@@ -40,7 +40,10 @@
     "inactive": "Óvirkur",
     "create": "Búa til",
     "update": "Uppfæra",
-    "retry": "Reyna aftur"
+    "retry": "Reyna aftur",
+    "search": {
+      "placeholder": "Leita að vörum..."
+    }
   },
   "chat": {
     "openChat": "Opna spjall",
@@ -343,6 +346,13 @@
       "deliveryDescription": "Heimafleiðsla á Reykjavík",
       "ageVerificationTitle": "Aldurstakmark",
       "ageVerificationDescription": "Örugg og lögleg verslun"
+    },
+    "testimonials": {
+      "title": "Hvað viðskiptavinir okkar segja",
+      "subtitle": "Heyrðu frá ánægðum viðskiptavinum okkar um reynslu þeirra með Ölföng",
+      "review1": "Frábær úrval af íslenskum bjórum og vín. Hröð afhending og frábær þjónusta við viðskiptavini. Mjög mælt með!",
+      "review2": "Ölföng hefur orðið aðalvefur minn fyrir gæða drykki. Afhendingin er alltaf á réttum tíma og vörurnar eru af bestu gerð.",
+      "review3": "Ótrúlegt úrval og samkeppnishæf verð. Starfsfólkið er þekkt og netverslunin er slétt."
     }
   },
   "authExtra": {

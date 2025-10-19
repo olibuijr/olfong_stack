@@ -40,7 +40,10 @@
     "inactive": "Inactive",
     "create": "Create",
     "update": "Update",
-    "retry": "Retry"
+    "retry": "Retry",
+    "search": {
+      "placeholder": "Search products..."
+    }
   },
   "chat": {
     "openChat": "Open chat",
@@ -343,6 +346,13 @@
       "deliveryDescription": "Home delivery in Reykjavik",
       "ageVerificationTitle": "Age Verification",
       "ageVerificationDescription": "Safe and legal shopping"
+    },
+    "testimonials": {
+      "title": "What Our Customers Say",
+      "subtitle": "Hear from our satisfied customers about their experience with Ölföng",
+      "review1": "Excellent selection of Icelandic beers and wines. Fast delivery and great customer service. Highly recommended!",
+      "review2": "Ölföng has become my go-to place for quality beverages. The delivery is always on time and the products are top-notch.",
+      "review3": "Amazing variety and competitive prices. The staff is knowledgeable and the online ordering is seamless."
     }
   },
   "authExtra": {
