@@ -10,6 +10,7 @@ import socketService from './services/socket';
 // Components
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import BottomNav from './components/layout/BottomNav';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import ChatWidget from './components/chat/ChatWidget';
@@ -124,8 +125,8 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
-      
-      <main className="flex-1">
+
+      <main className="flex-1 pb-16 md:pb-0">
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
@@ -169,9 +170,12 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      
+
       {!isAdminRoute && <Footer />}
-      
+
+      {/* Bottom Navigation for Mobile */}
+      {!isAdminRoute && <BottomNav />}
+
       {/* Chat Widget - Available on all pages */}
       <ChatWidget />
     </div>

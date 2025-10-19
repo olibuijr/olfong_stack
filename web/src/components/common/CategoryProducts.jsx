@@ -129,13 +129,13 @@ const CategoryProducts = ({ category, limit = 6 }) => {
         {/* Scroll buttons */}
         <button
           onClick={(e) => scrollLeft(e.target.closest('.relative').querySelector('.overflow-x-auto'))}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-2 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-400" />
         </button>
         <button
           onClick={(e) => scrollRight(e.target.closest('.relative').querySelector('.overflow-x-auto'))}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-2 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-400" />
         </button>
