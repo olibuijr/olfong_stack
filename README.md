@@ -236,6 +236,15 @@ The `opencode.jsonc` file includes advanced filesystem operations MCP server.
 - Bulk file operations and content analysis
 - Secure file system access with configurable permissions
 
+#### Command Execution MCP (Terminal Commands)
+The `opencode.jsonc` file includes command execution MCP server for running terminal commands.
+
+**Benefits:**
+- AI can execute shell commands directly (e.g., start dev servers, run builds, manage processes)
+- Background process monitoring and management
+- Secure command execution with approval mechanisms
+- Access to system tools and development workflows
+
 **Note**: PostgreSQL DBHub, Playwright, Filesystem, and Context7 MCP servers are automatically available when using OpenCode in this project directory. The database MCP runs in read-only mode for safety. The GitHub MCP server is currently disabled and can be enabled by setting `enabled: true` in `opencode.jsonc` and configuring a GitHub Personal Access Token.
 
 #### GitHub Personal Access Token Setup
@@ -300,6 +309,13 @@ Here are practical examples of how to leverage each MCP server for Ölföng deve
 - **Best Practices**: Research current development patterns and standards
 - **Security Guidelines**: Access latest security recommendations and practices
 - **Performance Tips**: Find optimization techniques and performance best practices
+
+##### Command Execution Examples
+- **Development Server Management**: Start/stop backend and frontend dev servers
+- **Build Automation**: Run npm scripts, database migrations, and deployment commands
+- **Process Monitoring**: Check running processes, logs, and system status
+- **Database Operations**: Run Prisma commands, seed data, and migrations
+- **Testing**: Execute test suites and linting across the project
 
 #### Testing MCP Server Integration
 

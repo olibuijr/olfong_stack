@@ -42,21 +42,28 @@ const Products = () => {
   const { products, categories, filters, pagination, isLoading } = useSelector((state) => state.products);
   const { isAuthenticated } = useSelector((state) => state.auth);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  // Handle URL parameters for initial category filter
+  // Handle URL parameters for initial category and subcategory filter
   useEffect(() => {
     const categoryFromUrl = searchParams.get('category');
+    const subcategoryFromUrl = searchParams.get('subcategory');
+
     if (categoryFromUrl && categoryFromUrl !== filters.category) {
-      dispatch(setFilters({ category: categoryFromUrl }));
+      dispatch(setFilters({ category: categoryFromUrl, subcategory: subcategoryFromUrl || '' }));
+      // Set selected category for UI state
+      const category = categories.find(cat => cat.name === categoryFromUrl);
+      setSelectedCategory(category || null);
     } else if (!categoryFromUrl && filters.category) {
-      // Clear category if no category in URL
-      dispatch(setFilters({ category: '' }));
+      // Clear category and subcategory if no category in URL
+      dispatch(setFilters({ category: '', subcategory: '' }));
+      setSelectedCategory(null);
     }
-  }, [searchParams, dispatch, filters.category]);
+  }, [searchParams, dispatch, filters.category, categories]);
 
   useEffect(() => {
     dispatch(fetchProducts(filters));
@@ -64,15 +71,17 @@ const Products = () => {
 
   const handleCategoryChange = (category) => {
     const categoryName = typeof category === 'string' ? category : (category?.name || '');
-    dispatch(setFilters({ category: categoryName }));
+    dispatch(setFilters({ category: categoryName, subcategory: '' })); // Clear subcategory when changing category
     setIsMobileFilterOpen(false);
-    
+
     // Update URL
     const newSearchParams = new URLSearchParams(searchParams);
     if (categoryName && categoryName.trim() !== '') {
       newSearchParams.set('category', categoryName);
+      newSearchParams.delete('subcategory'); // Remove subcategory when changing category
     } else {
       newSearchParams.delete('category');
+      newSearchParams.delete('subcategory');
     }
     navigate(`/products?${newSearchParams.toString()}`, { replace: true });
   };
@@ -139,39 +148,80 @@ const Products = () => {
                   </div>
                 </div>
 
-                {/* Categories */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                    {t('productsPage.category')}
-                  </label>
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => handleCategoryChange('')}
-                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        filters.category === '' 
-                          ? 'bg-primary-600 text-white shadow-sm' 
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                      }`}
-                      aria-pressed={filters.category === ''}
-                    >
-                      {t('productsPage.all')}
-                    </button>
-                    {categories.map((category) => (
-                      <button
-                        key={category.id}
-                        onClick={() => handleCategoryChange(category)}
-                        className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                          filters.category === category.name 
-                            ? 'bg-primary-600 text-white shadow-sm' 
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                        }`}
-                        aria-pressed={filters.category === category.name}
-                      >
-                        {i18n.language === 'is' ? category.nameIs : category.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                 {/* Categories */}
+                 <div>
+                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                     {t('productsPage.category')}
+                   </label>
+                   <div className="space-y-2">
+                     <button
+                       onClick={() => handleCategoryChange('')}
+                       className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                         filters.category === ''
+                           ? 'bg-primary-600 text-white shadow-sm'
+                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                       aria-pressed={filters.category === ''}
+                     >
+                       {t('productsPage.all')}
+                     </button>
+                     {categories.map((category) => (
+                       <div key={category.id}>
+                         <button
+                           onClick={() => handleCategoryChange(category)}
+                           className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                             filters.category === category.name
+                               ? 'bg-primary-600 text-white shadow-sm'
+                               : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                           }`}
+                           aria-pressed={filters.category === category.name}
+                         >
+                           {i18n.language === 'is' ? category.nameIs : category.name}
+                         </button>
+                         {/* Subcategories in sidebar */}
+                         {filters.category === category.name && category.subcategories && category.subcategories.length > 0 && (
+                           <div className="ml-4 mt-2 space-y-1">
+                             <button
+                               onClick={() => {
+                                 dispatch(setFilters({ subcategory: '' }));
+                                 const newSearchParams = new URLSearchParams(searchParams);
+                                 newSearchParams.set('category', category.name);
+                                 newSearchParams.delete('subcategory');
+                                 navigate(`/products?${newSearchParams.toString()}`, { replace: true });
+                               }}
+                               className={`w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                                 !filters.subcategory || filters.subcategory === ''
+                                   ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
+                                   : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                               }`}
+                             >
+                               {t('productsPage.all')}
+                             </button>
+                             {category.subcategories.map((subcategory) => (
+                               <button
+                                 key={subcategory.id}
+                                 onClick={() => {
+                                   dispatch(setFilters({ subcategory: subcategory.name }));
+                                   const newSearchParams = new URLSearchParams(searchParams);
+                                   newSearchParams.set('category', category.name);
+                                   newSearchParams.set('subcategory', subcategory.name);
+                                   navigate(`/products?${newSearchParams.toString()}`, { replace: true });
+                                 }}
+                                 className={`w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                                   filters.subcategory === subcategory.name
+                                     ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
+                                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                                 }`}
+                               >
+                                 {i18n.language === 'is' ? subcategory.nameIs : subcategory.name}
+                               </button>
+                             ))}
+                           </div>
+                         )}
+                       </div>
+                     ))}
+                   </div>
+                 </div>
 
                 {/* Price Range Filter */}
                 <div>
@@ -243,10 +293,89 @@ const Products = () => {
                 </div>
               </div>
               
-              <p className="text-gray-600 dark:text-gray-400">
-                {products.length} {t('productsPage.products')}
-              </p>
-            </div>
+               <p className="text-gray-600 dark:text-gray-400">
+                 {products.length} {t('productsPage.products')}
+               </p>
+             </div>
+
+             {/* Category Navigation */}
+             <div className="mb-6">
+               <div className="flex items-center gap-2 overflow-x-auto pb-2">
+                 <button
+                   onClick={() => {
+                     setSelectedCategory(null);
+                     handleCategoryChange('');
+                   }}
+                   className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+                     !selectedCategory && filters.category === ''
+                       ? 'bg-primary-600 text-white shadow-sm'
+                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                   }`}
+                 >
+                   {t('productsPage.all')}
+                 </button>
+                 {categories.map((category) => (
+                   <button
+                     key={category.id}
+                     onClick={() => {
+                       setSelectedCategory(category);
+                       handleCategoryChange(category);
+                     }}
+                     className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+                       selectedCategory?.id === category.id
+                         ? 'bg-primary-600 text-white shadow-sm'
+                         : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                     }`}
+                   >
+                     {i18n.language === 'is' ? category.nameIs : category.name}
+                   </button>
+                 ))}
+               </div>
+
+               {/* Subcategories */}
+               {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.length > 0 && (
+                 <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-2 pl-4 border-l-2 border-primary-200 dark:border-primary-800">
+                   <span className="text-xs text-gray-500 dark:text-gray-400 font-medium flex-shrink-0">
+                     {t('productsPage.subcategories')}:
+                   </span>
+                   <button
+                     onClick={() => handleCategoryChange(selectedCategory)}
+                     className={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+                       filters.category === selectedCategory.name && !filters.subcategory
+                         ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
+                         : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                     }`}
+                   >
+                     {t('productsPage.all')}
+                   </button>
+                   {selectedCategory.subcategories.map((subcategory) => (
+                     <button
+                       key={subcategory.id}
+                       onClick={() => {
+                         dispatch(setFilters({
+                           category: selectedCategory.name,
+                           subcategory: subcategory.name
+                         }));
+                         setIsMobileFilterOpen(false);
+
+                         // Update URL
+                         const newSearchParams = new URLSearchParams(searchParams);
+                         newSearchParams.set('category', selectedCategory.name);
+                         newSearchParams.set('subcategory', subcategory.name);
+                         navigate(`/products?${newSearchParams.toString()}`, { replace: true });
+                       }}
+                       className={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+                         filters.subcategory === subcategory.name
+                           ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
+                           : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                     >
+                       {i18n.language === 'is' ? subcategory.nameIs : subcategory.name}
+                     </button>
+                   ))}
+                 </div>
+               )}
+             </div>
 
             {/* Products Grid */}
             {products.length === 0 ? (
@@ -425,39 +554,82 @@ const Products = () => {
               </div>
             </div>
 
-            {/* Categories */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                {t('productsPage.category')}
-              </label>
-              <div className="space-y-2">
-                <button
-                  onClick={() => handleCategoryChange(null)}
-                  className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    !filters.category || filters.category === '' || filters.category === null
-                      ? 'bg-primary-600 text-white shadow-sm' 
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }`}
-                  aria-pressed={!filters.category || filters.category === '' || filters.category === null}
-                >
-                  {t('productsPage.all')}
-                </button>
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => handleCategoryChange(category)}
-                    className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      filters.category === category.name 
-                        ? 'bg-primary-600 text-white shadow-sm' 
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
-                    aria-pressed={filters.category === category.name}
-                  >
-                    {i18n.language === 'is' ? category.nameIs : category.name}
-                  </button>
-                ))}
-              </div>
-            </div>
+             {/* Categories */}
+             <div className="mb-6">
+               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                 {t('productsPage.category')}
+               </label>
+               <div className="space-y-2">
+                 <button
+                   onClick={() => handleCategoryChange(null)}
+                   className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                     !filters.category || filters.category === '' || filters.category === null
+                       ? 'bg-primary-600 text-white shadow-sm'
+                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                   }`}
+                   aria-pressed={!filters.category || filters.category === '' || filters.category === null}
+                 >
+                   {t('productsPage.all')}
+                 </button>
+                 {categories.map((category) => (
+                   <div key={category.id}>
+                     <button
+                       onClick={() => handleCategoryChange(category)}
+                       className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                         filters.category === category.name
+                           ? 'bg-primary-600 text-white shadow-sm'
+                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                       aria-pressed={filters.category === category.name}
+                     >
+                       {i18n.language === 'is' ? category.nameIs : category.name}
+                     </button>
+                     {/* Subcategories in mobile */}
+                     {filters.category === category.name && category.subcategories && category.subcategories.length > 0 && (
+                       <div className="ml-4 mt-2 space-y-1">
+                         <button
+                           onClick={() => {
+                             dispatch(setFilters({ subcategory: '' }));
+                             const newSearchParams = new URLSearchParams(searchParams);
+                             newSearchParams.set('category', category.name);
+                             newSearchParams.delete('subcategory');
+                             navigate(`/products?${newSearchParams.toString()}`, { replace: true });
+                             setIsMobileFilterOpen(false);
+                           }}
+                           className={`w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                             !filters.subcategory || filters.subcategory === ''
+                               ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
+                               : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                           }`}
+                         >
+                           {t('productsPage.all')}
+                         </button>
+                         {category.subcategories.map((subcategory) => (
+                           <button
+                             key={subcategory.id}
+                             onClick={() => {
+                               dispatch(setFilters({ subcategory: subcategory.name }));
+                               const newSearchParams = new URLSearchParams(searchParams);
+                               newSearchParams.set('category', category.name);
+                               newSearchParams.set('subcategory', subcategory.name);
+                               navigate(`/products?${newSearchParams.toString()}`, { replace: true });
+                               setIsMobileFilterOpen(false);
+                             }}
+                             className={`w-full text-left px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                               filters.subcategory === subcategory.name
+                                 ? 'bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300'
+                                 : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                             }`}
+                           >
+                             {i18n.language === 'is' ? subcategory.nameIs : subcategory.name}
+                           </button>
+                         ))}
+                       </div>
+                     )}
+                   </div>
+                 ))}
+               </div>
+             </div>
 
             {/* Price Range Filter */}
             <div className="mb-6">

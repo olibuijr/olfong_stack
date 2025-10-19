@@ -18,10 +18,7 @@ const DiscountedProducts = ({ limit = 6 }) => {
     product.discountPercentage && product.discountPercentage > 0
   ).slice(0, limit);
 
-  useEffect(() => {
-    // Fetch all products to find discounted ones
-    dispatch(fetchProducts({ limit: 100 }));
-  }, [dispatch]);
+  // Note: Products are now fetched by the parent component (Home)
 
   const scrollLeft = (element) => {
     element.scrollBy({ left: -300, behavior: 'smooth' });
@@ -86,11 +83,18 @@ const DiscountedProducts = ({ limit = 6 }) => {
                         currentLanguage={i18n.language}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-                      <div className="absolute top-3 right-3">
-                        <span className="px-2 py-1 rounded-full text-xs font-medium shadow-lg bg-red-500 text-white">
-                          -{product.discountPercentage}%
-                        </span>
-                      </div>
+                       <div className="absolute top-3 right-3 flex flex-col gap-2">
+                         <span className={`px-2 py-1 rounded-full text-xs font-medium shadow-lg ${
+                           product.stock > 0
+                             ? 'bg-green-500 text-white'
+                             : 'bg-red-500 text-white'
+                         }`}>
+                           {product.stock > 0 ? t('products.inStock') : t('products.outOfStock')}
+                         </span>
+                         <span className="px-2 py-1 rounded-full text-xs font-medium shadow-lg bg-red-500 text-white">
+                           -{product.discountPercentage}%
+                         </span>
+                       </div>
                     </div>
                   </Link>
                   
@@ -124,13 +128,13 @@ const DiscountedProducts = ({ limit = 6 }) => {
         {/* Scroll buttons */}
         <button
           onClick={(e) => scrollLeft(e.target.closest('.relative').querySelector('.overflow-x-auto'))}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-2 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100"
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-400" />
         </button>
         <button
           onClick={(e) => scrollRight(e.target.closest('.relative').querySelector('.overflow-x-auto'))}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-2 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100"
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 shadow-lg rounded-full p-3 hover:shadow-xl transition-shadow duration-200 opacity-0 group-hover:opacity-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
         >
           <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-400" />
         </button>

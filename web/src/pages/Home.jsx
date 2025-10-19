@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Wine, Beer, Truck, Shield } from 'lucide-react';
 import { fetchCategories } from '../store/slices/categorySlice';
 import { fetchBanners } from '../store/slices/bannerSlice';
+import { fetchProducts } from '../store/slices/productSlice';
 import CategoryProducts from '../components/common/CategoryProducts';
 import DiscountedProducts from '../components/common/DiscountedProducts';
 import Banner from '../components/common/Banner';
@@ -14,11 +15,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const { categories, isLoading: categoriesLoading } = useSelector((state) => state.categories);
   const { banners, isLoading: bannersLoading } = useSelector((state) => state.banners);
+  const { products } = useSelector((state) => state.products);
 
-  // Fetch categories and banners on component mount
+  // Fetch categories, banners, and products on component mount
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchBanners());
+    dispatch(fetchProducts({ limit: 100 }));
   }, [dispatch]);
 
   // Fallback banners if API fails or no banners are configured
@@ -57,6 +60,11 @@ const Home = () => {
     description: banner.descriptionIs || banner.description,
     link: banner.link
   })) : fallbackBanners;
+
+  // Check if there are any discounted products
+  const hasDiscountedProducts = products.some(product =>
+    product.discountPercentage && product.discountPercentage > 0
+  );
 
   // State to track used banners and selected banners
   const [usedBannerIndices, setUsedBannerIndices] = useState(new Set());
@@ -135,9 +143,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section - Establish trust and value proposition early */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       {/* Features Section - Establish trust and value proposition early */}
+       <section className="py-16 bg-gray-50 dark:bg-gray-900">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.why.title')}</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -145,7 +154,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <Link
                 key={index}
@@ -162,23 +171,26 @@ const Home = () => {
                   {feature.description}
                 </p>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+             ))}
+           </div>
+           </div>
+         </div>
+       </section>
 
-      {/* Discounted Products Section - Special offers prominently displayed */}
-      <section className="py-16 bg-white dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.discounted.title')}</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('home.discounted.subtitle')}
-            </p>
+       {/* Discounted Products Section - Only show if there are discounted products */}
+      {hasDiscountedProducts && (
+        <section className="py-16 bg-white dark:bg-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.discounted.title')}</h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300">
+                {t('home.discounted.subtitle')}
+              </p>
+            </div>
+            <DiscountedProducts limit={6} />
           </div>
-          <DiscountedProducts limit={6} />
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Strategic Banner 1 - Break between offers and main content */}
       {getBannerByIndex(0) && (

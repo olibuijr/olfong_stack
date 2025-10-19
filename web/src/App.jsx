@@ -20,7 +20,6 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 import OrderDetail from './pages/OrderDetail';
 import Profile from './pages/Profile';
@@ -38,6 +37,7 @@ import Notifications from './pages/admin/Notifications';
 import AdminSettings from './pages/admin/Settings';
 import AdminBanners from './pages/admin/Banners';
 import AdminChat from './pages/admin/Chat';
+import DemoData from './pages/admin/DemoData';
 import DeliveryDashboard from './pages/delivery/Dashboard';
 
 function App() {
@@ -77,22 +77,22 @@ function App() {
   // Initialize socket connection for authenticated users
   useEffect(() => {
     if (isAuthenticated && user) {
-      socketService.connect();
-      
-      // Join appropriate rooms based on user role
-      if (user.role === 'ADMIN') {
-        socketService.joinAdminRoom();
-      } else if (user.role === 'DELIVERY') {
-        socketService.joinDeliveryRoom(user.id);
-      } else {
-        socketService.joinUserRoom(user.id);
+      try {
+        socketService.connect();
+
+        // Join appropriate rooms based on user role
+        if (user.role === 'ADMIN') {
+          socketService.joinAdminRoom();
+        } else if (user.role === 'DELIVERY') {
+          socketService.joinDeliveryRoom(user.id);
+        }
+      } catch (error) {
+        console.warn('Socket connection failed, continuing without real-time features:', error);
       }
-    } else {
-      socketService.disconnect();
     }
 
     return () => {
-      if (!isAuthenticated) {
+      if (socketService.isSocketConnected()) {
         socketService.disconnect();
       }
     };
@@ -126,7 +126,7 @@ function App() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
 
-      <main className="flex-1 pb-16 md:pb-0">
+       <main className="flex-1 pt-16 pb-16 md:pb-0">
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
@@ -139,7 +139,6 @@ function App() {
           {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Navigate to="/profile" replace />} />
             <Route path="/orders/:id" element={<OrderDetail />} />
             <Route path="/profile" element={<Profile />} />
@@ -157,6 +156,7 @@ function App() {
             <Route path="/admin/reports" element={<Reports />} />
             <Route path="/admin/notifications" element={<Notifications />} />
             <Route path="/admin/banners" element={<AdminBanners />} />
+            <Route path="/admin/demo-data" element={<DemoData />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
           

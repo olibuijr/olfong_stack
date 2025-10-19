@@ -11,6 +11,7 @@ import '../../widgets/common/loading_widget.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/home/hero_section.dart';
 import '../../widgets/home/features_section.dart';
+import '../../widgets/home/discounted_products_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -102,11 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [
-                      // Hero Section
-                      const HeroSection(),
-                      
-                      // Features Section
-                      const FeaturesSection(),
+                       // Hero Section
+                       const HeroSection(),
+
+                       // Features Section
+                       const FeaturesSection(),
+
+                       // Discounted Products Section
+                       const DiscountedProductsSection(),
                       
                       // Main Content
                       Padding(

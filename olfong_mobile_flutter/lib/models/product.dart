@@ -3,6 +3,8 @@ class Product {
   final String name;
   final String description;
   final double price;
+  final double? discountedPrice;
+  final int? discountPercentage;
   final String? imageUrl;
   final String category;
   final bool ageRestricted;
@@ -16,6 +18,8 @@ class Product {
     required this.name,
     required this.description,
     required this.price,
+    this.discountedPrice,
+    this.discountPercentage,
     this.imageUrl,
     required this.category,
     required this.ageRestricted,
@@ -31,6 +35,8 @@ class Product {
       name: json['name'] ?? '',
       description: json['description'] ?? '',
       price: (json['price'] as num).toDouble(),
+      discountedPrice: json['discountedPrice'] != null ? (json['discountedPrice'] as num).toDouble() : null,
+      discountPercentage: json['discountPercentage'] != null ? (json['discountPercentage'] as num).toInt() : null,
       imageUrl: json['imageUrl'],
       category: json['category']?['name'] ?? 'Unknown',
       ageRestricted: json['ageRestriction'] != null && json['ageRestriction'] > 0,
@@ -47,6 +53,8 @@ class Product {
       'name': name,
       'description': description,
       'price': price,
+      'discountedPrice': discountedPrice,
+      'discountPercentage': discountPercentage,
       'imageUrl': imageUrl,
       'category': category,
       'ageRestricted': ageRestricted,

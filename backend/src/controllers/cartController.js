@@ -14,7 +14,11 @@ const getCart = async (req, res) => {
       include: {
         items: {
           include: {
-            product: true,
+            product: {
+              include: {
+                category: true,
+              },
+            },
           },
         },
       },
@@ -27,7 +31,11 @@ const getCart = async (req, res) => {
         include: {
           items: {
             include: {
-              product: true,
+              product: {
+                include: {
+                  category: true,
+                },
+              },
             },
           },
         },
@@ -113,7 +121,13 @@ const addToCart = async (req, res) => {
       const updatedItem = await prisma.cartItem.update({
         where: { id: existingItem.id },
         data: { quantity: newQuantity },
-        include: { product: true },
+        include: {
+          product: {
+            include: {
+              category: true,
+            },
+          },
+        },
       });
 
       return successResponse(res, updatedItem, 'Cart item updated successfully');
@@ -125,7 +139,13 @@ const addToCart = async (req, res) => {
           productId: parseInt(productId),
           quantity: parseInt(quantity),
         },
-        include: { product: true },
+        include: {
+          product: {
+            include: {
+              category: true,
+            },
+          },
+        },
       });
 
       return successResponse(res, newItem, 'Item added to cart successfully', 201);
@@ -184,7 +204,13 @@ const updateCartItem = async (req, res) => {
     const updatedItem = await prisma.cartItem.update({
       where: { id: parseInt(itemId) },
       data: { quantity: newQty },
-      include: { product: true },
+      include: {
+        product: {
+          include: {
+            category: true,
+          },
+        },
+      },
     });
 
     return successResponse(res, updatedItem, 'Cart item updated successfully');

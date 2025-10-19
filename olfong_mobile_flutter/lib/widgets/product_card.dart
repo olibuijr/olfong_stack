@@ -7,10 +7,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
+  final bool showDiscount;
 
   const ProductCard({
     Key? key,
     required this.product,
+    this.showDiscount = false,
   }) : super(key: key);
 
   @override
@@ -74,33 +76,61 @@ class ProductCard extends StatelessWidget {
                               ),
                             ),
                     ),
-                    // Stock status badge
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: product.stock > 0 ? Colors.green : Colors.red,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          product.stock > 0 ? l10n.productsInStock : l10n.productsOutOfStock,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+                     // Stock status badge
+                     Positioned(
+                       top: 8,
+                       right: 8,
+                       child: Container(
+                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                         decoration: BoxDecoration(
+                           color: product.stock > 0 ? Colors.green : Colors.red,
+                           borderRadius: BorderRadius.circular(12),
+                           boxShadow: [
+                             BoxShadow(
+                               color: Colors.black.withOpacity(0.1),
+                               blurRadius: 4,
+                               offset: const Offset(0, 2),
+                             ),
+                           ],
+                         ),
+                         child: Text(
+                           product.stock > 0 ? l10n.productsInStock : l10n.productsOutOfStock,
+                           style: const TextStyle(
+                             color: Colors.white,
+                             fontSize: 10,
+                             fontWeight: FontWeight.bold,
+                           ),
+                         ),
+                       ),
+                     ),
+                     // Discount badge (only show if showDiscount is true and product has discount)
+                     if (showDiscount && product.discountPercentage != null && product.discountPercentage! > 0)
+                       Positioned(
+                         top: 8,
+                         left: 8,
+                         child: Container(
+                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                           decoration: BoxDecoration(
+                             color: Colors.red,
+                             borderRadius: BorderRadius.circular(12),
+                             boxShadow: [
+                               BoxShadow(
+                                 color: Colors.black.withOpacity(0.1),
+                                 blurRadius: 4,
+                                 offset: const Offset(0, 2),
+                               ),
+                             ],
+                           ),
+                           child: Text(
+                             '-${product.discountPercentage}%',
+                             style: const TextStyle(
+                               color: Colors.white,
+                               fontSize: 10,
+                               fontWeight: FontWeight.bold,
+                             ),
+                           ),
+                         ),
+                       ),
                     // Hover overlay
                     Positioned.fill(
                       child: Container(
@@ -152,17 +182,40 @@ class ProductCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${product.price.toStringAsFixed(0)} ${l10n.commonCurrency}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 16,
-                          ),
-                        ),
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             if (product.discountedPrice != null && product.discountedPrice! < product.price)
+                               Text(
+                                 '${product.discountedPrice!.toStringAsFixed(0)} ${l10n.commonCurrency}',
+                                 style: TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: Theme.of(context).primaryColor,
+                                   fontSize: 16,
+                                 ),
+                               ),
+                             Text(
+                               '${product.price.toStringAsFixed(0)} ${l10n.commonCurrency}',
+                               style: TextStyle(
+                                 fontWeight: product.discountedPrice != null && product.discountedPrice! < product.price
+                                   ? FontWeight.normal
+                                   : FontWeight.bold,
+                                 color: product.discountedPrice != null && product.discountedPrice! < product.price
+                                   ? Colors.grey[600]
+                                   : Theme.of(context).primaryColor,
+                                 fontSize: product.discountedPrice != null && product.discountedPrice! < product.price
+                                   ? 14
+                                   : 16,
+                                 decoration: product.discountedPrice != null && product.discountedPrice! < product.price
+                                   ? TextDecoration.lineThrough
+                                   : null,
+                               ),
+                             ),
+                           ],
+                         ),
                         Consumer<CartProvider>(
                           builder: (context, cartProvider, child) {
                             return Container(

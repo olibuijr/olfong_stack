@@ -44,6 +44,24 @@ export const kenniLogin = createAsyncThunk(
   }
 );
 
+export const dummyLogin = createAsyncThunk(
+  'auth/dummyLogin',
+  async ({ phone }, { rejectWithValue }) => {
+    try {
+      const response = await api.post('/auth/dummy/login', { phone });
+
+      localStorage.setItem('token', response.data.token);
+      socketService.connect();
+      socketService.joinUserRoom(response.data.user.id);
+      toast.success('Innskráður með dummy login');
+      return response.data;
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Dummy innskráning mistókst');
+      return rejectWithValue(error.response?.data?.message || 'Dummy login failed');
+    }
+  }
+);
+
 export const register = createAsyncThunk(
   'auth/register',
   async (userData, { rejectWithValue }) => {
@@ -148,20 +166,36 @@ const authSlice = createSlice({
       })
       // Kenni Login
       .addCase(kenniLogin.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(kenniLogin.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
-        state.error = null;
-      })
-      .addCase(kenniLogin.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
+         state.isLoading = true;
+         state.error = null;
+       })
+       .addCase(kenniLogin.fulfilled, (state, action) => {
+         state.isLoading = false;
+         state.user = action.payload.user;
+         state.token = action.payload.token;
+         state.isAuthenticated = true;
+         state.error = null;
+       })
+       .addCase(kenniLogin.rejected, (state, action) => {
+         state.isLoading = false;
+         state.error = action.payload;
+       })
+       // Dummy Login
+       .addCase(dummyLogin.pending, (state) => {
+         state.isLoading = true;
+         state.error = null;
+       })
+       .addCase(dummyLogin.fulfilled, (state, action) => {
+         state.isLoading = false;
+         state.user = action.payload.user;
+         state.token = action.payload.token;
+         state.isAuthenticated = true;
+         state.error = null;
+       })
+       .addCase(dummyLogin.rejected, (state, action) => {
+         state.isLoading = false;
+         state.error = action.payload;
+       })
       
       // Register
       .addCase(register.pending, (state) => {

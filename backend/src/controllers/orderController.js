@@ -121,10 +121,27 @@ const getOrder = async (req, res) => {
 /**
  * Create new order
  */
-const createOrder = async (req, res) => {
-  try {
-    const { deliveryMethod = 'DELIVERY', deliveryAddressId, pickupTime, notes, paymentMethod = 'valitor' } = req.body;
-    const userId = req.user.id;
+  const createOrder = async (req, res) => {
+    try {
+      const { shippingOptionId, deliveryAddressId, pickupTime, notes, paymentMethod = 'valitor' } = req.body;
+      const userId = req.user.id;
+
+      if (!shippingOptionId) {
+        return errorResponse(res, 'Shipping option is required', 400);
+      }
+
+      // Get shipping option
+      const shippingOption = await prisma.shippingOption.findUnique({
+        where: { id: parseInt(shippingOptionId) },
+      });
+
+      if (!shippingOption) {
+        return errorResponse(res, 'Shipping option not found', 404);
+      }
+
+      if (!shippingOption.isEnabled) {
+        return errorResponse(res, 'Selected shipping option is not available', 400);
+      }
 
     // Get user's cart
     const cart = await prisma.cart.findUnique({
@@ -155,12 +172,12 @@ const createOrder = async (req, res) => {
     let addressId = null;
     let address = null;
 
-    // Validate delivery method specific requirements
-    if (deliveryMethod === 'DELIVERY') {
+    // Validate shipping option specific requirements
+    if (shippingOption.type === 'delivery') {
       if (!deliveryAddressId) {
         return errorResponse(res, 'Delivery address is required for delivery orders', 400);
       }
-      
+
       // Verify address belongs to user
       address = await prisma.address.findFirst({
         where: { id: parseInt(deliveryAddressId), userId },
@@ -169,20 +186,18 @@ const createOrder = async (req, res) => {
       if (!address) {
         return errorResponse(res, 'Address not found', 404);
       }
-      
+
       addressId = address.id;
-    } else if (deliveryMethod === 'PICKUP') {
+    } else if (shippingOption.type === 'pickup') {
       if (!pickupTime) {
         return errorResponse(res, 'Pickup time is required for pickup orders', 400);
       }
-      
+
       // Validate pickup time format (HH:MM)
       const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
       if (!timeRegex.test(pickupTime)) {
         return errorResponse(res, 'Invalid pickup time format. Use HH:MM format', 400);
       }
-    } else {
-      return errorResponse(res, 'Invalid delivery method. Use DELIVERY or PICKUP', 400);
     }
 
     // Calculate total and check stock
@@ -212,9 +227,9 @@ const createOrder = async (req, res) => {
       });
     }
 
-    // Add delivery fee (only for delivery orders, pickup is free)
-    const deliveryFee = deliveryMethod === 'DELIVERY' ? 500 : 0;
-    totalAmount += deliveryFee;
+    // Add shipping cost
+    const shippingCost = shippingOption.fee;
+    totalAmount += shippingCost;
 
     // Create order
     const order = await prisma.$transaction(async (tx) => {
@@ -224,11 +239,11 @@ const createOrder = async (req, res) => {
           orderNumber: generateOrderNumber(),
           userId,
           addressId,
-          deliveryMethod,
-          pickupTime: deliveryMethod === 'PICKUP' ? pickupTime : null,
+          shippingOptionId: shippingOption.id,
+          pickupTime: shippingOption.type === 'pickup' ? pickupTime : null,
           status: 'PENDING',
           totalAmount,
-          deliveryFee,
+          deliveryFee: shippingCost,
           notes,
         },
       });
@@ -261,7 +276,7 @@ const createOrder = async (req, res) => {
       // Handle cash on delivery payment
       if (paymentMethod === 'cash_on_delivery') {
         // Validate cash on delivery requirements
-        if (deliveryMethod !== 'DELIVERY') {
+        if (shippingOption.type !== 'delivery') {
           throw new Error('Cash on delivery is only available for delivery orders');
         }
         
@@ -295,7 +310,7 @@ const createOrder = async (req, res) => {
       // Handle pay on pickup payment
       if (paymentMethod === 'pay_on_pickup') {
         // Validate pay on pickup requirements
-        if (deliveryMethod !== 'PICKUP') {
+        if (shippingOption.type !== 'pickup') {
           throw new Error('Pay on pickup is only available for pickup orders');
         }
         
@@ -402,7 +417,7 @@ const updateOrderStatus = async (req, res) => {
     }
 
     // Handle pickup completion for pay on pickup
-    if (status === 'PICKED_UP' || (status === 'DELIVERED' && order.deliveryMethod === 'PICKUP')) {
+    if (status === 'PICKED_UP' || (status === 'DELIVERED' && order.shippingOption?.type === 'pickup')) {
       updateData.deliveredAt = new Date();
       
       // Mark pay on pickup payments as completed
@@ -564,7 +579,7 @@ const getAllOrders = async (req, res) => {
 
 // Validation rules
 const createOrderValidation = [
-  body('deliveryMethod').isIn(['DELIVERY', 'PICKUP']).withMessage('Delivery method must be DELIVERY or PICKUP'),
+  body('shippingOptionId').isInt({ min: 1 }).withMessage('Valid shipping option ID is required'),
   body('deliveryAddressId').optional().isInt({ min: 1 }).withMessage('Valid address ID is required for delivery orders'),
   body('pickupTime').optional().matches(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/).withMessage('Pickup time must be in HH:MM format'),
   body('notes').optional().isLength({ max: 500 }).withMessage('Notes must be less than 500 characters'),

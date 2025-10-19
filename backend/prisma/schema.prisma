@@ -227,11 +227,12 @@ model Order {
   user            User        @relation(fields: [userId], references: [id])
   addressId       Int?
   address         Address?    @relation(fields: [addressId], references: [id])
-  deliveryMethod  String      @default("DELIVERY") // DELIVERY, PICKUP
+  shippingOptionId Int?
+  shippingOption  ShippingOption? @relation(fields: [shippingOptionId], references: [id])
   pickupTime      String?     // HH:MM format for pickup orders
   status          String      @default("PENDING") // PENDING, CONFIRMED, PREPARING, OUT_FOR_DELIVERY, DELIVERED, CANCELLED
   totalAmount     Float
-  deliveryFee     Float       @default(0)
+  deliveryFee     Float       @default(0) // Kept for backward compatibility, but shippingOption.fee should be used
   notes           String?
   deliveryPersonId Int?
   deliveryPerson  User?       @relation("DeliveryPerson", fields: [deliveryPersonId], references: [id])
@@ -251,12 +252,31 @@ model OrderItem {
   orderId   Int
   order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId Int
-  product   Product  @relation(fields: [productId], references: [id])
-  quantity  Int
-  price     Float // Price at time of order
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  price     Float    // Price at time of order
   createdAt DateTime @default(now())
 
   @@unique([orderId, productId])
+}
+
+model ShippingOption {
+  id          Int      @id @default(autoincrement())
+  name        String   // English name (e.g., "Home Delivery")
+  nameIs      String   // Icelandic name (e.g., "Heimsending")
+  description String?  // English description
+  descriptionIs String? // Icelandic description
+  type        String   @default("DELIVERY") // DELIVERY, PICKUP
+  fee         Float    @default(0) // Shipping fee in ISK
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  estimatedDays Int?   // Estimated delivery time in days
+  cutoffTime  String?  // Cutoff time for same-day delivery (HH:MM format)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  orders      Order[]
 }
 
 model Transaction {

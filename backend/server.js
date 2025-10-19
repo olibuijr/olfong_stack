@@ -27,6 +27,8 @@ const analyticsRoutes = require('./src/routes/analytics');
 const reportsRoutes = require('./src/routes/reports');
 const chatRoutes = require('./src/routes/chat');
 const integrationRoutes = require('./src/routes/integrations');
+const shippingRoutes = require('./src/routes/shipping');
+const demoDataRoutes = require('./src/routes/demo-data');
 const ChatService = require('./src/services/chatService');
 
 const app = express();
@@ -77,6 +79,8 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/reports', reportsRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/integrations', integrationRoutes);
+app.use('/api/shipping', shippingRoutes);
+app.use('/api/admin/demo-data', demoDataRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

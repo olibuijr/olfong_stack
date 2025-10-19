@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "mcp-server-commands": {
+      "command": "mcp-server-commands",
+      "args": ["--config", "mcp-commands-config.json", "--commands", "mcp-dev-commands.json"],
+      "env": {
+        "NODE_ENV": "development",
+        "MCP_COMMANDS_LOG_LEVEL": "info"
+      }
+    }
+  }
+}
+    }
+  }
+}
+  }
+}

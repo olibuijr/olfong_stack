@@ -20,6 +20,15 @@ const getCategories = async (req, res) => {
       include: {
         _count: {
           select: { products: true }
+        },
+        subcategories: {
+          where: includeInactive ? {} : { isActive: true },
+          orderBy: { sortOrder: 'asc' },
+          include: {
+            _count: {
+              select: { products: true }
+            }
+          }
         }
       }
     });

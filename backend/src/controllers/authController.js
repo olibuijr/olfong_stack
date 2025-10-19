@@ -255,12 +255,83 @@ const kenniLogin = async (req, res) => {
   }
 };
 
+/**
+ * Dummy login for testing - creates user with specific test data when phone is 8430854
+ */
+const dummyLogin = async (req, res) => {
+  try {
+    const { phone } = req.body;
+    if (!phone) {
+      return errorResponse(res, 'Phone number is required', 400);
+    }
+
+    // Check if phone is the test number
+    if (phone !== '8430854') {
+      return errorResponse(res, 'Invalid phone number for dummy login', 400);
+    }
+
+    // Test data as specified
+    const testData = {
+      fullName: 'Ólafur Búi Ólafsson',
+      phone: '8430854',
+      kennitala: '1606843059',
+      dob: deriveDobFromKennitala('1606843059'), // Derive from kennitala
+    };
+
+    // Find existing user by phone
+    let user = await prisma.user.findFirst({
+      where: { phone: testData.phone },
+    });
+
+    if (user) {
+      // Update existing user with test data
+      user = await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          fullName: testData.fullName,
+          kennitala: testData.kennitala,
+          dob: testData.dob,
+          idpProvider: 'dummy',
+          idpSubject: `dummy_${testData.phone}`,
+          idpRaw: JSON.stringify({ test: true, phone: testData.phone }),
+        },
+      });
+    } else {
+      // Create new user with test data
+      const username = `dummy_${testData.phone}`;
+      user = await prisma.user.create({
+        data: {
+          username,
+          password: null,
+          role: 'CUSTOMER',
+          fullName: testData.fullName,
+          phone: testData.phone,
+          kennitala: testData.kennitala,
+          dob: testData.dob,
+          idpProvider: 'dummy',
+          idpSubject: `dummy_${testData.phone}`,
+          idpRaw: JSON.stringify({ test: true, phone: testData.phone }),
+        },
+      });
+    }
+
+    const token = generateToken({ userId: user.id });
+
+    const { password, ...safeUser } = user;
+    return successResponse(res, { user: safeUser, token }, 'Dummy login successful');
+  } catch (err) {
+    console.error('Dummy login error:', err);
+    return errorResponse(res, 'Dummy login failed', 500);
+  }
+};
+
 module.exports = {
   register,
   login,
   getProfile,
   updateProfile,
   kenniLogin,
+  dummyLogin,
   registerValidation,
   loginValidation,
   updateProfileValidation,

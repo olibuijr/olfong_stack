@@ -8,6 +8,7 @@ const {
   getProfile,
   updateProfile,
   kenniLogin,
+  dummyLogin,
   registerValidation,
   loginValidation,
   updateProfileValidation,
@@ -17,6 +18,7 @@ const {
 router.post('/register', registerValidation, validate, register);
 router.post('/login', loginValidation, validate, login);
 router.post('/kenni/login', kenniLogin);
+router.post('/dummy/login', dummyLogin);
 
 // Protected routes
 router.get('/profile', authenticate, getProfile);

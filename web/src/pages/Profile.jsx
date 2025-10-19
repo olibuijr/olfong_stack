@@ -2,22 +2,21 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Save, 
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Plus,
+  Edit,
+  Trash2,
+  Save,
   X,
   AlertCircle,
-  Shield,
-  Package, 
-  Clock, 
-  Truck, 
-  CheckCircle, 
+  Package,
+  Clock,
+  Truck,
+  CheckCircle,
   XCircle, 
   Eye, 
   RotateCcw
@@ -351,17 +350,22 @@ const Profile = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-gray-400 dark:text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {t('profilePage.email')}
-                      </p>
-                      <p className="font-medium text-gray-900 dark:text-white">
-                        {user?.email || t('profilePage.notSpecified')}
-                      </p>
-                    </div>
-                  </div>
+                   <div className="flex items-center space-x-3">
+                     <Mail className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+                     <div>
+                       <p className="text-sm text-gray-600 dark:text-gray-400">
+                         {t('profilePage.email')}
+                       </p>
+                       <p className="font-medium text-gray-900 dark:text-white">
+                         {user?.email || t('profilePage.notSpecified')}
+                       </p>
+                       {!user?.email && (
+                         <p className="text-sm text-amber-600 dark:text-amber-400 mt-1">
+                           ⚠️ {t('profilePage.emailMissingWarning')}
+                         </p>
+                       )}
+                     </div>
+                   </div>
 
                   <div className="flex items-center space-x-3">
                     <Phone className="w-5 h-5 text-gray-400 dark:text-gray-500" />
@@ -375,19 +379,7 @@ const Profile = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
-                    <Shield className="w-5 h-5 text-gray-400 dark:text-gray-500" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {t('profilePage.role')}
-                      </p>
-                      <p className="font-medium text-gray-900 dark:text-white">
-                        {user?.role === 'ADMIN' && 'Admin'}
-                        {user?.role === 'DELIVERY' && t('delivery.deliveryPerson')}
-                        {user?.role === 'CUSTOMER' && 'Customer'}
-                      </p>
-                    </div>
-                  </div>
+
                 </div>
               )}
             </div>
@@ -457,41 +449,40 @@ const Profile = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                   ))}
+                 </div>
+               )}
+
+               {addresses.length === 0 && (
+                 <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
+                   <p className="text-sm text-amber-800 dark:text-amber-200">
+                     ⚠️ {t('profilePage.addressMissingWarning')}
+                   </p>
+                 </div>
+               )}
+             </div>
           </div>
 
           {/* Orders embedded */}
           <div className="space-y-6 lg:col-span-1">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                  <Package className="w-5 h-5 mr-2" />
-                  {t('orders.title')}
-                </h2>
-              </div>
-
-              {/* Status Filter Dropdown */}
-              <div className="mb-6">
-                <div className="flex items-center gap-4">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('ordersPage.filterByStatus')}:
-                  </label>
-                  <select
-                    value={filters.status}
-                    onChange={(e) => handleStatusFilter(e.target.value)}
-                    className="input w-auto min-w-[150px] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  >
-                    <option value="">{t('ordersPage.allOrders')}</option>
-                    <option value="PENDING">{t('ordersPage.pending')}</option>
-                    <option value="CONFIRMED">{t('ordersPage.confirmed')}</option>
-                    <option value="OUT_FOR_DELIVERY">{t('ordersPage.outForDelivery')}</option>
-                    <option value="DELIVERED">{t('ordersPage.delivered')}</option>
-                  </select>
-                </div>
-              </div>
+               <div className="flex items-center justify-between mb-6">
+                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                   <Package className="w-5 h-5 mr-2" />
+                   {t('orders.title')}
+                 </h2>
+                 <select
+                   value={filters.status}
+                   onChange={(e) => handleStatusFilter(e.target.value)}
+                   className="input w-auto min-w-[150px] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                 >
+                   <option value="">{t('ordersPage.allOrders')}</option>
+                   <option value="PENDING">{t('ordersPage.pending')}</option>
+                   <option value="CONFIRMED">{t('ordersPage.confirmed')}</option>
+                   <option value="OUT_FOR_DELIVERY">{t('ordersPage.outForDelivery')}</option>
+                   <option value="DELIVERED">{t('ordersPage.delivered')}</option>
+                 </select>
+               </div>
 
               {/* Orders List */}
               {orders.length === 0 ? (

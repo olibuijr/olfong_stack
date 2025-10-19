@@ -104,6 +104,16 @@ const AdminCategories = () => {
     }
   };
 
+  const handleEditSubcategory = (subcategory) => {
+    // For now, just show a message that subcategory editing is not implemented
+    toast.info('Subcategory editing will be implemented in a future update');
+  };
+
+  const handleDeleteSubcategory = async (subcategoryId) => {
+    // For now, just show a message that subcategory deletion is not implemented
+    toast.info('Subcategory deletion will be implemented in a future update');
+  };
+
   if (user?.role !== 'ADMIN') {
     return (
       <AdminLayout>
@@ -177,70 +187,152 @@ const AdminCategories = () => {
             </p>
           </div>
         ) : (
-          <div className="space-y-4">
-            {categories.map((category) => (
-              <div key={category.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 flex-1">
-                    {/* Icon */}
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      {category.icon ? (
-                        <span className="text-2xl">{category.icon}</span>
-                      ) : (
-                        <FolderOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                      )}
-                    </div>
+           <div className="space-y-6">
+             {categories.map((category) => (
+               <div key={category.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                 {/* Main Category */}
+                 <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                   <div className="flex items-center justify-between">
+                     <div className="flex items-center gap-4 flex-1">
+                       {/* Icon */}
+                        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                          {category.icon ? (
+                            <span className="text-2xl text-white">{category.icon}</span>
+                          ) : (
+                            <FolderOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                          )}
+                        </div>
 
-                    {/* Category Info */}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-1">
-                        <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
-                          {category.nameIs || category.name}
-                        </h3>
-                        <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                          {category.slug}
-                        </span>
-                        {!category.isActive && (
-                          <span className="text-xs text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/20 px-2 py-1 rounded">
-                            {t('adminCategories.inactive')}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {category.descriptionIs || category.description || t('adminCategories.noDescription')}
-                      </p>
-                      <div className="flex items-center gap-4 mt-2">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {t('adminCategories.productCount')}: {category._count?.products || 0}
-                        </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {t('adminCategories.sortOrder')}: {category.sortOrder}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                       {/* Category Info */}
+                       <div className="flex-1">
+                         <div className="flex items-center gap-3 mb-1">
+                           <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+                             {category.nameIs || category.name}
+                           </h3>
+                           <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                             {category.slug}
+                           </span>
+                           {!category.isActive && (
+                             <span className="text-xs text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/20 px-2 py-1 rounded">
+                               {t('adminCategories.inactive')}
+                             </span>
+                           )}
+                         </div>
+                         <p className="text-sm text-gray-600 dark:text-gray-400">
+                           {category.descriptionIs || category.description || t('adminCategories.noDescription')}
+                         </p>
+                         <div className="flex items-center gap-4 mt-2">
+                           <span className="text-xs text-gray-500 dark:text-gray-400">
+                             {t('adminCategories.productCount')}: {category._count?.products || 0}
+                           </span>
+                           <span className="text-xs text-gray-500 dark:text-gray-400">
+                             {t('adminCategories.subcategories')}: {category.subcategories?.length || 0}
+                           </span>
+                           <span className="text-xs text-gray-500 dark:text-gray-400">
+                             {t('adminCategories.sortOrder')}: {category.sortOrder}
+                           </span>
+                         </div>
+                       </div>
+                     </div>
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => handleEdit(category)}
-                      className="btn btn-outline btn-sm flex items-center space-x-1"
-                    >
-                      <Edit className="w-3 h-3" />
-                      <span>{t('common.edit')}</span>
-                    </button>
-                    <button
-                      onClick={() => handleDelete(category.id)}
-                      className="btn btn-outline btn-sm text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900"
-                      disabled={category._count?.products > 0}
-                      title={category._count?.products > 0 ? t('adminCategories.cannotDeleteWithProducts') : ''}
-                    >
-                      <Trash2 className="w-3 h-3" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+                     {/* Actions */}
+                     <div className="flex items-center gap-2 flex-shrink-0">
+                       <button
+                         onClick={() => handleEdit(category)}
+                         className="btn btn-outline btn-sm flex items-center space-x-1"
+                       >
+                         <Edit className="w-3 h-3" />
+                         <span>{t('common.edit')}</span>
+                       </button>
+                       <button
+                         onClick={() => handleDelete(category.id)}
+                         className="btn btn-outline btn-sm text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900"
+                         disabled={category._count?.products > 0}
+                         title={category._count?.products > 0 ? t('adminCategories.cannotDeleteWithProducts') : ''}
+                       >
+                         <Trash2 className="w-3 h-3" />
+                       </button>
+                     </div>
+                   </div>
+                 </div>
+
+                 {/* Subcategories */}
+                 {category.subcategories && category.subcategories.length > 0 && (
+                   <div className="bg-gray-50 dark:bg-gray-900/50">
+                     <div className="px-6 py-3 border-b border-gray-200 dark:border-gray-700">
+                       <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                         {t('adminCategories.subcategories')}
+                       </h4>
+                     </div>
+                     <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                        {category.subcategories.map((subcategory) => (
+                          <div key={subcategory.id} className="px-6 py-4 pl-16">
+                            <div className="flex items-center justify-between gap-4">
+                             <div className="flex items-center gap-3 flex-1 min-w-0">
+                               {/* Subcategory Icon */}
+                                <div className="w-8 h-8 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                  {subcategory.icon ? (
+                                    <span className="text-lg text-white">{subcategory.icon}</span>
+                                  ) : (
+                                    <FolderOpen className="w-4 h-4 text-green-600 dark:text-green-400" />
+                                  )}
+                                </div>
+
+                               {/* Subcategory Info */}
+                               <div className="flex-1">
+                                 <div className="flex items-center gap-2 mb-1">
+                                   <h4 className="font-medium text-gray-900 dark:text-white">
+                                     {subcategory.nameIs || subcategory.name}
+                                   </h4>
+                                   <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                                     {subcategory.slug}
+                                   </span>
+                                   {!subcategory.isActive && (
+                                     <span className="text-xs text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/20 px-2 py-1 rounded">
+                                       {t('adminCategories.inactive')}
+                                     </span>
+                                   )}
+                                 </div>
+                                 <p className="text-sm text-gray-600 dark:text-gray-400">
+                                   {subcategory.descriptionIs || subcategory.description || t('adminCategories.noDescription')}
+                                 </p>
+                                 <div className="flex items-center gap-4 mt-1">
+                                   <span className="text-xs text-gray-500 dark:text-gray-400">
+                                     {t('adminCategories.productCount')}: {subcategory._count?.products || 0}
+                                   </span>
+                                   <span className="text-xs text-gray-500 dark:text-gray-400">
+                                     {t('adminCategories.sortOrder')}: {subcategory.sortOrder}
+                                   </span>
+                                 </div>
+                               </div>
+                             </div>
+
+                             {/* Subcategory Actions */}
+                             <div className="flex items-center gap-2 flex-shrink-0">
+                               <button
+                                 onClick={() => handleEditSubcategory(subcategory)}
+                                 className="btn btn-outline btn-sm flex items-center space-x-1"
+                               >
+                                 <Edit className="w-3 h-3" />
+                                 <span>{t('common.edit')}</span>
+                               </button>
+                               <button
+                                 onClick={() => handleDeleteSubcategory(subcategory.id)}
+                                 className="btn btn-outline btn-sm text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900"
+                                 disabled={subcategory._count?.products > 0}
+                                 title={subcategory._count?.products > 0 ? t('adminCategories.cannotDeleteWithProducts') : ''}
+                               >
+                                 <Trash2 className="w-3 h-3" />
+                               </button>
+                             </div>
+                           </div>
+                         </div>
+                       ))}
+                     </div>
+                   </div>
+                 )}
+               </div>
+             ))}
           </div>
         )}
 
