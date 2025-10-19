@@ -1,0 +1,384 @@
+# Ölföng Wine & Beer Shop Platform - Cursor Rules
+
+## 🤖 OpenCode AI Assistant Integration
+
+This project is designed to work with **OpenCode**, an open source AI coding agent built for the terminal. OpenCode provides:
+
+- **Native TUI**: Responsive terminal UI with themeable interface
+- **LSP Enabled**: Automatic loading of language servers for intelligent code assistance
+- **Multi-session**: Parallel agent sessions for complex tasks
+- **Share Links**: Shareable session links for collaboration and debugging
+- **Any Model**: Support for 75+ LLM providers through Models.dev, including local models
+- **Any Editor**: Terminal-based operation compatible with any IDE
+- **Privacy First**: No storage of code or context data for sensitive environments
+
+### OpenCode Usage Guidelines
+- Use OpenCode for code analysis, refactoring suggestions, and implementation assistance
+- Leverage OpenCode's LSP integration for intelligent code completion and error detection
+- Utilize multi-session capability for parallel development tasks
+- Share session links for collaborative debugging and code review
+- Access OpenCode's extensive model support for specialized coding tasks
+
+## 🚫 CRITICAL: DO NOT RUN OR BUILD APPLICATIONS
+
+**NEVER run, build, start, or execute any of the following commands or scripts:**
+
+### Backend (Node.js/Express)
+- `npm run dev` - Backend development server
+- `npm start` - Backend production server
+- `node server.js` - Direct server execution
+- `npm install` - Package installation
+- `npx prisma migrate dev` - Database migrations (ALLOWED for schema changes)
+- `npx prisma generate` - Prisma client generation (ALLOWED for schema changes)
+- `node prisma/seed.js` - Database seeding (ALLOWED for initial setup)
+
+### Web Frontend (React/Vite)
+- `npm run dev` - Web development server
+- `npm run build` - Web production build
+- `npm run preview` - Web preview server
+- `npm install` - Package installation
+- `vite` - Direct Vite execution
+
+### React Native Mobile App
+- `npm start` - Metro bundler
+- `npm run android` - Android app execution
+- `npm run ios` - iOS app execution
+- `react-native run-android` - Direct Android execution
+- `react-native run-ios` - Direct iOS execution
+- `npm install` - Package installation
+
+### Flutter Mobile App
+- `flutter run` - Flutter app execution
+- `flutter build` - Flutter app build
+- `flutter pub get` - Flutter dependencies
+- `flutter pub upgrade` - Flutter dependency upgrade
+- `flutter clean` - Flutter clean
+- `flutter doctor` - Flutter environment check
+
+### General Build/Run Commands
+- `npm run *` - Any npm script execution (except database operations)
+- `yarn *` - Any yarn command execution
+- `pnpm *` - Any pnpm command execution
+- `docker *` - Any Docker command execution
+- `docker-compose *` - Any Docker Compose command execution
+- `make *` - Any Make command execution
+- `./*` - Any executable script execution
+
+## 📋 Project Overview
+
+This is a **PRODUCTION-READY** e-commerce platform for Ölföng wine and beer shop with:
+
+### Architecture
+- **Backend**: Node.js + Express + SQLite/PostgreSQL + Prisma
+- **Web Frontend**: React.js + Vite + Tailwind CSS + Redux Toolkit
+- **Mobile Apps**: React Native (TypeScript) + Flutter (Dart)
+- **Real-time**: Socket.IO for live updates and delivery tracking
+- **Authentication**: JWT + Kenni IDP integration
+- **Payments**: Valitor payment gateway
+- **Maps**: OpenStreetMap integration (no API key required)
+
+### Key Features
+- Complete e-commerce functionality (products, cart, checkout, orders)
+- Advanced subscription system for recurring orders
+- Flexible delivery options (home delivery + store pickup)
+- Comprehensive admin panel for managing all aspects
+- Complete delivery dashboard with GPS tracking
+- Multi-language support (Icelandic/English)
+- Real-time updates via Socket.IO
+- Mobile-responsive design with dedicated mobile apps
+
+### Project Structure
+```
+olfong_stack/
+├── backend/                    # Node.js Express API Server
+│   ├── prisma/                 # Database schema and migrations
+│   ├── src/                    # Source code (controllers, routes, middleware, services, utils)
+│   ├── uploads/                # Product image storage
+│   ├── scripts/                # Database seeding and utility scripts
+│   ├── package.json            # Backend dependencies and scripts
+│   └── server.js               # Main server entry point
+├── web/                        # React.js Web Application
+│   ├── src/                    # React components, pages, services, store, locales
+│   ├── dist/                   # Built application assets
+│   ├── package.json            # Frontend dependencies and scripts
+│   └── vite.config.js          # Vite build configuration
+├── olfong_mobile_flutter/      # Flutter Mobile Application
+│   ├── lib/                    # Dart source code
+│   ├── android/                # Android platform configuration
+│   ├── ios/                    # iOS platform configuration
+│   ├── pubspec.yaml            # Flutter dependencies
+│   └── README.md               # Flutter app documentation
+├── shared/                     # Shared assets and constants
+│   └── logo_black-web.webp     # Shared logo asset
+├── .cursor/                    # Cursor IDE screenshots and assets
+├── .cursorrules               # This rules file for AI assistants
+├── README.md                   # Comprehensive project documentation
+├── docker-compose.yml          # Docker container orchestration
+├── integration_test_report.md  # Integration testing reports
+├── test_integration.js         # Integration test scripts
+└── .env                        # Environment configuration files (backend/web)
+```
+
+## 🎯 Development Guidelines
+
+### What You CAN Do
+- ✅ Read and analyze code files
+- ✅ Suggest code improvements and optimizations
+- ✅ Help with debugging and troubleshooting
+- ✅ Explain code functionality and architecture
+- ✅ Suggest new features and enhancements
+- ✅ Help with code refactoring
+- ✅ Assist with documentation updates
+- ✅ Review and suggest security improvements
+- ✅ Help with testing strategies
+- ✅ Suggest performance optimizations
+- ✅ Database schema changes and migrations
+- ✅ Prisma client generation
+- ✅ Database seeding for initial setup
+- ✅ **Context7 Documentation**: Use Context7 MCP server for latest documentation before making assumptions
+  - ✅ Search for framework and library documentation
+  - ✅ Get up-to-date API references and examples
+  - ✅ Verify implementation patterns and best practices
+  - ✅ Check compatibility and version-specific information
+  - ✅ Access official documentation for technologies used
+- ✅ **Playwright Testing**: Use Playwright MCP server for UI and app testing
+  - ✅ Test web application functionality and user flows
+  - ✅ Test mobile applications (React Native/Flutter)
+  - ✅ Perform cross-browser testing
+  - ✅ Test API endpoints and responses
+  - ✅ Generate and compare screenshots
+  - ✅ Test accessibility and performance
+  - ✅ Create automated test scenarios
+
+### What You CANNOT Do
+- ❌ Run any build or start commands
+- ❌ Execute any npm/yarn/pnpm scripts (except database operations)
+- ❌ Start development servers
+- ❌ Execute mobile app builds or runs
+- ❌ Install dependencies
+- ❌ Run any system commands that could affect the environment
+- ❌ Execute any commands that start processes or services
+- ❌ Start or stop the backend/frontend servers (they are manually managed by the user)
+
+## 🔧 Build Process Information
+
+The application uses manual build processes outside of AI chat:
+
+### Backend Setup (Manual Process)
+1. Navigate to `backend/` directory
+2. Run `npm install` to install dependencies
+3. Run `npx prisma migrate dev --name init` for database setup
+4. Run `node prisma/seed.js` to seed the database
+5. Run `npm run dev` to start the development server
+
+### Web Frontend Setup (Manual Process)
+1. Navigate to `web/` directory
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to start the development server
+
+### React Native Mobile Setup (Manual Process)
+1. Navigate to `mobile/` directory
+2. Run `npm install` to install dependencies
+3. Run `npm start` to start Metro bundler
+4. Run `npm run android` or `npm run ios` to launch the app
+
+### Flutter Mobile Setup (Manual Process)
+1. Navigate to `olfong_mobile_flutter/` directory
+2. Run `flutter pub get` to install dependencies
+3. Run `flutter run` to launch the app
+
+## 📱 Access Information
+
+### Default URLs (when manually started)
+- **Web App**: http://localhost:3001
+- **API**: http://localhost:5000/api
+- **Admin Login**: username: `admin`, password: `admin`
+- **Delivery Login**: username: `delivery1`, password: `delivery123`
+
+### Database
+- **Development**: SQLite (`file:./dev.db`)
+- **Production**: PostgreSQL (configurable)
+- **Schema**: Comprehensive with users, products, orders, subscriptions, etc.
+
+## 🚨 Important Notes
+
+1. **This is a PRODUCTION-READY application** - all core features are implemented and functional
+2. **Manual build process** - All builds and runs are handled outside of AI chat
+3. **Multiple platforms** - Web, React Native, and Flutter applications are all functional
+4. **Real-time features** - Socket.IO integration for live updates and delivery tracking
+5. **Payment integration** - Valitor payment gateway fully implemented
+6. **Multi-language support** - Icelandic/English throughout all applications
+7. **Role-based access** - Customer, Admin, and Delivery personnel with proper permissions
+
+## 🎯 Focus Areas for AI Assistance
+
+When helping with this project, focus on:
+- Code analysis and optimization suggestions
+- Feature enhancement recommendations
+- Security best practices
+- Performance improvements
+- Testing strategies and implementation
+- Documentation improvements
+- Architecture refinements
+- Bug identification and fixes
+- Code review and quality improvements
+- Database schema improvements and migrations
+- **UI/App Testing**: Leverage Playwright MCP server for comprehensive testing
+  - Web application testing and user flow validation
+  - Mobile app testing across platforms
+  - Cross-browser compatibility testing
+  - API endpoint testing and validation
+  - Visual regression and accessibility testing
+  - Performance and load testing
+
+## 🚀 Development Guidelines & Best Practices
+
+### Code Quality Standards
+- **Consistency**: Follow existing code patterns and conventions
+- **TypeScript**: Prefer TypeScript over JavaScript for new React Native components
+- **Error Handling**: Implement proper error handling with user-friendly messages
+- **Validation**: Use express-validator for backend validation and react-hook-form for frontend
+- **Security**: Always validate and sanitize user inputs
+- **Performance**: Optimize database queries and implement proper indexing
+- **Accessibility**: Ensure WCAG compliance for web components
+
+### Architecture Patterns
+- **Backend**: Follow MVC pattern with controllers, routes, middleware, and services
+- **Frontend**: Use Redux Toolkit for state management with proper slice organization
+- **Mobile**: Implement role-based navigation and consistent state management
+- **Database**: Use Prisma ORM with proper relationships and constraints
+- **Real-time**: Leverage Socket.IO for live updates and notifications
+
+### File Organization
+- **Components**: Organize by feature/domain (admin, auth, common, layout)
+- **Pages**: Group by user role (admin, customer, delivery)
+- **Services**: Separate API calls and business logic
+- **Utils**: Keep utility functions organized by purpose
+- **Types**: Define TypeScript interfaces in dedicated files
+
+### Naming Conventions
+- **Files**: Use PascalCase for components, camelCase for utilities
+- **Variables**: Use descriptive names with proper prefixes (is, has, can, should)
+- **Functions**: Use verb-noun pattern (getUser, updateOrder, validateInput)
+- **Constants**: Use UPPER_SNAKE_CASE for constants
+- **Database**: Use snake_case for table and column names
+
+### Error Handling
+- **Backend**: Use try-catch blocks with proper error responses
+- **Frontend**: Implement error boundaries and toast notifications
+- **Database**: Handle constraint violations gracefully
+- **API**: Return consistent error format with proper HTTP status codes
+- **Logging**: Log errors with sufficient context for debugging
+
+### Security Considerations
+- **Authentication**: Use JWT tokens with proper expiration
+- **Authorization**: Implement role-based access control
+- **Input Validation**: Validate all inputs on both client and server
+- **SQL Injection**: Use Prisma ORM to prevent SQL injection
+- **XSS Protection**: Sanitize user inputs and use proper escaping
+- **CORS**: Configure CORS properly for production
+- **Rate Limiting**: Implement rate limiting for API endpoints
+
+### Performance Optimization
+- **Database**: Use proper indexing and query optimization
+- **Frontend**: Implement code splitting and lazy loading
+- **Images**: Optimize images and use appropriate formats
+- **Caching**: Implement caching strategies for frequently accessed data
+- **Bundle Size**: Monitor and optimize bundle sizes
+- **Real-time**: Optimize Socket.IO events and room management
+
+### Testing Strategy
+- **Unit Tests**: Test individual functions and components
+- **Integration Tests**: Test API endpoints and database interactions
+- **E2E Tests**: Test complete user workflows
+- **Mocking**: Mock external services and dependencies
+- **Coverage**: Maintain good test coverage for critical paths
+- **Playwright MCP Server**: Available for comprehensive UI and app testing
+  - **Web Application Testing**: Test React.js web app functionality, user flows, and UI interactions
+  - **Mobile App Testing**: Test React Native and Flutter mobile applications
+  - **Cross-browser Testing**: Test web app across different browsers and devices
+  - **API Testing**: Test backend API endpoints and responses
+  - **Visual Regression Testing**: Compare screenshots for UI changes
+  - **Performance Testing**: Measure page load times and user interactions
+  - **Accessibility Testing**: Verify WCAG compliance and screen reader compatibility
+
+### Internationalization (i18n)
+- **Translation Keys**: Use descriptive, hierarchical key names
+- **Pluralization**: Handle plural forms correctly
+- **Date/Time**: Use proper locale-specific formatting
+- **Currency**: Format currency according to locale
+- **RTL Support**: Consider right-to-left language support
+
+### Mobile Development
+- **Platform Differences**: Handle iOS/Android specific features
+- **Navigation**: Use consistent navigation patterns
+- **State Management**: Implement proper state persistence
+- **Offline Support**: Consider offline functionality for critical features
+- **Push Notifications**: Implement proper notification handling
+- **Performance**: Optimize for mobile performance and battery usage
+
+### Database Design
+- **Relationships**: Define proper foreign key relationships
+- **Indexing**: Add indexes for frequently queried columns
+- **Constraints**: Use database constraints for data integrity
+- **Migrations**: Write reversible migrations with proper rollback
+- **Seeding**: Maintain consistent seed data for development
+- **Backups**: Implement proper backup strategies
+
+### API Design
+- **RESTful**: Follow REST conventions for API endpoints
+- **Versioning**: Implement API versioning for backward compatibility
+- **Documentation**: Document API endpoints with examples
+- **Pagination**: Implement proper pagination for list endpoints
+- **Filtering**: Support filtering and sorting options
+- **Error Responses**: Use consistent error response format
+
+### Real-time Features
+- **Socket.IO**: Use rooms for efficient message broadcasting
+- **Event Names**: Use descriptive event names with consistent naming
+- **Error Handling**: Handle connection errors gracefully
+- **Reconnection**: Implement automatic reconnection logic
+- **Scalability**: Consider horizontal scaling for Socket.IO
+
+### Payment Integration
+- **Valitor**: Follow Valitor API documentation and best practices
+- **Webhooks**: Implement proper webhook handling with verification
+- **Error Handling**: Handle payment failures gracefully
+- **Security**: Never store sensitive payment data
+- **Testing**: Use sandbox environment for testing
+
+### Deployment Considerations
+- **Environment Variables**: Use proper environment configuration
+- **Database**: Use appropriate database for production
+- **SSL**: Implement proper SSL certificates
+- **Monitoring**: Set up application monitoring and logging
+- **Backups**: Implement automated backup strategies
+- **Scaling**: Plan for horizontal scaling if needed
+
+### Code Review Checklist
+- [ ] Code follows established patterns and conventions
+- [ ] Proper error handling implemented
+- [ ] Input validation in place
+- [ ] Security considerations addressed
+- [ ] Performance optimizations applied
+- [ ] Tests written for new functionality
+- [ ] Documentation updated if needed
+- [ ] Internationalization keys added
+- [ ] Mobile compatibility verified
+- [ ] Database migrations tested
+- [ ] **Playwright tests created** for new UI features
+- [ ] Cross-browser compatibility verified
+- [ ] Accessibility compliance tested
+- [ ] Performance benchmarks established
+
+### Common Pitfalls to Avoid
+- **Direct Database Access**: Always use Prisma ORM, never raw SQL
+- **Hardcoded Values**: Use environment variables for configuration
+- **Missing Error Handling**: Always handle potential errors
+- **Inconsistent State**: Keep Redux state consistent across components
+- **Memory Leaks**: Clean up event listeners and subscriptions
+- **Security Vulnerabilities**: Never trust client-side data
+- **Performance Issues**: Monitor and optimize database queries
+- **Accessibility**: Don't forget about screen readers and keyboard navigation
+
+**Remember**: This application is fully functional and production-ready. The AI's role is to assist with code analysis, suggestions, and improvements, NOT to run or build the application.

@@ -1,0 +1,456 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite doesn't support enums, using strings with validation
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String?  @unique
+  password  String?
+  fullName  String?
+  phone     String?
+  role      String   @default("CUSTOMER") // CUSTOMER, ADMIN, DELIVERY
+  age       Int?
+  // Kenni IDP fields
+  kennitala   String?   @unique
+  dob         DateTime?
+  idpProvider String?   // e.g., "kenni"
+  idpSubject  String?   @unique
+  idpPhone    String?
+  idpRaw      String?   // JSON blob of raw IDP claims
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  orders           Order[]
+  addresses        Address[]
+  cart             Cart?
+  deliveryOrders   Order[]   @relation("DeliveryPerson")
+  deliveryLocation Location?
+  subscriptions    Subscription[]
+  // Chat relations
+  sentMessages     ChatMessage[] @relation("MessageSender")
+  receivedMessages ChatMessage[] @relation("MessageReceiver")
+  conversations    ConversationParticipant[]
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique // English name (e.g., "WINE", "BEER")
+  nameIs      String   // Icelandic name
+  slug        String   @unique // URL-friendly identifier
+  description String?
+  descriptionIs String?
+  icon        String?  // Icon identifier or emoji
+  imageUrl    String?  // Category image URL
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  products      Product[]
+  subcategories Subcategory[]
+}
+
+model Subcategory {
+  id          Int      @id @default(autoincrement())
+  name        String   // English name (e.g., "WHITE_WINE", "RED_WINE")
+  nameIs      String   // Icelandic name
+  slug        String   // URL-friendly identifier
+  description String?
+  descriptionIs String?
+  icon        String?  // Icon identifier or emoji
+  imageUrl    String?  // Subcategory image URL
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  products    Product[]
+
+  @@unique([categoryId, slug])
+  @@index([categoryId])
+}
+
+model Banner {
+  id          Int      @id @default(autoincrement())
+  title       String?  // Banner title (English)
+  titleIs     String?  // Banner title (Icelandic)
+  description String?  // Banner description (English)
+  descriptionIs String? // Banner description (Icelandic)
+  imageUrl    String   // Banner image URL
+  alt         String?  // Alt text for image
+  link        String?  // Optional link when banner is clicked
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id          Int             @id @default(autoincrement())
+  name        String
+  nameIs      String // Icelandic name
+  description String?
+  descriptionIs String? // Icelandic description
+  categoryId  Int
+  category    Category        @relation(fields: [categoryId], references: [id])
+  subcategoryId Int?
+  subcategory Subcategory?    @relation(fields: [subcategoryId], references: [id])
+  price       Float
+  stock       Int             @default(0)
+  imageUrl    String?
+  alcoholContent Float?
+  nicotineContent Float? // For nicotine products
+  subcategories  String[] // Array of subcategories (legacy field, will be deprecated)
+  isActive    Boolean         @default(true)
+  ageRestriction Int          @default(18)
+  
+  // Discount fields
+  hasDiscount Boolean         @default(false)
+  originalPrice Float?        // Original price before discount
+  discountPercentage Float?   // Discount percentage (0-100)
+  discountStartDate DateTime? // When discount starts
+  discountEndDate DateTime?   // When discount ends
+  discountReason String?      // Reason for discount (e.g., "Sale", "Clearance")
+  discountReasonIs String?    // Icelandic reason for discount
+  
+  // ATVR Import Fields - Comprehensive Bilingual Support
+  volume      String?         // e.g., "750 ml"
+  volumeIs    String?         // Icelandic volume description
+  country     String?         // Country of origin (English)
+  countryIs   String?         // Country of origin (Icelandic)
+  region      String?         // Region/State (English)
+  regionIs    String?         // Region/State (Icelandic)
+  origin      String?         // Origin/Appellation (English)
+  originIs    String?         // Origin/Appellation (Icelandic)
+  producer    String?         // Producer/manufacturer (English)
+  producerIs  String?         // Producer/manufacturer (Icelandic)
+  distributor String?         // Distributor (English)
+  distributorIs String?       // Distributor (Icelandic)
+  packaging   String?         // Packaging type (English)
+  packagingIs String?         // Packaging type (Icelandic)
+  packagingWeight String?     // Weight of packaging (e.g., "165 g")
+  packagingWeightIs String?   // Weight of packaging (Icelandic)
+  carbonFootprint String?     // Estimated carbon footprint (e.g., "180 g")
+  carbonFootprintIs String?   // Estimated carbon footprint (Icelandic)
+  vintage     String?         // Vintage year (e.g., "2024")
+  grapeVariety String?        // Grape variety (e.g., "Cabernet Sauvignon")
+  grapeVarietyIs String?      // Grape variety (Icelandic)
+  wineStyle   String?         // Wine style description (e.g., "Létt og ósætt")
+  wineStyleIs String?         // Wine style description (Icelandic)
+  pricePerLiter String?       // Price per liter (e.g., "2.233 kr")
+  pricePerLiterIs String?     // Price per liter (Icelandic)
+  foodPairings String[]       // Array of food pairing codes
+  foodPairingsIs String[]     // Array of food pairing codes (Icelandic)
+  specialAttributes String[]  // Array of special attributes (English)
+  specialAttributesIs String[] // Array of special attributes (Icelandic)
+  certifications String[]     // Array of certifications (e.g., "B Corporation", "Certified Sustainable Wine of Chile")
+  certificationsIs String[]   // Array of certifications (Icelandic)
+  availability String?        // Availability status (available, special-order, coming-soon, discontinued)
+  availabilityIs String?      // Availability status (Icelandic)
+  storeAvailability Json?     // Store-specific availability data
+  atvrProductId String?       // Original ATVR product ID
+  atvrUrl     String?         // Original ATVR product URL
+  atvrImageUrl String?        // Original ATVR product image URL
+  
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // Relations
+  orderItems     OrderItem[]
+  cartItems      CartItem[]
+  subscriptions  Subscription[]
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  items CartItem[]
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  cartId    Int
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+
+  @@unique([cartId, productId])
+}
+
+model Address {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label      String // e.g., "Home", "Work"
+  street     String
+  city       String
+  postalCode String
+  country    String   @default("Iceland")
+  latitude   Float?
+  longitude  Float?
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  orders Order[]
+  subscriptions Subscription[]
+}
+
+model Order {
+  id              Int         @id @default(autoincrement())
+  orderNumber     String      @unique
+  userId          Int
+  user            User        @relation(fields: [userId], references: [id])
+  addressId       Int?
+  address         Address?    @relation(fields: [addressId], references: [id])
+  deliveryMethod  String      @default("DELIVERY") // DELIVERY, PICKUP
+  pickupTime      String?     // HH:MM format for pickup orders
+  status          String      @default("PENDING") // PENDING, CONFIRMED, PREPARING, OUT_FOR_DELIVERY, DELIVERED, CANCELLED
+  totalAmount     Float
+  deliveryFee     Float       @default(0)
+  notes           String?
+  deliveryPersonId Int?
+  deliveryPerson  User?       @relation("DeliveryPerson", fields: [deliveryPersonId], references: [id])
+  estimatedDelivery DateTime?
+  deliveredAt     DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  items           OrderItem[]
+  transaction     Transaction?
+  subscriptionDeliveries SubscriptionDelivery[]
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float // Price at time of order
+  createdAt DateTime @default(now())
+
+  @@unique([orderId, productId])
+}
+
+model Transaction {
+  id              Int           @id @default(autoincrement())
+  orderId         Int           @unique
+  order           Order         @relation(fields: [orderId], references: [id])
+  amount          Float
+  paymentStatus   String         @default("PENDING") // PENDING, COMPLETED, FAILED, REFUNDED
+  paymentMethod   String // e.g., "Valitor", "Cash"
+  valitorTransactionId String?
+  paymentDetails  String? // JSON string for additional payment info
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Location {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  latitude  Float
+  longitude Float
+  accuracy  Float?
+  heading   Float?
+  speed     Float?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model Subscription {
+  id              Int         @id @default(autoincrement())
+  userId          Int
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId       Int
+  product         Product     @relation(fields: [productId], references: [id])
+  addressId       Int
+  address         Address     @relation(fields: [addressId], references: [id])
+  quantity        Int         @default(1)
+  intervalType    String      // WEEKLY, BIWEEKLY, MONTHLY, CUSTOM
+  intervalValue   Int         @default(1) // Every X weeks/months
+  preferredDay    String?     // MONDAY, TUESDAY, etc. or null for flexible
+  preferredTime   String?     // HH:MM format or null for flexible
+  nextDelivery    DateTime
+  status          String      @default("ACTIVE") // ACTIVE, PAUSED, CANCELLED
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  deliveries SubscriptionDelivery[]
+}
+
+model SubscriptionDelivery {
+  id             Int          @id @default(autoincrement())
+  subscriptionId Int
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  orderId        Int?
+  order          Order?       @relation(fields: [orderId], references: [id])
+  scheduledDate  DateTime
+  actualDate     DateTime?
+  status         String       @default("SCHEDULED") // SCHEDULED, PROCESSING, DELIVERED, SKIPPED, FAILED
+  notes          String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Setting {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique
+  value       String?
+  description String?
+  category    String   @default("GENERAL") // GENERAL, API_KEYS, PAYMENT, DELIVERY, NOTIFICATIONS, INTEGRATIONS
+  isEncrypted Boolean  @default(false)
+  isPublic    Boolean  @default(false) // Whether this setting can be accessed by frontend
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Integration {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique // e.g., "uniconta", "atvr", "kenni"
+  displayName String   // e.g., "Uniconta Integration"
+  provider    String   // e.g., "uniconta"
+  isEnabled   Boolean  @default(false)
+  isActive    Boolean  @default(true) // Whether the integration is available for use
+  sortOrder   Int      @default(0)
+  
+  // Configuration fields (JSON stored as string)
+  config      String?  // JSON configuration for the integration
+  
+  // Common configuration fields
+  apiKey      String?  // API key (encrypted)
+  secretKey   String?  // Secret key (encrypted)
+  baseUrl     String?  // Base URL for the integration
+  environment String   @default("sandbox") // sandbox, production
+  
+  // Integration specific fields
+  companyId   String?  // Company ID for the integration
+  username    String?  // Username for authentication
+  password    String?  // Password (encrypted)
+  
+  // Metadata
+  description String?  // Description of the integration
+  version     String?  // Integration version
+  lastSync    DateTime? // Last successful sync
+  lastError   String?  // Last error message
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PaymentGateway {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique // e.g., "Valitor", "Rapyd"
+  displayName String   // e.g., "Valitor Payment Gateway"
+  provider    String   // e.g., "valitor", "rapyd"
+  isEnabled   Boolean  @default(false)
+  isActive    Boolean  @default(true) // Whether the gateway is available for use
+  sortOrder   Int      @default(0)
+  
+  // Configuration fields (JSON stored as string)
+  config      String?  // JSON configuration for the gateway
+  
+  // Common configuration fields
+  merchantId  String?  // Merchant ID for the gateway
+  apiKey      String?  // API key (encrypted)
+  secretKey   String?  // Secret key (encrypted)
+  webhookSecret String? // Webhook secret (encrypted)
+  environment String   @default("sandbox") // sandbox, production
+  
+  // Gateway-specific settings
+  supportedCurrencies String[] // Array of supported currency codes
+  supportedCountries  String[] // Array of supported country codes
+  supportedMethods    String[] // Array of supported payment methods
+  
+  // Metadata
+  description String?
+  logoUrl     String?
+  website     String?
+  documentation String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Chat System Models
+model Conversation {
+  id          Int      @id @default(autoincrement())
+  title       String?  // Optional conversation title
+  type        String   @default("SUPPORT") // SUPPORT, ADMIN, DELIVERY
+  status      String   @default("ACTIVE") // ACTIVE, ARCHIVED, RESOLVED
+  priority    String   @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  lastMessageAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  participants ConversationParticipant[]
+  messages     ChatMessage[]
+}
+
+model ConversationParticipant {
+  id             Int          @id @default(autoincrement())
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId         Int
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           String       @default("PARTICIPANT") // PARTICIPANT, ADMIN, DELIVERY
+  joinedAt       DateTime     @default(now())
+  lastReadAt     DateTime?
+  isActive       Boolean      @default(true)
+
+  @@unique([conversationId, userId])
+}
+
+model ChatMessage {
+  id             Int          @id @default(autoincrement())
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       Int
+  sender         User         @relation("MessageSender", fields: [senderId], references: [id])
+  receiverId     Int?
+  receiver       User?        @relation("MessageReceiver", fields: [receiverId], references: [id])
+  content        String
+  messageType    String       @default("TEXT") // TEXT, IMAGE, FILE, SYSTEM
+  metadata       Json?        // Additional data (file info, system messages, etc.)
+  isRead         Boolean      @default(false)
+  readAt         DateTime?
+  isEdited       Boolean      @default(false)
+  editedAt       DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+  @@index([receiverId])
+}
+

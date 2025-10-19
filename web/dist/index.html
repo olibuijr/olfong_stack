@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ölföng - Wine & Beer Shop</title>
+    <meta name="description" content="Iceland's premier wine and beer shop with delivery service" />
+    <script>
+      // Prevent flash of white background on page load
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-Dq3wTEHn.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-q9JZwg2i.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
