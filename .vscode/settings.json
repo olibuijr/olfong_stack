@@ -1,0 +1,41 @@
+{
+  "mcp.servers": {
+    "playwright": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "--init", "--pull=always", "mcr.microsoft.com/playwright/mcp"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/olibuijr/Projects/olfong_stack"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "env": {
+        "CONTEXT7_API_KEY": "ctx7sk-5e739f0a-6b8b-4b4f-9c3b-0c5d42fe8f3d"
+      }
+    },
+    "persistproc": {
+      "command": "persistproc"
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "BSA_JQdHt3Pt9mmLWQ0i7mPrfSpeN2u"
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@henkey/postgres-mcp-server", "--connection-string", "postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public"]
+    }
+  }
+}

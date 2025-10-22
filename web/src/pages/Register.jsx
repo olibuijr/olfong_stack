@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch } from 'react-redux';
 import { Eye, EyeOff } from 'lucide-react';
-import { register, clearError } from '../store/slices/authSlice';
+import { register } from '../store/slices/authSlice';
 
 const Register = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
@@ -32,7 +32,7 @@ const Register = () => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
-      alert(t('authExtra.passwordMismatch'));
+      alert(t('authExtra', 'passwordMismatch'));
       return;
     }
 
@@ -53,15 +53,15 @@ const Register = () => {
             </div>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {t('auth.register')}
+            {t('auth', 'register')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            {t('authExtra.or')}
+            {t('authExtra', 'or')}
             <Link
               to="/login"
               className="font-medium text-primary-600 hover:text-primary-500"
             >
-              {t('authExtra.signInToYourAccount')}
+              {t('authExtra', 'signInToYourAccount')}
             </Link>
           </p>
         </div>
@@ -70,7 +70,7 @@ const Register = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="username" className="label">
-                {t('auth.username')}
+                {t('auth', 'username')}
               </label>
               <input
                 id="username"
@@ -80,13 +80,13 @@ const Register = () => {
                 value={formData.username}
                 onChange={handleChange}
                 className="input"
-                placeholder={t('auth.username')}
+                placeholder={t('auth', 'username')}
               />
             </div>
 
             <div>
               <label htmlFor="fullName" className="label">
-                {t('auth.fullName')}
+                {t('auth', 'fullName')}
               </label>
               <input
                 id="fullName"
@@ -95,13 +95,13 @@ const Register = () => {
                 value={formData.fullName}
                 onChange={handleChange}
                 className="input"
-                placeholder={t('auth.fullName')}
+                placeholder={t('auth', 'fullName')}
               />
             </div>
 
             <div>
               <label htmlFor="phone" className="label">
-                {t('auth.phone')}
+                {t('auth', 'phone')}
               </label>
               <input
                 id="phone"
@@ -110,13 +110,13 @@ const Register = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 className="input"
-                placeholder={t('auth.phone')}
+                placeholder={t('auth', 'phone')}
               />
             </div>
 
             <div>
               <label htmlFor="age" className="label">
-                {t('auth.age')}
+                {t('auth', 'age')}
               </label>
               <input
                 id="age"
@@ -126,13 +126,13 @@ const Register = () => {
                 value={formData.age}
                 onChange={handleChange}
                 className="input"
-                placeholder={t('auth.age')}
+                placeholder={t('auth', 'age')}
               />
             </div>
 
             <div>
               <label htmlFor="password" className="label">
-                {t('auth.password')}
+                {t('auth', 'password')}
               </label>
               <div className="relative">
                 <input
@@ -143,7 +143,7 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="input pr-10"
-                  placeholder={t('auth.password')}
+                  placeholder={t('auth', 'password')}
                 />
                 <button
                   type="button"
@@ -161,7 +161,7 @@ const Register = () => {
 
             <div>
               <label htmlFor="confirmPassword" className="label">
-                {t('auth.confirmPassword')}
+                {t('auth', 'confirmPassword')}
               </label>
               <div className="relative">
                 <input
@@ -172,7 +172,7 @@ const Register = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="input pr-10"
-                  placeholder={t('auth.confirmPassword')}
+                  placeholder={t('auth', 'confirmPassword')}
                 />
                 <button
                   type="button"
@@ -194,7 +194,7 @@ const Register = () => {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
-              {t('auth.register')}
+              {t('auth', 'register')}
             </button>
           </div>
         </form>

@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: [['html'], ['json', { outputFile: 'test-results.json' }]],
 
   use: {
-    baseURL: 'http://localhost:3001',
+    baseURL: 'http://192.168.8.62:3001',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -44,12 +44,14 @@ export default defineConfig({
     {
       command: 'cd /home/olibuijr/Projects/olfong_stack/backend && npm run dev',
       port: 5000,
+      host: '192.168.8.62',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },
     {
       command: 'cd /home/olibuijr/Projects/olfong_stack/web && npm run dev',
       port: 3001,
+      host: '192.168.8.62',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },

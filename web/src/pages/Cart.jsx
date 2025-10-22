@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, Truck, CreditCard, MapPin } from 'lucide-react';
@@ -12,15 +12,15 @@ import { getProductName } from '../utils/languageUtils';
 import { useForm } from 'react-hook-form';
 
 const Cart = () => {
-  const { t, i18n } = useTranslation();
+  const { t, currentLanguage } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
   const { cart, isLoading: cartLoading } = useSelector((state) => state.cart);
   const { addresses, isLoading: addressesLoading } = useSelector((state) => state.addresses);
   const { isLoading: orderLoading } = useSelector((state) => state.orders);
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   // Checkout state
   const [selectedAddressId, setSelectedAddressId] = useState('');
@@ -137,7 +137,7 @@ const Cart = () => {
   const onSubmitOrder = async (data) => {
     try {
       if (!selectedShippingOptionId) {
-        toast.error(t('checkoutPage.selectShippingOption'));
+        toast.error(t('checkoutPage', 'selectShippingOption'));
         return;
       }
 
@@ -151,13 +151,13 @@ const Cart = () => {
       // Add delivery-specific data
       if (selectedOption.type === 'delivery') {
         if (!selectedAddressId) {
-          toast.error(t('checkoutPage.selectDeliveryAddress'));
+          toast.error(t('checkoutPage', 'selectDeliveryAddress'));
           return;
         }
         orderData.deliveryAddressId = selectedAddressId;
       } else if (selectedOption.type === 'pickup') {
         if (!selectedPickupTime) {
-          toast.error(t('checkoutPage.selectPickupTime'));
+          toast.error(t('checkoutPage', 'selectPickupTime'));
           return;
         }
         orderData.pickupTime = selectedPickupTime;
@@ -202,7 +202,7 @@ const Cart = () => {
     try {
       await dispatch(updateCartItem({ itemId, quantity: newQuantity })).unwrap();
     } catch (error) {
-      toast.error(t('common.error'));
+      toast.error(t('common', 'error'));
     }
   };
 
@@ -210,35 +210,21 @@ const Cart = () => {
     try {
       await dispatch(removeFromCart(itemId)).unwrap();
     } catch (error) {
-      toast.error(t('common.error'));
+      toast.error(t('common', 'error'));
     }
   };
 
   const handleClearCart = async () => {
-    if (window.confirm(t('cartPage.clearCart') + '?')) {
+    if (window.confirm(t('cartPage', 'clearCart') + '?')) {
       try {
         await dispatch(clearCart()).unwrap();
       } catch (error) {
-        toast.error(t('cart.failedToClearCart'));
+        toast.error(t('cart', 'failedToClearCart'));
       }
     }
   };
 
-  const handleCheckout = () => {
-    if (!isAuthenticated) {
-      toast.error(t('common.loginRequired'));
-      navigate('/login');
-      return;
-    }
 
-    if (!cart || !cart.items || cart.items.length === 0) {
-      toast.error(t('cart.cartIsEmpty'));
-      return;
-    }
-
-    // Checkout form is always visible, so just validate and proceed
-    return;
-  };
 
   if (!isAuthenticated) {
     return (
@@ -246,13 +232,13 @@ const Cart = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-              {t('cart.title')}
+              {t('cart', 'title')}
             </h1>
             <div className="card p-8 max-w-md mx-auto">
               <ShoppingBag className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('cartPage.loginToViewCart')}</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">{t('cartPage.mustLoginToViewCart')}</p>
-              <Link to="/login" className="btn btn-primary w-full">{t('cartPage.login')}</Link>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('cartPage', 'loginToViewCart')}</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">{t('cartPage', 'mustLoginToViewCart')}</p>
+              <Link to="/login" className="btn btn-primary w-full">{t('cartPage', 'login')}</Link>
             </div>
           </div>
         </div>
@@ -273,14 +259,14 @@ const Cart = () => {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-            {t('cart.title')}
+            {t('cart', 'title')}
           </h1>
           <div className="text-center">
             <div className="card p-8 max-w-md mx-auto">
               <ShoppingBag className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('cartPage.emptyCart')}</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">{t('cartPage.addItemsToStart')}</p>
-              <Link to="/products" className="btn btn-primary w-full">{t('home.hero.startShopping')}</Link>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{t('cartPage', 'emptyCart')}</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">{t('cartPage', 'addItemsToStart')}</p>
+              <Link to="/products" className="btn btn-primary w-full">{t('home.hero', 'startShopping')}</Link>
             </div>
           </div>
         </div>
@@ -302,10 +288,10 @@ const Cart = () => {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
               <div className="flex-1 min-w-0 mb-4 sm:mb-0">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {t('cart.title')}
+                  {t('cart', 'title')}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  {t('cartPage.cartDescription')}
+                  {t('cartPage', 'cartDescription')}
                 </p>
               </div>
               {cart.items.length > 0 && (
@@ -314,7 +300,7 @@ const Cart = () => {
                   className="inline-flex items-center px-4 py-2 border border-red-300 dark:border-red-600 rounded-md shadow-sm text-sm font-medium text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 whitespace-nowrap flex-shrink-0"
                 >
                   <Trash2 className="w-4 h-4 mr-2 flex-shrink-0" />
-                  <span>{t('cartPage.clearCart')}</span>
+                  <span>{t('cartPage', 'clearCart')}</span>
                 </button>
               )}
             </div>
@@ -328,7 +314,7 @@ const Cart = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                   <ShoppingBag className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" />
-                  {t('cartPage.cartItems')}
+                  {t('cartPage', 'cartItems')}
                 </h2>
                 <div className="space-y-4">
                   {cart.items.map((item) => (
@@ -338,13 +324,13 @@ const Cart = () => {
                         <div className="flex-shrink-0">
                           {item.product.imageUrl ? (
                             <img
-                              src={`http://localhost:5000${item.product.imageUrl}`}
+                              src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${item.product.imageUrl}`}
                               alt={item.product.name}
                               className="w-20 h-20 object-cover rounded-lg border border-gray-200 dark:border-gray-600"
                             />
                           ) : (
                             <div className="w-20 h-20 bg-gray-100 dark:bg-gray-600 rounded-lg flex items-center justify-center border border-gray-200 dark:border-gray-600">
-                              <span className="text-gray-400 dark:text-gray-500 text-xs">{t('cartPage.noImage')}</span>
+                              <span className="text-gray-400 dark:text-gray-500 text-xs">{t('cartPage', 'noImage')}</span>
                             </div>
                           )}
                         </div>
@@ -352,7 +338,7 @@ const Cart = () => {
                         {/* Product Info */}
                         <div className="flex-1 min-w-0">
                           <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                            {getProductName(i18n.language, item.product)}
+                            {getProductName(currentLanguage, item.product)}
                           </h3>
                           <p className="text-sm text-gray-600 dark:text-gray-400 truncate mb-2">
                             {item.product.descriptionIs || item.product.description}
@@ -360,7 +346,7 @@ const Cart = () => {
                           <div className="flex flex-wrap items-center gap-2">
                             {item.product.category && (
                               <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 rounded text-xs font-medium">
-                                {t(`navigation.${item.product.category.name.toLowerCase()}`)}
+                                {t('navigation', item.product.category.name.toLowerCase())}
                               </span>
                             )}
                             <span className={`px-2 py-1 rounded text-xs font-medium ${
@@ -368,7 +354,7 @@ const Cart = () => {
                                 ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-300'
                                 : 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300'
                             }`}>
-                              {item.product.stock > 0 ? t('products.inStock') : t('products.outOfStock')}
+                              {item.product.stock > 0 ? t('products', 'inStock') : t('products', 'outOfStock')}
                             </span>
                           </div>
                         </div>
@@ -400,7 +386,7 @@ const Cart = () => {
                             <button
                               onClick={() => handleRemoveItem(item.id)}
                               className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors duration-200"
-                              title={t('common.remove')}
+                              title={t('common', 'remove')}
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -409,10 +395,10 @@ const Cart = () => {
                           {/* Price */}
                           <div className="text-left sm:text-right">
                             <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                              {(item.product.price * item.quantity).toLocaleString()} {t('common.currency')}
+                              {(item.product.price * item.quantity).toLocaleString()} {t('common', 'currency')}
                             </div>
                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {item.product.price.toLocaleString()} {t('common.currency')} {t('cartPage.each')}
+                              {item.product.price.toLocaleString()} {t('common', 'currency')} {t('cartPage', 'each')}
                             </div>
                           </div>
                         </div>
@@ -429,7 +415,7 @@ const Cart = () => {
                 <div className="flex items-center mb-6">
                   <CreditCard className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" />
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {t('checkoutPage.checkout')}
+                    {t('checkoutPage', 'checkout')}
                   </h2>
                 </div>
 
@@ -437,17 +423,17 @@ const Cart = () => {
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                     <Truck className="w-4 h-4 mr-2" />
-                    {t('checkoutPage.shippingOptions')}
+                    {t('checkoutPage', 'shippingOptions')}
                   </h3>
 
                   {isLoadingShipping ? (
                     <div className="flex items-center justify-center py-4">
                       <LoadingSpinner size="small" />
-                      <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+                      <span className="ml-2 text-gray-600">{t('common', 'loading')}</span>
                     </div>
                   ) : shippingOptions.length === 0 ? (
                     <div className="text-center py-4 text-gray-500">
-                      <p>{t('checkoutPage.noShippingOptions')}</p>
+                      <p>{t('checkoutPage', 'noShippingOptions')}</p>
                     </div>
                   ) : (
                     <div className="space-y-3">
@@ -466,7 +452,7 @@ const Cart = () => {
                                 {option.nameEn}
                               </div>
                               <div className="text-sm font-semibold text-primary-600">
-                                {option.fee === 0 ? t('common.free') : `${option.fee.toLocaleString()} ${t('common.currency')}`}
+                                {option.fee === 0 ? t('common', 'free') : `${option.fee.toLocaleString()} ${t('common', 'currency')}`}
                               </div>
                             </div>
                             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -474,7 +460,7 @@ const Cart = () => {
                             </div>
                             {option.estimatedDays && (
                               <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                                {t('checkoutPage.estimatedDelivery')}: {option.estimatedDays} {t('checkoutPage.days')}
+                                {t('checkoutPage', 'estimatedDelivery')}: {option.estimatedDays} {t('checkoutPage', 'days')}
                               </div>
                             )}
                           </div>
@@ -489,7 +475,7 @@ const Cart = () => {
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <MapPin className="w-4 h-4 mr-2" />
-                      {t('checkoutPage.deliveryAddress')}
+                      {t('checkoutPage', 'deliveryAddress')}
                     </h3>
 
                     {addresses.length > 0 && (
@@ -523,7 +509,7 @@ const Cart = () => {
 
                     {errors.addressId && (
                       <p className="text-red-600 text-sm mb-4">
-                        {t('checkoutPage.selectDeliveryAddress')}
+                        {t('checkoutPage', 'selectDeliveryAddress')}
                       </p>
                     )}
 
@@ -532,18 +518,18 @@ const Cart = () => {
                       onClick={() => setShowNewAddressForm(true)}
                       className="btn btn-outline text-sm"
                     >
-                      + {t('addresses.add')}
+                      + {t('addresses', 'add')}
                     </button>
 
                     {/* New Address Form */}
                     {showNewAddressForm && (
                       <div className="mt-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700">
-                        <h4 className="font-medium text-gray-900 dark:text-white mb-4">{t('checkoutPage.newAddress')}</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-white mb-4">{t('checkoutPage', 'newAddress')}</h4>
                         <form onSubmit={handleSubmit(onSubmitNewAddress)} className="space-y-4">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                {t('addresses.street')}
+                                {t('addresses', 'street')}
                               </label>
                               <input
                                 type="text"
@@ -553,7 +539,7 @@ const Cart = () => {
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                {t('addresses.city')}
+                                {t('addresses', 'city')}
                               </label>
                               <input
                                 type="text"
@@ -563,7 +549,7 @@ const Cart = () => {
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                {t('addresses.postalCode')}
+                                {t('addresses', 'postalCode')}
                               </label>
                               <input
                                 type="text"
@@ -573,7 +559,7 @@ const Cart = () => {
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                {t('addresses.country')}
+                                {t('addresses', 'country')}
                               </label>
                               <input
                                 type="text"
@@ -584,7 +570,7 @@ const Cart = () => {
                             </div>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage.notesOptional')}</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage', 'notesOptional')}</label>
                             <textarea
                               {...register('notes')}
                               rows={3}
@@ -592,13 +578,13 @@ const Cart = () => {
                             />
                           </div>
                           <div className="flex space-x-3">
-                            <button type="submit" className="btn btn-primary">{t('checkoutPage.saveAddress')}</button>
+                            <button type="submit" className="btn btn-primary">{t('checkoutPage', 'saveAddress')}</button>
                             <button
                               type="button"
                               onClick={() => setShowNewAddressForm(false)}
                               className="btn btn-outline"
                             >
-                              {t('common.cancel')}
+                              {t('common', 'cancel')}
                             </button>
                           </div>
                         </form>
@@ -612,11 +598,11 @@ const Cart = () => {
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                       <MapPin className="w-4 h-4 mr-2" />
-                      {t('checkoutPage.pickupTime')}
+                      {t('checkoutPage', 'pickupTime')}
                     </h3>
 
                     <div className="mb-4">
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('checkoutPage.selectPickupTimeHelp')}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('checkoutPage', 'selectPickupTimeHelp')}</p>
 
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {generatePickupTimes().map((time) => (
@@ -637,14 +623,14 @@ const Cart = () => {
 
                       {generatePickupTimes().length === 0 && (
                         <p className="text-red-600 text-sm">
-                          {t('checkoutPage.noPickupTimes')}
+                          {t('checkoutPage', 'noPickupTimes')}
                         </p>
                       )}
                     </div>
 
                     <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                      <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">{t('checkoutPage.storeLocation')}</h4>
-                      <p className="text-sm text-blue-700 dark:text-blue-300">{t('checkoutPage.storeLocationValue')}</p>
+                      <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">{t('checkoutPage', 'storeLocation')}</h4>
+                      <p className="text-sm text-blue-700 dark:text-blue-300">{t('checkoutPage', 'storeLocationValue')}</p>
                     </div>
                   </div>
                 )}
@@ -653,14 +639,14 @@ const Cart = () => {
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                     <CreditCard className="w-4 h-4 mr-2" />
-                    {t('checkoutPage.paymentMethod')}
+                    {t('checkoutPage', 'paymentMethod')}
                   </h3>
 
                   <div className="space-y-3">
                     {isLoadingGateways ? (
                       <div className="flex items-center justify-center py-4">
                         <LoadingSpinner size="small" />
-                        <span className="ml-2 text-gray-600">{t('common.loading')}</span>
+                        <span className="ml-2 text-gray-600">{t('common', 'loading')}</span>
                       </div>
                     ) : (
                       <>
@@ -674,8 +660,8 @@ const Cart = () => {
                               className="mt-1"
                             />
                             <div>
-                              <div className="font-medium text-gray-900 dark:text-white">{t('checkoutPage.valitorPayment')}</div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage.valitorDesc')}</div>
+                              <div className="font-medium text-gray-900 dark:text-white">{t('checkoutPage', 'valitorPayment')}</div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage', 'valitorDesc')}</div>
                             </div>
                           </label>
                         )}
@@ -690,8 +676,8 @@ const Cart = () => {
                               className="mt-1"
                             />
                             <div>
-                              <div className="font-medium text-gray-900 dark:text-white">{t('checkoutPage.cashOnDelivery')}</div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage.cashOnDeliveryDesc')}</div>
+                              <div className="font-medium text-gray-900 dark:text-white">{t('checkoutPage', 'cashOnDelivery')}</div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage', 'cashOnDeliveryDesc')}</div>
                             </div>
                           </label>
                         )}
@@ -706,16 +692,16 @@ const Cart = () => {
                               className="mt-1"
                             />
                             <div>
-                              <div className="font-medium text-gray-900 dark:text-white">{t('checkoutPage.payOnPickup')}</div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage.payOnPickupDesc')}</div>
+                              <div className="font-medium text-gray-900 dark:text-white">{t('checkoutPage', 'payOnPickup')}</div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage', 'payOnPickupDesc')}</div>
                             </div>
                           </label>
                         )}
 
                         {!isValitorAvailable() && !isCashOnDeliveryAvailable() && !isPayOnPickupAvailable() && (
                           <div className="text-center py-4 text-gray-500">
-                            <p>{t('checkoutPage.noPaymentMethodsAvailable')}</p>
-                            <p className="text-sm mt-1">{t('checkoutPage.contactAdmin')}</p>
+                            <p>{t('checkoutPage', 'noPaymentMethodsAvailable')}</p>
+                            <p className="text-sm mt-1">{t('checkoutPage', 'contactAdmin')}</p>
                           </div>
                         )}
                       </>
@@ -725,11 +711,11 @@ const Cart = () => {
 
                 {/* Order Notes */}
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('checkoutPage.orderNotes')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('checkoutPage', 'orderNotes')}</h3>
                   <textarea
                     {...register('notes')}
                     rows={3}
-                    placeholder={t('checkoutPage.orderNotes')}
+                    placeholder={t('checkoutPage', 'orderNotes')}
                     className="input w-full"
                   />
                 </div>
@@ -737,30 +723,30 @@ const Cart = () => {
                 {/* Order Summary */}
                 <div className="border-t pt-4 space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage.subtotal')} ({totalItems} {t('checkoutPage.items')})</span>
+                    <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage', 'subtotal')} ({totalItems} {t('checkoutPage', 'items')})</span>
                     <span className="font-medium">
-                      {subtotal.toLocaleString()} {t('common.currency')}
+                      {subtotal.toLocaleString()} {t('common', 'currency')}
                     </span>
                   </div>
 
                   <div className="flex justify-between">
                     <span className="text-gray-600 dark:text-gray-400">
-                      {getSelectedShippingOption() ? getSelectedShippingOption().nameEn : t('checkoutPage.shipping')}
+                      {getSelectedShippingOption() ? getSelectedShippingOption().nameEn : t('checkoutPage', 'shipping')}
                     </span>
                     <span className="font-medium">
                       {getSelectedShippingOption()?.fee === 0 ? (
-                        <span className="text-green-600">{t('common.free')}</span>
+                        <span className="text-green-600">{t('common', 'free')}</span>
                       ) : (
-                        `${getSelectedShippingOption()?.fee?.toLocaleString() || 0} ${t('common.currency')}`
+                        `${getSelectedShippingOption()?.fee?.toLocaleString() || 0} ${t('common', 'currency')}`
                       )}
                     </span>
                   </div>
 
                   <div className="border-t pt-3">
                     <div className="flex justify-between">
-                      <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('common.total')}</span>
+                      <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('common', 'total')}</span>
                       <span className="text-lg font-bold text-primary-600">
-                        {totalPrice.toLocaleString()} {t('common.currency')}
+                        {totalPrice.toLocaleString()} {t('common', 'currency')}
                       </span>
                     </div>
                   </div>
@@ -771,19 +757,19 @@ const Cart = () => {
                   disabled={orderLoading || !selectedShippingOptionId || (getSelectedShippingOption()?.type === 'delivery' && !selectedAddressId) || (getSelectedShippingOption()?.type === 'pickup' && !selectedPickupTime)}
                   className="btn btn-primary w-full py-3 text-lg mt-6"
                 >
-                  {orderLoading ? t('checkoutPage.creatingOrder') : t('checkoutPage.placeOrder')}
+                  {orderLoading ? t('checkoutPage', 'creatingOrder') : t('checkoutPage', 'placeOrder')}
                 </button>
 
                 {!selectedShippingOptionId && (
-                  <p className="text-red-600 text-sm mt-2">{t('checkoutPage.selectShippingOption')}</p>
+                  <p className="text-red-600 text-sm mt-2">{t('checkoutPage', 'selectShippingOption')}</p>
                 )}
 
                 {getSelectedShippingOption()?.type === 'delivery' && !selectedAddressId && (
-                  <p className="text-red-600 text-sm mt-2">{t('checkoutPage.selectDeliveryAddress')}</p>
+                  <p className="text-red-600 text-sm mt-2">{t('checkoutPage', 'selectDeliveryAddress')}</p>
                 )}
 
                 {getSelectedShippingOption()?.type === 'pickup' && !selectedPickupTime && (
-                  <p className="text-red-600 text-sm mt-2">{t('checkoutPage.selectPickupTime')}</p>
+                  <p className="text-red-600 text-sm mt-2">{t('checkoutPage', 'selectPickupTime')}</p>
                 )}
               </form>
             </div>
@@ -795,7 +781,7 @@ const Cart = () => {
               to="/products"
               className="btn btn-outline w-full py-3 text-center block"
             >
-              {t('cartPage.continueShopping')}
+              {t('cartPage', 'continueShopping')}
             </Link>
           </div>
         </div>

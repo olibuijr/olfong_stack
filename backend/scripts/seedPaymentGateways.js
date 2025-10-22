@@ -1,20 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
-const crypto = require('crypto');
 
 const prisma = new PrismaClient();
-
-// Encryption key for sensitive data (should match the one in controller)
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here!';
-const ALGORITHM = 'aes-256-cbc';
-
-// Helper function to encrypt sensitive data
-function encrypt(text) {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipher(ALGORITHM, ENCRYPTION_KEY);
-  let encrypted = cipher.update(text, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
-  return iv.toString('hex') + ':' + encrypted;
-}
 
 async function seedPaymentGateways() {
   console.log('🌱 Starting payment gateways seeding...');
@@ -270,6 +256,41 @@ async function seedPaymentGateways() {
 
     console.log('✅ Created Pay on Pickup payment gateway:', payOnPickupGateway.name);
 
+    // Create Teya payment gateway
+    const teyaGateway = await prisma.paymentGateway.upsert({
+      where: { name: 'Teya' },
+      update: {},
+      create: {
+        name: 'Teya',
+        displayName: 'Teya Payment Gateway',
+        provider: 'teya',
+        isEnabled: false, // Disabled by default
+        isActive: true,
+        sortOrder: 8,
+        config: JSON.stringify({
+          apiVersion: 'v1',
+          timeout: 30000,
+          retryAttempts: 3,
+          webhookUrl: '/api/webhooks/teya',
+          paymentGatewayId: null, // To be filled by admin
+        }),
+        merchantId: null, // To be filled by admin
+        apiKey: null, // To be filled by admin (Private Key)
+        secretKey: null, // To be filled by admin (Secret Key)
+        webhookSecret: null, // To be filled by admin
+        environment: 'sandbox',
+        supportedCurrencies: ['ISK', 'EUR', 'USD', 'GBP', 'DKK', 'NOK', 'SEK', 'CHF', 'CAD', 'AUD'],
+        supportedCountries: ['IS', 'DK', 'NO', 'SE', 'FI', 'DE', 'FR', 'GB', 'US', 'CA', 'AU', 'CH'],
+        supportedMethods: ['card', 'visa', 'mastercard', 'amex', 'diners', 'jcb', 'discover', 'maestro', 'visa_electron', 'bank_transfer', 'sepa', 'klarna', 'afterpay', 'paypal', 'apple_pay', 'google_pay'],
+        description: 'Icelandic payment gateway supporting major credit cards and international payment methods',
+        logoUrl: 'https://www.teya.com/wp-content/themes/teya/assets/images/teya-logo.svg',
+        website: 'https://www.teya.com',
+        documentation: 'https://docs.teya.com',
+      },
+    });
+
+    console.log('✅ Created Teya payment gateway:', teyaGateway.name);
+
     console.log('🎉 Payment gateways seeding completed successfully!');
     console.log('📋 Summary:');
     console.log('   - Valitor: Disabled (Icelandic payment gateway)');
@@ -277,6 +298,7 @@ async function seedPaymentGateways() {
     console.log('   - Stripe: Inactive (Popular payment gateway)');
     console.log('   - PayPal: Inactive (PayPal payment gateway)');
     console.log('   - Netgíró: Disabled (Icelandic payment gateway)');
+    console.log('   - Teya: Disabled (Icelandic payment gateway)');
     console.log('   - Cash on Delivery: Enabled (Local delivery payment method)');
     console.log('   - Pay on Pickup: Enabled (Store pickup payment method)');
     console.log('');

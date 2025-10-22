@@ -5,6 +5,7 @@ const { validate } = require('../middleware/validator');
 const {
   createPaymentSession,
   handleWebhook,
+  handleTeyaWebhook,
   verifyPayment,
   refundPayment,
   getPaymentMethods,
@@ -12,8 +13,9 @@ const {
   refundPaymentValidation,
 } = require('../controllers/paymentController');
 
-// Public webhook endpoint (no authentication required)
+// Public webhook endpoints (no authentication required)
 router.post('/webhook', handleWebhook);
+router.post('/webhook/teya', handleTeyaWebhook);
 
 // Get payment methods (public)
 router.get('/methods', getPaymentMethods);

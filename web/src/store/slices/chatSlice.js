@@ -65,6 +65,14 @@ export const fetchUnreadCount = createAsyncThunk(
   }
 );
 
+export const markMessagesAsRead = createAsyncThunk(
+  'chat/markMessagesAsRead',
+  async (conversationId) => {
+    const response = await api.post(`/chat/conversations/${conversationId}/messages/read`);
+    return response.data;
+  }
+);
+
 const chatSlice = createSlice({
   name: 'chat',
   initialState: {
@@ -132,6 +140,15 @@ const chatSlice = createSlice({
         message.isRead = true;
         message.readAt = new Date().toISOString();
       }
+    },
+    markAllMessagesAsRead: (state, action) => {
+      const conversationId = action.payload;
+      state.messages.forEach(message => {
+        if (message.conversationId === conversationId) {
+          message.isRead = true;
+          message.readAt = new Date().toISOString();
+        }
+      });
     },
     
     // Typing indicators
@@ -294,6 +311,12 @@ const chatSlice = createSlice({
       // Fetch unread count
       .addCase(fetchUnreadCount.fulfilled, (state, action) => {
         state.unreadCount = action.payload;
+      })
+      
+      // Mark messages as read
+      .addCase(markMessagesAsRead.fulfilled, (state, action) => { // eslint-disable-line no-unused-vars
+        // Update unread count
+        state.unreadCount = Math.max(0, state.unreadCount - state.messages.filter(msg => !msg.isRead).length);
       });
   }
 });
@@ -306,6 +329,7 @@ export const {
   addMessage,
   updateMessage,
   markMessageAsRead,
+  markAllMessagesAsRead,
   setTyping,
   setOtherUserTyping,
   handleNewMessage,

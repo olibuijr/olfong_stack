@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Wine, Beer, Package } from 'lucide-react';
 import { getProductName } from '../../utils/languageUtils';
 
@@ -61,13 +62,19 @@ const ProductImage = ({ product, className = "w-full h-64 object-cover", current
 
   return (
     <img
-      src={`http://localhost:5000${product.imageUrl}`}
+      src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
       alt={getProductName(currentLanguage, product)}
       className={className}
       onError={() => setImageError(true)}
       loading="lazy"
     />
   );
+};
+
+ProductImage.propTypes = {
+  product: PropTypes.object.isRequired,
+  className: PropTypes.string,
+  currentLanguage: PropTypes.string,
 };
 
 export default ProductImage;

@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
 
 const DualThumbSlider = ({ 
   min = 0, 
@@ -67,6 +68,7 @@ const DualThumbSlider = ({
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDragging, localValue]);
 
   const minPercentage = getPercentage(localValue[0]);

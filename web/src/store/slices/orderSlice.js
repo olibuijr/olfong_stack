@@ -94,6 +94,18 @@ export const fetchAllOrders = createAsyncThunk(
   }
 );
 
+export const sendReceiptEmail = createAsyncThunk(
+  'orders/sendReceiptEmail',
+  async ({ orderId, email }, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/orders/${orderId}/receipt/email`, { email });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to send receipt email');
+    }
+  }
+);
+
 // Initial state
 const initialState = {
   orders: [],
@@ -249,6 +261,20 @@ const orderSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAllOrders.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      
+      // Send Receipt Email
+      .addCase(sendReceiptEmail.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(sendReceiptEmail.fulfilled, (state, action) => { // eslint-disable-line no-unused-vars
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(sendReceiptEmail.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

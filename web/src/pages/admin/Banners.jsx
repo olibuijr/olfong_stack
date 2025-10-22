@@ -1,33 +1,45 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Eye, 
-  EyeOff, 
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Eye,
+  EyeOff,
   Image as ImageIcon,
+  X,
+  Upload,
   ExternalLink,
   Save,
-  X
+  ChevronDown,
+  Link as LinkIcon
 } from 'lucide-react';
+import MediaPicker from '../../components/admin/MediaPicker';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { 
-  fetchBanners, 
-  createBanner, 
-  updateBanner, 
-  deleteBanner, 
-  toggleBannerStatus 
+import {
+  fetchBanners,
+  createBanner,
+  updateBanner,
+  deleteBanner,
+  toggleBannerStatus,
+  setFeaturedBanner,
+  removeFeaturedBanner
 } from '../../store/slices/bannerSlice';
+import { fetchCategories } from '../../store/slices/categorySlice';
+import { fetchProducts } from '../../store/slices/productSlice';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const Banners = () => {
-  const { t } = useTranslation();
+  const { t, isLoading: translationsLoading } = useLanguage();
   const dispatch = useDispatch();
   const { banners, isLoading, error } = useSelector((state) => state.banners);
+  const { categories } = useSelector((state) => state.categories);
+  const { products } = useSelector((state) => state.products);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showMediaPicker, setShowMediaPicker] = useState(false);
   const [editingBanner, setEditingBanner] = useState(null);
+  const [showLinkDropdown, setShowLinkDropdown] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     titleIs: '',
@@ -36,12 +48,30 @@ const Banners = () => {
     imageUrl: '',
     alt: '',
     link: '',
-    sortOrder: 0
+    sortOrder: 0,
+    isFeatured: false,
+    featuredOrder: null
   });
 
   useEffect(() => {
     dispatch(fetchBanners({ includeInactive: true }));
+    dispatch(fetchCategories());
+    dispatch(fetchProducts());
   }, [dispatch]);
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showLinkDropdown && !event.target.closest('.link-dropdown-container')) {
+        setShowLinkDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLinkDropdown]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,19 +110,42 @@ const Banners = () => {
       imageUrl: banner.imageUrl || '',
       alt: banner.alt || '',
       link: banner.link || '',
-      sortOrder: banner.sortOrder || 0
+      sortOrder: banner.sortOrder || 0,
+      isFeatured: banner.isFeatured || false,
+      featuredOrder: banner.featuredOrder || null
     });
     setIsModalOpen(true);
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm(t('admin.banners.confirmDelete'))) {
+    if (window.confirm(t('admin.banners', 'confirmDelete'))) {
       await dispatch(deleteBanner(id));
     }
   };
 
   const handleToggleStatus = async (id) => {
     await dispatch(toggleBannerStatus(id));
+  };
+
+  const handleToggleFeatured = async (banner) => {
+    if (banner.isFeatured) {
+      await dispatch(removeFeaturedBanner(banner.id));
+    } else {
+      // Find next available position
+      const featuredBanners = banners.filter(b => b.isFeatured);
+      const usedPositions = featuredBanners.map(b => b.featuredOrder).filter(Boolean);
+      let nextPosition = 1;
+      while (usedPositions.includes(nextPosition)) {
+        nextPosition++;
+      }
+      await dispatch(setFeaturedBanner({ id: banner.id, featuredOrder: nextPosition }));
+    }
+  };
+  const handleMediaSelect = (selectedMedia) => {
+    if (selectedMedia && selectedMedia.url) {
+      setFormData({ ...formData, imageUrl: selectedMedia.url });
+    }
+    setShowMediaPicker(false);
   };
 
   const handleCloseModal = () => {
@@ -106,11 +159,13 @@ const Banners = () => {
       imageUrl: '',
       alt: '',
       link: '',
-      sortOrder: 0
+      sortOrder: 0,
+      isFeatured: false,
+      featuredOrder: null
     });
   };
 
-  if (isLoading) {
+  if (isLoading || translationsLoading) {
     return (
       <AdminLayout>
         <div className="flex justify-center items-center h-64">
@@ -127,10 +182,10 @@ const Banners = () => {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('admin.banners.title')}
+              {t('admin.banners', 'title')}
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              {t('admin.banners.subtitle')}
+              {t('admin.banners', 'subtitle')}
             </p>
           </div>
           <button
@@ -138,7 +193,7 @@ const Banners = () => {
             className="btn btn-primary flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            {t('admin.banners.addBanner')}
+            {t('admin.banners', 'addBanner')}
           </button>
         </div>
 
@@ -152,7 +207,7 @@ const Banners = () => {
         {/* Banners Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {banners.map((banner) => (
-            <div key={banner.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div key={banner.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
               {/* Banner Image */}
               <div className="relative h-48 bg-gray-100 dark:bg-gray-700">
                 {banner.imageUrl ? (
@@ -167,25 +222,30 @@ const Banners = () => {
                   </div>
                 )}
                 
-                {/* Status Badge */}
-                <div className="absolute top-2 right-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    banner.isActive 
-                      ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' 
-                      : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
-                  }`}>
-                    {banner.isActive ? t('common.active') : t('common.inactive')}
-                  </span>
-                </div>
+                 {/* Status Badges */}
+                 <div className="absolute top-2 right-2 flex gap-2">
+                   {banner.isFeatured && (
+                     <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
+                       {t('admin.banners', 'featured')} #{banner.featuredOrder}
+                     </span>
+                   )}
+                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                     banner.isActive
+                       ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                       : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-400'
+                   }`}>
+                     {banner.isActive ? t('common', 'active') : t('common', 'inactive')}
+                   </span>
+                 </div>
               </div>
 
               {/* Banner Content */}
               <div className="p-4">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  {banner.titleIs || banner.title || t('admin.banners.untitled')}
+                  {banner.titleIs || banner.title || t('admin.banners', 'untitled')}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
-                  {banner.descriptionIs || banner.description || t('admin.banners.noDescription')}
+                  {banner.descriptionIs || banner.description || t('admin.banners', 'noDescription')}
                 </p>
                 
                 {banner.link && (
@@ -195,35 +255,46 @@ const Banners = () => {
                   </div>
                 )}
 
-                {/* Actions */}
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleEdit(banner)}
-                      className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                      title={t('common.edit')}
-                    >
-                      <Edit className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => handleToggleStatus(banner.id)}
-                      className={`p-2 transition-colors ${
-                        banner.isActive 
-                          ? 'text-gray-400 hover:text-orange-600 dark:hover:text-orange-400' 
-                          : 'text-gray-400 hover:text-green-600 dark:hover:text-green-400'
-                      }`}
-                      title={banner.isActive ? t('admin.banners.deactivate') : t('admin.banners.activate')}
-                    >
-                      {banner.isActive ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                    <button
-                      onClick={() => handleDelete(banner.id)}
-                      className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                      title={t('common.delete')}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
+                 {/* Actions */}
+                 <div className="flex items-center justify-between">
+                   <div className="flex gap-2">
+                     <button
+                       onClick={() => handleEdit(banner)}
+                       className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                       title={t('common', 'edit')}
+                     >
+                       <Edit className="w-4 h-4" />
+                     </button>
+                     <button
+                       onClick={() => handleToggleFeatured(banner)}
+                       className={`p-2 transition-colors ${
+                         banner.isFeatured
+                           ? 'text-blue-600 dark:text-blue-400'
+                           : 'text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+                       }`}
+                       title={banner.isFeatured ? t('admin.banners', 'removeFromFeatured') : t('admin.banners', 'addToFeatured')}
+                     >
+                       <Eye className="w-4 h-4" />
+                     </button>
+                     <button
+                       onClick={() => handleToggleStatus(banner.id)}
+                       className={`p-2 transition-colors ${
+                         banner.isActive
+                           ? 'text-gray-400 hover:text-orange-600 dark:hover:text-orange-400'
+                           : 'text-gray-400 hover:text-green-600 dark:hover:text-green-400'
+                       }`}
+                       title={banner.isActive ? t('admin.banners', 'deactivate') : t('admin.banners', 'activate')}
+                     >
+                       {banner.isActive ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                     </button>
+                     <button
+                       onClick={() => handleDelete(banner.id)}
+                       className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                       title={t('common', 'delete')}
+                     >
+                       <Trash2 className="w-4 h-4" />
+                     </button>
+                   </div>
                   
                   <span className="text-xs text-gray-500 dark:text-gray-400">
                     #{banner.sortOrder}
@@ -239,16 +310,16 @@ const Banners = () => {
           <div className="text-center py-12">
             <ImageIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              {t('admin.banners.noBanners')}
+              {t('admin.banners', 'noBanners')}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {t('admin.banners.noBannersDescription')}
+              {t('admin.banners', 'noBannersDescription')}
             </p>
             <button
               onClick={() => setIsModalOpen(true)}
               className="btn btn-primary"
             >
-              {t('admin.banners.addFirstBanner')}
+              {t('admin.banners', 'addFirstBanner')}
             </button>
           </div>
         )}
@@ -257,11 +328,11 @@ const Banners = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {editingBanner ? t('admin.banners.editBanner') : t('admin.banners.addBanner')}
+                  {editingBanner ? t('admin.banners', 'editBanner') : t('admin.banners', 'addBanner')}
                 </h2>
                 <button
                   onClick={handleCloseModal}
@@ -276,28 +347,28 @@ const Banners = () => {
                   {/* English Title */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.titleEn')}
+                      {t('admin.banners', 'titleEn')}
                     </label>
                     <input
                       type="text"
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('admin.banners.titlePlaceholder')}
+                      placeholder={t('admin.banners', 'titlePlaceholder')}
                     />
                   </div>
 
                   {/* Icelandic Title */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.titleIs')}
+                      {t('admin.banners', 'titleIs')}
                     </label>
                     <input
                       type="text"
                       value={formData.titleIs}
                       onChange={(e) => setFormData({ ...formData, titleIs: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('admin.banners.titlePlaceholderIs')}
+                      placeholder={t('admin.banners', 'titlePlaceholderIs')}
                     />
                   </div>
                 </div>
@@ -306,92 +377,224 @@ const Banners = () => {
                   {/* English Description */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.descriptionEn')}
+                      {t('admin.banners', 'descriptionEn')}
                     </label>
                     <textarea
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       rows={3}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('admin.banners.descriptionPlaceholder')}
+                      placeholder={t('admin.banners', 'descriptionPlaceholder')}
                     />
                   </div>
 
                   {/* Icelandic Description */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.descriptionIs')}
+                      {t('admin.banners', 'descriptionIs')}
                     </label>
                     <textarea
                       value={formData.descriptionIs}
                       onChange={(e) => setFormData({ ...formData, descriptionIs: e.target.value })}
                       rows={3}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('admin.banners.descriptionPlaceholderIs')}
+                      placeholder={t('admin.banners', 'descriptionPlaceholderIs')}
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Image URL */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.imageUrl')} *
-                    </label>
-                    <input
-                      type="url"
-                      value={formData.imageUrl}
-                      onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('adminPlaceholders.enterImageUrl')}
-                      required
-                    />
-                  </div>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   {/* Image URL */}
+                   <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('admin.banners', 'imageUrl')} *
+                      </label>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                        {t('admin.banners', 'imageHelpText')}
+                      </p>
+                      <div className="flex space-x-2">
+                        <input
+                          type="url"
+                          value={formData.imageUrl}
+                          onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                          className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                          placeholder={t('adminPlaceholders', 'enterImageUrl')}
+                          required
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setShowMediaPicker(true)}
+                            className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200 flex items-center space-x-2"
+                          >
+                            <Upload className="w-4 h-4" />
+                            <span>{t('adminMedia', 'select')}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => window.open('/admin/media?collection=BANNERS', '_blank')}
+                            className="px-3 py-2 border border-blue-300 dark:border-blue-600 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors duration-200 flex items-center space-x-2"
+                          >
+                            <ImageIcon className="w-4 h-4" />
+                            <span>{t('admin.banners', 'manageImages')}</span>
+                          </button>
+                        </div>
+                     </div>
+                   </div>
 
                   {/* Alt Text */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.altText')}
+                      {t('admin.banners', 'altText')}
                     </label>
                     <input
                       type="text"
                       value={formData.alt}
                       onChange={(e) => setFormData({ ...formData, alt: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('admin.banners.altPlaceholder')}
+                      placeholder={t('admin.banners', 'altPlaceholder')}
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Link */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.link')}
-                    </label>
-                    <input
-                      type="url"
-                      value={formData.link}
-                      onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder={t('adminPlaceholders.enterWebsiteUrl')}
-                    />
-                  </div>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   {/* Link */}
+                   <div className="link-dropdown-container">
+                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                       {t('admin.banners', 'link')}
+                     </label>
+                     <div className="relative">
+                       <input
+                         type="url"
+                         value={formData.link}
+                         onChange={(e) => setFormData({ ...formData, link: e.target.value })}
+                         className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                         placeholder={t('adminPlaceholders', 'enterWebsiteUrl')}
+                       />
+                       <button
+                         type="button"
+                         onClick={() => setShowLinkDropdown(!showLinkDropdown)}
+                         className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                         title={t('admin.banners', 'selectLink')}
+                       >
+                         <ChevronDown className="w-4 h-4" />
+                       </button>
+                     </div>
 
-                  {/* Sort Order */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('admin.banners.sortOrder')}
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.sortOrder}
-                      onChange={(e) => setFormData({ ...formData, sortOrder: parseInt(e.target.value) || 0 })}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      min="0"
-                    />
-                  </div>
-                </div>
+                     {/* Link Dropdown */}
+                     {showLinkDropdown && (
+                       <div className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                         {/* Categories */}
+                         {categories.map((category) => (
+                           <div key={category.id}>
+                             <button
+                               type="button"
+                               onClick={() => {
+                                 setFormData({ ...formData, link: `/products?category=${category.name.toUpperCase()}` });
+                                 setShowLinkDropdown(false);
+                               }}
+                               className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-600 last:border-b-0"
+                             >
+                               <div className="flex items-center gap-2">
+                                 <LinkIcon className="w-4 h-4" />
+                                 <span>{category.nameIs || category.name} ({t('admin.banners', 'category')})</span>
+                               </div>
+                             </button>
+
+                             {/* Subcategories */}
+                             {category.subcategories && category.subcategories.map((subcategory) => (
+                               <button
+                                 key={subcategory.id}
+                                 type="button"
+                                 onClick={() => {
+                                   setFormData({ ...formData, link: `/products?category=${category.name.toUpperCase()}&subcategory=${subcategory.name.toUpperCase()}` });
+                                   setShowLinkDropdown(false);
+                                 }}
+                                 className="w-full px-6 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-600 last:border-b-0"
+                               >
+                                 <div className="flex items-center gap-2">
+                                   <LinkIcon className="w-3 h-3" />
+                                   <span>{subcategory.nameIs || subcategory.name} ({t('admin.banners', 'subcategory')})</span>
+                                 </div>
+                               </button>
+                             ))}
+                           </div>
+                         ))}
+
+                         {/* Products */}
+                         {products.slice(0, 20).map((product) => (
+                           <button
+                             key={product.id}
+                             type="button"
+                             onClick={() => {
+                               setFormData({ ...formData, link: `/products/${product.id}` });
+                               setShowLinkDropdown(false);
+                             }}
+                             className="w-full px-3 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-600 last:border-b-0"
+                           >
+                             <div className="flex items-center gap-2">
+                               <LinkIcon className="w-4 h-4" />
+                               <span>{product.nameIs || product.name} ({t('admin.banners', 'product')})</span>
+                             </div>
+                           </button>
+                         ))}
+                       </div>
+                     )}
+                   </div>
+
+                   {/* Sort Order */}
+                   <div>
+                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                       {t('admin.banners', 'sortOrder')}
+                     </label>
+                     <input
+                       type="number"
+                       value={formData.sortOrder}
+                       onChange={(e) => setFormData({ ...formData, sortOrder: parseInt(e.target.value) || 0 })}
+                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                       min="0"
+                     />
+                   </div>
+                 </div>
+
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                   {/* Featured Banner */}
+                   <div>
+                     <label className="flex items-center space-x-2">
+                       <input
+                         type="checkbox"
+                         checked={formData.isFeatured}
+                         onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                         className="rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500"
+                       />
+                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                         {t('admin.banners', 'featuredBanner')}
+                       </span>
+                     </label>
+                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                       {t('admin.banners', 'featuredBannerHelp')}
+                     </p>
+                   </div>
+
+                   {/* Featured Order */}
+                   {formData.isFeatured && (
+                     <div>
+                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                         {t('admin.banners', 'featuredOrder')}
+                       </label>
+                       <select
+                         value={formData.featuredOrder || ''}
+                         onChange={(e) => setFormData({ ...formData, featuredOrder: e.target.value ? parseInt(e.target.value) : null })}
+                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                       >
+                         <option value="">{t('admin.banners', 'selectPosition')}</option>
+                         <option value="1">{t('admin.banners', 'position')} 1</option>
+                         <option value="2">{t('admin.banners', 'position')} 2</option>
+                         <option value="3">{t('admin.banners', 'position')} 3</option>
+                       </select>
+                     </div>
+                   )}
+                 </div>
 
                 {/* Form Actions */}
                 <div className="flex justify-end gap-3 pt-4">
@@ -400,14 +603,14 @@ const Banners = () => {
                     onClick={handleCloseModal}
                     className="btn btn-outline"
                   >
-                    {t('common.cancel')}
+                    {t('common', 'cancel')}
                   </button>
                   <button
                     type="submit"
                     className="btn btn-primary flex items-center gap-2"
                   >
                     <Save className="w-4 h-4" />
-                    {editingBanner ? t('common.update') : t('common.create')}
+                    {editingBanner ? t('common', 'update') : t('common', 'create')}
                   </button>
                 </div>
               </form>
@@ -415,6 +618,15 @@ const Banners = () => {
           </div>
         </div>
       )}
+
+      {/* Media Picker Modal */}
+      <MediaPicker
+        isOpen={showMediaPicker}
+        onClose={() => setShowMediaPicker(false)}
+        onSelect={handleMediaSelect}
+        collection="BANNERS"
+        multiple={false}
+      />
     </AdminLayout>
   );
 };

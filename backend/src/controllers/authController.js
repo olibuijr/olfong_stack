@@ -247,7 +247,7 @@ const kenniLogin = async (req, res) => {
 
     const token = generateToken({ userId: user.id });
 
-    const { password, ...safeUser } = user;
+    const { password: _, ...safeUser } = user;
     return successResponse(res, { user: safeUser, token }, 'Login successful');
   } catch (err) {
     console.error('Kenni login error:', err);
@@ -317,7 +317,7 @@ const dummyLogin = async (req, res) => {
 
     const token = generateToken({ userId: user.id });
 
-    const { password, ...safeUser } = user;
+    const { password: _, ...safeUser } = user;
     return successResponse(res, { user: safeUser, token }, 'Dummy login successful');
   } catch (err) {
     console.error('Dummy login error:', err);

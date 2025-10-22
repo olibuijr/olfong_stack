@@ -6,47 +6,8 @@ export const fetchAnalytics = createAsyncThunk(
   'analytics/fetchAnalytics',
   async (timeRange = '30d', { rejectWithValue }) => {
     try {
-      // For now, return mock data since the backend routes are not fully implemented
-      // This prevents the route not found errors
-      const mockData = {
-        metrics: {
-          revenue: {
-            current: 0,
-            previous: 0,
-            growth: 0
-          },
-          orders: {
-            current: 0,
-            previous: 0,
-            growth: 0
-          },
-          customers: {
-            current: 0,
-            previous: 0,
-            growth: 0
-          },
-          products: {
-            current: 0,
-            previous: 0,
-            growth: 0
-          }
-        },
-        orderStatusDistribution: [],
-        topProducts: [],
-        timeRange,
-        period: {
-          current: {
-            start: null,
-            end: null
-          },
-          previous: {
-            start: null,
-            end: null
-          }
-        }
-      };
-      
-      return mockData;
+      const response = await api.get(`/analytics?timeRange=${timeRange}`);
+      return response.data?.data || response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch analytics data');
     }
@@ -58,7 +19,7 @@ export const fetchRevenueTrend = createAsyncThunk(
   async (timeRange = '30d', { rejectWithValue }) => {
     try {
       const response = await api.get(`/analytics/revenue-trend?timeRange=${timeRange}`);
-      return response.data;
+      return response.data?.data || response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch revenue trend data');
     }
@@ -143,7 +104,7 @@ const analyticsSlice = createSlice({
       })
       .addCase(fetchRevenueTrend.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.revenueTrend = action.payload.revenueTrend;
+        state.revenueTrend = action.payload;
       })
       .addCase(fetchRevenueTrend.rejected, (state, action) => {
         state.isLoading = false;

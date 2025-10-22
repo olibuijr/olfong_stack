@@ -1,60 +1,50 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["docker", "run", "-i", "--rm", "--init", "--pull=always", "mcr.microsoft.com/playwright/mcp"],
+      "enabled": true
+    },
     "filesystem": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "--mount",
-        "type=bind,src=/home/olibuijr/Projects/olfong_stack,dst=/workspace",
-        "mcp/filesystem",
-        "/workspace"
-      ],
-      "enabled": true
-    },
-    "git": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "--mount",
-        "type=bind,src=/home/olibuijr/Projects/olfong_stack,dst=/workspace",
-        "mcp/git",
-        "--repository",
-        "/workspace"
-      ],
-      "enabled": true
-    },
-    "fetch": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "mcp/fetch"
-      ],
-      "enabled": true
-    },
-    "everything": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "mcp/everything"
-      ],
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "/home/olibuijr/Projects/olfong_stack"],
       "enabled": true
     },
     "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "environment": {
+        "CONTEXT7_API_KEY": "ctx7sk-5e739f0a-6b8b-4b4f-9c3b-0c5d42fe8f3d"
+      },
+      "enabled": true
+    },
+    "persistproc": {
+      "type": "local",
+      "command": ["persistproc"],
+      "enabled": true
+    },
+    "git": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem"],
+      "enabled": true
+    },
+    "brave-search": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
+      "environment": {
+        "BRAVE_API_KEY": "BSA_JQdHt3Pt9mmLWQ0i7mPrfSpeN2u"
+      },
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+      "enabled": true
+    },
+    "postgres": {
+      "type": "local",
+      "command": ["npx", "-y", "@henkey/postgres-mcp-server", "--connection-string", "postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public"],
       "enabled": true
     }
   }

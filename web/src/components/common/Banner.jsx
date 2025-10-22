@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const Banner = ({ banners = [], autoPlay = true, interval = 5000 }) => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
@@ -48,7 +48,7 @@ const Banner = ({ banners = [], autoPlay = true, interval = 5000 }) => {
       <button
         onClick={closeBanner}
         className="absolute top-4 right-4 z-10 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover:opacity-100"
-        aria-label={t('common.close')}
+        aria-label={t('common', 'close')}
       >
         <X className="w-4 h-4" />
       </button>
@@ -57,7 +57,7 @@ const Banner = ({ banners = [], autoPlay = true, interval = 5000 }) => {
       <div className="relative">
         <img
           src={currentBanner.imageUrl}
-          alt={currentBanner.alt || t('home.banner.alt')}
+          alt={currentBanner.alt || t('home.banner', 'alt')}
           className="w-full h-64 md:h-80 object-cover"
         />
         
@@ -86,14 +86,14 @@ const Banner = ({ banners = [], autoPlay = true, interval = 5000 }) => {
           <button
             onClick={goToPrevious}
             className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover:opacity-100"
-            aria-label={t('common.previous')}
+            aria-label={t('common', 'previous')}
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={goToNext}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover:opacity-100"
-            aria-label={t('common.next')}
+            aria-label={t('common', 'next')}
           >
             <ChevronRight className="w-5 h-5" />
           </button>
@@ -112,7 +112,7 @@ const Banner = ({ banners = [], autoPlay = true, interval = 5000 }) => {
                   ? 'bg-white' 
                   : 'bg-white/50 hover:bg-white/75'
               }`}
-              aria-label={`${t('common.goToSlide')} ${index + 1}`}
+              aria-label={`${t('common', 'goToSlide')} ${index + 1}`}
             />
           ))}
         </div>

@@ -23,42 +23,39 @@ const getCustomers = async (req, res) => {
     }
 
     // Get customers with their order statistics
-    const [customers, total] = await Promise.all([
-      prisma.user.findMany({
-        where,
-        skip,
-        take: parseInt(limit),
-        orderBy: { createdAt: 'desc' },
-        select: {
-          id: true,
-          username: true,
-          email: true,
-          fullName: true,
-          phone: true,
-          createdAt: true,
-          updatedAt: true,
-          addresses: {
-            take: 1,
-            orderBy: { createdAt: 'desc' },
-            select: {
-              street: true,
-              city: true,
-              postalCode: true,
-              country: true,
-            },
-          },
-          orders: {
-            select: {
-              id: true,
-              totalAmount: true,
-              status: true,
-              createdAt: true,
-            },
+    const customers = await prisma.user.findMany({
+      where,
+      skip,
+      take: parseInt(limit),
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        fullName: true,
+        phone: true,
+        createdAt: true,
+        updatedAt: true,
+        addresses: {
+          take: 1,
+          orderBy: { createdAt: 'desc' },
+          select: {
+            street: true,
+            city: true,
+            postalCode: true,
+            country: true,
           },
         },
-      }),
-      prisma.user.count({ where }),
-    ]);
+        orders: {
+          select: {
+            id: true,
+            totalAmount: true,
+            status: true,
+            createdAt: true,
+          },
+        },
+      },
+    });
 
     // Process customers to add calculated fields
     const processedCustomers = customers.map(customer => {

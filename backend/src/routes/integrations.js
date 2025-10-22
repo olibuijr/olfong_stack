@@ -44,3 +44,19 @@ router.post('/:id/sync', syncIntegration);
 router.delete('/:id', deleteIntegration);
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

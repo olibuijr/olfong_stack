@@ -1,4 +1,4 @@
-const { body, query, oneOf } = require('express-validator');
+const { body, oneOf } = require('express-validator');
 const { successResponse, errorResponse } = require('../utils/response');
 const prisma = require('../config/database');
 
@@ -286,7 +286,7 @@ const createProduct = async (req, res) => {
     }
 
     // Remove the category field since we're using categoryId for the relation
-    const { category, ...productDataForCreate } = productData;
+    const { category: _, ...productDataForCreate } = productData;
     
     // Remove undefined values and fix array fields to avoid database issues
     Object.keys(productDataForCreate).forEach(key => {
@@ -413,13 +413,19 @@ const getDiscountedProducts = async (req, res) => {
       where: {
         isActive: true,
         hasDiscount: true,
-        OR: [
-          { discountEndDate: null }, // No end date
-          { discountEndDate: { gte: now } } // End date is in the future
-        ],
-        OR: [
-          { discountStartDate: null }, // No start date
-          { discountStartDate: { lte: now } } // Start date is in the past or now
+        AND: [
+          {
+            OR: [
+              { discountEndDate: null }, // No end date
+              { discountEndDate: { gte: now } } // End date is in the future
+            ]
+          },
+          {
+            OR: [
+              { discountStartDate: null }, // No start date
+              { discountStartDate: { lte: now } } // Start date is in the past or now
+            ]
+          }
         ]
       },
       take: parseInt(limit),

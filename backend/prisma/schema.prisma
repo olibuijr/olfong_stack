@@ -31,17 +31,18 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relations
-  orders           Order[]
-  addresses        Address[]
-  cart             Cart?
-  deliveryOrders   Order[]   @relation("DeliveryPerson")
-  deliveryLocation Location?
-  subscriptions    Subscription[]
-  // Chat relations
-  sentMessages     ChatMessage[] @relation("MessageSender")
-  receivedMessages ChatMessage[] @relation("MessageReceiver")
-  conversations    ConversationParticipant[]
+   // Relations
+   orders           Order[]
+   addresses        Address[]
+   cart             Cart?
+   deliveryOrders   Order[]   @relation("DeliveryPerson")
+   deliveryLocation Location?
+   subscriptions    Subscription[]
+   uploadedMedia    Media[]
+   // Chat relations
+   sentMessages     ChatMessage[] @relation("MessageSender")
+   receivedMessages ChatMessage[] @relation("MessageReceiver")
+   conversations    ConversationParticipant[]
 }
 
 model Category {
@@ -52,7 +53,9 @@ model Category {
   description String?
   descriptionIs String?
   icon        String?  // Icon identifier or emoji
-  imageUrl    String?  // Category image URL
+  imageUrl    String?  // Category image URL (legacy)
+  mediaId     String?  // New media relation
+  media       Media?   @relation(fields: [mediaId], references: [id])
   isActive    Boolean  @default(true)
   sortOrder   Int      @default(0)
   createdAt   DateTime @default(now())
@@ -87,18 +90,22 @@ model Subcategory {
 }
 
 model Banner {
-  id          Int      @id @default(autoincrement())
-  title       String?  // Banner title (English)
-  titleIs     String?  // Banner title (Icelandic)
-  description String?  // Banner description (English)
-  descriptionIs String? // Banner description (Icelandic)
-  imageUrl    String   // Banner image URL
-  alt         String?  // Alt text for image
-  link        String?  // Optional link when banner is clicked
-  isActive    Boolean  @default(true)
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  title         String?  // Banner title (English)
+  titleIs       String?  // Banner title (Icelandic)
+  description   String?  // Banner description (English)
+  descriptionIs String?  // Banner description (Icelandic)
+  imageUrl      String?  // Banner image URL (legacy)
+  mediaId       String?  // New media relation
+  media         Media?   @relation(fields: [mediaId], references: [id])
+  alt           String?  // Alt text for image
+  link          String?  // Optional link when banner is clicked
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  isFeatured    Boolean  @default(false) // Whether banner appears on homepage
+  featuredOrder Int?     // Position on homepage (1, 2, 3)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Product {
@@ -113,7 +120,9 @@ model Product {
   subcategory Subcategory?    @relation(fields: [subcategoryId], references: [id])
   price       Float
   stock       Int             @default(0)
-  imageUrl    String?
+  imageUrl    String? // Legacy field, will be replaced by media relation
+  mediaId     String? // New media relation
+  media       Media?          @relation(fields: [mediaId], references: [id])
   alcoholContent Float?
   nicotineContent Float? // For nicotine products
   subcategories  String[] // Array of subcategories (legacy field, will be deprecated)
@@ -171,10 +180,10 @@ model Product {
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
-  // Relations
-  orderItems     OrderItem[]
-  cartItems      CartItem[]
-  subscriptions  Subscription[]
+   // Relations
+   orderItems     OrderItem[]
+   cartItems      CartItem[]
+   subscriptions  Subscription[]
 }
 
 model Cart {
@@ -347,11 +356,58 @@ model Setting {
   key         String   @unique
   value       String?
   description String?
-  category    String   @default("GENERAL") // GENERAL, API_KEYS, PAYMENT, DELIVERY, NOTIFICATIONS, INTEGRATIONS
+  category    String   @default("GENERAL") // GENERAL, API_KEYS, PAYMENT, DELIVERY, NOTIFICATIONS, INTEGRATIONS, RECEIPTS, SMTP
   isEncrypted Boolean  @default(false)
   isPublic    Boolean  @default(false) // Whether this setting can be accessed by frontend
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model ReceiptSettings {
+  id              Int      @id @default(autoincrement())
+  logoUrl         String?  // Company logo URL
+  companyName     String   @default("Ölföng")
+  companyNameIs   String   @default("Ölföng")
+  companyAddress  String?  // Full address
+  companyAddressIs String?
+  companyPhone    String?
+  companyEmail    String?
+  companyWebsite  String?
+  taxId           String?  // VAT/Tax ID (Kennitala)
+  
+  // Receipt styling
+  headerColor     String   @default("#1e40af") // Primary color
+  accentColor     String   @default("#3b82f6")
+  fontFamily      String   @default("Inter, system-ui, sans-serif")
+  fontSize        String   @default("14px")
+  
+  // Receipt content
+  footerText      String?  // Custom footer message
+  footerTextIs    String?
+  showBarcode     Boolean  @default(true)
+  showQrCode      Boolean  @default(true)
+  
+  // Template layout
+  template        String   @default("modern") // modern, classic, minimal
+  paperSize       String   @default("80mm") // 80mm, A4, letter
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model SMTPSettings {
+  id              Int      @id @default(autoincrement())
+  host            String   // SMTP server host
+  port            Int      @default(587)
+  secure          Boolean  @default(false) // Use TLS
+  username        String   // SMTP username
+  password        String   // Encrypted SMTP password
+  fromEmail       String   // Sender email
+  fromName        String   @default("Ölföng")
+  fromNameIs      String   @default("Ölföng")
+  isEnabled       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Integration {
@@ -427,7 +483,6 @@ model Conversation {
   title       String?  // Optional conversation title
   type        String   @default("SUPPORT") // SUPPORT, ADMIN, DELIVERY
   status      String   @default("ACTIVE") // ACTIVE, ARCHIVED, RESOLVED
-  priority    String   @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
   lastMessageAt DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -474,3 +529,92 @@ model ChatMessage {
   @@index([receiverId])
 }
 
+model Lang {
+  id     String @id @default(uuid())
+  key    String
+  locale String
+  value  String
+
+  @@unique([key, locale])
+}
+
+
+
+
+
+// Media Management System
+enum MediaCollection {
+  PRODUCTS
+  CATEGORIES
+  BANNERS
+  PROFILE
+  DOCUMENTS
+  VIDEOS
+  TEMP
+}
+
+model Media {
+  id          String     @id @default(uuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  width       Int?
+  height      Int?
+  alt         String?
+  caption     String?
+  description String?
+
+  // Media Type Separation
+  collection  MediaCollection
+  entityId    String?    // Related entity ID
+  entityType  String?    // Product, Category, Banner
+
+  // Performance & Format Support
+  formats     MediaFormat[]
+  sizes       MediaSize[]
+  quality     Int?
+  hash        String?    // For deduplication
+
+  url         String
+  path        String
+  thumbnailUrl String?
+  uploadedBy  Int
+  uploadedByUser User @relation(fields: [uploadedBy], references: [id])
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  products    Product[]
+  categories  Category[]
+  banners     Banner[]
+
+  @@index([collection, createdAt])
+  @@index([entityType, entityId])
+  @@index([uploadedBy, isActive])
+  @@index([hash])
+}
+
+model MediaFormat {
+  id        String @id @default(uuid())
+  mediaId   String
+  media     Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  format    String // webp, jpeg, avif, webm
+  url       String
+  size      Int    // File size in bytes
+
+  @@unique([mediaId, format])
+}
+
+model MediaSize {
+  id        String @id @default(uuid())
+  mediaId   String
+  media     Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  size      String // thumbnail, medium, large, full
+  width     Int
+  height    Int
+  url       String
+
+  @@unique([mediaId, size])
+}

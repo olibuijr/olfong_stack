@@ -1,11 +1,23 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import AdminSidebar from './AdminSidebar';
 import { Menu } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const AdminLayout = ({ children, showSidebar = true }) => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Initialize sidebar collapsed state from localStorage
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    const saved = localStorage.getItem('adminSidebarCollapsed');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  // Handle sidebar collapse state changes
+  const handleSidebarCollapse = (collapsed) => {
+    setSidebarCollapsed(collapsed);
+  };
 
   if (!showSidebar) {
     // Simple layout without sidebar
@@ -32,7 +44,7 @@ const AdminLayout = ({ children, showSidebar = true }) => {
         <div className="fixed right-0 top-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 ease-in-out z-50 lg:hidden">
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('navigation.menu')}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('navigation', 'menu')}</h2>
               <button
                 onClick={() => setSidebarOpen(false)}
                 className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -52,12 +64,16 @@ const AdminLayout = ({ children, showSidebar = true }) => {
         {/* Sidebar */}
         <div className="fixed top-16 bottom-0 left-0 z-50 flex-shrink-0">
           <div className="m-4 lg:m-0 lg:mt-0 lg:mb-0 lg:pt-6" style={{height: 'calc(100vh - 4rem)'}}>
-            <AdminSidebar />
+            <AdminSidebar onCollapseChange={handleSidebarCollapse} />
           </div>
         </div>
 
         {/* Main content area */}
-        <div className="flex-1 flex flex-col min-w-0 lg:ml-64">
+        <div
+          className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out ${
+            sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-56'
+          }`}
+        >
           {/* Page content */}
           <main className="flex-1 p-4 lg:p-6">
             {children}
@@ -74,7 +90,7 @@ const AdminLayout = ({ children, showSidebar = true }) => {
             className="text-gray-700 dark:text-gray-300"
             onClick={() => setSidebarOpen(true)}
           >
-            <span className="sr-only">{t('adminLayout.openSidebar')}</span>
+            <span className="sr-only">{t('adminLayout', 'openSidebar')}</span>
             <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
@@ -86,6 +102,11 @@ const AdminLayout = ({ children, showSidebar = true }) => {
       </div>
     </div>
   );
+};
+
+AdminLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+  showSidebar: PropTypes.bool
 };
 
 export default AdminLayout;

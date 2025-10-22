@@ -8,6 +8,9 @@ const {
   updateBanner,
   deleteBanner,
   toggleBannerStatus,
+  getFeaturedBanners,
+  setFeaturedBanner,
+  removeFeaturedBanner,
   createBannerValidation,
   updateBannerValidation
 } = require('../controllers/bannerController');
@@ -15,35 +18,48 @@ const { validate } = require('../middleware/validator');
 
 // Public routes
 router.get('/', getBanners);
+router.get('/featured', getFeaturedBanners);
 router.get('/:id', getBanner);
 
 // Admin routes
-router.post('/', 
-  authenticate, 
-  authorize('ADMIN'), 
-  createBannerValidation, 
-  validate, 
+router.post('/',
+  authenticate,
+  authorize('ADMIN'),
+  createBannerValidation,
+  validate,
   createBanner
 );
 
-router.put('/:id', 
-  authenticate, 
-  authorize('ADMIN'), 
-  updateBannerValidation, 
-  validate, 
+router.put('/:id',
+  authenticate,
+  authorize('ADMIN'),
+  updateBannerValidation,
+  validate,
   updateBanner
 );
 
-router.delete('/:id', 
-  authenticate, 
-  authorize('ADMIN'), 
+router.delete('/:id',
+  authenticate,
+  authorize('ADMIN'),
   deleteBanner
 );
 
-router.patch('/:id/toggle', 
-  authenticate, 
-  authorize('ADMIN'), 
+router.patch('/:id/toggle',
+  authenticate,
+  authorize('ADMIN'),
   toggleBannerStatus
+);
+
+router.patch('/:id/featured',
+  authenticate,
+  authorize('ADMIN'),
+  setFeaturedBanner
+);
+
+router.delete('/:id/featured',
+  authenticate,
+  authorize('ADMIN'),
+  removeFeaturedBanner
 );
 
 module.exports = router;

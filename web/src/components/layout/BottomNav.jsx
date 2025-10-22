@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import { useSelector } from 'react-redux';
 import { Home, Package, ShoppingCart, User } from 'lucide-react';
 
 const BottomNav = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const location = useLocation();
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
@@ -15,31 +15,31 @@ const BottomNav = () => {
     {
       to: '/',
       icon: Home,
-      label: t('navigation.home'),
+      label: t('navigation', 'home'),
       active: location.pathname === '/',
     },
     {
       to: '/products',
       icon: Package,
-      label: t('navigation.products'),
+      label: t('navigation', 'products'),
       active: location.pathname === '/products' || location.pathname.startsWith('/products/'),
     },
     ...(isAuthenticated ? [{
       to: '/cart',
       icon: ShoppingCart,
-      label: t('navigation.cart'),
+      label: t('navigation', 'cart'),
       active: location.pathname === '/cart',
       badge: cartItemCount > 0 ? cartItemCount : null,
     }] : []),
     ...(isAuthenticated ? [{
       to: '/profile',
       icon: User,
-      label: t('navigation.profile'),
+      label: t('navigation', 'profile'),
       active: location.pathname === '/profile',
     }] : [{
       to: '/login',
       icon: User,
-      label: t('navigation.login'),
+      label: t('navigation', 'login'),
       active: location.pathname === '/login',
     }]),
   ];

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Translation API</title>
+</head>
+<body>
+    <h1>Testing Translation API</h1>
+    <div id="results"></div>
+    <script>
+        async function testAPI() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Testing API...</p>';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/translations/language/en');
+                resultsDiv.innerHTML += `<p>Status: ${response.status}</p>`;
+                
+                const data = await response.json();
+                resultsDiv.innerHTML += `<p>Success: ${data.success}</p>`;
+                resultsDiv.innerHTML += `<p>Data length: ${data.data?.length || 0}</p>`;
+                resultsDiv.innerHTML += `<p>First 5 keys:</p><ul>`;
+                
+                if (data.data && data.data.length > 0) {
+                    data.data.slice(0, 5).forEach(t => {
+                        resultsDiv.innerHTML += `<li>${t.key}: ${t.value}</li>`;
+                    });
+                }
+                
+                resultsDiv.innerHTML += '</ul>';
+            } catch (error) {
+                resultsDiv.innerHTML += `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+        
+        testAPI();
+    </script>
+</body>
+</html>
+

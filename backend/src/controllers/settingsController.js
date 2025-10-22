@@ -242,40 +242,146 @@ const initializeDefaultSettings = async (req, res) => {
         isEncrypted: false,
         isPublic: false
       },
-      // General Settings
-      {
-        key: 'SITE_NAME',
-        value: 'Ölföng',
-        description: 'Site name',
-        category: 'GENERAL',
-        isEncrypted: false,
-        isPublic: true
-      },
-      {
-        key: 'SITE_DESCRIPTION',
-        value: 'Icelandic wine and beer shop with home delivery',
-        description: 'Site description',
-        category: 'GENERAL',
-        isEncrypted: false,
-        isPublic: true
-      },
-      {
-        key: 'CONTACT_EMAIL',
-        value: 'info@olfong.is',
-        description: 'Contact email address',
-        category: 'GENERAL',
-        isEncrypted: false,
-        isPublic: true
-      },
-      {
-        key: 'CONTACT_PHONE',
-        value: '+354 555 1234',
-        description: 'Contact phone number',
-        category: 'GENERAL',
-        isEncrypted: false,
-        isPublic: true
-      }
-    ];
+       // General Settings
+       {
+         key: 'CONTACT_PHONE',
+         value: '+354 555 1234',
+         description: 'Contact phone number',
+         category: 'GENERAL',
+         isEncrypted: false,
+         isPublic: true
+       },
+       // Business Settings
+       {
+         key: 'openingHours',
+         value: JSON.stringify({
+           monday: { open: '10:00', close: '22:00', closed: false },
+           tuesday: { open: '10:00', close: '22:00', closed: false },
+           wednesday: { open: '10:00', close: '22:00', closed: false },
+           thursday: { open: '10:00', close: '22:00', closed: false },
+           friday: { open: '10:00', close: '22:00', closed: false },
+           saturday: { open: '12:00', close: '24:00', closed: false },
+           sunday: { open: '12:00', close: '24:00', closed: false }
+         }),
+         description: 'Store opening hours',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'deliveryEnabled',
+         value: 'true',
+         description: 'Delivery service enabled',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'deliveryFee',
+         value: '500',
+         description: 'Delivery fee',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'freeDeliveryThreshold',
+         value: '5000',
+         description: 'Free delivery threshold',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'deliveryRadius',
+         value: '50',
+         description: 'Delivery radius',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'ageRestrictionEnabled',
+         value: 'true',
+         description: 'Age restriction enabled',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'nicotineAge',
+         value: '18',
+         description: 'Minimum age for nicotine products',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'alcoholNicotineAge',
+         value: '20',
+         description: 'Minimum age for alcohol and nicotine products',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'generalProductsAge',
+         value: '0',
+         description: 'Minimum age for general products',
+         category: 'BUSINESS',
+         isEncrypted: false,
+         isPublic: true
+       },
+       // VAT Settings
+       {
+         key: 'vatEnabled',
+         value: 'true',
+         description: 'VAT enabled',
+         category: 'VAT',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'vatRate',
+         value: '24',
+         description: 'VAT rate',
+         category: 'VAT',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'vatCountry',
+         value: 'IS',
+         description: 'VAT country',
+         category: 'VAT',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'vatDisplayInAdmin',
+         value: 'true',
+         description: 'Show VAT in admin',
+         category: 'VAT',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'vatIncludeInCustomerPrice',
+         value: 'true',
+         description: 'Include VAT in customer price',
+         category: 'VAT',
+         isEncrypted: false,
+         isPublic: true
+       },
+       {
+         key: 'vatShowBreakdown',
+         value: 'true',
+         description: 'Show VAT breakdown',
+         category: 'VAT',
+         isEncrypted: false,
+         isPublic: true
+       }
+     ];
 
     const results = [];
     

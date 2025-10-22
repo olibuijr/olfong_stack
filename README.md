@@ -317,6 +317,29 @@ Here are practical examples of how to leverage each MCP server for Ölföng deve
 - **Database Operations**: Run Prisma commands, seed data, and migrations
 - **Testing**: Execute test suites and linting across the project
 
+##### Process Management MCP (PersistProc)
+The `opencode.jsonc` file includes persistproc MCP server for advanced process management.
+
+**Benefits:**
+- AI can start, stop, restart, and monitor long-running processes
+- Background process management without manual terminal management
+- Log monitoring and process health checking
+- Automated process lifecycle management
+
+**Process Management Examples:**
+- **Development Server Control**: AI can start/stop backend and frontend servers
+- **Database Process Management**: Control PostgreSQL, Redis, and other services
+- **Log Monitoring**: Real-time log viewing and error detection
+- **Process Health Checks**: Automatic restart on process failures
+- **Background Task Management**: Manage workers and scheduled tasks
+
+**Usage Examples:**
+- Start backend server: `persistproc start backend 'npm run dev'`
+- View backend logs: `persistproc logs backend`
+- Stop all processes: `persistproc stop backend && persistproc stop frontend`
+- List running processes: `persistproc list`
+- Restart failing service: `persistproc restart backend`
+
 #### Testing MCP Server Integration
 
 Once configured, you can test MCP server functionality by using OpenCode's AI assistant to perform tasks that leverage these integrations.

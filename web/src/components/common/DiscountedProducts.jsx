@@ -1,16 +1,13 @@
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useLanguage } from "../../contexts/LanguageContext";
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { fetchProducts } from '../../store/slices/productSlice';
 import ProductImage from './ProductImage';
 import LoadingSpinner from './LoadingSpinner';
 import { getProductName, getProductDescription } from '../../utils/languageUtils';
 
 const DiscountedProducts = ({ limit = 6 }) => {
-  const { t, i18n } = useTranslation();
-  const dispatch = useDispatch();
+  const { t, currentLanguage } = useLanguage();
   const { products, isLoading } = useSelector((state) => state.products);
   
   // Filter products that have discounts
@@ -33,7 +30,7 @@ const DiscountedProducts = ({ limit = 6 }) => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-            {t('home.discounted.title')}
+            {t('home.discounted', 'title')}
           </h3>
         </div>
         <div className="flex justify-center py-8">
@@ -52,17 +49,17 @@ const DiscountedProducts = ({ limit = 6 }) => {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-            {t('home.discounted.title')}
+            {t('home.discounted', 'title')}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {discountedProducts.length} {t('common.itemsLabel')}
+            {discountedProducts.length} {t('common', 'itemsLabel')}
           </p>
         </div>
         <Link
           to="/products?discounted=true"
           className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm"
         >
-          {t('common.viewAll')}
+          {t('common', 'viewAll')}
         </Link>
       </div>
 
@@ -80,7 +77,7 @@ const DiscountedProducts = ({ limit = 6 }) => {
                       <ProductImage 
                         product={product}
                         className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                        currentLanguage={i18n.language}
+                        currentLanguage={currentLanguage}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                        <div className="absolute top-3 right-3 flex flex-col gap-2">
@@ -89,7 +86,7 @@ const DiscountedProducts = ({ limit = 6 }) => {
                              ? 'bg-green-500 text-white'
                              : 'bg-red-500 text-white'
                          }`}>
-                           {product.stock > 0 ? t('products.inStock') : t('products.outOfStock')}
+                           {product.stock > 0 ? t('products', 'inStock') : t('products', 'outOfStock')}
                          </span>
                          <span className="px-2 py-1 rounded-full text-xs font-medium shadow-lg bg-red-500 text-white">
                            -{product.discountPercentage}%
@@ -101,20 +98,20 @@ const DiscountedProducts = ({ limit = 6 }) => {
                   <div className="p-4 flex-1 flex flex-col">
                     <div className="mb-3 flex-1">
                       <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white line-clamp-2 leading-tight">
-                        {getProductName(i18n.language, product)}
+                        {getProductName(currentLanguage, product)}
                       </h4>
                       <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2">
-                        {getProductDescription(i18n.language, product)}
+                        {getProductDescription(currentLanguage, product)}
                       </p>
                     </div>
                     
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                          {product.discountedPrice?.toLocaleString()} {t('common.currency')}
+                          {product.discountedPrice?.toLocaleString()} {t('common', 'currency')}
                         </span>
                         <span className="text-sm text-gray-500 line-through">
-                          {product.price.toLocaleString()} {t('common.currency')}
+                          {product.price.toLocaleString()} {t('common', 'currency')}
                         </span>
                       </div>
                     </div>

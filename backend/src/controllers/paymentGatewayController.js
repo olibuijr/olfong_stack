@@ -22,7 +22,7 @@ function decrypt(text) {
   const textParts = text.split(':');
   const iv = Buffer.from(textParts.shift(), 'hex');
   const encryptedText = textParts.join(':');
-  const decipher = crypto.createDecipher(ALGORITHM, ENCRYPTION_KEY);
+  const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
   let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;
@@ -235,17 +235,44 @@ const togglePaymentGateway = async (req, res) => {
 const testPaymentGateway = async (req, res) => {
   try {
     const { id } = req.params;
-    const gateway = await prisma.paymentGateway.findUnique({
-      where: { id: parseInt(id) }
-    });
+    let gateway;
+    
+    if (id) {
+      // Test existing gateway by ID
+      gateway = await prisma.paymentGateway.findUnique({
+        where: { id: parseInt(id) }
+      });
 
-    if (!gateway) {
-      return errorResponse(res, 'Payment gateway not found', 404);
+      if (!gateway) {
+        return errorResponse(res, 'Payment gateway not found', 404);
+      }
+    } else {
+      // Test new gateway configuration from request body
+      const { provider, environment, merchantId, apiKey, secretKey, accessKey, publishableKey, clientId, clientSecret, applicationId, paymentGatewayId, privateKey, publicKey } = req.body;
+      
+      if (!provider) {
+        return errorResponse(res, 'Provider is required for testing', 400);
+      }
+      
+      gateway = {
+        provider,
+        environment: environment || 'sandbox',
+        merchantId,
+        apiKey,
+        secretKey,
+        accessKey,
+        publishableKey,
+        clientId,
+        clientSecret,
+        applicationId,
+        paymentGatewayId,
+        privateKey,
+        publicKey
+      };
     }
 
-    // Decrypt credentials for testing
-    const decryptedApiKey = gateway.apiKey ? decrypt(gateway.apiKey) : null;
-    const decryptedSecretKey = gateway.secretKey ? decrypt(gateway.secretKey) : null;
+    // Decrypt credentials for testing (only if they exist and are encrypted)
+    // Note: decrypted credentials not currently used in test implementation
 
     // Here you would implement actual API testing based on the provider
     // For now, we'll simulate a test
@@ -303,6 +330,42 @@ const testPaymentGateway = async (req, res) => {
           maxAmount: 50000
         }
       };
+    } else if (gateway.provider === 'teya') {
+      // Test Teya API connection
+      try {
+        const teyaService = require('../services/teyaService');
+        
+        // Use already decrypted credentials
+        const decryptedApiKey = gateway.apiKey ? (gateway.apiKey.startsWith('encrypted:') ? decrypt(gateway.apiKey) : gateway.apiKey) : null;
+        const decryptedSecretKey = gateway.secretKey ? (gateway.secretKey.startsWith('encrypted:') ? decrypt(gateway.secretKey) : gateway.secretKey) : null;
+        
+        const teyaConfig = {
+          merchantId: gateway.merchantId,
+          paymentGatewayId: gateway.paymentGatewayId,
+          secretKey: decryptedSecretKey,
+          privateKey: decryptedApiKey,
+          environment: gateway.environment,
+        };
+        
+        const teya = new teyaService(teyaConfig);
+        const connectionTest = await teya.testConnection();
+        
+        testResult = {
+          success: connectionTest.success,
+          message: connectionTest.message,
+          details: {
+            environment: gateway.environment,
+            merchantId: gateway.merchantId,
+            status: connectionTest.success ? 'connected' : 'failed'
+          }
+        };
+      } catch (error) {
+        testResult = {
+          success: false,
+          message: 'Teya connection test failed',
+          error: error.message
+        };
+      }
     }
 
     return successResponse(res, { testResult });

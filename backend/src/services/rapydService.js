@@ -291,63 +291,7 @@ class RapydService {
         message: error.message
       };
     }
-  }
-
-  /**
-   * Get supported currencies (static list for quick reference)
-   */
-  getSupportedCurrencies() {
-    return [
-      'ISK', // Icelandic Króna
-      'EUR', // Euro
-      'USD', // US Dollar
-      'GBP', // British Pound
-      'DKK', // Danish Krone
-      'NOK', // Norwegian Krone
-      'SEK', // Swedish Krona
-      'CHF', // Swiss Franc
-      'CAD', // Canadian Dollar
-      'AUD', // Australian Dollar
-    ];
-  }
-
-  /**
-   * Get supported countries (static list for quick reference)
-   */
-  getSupportedCountries() {
-    return [
-      'IS', // Iceland
-      'DK', // Denmark
-      'NO', // Norway
-      'SE', // Sweden
-      'FI', // Finland
-      'DE', // Germany
-      'FR', // France
-      'GB', // United Kingdom
-      'US', // United States
-      'CA', // Canada
-      'AU', // Australia
-      'CH', // Switzerland
-      'AT', // Austria
-      'BE', // Belgium
-      'NL', // Netherlands
-      'ES', // Spain
-      'IT', // Italy
-      'PT', // Portugal
-      'GR', // Greece
-      'PL', // Poland
-      'CZ', // Czech Republic
-      'HU', // Hungary
-      'RO', // Romania
-      'BG', // Bulgaria
-      'HR', // Croatia
-      'SI', // Slovenia
-      'SK', // Slovakia
-      'LT', // Lithuania
-      'LV', // Latvia
-      'EE', // Estonia
-    ];
-  }
+   }
 
   /**
    * Get supported payment methods (static list for quick reference)

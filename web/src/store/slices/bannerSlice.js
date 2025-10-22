@@ -77,9 +77,46 @@ export const toggleBannerStatus = createAsyncThunk(
   }
 );
 
+export const fetchFeaturedBanners = createAsyncThunk(
+  'banners/fetchFeaturedBanners',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/banners/featured');
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch featured banners');
+    }
+  }
+);
+
+export const setFeaturedBanner = createAsyncThunk(
+  'banners/setFeaturedBanner',
+  async ({ id, featuredOrder }, { rejectWithValue }) => {
+    try {
+      const response = await api.patch(`/banners/${id}/featured`, { featuredOrder });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to set banner as featured');
+    }
+  }
+);
+
+export const removeFeaturedBanner = createAsyncThunk(
+  'banners/removeFeaturedBanner',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/banners/${id}/featured`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to remove banner from featured');
+    }
+  }
+);
+
 // Initial state
 const initialState = {
   banners: [],
+  featuredBanners: [],
   currentBanner: null,
   isLoading: false,
   error: null,
@@ -201,9 +238,72 @@ const bannerSlice = createSlice({
       .addCase(toggleBannerStatus.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+
+      // Fetch Featured Banners
+      .addCase(fetchFeaturedBanners.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchFeaturedBanners.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.featuredBanners = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchFeaturedBanners.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // Set Featured Banner
+      .addCase(setFeaturedBanner.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(setFeaturedBanner.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const index = state.banners.findIndex(b => b.id === action.payload.id);
+        if (index !== -1) {
+          state.banners[index] = action.payload;
+        }
+        // Update featured banners if this banner is now featured
+        if (action.payload.isFeatured) {
+          const featuredIndex = state.featuredBanners.findIndex(b => b.id === action.payload.id);
+          if (featuredIndex !== -1) {
+            state.featuredBanners[featuredIndex] = action.payload;
+          } else {
+            state.featuredBanners.push(action.payload);
+            state.featuredBanners.sort((a, b) => (a.featuredOrder || 0) - (b.featuredOrder || 0));
+          }
+        }
+        state.error = null;
+      })
+      .addCase(setFeaturedBanner.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // Remove Featured Banner
+      .addCase(removeFeaturedBanner.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(removeFeaturedBanner.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const index = state.banners.findIndex(b => b.id === action.payload.id);
+        if (index !== -1) {
+          state.banners[index] = action.payload;
+        }
+        // Remove from featured banners
+        state.featuredBanners = state.featuredBanners.filter(b => b.id !== action.payload.id);
+        state.error = null;
+      })
+      .addCase(removeFeaturedBanner.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
-  },
-});
+   },
+ });
 
 export const { clearCurrentBanner, clearError } = bannerSlice.actions;
 export default bannerSlice.reducer;

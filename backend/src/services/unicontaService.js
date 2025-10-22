@@ -1,6 +1,4 @@
 const axios = require('axios');
-const crypto = require('crypto');
-
 class UnicontaService {
   constructor(config = {}) {
     this.baseUrl = config.baseUrl || 'https://api.uniconta.com';
@@ -338,3 +336,19 @@ class UnicontaService {
 }
 
 module.exports = UnicontaService;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

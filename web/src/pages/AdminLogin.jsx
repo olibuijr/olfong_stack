@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { login, clearError } from '../store/slices/authSlice';
+import { useLanguage } from "../contexts/LanguageContext";
+import { login } from '../store/slices/authSlice';
 
 const AdminLogin = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +24,9 @@ const AdminLogin = () => {
     e.preventDefault();
     const result = await dispatch(login(formData));
     if (result.type === 'auth/login/fulfilled') {
-      navigate(from, { replace: true });
+      const userRole = result.payload.user.role;
+      const redirectPath = userRole === 'ADMIN' ? '/admin' : (from || '/');
+      navigate(redirectPath, { replace: true });
     }
   };
 
@@ -39,14 +41,14 @@ const AdminLogin = () => {
               className="h-16 w-auto dark:invert"
             />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">{t('auth.loginStaff')}</h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">{t('auth', 'loginStaff')}</h2>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
               <label htmlFor="username" className="label">
-                {t('auth.username')}
+                {t('auth', 'username')}
               </label>
               <input
                 id="username"
@@ -56,13 +58,14 @@ const AdminLogin = () => {
                 value={formData.username}
                 onChange={handleChange}
                 className="input"
-                placeholder={t('auth.username')}
+                placeholder={t('auth', 'username')}
+                data-testid="admin-username"
               />
             </div>
 
             <div>
               <label htmlFor="password" className="label">
-                {t('auth.password')}
+                {t('auth', 'password')}
               </label>
               <div className="relative">
                 <input
@@ -73,7 +76,8 @@ const AdminLogin = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="input pr-10"
-                  placeholder={t('auth.password')}
+                  placeholder={t('auth', 'password')}
+                  data-testid="admin-password"
                 />
                 <button
                   type="button"
@@ -101,13 +105,14 @@ const AdminLogin = () => {
               type="submit"
               disabled={isLoading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              data-testid="admin-login-button"
             >
-              {t('auth.login')}
+              {t('auth', 'login')}
             </button>
           </div>
 
           <div className="text-center mt-4">
-            <Link to="/login" className="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">{t('common.back')}</Link>
+            <Link to="/login" className="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">{t('common', 'back')}</Link>
           </div>
         </form>
       </div>

@@ -1,6 +1,4 @@
 // backend/src/services/netgiroService.js
-const axios = require('axios');
-
 const testConnection = async (gatewayConfig) => {
   try {
     // In a real scenario, this would involve making a test API call to Netgíró

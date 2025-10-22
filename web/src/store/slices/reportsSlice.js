@@ -6,43 +6,30 @@ export const fetchReports = createAsyncThunk(
   'reports/fetchReports',
   async ({ reportType, timeRange, startDate, endDate }, { rejectWithValue }) => {
     try {
-      // For now, return mock data since the backend routes are not fully implemented
-      // This prevents the route not found errors
-      const mockData = {
-        sales: {
-          totalRevenue: 0,
-          totalOrders: 0,
-          averageOrderValue: 0,
-          growthRate: 0,
-          dailySales: []
-        },
-        products: {
-          totalProducts: 0,
-          activeProducts: 0,
-          outOfStock: 0,
-          topSelling: [],
-          categoryBreakdown: []
-        },
-        customers: {
-          totalCustomers: 0,
-          newCustomers: 0,
-          returningCustomers: 0,
-          averageOrderFrequency: 0,
-          customerSegments: [],
-          topCustomers: []
-        },
-        orders: {
-          totalOrders: 0,
-          completedOrders: 0,
-          pendingOrders: 0,
-          cancelledOrders: 0,
-          averageProcessingTime: 0,
-          deliveryMethods: [],
-          orderStatusTrend: []
-        }
-      };
-      
-      return mockData;
+      const params = new URLSearchParams({
+        timeRange,
+        ...(startDate && { startDate }),
+        ...(endDate && { endDate })
+      });
+
+      let response;
+      switch (reportType) {
+        case 'sales':
+          response = await api.get(`/reports/sales?${params}`);
+          return { sales: response.data?.data || response.data };
+        case 'products':
+          response = await api.get(`/reports/inventory?${params}`);
+          return { products: response.data?.data || response.data };
+        case 'customers':
+          response = await api.get(`/reports/customers?${params}`);
+          return { customers: response.data?.data || response.data };
+        case 'orders':
+          // For orders, we'll use the analytics endpoint since it has order status distribution
+          response = await api.get(`/analytics?timeRange=${timeRange}`);
+          return { orders: response.data?.data || response.data };
+        default:
+          return {};
+      }
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch reports data');
     }
@@ -58,9 +45,9 @@ export const fetchSalesReport = createAsyncThunk(
         ...(startDate && { startDate }),
         ...(endDate && { endDate })
       });
-      
+
       const response = await api.get(`/reports/sales?${params}`);
-      return response.data;
+      return response.data?.data || response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch sales report');
     }
@@ -76,9 +63,9 @@ export const fetchProductsReport = createAsyncThunk(
         ...(startDate && { startDate }),
         ...(endDate && { endDate })
       });
-      
+
       const response = await api.get(`/reports/products?${params}`);
-      return response.data;
+      return response.data?.data || response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch products report');
     }
@@ -94,9 +81,9 @@ export const fetchCustomersReport = createAsyncThunk(
         ...(startDate && { startDate }),
         ...(endDate && { endDate })
       });
-      
+
       const response = await api.get(`/reports/customers?${params}`);
-      return response.data;
+      return response.data?.data || response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch customers report');
     }
@@ -112,9 +99,9 @@ export const fetchOrdersReport = createAsyncThunk(
         ...(startDate && { startDate }),
         ...(endDate && { endDate })
       });
-      
+
       const response = await api.get(`/reports/orders?${params}`);
-      return response.data;
+      return response.data?.data || response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch orders report');
     }

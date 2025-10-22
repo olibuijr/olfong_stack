@@ -1,4 +1,4 @@
-const { body, query } = require('express-validator');
+const { body } = require('express-validator');
 const { successResponse, errorResponse } = require('../utils/response');
 const prisma = require('../config/database');
 

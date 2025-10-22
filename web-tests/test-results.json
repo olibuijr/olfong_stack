@@ -10,17 +10,27 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 1
+    },
     "preserveOutput": "always",
     "reporter": [
       [
         "html",
-        null
+        {
+          "open": "never"
+        }
       ],
       [
         "json",
         {
           "outputFile": "test-results.json"
+        }
+      ],
+      [
+        "line",
+        {
+          "printSteps": true
         }
       ]
     ],
@@ -34,65 +44,11 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
-        "id": "chromium",
-        "name": "chromium",
-        "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
-        "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
-        "timeout": 30000
-      },
-      {
-        "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "firefox",
         "name": "firefox",
-        "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
-        "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
-        "timeout": 30000
-      },
-      {
-        "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
-        "id": "webkit",
-        "name": "webkit",
-        "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
-        "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
-        "timeout": 30000
-      },
-      {
-        "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
-        "id": "Mobile Chrome",
-        "name": "Mobile Chrome",
-        "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
-        "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
-        "timeout": 30000
-      },
-      {
-        "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
-        "id": "Mobile Safari",
-        "name": "Mobile Safari",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
         "testIgnore": [],
         "testMatch": [
@@ -105,32 +61,109 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.56.1",
-    "workers": 6,
+    "workers": 2,
     "webServer": null
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "Error: Playwright Test did not expect test.describe() to be called here.\nMost common reasons include:\n- You are calling test.describe() in a configuration file.\n- You are calling test.describe() in a file that is imported by the configuration file.\n- You have two different versions of @playwright/test. This usually happens\n  when one of the dependencies in your package.json depends on @playwright/test.",
-      "stack": "Error: Playwright Test did not expect test.describe() to be called here.\nMost common reasons include:\n- You are calling test.describe() in a configuration file.\n- You are calling test.describe() in a file that is imported by the configuration file.\n- You have two different versions of @playwright/test. This usually happens\n  when one of the dependencies in your package.json depends on @playwright/test.\n    at TestTypeImpl._currentSuite (/home/olibuijr/Projects/olfong_stack/web-tests/node_modules/playwright/lib/common/testType.js:74:13)\n    at TestTypeImpl._describe (/home/olibuijr/Projects/olfong_stack/web-tests/node_modules/playwright/lib/common/testType.js:114:24)\n    at Function.describe (/home/olibuijr/Projects/olfong_stack/web-tests/node_modules/playwright/lib/transform/transform.js:275:12)\n    at Object.<anonymous> (/home/olibuijr/Projects/olfong_stack/web-tests/e2e/auth/login.spec.ts:4:6)",
-      "location": {
-        "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/auth/login.spec.ts",
-        "column": 6,
-        "line": 4
-      },
-      "snippet": "\u001b[90m   at \u001b[39mauth/login.spec.ts:4\n\n  2 | import { testUsers } from '../../fixtures/test-data';\n  3 |\n> 4 | test.describe('Customer Login', () => {\n    |      ^\n  5 |   test.beforeEach(async ({ page }) => {\n  6 |     await page.goto('/login');\n  7 |   });"
-    },
-    {
-      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
-      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+      "title": "products/browse-products.spec.ts",
+      "file": "products/browse-products.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Product Browsing",
+          "file": "products/browse-products.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display products on home page",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 14044,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\u001b[22m\n\n    at /home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts:8:91",
+                        "location": {
+                          "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts",
+                          "column": 91,
+                          "line": 8
+                        },
+                        "snippet": "   6 |\n   7 |     // Wait for page to load and check for main content\n>  8 |     await expect(page.getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })).toBeVisible();\n     |                                                                                           ^\n   9 |     // Check for main content area\n  10 |     await expect(page.locator('main')).toBeVisible();\n  11 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts",
+                            "column": 91,
+                            "line": 8
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\u001b[22m\n\n\n   6 |\n   7 |     // Wait for page to load and check for main content\n>  8 |     await expect(page.getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })).toBeVisible();\n     |                                                                                           ^\n   9 |     // Check for main content area\n  10 |     await expect(page.locator('main')).toBeVisible();\n  11 |   });\n    at /home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts:8:91"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T16:02:01.962Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results/products-browse-products-P-c9632-splay-products-on-home-page-firefox/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results/products-browse-products-P-c9632-splay-products-on-home-page-firefox/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results/products-browse-products-P-c9632-splay-products-on-home-page-firefox/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts",
+                        "column": 91,
+                        "line": 8
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "6ab804ad8168167ac4cf-c84e256cea8c3e05965b",
+              "file": "products/browse-products.spec.ts",
+              "line": 4,
+              "column": 7
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2025-10-19T18:40:50.480Z",
-    "duration": 103.77500000000009,
+    "startTime": "2025-10-22T16:01:59.830Z",
+    "duration": 19693.146999999997,
     "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }

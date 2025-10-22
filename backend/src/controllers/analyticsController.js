@@ -196,13 +196,19 @@ const getAnalytics = async (req, res) => {
         const growth = calculateGrowth(currentRevenue, previousRevenue);
 
         return {
-          id: item.productId,
-          name: product?.name || 'Unknown Product',
-          nameIs: product?.nameIs || 'Óþekkt vara',
-          category: product?.category?.name || 'Unknown',
-          categoryIs: product?.category?.nameIs || 'Óþekkt flokkur',
-          sales: item._sum.quantity || 0,
-          revenue: currentRevenue,
+          productId: item.productId,
+          product: product ? {
+            name: product.name,
+            nameIs: product.nameIs,
+            category: product.category ? {
+              name: product.category.name,
+              nameIs: product.category.nameIs
+            } : null
+          } : null,
+          _sum: {
+            quantity: item._sum.quantity || 0,
+            price: currentRevenue
+          },
           growth: growth
         };
       })

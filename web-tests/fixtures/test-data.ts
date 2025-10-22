@@ -28,3 +28,26 @@ export const testAddresses = {
     country: 'Iceland',
   },
 };
+
+export const testShippingData = {
+  express: {
+    name: 'Express Delivery',
+    nameIs: 'Hraðsending',
+    type: 'DELIVERY',
+    fee: 500,
+    estimatedDays: 1,
+    sortOrder: 10,
+    description: 'Fast delivery within 24 hours',
+    descriptionIs: 'Hraðsending innan 24 klukkustunda',
+  },
+  pickup: {
+    name: 'Store Pickup',
+    nameIs: 'Afhending í verslun',
+    type: 'PICKUP',
+    fee: 0,
+    estimatedDays: 0,
+    sortOrder: 20,
+    description: 'Pick up your order at our store',
+    descriptionIs: 'Sæktu pöntunina í verslun okkar',
+  },
+};

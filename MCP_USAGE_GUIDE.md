@@ -151,6 +151,65 @@ All MCP servers are configured in `opencode.jsonc` and become available when usi
 "Locate all database queries that might need optimization"
 ```
 
+## ⚙️ Process Management (Bash Script Solution)
+
+**Purpose**: Direct bash-based process management for development servers and background tasks.
+
+**Note**: Due to dependency issues with persistproc MCP server, we use a custom bash script (`backend/mcp-process-manager.sh`) for reliable process management.
+
+### Process Management Commands
+
+#### 1. Development Server Control
+```bash
+# Start individual services
+./backend/mcp-process-manager.sh start-backend
+./backend/mcp-process-manager.sh start-frontend
+
+# Start all services (including Docker containers)
+./backend/mcp-process-manager.sh start-all
+
+# Stop services
+./backend/mcp-process-manager.sh stop backend
+./backend/mcp-process-manager.sh stop frontend
+./backend/mcp-process-manager.sh stop-all
+```
+
+#### 2. Process Monitoring
+```bash
+# List all managed processes
+./backend/mcp-process-manager.sh list
+
+# View logs
+./backend/mcp-process-manager.sh logs backend
+./backend/mcp-process-manager.sh logs frontend
+
+# Live log monitoring
+tail -f backend/backend.log
+tail -f web/frontend.log
+```
+
+#### 3. Process Control
+```bash
+# Restart services
+./backend/mcp-process-manager.sh restart backend
+./backend/mcp-process-manager.sh restart frontend
+```
+
+#### 4. Service Health Checks
+- Backend API: Runs on port 5000
+- Frontend Web App: Runs on port 3003 (auto-selected by Vite)
+- PostgreSQL: Port 5432 via Docker
+- Redis: Port 6379 via Docker
+
+### Automated Process Management
+
+The script provides:
+- **PID Tracking**: Stores process IDs in `.backend_pid` and `web/.web_pid`
+- **Automatic Cleanup**: Removes stale PID files for crashed processes
+- **Docker Integration**: Manages PostgreSQL and Redis containers
+- **Log Management**: Redirects output to dated log files
+- **Process Validation**: Checks if processes are actually running before operations
+
 ## 📚 Context7 MCP Server
 
 **Purpose**: Access to latest documentation, API references, and best practices.

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import { 
   Search, 
   X, 
@@ -11,7 +11,6 @@ import {
   Grid,
   List,
   Heart,
-  Eye,
   Check
 } from 'lucide-react';
 import imageSearchService from '../../services/imageSearchService';
@@ -25,7 +24,7 @@ const ImageSearchModal = ({
   category = '',
   initialQuery = ''
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const [query, setQuery] = useState(initialQuery || productName);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -220,7 +219,7 @@ const ImageSearchModal = ({
                   value={query}
                   onChange={handleQueryChange}
                   onKeyPress={handleKeyPress}
-                  placeholder={t('adminPlaceholders.searchForImages')}
+                  placeholder={t('adminPlaceholders', 'searchForImages')}
                   className="input pl-10 pr-4 w-full"
                 />
                 {loading && (
@@ -233,7 +232,7 @@ const ImageSearchModal = ({
                 <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg z-10 mt-1">
                   {suggestions.length > 0 && (
                     <div className="p-2">
-                      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t('imageSearchModal.suggestions')}</div>
+                      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t('imageSearchModal', 'suggestions')}</div>
                       {suggestions.slice(0, 5).map((suggestion, index) => (
                         <button
                           key={index}
@@ -247,7 +246,7 @@ const ImageSearchModal = ({
                   )}
                   {recentSearches.length > 0 && (
                     <div className="p-2 border-t border-gray-200 dark:border-gray-600">
-                      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t('imageSearchModal.recentSearches')}</div>
+                      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t('imageSearchModal', 'recentSearches')}</div>
                       {recentSearches.slice(0, 5).map((search, index) => (
                         <button
                           key={index}
@@ -293,10 +292,10 @@ const ImageSearchModal = ({
               onChange={(e) => setFilters({...filters, orientation: e.target.value})}
               className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-800"
             >
-              <option value="all">{t('imageSearchModal.allOrientations')}</option>
-              <option value="landscape">{t('imageSearchModal.landscape')}</option>
-              <option value="portrait">{t('imageSearchModal.portrait')}</option>
-              <option value="squarish">{t('imageSearchModal.square')}</option>
+              <option value="all">{t('imageSearchModal', 'allOrientations')}</option>
+              <option value="landscape">{t('imageSearchModal', 'landscape')}</option>
+              <option value="portrait">{t('imageSearchModal', 'portrait')}</option>
+              <option value="squarish">{t('imageSearchModal', 'square')}</option>
             </select>
             
             <select
@@ -304,18 +303,18 @@ const ImageSearchModal = ({
               onChange={(e) => setFilters({...filters, color: e.target.value})}
               className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-800"
             >
-              <option value="all">{t('imageSearchModal.allColors')}</option>
+              <option value="all">{t('imageSearchModal', 'allColors')}</option>
               <option value="black_and_white">Black & White</option>
-              <option value="black">{t('imageSearchModal.black')}</option>
-              <option value="white">{t('imageSearchModal.white')}</option>
-              <option value="yellow">{t('imageSearchModal.yellow')}</option>
-              <option value="orange">{t('imageSearchModal.orange')}</option>
-              <option value="red">{t('imageSearchModal.red')}</option>
-              <option value="purple">{t('imageSearchModal.purple')}</option>
-              <option value="magenta">{t('imageSearchModal.magenta')}</option>
-              <option value="green">{t('imageSearchModal.green')}</option>
-              <option value="teal">{t('imageSearchModal.teal')}</option>
-              <option value="blue">{t('imageSearchModal.blue')}</option>
+              <option value="black">{t('imageSearchModal', 'black')}</option>
+              <option value="white">{t('imageSearchModal', 'white')}</option>
+              <option value="yellow">{t('imageSearchModal', 'yellow')}</option>
+              <option value="orange">{t('imageSearchModal', 'orange')}</option>
+              <option value="red">{t('imageSearchModal', 'red')}</option>
+              <option value="purple">{t('imageSearchModal', 'purple')}</option>
+              <option value="magenta">{t('imageSearchModal', 'magenta')}</option>
+              <option value="green">{t('imageSearchModal', 'green')}</option>
+              <option value="teal">{t('imageSearchModal', 'teal')}</option>
+              <option value="blue">{t('imageSearchModal', 'blue')}</option>
             </select>
             
             <button
@@ -389,7 +388,7 @@ const ImageSearchModal = ({
                               handleDownloadAndSelect(image);
                             }}
                             className="p-2 bg-white rounded-full shadow-lg hover:bg-gray-100"
-                            title={t('adminLabels.selectImage')}
+                            title={t('adminLabels', 'selectImage')}
                           >
                             <Check className="w-4 h-4 text-green-600" />
                           </button>
@@ -399,7 +398,7 @@ const ImageSearchModal = ({
                               window.open(image.url, '_blank');
                             }}
                             className="p-2 bg-white rounded-full shadow-lg hover:bg-gray-100"
-                            title={t('adminLabels.viewOriginal')}
+                            title={t('adminLabels', 'viewOriginal')}
                           >
                             <ExternalLink className="w-4 h-4 text-blue-600" />
                           </button>
@@ -413,7 +412,7 @@ const ImageSearchModal = ({
                                 ? 'bg-red-500 text-white'
                                 : 'bg-white hover:bg-gray-100'
                             }`}
-                            title={t('adminLabels.addToFavorites')}
+                            title={t('adminLabels', 'addToFavorites')}
                           >
                             <Heart className="w-4 h-4" />
                           </button>

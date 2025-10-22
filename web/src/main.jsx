@@ -5,33 +5,31 @@ import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import App from './App.jsx'
 import { store } from './store/store.js'
-import './i18n/i18n.js'
+import { LanguageProvider } from './contexts/LanguageContext'
 import './index.css'
 
-// Register service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then((registration) => {
-        console.log('SW registered: ', registration);
-      })
-      .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
-      });
-  });
+// Debug: Log store in main
+console.log('Store in main.jsx:', store);
+console.log('Store state in main:', store?.getState());
+
+// Expose store on window for debugging
+if (typeof window !== 'undefined') {
+  window.store = store;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter 
+      <BrowserRouter
         future={{
           v7_startTransition: true,
           v7_relativeSplatPath: true
         }}
       >
-        <App />
-        <Toaster 
+        <LanguageProvider>
+          <App />
+        </LanguageProvider>
+        <Toaster
           position="top-right"
           toastOptions={{
             duration: 4000,
@@ -45,4 +43,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>,
 )
-

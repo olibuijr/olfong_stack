@@ -20,6 +20,7 @@ const atvrRoutes = require('./src/routes/atvr');
 const dashboardRoutes = require('./src/routes/dashboard');
 const bannerRoutes = require('./src/routes/banners');
 const imageRoutes = require('./src/routes/images');
+const mediaRoutes = require('./src/routes/media');
 const settingsRoutes = require('./src/routes/settings');
 const paymentGatewayRoutes = require('./src/routes/paymentGateways');
 const customerRoutes = require('./src/routes/customers');
@@ -29,6 +30,7 @@ const chatRoutes = require('./src/routes/chat');
 const integrationRoutes = require('./src/routes/integrations');
 const shippingRoutes = require('./src/routes/shipping');
 const demoDataRoutes = require('./src/routes/demo-data');
+const translationRoutes = require('./src/routes/translations');
 const ChatService = require('./src/services/chatService');
 
 const app = express();
@@ -71,16 +73,20 @@ app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/atvr', atvrRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/images', imageRoutes);
+app.use('/api/media', mediaRoutes);
 app.use('/api/banners', bannerRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/payment-gateways', paymentGatewayRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/receipt-settings', require('./src/routes/receiptSettings'));
+app.use('/api/smtp-settings', require('./src/routes/smtpSettings'));
 app.use('/api/reports', reportsRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/integrations', integrationRoutes);
 app.use('/api/shipping', shippingRoutes);
 app.use('/api/admin/demo-data', demoDataRoutes);
+app.use('/api/translations', translationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -240,8 +246,8 @@ process.on('SIGINT', async () => {
 ChatService.setIO(io);
 
 // Start server
-server.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🗄️  Database: ${process.env.DATABASE_URL}`);
 });

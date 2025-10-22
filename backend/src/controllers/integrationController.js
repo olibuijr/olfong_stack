@@ -22,7 +22,7 @@ function decrypt(encryptedText) {
   const textParts = encryptedText.split(':');
   const iv = Buffer.from(textParts.shift(), 'hex');
   const encryptedText2 = textParts.join(':');
-  const decipher = crypto.createDecipher(ALGORITHM, ENCRYPTION_KEY);
+  const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
   let decrypted = decipher.update(encryptedText2, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;

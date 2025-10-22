@@ -1,41 +1,33 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { 
-  MessageCircle, 
-  X, 
-  Send, 
-  Paperclip, 
-  Smile, 
-  Minimize2, 
-  Maximize2,
-  Circle,
-  MoreVertical,
-  Phone,
-  Video,
-  Search,
-  Archive,
-  Trash2
+import { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useLanguage } from "../../contexts/LanguageContext";
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  MessageCircle,
+  X,
+  Send,
+  Minimize2,
+  Maximize2
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import socketService from '../../services/socket';
 import api from '../../services/api';
+
 import './ChatWidget.css';
 
 const ChatWidget = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const { t } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
-  
+
   // Widget state
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-  const [otherUserTyping, setOtherUserTyping] = useState(false);
-  
   // Chat state
-  const [conversations, setConversations] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
+  const [otherUserTyping, setOtherUserTyping] = useState(false);
+  const [selectedTopic] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [unreadCount, setUnreadCount] = useState(0);
@@ -45,212 +37,67 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
   const inputRef = useRef(null);
-
-  // Scroll to bottom of messages
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  // Initialize chat when widget opens
-  useEffect(() => {
-    if (isOpen && isAuthenticated && user) {
-      // Connect to socket service
-      socketService.connect();
-      initializeChat();
-    }
-  }, [isOpen, isAuthenticated, user]);
-
-  // Socket event listeners
-  useEffect(() => {
-    if (!isAuthenticated || !user) return;
-
-    // New message received
-    const handleNewMessage = (data) => {
-      const { message, conversationId } = data;
-      
-      if (currentConversation?.id === conversationId) {
-        setMessages(prev => [...prev, message]);
-      }
-      
-      // Update conversations list
-      setConversations(prev => 
-        prev.map(conv => 
-          conv.id === conversationId 
-            ? { ...conv, lastMessageAt: message.createdAt, messages: [message] }
-            : conv
-        )
-      );
-      
-      // Update unread count
-      if (user && message.senderId !== user.id) {
-        setUnreadCount(prev => prev + 1);
-        toast.success(t('chat.newMessage'));
-      }
-    };
-
-    // User typing indicator
-    const handleUserTyping = (data) => {
-      if (user && data.userId !== user.id) {
-        setOtherUserTyping(data.isTyping);
-      }
-    };
-
-    // Conversation updates
-    const handleConversationUpdate = (data) => {
-      setConversations(prev => 
-        prev.map(conv => 
-          conv.id === data.conversation.id ? data.conversation : conv
-        )
-      );
-    };
-
-    socketService.on('new-message', handleNewMessage);
-    socketService.on('user-typing', handleUserTyping);
-    socketService.on('conversation-updated', handleConversationUpdate);
-
-    return () => {
-      socketService.removeListener('new-message', handleNewMessage);
-      socketService.removeListener('user-typing', handleUserTyping);
-      socketService.removeListener('conversation-updated', handleConversationUpdate);
-    };
-  }, [isAuthenticated, currentConversation, user, t]);
-
+  
+  // Initialize chat
   const initializeChat = async () => {
+    if (!isAuthenticated) return;
+    
     try {
       setIsLoading(true);
-      console.log('Initializing chat for user:', user);
+      const response = await api.get('/chat/conversations');
       
-      // Get user's conversations
-      const conversationsResponse = await api.get('/chat/conversations');
-      console.log('Conversations response:', conversationsResponse.data);
-      setConversations(conversationsResponse.data.conversations);
-      
-      // Get unread count
-      const unreadResponse = await api.get('/chat/unread-count');
-      setUnreadCount(unreadResponse.data.unreadCount);
-      
-      // If no conversations, create a new one for all users
-      if (conversationsResponse.data.conversations.length === 0) {
-        console.log('No conversations found, creating new one');
-        await createNewConversation();
-      } else if (conversationsResponse.data.conversations.length > 0) {
-        // Load the most recent conversation
-        const recentConv = conversationsResponse.data.conversations[0];
-        console.log('Loading recent conversation:', recentConv);
-        setCurrentConversation(recentConv);
-        await loadMessages(recentConv.id);
+      // Set first conversation as current if available
+      if (response.data.length > 0) {
+        setCurrentConversation(response.data[0]);
+        await loadMessages(response.data[0].id);
       }
     } catch (error) {
-      console.error('Error initializing chat:', error);
-      toast.error(t('chat.initializationError'));
+      console.error('Failed to initialize chat:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const createNewConversation = async () => {
-    try {
-      console.log('Creating new conversation for user:', user);
-      const response = await api.post('/chat/conversations', {
-        title: t('chat.supportChat'),
-        type: 'SUPPORT',
-        priority: 'NORMAL'
-      });
-      
-      const newConversation = response.data;
-      console.log('New conversation created:', newConversation);
-      setCurrentConversation(newConversation);
-      setConversations([newConversation]);
-      setMessages([]);
-      
-      // Join conversation room
-      if (socketService.isSocketConnected()) {
-        socketService.emit('join-conversation', newConversation.id);
-      } else {
-        console.warn('Socket not connected, cannot join conversation room');
-      }
-    } catch (error) {
-      console.error('Error creating conversation:', error);
-      toast.error(t('chat.createConversationError'));
-    }
-  };
-
+  // Load messages for a conversation
   const loadMessages = async (conversationId) => {
     try {
       const response = await api.get(`/chat/conversations/${conversationId}/messages`);
-      setMessages(response.data.messages);
-      
-      // Join conversation room
-      if (socketService.isSocketConnected()) {
-        socketService.emit('join-conversation', conversationId);
-      } else {
-        console.warn('Socket not connected, cannot join conversation room');
-      }
+      setMessages(response.data);
+      scrollToBottom();
     } catch (error) {
-      console.error('Error loading messages:', error);
-      toast.error(t('chat.loadMessagesError'));
+      console.error('Failed to load messages:', error);
     }
   };
 
+  // Scroll to bottom of messages
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Send message
   const sendMessage = async () => {
-    if (!newMessage.trim() || isLoading) return;
+    if (!newMessage.trim() || !currentConversation) return;
+
+    const messageData = {
+      conversationId: currentConversation.id,
+      content: newMessage.trim(),
+      topic: selectedTopic
+    };
 
     try {
-      const response = await api.post(`/chat/conversations/${currentConversation.id}/messages`, {
-        content: newMessage.trim(),
-        messageType: 'TEXT'
-      });
-
-      const message = response.data;
-      setMessages(prev => [...prev, message]);
+      const response = await api.post('/chat/messages', messageData);
+      setMessages(prev => [...prev, response.data]);
       setNewMessage('');
-      
-      // Clear typing indicator
-      setIsTyping(false);
-      if (user && socketService.isSocketConnected()) {
-        socketService.emit('typing-stop', {
-          conversationId: currentConversation.id,
-          userId: user.id
-        });
-      }
+      scrollToBottom();
     } catch (error) {
-      console.error('Error sending message:', error);
-      toast.error(t('chat.sendMessageError'));
+      console.error('Failed to send message:', error);
+      toast.error('Failed to send message');
     }
   };
 
-  const handleTyping = (e) => {
-    setNewMessage(e.target.value);
-    
-    if (!isTyping && currentConversation && user && socketService.isSocketConnected()) {
-      setIsTyping(true);
-      socketService.emit('typing-start', {
-        conversationId: currentConversation.id,
-        userId: user.id
-      });
-    }
-
-    // Clear existing timeout
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-    }
-
-    // Set new timeout to stop typing indicator
-    typingTimeoutRef.current = setTimeout(() => {
-      setIsTyping(false);
-      if (currentConversation && user && socketService.isSocketConnected()) {
-        socketService.emit('typing-stop', {
-          conversationId: currentConversation.id,
-          userId: user.id
-        });
-      }
-    }, 1000);
-  };
-
+  // Handle key press
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -258,150 +105,173 @@ const ChatWidget = () => {
     }
   };
 
-  const formatTime = (timestamp) => {
-    return new Date(timestamp).toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
-  };
-
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-
-    if (date.toDateString() === today.toDateString()) {
-      return t('chat.today');
-    } else if (date.toDateString() === yesterday.toDateString()) {
-      return t('chat.yesterday');
-    } else {
-      return date.toLocaleDateString();
+  // Handle typing
+  const handleTyping = () => {
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
     }
+    typingTimeoutRef.current = setTimeout(() => {
+      // Typing timeout
+    }, 1000);
   };
 
-  const getOtherParticipant = () => {
-    if (!currentConversation || !user) return null;
-    return currentConversation.participants.find(p => p.userId !== user.id)?.user;
-  };
+  // Effects
+  useEffect(() => {
+    initializeChat();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
 
-  const toggleWidget = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen) {
-      setIsMinimized(false);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    if (currentConversation) {
+      loadMessages(currentConversation.id);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentConversation]);
 
-  const toggleMinimize = () => {
-    setIsMinimized(!isMinimized);
-  };
+  // Socket effects
+  useEffect(() => {
+    if (!isAuthenticated) return;
 
-  if (!isAuthenticated || !user) return null;
+    const handleNewMessage = (message) => {
+      if (message.conversationId === currentConversation?.id) {
+        setMessages(prev => [...prev, message]);
+      }
+      setUnreadCount(prev => prev + 1);
+    };
+
+    const handleTypingStatus = (data) => {
+      if (data.conversationId === currentConversation?.id) {
+        setOtherUserTyping(data.isTyping);
+      }
+    };
+
+    socketService.on('newMessage', handleNewMessage);
+    socketService.on('typingStatus', handleTypingStatus);
+
+    return () => {
+      socketService.off('newMessage', handleNewMessage);
+      socketService.off('typingStatus', handleTypingStatus);
+    };
+  }, [isAuthenticated, currentConversation]);
+
+  // Don't show chat widget on admin pages
+  const isAdminPage = location.pathname.startsWith('/admin');
+  if (isAdminPage) {
+    return null;
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="fixed bottom-4 right-4 z-50">
+        <button
+          onClick={() => navigate('/login')}
+          className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+        >
+          <MessageCircle size={24} />
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="chat-widget">
-      {/* Chat Button */}
-      <button 
-        className={`chat-button ${isOpen ? 'open' : ''}`}
-        onClick={toggleWidget}
-        title={t('chat.openChat')}
-      >
-        <MessageCircle size={24} />
-        {unreadCount > 0 && (
-          <span className="chat-notification-badge">{unreadCount}</span>
-        )}
-      </button>
-
-      {/* Chat Window */}
-      {isOpen && (
-        <div className={`chat-window ${isMinimized ? 'minimized' : ''}`}>
+    <div className="fixed bottom-4 right-4 z-50">
+      {!isOpen ? (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors relative"
+        >
+          <MessageCircle size={24} />
+          {unreadCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
+              {unreadCount}
+            </span>
+          )}
+        </button>
+      ) : (
+        <div className="bg-white rounded-lg shadow-xl w-80 h-96 flex flex-col">
           {/* Header */}
-          <div className="chat-header">
-            <div className="chat-header-info">
-              <div className="chat-avatar">
-                <MessageCircle size={20} />
-              </div>
-              <div className="chat-header-text">
-                <h3>{t('chat.support')}</h3>
-                {otherUserTyping && (
-                  <p className="typing-indicator">{t('chat.typing')}</p>
-                )}
-              </div>
-            </div>
-            <div className="chat-header-actions">
-              <button 
-                onClick={toggleMinimize}
-                className="chat-action-btn"
-                title={isMinimized ? t('chat.maximize') : t('chat.minimize')}
+          <div className="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+            <h3 className="font-semibold">{t('chat', 'title')}</h3>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setIsMinimized(!isMinimized)}
+                className="text-white hover:bg-blue-700 p-1 rounded"
               >
                 {isMinimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
               </button>
-              <button 
-                onClick={toggleWidget}
-                className="chat-action-btn"
-                title={t('chat.close')}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-white hover:bg-blue-700 p-1 rounded"
               >
                 <X size={16} />
               </button>
             </div>
           </div>
 
-          {/* Messages */}
           {!isMinimized && (
             <>
-              <div className="chat-messages">
+              {/* Messages */}
+              <div className="flex-1 overflow-y-auto p-3 space-y-2">
                 {isLoading ? (
-                  <div className="chat-loading">
-                    <div className="loading-spinner"></div>
-                    <p>{t('chat.loading')}</p>
-                  </div>
+                  <div className="text-center text-gray-500">{t('common', 'loading')}</div>
                 ) : (
-                  <>
-                    {messages.map((message, index) => (
+                  messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${message.senderId === user?.id ? 'justify-end' : 'justify-start'}`}
+                    >
                       <div
-                        key={message.id}
-                        className={`message ${user && message.senderId === user.id ? 'sent' : 'received'}`}
+                        className={`max-w-xs p-2 rounded-lg ${
+                          message.senderId === user?.id
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-200 text-gray-800'
+                        }`}
                       >
-                        <div className="message-content">
-                          <p>{message.content}</p>
-                          <span className="message-time">
-                            {formatTime(message.createdAt)}
-                          </span>
-                        </div>
+                        <p className="text-sm">{message.content}</p>
+                        <p className="text-xs opacity-75 mt-1">
+                          {new Date(message.createdAt).toLocaleTimeString()}
+                        </p>
                       </div>
-                    ))}
-                    <div ref={messagesEndRef} />
-                  </>
+                    </div>
+                  ))
                 )}
+                {otherUserTyping && (
+                  <div className="flex justify-start">
+                    <div className="bg-gray-200 text-gray-800 p-2 rounded-lg">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Input */}
-              <div className="chat-input">
-                <div className="chat-input-container">
-                  <button className="chat-input-action" title={t('chat.attachFile')}>
-                    <Paperclip size={16} />
-                  </button>
-                  <textarea
+              <div className="p-3 border-t">
+                <div className="flex space-x-2">
+                  <input
                     ref={inputRef}
+                    type="text"
                     value={newMessage}
-                    onChange={handleTyping}
+                    onChange={(e) => {
+                      setNewMessage(e.target.value);
+                      handleTyping();
+                    }}
                     onKeyPress={handleKeyPress}
-                    placeholder={currentConversation ? t('chat.typeMessage') : t('chat.initializing')}
-                    className="chat-textarea"
-                    rows={1}
-                    disabled={isLoading}
+                    placeholder={t('chat', 'typeMessage')}
+                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <button 
-                    className="chat-input-action" 
-                    title={t('chat.emoji')}
-                  >
-                    <Smile size={16} />
-                  </button>
                   <button
                     onClick={sendMessage}
-                    disabled={!newMessage.trim() || !currentConversation || isLoading}
-                    className="chat-send-btn"
-                    title={t('chat.send')}
+                    disabled={!newMessage.trim()}
+                    className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send size={16} />
                   </button>

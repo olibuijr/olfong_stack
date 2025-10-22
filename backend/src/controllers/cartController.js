@@ -73,7 +73,6 @@ const addToCart = async (req, res) => {
 
     // Age restriction checks
     const dob = req.user.dob ? new Date(req.user.dob) : null;
-    const birthYear = dob ? dob.getUTCFullYear() : null;
     let age = null;
     if (dob) {
       const today = new Date();
@@ -164,6 +163,16 @@ const updateCartItem = async (req, res) => {
     const { itemId } = req.params;
     const { quantity } = req.body;
     const userId = req.user.id;
+
+    // Calculate user age for restrictions
+    const dob = req.user.dob ? new Date(req.user.dob) : null;
+    let age = null;
+    if (dob) {
+      const today = new Date();
+      age = today.getUTCFullYear() - dob.getUTCFullYear();
+      const m = today.getUTCMonth() - dob.getUTCMonth();
+      if (m < 0 || (m === 0 && today.getUTCDate() < dob.getUTCDate())) age--;
+    }
 
     // Find cart item
     const cartItem = await prisma.cartItem.findUnique({

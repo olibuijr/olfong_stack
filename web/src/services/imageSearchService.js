@@ -360,7 +360,7 @@ class ImageSearchService {
    */
   getAvailableSources() {
     return Object.entries(this.sources)
-      .filter(([key, config]) => config.enabled)
+      .filter(([, config]) => config.enabled)
       .map(([key, config]) => ({ key, name: config.name }));
   }
 

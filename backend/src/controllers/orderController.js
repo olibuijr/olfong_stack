@@ -1,4 +1,4 @@
-const { body, query } = require('express-validator');
+const { body } = require('express-validator');
 const { successResponse, errorResponse } = require('../utils/response');
 const prisma = require('../config/database');
 
@@ -594,14 +594,328 @@ const assignDeliveryPersonValidation = [
   body('deliveryPersonId').isInt({ min: 1 }).withMessage('Valid delivery person ID is required'),
 ];
 
+/**
+ * Create POS order (admin manual order creation)
+ */
+const createPOSOrder = async (req, res) => {
+  try {
+    const { 
+      customerId, // Optional - existing customer
+      guestInfo, // Optional - { name, email, phone }
+      items, // [{ productId, quantity, price }]
+      shippingOptionId,
+      paymentMethod, // 'cash', 'card', 'pay_later'
+      paymentStatus, // 'COMPLETED' or 'PENDING'
+      notes,
+      addressId, // Optional for delivery
+      pickupTime // Optional for pickup
+    } = req.body;
+
+    // Validate required fields
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return errorResponse(res, 'Items are required', 400);
+    }
+
+    if (!shippingOptionId) {
+      return errorResponse(res, 'Shipping option is required', 400);
+    }
+
+    // Get shipping option
+    const shippingOption = await prisma.shippingOption.findUnique({
+      where: { id: parseInt(shippingOptionId) },
+    });
+
+    if (!shippingOption || !shippingOption.isActive) {
+      return errorResponse(res, 'Shipping option not found or inactive', 404);
+    }
+
+    // Determine user ID - either existing customer or create guest user
+    let userId;
+    let customer = null;
+
+    if (customerId) {
+      // Use existing customer
+      customer = await prisma.user.findUnique({
+        where: { id: parseInt(customerId), role: 'CUSTOMER' }
+      });
+      
+      if (!customer) {
+        return errorResponse(res, 'Customer not found', 404);
+      }
+      userId = customer.id;
+    } else if (guestInfo && guestInfo.email) {
+      // Create or find guest user by email
+      customer = await prisma.user.findFirst({
+        where: { 
+          email: guestInfo.email,
+          role: 'CUSTOMER'
+        }
+      });
+
+      if (customer) {
+        userId = customer.id;
+      } else {
+        // Create new guest user
+        customer = await prisma.user.create({
+          data: {
+            username: `guest_${Date.now()}`,
+            email: guestInfo.email,
+            fullName: guestInfo.name || 'Guest Customer',
+            phone: guestInfo.phone || null,
+            role: 'CUSTOMER'
+          }
+        });
+        userId = customer.id;
+      }
+    } else {
+      return errorResponse(res, 'Either customerId or guestInfo with email is required', 400);
+    }
+
+    // Validate and calculate totals
+    let totalAmount = 0;
+    const orderItems = [];
+
+    for (const item of items) {
+      const product = await prisma.product.findUnique({
+        where: { id: item.productId }
+      });
+
+      if (!product) {
+        return errorResponse(res, `Product with ID ${item.productId} not found`, 404);
+      }
+
+      if (product.stock < item.quantity) {
+        return errorResponse(res, `Insufficient stock for ${product.name}`, 400);
+      }
+
+      const itemTotal = item.price * item.quantity;
+      totalAmount += itemTotal;
+
+      orderItems.push({
+        productId: item.productId,
+        quantity: item.quantity,
+        price: item.price,
+      });
+    }
+
+    // Add shipping cost
+    const shippingCost = shippingOption.fee;
+    totalAmount += shippingCost;
+
+    // Determine order status based on payment
+    let orderStatus = 'PENDING';
+    if (paymentStatus === 'COMPLETED') {
+      orderStatus = 'CONFIRMED';
+    }
+
+    // Create order
+    const order = await prisma.$transaction(async (tx) => {
+      // Create order
+      const newOrder = await tx.order.create({
+        data: {
+          orderNumber: generateOrderNumber(),
+          userId,
+          addressId: addressId ? parseInt(addressId) : null,
+          shippingOptionId: shippingOption.id,
+          pickupTime: shippingOption.type === 'pickup' ? pickupTime : null,
+          status: orderStatus,
+          totalAmount,
+          deliveryFee: shippingCost,
+          notes,
+        },
+      });
+
+      // Create order items
+      await tx.orderItem.createMany({
+        data: orderItems.map(item => ({
+          ...item,
+          orderId: newOrder.id,
+        })),
+      });
+
+      // Update product stock
+      for (const item of items) {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: {
+            stock: {
+              decrement: item.quantity,
+            },
+          },
+        });
+      }
+
+      // Create transaction record if payment is completed
+      if (paymentStatus === 'COMPLETED') {
+        await tx.transaction.create({
+          data: {
+            orderId: newOrder.id,
+            amount: totalAmount,
+            paymentStatus: 'COMPLETED',
+            paymentMethod: paymentMethod === 'cash' ? 'Cash' : 
+                          paymentMethod === 'card' ? 'Card' : 'Pay Later',
+            paymentDetails: JSON.stringify({
+              type: 'pos_order',
+              method: paymentMethod,
+              processedBy: req.user.id,
+              processedAt: new Date().toISOString()
+            }),
+          },
+        });
+      }
+
+      return newOrder;
+    });
+
+    // Get the complete order with relations
+    const completeOrder = await prisma.order.findUnique({
+      where: { id: order.id },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            username: true,
+            fullName: true,
+            email: true,
+            phone: true,
+          },
+        },
+        address: true,
+        shippingOption: true,
+        transaction: true,
+      },
+    });
+
+    return successResponse(res, { order: completeOrder }, 'POS order created successfully', 201);
+  } catch (error) {
+    console.error('Create POS order error:', error);
+    return errorResponse(res, 'Failed to create POS order', 500);
+  }
+};
+
+/**
+ * Get receipt data for an order
+ */
+const getReceiptData = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { language = 'en' } = req.query;
+
+    const order = await prisma.order.findUnique({
+      where: { id: parseInt(id) },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+        },
+        user: {
+          select: {
+            fullName: true,
+            username: true,
+            email: true,
+          },
+        },
+        address: true,
+        shippingOption: true,
+      },
+    });
+
+    if (!order) {
+      return errorResponse(res, 'Order not found', 404);
+    }
+
+    const receiptService = require('../services/receiptService');
+    const receiptHtml = await receiptService.generateReceiptHTMLFromData(order, await prisma.receiptSettings.findFirst(), language);
+
+    return successResponse(res, { 
+      order,
+      receiptHtml,
+      language 
+    }, 'Receipt data retrieved successfully');
+  } catch (error) {
+    console.error('Get receipt data error:', error);
+    return errorResponse(res, 'Failed to retrieve receipt data', 500);
+  }
+};
+
+/**
+ * Get receipt PDF
+ */
+const getReceiptPDF = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { language = 'en' } = req.query;
+
+    const receiptService = require('../services/receiptService');
+    const pdfBuffer = await receiptService.generateReceiptPDF(parseInt(id), language);
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="receipt-${id}.pdf"`);
+    res.send(pdfBuffer);
+  } catch (error) {
+    console.error('Get receipt PDF error:', error);
+    return errorResponse(res, 'Failed to generate receipt PDF', 500);
+  }
+};
+
+/**
+ * Email receipt
+ */
+const emailReceipt = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email, language = 'en' } = req.body;
+
+    if (!email) {
+      return errorResponse(res, 'Email address is required', 400);
+    }
+
+    const emailService = require('../services/emailService');
+    const result = await emailService.sendReceiptEmail(parseInt(id), email, language);
+
+    return successResponse(res, result, 'Receipt email sent successfully');
+  } catch (error) {
+    console.error('Email receipt error:', error);
+    return errorResponse(res, `Failed to send receipt email: ${error.message}`, 500);
+  }
+};
+
+// Validation rules for POS order
+const createPOSOrderValidation = [
+  body('items').isArray({ min: 1 }).withMessage('At least one item is required'),
+  body('items.*.productId').isInt({ min: 1 }).withMessage('Valid product ID is required'),
+  body('items.*.quantity').isInt({ min: 1 }).withMessage('Valid quantity is required'),
+  body('items.*.price').isFloat({ min: 0 }).withMessage('Valid price is required'),
+  body('shippingOptionId').isInt({ min: 1 }).withMessage('Valid shipping option ID is required'),
+  body('paymentMethod').isIn(['cash', 'card', 'pay_later']).withMessage('Valid payment method is required'),
+  body('paymentStatus').isIn(['COMPLETED', 'PENDING']).withMessage('Valid payment status is required'),
+  body('customerId').optional().isInt({ min: 1 }).withMessage('Valid customer ID is required'),
+  body('guestInfo').optional().isObject().withMessage('Guest info must be an object'),
+  body('guestInfo.email').optional().isEmail().withMessage('Valid email is required for guest info'),
+  body('addressId').optional().isInt({ min: 1 }).withMessage('Valid address ID is required'),
+  body('pickupTime').optional().matches(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/).withMessage('Pickup time must be in HH:MM format'),
+  body('notes').optional().isLength({ max: 500 }).withMessage('Notes must be less than 500 characters'),
+];
+
 module.exports = {
   getUserOrders,
   getOrder,
   createOrder,
+  createPOSOrder,
   updateOrderStatus,
   assignDeliveryPerson,
   getAllOrders,
+  getReceiptData,
+  getReceiptPDF,
+  emailReceipt,
   createOrderValidation,
+  createPOSOrderValidation,
   updateOrderStatusValidation,
   assignDeliveryPersonValidation,
 };

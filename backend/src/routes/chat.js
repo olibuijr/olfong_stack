@@ -10,6 +10,7 @@ const {
   joinConversation,
   updateConversationStatus,
   getUnreadCount,
+  markMessagesAsRead,
 } = require('../controllers/chatController');
 
 const router = express.Router();
@@ -54,5 +55,8 @@ router.get('/conversations/:conversationId/messages', getMessages);
 
 // Send message
 router.post('/conversations/:conversationId/messages', sendMessageValidation, validate, sendMessage);
+
+// Mark messages as read
+router.post('/conversations/:conversationId/messages/read', markMessagesAsRead);
 
 module.exports = router;

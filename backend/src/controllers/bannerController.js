@@ -152,6 +152,85 @@ const toggleBannerStatus = async (req, res) => {
   }
 };
 
+/**
+ * Get featured banners for homepage
+ */
+const getFeaturedBanners = async (req, res) => {
+  try {
+    const banners = await prisma.banner.findMany({
+      where: {
+        isActive: true,
+        isFeatured: true
+      },
+      orderBy: { featuredOrder: 'asc' }
+    });
+
+    return successResponse(res, banners, 'Featured banners retrieved successfully');
+  } catch (error) {
+    console.error('Get featured banners error:', error);
+    return errorResponse(res, 'Failed to retrieve featured banners', 500);
+  }
+};
+
+/**
+ * Set banner as featured (Admin only)
+ */
+const setFeaturedBanner = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { featuredOrder } = req.body;
+
+    // If setting a specific position, remove any existing banner from that position
+    if (featuredOrder) {
+      await prisma.banner.updateMany({
+        where: { featuredOrder: parseInt(featuredOrder) },
+        data: { isFeatured: false, featuredOrder: null }
+      });
+    }
+
+    const updatedBanner = await prisma.banner.update({
+      where: { id: parseInt(id) },
+      data: {
+        isFeatured: true,
+        featuredOrder: featuredOrder ? parseInt(featuredOrder) : null
+      }
+    });
+
+    return successResponse(res, updatedBanner, 'Banner set as featured successfully');
+  } catch (error) {
+    console.error('Set featured banner error:', error);
+    if (error.code === 'P2025') {
+      return errorResponse(res, 'Banner not found', 404);
+    }
+    return errorResponse(res, 'Failed to set banner as featured', 500);
+  }
+};
+
+/**
+ * Remove banner from featured (Admin only)
+ */
+const removeFeaturedBanner = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedBanner = await prisma.banner.update({
+      where: { id: parseInt(id) },
+      data: {
+        isFeatured: false,
+        featuredOrder: null
+      }
+    });
+
+    return successResponse(res, updatedBanner, 'Banner removed from featured successfully');
+  } catch (error) {
+    console.error('Remove featured banner error:', error);
+    if (error.code === 'P2025') {
+      return errorResponse(res, 'Banner not found', 404);
+    }
+    return errorResponse(res, 'Failed to remove banner from featured', 500);
+  }
+};
+
 // Validation rules
 const createBannerValidation = [
   body('imageUrl').notEmpty().withMessage('Image URL is required'),
@@ -168,6 +247,9 @@ module.exports = {
   updateBanner,
   deleteBanner,
   toggleBannerStatus,
+  getFeaturedBanners,
+  setFeaturedBanner,
+  removeFeaturedBanner,
   createBannerValidation,
   updateBannerValidation,
 };

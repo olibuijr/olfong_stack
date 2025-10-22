@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import api from '../../services/api';
@@ -8,7 +8,7 @@ import LoadingSpinner from './LoadingSpinner';
 import { getProductName, getProductDescription } from '../../utils/languageUtils';
 
 const CategoryProducts = ({ category, limit = 6 }) => {
-  const { t, i18n } = useTranslation();
+  const { t, currentLanguage } = useLanguage();
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +16,7 @@ const CategoryProducts = ({ category, limit = 6 }) => {
     const fetchCategoryProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get(`/products?category=${category.name}&limit=${limit}`);
+        const response = await api.get('/products?category=${category', 'name}&limit=${limit}');
         setCategoryProducts(response.data.products || []);
       } catch (error) {
         console.error('Error fetching category products:', error);
@@ -64,14 +64,14 @@ const CategoryProducts = ({ category, limit = 6 }) => {
             {category.nameIs || category.name}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {categoryProducts.length} {t('common.itemsLabel')}
+            {categoryProducts.length} {t('common', 'itemsLabel')}
           </p>
         </div>
         <Link
           to={`/products?category=${category.name}`}
           className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm"
         >
-          {t('common.viewAll')}
+          {t('common', 'viewAll')}
         </Link>
       </div>
 
@@ -89,7 +89,7 @@ const CategoryProducts = ({ category, limit = 6 }) => {
                       <ProductImage 
                         product={product}
                         className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-                        currentLanguage={i18n.language}
+                        currentLanguage={currentLanguage}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                       <div className="absolute top-3 right-3">
@@ -98,7 +98,7 @@ const CategoryProducts = ({ category, limit = 6 }) => {
                             ? 'bg-green-500 text-white' 
                             : 'bg-red-500 text-white'
                         }`}>
-                          {product.stock > 0 ? t('products.inStock') : t('products.outOfStock')}
+                          {product.stock > 0 ? t('products', 'inStock') : t('products', 'outOfStock')}
                         </span>
                       </div>
                     </div>
@@ -107,16 +107,16 @@ const CategoryProducts = ({ category, limit = 6 }) => {
                   <div className="p-4 flex-1 flex flex-col">
                     <div className="mb-3 flex-1">
                       <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white line-clamp-2 leading-tight">
-                        {getProductName(i18n.language, product)}
+                        {getProductName(currentLanguage, product)}
                       </h4>
                       <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2">
-                        {getProductDescription(i18n.language, product)}
+                        {getProductDescription(currentLanguage, product)}
                       </p>
                     </div>
                     
                     <div className="flex items-center justify-between">
                       <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                        {product.price.toLocaleString()} {t('common.currency')}
+                        {product.price.toLocaleString()} {t('common', 'currency')}
                       </span>
                     </div>
                   </div>

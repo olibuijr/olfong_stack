@@ -690,7 +690,23 @@ async function main() {
     });
   }
 
-  console.log('✅ Created demo customers');
+  // Create test customer for Playwright tests
+  const testCustomerPassword = await bcrypt.hash('password123', 10);
+  await prisma.user.upsert({
+    where: { email: 'test@example.com' },
+    update: {},
+    create: {
+      username: 'test_customer',
+      email: 'test@example.com',
+      password: testCustomerPassword,
+      fullName: 'Test Customer',
+      role: 'CUSTOMER',
+      phone: '+3545559999',
+      kennitala: '9999999999'
+    },
+  });
+
+  console.log('✅ Created demo customers and test customer');
 
   // Get demo customers for orders
   const customer1 = await prisma.user.findUnique({ where: { username: 'demo_customer1' } });
@@ -860,8 +876,10 @@ async function main() {
   ];
 
   for (const order of demoOrders) {
-    await prisma.order.create({
-      data: order,
+    await prisma.order.upsert({
+      where: { orderNumber: order.orderNumber },
+      update: {},
+      create: order,
     });
   }
 
@@ -915,6 +933,351 @@ async function main() {
   }
 
   console.log('✅ Created demo order items');
+
+  // Seed payment gateways
+  console.log('🌱 Seeding payment gateways...');
+  const { execSync } = require('child_process');
+  try {
+    execSync('node scripts/seedPaymentGateways.js', { stdio: 'inherit' });
+    console.log('✅ Payment gateways seeded successfully');
+  } catch (error) {
+    console.error('❌ Error seeding payment gateways:', error.message);
+  }
+
+  // Create default receipt settings
+  try {
+    await prisma.receiptSettings.upsert({
+      where: { id: 1 },
+      update: {},
+      create: {
+        companyName: 'Ölföng',
+        companyNameIs: 'Ölföng',
+        companyAddress: 'Reykjavík, Iceland',
+        companyAddressIs: 'Reykjavík, Ísland',
+        companyPhone: '+354 555 1234',
+        companyEmail: 'info@olfong.is',
+        companyWebsite: 'www.olfong.is',
+        taxId: '1234567890',
+        headerColor: '#1e40af',
+        accentColor: '#3b82f6',
+        fontFamily: 'Inter, system-ui, sans-serif',
+        fontSize: '14px',
+        footerText: 'Thank you for your business!',
+        footerTextIs: 'Takk fyrir viðskiptin!',
+        showBarcode: true,
+        showQrCode: true,
+        template: 'modern',
+        paperSize: '80mm'
+      }
+    });
+    console.log('✅ Default receipt settings created');
+  } catch (error) {
+    console.error('❌ Error creating receipt settings:', error.message);
+  }
+
+  // Create default SMTP settings (disabled by default)
+  try {
+    await prisma.sMTPSettings.upsert({
+      where: { id: 1 },
+      update: {},
+      create: {
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: true,
+        username: '',
+        password: '',
+        fromEmail: 'noreply@olfong.is',
+        fromName: 'Ölföng',
+        fromNameIs: 'Ölföng',
+        isEnabled: false
+      }
+    });
+    console.log('✅ Default SMTP settings created');
+  } catch (error) {
+    console.error('❌ Error creating SMTP settings:', error.message);
+  }
+
+  // Seed essential translations
+  console.log('🌐 Seeding essential translations...');
+  
+  const essentialTranslations = [
+    // Navigation translations
+    { key: 'navigation.home', section: 'navigation', language: 'en', value: 'Home' },
+    { key: 'navigation.home', section: 'navigation', language: 'is', value: 'Heim' },
+    { key: 'navigation.shop', section: 'navigation', language: 'en', value: 'Shop' },
+    { key: 'navigation.shop', section: 'navigation', language: 'is', value: 'Verslun' },
+    { key: 'navigation.wine', section: 'navigation', language: 'en', value: 'Wine' },
+    { key: 'navigation.wine', section: 'navigation', language: 'is', value: 'Vín' },
+    { key: 'navigation.beer', section: 'navigation', language: 'en', value: 'Beer' },
+    { key: 'navigation.beer', section: 'navigation', language: 'is', value: 'Bjór' },
+    { key: 'navigation.delivery', section: 'navigation', language: 'en', value: 'Delivery' },
+    { key: 'navigation.delivery', section: 'navigation', language: 'is', value: 'Afhending' },
+    { key: 'navigation.profile', section: 'navigation', language: 'en', value: 'Profile' },
+    { key: 'navigation.profile', section: 'navigation', language: 'is', value: 'Prófíll' },
+    { key: 'navigation.cart', section: 'navigation', language: 'en', value: 'Cart' },
+    { key: 'navigation.cart', section: 'navigation', language: 'is', value: 'Körfu' },
+    { key: 'navigation.login', section: 'navigation', language: 'en', value: 'Login' },
+    { key: 'navigation.login', section: 'navigation', language: 'is', value: 'Innskráning' },
+    { key: 'navigation.logout', section: 'navigation', language: 'en', value: 'Logout' },
+    { key: 'navigation.logout', section: 'navigation', language: 'is', value: 'Útskráning' },
+    { key: 'navigation.needHelp', section: 'navigation', language: 'en', value: 'Need Help' },
+    { key: 'navigation.needHelp', section: 'navigation', language: 'is', value: 'Þarftu hjálp' },
+    { key: 'navigation.contactUs', section: 'navigation', language: 'en', value: 'Contact Us' },
+    { key: 'navigation.contactUs', section: 'navigation', language: 'is', value: 'Hafðu samband' },
+    { key: 'navigation.discoverCategories', section: 'navigation', language: 'en', value: 'Discover Categories' },
+    { key: 'navigation.discoverCategories', section: 'navigation', language: 'is', value: 'Uppgötva flokka' },
+    { key: 'navigation.viewAllProducts', section: 'navigation', language: 'en', value: 'View All Products' },
+    { key: 'navigation.viewAllProducts', section: 'navigation', language: 'is', value: 'Skoða allar vörur' },
+
+    // Products page translations
+    { key: 'productsPage.all', section: 'productsPage', language: 'en', value: 'All' },
+    { key: 'productsPage.all', section: 'productsPage', language: 'is', value: 'Allt' },
+    { key: 'productsPage.products', section: 'productsPage', language: 'en', value: 'Products' },
+    { key: 'productsPage.products', section: 'productsPage', language: 'is', value: 'Vörur' },
+    { key: 'productsPage.noProductsFound', section: 'productsPage', language: 'en', value: 'No products found' },
+    { key: 'productsPage.noProductsFound', section: 'productsPage', language: 'is', value: 'Engar vörur fundust' },
+    { key: 'productsPage.priceRange', section: 'productsPage', language: 'en', value: 'Price Range' },
+    { key: 'productsPage.priceRange', section: 'productsPage', language: 'is', value: 'Verðsvið' },
+    { key: 'productsPage.alcoholVolume', section: 'productsPage', language: 'en', value: 'Alcohol Volume' },
+    { key: 'productsPage.alcoholVolume', section: 'productsPage', language: 'is', value: 'Áfengismagn' },
+    { key: 'productsPage.sortByNameDesc', section: 'productsPage', language: 'en', value: 'Sort by name descending' },
+    { key: 'productsPage.sortByNameDesc', section: 'productsPage', language: 'is', value: 'Raða eftir nafni lækkandi' },
+    { key: 'productsPage.sortByPriceAsc', section: 'productsPage', language: 'en', value: 'Sort by price ascending' },
+    { key: 'productsPage.sortByPriceAsc', section: 'productsPage', language: 'is', value: 'Raða eftir verði hækkandi' },
+    { key: 'productsPage.sortByPriceDesc', section: 'productsPage', language: 'en', value: 'Sort by price descending' },
+    { key: 'productsPage.sortByPriceDesc', section: 'productsPage', language: 'is', value: 'Raða eftir verði lækkandi' },
+    { key: 'productsPage.sortByAlcoholAsc', section: 'productsPage', language: 'en', value: 'Sort by alcohol ascending' },
+    { key: 'productsPage.sortByAlcoholAsc', section: 'productsPage', language: 'is', value: 'Raða eftir áfengi hækkandi' },
+    { key: 'productsPage.sortByAlcoholDesc', section: 'productsPage', language: 'en', value: 'Sort by alcohol descending' },
+    { key: 'productsPage.sortByAlcoholDesc', section: 'productsPage', language: 'is', value: 'Raða eftir áfengi lækkandi' },
+
+    // Common translations
+    { key: 'common.itemsLabel', section: 'common', language: 'en', value: 'Items' },
+    { key: 'common.itemsLabel', section: 'common', language: 'is', value: 'Vörur' },
+    { key: 'common.currency', section: 'common', language: 'en', value: 'kr.' },
+    { key: 'common.currency', section: 'common', language: 'is', value: 'kr.' },
+    { key: 'common.loading', section: 'common', language: 'en', value: 'Loading...' },
+    { key: 'common.loading', section: 'common', language: 'is', value: 'Hleð...' },
+    { key: 'common.error', section: 'common', language: 'en', value: 'Error' },
+    { key: 'common.error', section: 'common', language: 'is', value: 'Villa' },
+    { key: 'common.success', section: 'common', language: 'en', value: 'Success' },
+    { key: 'common.success', section: 'common', language: 'is', value: 'Tókst' },
+    { key: 'common.save', section: 'common', language: 'en', value: 'Save' },
+    { key: 'common.save', section: 'common', language: 'is', value: 'Vista' },
+    { key: 'common.cancel', section: 'common', language: 'en', value: 'Cancel' },
+    { key: 'common.cancel', section: 'common', language: 'is', value: 'Hætta við' },
+    { key: 'common.delete', section: 'common', language: 'en', value: 'Delete' },
+    { key: 'common.delete', section: 'common', language: 'is', value: 'Eyða' },
+    { key: 'common.edit', section: 'common', language: 'en', value: 'Edit' },
+    { key: 'common.edit', section: 'common', language: 'is', value: 'Breyta' },
+    { key: 'common.add', section: 'common', language: 'en', value: 'Add' },
+    { key: 'common.add', section: 'common', language: 'is', value: 'Bæta við' },
+    { key: 'common.remove', section: 'common', language: 'en', value: 'Remove' },
+    { key: 'common.remove', section: 'common', language: 'is', value: 'Fjarlægja' },
+    { key: 'common.clear', section: 'common', language: 'en', value: 'Clear' },
+    { key: 'common.clear', section: 'common', language: 'is', value: 'Hreinsa' },
+    { key: 'common.search', section: 'common', language: 'en', value: 'Search' },
+    { key: 'common.search', section: 'common', language: 'is', value: 'Leita' },
+    { key: 'common.filter', section: 'common', language: 'en', value: 'Filter' },
+    { key: 'common.filter', section: 'common', language: 'is', value: 'Sía' },
+    { key: 'common.sort', section: 'common', language: 'en', value: 'Sort' },
+    { key: 'common.sort', section: 'common', language: 'is', value: 'Raða' },
+    { key: 'common.price', section: 'common', language: 'en', value: 'Price' },
+    { key: 'common.price', section: 'common', language: 'is', value: 'Verð' },
+    { key: 'common.quantity', section: 'common', language: 'en', value: 'Quantity' },
+    { key: 'common.quantity', section: 'common', language: 'is', value: 'Magn' },
+    { key: 'common.total', section: 'common', language: 'en', value: 'Total' },
+    { key: 'common.total', section: 'common', language: 'is', value: 'Samtals' },
+    { key: 'common.subtotal', section: 'common', language: 'en', value: 'Subtotal' },
+    { key: 'common.subtotal', section: 'common', language: 'is', value: 'Undirheild' },
+    { key: 'common.tax', section: 'common', language: 'en', value: 'Tax' },
+    { key: 'common.tax', section: 'common', language: 'is', value: 'VSK' },
+    { key: 'common.shipping', section: 'common', language: 'en', value: 'Shipping' },
+    { key: 'common.shipping', section: 'common', language: 'is', value: 'Sending' },
+    { key: 'common.discount', section: 'common', language: 'en', value: 'Discount' },
+    { key: 'common.discount', section: 'common', language: 'is', value: 'Afsláttur' },
+    { key: 'common.yes', section: 'common', language: 'en', value: 'Yes' },
+    { key: 'common.yes', section: 'common', language: 'is', value: 'Já' },
+    { key: 'common.no', section: 'common', language: 'en', value: 'No' },
+    { key: 'common.no', section: 'common', language: 'is', value: 'Nei' },
+    { key: 'common.ok', section: 'common', language: 'en', value: 'OK' },
+    { key: 'common.ok', section: 'common', language: 'is', value: 'Í lagi' },
+    { key: 'common.close', section: 'common', language: 'en', value: 'Close' },
+    { key: 'common.close', section: 'common', language: 'is', value: 'Loka' },
+    { key: 'common.back', section: 'common', language: 'en', value: 'Back' },
+    { key: 'common.back', section: 'common', language: 'is', value: 'Til baka' },
+    { key: 'common.next', section: 'common', language: 'en', value: 'Next' },
+    { key: 'common.next', section: 'common', language: 'is', value: 'Næsta' },
+    { key: 'common.previous', section: 'common', language: 'en', value: 'Previous' },
+    { key: 'common.previous', section: 'common', language: 'is', value: 'Fyrri' },
+    { key: 'common.continue', section: 'common', language: 'en', value: 'Continue' },
+    { key: 'common.continue', section: 'common', language: 'is', value: 'Halda áfram' },
+    { key: 'common.finish', section: 'common', language: 'en', value: 'Finish' },
+    { key: 'common.finish', section: 'common', language: 'is', value: 'Ljúka' },
+    { key: 'common.retry', section: 'common', language: 'en', value: 'Retry' },
+    { key: 'common.retry', section: 'common', language: 'is', value: 'Reyna aftur' },
+    { key: 'common.refresh', section: 'common', language: 'en', value: 'Refresh' },
+    { key: 'common.refresh', section: 'common', language: 'is', value: 'Endurnýja' },
+    { key: 'common.goToSlide', section: 'common', language: 'en', value: 'Go to Slide' },
+    { key: 'common.goToSlide', section: 'common', language: 'is', value: 'Fara á skyggnu' },
+    { key: 'common.clearSearch', section: 'common', language: 'en', value: 'Clear Search' },
+    { key: 'common.clearSearch', section: 'common', language: 'is', value: 'Hreinsa leit' },
+
+    // Home page translations
+    { key: 'home.hero.title', section: 'home', language: 'en', value: 'Welcome to Ölföng' },
+    { key: 'home.hero.title', section: 'home', language: 'is', value: 'Velkomin í Ölföng' },
+    { key: 'home.hero.subtitle', section: 'home', language: 'en', value: 'Your premium wine and beer destination' },
+    { key: 'home.hero.subtitle', section: 'home', language: 'is', value: 'Þitt úrvals vín og bjór áfangastað' },
+    { key: 'home.why.title', section: 'home', language: 'en', value: 'Why Choose Us?' },
+    { key: 'home.why.title', section: 'home', language: 'is', value: 'Af hverju velja okkur?' },
+    { key: 'home.why.subtitle', section: 'home', language: 'en', value: 'Discover what makes us special' },
+    { key: 'home.why.subtitle', section: 'home', language: 'is', value: 'Uppgötvaðu hvað gerir okkur sérstaka' },
+    { key: 'home.features.wineDescription', section: 'home', language: 'en', value: 'Premium wine selection from around the world' },
+    { key: 'home.features.wineDescription', section: 'home', language: 'is', value: 'Úrvals vínúrval frá heiminum' },
+    { key: 'home.features.beerDescription', section: 'home', language: 'en', value: 'Craft and premium beers for every taste' },
+    { key: 'home.features.beerDescription', section: 'home', language: 'is', value: 'Handverks og úrvals bjór fyrir alla bragð' },
+    { key: 'home.features.deliveryDescription', section: 'home', language: 'en', value: 'Fast and reliable delivery to your doorstep' },
+    { key: 'home.features.deliveryDescription', section: 'home', language: 'is', value: 'Fljótleg og áreiðanleg afhending að dyrum' },
+    { key: 'home.features.ageVerificationTitle', section: 'home', language: 'en', value: 'Age Verification' },
+    { key: 'home.features.ageVerificationTitle', section: 'home', language: 'is', value: 'Aldursstaðfesting' },
+    { key: 'home.features.ageVerificationDescription', section: 'home', language: 'en', value: 'Secure age verification for alcohol purchases' },
+    { key: 'home.features.ageVerificationDescription', section: 'home', language: 'is', value: 'Örugg aldursstaðfesting fyrir áfengiskaup' },
+    { key: 'home.categories.title', section: 'home', language: 'en', value: 'Categories' },
+    { key: 'home.categories.title', section: 'home', language: 'is', value: 'Flokkar' },
+    { key: 'home.categories.subtitle', section: 'home', language: 'en', value: 'Browse our wide selection' },
+    { key: 'home.categories.subtitle', section: 'home', language: 'is', value: 'Skoðaðu úrvalið okkar' },
+    { key: 'home.banner.title1', section: 'home', language: 'en', value: 'Premium Wine Selection' },
+    { key: 'home.banner.title1', section: 'home', language: 'is', value: 'Úrvals vínúrval' },
+    { key: 'home.banner.description1', section: 'home', language: 'en', value: 'Discover our curated collection of fine wines' },
+    { key: 'home.banner.description1', section: 'home', language: 'is', value: 'Uppgötvaðu úrvalið okkar af fínu víni' },
+    { key: 'home.banner.title2', section: 'home', language: 'en', value: 'Quality Beer Collection' },
+    { key: 'home.banner.title2', section: 'home', language: 'is', value: 'Gæða bjórsafn' },
+    { key: 'home.banner.description2', section: 'home', language: 'en', value: 'Explore our wide range of craft and premium beers' },
+    { key: 'home.banner.description2', section: 'home', language: 'is', value: 'Kannaðu úrvalið okkar af handverks og úrvals bjórum' },
+    { key: 'home.banner.title3', section: 'home', language: 'en', value: 'Special Offers' },
+    { key: 'home.banner.title3', section: 'home', language: 'is', value: 'Sértilboð' },
+    { key: 'home.banner.description3', section: 'home', language: 'en', value: 'Don\'t miss out on our exclusive deals and discounts' },
+    { key: 'home.banner.description3', section: 'home', language: 'is', value: 'Ekki missa af einkaréttum tilboðum og afslættum' },
+    { key: 'home.banner.title4', section: 'home', language: 'en', value: 'Fast Delivery' },
+    { key: 'home.banner.title4', section: 'home', language: 'is', value: 'Fljótleg afhending' },
+    { key: 'home.banner.description4', section: 'home', language: 'en', value: 'Quick and reliable delivery to your doorstep' },
+    { key: 'home.banner.description4', section: 'home', language: 'is', value: 'Fljótleg og áreiðanleg afhending að dyrum' },
+    { key: 'home.banner.alt', section: 'home', language: 'en', value: 'Ölföng Banner' },
+    { key: 'home.banner.alt', section: 'home', language: 'is', value: 'Ölföng borði' },
+
+    // Products translations
+    { key: 'products.outOfStock', section: 'products', language: 'en', value: 'Out of Stock' },
+    { key: 'products.outOfStock', section: 'products', language: 'is', value: 'Uppselt' },
+    { key: 'products.addToCart', section: 'products', language: 'en', value: 'Add to Cart' },
+    { key: 'products.addToCart', section: 'products', language: 'is', value: 'Bæta í körfu' },
+    { key: 'products.viewDetails', section: 'products', language: 'en', value: 'View Details' },
+    { key: 'products.viewDetails', section: 'products', language: 'is', value: 'Skoða nánar' },
+    { key: 'products.price', section: 'products', language: 'en', value: 'Price' },
+    { key: 'products.price', section: 'products', language: 'is', value: 'Verð' },
+    { key: 'products.alcoholVolume', section: 'products', language: 'en', value: 'Alcohol Volume' },
+    { key: 'products.alcoholVolume', section: 'products', language: 'is', value: 'Áfengismagn' },
+    { key: 'products.country', section: 'products', language: 'en', value: 'Country' },
+    { key: 'products.country', section: 'products', language: 'is', value: 'Land' },
+    { key: 'products.region', section: 'products', language: 'en', value: 'Region' },
+    { key: 'products.region', section: 'products', language: 'is', value: 'Svæði' },
+    { key: 'products.producer', section: 'products', language: 'en', value: 'Producer' },
+    { key: 'products.producer', section: 'products', language: 'is', value: 'Framleiðandi' },
+    { key: 'products.vintage', section: 'products', language: 'en', value: 'Vintage' },
+    { key: 'products.vintage', section: 'products', language: 'is', value: 'Árgangur' },
+    { key: 'products.description', section: 'products', language: 'en', value: 'Description' },
+    { key: 'products.description', section: 'products', language: 'is', value: 'Lýsing' },
+    { key: 'products.foodPairings', section: 'products', language: 'en', value: 'Food Pairings' },
+    { key: 'products.foodPairings', section: 'products', language: 'is', value: 'Matarpar' },
+    { key: 'products.specialAttributes', section: 'products', language: 'en', value: 'Special Attributes' },
+    { key: 'products.specialAttributes', section: 'products', language: 'is', value: 'Sérstök eiginleikar' },
+
+    // Cart translations
+    { key: 'cart.title', section: 'cart', language: 'en', value: 'Shopping Cart' },
+    { key: 'cart.title', section: 'cart', language: 'is', value: 'Verslunarkörfa' },
+    { key: 'cart.empty', section: 'cart', language: 'en', value: 'Your cart is empty' },
+    { key: 'cart.empty', section: 'cart', language: 'is', value: 'Körfan þín er tóm' },
+    { key: 'cart.items', section: 'cart', language: 'en', value: 'items' },
+    { key: 'cart.items', section: 'cart', language: 'is', value: 'vörur' },
+    { key: 'cart.item', section: 'cart', language: 'en', value: 'item' },
+    { key: 'cart.item', section: 'cart', language: 'is', value: 'vara' },
+    { key: 'cart.removeItem', section: 'cart', language: 'en', value: 'Remove Item' },
+    { key: 'cart.removeItem', section: 'cart', language: 'is', value: 'Fjarlægja vöru' },
+    { key: 'cart.updateQuantity', section: 'cart', language: 'en', value: 'Update Quantity' },
+    { key: 'cart.updateQuantity', section: 'cart', language: 'is', value: 'Uppfæra magn' },
+    { key: 'cart.checkout', section: 'cart', language: 'en', value: 'Checkout' },
+    { key: 'cart.checkout', section: 'cart', language: 'is', value: 'Ganga frá' },
+    { key: 'cart.continueShopping', section: 'cart', language: 'en', value: 'Continue Shopping' },
+    { key: 'cart.continueShopping', section: 'cart', language: 'is', value: 'Halda áfram að versla' },
+    { key: 'cart.subtotal', section: 'cart', language: 'en', value: 'Subtotal' },
+    { key: 'cart.subtotal', section: 'cart', language: 'is', value: 'Undirheild' },
+    { key: 'cart.tax', section: 'cart', language: 'en', value: 'Tax' },
+    { key: 'cart.tax', section: 'cart', language: 'is', value: 'VSK' },
+    { key: 'cart.total', section: 'cart', language: 'en', value: 'Total' },
+    { key: 'cart.total', section: 'cart', language: 'is', value: 'Samtals' },
+
+    // Delivery translations
+    { key: 'delivery.title', section: 'delivery', language: 'en', value: 'Delivery' },
+    { key: 'delivery.title', section: 'delivery', language: 'is', value: 'Afhending' },
+    { key: 'delivery.homeDelivery', section: 'delivery', language: 'en', value: 'Home Delivery' },
+    { key: 'delivery.homeDelivery', section: 'delivery', language: 'is', value: 'Heimafhending' },
+    { key: 'delivery.storePickup', section: 'delivery', language: 'en', value: 'Store Pickup' },
+    { key: 'delivery.storePickup', section: 'delivery', language: 'is', value: 'Sótt í verslun' },
+    { key: 'delivery.estimatedDelivery', section: 'delivery', language: 'en', value: 'Estimated Delivery' },
+    { key: 'delivery.estimatedDelivery', section: 'delivery', language: 'is', value: 'Áætluð afhending' },
+    { key: 'delivery.deliveryFee', section: 'delivery', language: 'en', value: 'Delivery Fee' },
+    { key: 'delivery.deliveryFee', section: 'delivery', language: 'is', value: 'Sendingargjald' },
+    { key: 'delivery.freeDelivery', section: 'delivery', language: 'en', value: 'Free Delivery' },
+    { key: 'delivery.freeDelivery', section: 'delivery', language: 'is', value: 'Ókeypis sending' },
+
+    // Admin translations
+    { key: 'admin.dashboard', section: 'admin', language: 'en', value: 'Dashboard' },
+    { key: 'admin.dashboard', section: 'admin', language: 'is', value: 'Stjórnborð' },
+    { key: 'admin.products', section: 'admin', language: 'en', value: 'Products' },
+    { key: 'admin.products', section: 'admin', language: 'is', value: 'Vörur' },
+    { key: 'admin.categories', section: 'admin', language: 'en', value: 'Categories' },
+    { key: 'admin.categories', section: 'admin', language: 'is', value: 'Flokkar' },
+    { key: 'admin.orders', section: 'admin', language: 'en', value: 'Orders' },
+    { key: 'admin.orders', section: 'admin', language: 'is', value: 'Pantanir' },
+    { key: 'admin.customers', section: 'admin', language: 'en', value: 'Customers' },
+    { key: 'admin.customers', section: 'admin', language: 'is', value: 'Viðskiptavinir' },
+    { key: 'admin.analytics', section: 'admin', language: 'en', value: 'Analytics' },
+    { key: 'admin.analytics', section: 'admin', language: 'is', value: 'Greining' },
+    { key: 'admin.settings', section: 'admin', language: 'en', value: 'Settings' },
+    { key: 'admin.settings', section: 'admin', language: 'is', value: 'Stillingar' },
+    { key: 'admin.banners', section: 'admin', language: 'en', value: 'Banners' },
+    { key: 'admin.banners', section: 'admin', language: 'is', value: 'Borðar' },
+    { key: 'admin.reports', section: 'admin', language: 'en', value: 'Reports' },
+    { key: 'admin.reports', section: 'admin', language: 'is', value: 'Skýrslur' },
+    { key: 'admin.chat', section: 'admin', language: 'en', value: 'Chat' },
+    { key: 'admin.chat', section: 'admin', language: 'is', value: 'Spjall' },
+    { key: 'admin.media', section: 'admin', language: 'en', value: 'Media' },
+    { key: 'admin.media', section: 'admin', language: 'is', value: 'Miðlar' },
+    { key: 'admin.translations', section: 'admin', language: 'en', value: 'Translations' },
+    { key: 'admin.translations', section: 'admin', language: 'is', value: 'Þýðingar' },
+
+    // Admin categories translations
+    { key: 'admincategories.subcategories', section: 'admincategories', language: 'en', value: 'Subcategories' },
+    { key: 'admincategories.subcategories', section: 'admincategories', language: 'is', value: 'Undirflokkar' }
+  ];
+
+  // Clear existing translations
+  console.log('🗑️  Clearing existing translations...');
+  await prisma.translationHistory.deleteMany({});
+  await prisma.translation.deleteMany({});
+  console.log('✅ Existing translations cleared');
+
+  // Insert essential translations
+  console.log('💾 Inserting essential translations...');
+  await prisma.translation.createMany({
+    data: essentialTranslations.map(translation => ({
+      ...translation,
+      description: `Translation for ${translation.key}`,
+      createdBy: 'system'
+    })),
+    skipDuplicates: true
+  });
+
+  console.log(`✅ Inserted ${essentialTranslations.length} essential translations`);
 
   console.log('🎉 Database seeding completed successfully!');
 }

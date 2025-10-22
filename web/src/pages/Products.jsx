@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { Filter, X, Search, ArrowUpDown } from 'lucide-react';
 import { FaFish, FaDrumstickBite, FaCheese, FaCarrot, FaBirthdayCake, FaUtensils, FaPizzaSlice, FaLeaf, FaHamburger } from 'react-icons/fa';
 import { GiCow } from 'react-icons/gi';
 import { fetchProducts, fetchCategories, setFilters } from '../store/slices/productSlice';
-import LoadingSpinner from '../components/common/LoadingSpinner';
+
 import ProductImage from '../components/common/ProductImage';
 import SkeletonLoader from '../components/common/SkeletonLoader';
 import DualThumbSlider from '../components/common/DualThumbSlider';
 import { getProductName, getProductDescription, getProductCountry, getProductFoodPairings } from '../utils/languageUtils';
+import '../styles/scrollbar.css';
 
 // Map food pairings to grayscale icons using react-icons
 const getFoodIcon = (food) => {
@@ -35,11 +36,11 @@ const getFoodIcon = (food) => {
 };
 
 const Products = () => {
-  const { t, i18n } = useTranslation();
+  const { t, currentLanguage, isLoading: translationsLoading } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { products, categories, filters, pagination, isLoading } = useSelector((state) => state.products);
+  const { products, categories, filters, isLoading } = useSelector((state) => state.products);
   const { isAuthenticated } = useSelector((state) => state.auth);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -65,9 +66,17 @@ const Products = () => {
     }
   }, [searchParams, dispatch, filters.category, categories]);
 
+  // Fetch products whenever filters change
   useEffect(() => {
     dispatch(fetchProducts(filters));
   }, [dispatch, filters]);
+
+  // Initial fetch when component mounts
+  useEffect(() => {
+    if (products.length === 0 && !isLoading) {
+      dispatch(fetchProducts(filters));
+    }
+  }, [dispatch, filters, products.length, isLoading]);
 
   const handleCategoryChange = (category) => {
     const categoryName = typeof category === 'string' ? category : (category?.name || '');
@@ -102,7 +111,7 @@ const Products = () => {
     dispatch(setFilters({ minAlcoholVolume, maxAlcoholVolume }));
   };
 
-  if (isLoading && products.length === 0) {
+  if (translationsLoading || (isLoading && products.length === 0)) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,23 +136,23 @@ const Products = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
                   <Filter className="w-5 h-5 mr-2" />
-                  {t('productsPage.filters')}
+                  {t('productsPage', 'filters')}
                 </h2>
 
                 {/* Search */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('common.search')}
+                    {t('common', 'search')}
                   </label>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="text"
-                      placeholder={t('common.search')}
+                      placeholder={t('common', 'search')}
                       value={filters.search}
                       onChange={(e) => handleSearchChange(e.target.value)}
                       className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      aria-label={t('aria.searchProducts')}
+                      aria-label={t('aria', 'searchProducts')}
                     />
                   </div>
                 </div>
@@ -151,7 +160,7 @@ const Products = () => {
                  {/* Categories */}
                  <div>
                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                     {t('productsPage.category')}
+                     {t('productsPage', 'category')}
                    </label>
                    <div className="space-y-2">
                      <button
@@ -163,7 +172,7 @@ const Products = () => {
                        }`}
                        aria-pressed={filters.category === ''}
                      >
-                       {t('productsPage.all')}
+                       {t('productsPage', 'all')}
                      </button>
                      {categories.map((category) => (
                        <div key={category.id}>
@@ -176,7 +185,7 @@ const Products = () => {
                            }`}
                            aria-pressed={filters.category === category.name}
                          >
-                           {i18n.language === 'is' ? category.nameIs : category.name}
+                           {currentLanguage === 'is' ? category.nameIs : category.name}
                          </button>
                          {/* Subcategories in sidebar */}
                          {filters.category === category.name && category.subcategories && category.subcategories.length > 0 && (
@@ -195,7 +204,7 @@ const Products = () => {
                                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                                }`}
                              >
-                               {t('productsPage.all')}
+                               {t('productsPage', 'all')}
                              </button>
                              {category.subcategories.map((subcategory) => (
                                <button
@@ -213,7 +222,7 @@ const Products = () => {
                                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                                  }`}
                                >
-                                 {i18n.language === 'is' ? subcategory.nameIs : subcategory.name}
+                                 {currentLanguage === 'is' ? subcategory.nameIs : subcategory.name}
                                </button>
                              ))}
                            </div>
@@ -231,7 +240,7 @@ const Products = () => {
                     step={100}
                     value={[filters.minPrice || 0, filters.maxPrice || 50000]}
                     onChange={(values) => handlePriceFilterChange(values[0], values[1])}
-                    label={`${t('productsPage.priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
+                    label={`${t('productsPage', 'priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
                     formatValue={(val) => `${val} kr`}
                   />
                 </div>
@@ -244,7 +253,7 @@ const Products = () => {
                     step={0.5}
                     value={[filters.minAlcoholVolume || 0, filters.maxAlcoholVolume || 50]}
                     onChange={(values) => handleAlcoholVolumeFilterChange(values[0], values[1])}
-                    label={`${t('productsPage.alcoholVolume')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
+                    label={`${t('productsPage', 'alcoholVolume')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
                     formatValue={(val) => `${val}%`}
                   />
                 </div>
@@ -258,7 +267,7 @@ const Products = () => {
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {t('products.title')}
+                  {t('products', 'title')}
                 </h1>
                 
                 <div className="flex items-center gap-4">
@@ -273,12 +282,12 @@ const Products = () => {
                       }}
                       className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
-                      <option value="name-asc">{t('productsPage.sortByNameAsc')}</option>
-                      <option value="name-desc">{t('productsPage.sortByNameDesc')}</option>
-                      <option value="price-asc">{t('productsPage.sortByPriceAsc')}</option>
-                      <option value="price-desc">{t('productsPage.sortByPriceDesc')}</option>
-                      <option value="alcoholVolume-asc">{t('productsPage.sortByAlcoholAsc')}</option>
-                      <option value="alcoholVolume-desc">{t('productsPage.sortByAlcoholDesc')}</option>
+                      <option value="name-asc">{t('productsPage', 'sortByNameAsc')}</option>
+                      <option value="name-desc">{t('productsPage', 'sortByNameDesc')}</option>
+                      <option value="price-asc">{t('productsPage', 'sortByPriceAsc')}</option>
+                      <option value="price-desc">{t('productsPage', 'sortByPriceDesc')}</option>
+                      <option value="alcoholVolume-asc">{t('productsPage', 'sortByAlcoholAsc')}</option>
+                      <option value="alcoholVolume-desc">{t('productsPage', 'sortByAlcoholDesc')}</option>
                     </select>
                   </div>
                   
@@ -288,19 +297,19 @@ const Products = () => {
                     className="lg:hidden btn btn-outline flex items-center gap-2"
                   >
                     <Filter className="w-4 h-4" />
-                    {t('productsPage.filters')}
+                    {t('productsPage', 'filters')}
                   </button>
                 </div>
               </div>
               
                <p className="text-gray-600 dark:text-gray-400">
-                 {products.length} {t('productsPage.products')}
+                 {products.length} {t('productsPage', 'products')}
                </p>
              </div>
 
-             {/* Category Navigation */}
-             <div className="mb-6">
-               <div className="flex items-center gap-2 overflow-x-auto pb-2">
+{/* Category Navigation */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
                  <button
                    onClick={() => {
                      setSelectedCategory(null);
@@ -312,7 +321,7 @@ const Products = () => {
                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                    }`}
                  >
-                   {t('productsPage.all')}
+                   {t('productsPage', 'all')}
                  </button>
                  {categories.map((category) => (
                    <button
@@ -327,16 +336,16 @@ const Products = () => {
                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                      }`}
                    >
-                     {i18n.language === 'is' ? category.nameIs : category.name}
+                     {currentLanguage === 'is' ? category.nameIs : category.name}
                    </button>
                  ))}
                </div>
 
-               {/* Subcategories */}
-               {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.length > 0 && (
-                 <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-2 pl-4 border-l-2 border-primary-200 dark:border-primary-800">
+{/* Subcategories */}
+                {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.length > 0 && (
+                  <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-2 pl-4 border-l-2 border-primary-200 dark:border-primary-800 custom-scrollbar">
                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium flex-shrink-0">
-                     {t('productsPage.subcategories')}:
+                     {t('productsPage', 'subcategories')}:
                    </span>
                    <button
                      onClick={() => handleCategoryChange(selectedCategory)}
@@ -346,7 +355,7 @@ const Products = () => {
                          : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                      }`}
                    >
-                     {t('productsPage.all')}
+                     {t('productsPage', 'all')}
                    </button>
                    {selectedCategory.subcategories.map((subcategory) => (
                      <button
@@ -370,7 +379,7 @@ const Products = () => {
                            : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                        }`}
                      >
-                       {i18n.language === 'is' ? subcategory.nameIs : subcategory.name}
+                       {currentLanguage === 'is' ? subcategory.nameIs : subcategory.name}
                      </button>
                    ))}
                  </div>
@@ -387,16 +396,16 @@ const Products = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {t('productsPage.noProductsFound')}
+                    {t('productsPage', 'noProductsFound')}
                   </h3>
                   <p className="text-gray-500 dark:text-gray-400 mb-6">
-                    {t('productsPage.adjustSearch')}
+                    {t('productsPage', 'adjustSearch')}
                   </p>
                   <button
                     onClick={() => handleSearchChange('')}
                     className="btn btn-outline"
                   >
-                    {t('common.clearSearch')}
+                    {t('common', 'clearSearch')}
                   </button>
                 </div>
               </div>
@@ -410,13 +419,13 @@ const Products = () => {
                           <ProductImage 
                             product={product}
                             className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                            currentLanguage={i18n.language}
+                            currentLanguage={currentLanguage}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                           {product.stock === 0 && (
                             <div className="absolute top-3 right-3">
                               <span className="px-3 py-1 rounded-full text-xs font-medium shadow-lg bg-red-500 text-white">
-                                {t('products.outOfStock')}
+                                {t('products', 'outOfStock')}
                               </span>
                             </div>
                           )}
@@ -426,10 +435,10 @@ const Products = () => {
                       <div className="p-6 flex-1 flex flex-col">
                         <div className="mb-4 flex-1">
                           <h3 className="font-bold text-xl mb-3 text-gray-900 dark:text-white line-clamp-2 leading-tight">
-                            {getProductName(i18n.language, product)}
+                            {getProductName(currentLanguage, product)}
                           </h3>
                           <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
-                            {getProductDescription(i18n.language, product)}
+                            {getProductDescription(currentLanguage, product)}
                           </p>
                           
                           {/* ATVR Product Info */}
@@ -437,17 +446,17 @@ const Products = () => {
                             <div className="mt-3 space-y-1">
                               {product.volume && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-medium">{t('products.volume')}:</span> {product.volume}
+                                  <span className="font-medium">{t('products', 'volume')}:</span> {product.volume}
                                 </p>
                               )}
                               {product.alcoholContent && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-medium">{t('products.alcoholContent')}:</span> {product.alcoholContent}%
+                                  <span className="font-medium">{t('products', 'alcoholContent')}:</span> {product.alcoholContent}%
                                 </p>
                               )}
                               {product.country && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-medium">{t('products.country')}:</span> {getProductCountry(i18n.language, product)}
+                                  <span className="font-medium">{t('products', 'country')}:</span> {getProductCountry(currentLanguage, product)}
                                 </p>
                               )}
                             </div>
@@ -456,15 +465,15 @@ const Products = () => {
                         
                         <div className="flex items-center justify-between mb-6">
                           <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                            {product.price.toLocaleString()} {t('common.currency')}
+                            {product.price.toLocaleString()} {t('common', 'currency')}
                           </span>
                         </div>
                         
                         {/* Food Pairing Icons */}
-                        {getProductFoodPairings(i18n.language, product).length > 0 && (
+                        {getProductFoodPairings(currentLanguage, product).length > 0 && (
                           <div className="mt-3 mb-4">
                             <div className="flex flex-wrap gap-2">
-                              {getProductFoodPairings(i18n.language, product).slice(0, 4).map((pairing, index) => (
+                              {getProductFoodPairings(currentLanguage, product).slice(0, 4).map((pairing, index) => (
                                 <div
                                   key={index}
                                   className="flex items-center justify-center w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full"
@@ -473,9 +482,9 @@ const Products = () => {
                                   {getFoodIcon(pairing)}
                                 </div>
                               ))}
-                              {getProductFoodPairings(i18n.language, product).length > 4 && (
+                              {getProductFoodPairings(currentLanguage, product).length > 4 && (
                                 <div className="flex items-center justify-center w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full text-xs text-gray-500">
-                                  +{getProductFoodPairings(i18n.language, product).length - 4}
+                                  +{getProductFoodPairings(currentLanguage, product).length - 4}
                                 </div>
                               )}
                             </div>
@@ -491,7 +500,7 @@ const Products = () => {
                               <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
                               </svg>
-                              {t('products.addToCart')}
+                              {t('products', 'addToCart')}
                             </Link>
                           )}
                           
@@ -504,7 +513,7 @@ const Products = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
-                              {t('common.view')}
+                              {t('common', 'view')}
                             </Link>
                           )}
                         </div>
@@ -526,7 +535,7 @@ const Products = () => {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center">
                 <Filter className="w-5 h-5 mr-2" />
-                {t('productsPage.filters')}
+                {t('productsPage', 'filters')}
               </h2>
               <button
                 onClick={() => setIsMobileFilterOpen(false)}
@@ -539,17 +548,17 @@ const Products = () => {
             {/* Search */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                {t('common.search')}
+                {t('common', 'search')}
               </label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                 <input
                   type="text"
-                  placeholder={t('common.search')}
+                  placeholder={t('common', 'search')}
                   value={filters.search}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  aria-label={t('aria.searchProducts')}
+                  aria-label={t('aria', 'searchProducts')}
                 />
               </div>
             </div>
@@ -557,7 +566,7 @@ const Products = () => {
              {/* Categories */}
              <div className="mb-6">
                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                 {t('productsPage.category')}
+                 {t('productsPage', 'category')}
                </label>
                <div className="space-y-2">
                  <button
@@ -569,7 +578,7 @@ const Products = () => {
                    }`}
                    aria-pressed={!filters.category || filters.category === '' || filters.category === null}
                  >
-                   {t('productsPage.all')}
+                   {t('productsPage', 'all')}
                  </button>
                  {categories.map((category) => (
                    <div key={category.id}>
@@ -582,7 +591,7 @@ const Products = () => {
                        }`}
                        aria-pressed={filters.category === category.name}
                      >
-                       {i18n.language === 'is' ? category.nameIs : category.name}
+                       {currentLanguage === 'is' ? category.nameIs : category.name}
                      </button>
                      {/* Subcategories in mobile */}
                      {filters.category === category.name && category.subcategories && category.subcategories.length > 0 && (
@@ -602,7 +611,7 @@ const Products = () => {
                                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                            }`}
                          >
-                           {t('productsPage.all')}
+                           {t('productsPage', 'all')}
                          </button>
                          {category.subcategories.map((subcategory) => (
                            <button
@@ -621,7 +630,7 @@ const Products = () => {
                                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                              }`}
                            >
-                             {i18n.language === 'is' ? subcategory.nameIs : subcategory.name}
+                             {currentLanguage === 'is' ? subcategory.nameIs : subcategory.name}
                            </button>
                          ))}
                        </div>
@@ -639,7 +648,7 @@ const Products = () => {
                 step={100}
                 value={[filters.minPrice || 0, filters.maxPrice || 50000]}
                 onChange={(values) => handlePriceFilterChange(values[0], values[1])}
-                label={`${t('productsPage.priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
+                label={`${t('productsPage', 'priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
                 formatValue={(val) => `${val} kr`}
               />
             </div>
@@ -652,7 +661,7 @@ const Products = () => {
                 step={0.5}
                 value={[filters.minAlcoholVolume || 0, filters.maxAlcoholVolume || 50]}
                 onChange={(values) => handleAlcoholVolumeFilterChange(values[0], values[1])}
-                label={`${t('productsPage.alcoholVolume')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
+                label={`${t('productsPage', 'alcoholVolume')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
                 formatValue={(val) => `${val}%`}
               />
             </div>

@@ -107,7 +107,7 @@ const cartSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(addToCart.fulfilled, (state, action) => {
+      .addCase(addToCart.fulfilled, (state, action) => { // eslint-disable-line no-unused-vars
         state.isLoading = false;
         // Refresh cart after adding item
         // The cart will be refetched in the component

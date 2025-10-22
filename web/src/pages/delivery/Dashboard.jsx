@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { 
   Truck, 
   Package, 
   MapPin, 
   Clock, 
-  CheckCircle, 
-  Navigation, 
+  CheckCircle,
   Phone, 
   User, 
   AlertCircle,
@@ -19,14 +18,13 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 import toast from 'react-hot-toast';
 
 const DeliveryDashboard = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { orders, isLoading } = useSelector((state) => state.orders);
 
   const [assignedOrders, setAssignedOrders] = useState([]);
   const [isTracking, setIsTracking] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [newStatus, setNewStatus] = useState('');
@@ -59,8 +57,6 @@ const DeliveryDashboard = () => {
             lng: position.coords.longitude,
             timestamp: new Date().toISOString()
           };
-          setCurrentLocation(location);
-          
           // TODO: Implement location update functionality
           // dispatch(updateLocation({
           //   deliveryPersonId: user.id,
@@ -70,7 +66,7 @@ const DeliveryDashboard = () => {
         },
         (error) => {
           console.error('Error getting location:', error);
-          toast.error(t('navigation.language') === 'is' ? 'Villa við að fá staðsetningu' : 'Error getting location');
+          toast.error('Villa við að fá staðsetningu');
         },
         {
           enableHighAccuracy: true,
@@ -102,7 +98,20 @@ const DeliveryDashboard = () => {
     }
   };
 
-  const getStatusText = (status) => t(`orders.statuses.${status}`);
+  const getStatusText = (status) => {
+    switch (status) {
+      case 'CONFIRMED':
+        return 'Staðfest';
+      case 'PREPARING':
+        return 'Undirbúningur';
+      case 'OUT_FOR_DELIVERY':
+        return 'Í afhendingu';
+      case 'DELIVERED':
+        return 'Afhent';
+      default:
+        return status; // Fallback to original status if not found
+    }
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -125,21 +134,21 @@ const DeliveryDashboard = () => {
         orderId: selectedOrder.id, 
         status: newStatus 
       })).unwrap();
-      toast.success(t('navigation.language') === 'is' ? 'Staða uppfært!' : 'Status updated!');
+      toast.success('Staða uppfært!');
       setShowStatusModal(false);
       setSelectedOrder(null);
       setNewStatus('');
     } catch (error) {
-      toast.error(error.message || (t('navigation.language') === 'is' ? 'Villa kom upp' : 'An error occurred'));
+      toast.error(error.message || ('Villa kom upp'));
     }
   };
 
   const toggleTracking = () => {
     setIsTracking(!isTracking);
     if (!isTracking) {
-      toast.success(t('navigation.language') === 'is' ? 'Staðsetning byrjað' : 'Location tracking started');
+      toast.success('Staðsetning byrjað');
     } else {
-      toast.info(t('navigation.language') === 'is' ? 'Staðsetning stöðvuð' : 'Location tracking stopped');
+      toast.info('Staðsetning stöðvuð');
     }
   };
 
@@ -156,10 +165,10 @@ const DeliveryDashboard = () => {
   };
 
   const statusOptions = [
-    { value: 'CONFIRMED', label: t('navigation.language') === 'is' ? 'Staðfest' : 'Confirmed' },
-    { value: 'PREPARING', label: t('navigation.language') === 'is' ? 'Undirbúningur' : 'Preparing' },
-    { value: 'OUT_FOR_DELIVERY', label: t('navigation.language') === 'is' ? 'Í afhendingu' : 'Out for Delivery' },
-    { value: 'DELIVERED', label: t('navigation.language') === 'is' ? 'Afhent' : 'Delivered' },
+    { value: 'CONFIRMED', label: 'Staðfest' },
+    { value: 'PREPARING', label: 'Undirbúningur' },
+    { value: 'OUT_FOR_DELIVERY', label: 'Í afhendingu' },
+    { value: 'DELIVERED', label: 'Afhent' },
   ];
 
   if (user?.role !== 'DELIVERY') {
@@ -168,19 +177,15 @@ const DeliveryDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">
-              {t('delivery.title')}
+              {t('delivery', 'title')}
             </h1>
             <div className="card p-8">
               <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('navigation.language') === 'is' 
-                  ? 'Aðgangur bannaður' 
-                  : 'Access Denied'}
+                {'Aðgangur bannaður'}
               </h2>
               <p className="text-gray-600">
-                {t('navigation.language') === 'is' 
-                  ? 'Þú hefur ekki leyfi til að skoða þessa síðu.' 
-                  : 'You do not have permission to view this page.'}
+                {'Þú hefur ekki leyfi til að skoða þessa síðu.'}
               </p>
             </div>
           </div>
@@ -204,12 +209,10 @@ const DeliveryDashboard = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {t('delivery.title')}
+              {t('delivery', 'title')}
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {t('navigation.language') === 'is' 
-                ? 'Velkomin, ' + (user?.fullName || user?.username) + '. Stjórnaðu afhendingum þínum.' 
-                : 'Welcome, ' + (user?.fullName || user?.username) + '. Manage your deliveries.'}
+              {'Velkomin, ' + (user?.fullName || user?.username) + '. Stjórnaðu afhendingum þínum.'}
             </p>
           </div>
           
@@ -219,8 +222,8 @@ const DeliveryDashboard = () => {
               <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
               <span className="text-sm text-gray-600">
                 {isTracking 
-                  ? (t('navigation.language') === 'is' ? 'Staðsetning virk' : 'Location active')
-                  : (t('navigation.language') === 'is' ? 'Staðsetning óvirk' : 'Location inactive')
+                  ? ('Staðsetning virk')
+                  : ('Staðsetning óvirk')
                 }
               </span>
             </div>
@@ -231,8 +234,8 @@ const DeliveryDashboard = () => {
               {isTracking ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
               <span>
                 {isTracking 
-                  ? (t('navigation.language') === 'is' ? 'Stöðva' : 'Stop')
-                  : (t('navigation.language') === 'is' ? 'Byrja' : 'Start')
+                  ? ('Stöðva')
+                  : ('Byrja')
                 }
               </span>
             </button>
@@ -248,7 +251,7 @@ const DeliveryDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">
-                  {t('navigation.language') === 'is' ? 'Úthlutaðar pantanir' : 'Assigned Orders'}
+'Úthlutaðar pantanir'
                 </p>
                 <p className="text-2xl font-bold text-gray-900">{assignedOrders.length}</p>
               </div>
@@ -262,7 +265,7 @@ const DeliveryDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">
-                  {t('navigation.language') === 'is' ? 'Í afhendingu' : 'In Delivery'}
+'Í afhendingu'
                 </p>
                 <p className="text-2xl font-bold text-gray-900">
                   {assignedOrders.filter(order => order.status === 'OUT_FOR_DELIVERY').length}
@@ -278,7 +281,7 @@ const DeliveryDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">
-                  {t('navigation.language') === 'is' ? 'Afhent í dag' : 'Delivered Today'}
+'Afhent í dag'
                 </p>
                 <p className="text-2xl font-bold text-gray-900">
                   {assignedOrders.filter(order => 
@@ -297,7 +300,7 @@ const DeliveryDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">
-                  {t('navigation.language') === 'is' ? 'Bíður afhendingar' : 'Pending Delivery'}
+'Bíður afhendingar'
                 </p>
                 <p className="text-2xl font-bold text-gray-900">
                   {assignedOrders.filter(order => ['CONFIRMED', 'PREPARING'].includes(order.status)).length}
@@ -310,19 +313,17 @@ const DeliveryDashboard = () => {
         {/* Assigned Orders */}
         <div className="space-y-6">
           <h2 className="text-2xl font-bold text-gray-900">
-            {t('navigation.language') === 'is' ? 'Úthlutaðar pantanir' : 'Assigned Orders'}
+  'Úthlutaðar pantanir'
           </h2>
 
           {assignedOrders.length === 0 ? (
             <div className="card p-8 text-center">
               <Truck className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {t('navigation.language') === 'is' ? 'Engar pantanir úthlutaðar' : 'No orders assigned'}
+'Engar pantanir úthlutaðar'
               </h3>
               <p className="text-gray-600">
-                {t('navigation.language') === 'is' 
-                  ? 'Engar pantanir hafa verið úthlutaðar þér ennþá.' 
-                  : 'No orders have been assigned to you yet.'}
+'Engar pantanir hafa verið úthlutaðar þér ennþá.'
               </p>
             </div>
           ) : (
@@ -332,7 +333,7 @@ const DeliveryDashboard = () => {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">
-                        {t('navigation.language') === 'is' ? 'Pöntun' : 'Order'} #{order.orderNumber}
+'Pöntun' #{order.orderNumber}
                       </h3>
                       <p className="text-sm text-gray-600">
                         {new Date(order.createdAt).toLocaleDateString()}
@@ -381,20 +382,20 @@ const DeliveryDashboard = () => {
                   {/* Order Items */}
                   <div className="mb-4">
                     <h4 className="font-medium text-gray-900 mb-2">
-                      {t('navigation.language') === 'is' ? 'Vörur:' : 'Items:'}
+'Vörur:'
                     </h4>
                     <div className="space-y-1">
                       {order.items.slice(0, 3).map((item, index) => (
                         <div key={index} className="flex justify-between text-sm">
                           <span>{item.quantity}x {item.product.nameIs || item.product.name}</span>
                           <span className="font-medium">
-                            {(item.price * item.quantity).toLocaleString()} {t('common.currency')}
+                            {(item.price * item.quantity).toLocaleString()} {t('common', 'currency')}
                           </span>
                         </div>
                       ))}
                       {order.items.length > 3 && (
                         <p className="text-xs text-gray-500">
-                          +{order.items.length - 3} {t('navigation.language') === 'is' ? 'fleiri' : 'more'}
+'fleiri'
                         </p>
                       )}
                     </div>
@@ -404,10 +405,10 @@ const DeliveryDashboard = () => {
                   <div className="border-t pt-4 mb-4">
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-900">
-                        {t('navigation.language') === 'is' ? 'Samtals:' : 'Total:'}
+  'Samtals:'
                       </span>
                       <span className="text-lg font-bold text-primary-600">
-                        {order.totalAmount.toLocaleString()} {t('common.currency')}
+                        {order.totalAmount.toLocaleString()} {t('common', 'currency')}
                       </span>
                     </div>
                   </div>
@@ -420,7 +421,7 @@ const DeliveryDashboard = () => {
                         className="btn btn-primary flex-1 flex items-center justify-center space-x-2"
                       >
                         <Play className="w-4 h-4" />
-                        <span>{t('navigation.language') === 'is' ? 'Byrja afhendingu' : 'Start Delivery'}</span>
+'Byrja afhendingu'
                       </button>
                     )}
                     
@@ -430,7 +431,7 @@ const DeliveryDashboard = () => {
                         className="btn btn-success flex-1 flex items-center justify-center space-x-2"
                       >
                         <CheckCircle className="w-4 h-4" />
-                        <span>{t('navigation.language') === 'is' ? 'Ljúka afhendingu' : 'Complete Delivery'}</span>
+'Ljúka afhendingu'
                       </button>
                     )}
 
@@ -442,7 +443,7 @@ const DeliveryDashboard = () => {
                       }}
                       className="btn btn-outline"
                     >
-                      {t('navigation.language') === 'is' ? 'Breyta' : 'Update'}
+'Breyta'
                     </button>
                   </div>
                 </div>
@@ -456,12 +457,12 @@ const DeliveryDashboard = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('navigation.language') === 'is' ? 'Uppfæra pöntun' : 'Update Order'} #{selectedOrder.orderNumber}
+'Uppfæra pöntun' #{selectedOrder.orderNumber}
               </h2>
               
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('navigation.language') === 'is' ? 'Ný staða' : 'New Status'}
+'Ný staða'
                 </label>
                 <select
                   value={newStatus}
@@ -485,13 +486,13 @@ const DeliveryDashboard = () => {
                   }}
                   className="btn btn-outline flex-1"
                 >
-                  {t('navigation.language') === 'is' ? 'Hætta við' : 'Cancel'}
+'Hætta við'
                 </button>
                 <button
                   onClick={handleStatusUpdate}
                   className="btn btn-primary flex-1"
                 >
-                  {t('navigation.language') === 'is' ? 'Uppfæra' : 'Update'}
+'Uppfæra'
                 </button>
               </div>
             </div>

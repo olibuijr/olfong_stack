@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { 
-  Users, 
-  Search, 
-  Filter,
+import { useSelector } from 'react-redux';
+import { useLanguage } from "../../contexts/LanguageContext";
+import {
+  Users,
+  Search,
   Mail,
   Phone,
   MapPin,
-  Calendar,
   Eye,
   MoreVertical,
   Download,
@@ -18,7 +16,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 import api from '../../services/api';
 
 const Customers = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const { user } = useSelector((state) => state.auth);
   
   const [customers, setCustomers] = useState([]);
@@ -44,7 +42,7 @@ const Customers = () => {
       if (search) params.append('search', search);
       if (status) params.append('status', status);
 
-      const response = await api.get(`/customers?${params.toString()}`);
+      const response = await api.get('/customers?${params', 'toString()}');
       console.log('Customers API response:', response);
       console.log('Response data:', response.data);
       console.log('Customers array:', response.data?.customers || response.customers);
@@ -109,17 +107,17 @@ const Customers = () => {
       <AdminLayout>
         <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage.accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage', 'accessDenied')}</h1>
           </div>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('adminPage.accessDenied')}
+                {t('adminPage', 'accessDenied')}
               </h2>
               <p className="text-gray-600">
-                {t('adminPage.noPermission')}
+                {t('adminPage', 'noPermission')}
               </p>
             </div>
           </div>
@@ -130,26 +128,28 @@ const Customers = () => {
 
   return (
     <AdminLayout>
-      {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-        <div className="px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminCustomers.customerManagement')}</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminCustomers.manageCustomerInfo')}</p>
-            </div>
-            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-              <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                <Download className="h-4 w-4 mr-2" />
-                {t('adminCustomers.export')}
-              </button>
+      <div className="max-w-none">
+        {/* Header */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminCustomers', 'customerManagement')}</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminCustomers', 'manageCustomerInfo')}</p>
+              </div>
+              <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+                <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                  <Download className="h-4 w-4 mr-2" />
+                  {t('adminCustomers', 'export')}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6">
+        {/* Main Content */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
         {/* Filters */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -158,7 +158,7 @@ const Customers = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder={t('adminCustomers.searchCustomers')}
+                placeholder={t('adminCustomers', 'searchCustomers')}
                 value={searchTerm}
                 onChange={handleSearchChange}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -171,11 +171,11 @@ const Customers = () => {
               onChange={handleStatusChange}
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             >
-              <option value="">{t('adminCustomers.allStatus')}</option>
-              <option value="active">{t('adminCustomers.active')}</option>
-              <option value="inactive">{t('adminCustomers.inactive')}</option>
-              <option value="vip">{t('adminCustomers.vip')}</option>
-              <option value="new">{t('adminCustomers.new')}</option>
+              <option value="">{t('adminCustomers', 'allStatus')}</option>
+              <option value="active">{t('adminCustomers', 'active')}</option>
+              <option value="inactive">{t('adminCustomers', 'inactive')}</option>
+              <option value="vip">{t('adminCustomers', 'vip')}</option>
+              <option value="new">{t('adminCustomers', 'new')}</option>
             </select>
 
             {/* Quick Stats */}
@@ -191,32 +191,32 @@ const Customers = () => {
         {/* Customers Table */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminCustomers.customerList')}</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminCustomers', 'customerList')}</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.customer')}
+                    {t('adminCustomers', 'customer')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.contact')}
+                    {t('adminCustomers', 'contact')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.orders')}
+                    {t('adminCustomers', 'orders')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.totalSpent')}
+                    {t('adminCustomers', 'totalSpent')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.status')}
+                    {t('adminCustomers', 'status')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.lastOrder')}
+                    {t('adminCustomers', 'lastOrder')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminCustomers.actions')}
+                    {t('adminCustomers', 'actions')}
                   </th>
                 </tr>
               </thead>
@@ -226,7 +226,7 @@ const Customers = () => {
                     <td colSpan="7" className="px-6 py-12 text-center">
                       <div className="flex items-center justify-center">
                         <Loader2 className="h-6 w-6 animate-spin text-gray-400 mr-2" />
-                        <span className="text-gray-500">{t('common.loading')}</span>
+                        <span className="text-gray-500">{t('common', 'loading')}</span>
                       </div>
                     </td>
                   </tr>
@@ -294,12 +294,14 @@ const Customers = () => {
         {!loading && customers.length === 0 && (
           <div className="text-center py-12">
             <Users className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('adminCustomers.noCustomersFound')}</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('adminCustomers', 'noCustomersFound')}</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {t('adminCustomers.adjustSearchCriteria')}
+              {t('adminCustomers', 'adjustSearchCriteria')}
             </p>
           </div>
         )}
+          </div>
+        </div>
       </div>
 
       {/* Customer Detail Modal */}
@@ -307,7 +309,7 @@ const Customers = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900">{t('adminCustomers.customerDetails')}</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{t('adminCustomers', 'customerDetails')}</h2>
               <button
                 onClick={() => setSelectedCustomer(null)}
                 className="text-gray-400 hover:text-gray-600"
@@ -335,7 +337,7 @@ const Customers = () => {
 
               {/* Contact Information */}
               <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-3">{t('adminCustomers.contactInformation')}</h4>
+                <h4 className="text-sm font-medium text-gray-900 mb-3">{t('adminCustomers', 'contactInformation')}</h4>
                 <div className="space-y-2">
                   <div className="flex items-center">
                     <Mail className="h-4 w-4 text-gray-400 mr-3" />
@@ -354,14 +356,14 @@ const Customers = () => {
 
               {/* Order Statistics */}
               <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-3">{t('adminCustomers.orderStatistics')}</h4>
+                <h4 className="text-sm font-medium text-gray-900 mb-3">{t('adminCustomers', 'orderStatistics')}</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="text-sm text-gray-500">{t('adminCustomers.totalOrders')}</p>
+                    <p className="text-sm text-gray-500">{t('adminCustomers', 'totalOrders')}</p>
                     <p className="text-2xl font-bold text-gray-900">{selectedCustomer.totalOrders}</p>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="text-sm text-gray-500">{t('adminCustomers.totalSpent')}</p>
+                    <p className="text-sm text-gray-500">{t('adminCustomers', 'totalSpent')}</p>
                     <p className="text-2xl font-bold text-gray-900">{formatCurrency(selectedCustomer.totalSpent)}</p>
                   </div>
                 </div>
@@ -369,7 +371,7 @@ const Customers = () => {
 
               {/* Status */}
               <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-3">{t('adminCustomers.status')}</h4>
+                <h4 className="text-sm font-medium text-gray-900 mb-3">{t('adminCustomers', 'status')}</h4>
                 <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedCustomer.status)}`}>
                   {selectedCustomer.status.toUpperCase()}
                 </span>

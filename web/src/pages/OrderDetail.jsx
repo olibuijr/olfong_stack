@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { ArrowLeft, Package, Clock, Truck, CheckCircle, XCircle, MapPin, Phone, User, Calendar, CreditCard } from 'lucide-react';
 import { fetchOrder, clearCurrentOrder } from '../store/slices/orderSlice';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const OrderDetail = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const OrderDetail = () => {
     }
   };
 
-  const getStatusText = (status) => t(`orders.statuses.${status}`);
+  const getStatusText = (status) => t('orders.statuses', status);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -106,9 +106,9 @@ const OrderDetail = () => {
       <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('orderDetailPage.orderNotFound')}</h1>
-            <p className="text-gray-600 mb-8">{t('orderDetailPage.orderNotFoundDesc')}</p>
-            <button onClick={() => navigate('/orders')} className="btn btn-primary">{t('orderDetailPage.backToOrders')}</button>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('orderDetailPage', 'orderNotFound')}</h1>
+            <p className="text-gray-600 mb-8">{t('orderDetailPage', 'orderNotFoundDesc')}</p>
+            <button onClick={() => navigate('/orders')} className="btn btn-primary">{t('orderDetailPage', 'backToOrders')}</button>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ const OrderDetail = () => {
           className="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('orderDetailPage.backToOrders')}
+          {t('orderDetailPage', 'backToOrders')}
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -135,9 +135,9 @@ const OrderDetail = () => {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                  {t('orderDetailPage.order')} #{currentOrder.orderNumber}
+                  {t('orderDetailPage', 'order')} #{currentOrder.orderNumber}
                   </h1>
-                  <p className="text-gray-600">{t('orderDetailPage.created')}: {formatDate(currentOrder.createdAt)}</p>
+                  <p className="text-gray-600">{t('orderDetailPage', 'created')}: {formatDate(currentOrder.createdAt)}</p>
                 </div>
                 <div className={`px-4 py-2 rounded-lg border flex items-center space-x-2 ${getStatusColor(currentOrder.status)}`}>
                   {getStatusIcon(currentOrder.status)}
@@ -148,13 +148,13 @@ const OrderDetail = () => {
 
             {/* Order Items */}
             <div className="card p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage.orderItems')}</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage', 'orderItems')}</h2>
               <div className="space-y-4">
                 {currentOrder.items.map((item, index) => (
                   <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
                     {item.product.imageUrl ? (
                       <img
-                        src={`http://localhost:5000${item.product.imageUrl}`}
+                        src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${item.product.imageUrl}`}
                         alt={item.product.name}
                         className="w-16 h-16 object-cover rounded-lg"
                       />
@@ -167,13 +167,13 @@ const OrderDetail = () => {
                       <h3 className="font-medium text-gray-900">
                         {item.product.nameIs || item.product.name}
                       </h3>
-                      <p className="text-sm text-gray-600">{t('orderDetailPage.quantity')}: {item.quantity}</p>
+                      <p className="text-sm text-gray-600">{t('orderDetailPage', 'quantity')}: {item.quantity}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-medium text-gray-900">
-                        {(item.price * item.quantity).toLocaleString()} {t('common.currency')}
+                        {(item.price * item.quantity).toLocaleString()} {t('common', 'currency')}
                       </p>
-                      <p className="text-sm text-gray-600">{item.price.toLocaleString()} {t('common.currency')} {t('orderDetailPage.each')}</p>
+                      <p className="text-sm text-gray-600">{item.price.toLocaleString()} {t('common', 'currency')} {t('orderDetailPage', 'each')}</p>
                     </div>
                   </div>
                 ))}
@@ -184,23 +184,23 @@ const OrderDetail = () => {
             <div className="card p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <MapPin className="w-5 h-5 mr-2" />
-                {t('orderDetailPage.deliveryInfo')}
+                {t('orderDetailPage', 'deliveryInfo')}
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage.deliveryMethod')}</h3>
-                  <p className="text-gray-600">{currentOrder.deliveryMethod === 'PICKUP' ? t('orderDetailPage.storePickup') : t('orderDetailPage.homeDelivery')}</p>
+                  <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage', 'deliveryMethod')}</h3>
+                  <p className="text-gray-600">{currentOrder.deliveryMethod === 'PICKUP' ? t('orderDetailPage', 'storePickup') : t('orderDetailPage', 'homeDelivery')}</p>
                   {currentOrder.pickupTime && (
                     <p className="text-sm text-gray-600 mt-1">
-                      {t('navigation.language') === 'is' ? 'Tími:' : 'Time:'} {currentOrder.pickupTime}
+                      {t('navigation', 'language') === 'is' ? 'Tími:' : 'Time:'} {currentOrder.pickupTime}
                     </p>
                   )}
                 </div>
 
                 {currentOrder.deliveryMethod === 'DELIVERY' && currentOrder.address && (
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage.deliveryAddress')}</h3>
+                    <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage', 'deliveryAddress')}</h3>
                     <p className="text-gray-600">
                       {currentOrder.address.street}<br />
                       {currentOrder.address.city}, {currentOrder.address.postalCode}<br />
@@ -213,7 +213,7 @@ const OrderDetail = () => {
                   <div>
                     <h3 className="font-medium text-gray-900 mb-2 flex items-center">
                       <User className="w-4 h-4 mr-1" />
-                      {t('orderDetailPage.deliveryPerson')}
+                      {t('orderDetailPage', 'deliveryPerson')}
                     </h3>
                     <p className="text-gray-600">{currentOrder.deliveryPerson.fullName}</p>
                     {currentOrder.deliveryPerson.phone && (
@@ -229,7 +229,7 @@ const OrderDetail = () => {
                   <div>
                     <h3 className="font-medium text-gray-900 mb-2 flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
-                      {t('orderDetailPage.estimatedDelivery')}
+                      {t('orderDetailPage', 'estimatedDelivery')}
                     </h3>
                     <p className="text-gray-600">{formatDate(currentOrder.estimatedDelivery)}</p>
                   </div>
@@ -237,7 +237,7 @@ const OrderDetail = () => {
 
                 {currentOrder.deliveredAt && (
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage.deliveredAt')}</h3>
+                    <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage', 'deliveredAt')}</h3>
                     <p className="text-gray-600">{formatDate(currentOrder.deliveredAt)}</p>
                   </div>
                 )}
@@ -249,15 +249,15 @@ const OrderDetail = () => {
               <div className="card p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                   <CreditCard className="w-5 h-5 mr-2" />
-                  {t('orderDetailPage.paymentInfo')}
+                  {t('orderDetailPage', 'paymentInfo')}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <span className="font-medium text-gray-900">{t('orderDetailPage.paymentMethod')}</span>
+                    <span className="font-medium text-gray-900">{t('orderDetailPage', 'paymentMethod')}</span>
                     <p className="text-gray-600">{currentOrder.transaction.paymentMethod}</p>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-900">{t('orderDetailPage.status')}</span>
+                    <span className="font-medium text-gray-900">{t('orderDetailPage', 'status')}</span>
                     <p className="text-gray-600">{currentOrder.transaction.paymentStatus}</p>
                   </div>
                 </div>
@@ -267,7 +267,7 @@ const OrderDetail = () => {
             {/* Notes */}
             {currentOrder.notes && (
               <div className="card p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage.notes')}</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage', 'notes')}</h2>
                 <p className="text-gray-600">{currentOrder.notes}</p>
               </div>
             )}
@@ -277,31 +277,31 @@ const OrderDetail = () => {
           <div className="lg:col-span-1 space-y-6">
             {/* Order Summary */}
             <div className="card p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orders.title')}</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orders', 'title')}</h2>
               
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">{t('orders.reorder')}</span>
+                  <span className="text-gray-600">{t('orders', 'reorder')}</span>
                   <span className="font-medium">
-                    {(currentOrder.totalAmount - currentOrder.deliveryFee).toLocaleString()} {t('common.currency')}
+                    {(currentOrder.totalAmount - currentOrder.deliveryFee).toLocaleString()} {t('common', 'currency')}
                   </span>
                 </div>
                 
                 <div className="flex justify-between">
-                  <span className="text-gray-600">{currentOrder.deliveryMethod === 'PICKUP' ? t('ordersPage.pickup') : t('ordersPage.delivery')}</span>
+                  <span className="text-gray-600">{currentOrder.deliveryMethod === 'PICKUP' ? t('ordersPage', 'pickup') : t('ordersPage', 'delivery')}</span>
                   <span className="font-medium">
                     {currentOrder.deliveryFee === 0 
-                      ? (t('navigation.language') === 'is' ? 'Ókeypis' : 'Free')
-                      : `${currentOrder.deliveryFee.toLocaleString()} ${t('common.currency')}`
+                      ? (t('navigation', 'language') === 'is' ? 'Ókeypis' : 'Free')
+                      : `${currentOrder.deliveryFee.toLocaleString()} ${t('common', 'currency')}`
                     }
                   </span>
                 </div>
                 
                 <div className="border-t pt-3">
                   <div className="flex justify-between">
-                  <span className="text-lg font-semibold text-gray-900">{t('common.total')}</span>
+                  <span className="text-lg font-semibold text-gray-900">{t('common', 'total')}</span>
                     <span className="text-lg font-bold text-primary-600">
-                      {currentOrder.totalAmount.toLocaleString()} {t('common.currency')}
+                      {currentOrder.totalAmount.toLocaleString()} {t('common', 'currency')}
                     </span>
                   </div>
                 </div>
@@ -311,7 +311,7 @@ const OrderDetail = () => {
             {/* Delivery Tracking Map */}
             {currentOrder.status === 'OUT_FOR_DELIVERY' && currentOrder.deliveryMethod === 'DELIVERY' && (
               <div className="card p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage.deliveryTracking')}</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage', 'deliveryTracking')}</h2>
                 
                 {deliveryLocation ? (
                   <div>
@@ -319,14 +319,14 @@ const OrderDetail = () => {
                     <div className="bg-gray-200 rounded-lg h-64 mb-4 flex items-center justify-center">
                       <div className="text-center">
                         <MapPin className="w-12 h-12 text-primary-600 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600">{t('orderDetailPage.onTheWay')}</p>
-                        <p className="text-xs text-gray-500 mt-1">{t('orderDetailPage.lastUpdated')}: {new Date(deliveryLocation.timestamp).toLocaleTimeString()}</p>
+                        <p className="text-sm text-gray-600">{t('orderDetailPage', 'onTheWay')}</p>
+                        <p className="text-xs text-gray-500 mt-1">{t('orderDetailPage', 'lastUpdated')}: {new Date(deliveryLocation.timestamp).toLocaleTimeString()}</p>
                       </div>
                     </div>
                     
                     <div className="text-sm text-gray-600">
                       <p>
-                        {t('navigation.language') === 'is' 
+                        {t('navigation', 'language') === 'is' 
                           ? 'Áætluð afhending:' 
                           : 'Estimated delivery'}: {currentOrder.estimatedDelivery ? formatDate(currentOrder.estimatedDelivery) : 'TBD'}
                       </p>
@@ -336,7 +336,7 @@ const OrderDetail = () => {
                   <div className="text-center py-8">
                     <Truck className="w-12 h-12 text-gray-400 mx-auto mb-2" />
                     <p className="text-sm text-gray-600">
-                      {t('orderDetailPage.notStarted')}
+                      {t('orderDetailPage', 'notStarted')}
                     </p>
                   </div>
                 )}
@@ -346,12 +346,12 @@ const OrderDetail = () => {
             {/* Contact Information */}
             <div className="card p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('navigation.language') === 'is' ? 'Hafa samband' : 'Contact'}
+                {t('navigation', 'language') === 'is' ? 'Hafa samband' : 'Contact'}
               </h2>
               <div className="space-y-3 text-sm">
                 <p>
                   <span className="font-medium">
-                    {t('navigation.language') === 'is' ? 'Netfang:' : 'Email:'}
+                    {t('navigation', 'language') === 'is' ? 'Netfang:' : 'Email:'}
                   </span>
                   <br />
                   <a href="mailto:info@olfong.is" className="text-primary-600 hover:text-primary-700">
@@ -360,7 +360,7 @@ const OrderDetail = () => {
                 </p>
                 <p>
                   <span className="font-medium">
-                    {t('navigation.language') === 'is' ? 'Sími:' : 'Phone:'}
+                    {t('navigation', 'language') === 'is' ? 'Sími:' : 'Phone:'}
                   </span>
                   <br />
                   <a href="tel:+3541234567" className="text-primary-600 hover:text-primary-700">

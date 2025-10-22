@@ -12,4 +12,14 @@ router.get('/customers', authenticate, authorize('ADMIN'), getCustomerReport);
 // Get inventory report (Admin only)
 router.get('/inventory', authenticate, authorize('ADMIN'), getInventoryReport);
 
+// Get products report (Admin only) - alias for inventory
+router.get('/products', authenticate, authorize('ADMIN'), getInventoryReport);
+
+// Get orders report (Admin only) - use analytics endpoint
+router.get('/orders', authenticate, authorize('ADMIN'), async (req, res) => {
+  // Redirect to analytics endpoint for order data
+  const analyticsController = require('../controllers/analyticsController');
+  return analyticsController.getAnalytics(req, res);
+});
+
 module.exports = router;

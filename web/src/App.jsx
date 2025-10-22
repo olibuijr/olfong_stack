@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from './store/slices/authSlice';
 import { updateOrderStatusRealtime } from './store/slices/orderSlice';
@@ -20,7 +20,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
-import Orders from './pages/Orders';
+
 import OrderDetail from './pages/OrderDetail';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
@@ -30,18 +30,30 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/Products';
 import AdminCategories from './pages/admin/Categories';
 import AdminOrders from './pages/admin/Orders';
+import POSOrders from './pages/admin/POSOrders';
 import Analytics from './pages/admin/Analytics';
 import Customers from './pages/admin/Customers';
 import Reports from './pages/admin/Reports';
 import Notifications from './pages/admin/Notifications';
-import AdminSettings from './pages/admin/Settings';
+import SettingsOverview from './pages/admin/SettingsOverview';
+import GeneralSettings from './pages/admin/settings/GeneralSettings';
+import BusinessSettings from './pages/admin/settings/BusinessSettings';
+import ShippingSettings from './pages/admin/settings/ShippingSettings';
+import VatSettings from './pages/admin/settings/VatSettings';
+import ApiKeysSettings from './pages/admin/settings/ApiKeysSettings';
+import PaymentGatewaysSettings from './pages/admin/settings/PaymentGatewaysSettings';
+import ReceiptSettings from './pages/admin/settings/ReceiptSettings';
+import SMTPSettings from './pages/admin/settings/SMTPSettings';
 import AdminBanners from './pages/admin/Banners';
 import AdminChat from './pages/admin/Chat';
 import DemoData from './pages/admin/DemoData';
+import Translations from './pages/admin/Translations';
+import Media from './pages/admin/Media';
+import MediaUpload from './pages/admin/MediaUpload';
 import DeliveryDashboard from './pages/delivery/Dashboard';
 
 function App() {
-  const { i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const location = useLocation();
   const { isAuthenticated, user, isLoading } = useSelector((state) => state.auth);
@@ -53,18 +65,11 @@ function App() {
   useEffect(() => {
     // Set document title based on language
     const updateTitle = () => {
-      document.title = i18n.language === 'is' 
-        ? 'Ölföng - Vín og Bjórverslun' 
-        : 'Ölföng - Wine & Beer Shop';
+      document.title = 'Ölföng - Vín og Bjórverslun';
     };
 
     updateTitle();
-    i18n.on('languageChanged', updateTitle);
-
-    return () => {
-      i18n.off('languageChanged', updateTitle);
-    };
-  }, [i18n]);
+  }, []);
 
   // Check authentication on app load
   useEffect(() => {
@@ -123,63 +128,78 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Navbar />
 
-       <main className="flex-1 pt-16 pb-16 md:pb-0">
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
-          
-          {/* Protected routes */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/orders" element={<Navigate to="/profile" replace />} />
-            <Route path="/orders/:id" element={<OrderDetail />} />
-            <Route path="/profile" element={<Profile />} />
-          </Route>
-          
-          {/* Admin routes */}
-          <Route element={<ProtectedRoute requiredRole="ADMIN" />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/products" element={<AdminProducts />} />
-            <Route path="/admin/categories" element={<AdminCategories />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/admin/customers" element={<Customers />} />
-            <Route path="/admin/chat" element={<AdminChat />} />
-            <Route path="/admin/analytics" element={<Analytics />} />
-            <Route path="/admin/reports" element={<Reports />} />
-            <Route path="/admin/notifications" element={<Notifications />} />
-            <Route path="/admin/banners" element={<AdminBanners />} />
-            <Route path="/admin/demo-data" element={<DemoData />} />
-            <Route path="/admin/settings" element={<AdminSettings />} />
-          </Route>
-          
-          {/* Delivery routes */}
-          <Route element={<ProtectedRoute requiredRole="DELIVERY" />}>
-            <Route path="/delivery" element={<DeliveryDashboard />} />
-            <Route path="/admin/chat" element={<AdminChat />} />
-          </Route>
-          
-          {/* Catch-all route for 404 */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
+        <main className="flex-1 pt-16 pb-16 md:pb-0">
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
 
-      {!isAdminRoute && <Footer />}
+            {/* Protected routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/orders" element={<Navigate to="/profile" replace />} />
+              <Route path="/orders/:id" element={<OrderDetail />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
 
-      {/* Bottom Navigation for Mobile */}
-      {!isAdminRoute && <BottomNav />}
+            {/* Admin routes */}
+            <Route element={<ProtectedRoute requiredRole="ADMIN" />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/products" element={<AdminProducts />} />
+              <Route path="/admin/categories" element={<AdminCategories />} />
+              <Route path="/admin/orders" element={<AdminOrders />} />
+              <Route path="/admin/pos" element={<POSOrders />} />
+              <Route path="/admin/customers" element={<Customers />} />
+              <Route path="/admin/chat" element={<AdminChat />} />
+              <Route path="/admin/analytics" element={<Analytics />} />
+              <Route path="/admin/reports" element={<Reports />} />
+              <Route path="/admin/notifications" element={<Notifications />} />
+              <Route path="/admin/media" element={<Media />} />
+              <Route path="/admin/media/upload" element={<MediaUpload />} />
+              <Route path="/admin/banners" element={<AdminBanners />} />
+              <Route path="/admin/demo-data" element={<DemoData />} />
+              <Route path="/admin/translations" element={<Translations />} />
+              <Route path="/admin/settings" element={<SettingsOverview />} />
+              <Route path="/admin/settings/general" element={<GeneralSettings />} />
+              <Route path="/admin/settings/business" element={<BusinessSettings />} />
+              <Route path="/admin/settings/shipping" element={<ShippingSettings />} />
+              <Route path="/admin/settings/vat" element={<VatSettings />} />
+              <Route path="/admin/settings/api-keys" element={<ApiKeysSettings />} />
+              <Route path="/admin/settings/payment-gateways" element={<PaymentGatewaysSettings />} />
+              <Route path="/admin/settings/receipts" element={<ReceiptSettings />} />
+              <Route path="/admin/settings/smtp" element={<SMTPSettings />} />
+            </Route>
 
-      {/* Chat Widget - Available on all pages */}
-      <ChatWidget />
-    </div>
+            {/* Delivery routes */}
+            <Route element={<ProtectedRoute requiredRole="DELIVERY" />}>
+              <Route path="/delivery" element={<DeliveryDashboard />} />
+              <Route path="/admin/chat" element={<AdminChat />} />
+            </Route>
+
+            {/* Catch-all route for 404 */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+
+        {!isAdminRoute && <Footer />}
+
+        {/* Bottom Navigation for Mobile */}
+        {!isAdminRoute && <BottomNav />}
+
+        {/* Chat Widget - Available on all pages */}
+        <ChatWidget />
+      </div>
+    </LanguageProvider>
   );
+
 }
 
 export default App;

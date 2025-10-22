@@ -11,6 +11,8 @@ import bannerReducer from './slices/bannerSlice';
 import chatReducer from './slices/chatSlice';
 import analyticsReducer from './slices/analyticsSlice';
 import reportsReducer from './slices/reportsSlice';
+import receiptSettingsReducer from './slices/receiptSettingsSlice';
+import smtpSettingsReducer from './slices/smtpSettingsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +28,8 @@ export const store = configureStore({
     chat: chatReducer,
     analytics: analyticsReducer,
     reports: reportsReducer,
+    receiptSettings: receiptSettingsReducer,
+    smtpSettings: smtpSettingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -34,6 +38,15 @@ export const store = configureStore({
       },
     }),
 });
+
+// Debug: Log store creation
+console.log('Store created:', store);
+console.log('Store state:', store.getState());
+
+// Expose store on window for debugging
+if (typeof window !== 'undefined') {
+  window.store = store;
+}
 
 // TypeScript types (commented out for JavaScript project)
 // export type RootState = ReturnType<typeof store.getState>;

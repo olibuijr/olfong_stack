@@ -8,8 +8,10 @@ class SocketService {
 
   connect() {
     if (!this.socket) {
-      // Connect to the backend server directly for Socket.IO
-      const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      // Connect to the backend server via proxy for Socket.IO
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      // Remove /api from the URL for Socket.IO connection
+      const backendUrl = apiUrl.replace('/api', '');
       this.socket = io(backendUrl, {
         transports: ['websocket'],
         timeout: 20000,
@@ -157,6 +159,11 @@ class SocketService {
     if (this.socket) {
       this.socket.off(event, callback);
     }
+  }
+
+  // Alias for removeListener to match Socket.IO API
+  off(event, callback) {
+    this.removeListener(event, callback);
   }
 
   // Generic emit method

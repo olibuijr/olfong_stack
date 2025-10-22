@@ -1,6 +1,4 @@
 const axios = require('axios');
-const crypto = require('crypto');
-
 class DkService {
   constructor(config = {}) {
     this.baseUrl = config.baseUrl || 'https://api.dk.com';
@@ -338,3 +336,19 @@ class DkService {
 }
 
 module.exports = DkService;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

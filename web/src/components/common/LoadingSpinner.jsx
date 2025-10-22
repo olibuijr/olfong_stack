@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Loader2 } from 'lucide-react';
 
 const LoadingSpinner = ({ size = 'medium', className = '' }) => {
@@ -14,6 +15,9 @@ const LoadingSpinner = ({ size = 'medium', className = '' }) => {
   );
 };
 
+LoadingSpinner.propTypes = {
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  className: PropTypes.string,
+};
+
 export default LoadingSpinner;
-
-

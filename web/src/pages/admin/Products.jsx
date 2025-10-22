@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { 
   Plus, 
   Edit, 
   Trash2, 
-  Search, 
-  Filter, 
+  Search,
   Package,
   AlertCircle,
   Upload,
   X,
-  Eye,
-  EyeOff,
   Grid,
   List
 } from 'lucide-react';
@@ -27,10 +24,11 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 import AdminLayout from '../../components/admin/AdminLayout';
 import ATVRImport from '../../components/admin/ATVRImport';
 import ImageSearchModal from '../../components/admin/ImageSearchModal';
+import MediaPicker from '../../components/admin/MediaPicker';
 import toast from 'react-hot-toast';
 
 const AdminProducts = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { products, isLoading, error } = useSelector((state) => state.products);
@@ -38,6 +36,7 @@ const AdminProducts = () => {
   const [showModal, setShowModal] = useState(false);
   const [showATVRImport, setShowATVRImport] = useState(false);
   const [showImageSearch, setShowImageSearch] = useState(false);
+  const [showMediaPicker, setShowMediaPicker] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
@@ -110,10 +109,10 @@ const AdminProducts = () => {
 
       if (editingProduct) {
         await dispatch(updateProduct({ id: editingProduct.id, ...productData })).unwrap();
-        toast.success(t('common.success'));
+        toast.success(t('common', 'success'));
       } else {
         await dispatch(createProduct(productData)).unwrap();
-        toast.success(t('common.success'));
+        toast.success(t('common', 'success'));
       }
 
       setShowModal(false);
@@ -121,7 +120,7 @@ const AdminProducts = () => {
       reset();
       setUploadedImage(null);
     } catch (error) {
-      toast.error(error.message || t('common.error'));
+      toast.error(error.message || t('common', 'error'));
     }
   };
 
@@ -230,12 +229,12 @@ const AdminProducts = () => {
   };
 
   const handleDelete = async (productId) => {
-    if (window.confirm(t('common.delete') + '?')) {
+    if (window.confirm(t('common', 'delete') + '?')) {
       try {
         await dispatch(deleteProduct(productId)).unwrap();
-        toast.success(t('common.success'));
+        toast.success(t('common', 'success'));
       } catch (error) {
-        toast.error(error.message || t('common.error'));
+        toast.error(error.message || t('common', 'error'));
       }
     }
   };
@@ -252,10 +251,16 @@ const AdminProducts = () => {
     }
   };
 
-  const handleImageSearchSelect = (imageUrl, metadata) => {
+  const handleImageSearchSelect = (imageUrl) => {
     setUploadedImage(imageUrl);
-    setShowImageSearch(false);
-    toast.success('Image selected successfully');
+  };
+
+  const handleMediaSelect = (selectedMedia) => {
+    if (selectedMedia && selectedMedia.url) {
+      setUploadedImage(selectedMedia.url);
+      setValue('imageUrl', selectedMedia.url);
+    }
+    setShowMediaPicker(false);
   };
 
   const filteredProducts = products.filter(product => {
@@ -268,39 +273,39 @@ const AdminProducts = () => {
   });
 
   const categories = [
-    { value: 'WINE', label: t('categories.WINE') },
-    { value: 'BEER', label: t('categories.BEER') },
-    { value: 'BEERS', label: t('categories.BEERS') },
-    { value: 'CIDER_RTD', label: t('categories.CIDER_RTD') },
-    { value: 'SPIRITS', label: t('categories.SPIRITS') },
-    { value: 'NICOTINE', label: t('categories.NICOTINE') },
-    { value: 'NON_ALCOHOLIC', label: t('categories.NON_ALCOHOLIC') },
-    { value: 'OFFERS', label: t('categories.OFFERS') }
+    { value: 'WINE', label: t('categories', 'WINE') },
+    { value: 'BEER', label: t('categories', 'BEER') },
+    { value: 'BEERS', label: t('categories', 'BEERS') },
+    { value: 'CIDER_RTD', label: t('categories', 'CIDER_RTD') },
+    { value: 'SPIRITS', label: t('categories', 'SPIRITS') },
+    { value: 'NICOTINE', label: t('categories', 'NICOTINE') },
+    { value: 'NON_ALCOHOLIC', label: t('categories', 'NON_ALCOHOLIC') },
+    { value: 'OFFERS', label: t('categories', 'OFFERS') }
   ];
 
   const subcategories = [
     // Wine subcategories
-    { value: 'WHITE_WINE', label: t('subcategories.WHITE_WINE'), category: 'WINE' },
-    { value: 'RED_WINE', label: t('subcategories.RED_WINE'), category: 'WINE' },
-    { value: 'SPARKLING_WINE', label: t('subcategories.SPARKLING_WINE'), category: 'WINE' },
-    { value: 'CHAMPAGNE', label: t('subcategories.CHAMPAGNE'), category: 'WINE' },
-    { value: 'YELLOW_WINE', label: t('subcategories.YELLOW_WINE'), category: 'WINE' },
-    { value: 'ROSE_WINE', label: t('subcategories.ROSE_WINE'), category: 'WINE' },
+    { value: 'WHITE_WINE', label: t('subcategories', 'WHITE_WINE'), category: 'WINE' },
+    { value: 'RED_WINE', label: t('subcategories', 'RED_WINE'), category: 'WINE' },
+    { value: 'SPARKLING_WINE', label: t('subcategories', 'SPARKLING_WINE'), category: 'WINE' },
+    { value: 'CHAMPAGNE', label: t('subcategories', 'CHAMPAGNE'), category: 'WINE' },
+    { value: 'YELLOW_WINE', label: t('subcategories', 'YELLOW_WINE'), category: 'WINE' },
+    { value: 'ROSE_WINE', label: t('subcategories', 'ROSE_WINE'), category: 'WINE' },
     // Spirits subcategories
-    { value: 'GIN', label: t('subcategories.GIN'), category: 'SPIRITS' },
-    { value: 'COGNAC', label: t('subcategories.COGNAC'), category: 'SPIRITS' },
-    { value: 'RUM', label: t('subcategories.RUM'), category: 'SPIRITS' },
-    { value: 'LIQUEURS_SHOTS', label: t('subcategories.LIQUEURS_SHOTS'), category: 'SPIRITS' },
-    { value: 'TEQUILA', label: t('subcategories.TEQUILA'), category: 'SPIRITS' },
-    { value: 'VODKA', label: t('subcategories.VODKA'), category: 'SPIRITS' },
-    { value: 'WHISKEY', label: t('subcategories.WHISKEY'), category: 'SPIRITS' },
+    { value: 'GIN', label: t('subcategories', 'GIN'), category: 'SPIRITS' },
+    { value: 'COGNAC', label: t('subcategories', 'COGNAC'), category: 'SPIRITS' },
+    { value: 'RUM', label: t('subcategories', 'RUM'), category: 'SPIRITS' },
+    { value: 'LIQUEURS_SHOTS', label: t('subcategories', 'LIQUEURS_SHOTS'), category: 'SPIRITS' },
+    { value: 'TEQUILA', label: t('subcategories', 'TEQUILA'), category: 'SPIRITS' },
+    { value: 'VODKA', label: t('subcategories', 'VODKA'), category: 'SPIRITS' },
+    { value: 'WHISKEY', label: t('subcategories', 'WHISKEY'), category: 'SPIRITS' },
     // Nicotine subcategories
-    { value: 'VAPE', label: t('subcategories.VAPE'), category: 'NICOTINE' },
-    { value: 'NICOTINE_PADS', label: t('subcategories.NICOTINE_PADS'), category: 'NICOTINE' },
+    { value: 'VAPE', label: t('subcategories', 'VAPE'), category: 'NICOTINE' },
+    { value: 'NICOTINE_PADS', label: t('subcategories', 'NICOTINE_PADS'), category: 'NICOTINE' },
     // Non-alcoholic subcategories
-    { value: 'SODA', label: t('subcategories.SODA'), category: 'NON_ALCOHOLIC' },
-    { value: 'SOFT_DRINKS', label: t('subcategories.SOFT_DRINKS'), category: 'NON_ALCOHOLIC' },
-    { value: 'ENERGY_DRINKS', label: t('subcategories.ENERGY_DRINKS'), category: 'NON_ALCOHOLIC' }
+    { value: 'SODA', label: t('subcategories', 'SODA'), category: 'NON_ALCOHOLIC' },
+    { value: 'SOFT_DRINKS', label: t('subcategories', 'SOFT_DRINKS'), category: 'NON_ALCOHOLIC' },
+    { value: 'ENERGY_DRINKS', label: t('subcategories', 'ENERGY_DRINKS'), category: 'NON_ALCOHOLIC' }
   ];
 
   if (user?.role !== 'ADMIN') {
@@ -308,7 +313,7 @@ const AdminProducts = () => {
       <AdminLayout>
         <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage.accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage', 'accessDenied')}</h1>
           </div>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 py-8">
@@ -316,10 +321,10 @@ const AdminProducts = () => {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('adminPage.accessDenied')}
+                {t('adminPage', 'accessDenied')}
               </h2>
               <p className="text-gray-600">
-                {t('adminPage.noPermission')}
+                {t('adminPage', 'noPermission')}
               </p>
             </div>
           </div>
@@ -345,7 +350,7 @@ const AdminProducts = () => {
           <div className="text-center">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-              {t('common.error')}
+              {t('common', 'error')}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               {error}
@@ -354,7 +359,7 @@ const AdminProducts = () => {
               onClick={() => dispatch(fetchProducts({ limit: 100 }))}
               className="btn btn-primary"
             >
-              {t('common.retry')}
+              {t('common', 'retry')}
             </button>
           </div>
         </div>
@@ -364,44 +369,46 @@ const AdminProducts = () => {
 
   return (
     <AdminLayout>
-      {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-        <div className="px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminProductsPage.productManagement')}</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminProductsPage.manageProducts')}</p>
-            </div>
-            <div className="flex space-x-3 mt-4 sm:mt-0">
-              <button
-                onClick={() => {
-                  setEditingProduct(null);
-                  setShowModal(true);
-                }}
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                {t('adminProductsPage.newProduct')}
-              </button>
-              <button
-                onClick={() => setShowATVRImport(true)}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-              >
-                <Package className="w-4 h-4 mr-2" />
-                {t('adminProducts.importFromATVR')}
-              </button>
+      <div className="max-w-none">
+        {/* Header */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminProductsPage', 'productManagement')}</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminProductsPage', 'manageProducts')}</p>
+              </div>
+              <div className="flex space-x-3 mt-4 sm:mt-0">
+                <button
+                  onClick={() => {
+                    setEditingProduct(null);
+                    setShowModal(true);
+                  }}
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  {t('adminProductsPage', 'newProduct')}
+                </button>
+                <button
+                  onClick={() => setShowATVRImport(true)}
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                >
+                  <Package className="w-4 h-4 mr-2" />
+                  {t('adminProducts', 'importFromATVR')}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="px-4 sm:px-6 lg:px-8 py-6">
+        {/* Main Content */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
 
         {/* Filters and View Toggle */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminLabels.filters')}</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminLabels', 'filters')}</h2>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setViewMode('grid')}
@@ -410,7 +417,7 @@ const AdminProducts = () => {
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
-                title={t('adminLabels.gridView')}
+                title={t('adminLabels', 'gridView')}
               >
                 <Grid className="w-5 h-5" />
               </button>
@@ -421,7 +428,7 @@ const AdminProducts = () => {
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
-                title={t('adminLabels.listView')}
+                title={t('adminLabels', 'listView')}
               >
                 <List className="w-5 h-5" />
               </button>
@@ -433,7 +440,7 @@ const AdminProducts = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder={t('adminProductsPage.searchProducts')}
+                placeholder={t('adminProductsPage', 'searchProducts')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="input pl-10 w-full"
@@ -446,7 +453,7 @@ const AdminProducts = () => {
               onChange={(e) => setFilterCategory(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminProductsPage.allCategories')}</option>
+              <option value="">{t('adminProductsPage', 'allCategories')}</option>
               {categories.map(category => (
                 <option key={category.value} value={category.value}>
                   {category.label}
@@ -463,7 +470,7 @@ const AdminProducts = () => {
                 className="rounded"
               />
               <span className="text-sm text-gray-700 dark:text-gray-300">
-                {t('adminProductsPage.showOnlyAgeRestricted')}
+                {t('adminProductsPage', 'showOnlyAgeRestricted')}
               </span>
             </label>
           </div>
@@ -474,12 +481,12 @@ const AdminProducts = () => {
           /* Grid View */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover:shadow-md transition-shadow duration-200">
+              <div key={product.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 p-4">
                   {/* Product Image */}
                   <div className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg mb-4 overflow-hidden">
                     {product.imageUrl ? (
                       <img
-                        src={`http://localhost:5000${product.imageUrl}`}
+                        src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
@@ -507,7 +514,7 @@ const AdminProducts = () => {
 
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-blue-600 dark:text-blue-400">
-                      {product.price.toLocaleString()} {t('common.currency')}
+                      {product.price.toLocaleString()} {t('common', 'currency')}
                     </span>
                     <span className={`text-sm px-2 py-1 rounded ${
                       product.stock > 10 
@@ -516,7 +523,7 @@ const AdminProducts = () => {
                           ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400' 
                           : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
                     }`}>
-                      {product.stock} {t('adminProductsPage.inStock')}
+                      {product.stock} {t('adminProductsPage', 'inStock')}
                     </span>
                   </div>
 
@@ -526,7 +533,7 @@ const AdminProducts = () => {
                       className="btn btn-outline btn-sm flex-1 flex items-center justify-center space-x-1"
                     >
                       <Edit className="w-3 h-3" />
-                      <span>{t('common.edit')}</span>
+                      <span>{t('common', 'edit')}</span>
                     </button>
                     <button
                       onClick={() => handleDelete(product.id)}
@@ -543,13 +550,13 @@ const AdminProducts = () => {
           /* List View */
           <div className="space-y-4">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover:shadow-md transition-shadow duration-200">
+              <div key={product.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 p-4">
                 <div className="flex items-center gap-4">
                   {/* Product Image */}
                   <div className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex-shrink-0">
                     {product.imageUrl ? (
                       <img
-                        src={`http://localhost:5000${product.imageUrl}`}
+                        src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
@@ -586,7 +593,7 @@ const AdminProducts = () => {
                                 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400' 
                                 : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
                           }`}>
-                            {product.stock} {t('adminProductsPage.inStock')}
+                            {product.stock} {t('adminProductsPage', 'inStock')}
                           </span>
                         </div>
                       </div>
@@ -594,7 +601,7 @@ const AdminProducts = () => {
                       {/* Price and Actions */}
                       <div className="flex items-center gap-4">
                         <span className="font-bold text-blue-600 dark:text-blue-400 text-lg whitespace-nowrap">
-                          {product.price.toLocaleString()} {t('common.currency')}
+                          {product.price.toLocaleString()} {t('common', 'currency')}
                         </span>
                         <div className="flex items-center gap-2">
                           <button
@@ -602,7 +609,7 @@ const AdminProducts = () => {
                             className="btn btn-outline btn-sm flex items-center space-x-1"
                           >
                             <Edit className="w-3 h-3" />
-                            <span>{t('common.edit')}</span>
+                            <span>{t('common', 'edit')}</span>
                           </button>
                           <button
                             onClick={() => handleDelete(product.id)}
@@ -624,10 +631,10 @@ const AdminProducts = () => {
           <div className="text-center py-12">
             <Package className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              {t('adminProductsPage.noProductsFound')}
+              {t('adminProductsPage', 'noProductsFound')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {t('adminProductsPage.adjustSearchOrAdd')}
+              {t('adminProductsPage', 'adjustSearchOrAdd')}
             </p>
           </div>
         )}
@@ -638,7 +645,7 @@ const AdminProducts = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-xl">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {editingProduct ? t('adminProductsPage.editProduct') : t('adminProductsPage.newProductTitle')}
+                  {editingProduct ? t('adminProductsPage', 'editProduct') : t('adminProductsPage', 'newProductTitle')}
                 </h2>
                 <button
                   onClick={() => {
@@ -658,16 +665,16 @@ const AdminProducts = () => {
                   {/* Name (English) */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminProductsPage.nameEn')} *
+                      {t('adminProductsPage', 'nameEn')} *
                     </label>
                     <input
                       {...register('name', { required: true })}
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                      placeholder={t('products.title')}
+                      placeholder={t('products', 'title')}
                     />
                     {errors.name && (
                       <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                        {t('adminProductsPage.nameRequired')}
+                        {t('adminProductsPage', 'nameRequired')}
                       </p>
                     )}
                   </div>
@@ -675,12 +682,12 @@ const AdminProducts = () => {
                   {/* Name (Icelandic) */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminProductsPage.nameIs')}
+                      {t('adminProductsPage', 'nameIs')}
                     </label>
                     <input
                       {...register('nameIs')}
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                      placeholder={t('adminProductsPage.nameIs')}
+                      placeholder={t('adminProductsPage', 'nameIs')}
                     />
                   </div>
                 </div>
@@ -689,7 +696,7 @@ const AdminProducts = () => {
                   {/* Price */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('common.price')} * ({t('common.currency')})
+                      {t('common', 'price')} * ({t('common', 'currency')})
                     </label>
                     <input
                       type="number"
@@ -700,7 +707,7 @@ const AdminProducts = () => {
                     />
                     {errors.price && (
                       <p className="text-red-600 text-sm mt-1">
-                        {t('adminProductsPage.priceRequired')}
+                        {t('adminProductsPage', 'priceRequired')}
                       </p>
                     )}
                   </div>
@@ -708,7 +715,7 @@ const AdminProducts = () => {
                   {/* Stock */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('products.stock')} *
+                      {t('products', 'stock')} *
                     </label>
                     <input
                       type="number"
@@ -718,7 +725,7 @@ const AdminProducts = () => {
                     />
                     {errors.stock && (
                       <p className="text-red-600 text-sm mt-1">
-                        {t('adminProductsPage.stockRequired')}
+                        {t('adminProductsPage', 'stockRequired')}
                       </p>
                     )}
                   </div>
@@ -728,7 +735,7 @@ const AdminProducts = () => {
                   {/* Category */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('products.category')} *
+                      {t('products', 'category')} *
                     </label>
                     <select
                       {...register('category', { required: true })}
@@ -745,13 +752,13 @@ const AdminProducts = () => {
                   {/* Subcategory */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('adminProductsPage.subcategory')}
+                      {t('adminProductsPage', 'subcategory')}
                     </label>
                     <select
                       {...register('subcategory')}
                       className="input w-full"
                     >
-                      <option value="">{t('adminProductsPage.selectSubcategory')}</option>
+                      <option value="">{t('adminProductsPage', 'selectSubcategory')}</option>
                       {subcategories
                         .filter(sub => sub.category === watch('category'))
                         .map(subcategory => (
@@ -772,7 +779,7 @@ const AdminProducts = () => {
                       className="rounded"
                     />
                     <label className="text-sm text-gray-700">
-                      {t('adminProductsPage.ageRestricted')}
+                      {t('adminProductsPage', 'ageRestricted')}
                     </label>
                   </div>
                 </div>
@@ -780,56 +787,64 @@ const AdminProducts = () => {
                 {/* Description (English) */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('adminProductsPage.descEn')}
+                    {t('adminProductsPage', 'descEn')}
                   </label>
                   <textarea
                     {...register('description')}
                     rows={3}
                     className="input w-full"
-                    placeholder={t('products.description')}
+                    placeholder={t('products', 'description')}
                   />
                 </div>
 
                 {/* Description (Icelandic) */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('adminProductsPage.descIs')}
+                    {t('adminProductsPage', 'descIs')}
                   </label>
                   <textarea
                     {...register('descriptionIs')}
                     rows={3}
                     className="input w-full"
-                    placeholder={t('adminProductsPage.descIs')}
+                    placeholder={t('adminProductsPage', 'descIs')}
                   />
                 </div>
 
                 {/* Image Upload */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('adminProductsPage.image')}
+                    {t('adminProductsPage', 'image')}
                   </label>
                   <div className="space-y-2">
-                    <div className="flex space-x-2">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="input flex-1"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowImageSearch(true)}
-                        className="btn btn-outline flex items-center space-x-2"
-                      >
-                        <Search className="w-4 h-4" />
-                        <span>{t('adminLabels.searchOnline')}</span>
-                      </button>
-                    </div>
+                     <div className="flex space-x-2">
+                       <input
+                         type="file"
+                         accept="image/*"
+                         onChange={handleImageUpload}
+                         className="input flex-1"
+                       />
+                       <button
+                         type="button"
+                         onClick={() => setShowImageSearch(true)}
+                         className="btn btn-outline flex items-center space-x-2"
+                       >
+                         <Search className="w-4 h-4" />
+                         <span>{t('adminLabels', 'searchOnline')}</span>
+                       </button>
+                       <button
+                         type="button"
+                         onClick={() => setShowMediaPicker(true)}
+                         className="btn btn-outline flex items-center space-x-2"
+                       >
+                         <Upload className="w-4 h-4" />
+                         <span>{t('adminMedia', 'selectFromMedia')}</span>
+                       </button>
+                     </div>
                     {uploadedImage && (
                       <div className="relative">
                         <img
                           src={uploadedImage}
-                          alt={t('adminLabels.preview')}
+                          alt={t('adminLabels', 'preview')}
                           className="w-32 h-32 object-cover rounded-lg"
                         />
                         <button
@@ -847,7 +862,7 @@ const AdminProducts = () => {
                 {/* Discount Section */}
                 <div className="border-t pt-6">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    {t('adminProductsPage.discountSettings')}
+                    {t('adminProductsPage', 'discountSettings')}
                   </h3>
                   
                   <div className="flex items-center space-x-2 mb-4">
@@ -857,7 +872,7 @@ const AdminProducts = () => {
                       className="rounded"
                     />
                     <label className="text-sm text-gray-700 dark:text-gray-300">
-                      {t('adminProductsPage.enableDiscount')}
+                      {t('adminProductsPage', 'enableDiscount')}
                     </label>
                   </div>
 
@@ -866,7 +881,7 @@ const AdminProducts = () => {
                       {/* Original Price */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {t('adminProductsPage.originalPrice')} *
+                          {t('adminProductsPage', 'originalPrice')} *
                         </label>
                         <input
                           type="number"
@@ -880,7 +895,7 @@ const AdminProducts = () => {
                       {/* Discount Percentage */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {t('adminProductsPage.discountPercentage')} * (%)
+                          {t('adminProductsPage', 'discountPercentage')} * (%)
                         </label>
                         <input
                           type="number"
@@ -895,7 +910,7 @@ const AdminProducts = () => {
                       {/* Discount Start Date */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {t('adminProductsPage.discountStartDate')}
+                          {t('adminProductsPage', 'discountStartDate')}
                         </label>
                         <input
                           type="date"
@@ -907,7 +922,7 @@ const AdminProducts = () => {
                       {/* Discount End Date */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {t('adminProductsPage.discountEndDate')}
+                          {t('adminProductsPage', 'discountEndDate')}
                         </label>
                         <input
                           type="date"
@@ -919,24 +934,24 @@ const AdminProducts = () => {
                       {/* Discount Reason (English) */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {t('adminProductsPage.discountReason')}
+                          {t('adminProductsPage', 'discountReason')}
                         </label>
                         <input
                           {...register('discountReason')}
                           className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                          placeholder={t('adminProductsPage.discountReasonPlaceholder')}
+                          placeholder={t('adminProductsPage', 'discountReasonPlaceholder')}
                         />
                       </div>
 
                       {/* Discount Reason (Icelandic) */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          {t('adminProductsPage.discountReasonIs')}
+                          {t('adminProductsPage', 'discountReasonIs')}
                         </label>
                         <input
                           {...register('discountReasonIs')}
                           className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                          placeholder={t('adminProductsPage.discountReasonPlaceholder')}
+                          placeholder={t('adminProductsPage', 'discountReasonPlaceholder')}
                         />
                       </div>
                     </div>
@@ -955,19 +970,21 @@ const AdminProducts = () => {
                     }}
                     className="btn btn-outline flex-1"
                   >
-                    {t('adminProductsPage.cancel')}
+                    {t('adminProductsPage', 'cancel')}
                   </button>
                   <button
                     type="submit"
                     className="btn btn-primary flex-1"
                   >
-                    {editingProduct ? t('adminProductsPage.update') : t('adminProductsPage.create')}
+                    {editingProduct ? t('adminProductsPage', 'update') : t('adminProductsPage', 'create')}
                   </button>
                 </div>
               </form>
             </div>
           </div>
         )}
+          </div>
+        </div>
       </div>
 
       {/* ATVR Import Modal */}
@@ -989,6 +1006,15 @@ const AdminProducts = () => {
           initialQuery={editingProduct?.name || ''}
         />
       )}
+
+      {/* Media Picker Modal */}
+      <MediaPicker
+        isOpen={showMediaPicker}
+        onClose={() => setShowMediaPicker(false)}
+        onSelect={handleMediaSelect}
+        collection="PRODUCTS"
+        multiple={false}
+      />
     </AdminLayout>
   );
 };

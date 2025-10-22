@@ -1,38 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Bell,
-  BellOff,
-  CheckCircle,
-  XCircle,
   AlertTriangle,
-  Info,
   Mail,
   Phone,
   Settings,
-  Filter,
   Search,
-  MoreVertical,
   Trash2,
   Archive,
   Eye,
   EyeOff,
   Clock,
-  User,
   ShoppingCart,
   Package,
   CreditCard,
   AlertCircle,
-  CheckCircle2,
+  CheckCircle,
   X
 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import { useTranslation } from 'react-i18next';
+import { useLanguage } from "../../contexts/LanguageContext";
 import toast from 'react-hot-toast';
 
 const Notifications = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const { user } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(true);
   const [notifications, setNotifications] = useState([]);
@@ -53,7 +46,7 @@ const Notifications = () => {
   });
 
   // Mock notifications data - in real app, this would come from API
-  const mockNotifications = [
+  const mockNotifications = useMemo(() => [
     {
       id: 1,
       type: 'order',
@@ -182,7 +175,7 @@ const Notifications = () => {
         reason: 'Customer requested'
       }
     }
-  ];
+  ], []);
 
   useEffect(() => {
     // Simulate API call
@@ -278,7 +271,7 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications.notificationMarkedRead'));
+    toast.success(t('adminNotifications', 'notificationMarkedRead'));
   };
 
   const handleMarkAsUnread = (notificationId) => {
@@ -289,7 +282,7 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications.notificationMarkedUnread'));
+    toast.success(t('adminNotifications', 'notificationMarkedUnread'));
   };
 
   const handleArchive = (notificationId) => {
@@ -300,7 +293,7 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications.notificationArchived'));
+    toast.success(t('adminNotifications', 'notificationArchived'));
   };
 
   const handleUnarchive = (notificationId) => {
@@ -311,17 +304,17 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications.notificationUnarchived'));
+    toast.success(t('adminNotifications', 'notificationUnarchived'));
   };
 
   const handleDelete = (notificationId) => {
     setNotifications(prev => prev.filter(notification => notification.id !== notificationId));
-    toast.success(t('adminNotifications.notificationDeleted'));
+    toast.success(t('adminNotifications', 'notificationDeleted'));
   };
 
   const handleBulkAction = (action) => {
     if (selectedNotifications.length === 0) {
-      toast.error(t('adminNotifications.selectNotificationsFirst'));
+      toast.error(t('adminNotifications', 'selectNotificationsFirst'));
       return;
     }
 
@@ -408,7 +401,7 @@ const Notifications = () => {
             <div className="flex items-center">
               <Bell className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminNotifications.title')}</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminNotifications', 'title')}</h1>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
                   {t('adminNotifications.unreadCount', { count: unreadCount })} • {t('adminNotifications.archivedCount', { count: archivedCount })} • {t('adminNotifications.totalCount', { count: notifications.length })}
                 </p>
@@ -420,14 +413,14 @@ const Notifications = () => {
                 className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <Settings className="h-4 w-4 mr-2" />
-                {t('adminNotifications.settings')}
+                {t('adminNotifications', 'settings')}
               </button>
               <button
                 onClick={() => handleBulkAction('mark-read')}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <CheckCircle className="h-4 w-4 mr-2" />
-                {t('adminNotifications.markAllRead')}
+                {t('adminNotifications', 'markAllRead')}
               </button>
             </div>
           </div>
@@ -444,7 +437,7 @@ const Notifications = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder={t('adminNotifications.searchNotifications')}
+                placeholder={t('adminNotifications', 'searchNotifications')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="input pl-10 w-full"
@@ -457,10 +450,10 @@ const Notifications = () => {
               onChange={(e) => setStatusFilter(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminNotifications.allStatus')}</option>
-              <option value="unread">{t('adminNotifications.unread')}</option>
-              <option value="read">{t('adminNotifications.read')}</option>
-              <option value="archived">{t('adminNotifications.archived')}</option>
+              <option value="">{t('adminNotifications', 'allStatus')}</option>
+              <option value="unread">{t('adminNotifications', 'unread')}</option>
+              <option value="read">{t('adminNotifications', 'read')}</option>
+              <option value="archived">{t('adminNotifications', 'archived')}</option>
             </select>
 
             {/* Type Filter */}
@@ -469,13 +462,13 @@ const Notifications = () => {
               onChange={(e) => setTypeFilter(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminNotifications.allTypes')}</option>
-              <option value="order">{t('adminNotifications.orders')}</option>
-              <option value="payment">{t('adminNotifications.payments')}</option>
-              <option value="delivery">{t('adminNotifications.delivery')}</option>
-              <option value="system">{t('adminNotifications.system')}</option>
-              <option value="security">{t('adminNotifications.security')}</option>
-              <option value="marketing">{t('adminNotifications.marketing')}</option>
+              <option value="">{t('adminNotifications', 'allTypes')}</option>
+              <option value="order">{t('adminNotifications', 'orders')}</option>
+              <option value="payment">{t('adminNotifications', 'payments')}</option>
+              <option value="delivery">{t('adminNotifications', 'delivery')}</option>
+              <option value="system">{t('adminNotifications', 'system')}</option>
+              <option value="security">{t('adminNotifications', 'security')}</option>
+              <option value="marketing">{t('adminNotifications', 'marketing')}</option>
             </select>
 
             {/* Bulk Actions */}
@@ -486,7 +479,7 @@ const Notifications = () => {
                 onChange={handleSelectAll}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700">{t('adminNotifications.selectAll')}</span>
+              <span className="text-sm text-gray-700">{t('adminNotifications', 'selectAll')}</span>
             </div>
           </div>
 
@@ -499,28 +492,28 @@ const Notifications = () => {
                 className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50"
               >
                 <CheckCircle className="h-4 w-4 mr-1" />
-                {t('adminNotifications.markRead')}
+                {t('adminNotifications', 'markRead')}
               </button>
               <button
                 onClick={() => handleBulkAction('mark-unread')}
                 className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50"
               >
                 <EyeOff className="h-4 w-4 mr-1" />
-                {t('adminNotifications.markUnread')}
+                {t('adminNotifications', 'markUnread')}
               </button>
               <button
                 onClick={() => handleBulkAction('archive')}
                 className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50"
               >
                 <Archive className="h-4 w-4 mr-1" />
-                {t('adminNotifications.archive')}
+                {t('adminNotifications', 'archive')}
               </button>
               <button
                 onClick={() => handleBulkAction('delete')}
                 className="inline-flex items-center px-3 py-1 border border-red-300 rounded-md text-sm text-red-700 bg-red-50 hover:bg-red-100"
               >
                 <Trash2 className="h-4 w-4 mr-1" />
-                {t('adminNotifications.delete')}
+                {t('adminNotifications', 'delete')}
               </button>
             </div>
           )}
@@ -597,7 +590,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleMarkAsRead(notification.id)}
                         className="p-2 text-gray-400 hover:text-blue-600"
-                        title={t('tooltips.markAsRead')}
+                        title={t('tooltips', 'markAsRead')}
                       >
                         <Eye className="h-4 w-4" />
                       </button>
@@ -605,7 +598,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleMarkAsUnread(notification.id)}
                         className="p-2 text-gray-400 hover:text-gray-600"
-                        title={t('tooltips.markAsUnread')}
+                        title={t('tooltips', 'markAsUnread')}
                       >
                         <EyeOff className="h-4 w-4" />
                       </button>
@@ -615,7 +608,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleArchive(notification.id)}
                         className="p-2 text-gray-400 hover:text-yellow-600"
-                        title={t('tooltips.archive')}
+                        title={t('tooltips', 'archive')}
                       >
                         <Archive className="h-4 w-4" />
                       </button>
@@ -623,7 +616,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleUnarchive(notification.id)}
                         className="p-2 text-gray-400 hover:text-green-600"
-                        title={t('tooltips.unarchive')}
+                        title={t('tooltips', 'unarchive')}
                       >
                         <Archive className="h-4 w-4" />
                       </button>
@@ -632,7 +625,7 @@ const Notifications = () => {
                     <button
                       onClick={() => handleDelete(notification.id)}
                       className="p-2 text-gray-400 hover:text-red-600"
-                      title={t('tooltips.delete')}
+                      title={t('tooltips', 'delete')}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

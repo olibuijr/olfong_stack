@@ -1,6 +1,7 @@
 const { body } = require('express-validator');
 const { successResponse, errorResponse } = require('../utils/response');
 const valitorService = require('../services/valitorService');
+const TeyaService = require('../services/teyaService');
 const prisma = require('../config/database');
 
 /**
@@ -138,7 +139,20 @@ const createPaymentSession = async (req, res) => {
       }, 'Pay on pickup payment confirmed');
     }
 
-    // Prepare payment data for Valitor
+    // Get payment gateway configuration
+    const gateway = await prisma.paymentGateway.findFirst({
+      where: {
+        provider: paymentMethod,
+        isEnabled: true,
+        isActive: true,
+      },
+    });
+
+    if (!gateway) {
+      return errorResponse(res, 'Payment gateway not found or not enabled', 404);
+    }
+
+    // Prepare payment data
     const paymentData = {
       orderId: order.id,
       orderNumber: order.orderNumber,
@@ -146,6 +160,9 @@ const createPaymentSession = async (req, res) => {
       customerName: order.user.fullName || order.user.username,
       customerEmail: order.user.email,
       customerPhone: order.user.phone,
+      returnUrl: `${process.env.FRONTEND_URL || 'http://localhost:3001'}/checkout/success?order=${order.id}`,
+      cancelUrl: `${process.env.FRONTEND_URL || 'http://localhost:3001'}/checkout/cancel?order=${order.id}`,
+      description: `Order ${order.orderNumber}`,
       billingAddress: {
         street: order.address.street,
         city: order.address.city,
@@ -154,46 +171,177 @@ const createPaymentSession = async (req, res) => {
       },
     };
 
-    // Create payment session with Valitor
-    const paymentResult = await valitorService.createPaymentSession(paymentData);
+    let paymentResult;
+    let transactionData = {
+      orderId: order.id,
+      amount: order.totalAmount,
+      paymentStatus: 'PENDING',
+      paymentMethod: gateway.displayName,
+    };
+
+    // Create payment session based on gateway
+    if (paymentMethod === 'valitor') {
+      paymentResult = await valitorService.createPaymentSession(paymentData);
+      if (paymentResult.success) {
+        transactionData.valitorTransactionId = paymentResult.data.transactionId;
+        transactionData.paymentDetails = JSON.stringify({
+          sessionId: paymentResult.data.sessionId,
+          paymentUrl: paymentResult.data.paymentUrl,
+        });
+      }
+    } else if (paymentMethod === 'teya') {
+      // Decrypt Teya credentials
+      const crypto = require('crypto');
+      const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here!';
+      const ALGORITHM = 'aes-256-cbc';
+      
+      const decrypt = (text) => {
+        const textParts = text.split(':');
+        const iv = Buffer.from(textParts.shift(), 'hex');
+        const encryptedText = textParts.join(':');
+        const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
+        let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+        decrypted += decipher.final('utf8');
+        return decrypted;
+      };
+
+      const teyaConfig = {
+        merchantId: gateway.merchantId,
+        paymentGatewayId: gateway.config ? JSON.parse(gateway.config).paymentGatewayId : null,
+        secretKey: gateway.secretKey ? decrypt(gateway.secretKey) : null,
+        privateKey: gateway.apiKey ? decrypt(gateway.apiKey) : null,
+        environment: gateway.environment,
+      };
+
+      const teya = new TeyaService(teyaConfig);
+      paymentResult = await teya.createPaymentSession(paymentData);
+      
+      if (paymentResult.success) {
+        transactionData.teyaTransactionId = paymentResult.data.paymentId;
+        transactionData.paymentDetails = JSON.stringify({
+          sessionId: paymentResult.data.sessionId,
+          paymentUrl: paymentResult.data.paymentUrl,
+        });
+      }
+    } else {
+      return errorResponse(res, 'Unsupported payment method', 400);
+    }
 
     if (!paymentResult.success) {
       return errorResponse(res, paymentResult.error, 500);
     }
 
     // Create or update transaction record
-    const transaction = await prisma.transaction.upsert({
+    await prisma.transaction.upsert({
       where: { orderId: order.id },
-      update: {
-        valitorTransactionId: paymentResult.transactionId,
-        paymentStatus: 'PENDING',
-        paymentMethod: 'Valitor',
-        paymentDetails: JSON.stringify({
-          sessionId: paymentResult.sessionId,
-          paymentUrl: paymentResult.paymentUrl,
-        }),
-      },
-      create: {
-        orderId: order.id,
-        amount: order.totalAmount,
-        paymentStatus: 'PENDING',
-        paymentMethod: 'Valitor',
-        valitorTransactionId: paymentResult.transactionId,
-        paymentDetails: JSON.stringify({
-          sessionId: paymentResult.sessionId,
-          paymentUrl: paymentResult.paymentUrl,
-        }),
-      },
+      update: transactionData,
+      create: transactionData,
     });
 
     return successResponse(res, {
-      paymentUrl: paymentResult.paymentUrl,
-      transactionId: paymentResult.transactionId,
-      sessionId: paymentResult.sessionId,
+      paymentUrl: paymentResult.data.paymentUrl,
+      transactionId: paymentResult.data.transactionId || paymentResult.data.paymentId,
+      sessionId: paymentResult.data.sessionId,
     }, 'Payment session created successfully');
   } catch (error) {
     console.error('Create payment session error:', error);
     return errorResponse(res, 'Failed to create payment session', 500);
+  }
+};
+
+/**
+ * Handle Teya webhook
+ */
+const handleTeyaWebhook = async (req, res) => {
+  try {
+    const signature = req.headers['teya-signature'];
+    const payload = req.body;
+
+    // Get Teya gateway configuration
+    const gateway = await prisma.paymentGateway.findFirst({
+      where: { provider: 'teya', isEnabled: true }
+    });
+
+    if (!gateway) {
+      return errorResponse(res, 'Teya gateway not found', 404);
+    }
+
+    // Decrypt credentials
+    const crypto = require('crypto');
+    const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'your-32-character-secret-key-here!';
+    const ALGORITHM = 'aes-256-cbc';
+    
+    const decrypt = (text) => {
+      const textParts = text.split(':');
+      const iv = Buffer.from(textParts.shift(), 'hex');
+      const encryptedText = textParts.join(':');
+      const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
+      let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+      decrypted += decipher.final('utf8');
+      return decrypted;
+    };
+
+    const teyaConfig = {
+      merchantId: gateway.merchantId,
+      paymentGatewayId: gateway.config ? JSON.parse(gateway.config).paymentGatewayId : null,
+      secretKey: gateway.secretKey ? decrypt(gateway.secretKey) : null,
+      privateKey: gateway.apiKey ? decrypt(gateway.apiKey) : null,
+      environment: gateway.environment,
+    };
+
+    const teya = new TeyaService(teyaConfig);
+
+    // Verify webhook signature
+    if (!teya.verifyWebhookSignature(payload, signature)) {
+      return errorResponse(res, 'Invalid webhook signature', 401);
+    }
+
+    const webhookData = teya.processWebhook(payload);
+    if (!webhookData.success) {
+      return errorResponse(res, 'Invalid webhook payload', 400);
+    }
+
+    const { paymentId, status } = webhookData.event;
+
+    // Find transaction
+    const transaction = await prisma.transaction.findFirst({
+      where: { teyaTransactionId: paymentId },
+      include: { order: true },
+    });
+
+    if (!transaction) {
+      return errorResponse(res, 'Transaction not found', 404);
+    }
+
+    // Update transaction status
+    const paymentStatus = status === 'completed' ? 'COMPLETED' : 
+                         status === 'failed' ? 'FAILED' : 'PENDING';
+
+    await prisma.transaction.update({
+      where: { id: transaction.id },
+      data: {
+        paymentStatus,
+        paymentMethod: 'Teya',
+        paymentDetails: JSON.stringify({
+          ...JSON.parse(transaction.paymentDetails || '{}'),
+          webhookData: payload,
+          processedAt: new Date().toISOString(),
+        }),
+      },
+    });
+
+    // Update order status if payment completed
+    if (paymentStatus === 'COMPLETED') {
+      await prisma.order.update({
+        where: { id: transaction.orderId },
+        data: { status: 'CONFIRMED' },
+      });
+    }
+
+    return successResponse(res, null, 'Teya webhook processed successfully');
+  } catch (error) {
+    console.error('Teya webhook processing error:', error);
+    return errorResponse(res, 'Teya webhook processing failed', 500);
   }
 };
 
@@ -210,7 +358,7 @@ const handleWebhook = async (req, res) => {
       return errorResponse(res, 'Invalid webhook signature', 401);
     }
 
-    const { transactionId, status, amount, paymentMethod } = payload;
+    const { transactionId, status, paymentMethod } = payload;
 
     // Find transaction
     const transaction = await prisma.transaction.findFirst({
@@ -389,6 +537,7 @@ const refundPaymentValidation = [
 module.exports = {
   createPaymentSession,
   handleWebhook,
+  handleTeyaWebhook,
   verifyPayment,
   refundPayment,
   getPaymentMethods,

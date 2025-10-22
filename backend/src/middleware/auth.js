@@ -49,7 +49,7 @@ const authenticate = async (req, res, next) => {
 /**
  * Middleware to check if user has required role
  */
-const authorize = (...roles) => {
+const authorize = () => {
   return (req, res, next) => {
     if (!req.user) {
       return errorResponse(res, 'Not authenticated', 401);

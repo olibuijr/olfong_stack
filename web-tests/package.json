@@ -4,7 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test-runner.js --all",
+    "test:admin": "playwright test e2e/admin/",
+    "test:user": "playwright test e2e/user/",
+    "test:auth": "playwright test e2e/auth/",
+    "test:cart": "playwright test e2e/cart/",
+    "test:checkout": "playwright test e2e/checkout/",
+    "test:products": "playwright test e2e/products/",
+    "test:realtime": "playwright test e2e/realtime/",
+    "test:runner": "node test-runner.js",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "install-browsers": "playwright install"
   },
   "keywords": [],
   "author": "",

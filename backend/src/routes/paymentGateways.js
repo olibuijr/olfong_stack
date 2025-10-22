@@ -5,7 +5,6 @@ const {
   getPaymentGateway,
   createPaymentGateway,
   updatePaymentGateway,
-  deletePaymentGateway,
   togglePaymentGateway,
   testPaymentGateway,
   getPaymentGatewayConfig
@@ -31,13 +30,16 @@ router.post('/', ...validatePaymentGateway, createPaymentGateway);
 // Update payment gateway (admin only)
 router.put('/:id', ...validatePaymentGateway, updatePaymentGateway);
 
-// Delete payment gateway (admin only)
-router.delete('/:id', deletePaymentGateway);
+// Delete payment gateway (admin only) - DISABLED for security
+// router.delete('/:id', deletePaymentGateway);
 
 // Toggle payment gateway enabled status (admin only)
 router.patch('/:id/toggle', togglePaymentGateway);
 
 // Test payment gateway connection (admin only)
 router.post('/:id/test', testPaymentGateway);
+
+// Test payment gateway configuration (admin only)
+router.post('/test', testPaymentGateway);
 
 module.exports = router;

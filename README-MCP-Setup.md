@@ -1,407 +1,267 @@
-# Ölföng MCP Server Setup for Terminal Command Management
+# OpenCode MCP Configuration
 
-This guide explains how to set up and use MCP (Model Context Protocol) servers for managing terminal commands, dev servers, and background processes in the Ölföng e-commerce platform.
+This project is configured with OpenCode CLI and Model Context Protocol (MCP) servers running in Docker containers.
 
 ## 🎯 Overview
 
-The MCP server setup provides:
-- **Terminal Command Execution**: Run and monitor shell commands
-- **Background Process Management**: Keep dev servers running until needed
-- **Docker Integration**: Containerized MCP server for reliability
-- **Process Monitoring**: Track running processes and their status
-- **Predefined Commands**: Ready-to-use commands for common development tasks
+The MCP configuration provides:
+- **Google Search**: Web search capabilities via Google Custom Search API
+- **File System Access**: Secure file system operations (read-only)
+- **Git Operations**: Version control and repository management
+- **Database Access**: PostgreSQL database interactions (configured for project database)
+- **GitHub Integration**: GitHub API access for repository operations
+- **Web Automation**: Puppeteer-based browser automation
+- **Code Search**: GitHub code search and documentation lookup
+- **Specialized Agents**: Pre-configured agent profiles for different tasks
 
 ## 🚀 Quick Start
 
-### OpenCode Integration (Primary Method)
+1. **Install OpenCode CLI**
+   ```bash
+   curl -fsSL https://opencode.ai/install | bash
+   ```
 
-The MCP commands server is integrated into OpenCode via `opencode.jsonc`. Use natural language commands directly:
+2. **Configure Environment Variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your API keys
+   ```
 
-**Usage Examples:**
+3. **Start Database**
+   ```bash
+   docker-compose up -d postgres
+   ```
+
+4. **Start OpenCode**
+   ```bash
+   cd /path/to/project
+   opencode
+   ```
+
+## 📋 Available MCP Servers
+
+### Enabled by Default:
+- **filesystem**: File system access (read-only)
+- **git**: Git operations
+- **postgres**: PostgreSQL database access (project database)
+- **playwright**: Web automation and browser control
+- **gh_grep**: GitHub code search (remote)
+
+### Available but Disabled:
+- **github**: GitHub API access
+- **context7**: Documentation search (requires API key)
+
+## 💾 Database Configuration
+
+The MCP PostgreSQL server is configured to connect to the project's database:
+
+- **Database**: `olfong_db`
+- **User**: `olfong_user`
+- **Host**: `localhost:5432`
+- **Schema**: `public`
+
+The connection uses Docker's host networking to access the PostgreSQL container defined in `docker-compose.yml`.
+
+### Database Schema Access
+
+The MCP server can interact with all tables in the Ölföng e-commerce platform:
+
+- **Users & Authentication**: `User`, `Address`, `Location`
+- **Products**: `Product`, `Category`, `Subcategory`
+- **Orders**: `Order`, `OrderItem`, `Transaction`
+- **Cart**: `Cart`, `CartItem`
+- **Subscriptions**: `Subscription`, `SubscriptionDelivery`
+- **Shipping**: `ShippingOption`
+- **Content**: `Banner`, `Setting`
+- **Integrations**: `Integration`, `PaymentGateway`
+- **Chat**: `Conversation`, `ConversationParticipant`, `ChatMessage`
+
+## 🛠️ Usage Examples
+
+### Database Operations
 ```
-"Start the development stack"
-"Run the test suite"
-"Check if all services are healthy"
-"Show me the backend logs"
-"Build the web frontend"
-"Stop all development servers"
+Use the postgres tool to query all users with role ADMIN
 ```
 
-The server runs automatically when you use OpenCode in this project directory.
-
-### Manual Docker Setup
-
-If you need to run the MCP server manually:
-
-```bash
-docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "npm install && npx mcp-server-commands --config mcp-commands-config.json --commands mcp-dev-commands.json"
+```
+Show me the top 10 most expensive products using postgres
 ```
 
-## 📋 Available Commands
-
-### Development Stack Management
-- `start-dev-stack`: Start all services (DB, backend, frontend, mobile)
-- `stop-dev-stack`: Stop all development servers
-- `start-backend`: Start Node.js backend server
-- `start-web`: Start React web frontend
-- `start-flutter`: Start Flutter mobile dev server
-
-### Testing & Building
-- `run-tests`: Run backend test suite
-- `run-e2e-tests`: Run Playwright E2E tests
-- `build-backend`: Build backend for production
-- `build-web`: Build web frontend for production
-- `build-flutter`: Build Flutter app for web
-
-### Infrastructure
-- `docker-build`: Build all Docker images
-- `docker-up`: Start Docker services
-- `docker-down`: Stop Docker services
-- `db-migrate`: Run database migrations
-- `db-seed`: Seed database with test data
-
-### Monitoring
-- `check-health`: Check all services health
-- `logs-backend`: Show backend logs
-- `logs-web`: Show web frontend logs
-
-## 💬 Using MCP Commands
-
-### With Claude Desktop
-
-If using Claude Desktop directly, configure your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "olfong-commands": {
-      "command": "docker",
-      "args": [
-        "run", "--rm", "-i",
-        "-v", "/var/run/docker.sock:/var/run/docker.sock",
-        "-v", "/home/olibuijr/Projects/olfong_stack:/workspace",
-        "-w", "/workspace/backend",
-        "node:18-alpine",
-        "sh", "-c",
-        "npm install && npx mcp-server-commands --config mcp-commands-config.json --commands mcp-dev-commands.json"
-      ]
-    }
-  }
-}
 ```
+Find all orders with status PENDING using postgres
+```
+
+### File System Operations
+```
+Use the filesystem tool to read the package.json files
+```
+
+```
+Search for all TypeScript files in the backend directory
+```
+
+### Git Operations
+```
+Use the git tool to show the recent commit history
+```
+
+```
+Check the current git status and staged changes
+```
+
+### Web Search
+```
+Search for information about React hooks using google-search
+```
+
+```
+Find documentation about Prisma migrations using google-search
+```
+
+### Code Search
+```
+Search GitHub for examples of Next.js authentication using gh_grep
+```
+
+## 🤖 Agent Profiles
+
+### web-search Agent
+Specialized for research and documentation:
+- Google Search
+- GitHub Code Search
+- Context7 Documentation
+
+### database Agent
+Specialized for database operations:
+- PostgreSQL access
+- File system access
+
+### fullstack Agent
+Complete development toolkit with all tools enabled
 
 ## 🔧 Configuration
 
-### MCP Commands Configuration (`backend/mcp-dev-commands.json`)
+### Main Configuration (`opencode.jsonc`)
 
-```json
-{
-  "commands": {
-    "start-backend": {
-      "description": "Start the Node.js backend server",
-      "command": "npm run dev",
-      "workingDirectory": "backend",
-      "background": true,
-      "timeout": 300000,
-      "healthCheck": {
-        "url": "http://localhost:5000/health",
-        "interval": 5000,
-        "maxAttempts": 30
-      }
-    }
-  },
-  "processGroups": {
-    "development": ["start-backend", "start-web", "start-flutter"],
-    "testing": ["run-tests", "run-e2e-tests"],
-    "building": ["build-backend", "build-web", "build-flutter"]
-  }
-}
-```
+The configuration file defines:
+- MCP server definitions with Docker commands
+- Environment variable mappings
+- Tool enable/disable flags
+- Agent profiles with specialized toolsets
 
-### Server Configuration (`backend/mcp-commands-config.json`)
+### Environment Variables (`.env`)
 
-```json
-{
-  "server": {
-    "port": 3001,
-    "host": "0.0.0.0",
-    "timeout": 300000,
-    "maxConcurrentCommands": 5
-  },
-  "commands": {
-    "allowedCommands": ["npm", "yarn", "docker", "git", "node", "python"],
-    "blockedPatterns": ["rm -rf /", "sudo", "su"]
-  },
-  "backgroundProcesses": {
-    "maxProcesses": 10,
-    "processTimeout": 3600000,
-    "cleanupInterval": 300000
-  }
-}
+Required for full functionality:
+- `GOOGLE_API_KEY`: Google Custom Search API key
+- `GOOGLE_CSE_ID`: Google Custom Search Engine ID
+- `GITHUB_TOKEN`: GitHub personal access token
+- `CONTEXT7_API_KEY`: Context7 API key (optional)
+
+### Database Connection
+
+The PostgreSQL connection is pre-configured:
+```bash
+# Uses the project's PostgreSQL database from docker-compose.yml
+# Connection string: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
 ```
 
 ## 🐳 Docker Integration
 
-### How It Works
+All MCP servers run in isolated Docker containers using official images from `ghcr.io/modelcontextprotocol/servers/`. This ensures:
 
-The MCP commands server runs in a Docker container that's automatically started by OpenCode:
+- **Isolation**: Containers are isolated from the host system
+- **Consistency**: Consistent environments across different machines
+- **Easy Updates**: Simple to update to newer versions
+- **No Dependencies**: No need to install MCP servers locally
 
-```bash
-# This is what OpenCode runs automatically:
-docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "npm install && npx mcp-server-commands --config mcp-commands-config.json --commands mcp-dev-commands.json"
-```
+### PostgreSQL Container Access
 
-### Key Features
-- **Isolated Environment**: MCP server runs in its own container
-- **Volume Mounting**: Direct access to project files via `/workspace`
-- **Docker Socket Access**: Can manage other Docker containers
-- **STDIO Communication**: Uses standard input/output for MCP protocol
-- **Ephemeral Containers**: Clean startup, no persistent state
-- **Auto-start**: Launches automatically when using OpenCode
-
-## 📊 Monitoring & Management
-
-### Process Monitoring
-
-The MCP server provides:
-- **Real-time Status**: Check running processes
-- **Resource Usage**: Monitor CPU/memory usage
-- **Health Checks**: Automatic service health verification
-- **Log Streaming**: Access to process logs
-- **Process Groups**: Manage related processes together
-
-### Background Process Management
-
-```bash
-# Start a background process
-"Start the backend server in background"
-
-# Check status
-"Show me running background processes"
-
-# Stop specific process
-"Stop the backend server"
-
-# Stop all processes in a group
-"Stop all development servers"
-```
+The PostgreSQL MCP server uses `--network host` to access the database container directly, providing seamless integration with the project's existing database setup.
 
 ## 🔒 Security Considerations
 
-### Command Allowlisting
-- Only predefined commands are allowed
-- Dangerous patterns are blocked (rm -rf /, sudo, etc.)
-- Working directory restrictions
-
-### Process Isolation
-- Docker containerization for security
-- Resource limits and timeouts
-- Process monitoring and cleanup
+- **Read-only Filesystem**: File system access is restricted to read-only operations
+- **Container Isolation**: Each MCP server runs in its own isolated container
+- **Environment Variables**: Sensitive data is stored in environment variables, not in configuration files
+- **Network Access**: Containers have controlled network access based on their requirements
 
 ## 🐛 Troubleshooting
 
-### Common Issues
-
-1. **Permission Issues**
+### Database Connection Issues
 ```bash
-chmod +x start-dev-servers.sh stop-dev-servers.sh
+# Check if PostgreSQL container is running
+docker-compose ps
+
+# Verify database connectivity
+docker exec olfong_postgres psql -U olfong_user -d olfong_db -c "SELECT 1;"
 ```
 
-2. **Docker Socket Access**
-```bash
-# Add user to docker group
-sudo usermod -aG docker $USER
-# Logout and login again for group changes to take effect
-```
-
-3. **OpenCode Not Recognizing MCP Server**
-```bash
-# Verify opencode.jsonc syntax
-cat opencode.jsonc | jq .
-# Restart OpenCode
-# Check that Docker is running
-docker --version
-```
-
-4. **Container Fails to Start**
+### Docker Issues
 ```bash
 # Test basic Docker functionality
 docker run --rm hello-world
 
-# Test our specific setup
-docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "ls -la && echo 'Container working'"
+# Check Docker daemon status
+sudo systemctl status docker
 ```
 
-5. **MCP Commands Not Working**
+### OpenCode Integration
 ```bash
-# Check if config files exist
-ls -la backend/mcp-*.json
+# Verify configuration syntax
+cat opencode.jsonc | jq .
 
-# Test MCP server directly
-cd backend
-npm install
-npx mcp-server-commands --help
+# Check OpenCode version
+opencode --version
 ```
 
-### Logs and Debugging
-
+### MCP Server Issues
 ```bash
-# Check running Docker containers
-docker ps
-
-# View container logs (if running manually)
+# Test PostgreSQL MCP server manually
 docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "npm install && npx mcp-server-commands --help"
-
-# Check OpenCode integration
-# OpenCode should show MCP server status in its interface
-# Look for "commands" in the MCP servers list
-
-# Debug MCP protocol
-echo '{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "test", "version": "1.0"}}}' | \
-docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "npm install && npx mcp-server-commands --config mcp-commands-config.json --commands mcp-dev-commands.json"
+  --network host \
+  -e DATABASE_URL="postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public" \
+  ghcr.io/modelcontextprotocol/servers/postgres:latest
 ```
 
-## 🚀 Advanced Usage
+## 📈 Advanced Usage
 
-### Custom Command Definition
+### Custom Queries
 
-Add new commands to `mcp-dev-commands.json`:
+You can perform complex database operations through the MCP interface:
 
-```json
-{
-  "custom-command": {
-    "description": "My custom development command",
-    "command": "npm run custom-script",
-    "workingDirectory": "backend",
-    "background": false,
-    "timeout": 120000,
-    "env": {
-      "NODE_ENV": "development"
-    }
-  }
-}
+```
+Use postgres to find the total revenue per month for the current year
 ```
 
-### Process Groups
-
-Organize commands into logical groups:
-
-```json
-{
-  "processGroups": {
-    "full-stack": ["start-backend", "start-web", "start-mobile"],
-    "testing": ["unit-tests", "integration-tests", "e2e-tests"],
-    "deployment": ["build-all", "docker-deploy", "health-check"]
-  }
-}
+```
+Show me the customer retention rate using postgres queries
 ```
 
-### Integration with CI/CD
+### Integration with Development Workflow
 
-Use MCP commands in automated pipelines:
+The MCP servers integrate seamlessly with the development workflow:
 
-```yaml
-# .github/workflows/deploy.yml
-- name: Run tests via MCP
-  run: |
-    docker run --rm -i \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v $PWD:/workspace \
-      -w /workspace/backend \
-      node:18-alpine \
-      sh -c "npm install && npx mcp-server-commands --config mcp-commands-config.json --commands mcp-dev-commands.json" \
-      --command run-tests
-```
+1. **Database Schema Exploration**: Query the database structure
+2. **Data Analysis**: Perform analytics on orders, users, products
+3. **Code Research**: Search GitHub for implementation examples
+4. **Documentation Lookup**: Find relevant documentation quickly
 
-### Manual Testing
+## 📚 Additional Resources
 
-Test the MCP server manually:
-
-```bash
-# Test Docker command
-docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "npm install && echo 'MCP server ready'"
-
-# Test with actual MCP server
-echo '{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}}' | \
-docker run --rm -i \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /home/olibuijr/Projects/olfong_stack:/workspace \
-  -w /workspace/backend \
-  node:18-alpine \
-  sh -c "npm install && npx mcp-server-commands --config mcp-commands-config.json --commands mcp-dev-commands.json"
-```
-
-## 📈 Performance & Architecture
-
-### Container Architecture
-- **Ephemeral Design**: Clean container startup/shutdown
-- **Volume Mounting**: Direct filesystem access via `/workspace`
-- **Docker Socket**: Full Docker API access for container management
-- **STDIO Protocol**: Efficient MCP communication
-
-### Resource Management
-- **Process Limits**: Max 5 concurrent background processes
-- **Timeouts**: Configurable command timeouts (5min default)
-- **Cleanup**: Automatic process cleanup every 5 minutes
-
-### Security
-- **Isolated Execution**: Commands run in separate containers
-- **Allowlist**: Only predefined commands permitted
-- **Path Restrictions**: Working directories controlled
-- **No Root Access**: Non-privileged container execution
-
-## 🤝 Contributing
-
-### Adding New Commands
-1. Define command in `mcp-dev-commands.json`
-2. Test locally with `npm run mcp`
-3. Update documentation
-4. Test in Docker environment
-
-### Improving Performance
-1. Profile command execution times
-2. Optimize health check intervals
-3. Implement command result caching
-4. Add resource usage monitoring
+- [OpenCode Documentation](https://opencode.ai/docs)
+- [MCP Server Documentation](https://opencode.ai/docs/mcp-servers)
+- [Docker Documentation](https://docs.docker.com/)
+- [Prisma Documentation](https://www.prisma.io/docs)
 
 ---
 
-## 📞 Support
+## 🤝 Contributing
 
-For issues with MCP server setup:
-1. Check the troubleshooting section
-2. Review Docker and npm logs
-3. Verify configuration files
-4. Test with minimal setup
+When adding new MCP servers or modifying configurations:
 
-The MCP server provides a powerful way to manage development workflows through natural language commands, making it easier to handle complex multi-service applications like Ölföng.
+1. Test the configuration locally
+2. Update this documentation
+3. Verify Docker container functionality
+4. Ensure environment variables are properly documented
+
+The MCP configuration provides a powerful, extensible platform for AI-assisted development workflows in the Ölföng e-commerce project.

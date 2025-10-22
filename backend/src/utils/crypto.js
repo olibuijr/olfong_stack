@@ -15,10 +15,10 @@ function encrypt(text) {
   
   try {
     const iv = generateIV();
-    const cipher = crypto.createCipher(ALGORITHM, ENCRYPTION_KEY);
+    const cipher = crypto.createCipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
     let encrypted = cipher.update(text, 'utf8', 'hex');
     encrypted += cipher.final('hex');
-    return encrypted;
+    return iv.toString('hex') + ':' + encrypted;
   } catch (error) {
     console.error('Encryption error:', error);
     return null;
@@ -28,10 +28,13 @@ function encrypt(text) {
 // Decrypt text
 function decrypt(encryptedText) {
   if (!encryptedText) return null;
-  
+
   try {
-    const decipher = crypto.createDecipher(ALGORITHM, ENCRYPTION_KEY);
-    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    const textParts = encryptedText.split(':');
+    const iv = Buffer.from(textParts.shift(), 'hex');
+    const encryptedData = textParts.join(':');
+    const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
+    let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
     return decrypted;
   } catch (error) {
@@ -44,3 +47,19 @@ module.exports = {
   encrypt,
   decrypt
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

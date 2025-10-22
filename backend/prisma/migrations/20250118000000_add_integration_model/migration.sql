@@ -30,3 +30,19 @@ CREATE UNIQUE INDEX "Integration_name_key" ON "Integration"("name");
 
 -- Update Setting category enum
 ALTER TABLE "Setting" ALTER COLUMN "category" SET DEFAULT 'GENERAL';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const SkeletonLoader = ({ type = 'card', count = 1, className = '' }) => {
   const renderSkeleton = () => {
     switch (type) {
@@ -73,6 +75,12 @@ const SkeletonLoader = ({ type = 'card', count = 1, className = '' }) => {
       ))}
     </div>
   );
+};
+
+SkeletonLoader.propTypes = {
+  type: PropTypes.oneOf(['card', 'product', 'text', 'button', 'image']),
+  count: PropTypes.number,
+  className: PropTypes.string,
 };
 
 export default SkeletonLoader;

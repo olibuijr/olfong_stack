@@ -8,19 +8,26 @@ const ChatService = require('../services/chatService');
 const getConversations = async (req, res) => {
   try {
     const userId = req.user.id;
+    const userRole = req.user.role;
     const { page = 1, limit = 20, status = 'ACTIVE' } = req.query;
     const skip = (page - 1) * limit;
 
-    const conversations = await prisma.conversation.findMany({
-      where: {
-        participants: {
-          some: {
-            userId,
-            isActive: true,
+    // For admin and delivery users, show all conversations
+    // For regular users, show only their conversations
+    const whereClause = userRole === 'ADMIN' || userRole === 'DELIVERY' 
+      ? { status }
+      : {
+          participants: {
+            some: {
+              userId,
+              isActive: true,
+            },
           },
-        },
-        status,
-      },
+          status,
+        };
+
+    const conversations = await prisma.conversation.findMany({
+      where: whereClause,
       include: {
         participants: {
           include: {
@@ -65,15 +72,7 @@ const getConversations = async (req, res) => {
     });
 
     const total = await prisma.conversation.count({
-      where: {
-        participants: {
-          some: {
-            userId,
-            isActive: true,
-          },
-        },
-        status,
-      },
+      where: whereClause,
     });
 
     return successResponse(res, {
@@ -174,9 +173,10 @@ const sendMessage = async (req, res) => {
     const { conversationId } = req.params;
     const { content, messageType = 'TEXT', metadata } = req.body;
     const senderId = req.user.id;
+    const userRole = req.user.role;
 
     // Check if user is participant in this conversation
-    const participant = await prisma.conversationParticipant.findUnique({
+    let participant = await prisma.conversationParticipant.findUnique({
       where: {
         conversationId_userId: {
           conversationId: parseInt(conversationId),
@@ -185,8 +185,29 @@ const sendMessage = async (req, res) => {
       },
     });
 
+    // If not a participant, check if user is admin/delivery and auto-join
     if (!participant || !participant.isActive) {
-      return errorResponse(res, 'Access denied to this conversation', 403);
+      if (['ADMIN', 'DELIVERY'].includes(userRole)) {
+        // Auto-join admin/delivery users to conversations
+        if (participant) {
+          // Reactivate existing participant
+          await prisma.conversationParticipant.update({
+            where: { id: participant.id },
+            data: { isActive: true, joinedAt: new Date() },
+          });
+        } else {
+          // Create new participant
+          await prisma.conversationParticipant.create({
+            data: {
+              conversationId: parseInt(conversationId),
+              userId: senderId,
+              role: userRole,
+            },
+          });
+        }
+      } else {
+        return errorResponse(res, 'Access denied to this conversation', 403);
+      }
     }
 
     // Get other participants to determine receiver
@@ -250,7 +271,7 @@ const sendMessage = async (req, res) => {
  */
 const createConversation = async (req, res) => {
   try {
-    const { title, type = 'SUPPORT', priority = 'NORMAL' } = req.body;
+    const { title, type = 'SUPPORT' } = req.body;
     const userId = req.user.id;
 
     // Check if user already has an active support conversation
@@ -276,7 +297,6 @@ const createConversation = async (req, res) => {
       data: {
         title,
         type,
-        priority,
         participants: {
           create: {
             userId,
@@ -333,7 +353,8 @@ const joinConversation = async (req, res) => {
 
     if (existingParticipant) {
       if (existingParticipant.isActive) {
-        return errorResponse(res, 'Already a participant in this conversation', 400);
+        // Already a participant, just return success
+        console.log(`User ${userId} is already a participant in conversation ${conversationId}`);
       } else {
         // Reactivate participant
         await prisma.conversationParticipant.update({
@@ -384,7 +405,7 @@ const joinConversation = async (req, res) => {
 const updateConversationStatus = async (req, res) => {
   try {
     const { conversationId } = req.params;
-    const { status, priority } = req.body;
+    const { status } = req.body;
     const userRole = req.user.role;
 
     // Only admin can update conversation status
@@ -394,7 +415,6 @@ const updateConversationStatus = async (req, res) => {
 
     const updateData = {};
     if (status) updateData.status = status;
-    if (priority) updateData.priority = priority;
 
     const conversation = await prisma.conversation.update({
       where: { id: parseInt(conversationId) },
@@ -446,6 +466,37 @@ const getUnreadCount = async (req, res) => {
   }
 };
 
+/**
+ * Mark messages as read for a conversation
+ */
+const markMessagesAsRead = async (req, res) => {
+  try {
+    const { conversationId } = req.params;
+    const userId = req.user.id;
+
+    // Mark all unread messages in this conversation as read
+    await prisma.chatMessage.updateMany({
+      where: {
+        conversationId: parseInt(conversationId),
+        receiverId: userId,
+        isRead: false,
+      },
+      data: {
+        isRead: true,
+        readAt: new Date(),
+      },
+    });
+
+    // Emit read status to other devices
+    await ChatService.emitMessageRead(conversationId, null, userId);
+
+    return successResponse(res, { success: true }, 'Messages marked as read');
+  } catch (error) {
+    console.error('Mark messages as read error:', error);
+    return errorResponse(res, 'Failed to mark messages as read', 500);
+  }
+};
+
 module.exports = {
   getConversations,
   getMessages,
@@ -454,4 +505,5 @@ module.exports = {
   joinConversation,
   updateConversationStatus,
   getUnreadCount,
+  markMessagesAsRead,
 };
