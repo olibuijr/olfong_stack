@@ -317,9 +317,9 @@ const Cart = () => {
         </div>
 
         <div className="space-y-6">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
-            {/* Cart Items */}
-            <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            {/* Cart Items - Left Column */}
+            <div className="lg:col-span-1 space-y-4">
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
                   <ShoppingBag className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" />
@@ -403,8 +403,8 @@ const Cart = () => {
               </div>
             </div>
 
-            {/* Checkout Form */}
-            <div className="space-y-6">
+            {/* Checkout Form - Middle Column */}
+            <div className="lg:col-span-1 space-y-6">
               <form onSubmit={handleSubmit(onSubmitOrder)} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <div className="flex items-center mb-6">
                   <CreditCard className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" />
@@ -715,20 +715,42 @@ const Cart = () => {
                   />
                 </div>
 
-                {/* Order Summary */}
-                <div className="border-t pt-4 space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage.subtotal')} ({totalItems} {t('checkoutPage.items')})</span>
-                    <span className="font-medium">
-                      {subtotal.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
-                    </span>
+                {/* Line Items Summary */}
+                <div className="mb-6 bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('cartPage.cartItems')}</h3>
+                  <div className="space-y-2 max-h-80 overflow-y-auto">
+                    {cart.items.map((item) => (
+                      <div key={item.id} className="flex justify-between text-sm">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-gray-600 dark:text-gray-400 truncate">
+                            {getProductName(currentLanguage, item.product)}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-500">x{item.quantity}</p>
+                        </div>
+                        <p className="text-gray-900 dark:text-white font-medium ml-2 flex-shrink-0">
+                          {(item.product.price * item.quantity).toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                        </p>
+                      </div>
+                    ))}
                   </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">
+                  <div className="border-t border-gray-300 dark:border-gray-500 mt-4 pt-4">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage.subtotal')}</span>
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        {subtotal.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Shipping Summary */}
+                <div className="mb-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+                  <div className="flex justify-between items-center">
+                    <span className="text-blue-900 dark:text-blue-100 font-medium">
                       {getSelectedShippingOption() ? (currentLanguage === 'is' ? (getSelectedShippingOption().nameIs || getSelectedShippingOption().name) : (getSelectedShippingOption().name || getSelectedShippingOption().nameEn)) : t('checkoutPage.shipping')}
                     </span>
-                    <span className="font-medium">
+                    <span className="font-semibold text-blue-900 dark:text-blue-100">
                       {getSelectedShippingOption()?.fee === 0 ? (
                         <span className="text-green-600">{t('common.free')}</span>
                       ) : (
@@ -736,14 +758,15 @@ const Cart = () => {
                       )}
                     </span>
                   </div>
+                </div>
 
-                  <div className="border-t pt-3">
-                    <div className="flex justify-between">
-                      <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('common.total')}</span>
-                      <span className="text-lg font-bold text-primary-600">
-                        {totalPrice.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
-                      </span>
-                    </div>
+                {/* Total Summary */}
+                <div className="mb-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-lg p-4 border border-primary-200 dark:border-primary-700">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('common.total')}</span>
+                    <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                      {totalPrice.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                    </span>
                   </div>
                 </div>
 
@@ -768,6 +791,7 @@ const Cart = () => {
                 )}
               </form>
             </div>
+
           </div>
         </div>
       </div>

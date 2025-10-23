@@ -20,7 +20,7 @@ export const createAddress = createAsyncThunk(
   async (addressData, { rejectWithValue }) => {
     try {
       const response = await api.post('/addresses', addressData);
-      toast.success('Heimilisfang bætt við');
+      toast.success('Bæta við heimilisfangi');
       return response.data;
     } catch (error) {
       toast.error(error.response?.data?.message || 'Mistókst að bæta við heimilisfangi');

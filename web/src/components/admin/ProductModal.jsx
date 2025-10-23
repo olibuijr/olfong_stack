@@ -471,7 +471,7 @@ const ProductModal = ({
                     <input
                       {...register('packagingIs')}
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                      placeholder="t.d., Flaska, Dós, Kassi"
+                      placeholder="t.d., Flaska, Dós"
                     />
                   </div>
                 </div>
