@@ -249,7 +249,7 @@ const Cart = () => {
 
   if (cartLoading || addressesLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <LoadingSpinner size="large" />
       </div>
     );
