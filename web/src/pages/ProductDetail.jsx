@@ -320,10 +320,10 @@ const ProductDetail = () => {
       })).unwrap();
 
       // Show success toast instead of navigating
-      toast.success(t('products.addedToCart'));
+      toast.success(t('cart.itemAdded'));
     } catch (error) {
       console.error('Failed to add to cart:', error);
-      toast.error(t('products.failedToAddToCart'));
+      toast.error(t('cart.addError'));
     }
   };
 
