@@ -92,3 +92,140 @@ User disconnected: Jkp5zA6y1YBzrRBzAAAV
 User connected: Oo2XJJazXkCNjsi5AAAX
 User disconnected: Oo2XJJazXkCNjsi5AAAX
 User connected: JOjwSvfAWVDTXnDwAAAZ
+Trying axios approach for is...
+Trying axios approach for en...
+Axios approach successful for is, parsing HTML...
+HTML length: 58117
+No products found with axios, trying Playwright...
+Available elements: [
+  'html',    'xml',
+  'text',    'parseHTML',
+  'root',    'contains',
+  'extract', 'merge',
+  'load'
+]
+Axios failed, trying Playwright approach...
+Navigating to: https://www.vinbudin.is/heim/vorur/vorur.aspx/?text=Maipo
+Axios failed, trying Playwright approach...
+Navigating to: https://www.vinbudin.is/english/heim/vorur/vorur.aspx/?text=Maipo
+Searching for products in HTML...
+Total li.product elements found: 30
+Total a[href*="productID"] elements found: 60
+Found 30 product containers
+Found product: Vina Maipo Sauvignon Blanc Chardonnay 06824
+Found product: Vina Maipo Mi Pueblo Chardonnay 06839
+Found product: Vina Maipo Cabernet Sauvignon 07259
+Found product: Vina Maipo Classic Series Cabernet Sauvignon 07251
+Found product: Maison Castel Cremant de Bourgogne Brut 30898
+Found product: Maison Maximiliano Cuvee No. 86 Maxima rautt 31520
+Found product: Maison Barboulot Cabernet Syrah 31078
+Found product: Maison Castel Saint-Emilion rautt 23513
+Found product: Masso Antico Primitivo 23603
+Found product: Sérpöntun 29117
+Found product: Sérpöntun 21697
+Found product: Sérpöntun 31249
+Found product: Campo Viejo Gran Reserva 07624
+Found product: Massolino Barbera d'Alba 21699
+Found product: Saigon Baigur Gin 31030
+Found product: Campo Viejo Reserva 00135
+Found product: Campo Viejo Tempranillo 21044
+Found product: Sérpöntun 09668
+Found product: Saison du Rog reyktur bjór 31934
+Found product: Sérpöntun 27850
+Found product: Masso Antico Primitivo Single Vineyard 28807
+Found product: Martini Asti 00502
+Found product: Vara hættir 28627
+Found product: Vara hættir 19634
+Found product: Gaitero Spanish Cider with Red Grape 31614
+Found product: Marques de la Concordia Reserva Rioja Santiago 24993
+Found product: Vara hættir 28915
+Found product: Mucho Mas rautt 25431
+Found product: Væntanlegt 30703
+Found product: Væntanlegt 31605
+Found 30 products for is
+Searching for products in HTML...
+Total li.product elements found: 0
+Total a[href*="productID"] elements found: 0
+Found 0 product containers
+Found 0 products for en
+Found 30 unique products from both languages
+Creating product with body: {
+  "name": "Vina Maipo Mi Pueblo Chardonnay",
+  "nameIs": "Vina Maipo Mi Pueblo Chardonnay",
+  "description": "A quality hvítvín from Iceland.",
+  "descriptionIs": "Gæðavara hvítvín frá Ísland.",
+  "price": "6.698",
+  "stock": "100",
+  "category": "WINE",
+  "ageRestriction": "20",
+  "atvrImageUrl": "https://www.vinbudin.is/Portaldata/1/Resources/vorumyndir/medium/06839_r.jpg",
+  "alcoholContent": "11",
+  "volume": "3.000 ml",
+  "country": "Iceland",
+  "countryIs": "Ísland",
+  "subcategories": "",
+  "foodPairings": "[\"Shellfish\",\"Fish\",\"Vegetables\"]",
+  "foodPairingsIs": "[\"Skelfisk\",\"Fiskur\",\"Grænmetisréttir\"]",
+  "specialAttributes": "[]",
+  "specialAttributesIs": "[]",
+  "certifications": "[]",
+  "certificationsIs": "[]",
+  "atvrProductId": "06839",
+  "availability": "available",
+  "availabilityIs": "Til ráðstöfunar"
+}
+Downloading ATVR product image...
+Downloading image from https://www.vinbudin.is/Portaldata/1/Resources/vorumyndir/medium/06839_r.jpg
+Successfully saved image to media library: dfd9b8ca-a025-4a2c-9551-9dc077cc8e8f
+Successfully set product image URL to: http://localhost:5000/uploads/products/originals/2adbdd4c-f29e-455b-8548-e368393555d8.jpeg
+Creating product with body: {
+  "name": "Vina Maipo Sauvignon Blanc Chardonnay",
+  "nameIs": "Vina Maipo Sauvignon Blanc Chardonnay",
+  "description": "A quality hvítvín from Iceland.",
+  "descriptionIs": "Gæðavara hvítvín frá Ísland.",
+  "price": "1.999",
+  "stock": "100",
+  "category": "WINE",
+  "ageRestriction": "20",
+  "atvrImageUrl": "https://www.vinbudin.is/Portaldata/1/Resources/vorumyndir/medium/06824_r.jpg",
+  "alcoholContent": "12",
+  "volume": "750 ml",
+  "country": "Iceland",
+  "countryIs": "Ísland",
+  "subcategories": "",
+  "foodPairings": "[\"Fish\",\"Vegetables\"]",
+  "foodPairingsIs": "[\"Fiskur\",\"Grænmetisréttir\"]",
+  "specialAttributes": "[]",
+  "specialAttributesIs": "[]",
+  "certifications": "[]",
+  "certificationsIs": "[]",
+  "atvrProductId": "06824",
+  "availability": "available",
+  "availabilityIs": "Til ráðstöfunar"
+}
+Downloading ATVR product image...
+Downloading image from https://www.vinbudin.is/Portaldata/1/Resources/vorumyndir/medium/06824_r.jpg
+Successfully saved image to media library: 63c6d87d-f5f7-4d0d-9932-babfc18e6be4
+Successfully set product image URL to: http://localhost:5000/uploads/products/originals/49a1e784-4d65-434a-8731-029507c6a60b.jpeg
+Generated 1 formats and 4 sizes for media 63c6d87d-f5f7-4d0d-9932-babfc18e6be4
+Generated 1 formats and 4 sizes for media dfd9b8ca-a025-4a2c-9551-9dc077cc8e8f
+User disconnected: JOjwSvfAWVDTXnDwAAAZ
+User connected: n_YsrKT_U0ZCrBiNAAAb
+User disconnected: n_YsrKT_U0ZCrBiNAAAb
+User connected: txFgGG9Ty0EMNCkLAAAd
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: YHw8mZy8bLWUrkrdAAAB
+User connected: mG9X5c1Zzyhcf6YpAAAD
+User connected: okFYzPGXDZErG2C-AAAF
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: SWmdu8QAMgOPljSCAAAB
+User connected: W_ZyMYgtbgBisPuwAAAD
+User connected: Ng0FS2q0tHwOWlxXAAAF

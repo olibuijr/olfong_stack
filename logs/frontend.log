@@ -41,3 +41,6 @@ To eliminate this warning, add "type": "module" to /home/olibuijr/Projects/olfon
 1:57:49 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
 1:57:54 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
 1:58:49 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
+2:06:22 AM [vite] hmr update /src/pages/Cart.jsx, /src/index.css
+2:06:32 AM [vite] hmr update /src/pages/Cart.jsx, /src/index.css
+2:06:38 AM [vite] hmr update /src/pages/Cart.jsx, /src/index.css
