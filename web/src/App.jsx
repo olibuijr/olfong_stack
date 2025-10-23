@@ -71,6 +71,11 @@ function App() {
     updateTitle();
   }, []);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Check authentication on app load
   useEffect(() => {
     const token = localStorage.getItem('token');
