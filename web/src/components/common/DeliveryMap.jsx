@@ -138,7 +138,7 @@ const DeliveryMap = ({
               ? 'Pickupstaðsetning er merkt á kortinu hér að neðan'
               : 'Pickup location is marked on the map below'
             : t('navigation.language') === 'is'
-            ? 'Staðsetning sendara og afhendingararðsetning eru sýndar á kortinu'
+            ? 'Staðsetning sendara og afhendingarheimilisfang eru sýndar á kortinu'
             : 'Delivery person and delivery address locations are shown on the map'}
         </div>
       </div>

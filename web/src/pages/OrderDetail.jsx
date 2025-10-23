@@ -72,6 +72,16 @@ const OrderDetail = () => {
 
   const getStatusText = (status) => t('orders.statuses', status);
 
+  const getPaymentStatusText = (status) => {
+    const statusMap = {
+      'COMPLETED': t('navigation.language') === 'is' ? 'Lokið' : 'Completed',
+      'PENDING': t('navigation.language') === 'is' ? 'Í bið' : 'Pending',
+      'FAILED': t('navigation.language') === 'is' ? 'Mistókst' : 'Failed',
+      'CANCELLED': t('navigation.language') === 'is' ? 'Hætt við' : 'Cancelled'
+    };
+    return statusMap[status] || status;
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'PENDING':
@@ -299,7 +309,7 @@ const OrderDetail = () => {
                       {t('orderDetailPage.status')}
                     </span>
                     <p className={currentOrder.transaction.paymentStatus === 'COMPLETED' ? 'text-green-800 dark:text-green-300 font-medium' : 'text-yellow-800 dark:text-yellow-300 font-medium'}>
-                      {currentOrder.transaction.paymentStatus}
+                      {getPaymentStatusText(currentOrder.transaction.paymentStatus)}
                     </p>
                   </div>
                 </div>
@@ -333,7 +343,7 @@ const OrderDetail = () => {
                   <span>{currentOrder.shippingOption?.type === 'pickup' ? t('ordersPage.pickup') : t('ordersPage.delivery')}</span>
                   <span className="font-medium">
                     {(currentOrder.deliveryFee || 0) === 0
-                      ? (t('navigation.language') === 'is' ? 'Ókeypis' : 'Free')
+                      ? t('common.free')
                       : `${(currentOrder.deliveryFee || 0).toLocaleString()} ${t('common.currency')}`
                     }
                   </span>
