@@ -318,12 +318,10 @@ const ProductDetail = () => {
         productId: currentProduct.id,
         quantity
       })).unwrap();
-
-      // Show success toast instead of navigating
-      toast.success(t('cart.itemAdded'));
+      // Toast is handled by the thunk
     } catch (error) {
       console.error('Failed to add to cart:', error);
-      toast.error(t('cart.addError'));
+      // Toast is handled by the thunk
     }
   };
 
