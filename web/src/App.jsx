@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from './store/slices/authSlice';
 import { updateOrderStatusRealtime } from './store/slices/orderSlice';
@@ -178,10 +178,9 @@ function App() {
               <Route path="/admin/settings/smtp" element={<SMTPSettings />} />
             </Route>
 
-            {/* Delivery routes */}
-            <Route element={<ProtectedRoute requiredRole="DELIVERY" />}>
+            {/* Delivery routes - accessible by both ADMIN and DELIVERY roles */}
+            <Route element={<ProtectedRoute requiredRoles={['ADMIN', 'DELIVERY']} />}>
               <Route path="/delivery" element={<DeliveryDashboard />} />
-              <Route path="/admin/chat" element={<AdminChat />} />
             </Route>
 
             {/* Catch-all route for 404 */}

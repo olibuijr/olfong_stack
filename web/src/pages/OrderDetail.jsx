@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
-import { ArrowLeft, Package, Clock, Truck, CheckCircle, XCircle, MapPin, Phone, User, Calendar, CreditCard } from 'lucide-react';
+import { ArrowLeft, Package, Clock, Truck, CheckCircle, XCircle, MapPin, Phone, User, Calendar, CreditCard, AlertCircle } from 'lucide-react';
 import { fetchOrder, clearCurrentOrder } from '../store/slices/orderSlice';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import DeliveryMap from '../components/common/DeliveryMap';
+import ProductImage from '../components/common/ProductImage';
 
 const OrderDetail = () => {
   const { t } = useLanguage();
@@ -106,9 +108,9 @@ const OrderDetail = () => {
       <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('orderDetailPage', 'orderNotFound')}</h1>
-            <p className="text-gray-600 mb-8">{t('orderDetailPage', 'orderNotFoundDesc')}</p>
-            <button onClick={() => navigate('/orders')} className="btn btn-primary">{t('orderDetailPage', 'backToOrders')}</button>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('orderDetailPage.orderNotFound')}</h1>
+            <p className="text-gray-600 mb-8">{t('orderDetailPage.orderNotFoundDesc')}</p>
+            <button onClick={() => navigate('/orders')} className="btn btn-primary">{t('orderDetailPage.backToOrders')}</button>
           </div>
         </div>
       </div>
@@ -116,149 +118,189 @@ const OrderDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-8 md:py-12">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Back button */}
         <button
           onClick={() => navigate('/orders')}
-          className="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+          className="flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mb-6 font-medium"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('orderDetailPage', 'backToOrders')}
+          {t('orderDetailPage.backToOrders')}
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Order Information */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Order Header */}
-            <div className="card p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                  {t('orderDetailPage', 'order')} #{currentOrder.orderNumber}
-                  </h1>
-                  <p className="text-gray-600">{t('orderDetailPage', 'created')}: {formatDate(currentOrder.createdAt)}</p>
-                </div>
-                <div className={`px-4 py-2 rounded-lg border flex items-center space-x-2 ${getStatusColor(currentOrder.status)}`}>
-                  {getStatusIcon(currentOrder.status)}
-                  <span className="font-medium">{getStatusText(currentOrder.status)}</span>
-                </div>
+        {/* Main Receipt-style Card */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+
+          {/* Header - Receipt Style */}
+          <div className="bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 px-6 sm:px-8 py-8 text-white">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h1 className="text-3xl sm:text-4xl font-bold mb-2">
+                  #{currentOrder.orderNumber}
+                </h1>
+                <p className="text-primary-100 text-sm">{t('orderDetailPage.created')}: {formatDate(currentOrder.createdAt)}</p>
+              </div>
+              <div className={`px-4 py-3 rounded-lg flex items-center space-x-2 font-semibold text-lg ${getStatusColor(currentOrder.status)}`}>
+                {getStatusIcon(currentOrder.status)}
+                <span>{getStatusText(currentOrder.status)}</span>
               </div>
             </div>
+          </div>
 
-            {/* Order Items */}
-            <div className="card p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage', 'orderItems')}</h2>
-              <div className="space-y-4">
+          {/* Content */}
+          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+
+            {/* Order Items Section */}
+            <div className="px-6 sm:px-8 py-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <Package className="w-6 h-6 mr-3 text-primary-600 dark:text-primary-400" />
+                {t('orderDetailPage.orderItems')}
+              </h2>
+              <div className="space-y-6">
                 {currentOrder.items.map((item, index) => (
-                  <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                    {item.product.imageUrl ? (
-                      <img
-                        src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${item.product.imageUrl}`}
-                        alt={item.product.name}
-                        className="w-16 h-16 object-cover rounded-lg"
-                      />
-                    ) : (
-                      <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                        <Package className="w-8 h-8 text-gray-400" />
-                      </div>
-                    )}
-                    <div className="flex-1">
-                      <h3 className="font-medium text-gray-900">
+                  <div key={index} className="flex gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                    <ProductImage
+                      product={item.product}
+                      className="w-20 h-20 sm:w-24 sm:h-24 object-contain flex-shrink-0 bg-white dark:bg-gray-600 rounded-lg p-2"
+                      currentLanguage={t('navigation.language')}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
                         {item.product.nameIs || item.product.name}
                       </h3>
-                      <p className="text-sm text-gray-600">{t('orderDetailPage', 'quantity')}: {item.quantity}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium text-gray-900">
-                        {(item.price * item.quantity).toLocaleString()} {t('common', 'currency')}
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        {item.product.descriptionIs || item.product.description}
                       </p>
-                      <p className="text-sm text-gray-600">{item.price.toLocaleString()} {t('common', 'currency')} {t('orderDetailPage', 'each')}</p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                          {t('orderDetailPage.quantity')}: <span className="font-bold text-gray-900 dark:text-white ml-1">{item.quantity}</span>
+                        </span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          {item.price.toLocaleString()} {t('common.currency')} {t('orderDetailPage.each')}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="font-bold text-lg text-primary-600 dark:text-primary-400">
+                        {(item.price * item.quantity).toLocaleString()}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t('common.currency')}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Delivery Information */}
-            <div className="card p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <MapPin className="w-5 h-5 mr-2" />
-                {t('orderDetailPage', 'deliveryInfo')}
+            {/* Delivery & Map Section */}
+            <div className="px-6 sm:px-8 py-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <Truck className="w-6 h-6 mr-3 text-primary-600 dark:text-primary-400" />
+                {t('orderDetailPage.deliveryInfo')}
               </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage', 'deliveryMethod')}</h3>
-                  <p className="text-gray-600">{currentOrder.deliveryMethod === 'PICKUP' ? t('orderDetailPage', 'storePickup') : t('orderDetailPage', 'homeDelivery')}</p>
-                  {currentOrder.pickupTime && (
-                    <p className="text-sm text-gray-600 mt-1">
-                      {t('navigation', 'language') === 'is' ? 'Tími:' : 'Time:'} {currentOrder.pickupTime}
-                    </p>
-                  )}
-                </div>
 
-                {currentOrder.deliveryMethod === 'DELIVERY' && currentOrder.address && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage', 'deliveryAddress')}</h3>
-                    <p className="text-gray-600">
-                      {currentOrder.address.street}<br />
-                      {currentOrder.address.city}, {currentOrder.address.postalCode}<br />
-                      {currentOrder.address.country}
-                    </p>
-                  </div>
-                )}
-
-                {currentOrder.deliveryPerson && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2 flex items-center">
-                      <User className="w-4 h-4 mr-1" />
-                      {t('orderDetailPage', 'deliveryPerson')}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                {/* Delivery Information */}
+                <div className="space-y-6">
+                  <div className="bg-gray-50 dark:bg-gray-700/50 p-5 rounded-lg">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                      <Truck className="w-4 h-4 mr-2 text-primary-600 dark:text-primary-400" />
+                      {t('orderDetailPage.deliveryMethod')}
                     </h3>
-                    <p className="text-gray-600">{currentOrder.deliveryPerson.fullName}</p>
-                    {currentOrder.deliveryPerson.phone && (
-                      <p className="text-sm text-gray-600 flex items-center">
-                        <Phone className="w-3 h-3 mr-1" />
-                        {currentOrder.deliveryPerson.phone}
+                    <p className="text-gray-600 dark:text-gray-400 font-medium">
+                      {currentOrder.shippingOption?.type === 'pickup'
+                        ? (t('navigation.language') === 'is' ? 'Sækja í verslun' : 'Store Pickup')
+                        : (t('navigation.language') === 'is' ? 'Heimsending' : 'Home Delivery')}
+                    </p>
+                    {currentOrder.pickupTime && (
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                        <Clock className="w-4 h-4 inline mr-1" />
+                        {t('checkoutPage.pickupTime')}: <span className="font-semibold">{currentOrder.pickupTime}</span>
                       </p>
                     )}
                   </div>
-                )}
 
-                {currentOrder.estimatedDelivery && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2 flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {t('orderDetailPage', 'estimatedDelivery')}
-                    </h3>
-                    <p className="text-gray-600">{formatDate(currentOrder.estimatedDelivery)}</p>
-                  </div>
-                )}
+                  {currentOrder.address && (
+                    <div className="bg-gray-50 dark:bg-gray-700/50 p-5 rounded-lg">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                        <MapPin className="w-4 h-4 mr-2 text-primary-600 dark:text-primary-400" />
+                        {t('orderDetailPage.deliveryAddress')}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        <span className="font-medium">{currentOrder.address.street}</span><br />
+                        <span className="text-sm">{currentOrder.address.city}, {currentOrder.address.postalCode}</span><br />
+                        <span className="text-sm">{currentOrder.address.country}</span>
+                      </p>
+                    </div>
+                  )}
 
-                {currentOrder.deliveredAt && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2">{t('orderDetailPage', 'deliveredAt')}</h3>
-                    <p className="text-gray-600">{formatDate(currentOrder.deliveredAt)}</p>
-                  </div>
-                )}
+                  {currentOrder.deliveryPerson && (
+                    <div className="bg-blue-50 dark:bg-blue-900/20 p-5 rounded-lg border border-blue-200 dark:border-blue-800">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                        <User className="w-4 h-4 mr-2 text-blue-600 dark:text-blue-400" />
+                        {t('orderDetailPage.deliveryPerson')}
+                      </h3>
+                      <p className="font-medium text-gray-900 dark:text-white">{currentOrder.deliveryPerson.fullName}</p>
+                      {currentOrder.deliveryPerson.phone && (
+                        <a href={`tel:${currentOrder.deliveryPerson.phone}`} className="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center mt-2">
+                          <Phone className="w-3 h-3 mr-1" />
+                          {currentOrder.deliveryPerson.phone}
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {currentOrder.estimatedDelivery && (
+                    <div className="bg-gray-50 dark:bg-gray-700/50 p-5 rounded-lg">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                        <Calendar className="w-4 h-4 mr-2 text-primary-600 dark:text-primary-400" />
+                        {t('orderDetailPage.estimatedDelivery')}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400">{formatDate(currentOrder.estimatedDelivery)}</p>
+                    </div>
+                  )}
+
+                  {currentOrder.deliveredAt && (
+                    <div className="bg-green-50 dark:bg-green-900/20 p-5 rounded-lg border border-green-200 dark:border-green-800">
+                      <h3 className="font-semibold text-green-900 dark:text-green-200 mb-2 flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        {t('orderDetailPage.deliveredAt')}
+                      </h3>
+                      <p className="text-green-800 dark:text-green-300">{formatDate(currentOrder.deliveredAt)}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Map */}
+                <div>
+                  <DeliveryMap
+                    deliveryLocation={deliveryLocation}
+                    deliveryAddress={currentOrder.address}
+                    orderType={currentOrder.shippingOption?.type || 'delivery'}
+                  />
+                </div>
               </div>
             </div>
 
             {/* Payment Information */}
             {currentOrder.transaction && (
-              <div className="card p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <CreditCard className="w-5 h-5 mr-2" />
-                  {t('orderDetailPage', 'paymentInfo')}
+              <div className="px-6 sm:px-8 py-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                  <CreditCard className="w-6 h-6 mr-3 text-primary-600 dark:text-primary-400" />
+                  {t('orderDetailPage.paymentInfo')}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <span className="font-medium text-gray-900">{t('orderDetailPage', 'paymentMethod')}</span>
-                    <p className="text-gray-600">{currentOrder.transaction.paymentMethod}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-gray-50 dark:bg-gray-700/50 p-5 rounded-lg">
+                    <span className="font-semibold text-gray-900 dark:text-white block mb-2">{t('orderDetailPage.paymentMethod')}</span>
+                    <p className="text-gray-600 dark:text-gray-400">{currentOrder.transaction.paymentMethod}</p>
                   </div>
-                  <div>
-                    <span className="font-medium text-gray-900">{t('orderDetailPage', 'status')}</span>
-                    <p className="text-gray-600">{currentOrder.transaction.paymentStatus}</p>
+                  <div className={`p-5 rounded-lg ${currentOrder.transaction.paymentStatus === 'COMPLETED' ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' : 'bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800'}`}>
+                    <span className={`font-semibold block mb-2 ${currentOrder.transaction.paymentStatus === 'COMPLETED' ? 'text-green-900 dark:text-green-200' : 'text-yellow-900 dark:text-yellow-200'}`}>
+                      {t('orderDetailPage.status')}
+                    </span>
+                    <p className={currentOrder.transaction.paymentStatus === 'COMPLETED' ? 'text-green-800 dark:text-green-300 font-medium' : 'text-yellow-800 dark:text-yellow-300 font-medium'}>
+                      {currentOrder.transaction.paymentStatus}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -266,107 +308,68 @@ const OrderDetail = () => {
 
             {/* Notes */}
             {currentOrder.notes && (
-              <div className="card p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage', 'notes')}</h2>
-                <p className="text-gray-600">{currentOrder.notes}</p>
+              <div className="px-6 sm:px-8 py-8 bg-blue-50 dark:bg-blue-900/20 border-t border-blue-200 dark:border-blue-800">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                  <AlertCircle className="w-6 h-6 mr-3 text-blue-600 dark:text-blue-400" />
+                  {t('orderDetailPage.notes')}
+                </h2>
+                <p className="text-gray-700 dark:text-gray-300">{currentOrder.notes}</p>
               </div>
             )}
-          </div>
 
-          {/* Order Summary & Map */}
-          <div className="lg:col-span-1 space-y-6">
             {/* Order Summary */}
-            <div className="card p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orders', 'title')}</h2>
-              
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{t('orders', 'reorder')}</span>
+            <div className="px-6 sm:px-8 py-8 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('orders.title')}</h2>
+
+              <div className="space-y-4 max-w-md ml-auto">
+                <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                  <span>{t('orders.reorder')}</span>
                   <span className="font-medium">
-                    {(currentOrder.totalAmount - currentOrder.deliveryFee).toLocaleString()} {t('common', 'currency')}
+                    {((currentOrder.totalAmount || 0) - (currentOrder.deliveryFee || 0)).toLocaleString()} {t('common.currency')}
                   </span>
                 </div>
-                
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{currentOrder.deliveryMethod === 'PICKUP' ? t('ordersPage', 'pickup') : t('ordersPage', 'delivery')}</span>
+
+                <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                  <span>{currentOrder.shippingOption?.type === 'pickup' ? t('ordersPage.pickup') : t('ordersPage.delivery')}</span>
                   <span className="font-medium">
-                    {currentOrder.deliveryFee === 0 
-                      ? (t('navigation', 'language') === 'is' ? 'Ókeypis' : 'Free')
-                      : `${currentOrder.deliveryFee.toLocaleString()} ${t('common', 'currency')}`
+                    {(currentOrder.deliveryFee || 0) === 0
+                      ? (t('navigation.language') === 'is' ? 'Ókeypis' : 'Free')
+                      : `${(currentOrder.deliveryFee || 0).toLocaleString()} ${t('common.currency')}`
                     }
                   </span>
                 </div>
-                
-                <div className="border-t pt-3">
-                  <div className="flex justify-between">
-                  <span className="text-lg font-semibold text-gray-900">{t('common', 'total')}</span>
-                    <span className="text-lg font-bold text-primary-600">
-                      {currentOrder.totalAmount.toLocaleString()} {t('common', 'currency')}
-                    </span>
-                  </div>
+
+                <div className="border-t-2 border-gray-300 dark:border-gray-600 pt-4 flex justify-between">
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">{t('common.total')}</span>
+                  <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                    {(currentOrder.totalAmount || 0).toLocaleString()} {t('common.currency')}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Delivery Tracking Map */}
-            {currentOrder.status === 'OUT_FOR_DELIVERY' && currentOrder.deliveryMethod === 'DELIVERY' && (
-              <div className="card p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('orderDetailPage', 'deliveryTracking')}</h2>
-                
-                {deliveryLocation ? (
-                  <div>
-                    {/* OpenStreetMap Integration */}
-                    <div className="bg-gray-200 rounded-lg h-64 mb-4 flex items-center justify-center">
-                      <div className="text-center">
-                        <MapPin className="w-12 h-12 text-primary-600 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600">{t('orderDetailPage', 'onTheWay')}</p>
-                        <p className="text-xs text-gray-500 mt-1">{t('orderDetailPage', 'lastUpdated')}: {new Date(deliveryLocation.timestamp).toLocaleTimeString()}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="text-sm text-gray-600">
-                      <p>
-                        {t('navigation', 'language') === 'is' 
-                          ? 'Áætluð afhending:' 
-                          : 'Estimated delivery'}: {currentOrder.estimatedDelivery ? formatDate(currentOrder.estimatedDelivery) : 'TBD'}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Truck className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">
-                      {t('orderDetailPage', 'notStarted')}
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Contact Information */}
-            <div className="card p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('navigation', 'language') === 'is' ? 'Hafa samband' : 'Contact'}
+            {/* Contact Information Footer */}
+            <div className="px-6 sm:px-8 py-8 bg-gray-900 dark:bg-black text-white">
+              <h2 className="text-xl font-bold mb-6">
+                {t('navigation.language') === 'is' ? 'Hafa samband' : 'Contact'}
               </h2>
-              <div className="space-y-3 text-sm">
-                <p>
-                  <span className="font-medium">
-                    {t('navigation', 'language') === 'is' ? 'Netfang:' : 'Email:'}
-                  </span>
-                  <br />
-                  <a href="mailto:info@olfong.is" className="text-primary-600 hover:text-primary-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-sm text-gray-300 mb-2">
+                    {t('navigation.language') === 'is' ? 'Netfang' : 'Email'}
+                  </p>
+                  <a href="mailto:info@olfong.is" className="text-primary-400 hover:text-primary-300 font-medium break-all">
                     info@olfong.is
                   </a>
-                </p>
-                <p>
-                  <span className="font-medium">
-                    {t('navigation', 'language') === 'is' ? 'Sími:' : 'Phone:'}
-                  </span>
-                  <br />
-                  <a href="tel:+3541234567" className="text-primary-600 hover:text-primary-700">
+                </div>
+                <div>
+                  <p className="text-sm text-gray-300 mb-2">
+                    {t('navigation.language') === 'is' ? 'Sími' : 'Phone'}
+                  </p>
+                  <a href="tel:+3541234567" className="text-primary-400 hover:text-primary-300 font-medium">
                     +354 123 4567
                   </a>
-                </p>
+                </div>
               </div>
             </div>
           </div>

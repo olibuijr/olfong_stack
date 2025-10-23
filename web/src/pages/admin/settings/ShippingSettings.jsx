@@ -77,7 +77,7 @@ const ShippingSettings = () => {
   };
 
   const handleShippingDelete = async (shippingId) => {
-    if (!window.confirm(t('adminSettings', 'confirmDeleteShipping'))) {
+    if (!window.confirm(t('adminSettings.confirmDeleteShipping'))) {
       return;
     }
 
@@ -167,8 +167,8 @@ const ShippingSettings = () => {
             <div className="text-red-400 mb-4">
               <RefreshCw className="w-16 h-16 mx-auto" />
             </div>
-            <h1 className="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
-            <p className="text-gray-700">You do not have permission to view this page.</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-gray-700">{t('admin.accessDeniedMessage')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -194,7 +194,7 @@ const ShippingSettings = () => {
           <div className="mt-3">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {editingShippingData.id ? t('adminSettings', 'editShippingOption') : t('adminSettings', 'addShippingOption')}
+                {editingShippingData.id ? t('adminSettings.editShippingOption') : t('adminSettings.addShippingOption')}
               </h3>
               <button
                 onClick={() => {
@@ -227,7 +227,7 @@ const ShippingSettings = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'nameEnglish')}
+                      {t('adminSettings.nameEnglish')}
                     </label>
                     <input
                       type="text"
@@ -240,7 +240,7 @@ const ShippingSettings = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'nameIcelandic')}
+                      {t('adminSettings.nameIcelandic')}
                     </label>
                     <input
                       type="text"
@@ -254,22 +254,22 @@ const ShippingSettings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'type')}
+                    {t('adminSettings.type')}
                   </label>
                   <select
                     name="type"
                     defaultValue={editingShippingData.type || 'DELIVERY'}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
                   >
-                    <option value="DELIVERY">{t('adminSettings', 'delivery')}</option>
-                    <option value="PICKUP">{t('adminSettings', 'pickup')}</option>
+                    <option value="DELIVERY">{t('adminSettings.delivery')}</option>
+                    <option value="PICKUP">{t('adminSettings.pickup')}</option>
                   </select>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'price')} (ISK)
+                      {t('adminSettings.price')} (ISK)
                     </label>
                     <input
                       type="number"
@@ -284,7 +284,7 @@ const ShippingSettings = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'estimatedDays')}
+                      {t('adminSettings.estimatedDays')}
                     </label>
                     <input
                       type="number"
@@ -297,7 +297,7 @@ const ShippingSettings = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'sortOrder')}
+                      {t('adminSettings.sortOrder')}
                     </label>
                     <input
                       type="number"
@@ -311,7 +311,7 @@ const ShippingSettings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'descriptionEnglish')}
+                    {t('adminSettings.descriptionEnglish')}
                   </label>
                   <textarea
                     name="description"
@@ -323,7 +323,7 @@ const ShippingSettings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'descriptionIcelandic')}
+                    {t('adminSettings.descriptionIcelandic')}
                   </label>
                   <textarea
                     name="descriptionIs"
@@ -343,13 +343,13 @@ const ShippingSettings = () => {
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500"
                 >
-                  {t('adminSettings', 'cancel')}
+                  {t('adminSettings.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  {editingShippingData.id ? t('adminSettings', 'update') : t('adminSettings', 'create')}
+                  {editingShippingData.id ? t('adminSettings.update') : t('adminSettings.create')}
                 </button>
               </div>
             </form>
@@ -373,8 +373,8 @@ const ShippingSettings = () => {
                 <ArrowLeft className="w-5 h-5" />
               </Link>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings', 'shipping')}</h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings', 'shippingDescription')}</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.shipping')}</h1>
+                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings.shippingDescription')}</p>
               </div>
             </div>
           </div>
@@ -387,8 +387,8 @@ const ShippingSettings = () => {
             <div className="flex items-start">
               <div className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5">ℹ️</div>
               <div className="text-sm text-blue-800 dark:text-blue-200">
-                <p className="font-medium mb-1">{t('adminSettings', 'shippingConfiguration')}</p>
-                <p>{t('adminSettings', 'shippingDescription')}</p>
+                <p className="font-medium mb-1">{t('adminSettings.shippingConfiguration')}</p>
+                <p>{t('adminSettings.shippingDescription')}</p>
               </div>
             </div>
           </div>
@@ -403,7 +403,7 @@ const ShippingSettings = () => {
               className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
             >
               <Plus className="h-4 w-4 mr-2" />
-              {t('adminSettings', 'addShippingOption')}
+              {t('adminSettings.addShippingOption')}
             </button>
           </div>
 
@@ -429,7 +429,7 @@ const ShippingSettings = () => {
                     <button
                       onClick={() => handleShippingDelete(option.id)}
                       className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                      title={t('adminSettings', 'delete')}
+                      title={t('adminSettings.delete')}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -458,7 +458,7 @@ const ShippingSettings = () => {
                   <div className="flex items-center space-x-3">
                     <div className={`w-3 h-3 rounded-full ${option.isEnabled ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {option.isEnabled ? t('adminSettings', 'enabled') : t('adminSettings', 'disabled')}
+                      {option.isEnabled ? t('adminSettings.enabled') : t('adminSettings.disabled')}
                     </span>
                   </div>
                   <div className="text-right">
@@ -480,7 +480,7 @@ const ShippingSettings = () => {
                     }}
                     className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg transition-colors duration-200"
                   >
-                    {t('adminSettings', 'edit')}
+                    {t('adminSettings.edit')}
                   </button>
                 </div>
               </div>
@@ -490,8 +490,8 @@ const ShippingSettings = () => {
           {shippingOptions.length === 0 && (
             <div className="text-center py-12">
               <Truck className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'noShippingOptions')}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings', 'noShippingOptionsDescription')}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.noShippingOptions')}</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings.noShippingOptionsDescription')}</p>
               <button
                 onClick={() => {
                   setEditingShippingData({});
@@ -500,7 +500,7 @@ const ShippingSettings = () => {
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <Plus className="h-4 w-4 mr-2" />
-                {t('adminSettings', 'addFirstShippingOption')}
+                {t('adminSettings.addFirstShippingOption')}
               </button>
             </div>
           )}
@@ -509,11 +509,11 @@ const ShippingSettings = () => {
             <div className="flex items-start">
               <div className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 mt-0.5">⚠️</div>
               <div className="text-sm text-yellow-800 dark:text-yellow-200">
-                <p className="font-medium mb-1">{t('adminSettings', 'shippingNotes')}</p>
+                <p className="font-medium mb-1">{t('adminSettings.shippingNotes')}</p>
                 <ul className="list-disc list-inside space-y-1">
-                  <li>{t('adminSettings', 'shippingNote1')}</li>
-                  <li>{t('adminSettings', 'shippingNote2')}</li>
-                  <li>{t('adminSettings', 'shippingNote3')}</li>
+                  <li>{t('adminSettings.shippingNote1')}</li>
+                  <li>{t('adminSettings.shippingNote2')}</li>
+                  <li>{t('adminSettings.shippingNote3')}</li>
                 </ul>
               </div>
             </div>

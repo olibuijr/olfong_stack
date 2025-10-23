@@ -62,14 +62,14 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
       });
 
       if (!response.ok) {
-        throw new Error(t('atvrImport', 'failedToImport'));
+        throw new Error(t('atvrImport.failedToImport'));
       }
 
       const data = await response.json();
       setSearchResults(data.data?.products || []);
     } catch (error) {
       console.error('Error searching ATVR products:', error);
-      toast.error(t('atvrImport', 'failedToImport'));
+      toast.error(t('atvrImport.failedToImport'));
     } finally {
       setIsSearching(false);
     }
@@ -95,23 +95,16 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
 
   // Parse ATVR product data to our format with bilingual support
   const parseATVRProduct = (atvrProduct) => {
+    // Food pairings from ATVR are already human-readable names, pass them through as-is
     const foodPairings = atvrProduct.foodPairings || [];
     const foodPairingsIs = atvrProduct.foodPairingsIs || [];
-    const parsedPairings = foodPairings.map(code => ({
-      code,
-      name: foodCategories[code]?.en || code
-    }));
-    const parsedPairingsIs = foodPairingsIs.map(code => ({
-      code,
-      name: foodCategories[code]?.is || code
-    }));
 
     return {
       name: atvrProduct.name,
       nameIs: atvrProduct.nameIs || atvrProduct.name,
       description: atvrProduct.description || '',
       descriptionIs: atvrProduct.descriptionIs || atvrProduct.description || '',
-      price: parseFloat(atvrProduct.price.replace(/[^\d.,]/g, '').replace(',', '.')),
+      price: typeof atvrProduct.price === 'number' ? atvrProduct.price : parseFloat(atvrProduct.price.replace(/[^\d.,]/g, '').replace(',', '.')),
       category: productCategories[atvrProduct.category]?.en || atvrProduct.category,
       image: atvrProduct.image,
       alcoholContent: atvrProduct.alcoholContent,
@@ -125,8 +118,8 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
       distributorIs: atvrProduct.distributorIs,
       packaging: atvrProduct.packaging,
       packagingIs: atvrProduct.packagingIs,
-      foodPairings: parsedPairings,
-      foodPairingsIs: parsedPairingsIs,
+      foodPairings: foodPairings,
+      foodPairingsIs: foodPairingsIs,
       specialAttributes: atvrProduct.specialAttributes || [],
       specialAttributesIs: atvrProduct.specialAttributesIs || [],
       availability: atvrProduct.availability || 'available',
@@ -139,7 +132,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
   // Import selected products
   const handleImport = async () => {
     if (selectedProducts.length === 0) {
-      toast.error(t('atvrImport', 'pleaseSelectOne'));
+      toast.error(t('atvrImport.pleaseSelectOne'));
       return;
     }
 
@@ -150,13 +143,13 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
         await onImportProduct(product);
       }
 
-      toast.success(`${t('atvrImport', 'successfullyImported')} ${parsedProducts.length} ${t('atvrImport', 'productsImported')}`);
+      toast.success(`${t('atvrImport.successfullyImported')} ${parsedProducts.length} ${t('atvrImport.productsImported')}`);
       setSelectedProducts([]);
       setSearchResults([]);
       setSearchTerm('');
     } catch (error) {
       console.error('Error importing products:', error);
-      toast.error(t('atvrImport', 'failedToImport'));
+      toast.error(t('atvrImport.failedToImport'));
     }
   };
 
@@ -173,7 +166,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                {t('atvrImport', 'previewImportTitle')} ({selectedProducts.length} {t('atvrImport', 'products')})
+                {t('atvrImport.previewImportTitle')} ({selectedProducts.length} {t('atvrImport.products')})
               </h3>
               <button
                 onClick={() => setShowPreview(false)}
@@ -196,7 +189,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                           </h4>
                           {parsedProduct.nameIs && parsedProduct.nameIs !== parsedProduct.name && (
                             <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                              <strong>{t('atvrImport', 'icelandicLabel')}</strong> {parsedProduct.nameIs}
+                              <strong>{t('atvrImport.icelandicLabel')}</strong> {parsedProduct.nameIs}
                             </p>
                           )}
                           <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
@@ -204,7 +197,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                           </p>
                           {parsedProduct.descriptionIs && parsedProduct.descriptionIs !== parsedProduct.description && (
                             <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                              <strong>{t('atvrImport', 'icelandicLabel')}</strong> {parsedProduct.descriptionIs}
+                              <strong>{t('atvrImport.icelandicLabel')}</strong> {parsedProduct.descriptionIs}
                             </p>
                           )}
                           <p className="text-lg font-bold text-primary-600">
@@ -215,7 +208,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                         <div className="space-y-2">
                           {parsedProduct.volume && (
                             <p className="text-sm">
-                              <strong>{t('atvrImport', 'volume')}</strong> {parsedProduct.volume}
+                              <strong>{t('atvrImport.volume')}</strong> {parsedProduct.volume}
                               {parsedProduct.volumeIs && parsedProduct.volumeIs !== parsedProduct.volume && (
                                 <span className="text-gray-600"> / {parsedProduct.volumeIs}</span>
                               )}
@@ -223,7 +216,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                           )}
                           {parsedProduct.country && (
                             <p className="text-sm">
-                              <strong>{t('atvrImport', 'country')}</strong> {parsedProduct.country}
+                              <strong>{t('atvrImport.country')}</strong> {parsedProduct.country}
                               {parsedProduct.countryIs && parsedProduct.countryIs !== parsedProduct.country && (
                                 <span className="text-gray-600"> / {parsedProduct.countryIs}</span>
                               )}
@@ -231,7 +224,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                           )}
                           {parsedProduct.producer && (
                             <p className="text-sm">
-                              <strong>{t('atvrImport', 'producer')}</strong> {parsedProduct.producer}
+                              <strong>{t('atvrImport.producer')}</strong> {parsedProduct.producer}
                               {parsedProduct.producerIs && parsedProduct.producerIs !== parsedProduct.producer && (
                                 <span className="text-gray-600"> / {parsedProduct.producerIs}</span>
                               )}
@@ -239,7 +232,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                           )}
                           {parsedProduct.foodPairings && parsedProduct.foodPairings.length > 0 && (
                             <div>
-                              <strong className="text-sm">{t('atvrImport', 'foodPairings')}</strong>
+                              <strong className="text-sm">{t('atvrImport.foodPairings')}</strong>
                               <div className="flex flex-wrap gap-1 mt-1">
                                 {parsedProduct.foodPairings.map((pairing, idx) => (
                                   <span key={idx} className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
@@ -262,7 +255,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                       onClick={() => setShowPreview(false)}
                       className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
-                      {t('atvrImport', 'cancel')}
+                      {t('atvrImport.cancel')}
                     </button>
                     <button
                       onClick={() => {
@@ -271,7 +264,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                       }}
                       className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
                     >
-                      {t('atvrImport', 'importProductsButton')}
+                      {t('atvrImport.importProductsButton')}
                     </button>
             </div>
           </div>
@@ -285,10 +278,10 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {t('atvrImport', 'title')}
+                  {t('atvrImport.title')}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 mt-1">
-                  {t('atvrImport', 'subtitle')}
+                  {t('atvrImport.subtitle')}
                 </p>
               </div>
             <button
@@ -309,7 +302,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder={t('atvrImport', 'searchPlaceholderIs')}
+                  placeholder={t('atvrImport.searchPlaceholderIs')}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 />
               </div>
@@ -323,7 +316,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                 ) : (
                   <Search className="h-4 w-4" />
                 )}
-                <span>{t('atvrImport', 'search')}</span>
+                <span>{t('atvrImport.search')}</span>
               </button>
             </form>
           </div>
@@ -336,17 +329,17 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {t('atvrImport', 'searchResults')} ({searchResults.length})
+                  {t('atvrImport.searchResults')} ({searchResults.length})
                 </h3>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600 dark:text-gray-300">
-                    {selectedProducts.length} {t('atvrImport', 'selected')}
+                    {selectedProducts.length} {t('atvrImport.selected')}
                   </span>
                   <button
                     onClick={() => setSelectedProducts([])}
                     className="text-sm text-primary-600 hover:text-primary-700"
                   >
-                    {t('atvrImport', 'clearAll')}
+                    {t('atvrImport.clearAll')}
                   </button>
                 </div>
                   </div>
@@ -372,7 +365,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                               />
                             ) : (
                         <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                          <span className="text-gray-400 text-xs">{t('atvrImport', 'noImage')}</span>
+                          <span className="text-gray-400 text-xs">{t('atvrImport.noImage')}</span>
                         </div>
                             )}
                           </div>
@@ -405,7 +398,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                                     ))}
                                     {product.foodPairings.length > 3 && (
                                 <span className="text-xs text-gray-500">
-                                  +{product.foodPairings.length - 3} {t('atvrImport', 'more')}
+                                  +{product.foodPairings.length - 3} {t('atvrImport.more')}
                                 </span>
                                     )}
                                   </div>
@@ -429,20 +422,20 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
               <div className="text-center py-12">
                 <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                  {t('atvrImport', 'noProductsFound')}
+                  {t('atvrImport.noProductsFound')}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  {t('atvrImport', 'tryDifferentTerms')}
+                  {t('atvrImport.tryDifferentTerms')}
                 </p>
               </div>
               ) : (
                 <div className="text-center py-12">
                   <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                    {t('atvrImport', 'searchATVRProducts')}
+                    {t('atvrImport.searchATVRProducts')}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    {t('atvrImport', 'enterSearchTerm')}
+                    {t('atvrImport.enterSearchTerm')}
                   </p>
                 </div>
               )}
@@ -453,13 +446,13 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
               <div className="w-80 border-l border-gray-200 dark:border-gray-700 p-6 overflow-y-auto">
                 <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {t('atvrImport', 'selected')} ({selectedProducts.length})
+                  {t('atvrImport.selected')} ({selectedProducts.length})
                 </h3>
                 <button
                   onClick={() => setSelectedProducts([])}
                   className="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
                 >
-                  {t('atvrImport', 'clearAll')}
+                  {t('atvrImport.clearAll')}
                 </button>
                 </div>
 
@@ -492,14 +485,14 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-center space-x-2"
                   >
                     <Eye className="h-4 w-4" />
-                    <span>{t('atvrImport', 'previewImport')}</span>
+                    <span>{t('atvrImport.previewImport')}</span>
                   </button>
                   <button
                     onClick={handleImport}
                     className="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 flex items-center justify-center space-x-2"
                   >
                     <Download className="h-4 w-4" />
-                    <span>{t('atvrImport', 'importProducts')}</span>
+                    <span>{t('atvrImport.importProducts')}</span>
                   </button>
                 </div>
               </div>

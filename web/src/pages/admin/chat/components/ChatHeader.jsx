@@ -26,18 +26,18 @@ const ChatHeader = ({
           </div>
           <div>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {customer?.fullName || customer?.username || t('adminChat', 'unknownCustomer')}
+              {customer?.fullName || customer?.username || t('adminChat.unknownCustomer')}
             </h2>
             {conversation.metadata?.orderNumber && (
               <div className="mt-1">
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
                   <ShoppingBag className="h-3 w-3 mr-1" />
-                  {t('order', 'orderNumber')}: {conversation.metadata.orderNumber}
+                  {t('order.orderNumber')}: {conversation.metadata.orderNumber}
                 </span>
               </div>
             )}
             {otherUserTyping && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 italic">{t('adminChat', 'customerTyping')}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 italic">{t('adminChat.customerTyping')}</p>
             )}
           </div>
         </div>
@@ -48,9 +48,9 @@ const ChatHeader = ({
             onChange={(e) => onUpdateStatus(conversation.id, e.target.value)}
             className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           >
-            <option value="ACTIVE">{t('adminChat', 'active')}</option>
-            <option value="ARCHIVED">{t('adminChat', 'archived')}</option>
-            <option value="RESOLVED">{t('adminChat', 'resolved')}</option>
+            <option value="ACTIVE">{t('adminChat.active')}</option>
+            <option value="ARCHIVED">{t('adminChat.archived')}</option>
+            <option value="RESOLVED">{t('adminChat.resolved')}</option>
           </select>
         </div>
       </div>

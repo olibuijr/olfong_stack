@@ -5,73 +5,44 @@ import useAdmin from '../hooks/useAdmin';
 import { Link } from 'react-router-dom';
 import { Wine, Beer, Truck, Shield } from 'lucide-react';
 import { fetchCategories } from '../store/slices/categorySlice';
-import { fetchBanners, fetchFeaturedBanners, setFeaturedBanner, removeFeaturedBanner } from '../store/slices/bannerSlice';
+import { fetchBanners, fetchFeaturedBanners, fetchHeroBanner, setFeaturedBanner, removeFeaturedBanner } from '../store/slices/bannerSlice';
 import { fetchProducts } from '../store/slices/productSlice';
 import CategoryProducts from '../components/common/CategoryProducts';
 import DiscountedProducts from '../components/common/DiscountedProducts';
+import Marquee from '../components/common/Marquee';
 
 
 const Home = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const dispatch = useDispatch();
   const isAdmin = useAdmin();
   const { categories, isLoading: categoriesLoading } = useSelector((state) => state.categories);
-  const { banners, featuredBanners } = useSelector((state) => state.banners);
+  const { banners, featuredBanners, heroBanner } = useSelector((state) => state.banners);
   const { products } = useSelector((state) => state.products);
 
-  // Fetch categories, featured banners, and products on component mount
+  // Fetch categories, featured banners, hero banner, and products on component mount
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchFeaturedBanners());
+    dispatch(fetchHeroBanner());
     if (isAdmin) {
       dispatch(fetchBanners({ includeInactive: true }));
     }
     dispatch(fetchProducts({ limit: 100 }));
   }, [dispatch, isAdmin]);
 
-  // Fallback banners if API fails or no banners are configured - static to avoid infinite re-renders
-  const fallbackBanners = useMemo(() => [
-    {
-      imageUrl: '/898-1200-x-300-px-2.webp',
-      alt: 'Ölföng Banner 1',
-      title: 'Premium Wine Selection',
-      description: 'Discover our curated collection of fine wines'
-    },
-    {
-      imageUrl: '/Allir-nikotin-pudar-a-890-768-x-300-px-4.webp',
-      alt: 'Ölföng Banner 2',
-      title: 'Quality Beer Collection',
-      description: 'Explore our wide range of craft and premium beers'
-    },
-    {
-      imageUrl: '/Allir-nikotin-pudar-a-890-768-x-300-px-768-x-250-px-2.webp',
-      alt: 'Ölföng Banner 3',
-      title: 'Special Offers',
-      description: 'Don\'t miss out on our exclusive deals and discounts'
-    },
-    {
-      imageUrl: '/Allir-nikotin-pudar-a-890-768-x-300-px-768-x-250-px.webp',
-      alt: 'Ölföng Banner 4',
-      title: 'Fast Delivery',
-      description: 'Quick and reliable delivery to your doorstep'
-    }
-  ], []);
-
-  // Use featured banners if available, otherwise fallback to hardcoded banners
+  // Use featured banners from database only
   const displayBanners = useMemo(() => {
-    if (featuredBanners.length > 0) {
-      return featuredBanners.map(banner => ({
-        id: banner.id,
-        imageUrl: banner.imageUrl,
-        alt: banner.alt || 'Ölföng Banner',
-        title: banner.titleIs || banner.title,
-        description: banner.descriptionIs || banner.description,
-        link: banner.link,
-        featuredOrder: banner.featuredOrder
-      }));
-    }
-    return fallbackBanners;
-  }, [featuredBanners, fallbackBanners]);
+    return featuredBanners.map(banner => ({
+      id: banner.id,
+      imageUrl: banner.imageUrl,
+      alt: banner.alt || 'Ölföng Banner',
+      title: banner.titleIs || banner.title,
+      description: banner.descriptionIs || banner.description,
+      link: banner.link,
+      featuredOrder: banner.featuredOrder
+    }));
+  }, [featuredBanners]);
 
   // Check if there are any discounted products
   const hasDiscountedProducts = products.some(product =>
@@ -125,52 +96,173 @@ const Home = () => {
   const features = useMemo(() => [
     {
       icon: <Wine className="w-8 h-8 text-primary-600" />,
-      title: t('navigation', 'wine'),
-      description: t('home', 'features').wineDescription,
+      title: t('home.features.wineTitle'),
+      description: t('home.features.wineDescription'),
       link: '/products?category=WINE'
     },
     {
       icon: <Beer className="w-8 h-8 text-primary-600" />,
-      title: t('navigation', 'beer'),
-      description: t('home', 'features').beerDescription,
+      title: t('home.features.beerTitle'),
+      description: t('home.features.beerDescription'),
       link: '/products?category=BEER'
     },
     {
       icon: <Truck className="w-8 h-8 text-primary-600" />,
-      title: t('delivery', 'title'),
-      description: t('home', 'features').deliveryDescription,
+      title: t('home.features.deliveryTitle'),
+      description: t('home.features.deliveryDescription'),
       link: '/products'
     },
     {
       icon: <Shield className="w-8 h-8 text-primary-600" />,
-      title: t('home', 'features').ageVerificationTitle,
-      description: t('home', 'features').ageVerificationDescription,
+      title: t('home.features.ageVerificationTitle'),
+      description: t('home.features.ageVerificationDescription'),
       link: '/products'
     }
   ], [t]); // Keep t as dependency but fix the infinite re-render issue differently
 
+  // Hero banner content with fallback
+  const heroContent = useMemo(() => {
+    if (heroBanner) {
+      return {
+        backgroundType: heroBanner.backgroundType || 'gradient',
+        gradientStartColor: heroBanner.gradientStartColor || '#374151',
+        gradientEndColor: heroBanner.gradientEndColor || '#111827',
+        gradientDirection: heroBanner.gradientDirection || 'to-r',
+        backgroundImageUrl: heroBanner.backgroundImageUrl,
+        backgroundOpacity: heroBanner.backgroundOpacity !== undefined ? heroBanner.backgroundOpacity : 1.0,
+        marqueeText: language === 'is' ? (heroBanner.marqueeTextIs || heroBanner.marqueeText) : heroBanner.marqueeText,
+        marqueeSpeed: heroBanner.marqueeSpeed || 50,
+        marqueeCount: heroBanner.marqueeCount || 3,
+        logoUrl: heroBanner.heroLogoUrl || '/logo_black-web.webp',
+        subtitle: language === 'is' ? (heroBanner.heroSubtitleIs || heroBanner.heroSubtitle || t('home.hero.subtitle')) : (heroBanner.heroSubtitle || t('home.hero.subtitle')),
+        buttonText: language === 'is' ? (heroBanner.heroButtonTextIs || heroBanner.heroButtonText || t('home.hero.startShopping')) : (heroBanner.heroButtonText || t('home.hero.startShopping')),
+        buttonLink: heroBanner.heroButtonLink || '/products',
+        textColor: heroBanner.textColor || '#ffffff',
+        buttonBgColor: heroBanner.buttonBgColor || '#ffffff',
+        buttonTextColor: heroBanner.buttonTextColor || '#1f2937',
+        overlayOpacity: heroBanner.overlayOpacity !== undefined ? heroBanner.overlayOpacity : 0.0,
+      };
+    }
+    // Fallback defaults
+    return {
+      backgroundType: 'gradient',
+      gradientStartColor: '#374151',
+      gradientEndColor: '#111827',
+      gradientDirection: 'to-r',
+      backgroundImageUrl: null,
+      backgroundOpacity: 1.0,
+      marqueeText: null,
+      marqueeSpeed: 50,
+      marqueeCount: 3,
+      logoUrl: '/logo_black-web.webp',
+      subtitle: t('home.hero.subtitle'),
+      buttonText: t('home.hero.startShopping'),
+      buttonLink: '/products',
+      textColor: '#ffffff',
+      buttonBgColor: '#ffffff',
+      buttonTextColor: '#1f2937',
+      overlayOpacity: 0.0,
+    };
+  }, [heroBanner, language, t]);
+
+  // Generate background style based on hero banner config
+  const getBackgroundStyle = () => {
+    const { backgroundType, gradientStartColor, gradientEndColor, gradientDirection, backgroundImageUrl, backgroundOpacity } = heroContent;
+
+    if (backgroundType === 'image' && backgroundImageUrl) {
+      return {
+        backgroundImage: `url(${backgroundImageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        opacity: backgroundOpacity,
+      };
+    } else if (backgroundType === 'gradient') {
+      const directionMap = {
+        'to-r': 'to right',
+        'to-l': 'to left',
+        'to-t': 'to top',
+        'to-b': 'to bottom',
+        'to-br': 'to bottom right',
+        'to-bl': 'to bottom left',
+        'to-tr': 'to top right',
+        'to-tl': 'to top left',
+      };
+      return {
+        background: `linear-gradient(${directionMap[gradientDirection] || 'to right'}, ${gradientStartColor}, ${gradientEndColor})`,
+        opacity: backgroundOpacity,
+      };
+    }
+    return {};
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-700 to-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <section className="relative overflow-hidden">
+        {/* Background */}
+        <div
+          className="absolute inset-0"
+          style={getBackgroundStyle()}
+        />
+
+        {/* Marquee Background */}
+        {heroContent.backgroundType === 'marquee' && heroContent.marqueeText && (
+          <div
+            className="absolute inset-0 flex flex-col justify-center"
+            style={{
+              background: `linear-gradient(to right, ${heroContent.gradientStartColor}, ${heroContent.gradientEndColor})`,
+            }}
+          >
+            {Array.from({ length: 10 }).map((_, i) => (
+              <Marquee
+                key={i}
+                text={heroContent.marqueeText}
+                speed={heroContent.marqueeSpeed}
+                count={heroContent.marqueeCount}
+                className="text-6xl md:text-8xl font-bold opacity-5"
+                style={{ color: heroContent.textColor }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Dark Overlay (optional) */}
+        {heroContent.overlayOpacity > 0 && (
+          <div
+            className="absolute inset-0 bg-black"
+            style={{ opacity: heroContent.overlayOpacity }}
+          />
+        )}
+
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <div className="flex justify-center mb-6">
-              <img 
-                src="/logo_black-web.webp" 
-                alt={t('home', 'olfongLogoAlt')} 
-                className="h-20 md:h-32 w-auto invert"
+              <img
+                src={heroContent.logoUrl}
+                alt={t('home.olfongLogoAlt')}
+                className="h-20 md:h-32 w-auto"
+                style={{
+                  filter: heroContent.logoUrl === '/logo_black-web.webp' ? 'invert(1)' : 'none',
+                }}
               />
             </div>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200">
-              {t('home', 'hero').subtitle}
+            <p
+              className="text-xl md:text-2xl mb-8"
+              style={{ color: heroContent.textColor }}
+            >
+              {heroContent.subtitle}
             </p>
             <div className="flex justify-center">
               <Link
-                to="/products"
-                className="btn bg-white text-gray-800 hover:bg-gray-100 px-8 py-3 text-lg"
+                to={heroContent.buttonLink}
+                className="btn px-8 py-3 text-lg transition-colors duration-200"
+                style={{
+                  backgroundColor: heroContent.buttonBgColor,
+                  color: heroContent.buttonTextColor,
+                }}
               >
-                {t('home', 'hero').startShopping}
+                {heroContent.buttonText}
               </Link>
             </div>
           </div>
@@ -182,9 +274,9 @@ const Home = () => {
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home', 'why').title}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.why.title')}</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('home', 'why').subtitle}
+              {t('home.why.subtitle')}
             </p>
           </div>
 
@@ -216,9 +308,9 @@ const Home = () => {
         <section className="py-16 bg-white dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home', 'discounted').title}</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.discounted.title')}</h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                {t('home', 'discounted').subtitle}
+                {t('home.discounted.subtitle')}
               </p>
             </div>
             <DiscountedProducts limit={6} />
@@ -280,9 +372,9 @@ const Home = () => {
         <section className="py-16 bg-white dark:bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home', 'categories').title}</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.categories.title')}</h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                {t('home', 'categories').subtitle}
+                {t('home.categories.subtitle')}
               </p>
             </div>
             <div className="space-y-8">
@@ -348,9 +440,9 @@ const Home = () => {
       <section className="py-16 bg-white dark:bg-gray-800 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home', 'testimonials').title}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('home.testimonials.title')}</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {t('home', 'testimonials').subtitle}
+              {t('home.testimonials.subtitle')}
             </p>
           </div>
 
@@ -362,10 +454,10 @@ const Home = () => {
                 </div>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                &quot;{t('home', 'testimonials').review1}&quot;
+                &quot;{t('home.testimonials.review1')}&quot;
               </p>
-              <div className="font-semibold text-gray-900 dark:text-white">{t('home', 'testimonials').review1Author}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">{t('home', 'testimonials').review1Location}</div>
+              <div className="font-semibold text-gray-900 dark:text-white">{t('home.testimonials.review1Author')}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{t('home.testimonials.review1Location')}</div>
             </div>
 
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
@@ -375,10 +467,10 @@ const Home = () => {
                 </div>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                &quot;{t('home', 'testimonials').review2}&quot;
+                &quot;{t('home.testimonials.review2')}&quot;
               </p>
-              <div className="font-semibold text-gray-900 dark:text-white">{t('home', 'testimonials').review2Author}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">{t('home', 'testimonials').review2Location}</div>
+              <div className="font-semibold text-gray-900 dark:text-white">{t('home.testimonials.review2Author')}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{t('home.testimonials.review2Location')}</div>
             </div>
 
             <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
@@ -388,10 +480,10 @@ const Home = () => {
                 </div>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                &quot;{t('home', 'testimonials').review3}&quot;
+                &quot;{t('home.testimonials.review3')}&quot;
               </p>
-              <div className="font-semibold text-gray-900 dark:text-white">{t('home', 'testimonials').review3Author}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">{t('home', 'testimonials').review3Location}</div>
+              <div className="font-semibold text-gray-900 dark:text-white">{t('home.testimonials.review3Author')}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{t('home.testimonials.review3Location')}</div>
             </div>
           </div>
         </div>

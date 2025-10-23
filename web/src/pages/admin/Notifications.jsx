@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Bell,
@@ -185,7 +185,7 @@ const Notifications = () => {
       setFilteredNotifications(mockNotifications);
       setIsLoading(false);
     }, 1000);
-  }, []);
+  }, [mockNotifications]);
 
   useEffect(() => {
     // Filter notifications based on search and filters
@@ -271,7 +271,7 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications', 'notificationMarkedRead'));
+    toast.success(t('adminNotifications.notificationMarkedRead'));
   };
 
   const handleMarkAsUnread = (notificationId) => {
@@ -282,7 +282,7 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications', 'notificationMarkedUnread'));
+    toast.success(t('adminNotifications.notificationMarkedUnread'));
   };
 
   const handleArchive = (notificationId) => {
@@ -293,7 +293,7 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications', 'notificationArchived'));
+    toast.success(t('adminNotifications.notificationArchived'));
   };
 
   const handleUnarchive = (notificationId) => {
@@ -304,17 +304,17 @@ const Notifications = () => {
           : notification
       )
     );
-    toast.success(t('adminNotifications', 'notificationUnarchived'));
+    toast.success(t('adminNotifications.notificationUnarchived'));
   };
 
   const handleDelete = (notificationId) => {
     setNotifications(prev => prev.filter(notification => notification.id !== notificationId));
-    toast.success(t('adminNotifications', 'notificationDeleted'));
+    toast.success(t('adminNotifications.notificationDeleted'));
   };
 
   const handleBulkAction = (action) => {
     if (selectedNotifications.length === 0) {
-      toast.error(t('adminNotifications', 'selectNotificationsFirst'));
+      toast.error(t('adminNotifications.selectNotificationsFirst'));
       return;
     }
 
@@ -374,8 +374,8 @@ const Notifications = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white shadow-lg rounded-lg border border-gray-200">
             <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
-            <p className="text-gray-700">You do not have permission to view this page.</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-gray-700">{t('admin.accessDeniedMessage')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -401,7 +401,7 @@ const Notifications = () => {
             <div className="flex items-center">
               <Bell className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminNotifications', 'title')}</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminNotifications.title')}</h1>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
                   {t('adminNotifications.unreadCount', { count: unreadCount })} • {t('adminNotifications.archivedCount', { count: archivedCount })} • {t('adminNotifications.totalCount', { count: notifications.length })}
                 </p>
@@ -413,14 +413,14 @@ const Notifications = () => {
                 className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <Settings className="h-4 w-4 mr-2" />
-                {t('adminNotifications', 'settings')}
+                {t('adminNotifications.settings')}
               </button>
               <button
                 onClick={() => handleBulkAction('mark-read')}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <CheckCircle className="h-4 w-4 mr-2" />
-                {t('adminNotifications', 'markAllRead')}
+                {t('adminNotifications.markAllRead')}
               </button>
             </div>
           </div>
@@ -437,7 +437,7 @@ const Notifications = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder={t('adminNotifications', 'searchNotifications')}
+                placeholder={t('adminNotifications.searchNotifications')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="input pl-10 w-full"
@@ -450,10 +450,10 @@ const Notifications = () => {
               onChange={(e) => setStatusFilter(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminNotifications', 'allStatus')}</option>
-              <option value="unread">{t('adminNotifications', 'unread')}</option>
-              <option value="read">{t('adminNotifications', 'read')}</option>
-              <option value="archived">{t('adminNotifications', 'archived')}</option>
+              <option value="">{t('adminNotifications.allStatus')}</option>
+              <option value="unread">{t('adminNotifications.unread')}</option>
+              <option value="read">{t('adminNotifications.read')}</option>
+              <option value="archived">{t('adminNotifications.archived')}</option>
             </select>
 
             {/* Type Filter */}
@@ -462,13 +462,13 @@ const Notifications = () => {
               onChange={(e) => setTypeFilter(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminNotifications', 'allTypes')}</option>
-              <option value="order">{t('adminNotifications', 'orders')}</option>
-              <option value="payment">{t('adminNotifications', 'payments')}</option>
-              <option value="delivery">{t('adminNotifications', 'delivery')}</option>
-              <option value="system">{t('adminNotifications', 'system')}</option>
-              <option value="security">{t('adminNotifications', 'security')}</option>
-              <option value="marketing">{t('adminNotifications', 'marketing')}</option>
+              <option value="">{t('adminNotifications.allTypes')}</option>
+              <option value="order">{t('adminNotifications.orders')}</option>
+              <option value="payment">{t('adminNotifications.payments')}</option>
+              <option value="delivery">{t('adminNotifications.delivery')}</option>
+              <option value="system">{t('adminNotifications.system')}</option>
+              <option value="security">{t('adminNotifications.security')}</option>
+              <option value="marketing">{t('adminNotifications.marketing')}</option>
             </select>
 
             {/* Bulk Actions */}
@@ -479,7 +479,7 @@ const Notifications = () => {
                 onChange={handleSelectAll}
                 className="rounded"
               />
-              <span className="text-sm text-gray-700">{t('adminNotifications', 'selectAll')}</span>
+              <span className="text-sm text-gray-700">{t('adminNotifications.selectAll')}</span>
             </div>
           </div>
 
@@ -492,28 +492,28 @@ const Notifications = () => {
                 className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50"
               >
                 <CheckCircle className="h-4 w-4 mr-1" />
-                {t('adminNotifications', 'markRead')}
+                {t('adminNotifications.markRead')}
               </button>
               <button
                 onClick={() => handleBulkAction('mark-unread')}
                 className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50"
               >
                 <EyeOff className="h-4 w-4 mr-1" />
-                {t('adminNotifications', 'markUnread')}
+                {t('adminNotifications.markUnread')}
               </button>
               <button
                 onClick={() => handleBulkAction('archive')}
                 className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50"
               >
                 <Archive className="h-4 w-4 mr-1" />
-                {t('adminNotifications', 'archive')}
+                {t('adminNotifications.archive')}
               </button>
               <button
                 onClick={() => handleBulkAction('delete')}
                 className="inline-flex items-center px-3 py-1 border border-red-300 rounded-md text-sm text-red-700 bg-red-50 hover:bg-red-100"
               >
                 <Trash2 className="h-4 w-4 mr-1" />
-                {t('adminNotifications', 'delete')}
+                {t('adminNotifications.delete')}
               </button>
             </div>
           )}
@@ -590,7 +590,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleMarkAsRead(notification.id)}
                         className="p-2 text-gray-400 hover:text-blue-600"
-                        title={t('tooltips', 'markAsRead')}
+                        title={t('tooltips.markAsRead')}
                       >
                         <Eye className="h-4 w-4" />
                       </button>
@@ -598,7 +598,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleMarkAsUnread(notification.id)}
                         className="p-2 text-gray-400 hover:text-gray-600"
-                        title={t('tooltips', 'markAsUnread')}
+                        title={t('tooltips.markAsUnread')}
                       >
                         <EyeOff className="h-4 w-4" />
                       </button>
@@ -608,7 +608,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleArchive(notification.id)}
                         className="p-2 text-gray-400 hover:text-yellow-600"
-                        title={t('tooltips', 'archive')}
+                        title={t('tooltips.archive')}
                       >
                         <Archive className="h-4 w-4" />
                       </button>
@@ -616,7 +616,7 @@ const Notifications = () => {
                       <button
                         onClick={() => handleUnarchive(notification.id)}
                         className="p-2 text-gray-400 hover:text-green-600"
-                        title={t('tooltips', 'unarchive')}
+                        title={t('tooltips.unarchive')}
                       >
                         <Archive className="h-4 w-4" />
                       </button>
@@ -625,7 +625,7 @@ const Notifications = () => {
                     <button
                       onClick={() => handleDelete(notification.id)}
                       className="p-2 text-gray-400 hover:text-red-600"
-                      title={t('tooltips', 'delete')}
+                      title={t('tooltips.delete')}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -639,7 +639,7 @@ const Notifications = () => {
         {filteredNotifications.length === 0 && (
           <div className="text-center py-12">
             <Bell className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No notifications found</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('notifications.noNotifications')}</h2>
             <p className="text-gray-600 dark:text-gray-400">
               {searchTerm || statusFilter || typeFilter
                 ? 'Try adjusting your search criteria or filters.'
@@ -654,7 +654,7 @@ const Notifications = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900">Notification Settings</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{t('notifications.settings')}</h2>
               <button
                 onClick={() => setShowSettings(false)}
                 className="text-gray-400 hover:text-gray-600"
@@ -665,7 +665,7 @@ const Notifications = () => {
             
             <div className="space-y-4">
               <div>
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Delivery Methods</h3>
+                <h3 className="text-sm font-medium text-gray-700 mb-3">{t('notifications.deliveryMethods')}</h3>
                 <div className="space-y-2">
                   <label className="flex items-center">
                     <input
@@ -675,7 +675,7 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <Mail className="h-4 w-4 mr-2" />
-                    Email Notifications
+                    {t('notifications.emailNotifications')}
                   </label>
                   <label className="flex items-center">
                     <input
@@ -685,7 +685,7 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <Bell className="h-4 w-4 mr-2" />
-                    Push Notifications
+                    {t('notifications.pushNotifications')}
                   </label>
                   <label className="flex items-center">
                     <input
@@ -695,13 +695,13 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <Phone className="h-4 w-4 mr-2" />
-                    SMS Notifications
+                    {t('notifications.smsNotifications')}
                   </label>
                 </div>
               </div>
               
               <div>
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Notification Types</h3>
+                <h3 className="text-sm font-medium text-gray-700 mb-3">{t('notifications.types')}</h3>
                 <div className="space-y-2">
                   <label className="flex items-center">
                     <input
@@ -711,7 +711,7 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <ShoppingCart className="h-4 w-4 mr-2" />
-                    Order Updates
+                    {t('notifications.orderUpdates')}
                   </label>
                   <label className="flex items-center">
                     <input
@@ -721,7 +721,7 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <Settings className="h-4 w-4 mr-2" />
-                    System Alerts
+                    {t('notifications.systemAlerts')}
                   </label>
                   <label className="flex items-center">
                     <input
@@ -731,7 +731,7 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <Mail className="h-4 w-4 mr-2" />
-                    Marketing
+                    {t('notifications.marketing')}
                   </label>
                   <label className="flex items-center">
                     <input
@@ -741,7 +741,7 @@ const Notifications = () => {
                       className="rounded mr-3"
                     />
                     <AlertTriangle className="h-4 w-4 mr-2" />
-                    Security Alerts
+                    {t('notifications.securityAlerts')}
                   </label>
                 </div>
               </div>

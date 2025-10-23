@@ -96,7 +96,7 @@ const PaymentGatewayModal = ({
       onClose();
     } catch (error) {
       console.error('Error saving payment gateway:', error);
-      toast.error(t('adminSettings', 'errorSavingPaymentGateway'));
+      toast.error(t('adminSettings.errorSavingPaymentGateway'));
     }
   };
 
@@ -117,7 +117,7 @@ const PaymentGatewayModal = ({
 
   const testConnection = async () => {
     if (!formData.provider) {
-      toast.error(t('adminSettings', 'pleaseSelectProvider'));
+      toast.error(t('adminSettings.pleaseSelectProvider'));
       return;
     }
 
@@ -126,7 +126,7 @@ const PaymentGatewayModal = ({
       const response = await fetch(`/api/payment-gateways/test`, {
         method: 'POST',
         headers: {
-          'Content-Type': t('adminSettings', 'contentType'),
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
@@ -139,13 +139,13 @@ const PaymentGatewayModal = ({
       const result = await response.json();
       
       if (response.ok) {
-        toast.success(t('adminSettings', 'connectionTestSuccessful'));
+        toast.success(t('adminSettings.connectionTestSuccessful'));
       } else {
-        toast.error(result.message || t('adminSettings', 'connectionTestFailed'));
+        toast.error(result.message || t('adminSettings.connectionTestFailed'));
       }
     } catch (error) {
       console.error('Connection test error:', error);
-      toast.error(t('adminSettings', 'connectionTestFailed'));
+      toast.error(t('adminSettings.connectionTestFailed'));
     } finally {
       setIsTestingConnection(false);
     }
@@ -157,48 +157,48 @@ const PaymentGatewayModal = ({
     switch (provider) {
       case 'valitor':
         return [
-          { name: 'merchantId', label: t('adminSettings', 'merchantId'), type: 'text', required: true, placeholder: t('adminSettings', 'enterMerchantId') },
-          { name: 'apiKey', label: t('adminSettings', 'apiKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterApiKey') },
-          { name: 'secretKey', label: t('adminSettings', 'secretKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterSecretKey') },
-          { name: 'webhookSecret', label: t('adminSettings', 'webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings', 'enterWebhookSecret') }
+          { name: 'merchantId', label: t('adminSettings.merchantId'), type: 'text', required: true, placeholder: t('adminSettings.enterMerchantId') },
+          { name: 'apiKey', label: t('adminSettings.apiKey'), type: 'password', required: true, placeholder: t('adminSettings.enterApiKey') },
+          { name: 'secretKey', label: t('adminSettings.secretKey'), type: 'password', required: true, placeholder: t('adminSettings.enterSecretKey') },
+          { name: 'webhookSecret', label: t('adminSettings.webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings.enterWebhookSecret') }
         ];
       
       case 'rapyd':
         return [
-          { name: 'accessKey', label: t('adminSettings', 'accessKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterAccessKey') },
-          { name: 'secretKey', label: t('adminSettings', 'secretKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterSecretKey') },
-          { name: 'webhookSecret', label: t('adminSettings', 'webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings', 'enterWebhookSecret') }
+          { name: 'accessKey', label: t('adminSettings.accessKey'), type: 'password', required: true, placeholder: t('adminSettings.enterAccessKey') },
+          { name: 'secretKey', label: t('adminSettings.secretKey'), type: 'password', required: true, placeholder: t('adminSettings.enterSecretKey') },
+          { name: 'webhookSecret', label: t('adminSettings.webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings.enterWebhookSecret') }
         ];
       
       case 'stripe':
         return [
-          { name: 'publishableKey', label: t('adminSettings', 'publishableKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterPublishableKey') },
-          { name: 'secretKey', label: t('adminSettings', 'secretKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterSecretKey') },
-          { name: 'webhookSecret', label: t('adminSettings', 'webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings', 'enterWebhookSecret') }
+          { name: 'publishableKey', label: t('adminSettings.publishableKey'), type: 'password', required: true, placeholder: t('adminSettings.enterPublishableKey') },
+          { name: 'secretKey', label: t('adminSettings.secretKey'), type: 'password', required: true, placeholder: t('adminSettings.enterSecretKey') },
+          { name: 'webhookSecret', label: t('adminSettings.webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings.enterWebhookSecret') }
         ];
       
       case 'paypal':
         return [
-          { name: 'clientId', label: t('adminSettings', 'clientId'), type: 'password', required: true, placeholder: t('adminSettings', 'enterClientId') },
-          { name: 'clientSecret', label: t('adminSettings', 'clientSecret'), type: 'password', required: true, placeholder: t('adminSettings', 'enterClientSecret') },
-          { name: 'webhookSecret', label: t('adminSettings', 'webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings', 'enterWebhookSecret') }
+          { name: 'clientId', label: t('adminSettings.clientId'), type: 'password', required: true, placeholder: t('adminSettings.enterClientId') },
+          { name: 'clientSecret', label: t('adminSettings.clientSecret'), type: 'password', required: true, placeholder: t('adminSettings.enterClientSecret') },
+          { name: 'webhookSecret', label: t('adminSettings.webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings.enterWebhookSecret') }
         ];
       
       case 'netgiro':
         return [
-          { name: 'applicationId', label: t('adminSettings', 'applicationId'), type: 'text', required: true, placeholder: t('adminSettings', 'enterApplicationId') },
-          { name: 'secretKey', label: t('adminSettings', 'secretKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterSecretKey') },
-          { name: 'webhookSecret', label: t('adminSettings', 'webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings', 'enterWebhookSecret') }
+          { name: 'applicationId', label: t('adminSettings.applicationId'), type: 'text', required: true, placeholder: t('adminSettings.enterApplicationId') },
+          { name: 'secretKey', label: t('adminSettings.secretKey'), type: 'password', required: true, placeholder: t('adminSettings.enterSecretKey') },
+          { name: 'webhookSecret', label: t('adminSettings.webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings.enterWebhookSecret') }
         ];
       
       case 'teya':
         return [
-          { name: 'merchantId', label: t('adminSettings', 'merchantId'), type: 'text', required: true, placeholder: t('adminSettings', 'enterMerchantId') },
-          { name: 'paymentGatewayId', label: t('adminSettings', 'paymentGatewayId'), type: 'text', required: true, placeholder: t('adminSettings', 'enterPaymentGatewayId') },
-          { name: 'secretKey', label: t('adminSettings', 'secretKey'), type: 'password', required: true, placeholder: t('adminSettings', 'enterSecretKey') },
-          { name: 'privateKey', label: t('adminSettings', 'privateKey'), type: 'password', required: false, placeholder: t('adminSettings', 'enterPrivateKey') },
-          { name: 'publicKey', label: t('adminSettings', 'publicKey'), type: 'password', required: false, placeholder: t('adminSettings', 'enterPublicKey') },
-          { name: 'webhookSecret', label: t('adminSettings', 'webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings', 'enterWebhookSecret') }
+          { name: 'merchantId', label: t('adminSettings.merchantId'), type: 'text', required: true, placeholder: t('adminSettings.enterMerchantId') },
+          { name: 'paymentGatewayId', label: t('adminSettings.paymentGatewayId'), type: 'text', required: true, placeholder: t('adminSettings.enterPaymentGatewayId') },
+          { name: 'secretKey', label: t('adminSettings.secretKey'), type: 'password', required: true, placeholder: t('adminSettings.enterSecretKey') },
+          { name: 'privateKey', label: t('adminSettings.privateKey'), type: 'password', required: false, placeholder: t('adminSettings.enterPrivateKey') },
+          { name: 'publicKey', label: t('adminSettings.publicKey'), type: 'password', required: false, placeholder: t('adminSettings.enterPublicKey') },
+          { name: 'webhookSecret', label: t('adminSettings.webhookSecret'), type: 'password', required: false, placeholder: t('adminSettings.enterWebhookSecret') }
         ];
       
       default:
@@ -213,7 +213,7 @@ const PaymentGatewayModal = ({
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            {gatewayData?.id ? t('adminSettings', 'editPaymentGateway') : t('adminSettings', 'addPaymentGateway')}
+            {gatewayData?.id ? t('adminSettings.editPaymentGateway') : t('adminSettings.addPaymentGateway')}
           </h2>
           <button
             onClick={onClose}
@@ -226,7 +226,7 @@ const PaymentGatewayModal = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t('adminSettings', 'displayName')}
+              {t('adminSettings.displayName')}
             </label>
             <input
               type="text"
@@ -240,7 +240,7 @@ const PaymentGatewayModal = ({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t('adminSettings', 'provider')}
+              {t('adminSettings.provider')}
             </label>
             <select
               name="provider"
@@ -249,19 +249,19 @@ const PaymentGatewayModal = ({
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               required
             >
-              <option value="">{t('adminSettings', 'selectPaymentProvider')}</option>
-              <option value="valitor">{t('adminSettings', 'valitor')}</option>
-              <option value="rapyd">{t('adminSettings', 'rapyd')}</option>
-              <option value="stripe">{t('adminSettings', 'stripe')}</option>
-              <option value="paypal">{t('adminSettings', 'paypal')}</option>
-              <option value="netgiro">{t('adminSettings', 'netgiro')}</option>
-              <option value="teya">{t('adminSettings', 'teya')}</option>
+              <option value="">{t('adminSettings.selectPaymentProvider')}</option>
+              <option value="valitor">{t('adminSettings.valitor')}</option>
+              <option value="rapyd">{t('adminSettings.rapyd')}</option>
+              <option value="stripe">{t('adminSettings.stripe')}</option>
+              <option value="paypal">{t('adminSettings.paypal')}</option>
+              <option value="netgiro">{t('adminSettings.netgiro')}</option>
+              <option value="teya">{t('adminSettings.teya')}</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t('adminSettings', 'description')}
+              {t('adminSettings.description')}
             </label>
             <textarea
               name="description"
@@ -274,7 +274,7 @@ const PaymentGatewayModal = ({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t('adminSettings', 'environment')}
+              {t('adminSettings.environment')}
             </label>
             <select
               name="environment"
@@ -282,8 +282,8 @@ const PaymentGatewayModal = ({
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
             >
-              <option value="sandbox">{t('adminSettings', 'sandbox')}</option>
-              <option value="production">{t('adminSettings', 'production')}</option>
+              <option value="sandbox">{t('adminSettings.sandbox')}</option>
+              <option value="production">{t('adminSettings.production')}</option>
             </select>
           </div>
 
@@ -292,7 +292,7 @@ const PaymentGatewayModal = ({
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                  {t('adminSettings.${formData', 'provider}')} {t('adminSettings', 'configuration')}
+                  {formData.provider ? `${formData.provider.charAt(0).toUpperCase() + formData.provider.slice(1)} ${t('adminSettings.configuration')}` : t('adminSettings.configuration')}
                 </h3>
                 <button
                   type="button"
@@ -301,7 +301,7 @@ const PaymentGatewayModal = ({
                   className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
                 >
                   <TestTube className="h-4 w-4 mr-2" />
-                  {isTestingConnection ? t('adminSettings', 'testing') : t('adminSettings', 'testConnection')}
+                  {isTestingConnection ? t('adminSettings.testing') : t('adminSettings.testConnection')}
                 </button>
               </div>
               
@@ -345,7 +345,7 @@ const PaymentGatewayModal = ({
           {/* Supported Payment Methods */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t('adminSettings', 'supportedPaymentMethods')}
+              {t('adminSettings.supportedPaymentMethods')}
             </label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {[
@@ -389,7 +389,7 @@ const PaymentGatewayModal = ({
               className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
             />
             <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-              {t('adminSettings', 'enabled')}
+              {t('adminSettings.enabled')}
             </label>
           </div>
 
@@ -408,14 +408,14 @@ const PaymentGatewayModal = ({
                 onClick={onClose}
                 className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-md transition-colors"
               >
-                {t('adminSettings', 'cancel')}
+                {t('adminSettings.cancel')}
               </button>
               <button
                 type="submit"
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
               >
                 <Save className="h-4 w-4 mr-2" />
-                {gatewayData?.id ? t('adminSettings', 'updateGateway') : t('adminSettings', 'createGateway')}
+                {gatewayData?.id ? t('adminSettings.updateGateway') : t('adminSettings.createGateway')}
               </button>
             </div>
           </div>

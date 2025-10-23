@@ -204,7 +204,7 @@ class TranslationService {
   async createTranslation(translationData) {
     try {
       const url = `${API_BASE_URL}/translations`;
-      
+
       const response = await fetch(url, {
         method: 'POST',
         headers: this.getAuthHeaders(),
@@ -219,6 +219,57 @@ class TranslationService {
       return data;
     } catch (error) {
       console.error('Error creating translation:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Upsert translation (create or update)
+   */
+  async upsertTranslation(translationData) {
+    try {
+      const url = `${API_BASE_URL}/translations/upsert`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+        body: JSON.stringify(translationData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error upserting translation:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get all translations for both IS and EN grouped
+   */
+  async getAllTranslationsMultiLang() {
+    try {
+      const url = `${API_BASE_URL}/translations/all`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching multi-lang translations:', error);
       throw error;
     }
   }

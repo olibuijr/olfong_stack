@@ -13,28 +13,28 @@ const StatsGrid = ({ stats, formatCurrency }) => {
 
   const statCards = [
     {
-      title: t('adminDashboard', 'totalRevenue'),
+      title: t('adminDashboard.totalRevenue'),
       value: formatCurrency(stats.totalRevenue),
       growth: stats.revenueGrowth,
       icon: DollarSign,
       color: 'green'
     },
     {
-      title: t('adminDashboard', 'totalOrders'),
+      title: t('adminDashboard.totalOrders'),
       value: stats.totalOrders.toLocaleString(),
       growth: stats.orderGrowth,
       icon: ShoppingCart,
       color: 'blue'
     },
     {
-      title: t('adminDashboard', 'totalProducts'),
+      title: t('adminDashboard.totalProducts'),
       value: stats.totalProducts,
       growth: stats.productGrowth,
       icon: Package,
       color: 'purple'
     },
     {
-      title: t('adminDashboard', 'totalCustomers'),
+      title: t('adminDashboard.totalCustomers'),
       value: stats.totalCustomers,
       growth: stats.customerGrowth,
       icon: Users,

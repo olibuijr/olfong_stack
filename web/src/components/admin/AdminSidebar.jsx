@@ -16,13 +16,10 @@ import {
   FolderOpen,
   MessageCircle,
   Play,
-  Building,
   Truck,
-  Key,
   CreditCard,
   Languages,
   Receipt,
-  Mail,
   Calculator,
   Image,
   FileImage
@@ -65,93 +62,69 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
 
   const navigationSections = [
     {
-      title: t('adminSidebar', 'overview'),
+      title: t('adminSidebar.overview'),
       items: [
-        { name: t('adminNavigation', 'dashboard'), href: '/admin', icon: LayoutDashboard }
+        { name: t('adminNavigation.dashboard'), href: '/admin', icon: LayoutDashboard }
       ]
     },
     {
-      title: t('adminSidebar', 'productManagement'),
+      title: t('adminSidebar.sales'),
       items: [
-        { name: t('adminNavigation', 'products'), href: '/admin/products', icon: Package },
-        { name: t('adminNavigation', 'categories'), href: '/admin/categories', icon: FolderOpen }
+        { name: t('adminNavigation.orders'), href: '/admin/orders', icon: ShoppingCart },
+        { name: t('adminNavigation.pos'), href: '/admin/pos', icon: Calculator },
+        { name: t('adminNavigation.delivery'), href: '/delivery', icon: Truck }
       ]
     },
     {
-      title: t('adminSidebar', 'orderManagement'),
+      title: t('adminSidebar.catalog'),
       items: [
-        { name: t('adminNavigation', 'orders'), href: '/admin/orders', icon: ShoppingCart },
-        { name: t('adminNavigation', 'pos'), href: '/admin/pos', icon: Calculator },
-        { name: t('adminNavigation', 'customers'), href: '/admin/customers', icon: Users }
+        { name: t('adminNavigation.products'), href: '/admin/products', icon: Package },
+        { name: t('adminNavigation.categories'), href: '/admin/categories', icon: FolderOpen }
       ]
     },
     {
-      title: t('adminSidebar', 'communication'),
+      title: t('adminSidebar.content'),
       items: [
-        { 
-          name: t('adminNavigation', 'chat'), 
-          href: '/admin/chat', 
+        { name: t('adminNavigation.media'), href: '/admin/media', icon: FileImage },
+        { name: t('adminNavigation.banners'), href: '/admin/banners', icon: Image }
+      ]
+    },
+    {
+      title: t('adminSidebar.customersAndCommunication'),
+      items: [
+        { name: t('adminNavigation.customers'), href: '/admin/customers', icon: Users },
+        {
+          name: t('adminNavigation.chat'),
+          href: '/admin/chat',
           icon: MessageCircle,
           unreadCount: unreadCount
-        }
+        },
+        { name: t('adminNavigation.notifications'), href: '/admin/notifications', icon: Bell }
       ]
     },
     {
-      title: t('adminSidebar', 'analyticsReports'),
+      title: t('adminSidebar.analytics'),
       items: [
-        { name: t('adminNavigation', 'analytics'), href: '/admin/analytics', icon: BarChart3 },
-        { name: t('adminNavigation', 'reports'), href: '/admin/reports', icon: FileText }
+        { name: t('adminNavigation.analytics'), href: '/admin/analytics', icon: BarChart3 },
+        { name: t('adminNavigation.reports'), href: '/admin/reports', icon: FileText }
       ]
     },
-      {
-        title: t('adminSidebar', 'system'),
-        items: [
-           { name: t('adminNavigation', 'media'), href: '/admin/media', icon: FileImage },
-          { name: t('adminNavigation', 'banners'), href: '/admin/banners', icon: Image },
-          { name: t('adminNavigation', 'demoData'), href: '/admin/demo-data', icon: Play },
-          { name: t('adminNavigation', 'notifications'), href: '/admin/notifications', icon: Bell },
-          {
-            name: t('adminNavigation', 'translations'),
-            href: '/admin/translations',
-            icon: Languages
-          },
-         {
-           name: t('adminSettings', 'general'),
-           href: '/admin/settings/general',
-           icon: Settings
-         },
-         {
-           name: t('adminSettings', 'business'),
-           href: '/admin/settings/business',
-           icon: Building
-         },
-         {
-           name: t('adminSettings', 'shipping'),
-           href: '/admin/settings/shipping',
-           icon: Truck
-         },
-         {
-           name: t('adminSettings', 'apiKeys'),
-           href: '/admin/settings/api-keys',
-           icon: Key
-         },
-        {
-          name: t('adminSettings', 'paymentGateways'),
-          href: '/admin/settings/payment-gateways',
-          icon: CreditCard
-        },
-        {
-          name: t('adminSettings', 'receipts'),
-          href: '/admin/settings/receipts',
-          icon: Receipt
-        },
-        {
-          name: t('adminSettings', 'smtp'),
-          href: '/admin/settings/smtp',
-          icon: Mail
-        }
-       ]
-     }
+    {
+      title: t('adminSidebar.settings'),
+      items: [
+        { name: t('adminSettings.general'), href: '/admin/settings/general', icon: Settings },
+        { name: t('adminSettings.shipping'), href: '/admin/settings/shipping', icon: Truck },
+        { name: t('adminSettings.paymentGateways'), href: '/admin/settings/payment-gateways', icon: CreditCard },
+        { name: t('adminSettings.receipts'), href: '/admin/settings/receipts', icon: Receipt }
+      ]
+    },
+    {
+      title: t('adminSidebar.system'),
+      items: [
+        { name: t('adminNavigation.translations'), href: '/admin/translations', icon: Languages },
+        { name: t('adminNavigation.demoData'), href: '/admin/demo-data', icon: Play }
+      ]
+    }
   ];
 
   const handleLogout = () => {
@@ -262,8 +235,8 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
            <div className={`min-w-0 flex-1 transition-all duration-300 ease-in-out ${
              isCollapsed && !isMobile ? 'opacity-0 w-0 overflow-hidden ml-0' : 'opacity-100 w-auto ml-3'
            }`}>
-             <p className="text-sm font-medium text-gray-900 dark:text-white truncate transition-colors duration-200">{t('adminNavigation', 'adminUser')}</p>
-             <p className="text-xs text-gray-500 dark:text-gray-400 truncate transition-colors duration-200">{t('adminSidebar', 'adminEmail')}</p>
+             <p className="text-sm font-medium text-gray-900 dark:text-white truncate transition-colors duration-200">{t('adminNavigation.adminUser')}</p>
+             <p className="text-xs text-gray-500 dark:text-gray-400 truncate transition-colors duration-200">{t('adminSidebar.adminEmail')}</p>
            </div>
          </div>
 
@@ -273,13 +246,13 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
             className={`flex items-center w-full px-3 py-1.5 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-700 dark:hover:text-red-300 transition-all duration-300 ease-in-out hover:scale-[1.02] active:scale-[0.98] ${
               isCollapsed && !isMobile ? 'justify-center px-2' : ''
             }`}
-           title={isCollapsed && !isMobile ? t('adminNavigation', 'logout') : undefined}
+           title={isCollapsed && !isMobile ? t('adminNavigation.logout') : undefined}
          >
            <LogOut className="h-4 w-4 flex-shrink-0 transition-transform duration-200 group-hover:scale-110" />
            <span className={`transition-all duration-300 ease-in-out ${
              isCollapsed && !isMobile ? 'opacity-0 w-0 overflow-hidden ml-0' : 'opacity-100 w-auto ml-3'
            }`}>
-            {t('adminNavigation', 'logout')}
+            {t('adminNavigation.logout')}
           </span>
          </button>
       </div>

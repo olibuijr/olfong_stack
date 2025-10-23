@@ -6,11 +6,12 @@ const { errorResponse } = require('../utils/response');
  */
 const validate = (req, res, next) => {
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
+    console.log('Validation errors:', JSON.stringify(errors.array(), null, 2));
     return errorResponse(res, 'Validation failed', 400, errors.array());
   }
-  
+
   next();
 };
 

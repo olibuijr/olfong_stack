@@ -23,7 +23,8 @@ const PaymentGatewaysSettings = () => {
 
   useEffect(() => {
     loadPaymentGateways();
-  }, [loadPaymentGateways]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loadPaymentGateways = useCallback(async () => {
     setIsLoading(true);
@@ -40,7 +41,7 @@ const PaymentGatewaysSettings = () => {
       }
     } catch (error) {
       console.error('Error loading payment gateways:', error);
-      toast.error(t('adminSettings', 'errorLoadingPaymentGateways'));
+      toast.error(t('adminSettings.errorLoadingPaymentGateways'));
     } finally {
       setIsLoading(false);
     }
@@ -51,7 +52,7 @@ const PaymentGatewaysSettings = () => {
       const response = await fetch(`/api/payment-gateways/${gatewayId}/toggle`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': t('adminSettings', 'contentType'),
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({ isEnabled })
@@ -65,13 +66,13 @@ const PaymentGatewaysSettings = () => {
               : gateway
           )
         );
-        toast.success(`Payment gateway ${isEnabled ? 'enabled' : 'disabled'} successfully`);
+        toast.success(t(isEnabled ? 'adminSettings.paymentGatewayEnabled' : 'adminSettings.paymentGatewayDisabled'));
       } else {
-        throw new Error(t('adminSettings', 'errorTogglingPaymentGateway'));
+        throw new Error(t('adminSettings.errorTogglingPaymentGateway'));
       }
     } catch (error) {
       console.error('Error toggling payment gateway:', error);
-      toast.error(t('adminSettings', 'errorTogglingPaymentGateway'));
+      toast.error(t('adminSettings.errorTogglingPaymentGateway'));
     }
   };
 
@@ -85,14 +86,14 @@ const PaymentGatewaysSettings = () => {
       });
 
       if (response.ok) {
-        toast.success(t('adminSettings', 'paymentGatewayTestSuccessful'));
+        toast.success(t('adminSettings.paymentGatewayTestSuccessful'));
       } else {
         const errorData = await response.json();
         toast.error(t('adminSettings.paymentGatewayTestFailed', { message: errorData.message || 'Unknown error' }));
       }
     } catch (error) {
       console.error('Error testing payment gateway:', error);
-      toast.error(t('adminSettings', 'errorTestingPaymentGateway'));
+      toast.error(t('adminSettings.errorTestingPaymentGateway'));
     }
   };
 
@@ -108,7 +109,7 @@ const PaymentGatewaysSettings = () => {
       const response = await fetch(`/api/payment-gateways/${gatewayData.id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': t('adminSettings', 'contentType'),
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(gatewayData)
@@ -116,13 +117,13 @@ const PaymentGatewaysSettings = () => {
 
       if (response.ok) {
         await loadPaymentGateways();
-        toast.success(t('adminSettings', 'paymentGatewayUpdatedSuccessfully'));
+        toast.success(t('adminSettings.paymentGatewayUpdatedSuccessfully'));
       } else {
-        throw new Error(t('adminSettings', 'errorUpdatingPaymentGateway'));
+        throw new Error(t('adminSettings.errorUpdatingPaymentGateway'));
       }
     } catch (error) {
       console.error('Error updating payment gateway:', error);
-      toast.error(t('adminSettings', 'errorUpdatingPaymentGateway'));
+      toast.error(t('adminSettings.errorUpdatingPaymentGateway'));
       throw error;
     }
   };
@@ -140,8 +141,8 @@ const PaymentGatewaysSettings = () => {
             <div className="text-red-400 mb-4">
               <RefreshCw className="w-16 h-16 mx-auto" />
             </div>
-            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminSettings', 'accessDenied')}</h1>
-            <p className="text-gray-700">{t('adminSettings', 'noPermissionMessage')}</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminSettings.accessDenied')}</h1>
+            <p className="text-gray-700">{t('adminSettings.noPermissionMessage')}</p>
           </div>
         </div>
       </AdminLayout>

@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { 
-  getSettings, 
-  getSetting, 
-  upsertSetting, 
-  updateSettings, 
-  deleteSetting, 
+const {
+  getSettings,
+  getSetting,
+  upsertSetting,
+  updateSettings,
+  deleteSetting,
   getPublicSettings,
-  initializeDefaultSettings 
+  getOpeningHours,
+  initializeDefaultSettings
 } = require('../controllers/settingsController');
 const { authenticate, authorize } = require('../middleware/auth');
 const { body, param, query, validationResult } = require('express-validator');
@@ -25,8 +26,9 @@ const validate = (req, res, next) => {
   next();
 };
 
-// Public route - get public settings (no auth required)
+// Public routes - no auth required
 router.get('/public', getPublicSettings);
+router.get('/opening-hours', getOpeningHours);
 
 // All other routes require authentication
 router.use(authenticate);

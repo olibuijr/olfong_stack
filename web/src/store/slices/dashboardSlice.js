@@ -71,10 +71,11 @@ const dashboardSlice = createSlice({
       })
       .addCase(fetchDashboardStats.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.stats = action.payload.stats;
-        state.recentOrders = action.payload.recentOrders;
-        state.orderStatusCounts = action.payload.orderStatusCounts;
-        state.topProducts = action.payload.topProducts;
+        const data = action.payload.data || action.payload;
+        state.stats = data.stats || initialState.stats;
+        state.recentOrders = data.recentOrders || [];
+        state.orderStatusCounts = data.orderStatusCounts || initialState.orderStatusCounts;
+        state.topProducts = data.topProducts || [];
       })
       .addCase(fetchDashboardStats.rejected, (state, action) => {
         state.isLoading = false;

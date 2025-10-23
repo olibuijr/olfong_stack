@@ -132,7 +132,7 @@ const Reports = () => {
               <span className={`text-sm font-medium ml-1 ${getGrowthColor(growth)}`}>
                 {growth >= 0 ? '+' : ''}{growth}%
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">{t('adminReports', 'vsPreviousPeriod')}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">{t('adminReports.vsPreviousPeriod')}</span>
             </div>
           )}
         </div>
@@ -162,28 +162,28 @@ const Reports = () => {
       {/* Sales Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title={t('adminReports', 'totalRevenue')}
+          title={t('adminReports.totalRevenue')}
           value={formatCurrency(sales.totalRevenue || 0)}
           icon={DollarSign}
           growth={sales.growthRate}
           color="green"
         />
         <StatCard
-          title={t('adminReports', 'totalOrders')}
+          title={t('adminReports.totalOrders')}
           value={(sales.totalOrders || 0).toLocaleString()}
           icon={ShoppingCart}
           growth={8.3}
           color="blue"
         />
         <StatCard
-          title={t('adminReports', 'averageOrderValue')}
+          title={t('adminReports.averageOrderValue')}
           value={formatCurrency(sales.averageOrderValue || 0)}
           icon={TrendingUp}
           growth={5.2}
           color="purple"
         />
         <StatCard
-          title={t('adminReports', 'growthRate')}
+          title={t('adminReports.growthRate')}
           value={`${sales.growthRate || 0}%`}
           icon={BarChart3}
           growth={sales.growthRate}
@@ -193,7 +193,7 @@ const Reports = () => {
 
        {/* Daily Sales Chart */}
        <ChartCard
-         title={t('adminReports', 'dailySalesTrend')}
+         title={t('adminReports.dailySalesTrend')}
          actions={
            <div className="flex items-center space-x-2">
              <button className="p-2 text-gray-400 hover:text-gray-600">
@@ -214,7 +214,7 @@ const Reports = () => {
                    return date.toLocaleDateString('is-IS', { month: 'short', day: 'numeric' });
                  }),
                  datasets: [{
-                   label: t('adminReports', 'revenue'),
+                   label: t('adminReports.revenue'),
                    data: sales.dailySales.map(day => parseFloat(day.revenue) || 0),
                    borderColor: 'rgb(59, 130, 246)',
                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
@@ -248,7 +248,7 @@ const Reports = () => {
            </div>
          ) : (
            <div className="h-80 flex items-center justify-center text-gray-500">
-             {t('adminReports', 'noData')}
+             {t('adminReports.noData')}
            </div>
          )}
        </ChartCard>
@@ -260,30 +260,30 @@ const Reports = () => {
       {/* Product Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard
-          title={t('adminReports', 'totalProducts')}
+          title={t('adminReports.totalProducts')}
           value={products.totalProducts}
           icon={Package}
           growth={15.2}
           color="blue"
         />
         <StatCard
-          title={t('adminReports', 'activeProducts')}
+          title={t('adminReports.activeProducts')}
           value={products.activeProducts}
-          subtitle={`${Math.round((products.activeProducts / products.totalProducts) * 100)}% ${t('adminReports', 'ofTotal')}`}
+          subtitle={`${Math.round((products.activeProducts / products.totalProducts) * 100)}% ${t('adminReports.ofTotal')}`}
           icon={CheckCircle}
           color="green"
         />
         <StatCard
-          title={t('adminReports', 'outOfStock')}
+          title={t('adminReports.outOfStock')}
           value={products.outOfStock}
-          subtitle={`${Math.round((products.outOfStock / products.totalProducts) * 100)}% ${t('adminReports', 'ofTotal')}`}
+          subtitle={`${Math.round((products.outOfStock / products.totalProducts) * 100)}% ${t('adminReports.ofTotal')}`}
           icon={AlertCircle}
           color="red"
         />
       </div>
 
       {/* Top Selling Products */}
-      <ChartCard title={t('adminReports', 'topSellingProducts')}>
+      <ChartCard title={t('adminReports.topSellingProducts')}>
         <div className="space-y-4">
           {products.topSelling.length > 0 ? (
             products.topSelling.map((product, index) => (
@@ -310,27 +310,27 @@ const Reports = () => {
             ))
           ) : (
             <div className="text-center py-8 text-gray-500">
-              {t('adminReports', 'noData')}
+              {t('adminReports.noData')}
             </div>
           )}
         </div>
       </ChartCard>
 
       {/* Category Breakdown */}
-      <ChartCard title={t('adminReports', 'revenueByCategory')}>
+      <ChartCard title={t('adminReports.revenueByCategory')}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.categoryBreakdown.length > 0 ? (
             products.categoryBreakdown.map((category) => (
               <div key={category.category} className="text-center p-4 bg-gray-50 rounded-lg">
                 <h4 className="text-sm font-medium text-gray-900">{category.category}</h4>
                 <p className="text-2xl font-bold text-gray-900 mt-2">{category.count}</p>
-                <p className="text-xs text-gray-500">{t('adminReports', 'products')}</p>
+                <p className="text-xs text-gray-500">{t('adminReports.products')}</p>
                 <p className="text-sm font-medium text-blue-600 mt-1">{formatCurrency(category.revenue)}</p>
               </div>
             ))
           ) : (
             <div className="col-span-full text-center py-8 text-gray-500">
-              {t('adminReports', 'noData')}
+              {t('adminReports.noData')}
             </div>
           )}
         </div>
@@ -343,24 +343,24 @@ const Reports = () => {
       {/* Customer Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard
-          title={t('adminReports', 'totalCustomers')}
+          title={t('adminReports.totalCustomers')}
           value={customers.totalCustomers}
           icon={Users}
           growth={6.7}
           color="blue"
         />
         <StatCard
-          title={t('adminReports', 'newCustomers')}
+          title={t('adminReports.newCustomers')}
           value={customers.newCustomers}
-          subtitle={t('adminReports', 'thisPeriod')}
+          subtitle={t('adminReports.thisPeriod')}
           icon={TrendingUp}
           growth={12.3}
           color="green"
         />
         <StatCard
-          title={t('adminReports', 'avgOrderFrequency')}
+          title={t('adminReports.avgOrderFrequency')}
           value={customers.averageOrderFrequency}
-          subtitle={t('adminReports', 'ordersPerCustomer')}
+          subtitle={t('adminReports.ordersPerCustomer')}
           icon={ShoppingCart}
           growth={-2.1}
           color="purple"
@@ -368,7 +368,7 @@ const Reports = () => {
       </div>
 
       {/* Customer Segments */}
-      <ChartCard title={t('adminReports', 'customerSegmentation')}>
+      <ChartCard title={t('adminReports.customerSegmentation')}>
         <div className="space-y-4">
           {customers.customerSegments.length > 0 ? (
             customers.customerSegments.map((segment) => (
@@ -391,14 +391,14 @@ const Reports = () => {
             ))
           ) : (
             <div className="text-center py-8 text-gray-500">
-              {t('adminReports', 'noData')}
+              {t('adminReports.noData')}
             </div>
           )}
         </div>
       </ChartCard>
 
       {/* Top Customers */}
-      <ChartCard title={t('adminReports', 'topCustomersByRevenue')}>
+      <ChartCard title={t('adminReports.topCustomersByRevenue')}>
         <div className="space-y-4">
           {customers.topCustomers.length > 0 ? (
             customers.topCustomers.map((customer, index) => (
@@ -409,18 +409,18 @@ const Reports = () => {
                   </div>
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-900">{customer.name}</p>
-                    <p className="text-xs text-gray-500">{customer.orders} {t('adminReports', 'orders')}</p>
+                    <p className="text-xs text-gray-500">{customer.orders} {t('adminReports.orders')}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-medium text-gray-900">{formatCurrency(customer.totalSpent)}</p>
-                  <p className="text-xs text-gray-500">{t('adminReports', 'last')}: {formatDate(customer.lastOrder)}</p>
+                  <p className="text-xs text-gray-500">{t('adminReports.last')}: {formatDate(customer.lastOrder)}</p>
                 </div>
               </div>
             ))
           ) : (
             <div className="text-center py-8 text-gray-500">
-              {t('adminReports', 'noData')}
+              {t('adminReports.noData')}
             </div>
           )}
         </div>
@@ -433,30 +433,30 @@ const Reports = () => {
       {/* Order Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title={t('adminReports', 'totalOrders')}
+          title={t('adminReports.totalOrders')}
           value={orders.totalOrders}
           icon={ShoppingCart}
           growth={8.3}
           color="blue"
         />
         <StatCard
-          title={t('adminReports', 'completedOrders')}
+          title={t('adminReports.completedOrders')}
           value={orders.completedOrders}
-          subtitle={`${Math.round((orders.completedOrders / orders.totalOrders) * 100)}% ${t('adminReports', 'completionRate')}`}
+          subtitle={`${Math.round((orders.completedOrders / orders.totalOrders) * 100)}% ${t('adminReports.completionRate')}`}
           icon={CheckCircle}
           growth={12.1}
           color="green"
         />
         <StatCard
-          title={t('adminReports', 'pendingOrders')}
+          title={t('adminReports.pendingOrders')}
           value={orders.pendingOrders}
           icon={Clock}
           growth={-15.2}
           color="yellow"
         />
         <StatCard
-          title={t('adminReports', 'avgProcessingTime')}
-          value={`${orders.averageProcessingTime} ${t('adminReports', 'days')}`}
+          title={t('adminReports.avgProcessingTime')}
+          value={`${orders.averageProcessingTime} ${t('adminReports.days')}`}
           icon={TrendingUp}
           growth={-5.3}
           color="purple"
@@ -464,28 +464,28 @@ const Reports = () => {
       </div>
 
       {/* Delivery Methods */}
-      <ChartCard title={t('adminReports', 'orderDistributionByDeliveryMethod')}>
+      <ChartCard title={t('adminReports.orderDistributionByDeliveryMethod')}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {orders.deliveryMethods.length > 0 ? (
             orders.deliveryMethods.map((method) => (
               <div key={method.method} className="text-center p-6 bg-gray-50 rounded-lg">
                 <h4 className="text-sm font-medium text-gray-900">
-                  {method.method === 'HOME_DELIVERY' ? t('adminPage', 'homeDelivery') : t('ordersPage', 'pickup')}
+                  {method.method === 'HOME_DELIVERY' ? t('adminPage.homeDelivery') : t('ordersPage.pickup')}
                 </h4>
                 <p className="text-3xl font-bold text-gray-900 mt-2">{method.count}</p>
-                <p className="text-sm text-gray-500">{method.percentage}% {t('adminReports', 'ofTotalOrders')}</p>
+                <p className="text-sm text-gray-500">{method.percentage}% {t('adminReports.ofTotalOrders')}</p>
               </div>
             ))
           ) : (
             <div className="col-span-full text-center py-8 text-gray-500">
-              {t('adminReports', 'noData')}
+              {t('adminReports.noData')}
             </div>
           )}
         </div>
       </ChartCard>
 
       {/* Order Status Trend */}
-      <ChartCard title={t('adminReports', 'orderStatusDistribution')}>
+      <ChartCard title={t('adminReports.orderStatusDistribution')}>
         <div className="space-y-4">
           {orders.orderStatusTrend.length > 0 ? (
             orders.orderStatusTrend.map((status) => (
@@ -526,7 +526,7 @@ const Reports = () => {
             ))
           ) : (
             <div className="text-center py-8 text-gray-500">
-              {t('adminReports', 'noData')}
+              {t('adminReports.noData')}
             </div>
           )}
         </div>
@@ -540,8 +540,8 @@ const Reports = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white shadow-lg rounded-lg border border-gray-200">
             <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
-            <p className="text-gray-700">You do not have permission to view this page.</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-gray-700">{t('admin.accessDeniedMessage')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -566,8 +566,8 @@ const Reports = () => {
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSidebar', 'reportsAnalytics')}</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSidebar', 'comprehensiveInsights')}</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSidebar.reportsAnalytics')}</h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSidebar.comprehensiveInsights')}</p>
             </div>
             <div className="flex items-center space-x-4 mt-4 sm:mt-0">
               <button
@@ -575,14 +575,14 @@ const Reports = () => {
                 className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <FileText className="h-4 w-4 mr-2" />
-{t('adminReports', 'exportPDF')}
+{t('adminReports.exportPDF')}
               </button>
               <button
                 onClick={() => exportReport('csv')}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <Download className="h-4 w-4 mr-2" />
-{t('adminReports', 'exportCSV')}
+{t('adminReports.exportCSV')}
               </button>
             </div>
           </div>
@@ -597,38 +597,38 @@ const Reports = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Report Type */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports', 'reportType')}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports.reportType')}</label>
               <select
                 value={currentReport}
                 onChange={(e) => dispatch(setCurrentReport(e.target.value))}
                 className="input w-full"
               >
-                <option value="sales">{t('adminReports', 'salesReport')}</option>
-                <option value="products">{t('adminReports', 'productsReport')}</option>
-                <option value="customers">{t('adminReports', 'customersReport')}</option>
-                <option value="orders">{t('adminReports', 'ordersReport')}</option>
+                <option value="sales">{t('adminReports.salesReport')}</option>
+                <option value="products">{t('adminReports.productsReport')}</option>
+                <option value="customers">{t('adminReports.customersReport')}</option>
+                <option value="orders">{t('adminReports.ordersReport')}</option>
               </select>
             </div>
 
             {/* Time Period */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports', 'timePeriod')}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports.timePeriod')}</label>
               <select
                 value={timeRange}
                 onChange={(e) => dispatch(setTimeRange(e.target.value))}
                 className="input w-full"
               >
-                <option value="last7days">{t('adminReports', 'last7Days')}</option>
-                <option value="last30days">{t('adminReports', 'last30Days')}</option>
-                <option value="last90days">{t('adminReports', 'last90Days')}</option>
-                <option value="lastyear">{t('adminReports', 'lastYear')}</option>
-                <option value="custom">{t('adminReports', 'customRange')}</option>
+                <option value="last7days">{t('adminReports.last7Days')}</option>
+                <option value="last30days">{t('adminReports.last30Days')}</option>
+                <option value="last90days">{t('adminReports.last90Days')}</option>
+                <option value="lastyear">{t('adminReports.lastYear')}</option>
+                <option value="custom">{t('adminReports.customRange')}</option>
               </select>
             </div>
 
             {/* Start Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports', 'startDate')}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports.startDate')}</label>
               <input
                 type="date"
                 value={dateRange.start || ''}
@@ -639,7 +639,7 @@ const Reports = () => {
 
             {/* End Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports', 'endDate')}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('adminReports.endDate')}</label>
               <input
                 type="date"
                 value={dateRange.end || ''}
@@ -662,7 +662,7 @@ const Reports = () => {
               className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
             >
               <RefreshCw className="h-4 w-4 mr-2" />
-{t('adminReports', 'refreshData')}
+{t('adminReports.refreshData')}
             </button>
             
             <div className="flex items-center space-x-2 text-sm text-gray-500">

@@ -40,7 +40,7 @@ const Chat = () => {
   // Check if user is admin or delivery
   useEffect(() => {
     if (user && !['ADMIN', 'DELIVERY'].includes(user.role)) {
-      toast.error(t('adminChat', 'accessDeniedMessage'));
+      toast.error(t('adminChat.accessDeniedMessage'));
       return;
     }
   }, [user, t]);
@@ -129,7 +129,7 @@ const Chat = () => {
         socketService.emitTypingStop(currentConversation.id, user.id);
       }
     } catch (error) {
-      toast.error(t('adminChat', 'sendMessageError'));
+      toast.error(t('adminChat.sendMessageError'));
     }
   };
 
@@ -170,9 +170,9 @@ const Chat = () => {
         status
       })).unwrap();
       
-      toast.success(t('adminChat', 'statusUpdated'));
+      toast.success(t('adminChat.statusUpdated'));
     } catch (error) {
-      toast.error(t('adminChat', 'updateStatusError'));
+      toast.error(t('adminChat.updateStatusError'));
     }
   };
 
@@ -182,10 +182,10 @@ const Chat = () => {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              {t('adminChat', 'accessDenied')}
+              {t('adminChat.accessDenied')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
-              {t('adminChat', 'accessDeniedMessage')}
+              {t('adminChat.accessDeniedMessage')}
             </p>
           </div>
         </div>
@@ -201,8 +201,8 @@ const Chat = () => {
           <div className="px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('adminChat', 'title')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{t('adminChat', 'subtitle')}</p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('adminChat.title')}</h1>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{t('adminChat.subtitle')}</p>
               </div>
             </div>
           </div>

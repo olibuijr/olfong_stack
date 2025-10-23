@@ -89,6 +89,18 @@ export const fetchFeaturedBanners = createAsyncThunk(
   }
 );
 
+export const fetchHeroBanner = createAsyncThunk(
+  'banners/fetchHeroBanner',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/banners/hero/active');
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch hero banner');
+    }
+  }
+);
+
 export const setFeaturedBanner = createAsyncThunk(
   'banners/setFeaturedBanner',
   async ({ id, featuredOrder }, { rejectWithValue }) => {
@@ -117,6 +129,7 @@ export const removeFeaturedBanner = createAsyncThunk(
 const initialState = {
   banners: [],
   featuredBanners: [],
+  heroBanner: null,
   currentBanner: null,
   isLoading: false,
   error: null,
@@ -251,6 +264,21 @@ const bannerSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchFeaturedBanners.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // Fetch Hero Banner
+      .addCase(fetchHeroBanner.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchHeroBanner.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.heroBanner = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchHeroBanner.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })

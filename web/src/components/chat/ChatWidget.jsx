@@ -195,7 +195,7 @@ const ChatWidget = () => {
         <div className="bg-white rounded-lg shadow-xl w-80 h-96 flex flex-col">
           {/* Header */}
           <div className="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
-            <h3 className="font-semibold">{t('chat', 'title')}</h3>
+            <h3 className="font-semibold">{t('chat.title')}</h3>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
@@ -217,7 +217,7 @@ const ChatWidget = () => {
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-3 space-y-2">
                 {isLoading ? (
-                  <div className="text-center text-gray-500">{t('common', 'loading')}</div>
+                  <div className="text-center text-gray-500">{t('common.loading')}</div>
                 ) : (
                   messages.map((message) => (
                     <div
@@ -265,7 +265,7 @@ const ChatWidget = () => {
                       handleTyping();
                     }}
                     onKeyPress={handleKeyPress}
-                    placeholder={t('chat', 'typeMessage')}
+                    placeholder={t('chat.typeMessage')}
                     className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <button

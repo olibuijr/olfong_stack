@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLanguage } from "../../contexts/LanguageContext";
-import { 
-  ShoppingCart, 
-  Search, 
-  Plus, 
-  Minus, 
+import {
+  ShoppingCart,
+  Search,
+  Plus,
+  Minus,
   X,
   User,
   CreditCard,
   Banknote,
-  Clock,
   Printer,
   Send,
   Download,
@@ -42,6 +41,7 @@ const POSOrders = () => {
   const [notes, setNotes] = useState('');
   const [shippingOptionId, setShippingOptionId] = useState('');
   const [shippingOptions, setShippingOptions] = useState([]);
+  const [paymentGateways, setPaymentGateways] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
   const [currentOrder, setCurrentOrder] = useState(null);
@@ -52,6 +52,7 @@ const POSOrders = () => {
       dispatch(fetchProducts({ limit: 100 }));
       dispatch(fetchCategories());
       fetchShippingOptions();
+      fetchPaymentGateways();
     }
   }, [dispatch, user]);
 
@@ -64,6 +65,30 @@ const POSOrders = () => {
       }
     } catch (error) {
       console.error('Error fetching shipping options:', error);
+    }
+  };
+
+  const fetchPaymentGateways = async () => {
+    try {
+      const response = await fetch('/api/payment-gateways', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const enabledGateways = (data.data.gateways || []).filter(gateway => gateway.isEnabled);
+        setPaymentGateways(enabledGateways);
+
+        // Set default payment method to first enabled gateway
+        if (enabledGateways.length > 0) {
+          setPaymentMethod(enabledGateways[0].provider);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching payment gateways:', error);
+      toast.error('Failed to load payment methods');
     }
   };
 
@@ -231,8 +256,8 @@ const POSOrders = () => {
       <AdminLayout>
         <div className="text-center py-12">
           <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Access Denied</h2>
-          <p className="text-gray-600">You don&apos;t have permission to access the POS system.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('admin.accessDenied')}</h2>
+          <p className="text-gray-600">{t('admin.accessDeniedMessage')}</p>
         </div>
       </AdminLayout>
     );
@@ -351,15 +376,15 @@ const POSOrders = () => {
                 {filteredProducts.map(product => (
                   <div
                     key={product.id}
-                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
+                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer bg-white dark:bg-gray-800"
                     onClick={() => addToCart(product)}
                   >
-                    <div className="aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg mb-3 flex items-center justify-center">
+                    <div className="aspect-square bg-white dark:bg-white rounded-lg mb-3 flex items-center justify-center border border-gray-200 dark:border-gray-300">
                       {product.imageUrl ? (
                         <img
                           src={product.imageUrl}
                           alt={product.name}
-                          className="w-full h-full object-cover rounded-lg"
+                          className="w-full h-full object-contain rounded-lg p-2"
                         />
                       ) : (
                         <Package className="w-8 h-8 text-gray-400" />
@@ -446,40 +471,40 @@ const POSOrders = () => {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   {t('pos.paymentMethod')}
                 </label>
-                <div className="grid grid-cols-3 gap-2">
-                  <button
-                    onClick={() => setPaymentMethod('cash')}
-                    className={`p-2 rounded-lg border text-sm font-medium ${
-                      paymentMethod === 'cash'
-                        ? 'border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300'
-                        : 'border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-300'
-                    }`}
-                  >
-                    <Banknote className="w-4 h-4 mx-auto mb-1" />
-                    {t('pos.cash')}
-                  </button>
-                  <button
-                    onClick={() => setPaymentMethod('card')}
-                    className={`p-2 rounded-lg border text-sm font-medium ${
-                      paymentMethod === 'card'
-                        ? 'border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300'
-                        : 'border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-300'
-                    }`}
-                  >
-                    <CreditCard className="w-4 h-4 mx-auto mb-1" />
-                    {t('pos.card')}
-                  </button>
-                  <button
-                    onClick={() => setPaymentMethod('pay_later')}
-                    className={`p-2 rounded-lg border text-sm font-medium ${
-                      paymentMethod === 'pay_later'
-                        ? 'border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300'
-                        : 'border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-300'
-                    }`}
-                  >
-                    <Clock className="w-4 h-4 mx-auto mb-1" />
-                    {t('pos.payLater')}
-                  </button>
+                <div className="grid grid-cols-2 gap-2">
+                  {paymentGateways.length > 0 ? (
+                    paymentGateways.map((gateway) => {
+                      // Determine icon based on gateway provider
+                      let Icon = CreditCard;
+                      if (gateway.provider === 'valitor' || gateway.provider === 'rapyd' || gateway.provider === 'stripe' || gateway.provider === 'paypal' || gateway.provider === 'netgiro' || gateway.provider === 'teya') {
+                        Icon = CreditCard;
+                      } else if (gateway.provider === 'cash_on_delivery' || gateway.provider === 'pay_on_pickup') {
+                        Icon = Banknote;
+                      }
+
+                      return (
+                        <button
+                          key={gateway.id}
+                          onClick={() => setPaymentMethod(gateway.provider)}
+                          className={`p-3 rounded-lg border text-sm font-medium transition-all ${
+                            paymentMethod === gateway.provider
+                              ? 'border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300 ring-2 ring-blue-200'
+                              : 'border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-300 hover:border-gray-400'
+                          }`}
+                        >
+                          <Icon className="w-5 h-5 mx-auto mb-1" />
+                          <div className="text-xs truncate">{gateway.displayName}</div>
+                          <div className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">
+                            {gateway.environment === 'production' ? 'Live' : 'Test'}
+                          </div>
+                        </button>
+                      );
+                    })
+                  ) : (
+                    <div className="col-span-2 text-center py-4 text-gray-500 dark:text-gray-400 text-sm">
+                      No payment methods available. Please configure payment gateways in settings.
+                    </div>
+                  )}
                 </div>
               </div>
 

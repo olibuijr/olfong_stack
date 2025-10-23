@@ -1,7 +1,7 @@
 import { useLanguage } from "../../../contexts/LanguageContext";
 import { RefreshCw, MoreVertical } from 'lucide-react';
 import PropTypes from 'prop-types';
-import { getStatusColor, getStatusIcon } from './utils';
+import { getStatusColor, getStatusIcon, getStatusLabel } from './utils';
 
 const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
   const { t } = useLanguage();
@@ -12,7 +12,7 @@ const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
         <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
-              {t('adminDashboard', 'recentOrders')}
+              {t('adminDashboard.recentOrders')}
             </h2>
             <div className="flex items-center space-x-1 sm:space-x-2">
               <button className="p-1.5 sm:p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200">
@@ -29,19 +29,19 @@ const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                  {t('adminDashboard', 'orderId')}
+                  {t('adminDashboard.orderId')}
                 </th>
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                  {t('adminDashboard', 'customer')}
+                  {t('adminDashboard.customer')}
                 </th>
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                  {t('adminDashboard', 'amount')}
+                  {t('adminDashboard.amount')}
                 </th>
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                  {t('adminDashboard', 'status')}
+                  {t('adminDashboard.status')}
                 </th>
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                  {t('adminDashboard', 'date')}
+                  {t('adminDashboard.date')}
                 </th>
               </tr>
             </thead>
@@ -62,7 +62,7 @@ const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
                         <StatusIcon className="h-3 w-3 mr-1" />
-                        {t('orders', 'statuses')[order.status.toUpperCase()]}
+                        {getStatusLabel(order.status, t)}
                       </span>
                     </td>
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">

@@ -7,32 +7,78 @@
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node server.js`[39m
-node:internal/modules/cjs/loader:1386
-  throw err;
-  ^
-
-Error: Cannot find module '../middleware/authMiddleware'
-Require stack:
-- /home/olibuijr/Projects/olfong_stack/backend/src/routes/translations.js
-- /home/olibuijr/Projects/olfong_stack/backend/server.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
-    at Module._load (node:internal/modules/cjs/loader:1192:37)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
-    at Module.require (node:internal/modules/cjs/loader:1463:12)
-    at require (node:internal/modules/helpers:147:16)
-    at Object.<anonymous> (/home/olibuijr/Projects/olfong_stack/backend/src/routes/translations.js:4:32)
-    at Module._compile (node:internal/modules/cjs/loader:1706:14) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    '/home/olibuijr/Projects/olfong_stack/backend/src/routes/translations.js',
-    '/home/olibuijr/Projects/olfong_stack/backend/server.js'
-  ]
-}
-
-Node.js v22.20.0
-[31m[nodemon] app crashed - waiting for file changes before starting...[39m
-[32m[nodemon] restarting child process[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: Vu2ZXwF7cBLMgTHaAAAB
+User connected: leq_S4nK0c8oH445AAAE
+User connected: 1iE8z2sjn-aYUCtGAAAF
+User 1 joined their room
+User disconnected: 1iE8z2sjn-aYUCtGAAAF
+User connected: ka0oglmKbowndPpPAAAH
+User disconnected: ka0oglmKbowndPpPAAAH
+User connected: GA4wy_NNv7M_Sbd3AAAJ
+User disconnected: GA4wy_NNv7M_Sbd3AAAJ
+User connected: z4tigr-ImknQXUykAAAL
+User disconnected: z4tigr-ImknQXUykAAAL
+User connected: Ry8g8pBRuVdbrMVsAAAN
+User disconnected: leq_S4nK0c8oH445AAAE
+User connected: Iln156pwjCFBFuqoAAAP
+Validation errors: [
+  {
+    "type": "field",
+    "msg": "Username is required",
+    "path": "username",
+    "location": "body"
+  }
+]
+Validation errors: [
+  {
+    "type": "field",
+    "msg": "Username is required",
+    "path": "username",
+    "location": "body"
+  }
+]
+Validation errors: [
+  {
+    "type": "field",
+    "msg": "Username is required",
+    "path": "username",
+    "location": "body"
+  }
+]
+User disconnected: Ry8g8pBRuVdbrMVsAAAN
+User connected: FTb_-_wN-oARVrqfAAAR
+User disconnected: FTb_-_wN-oARVrqfAAAR
+User connected: HQUhsGojNiKoTn9dAAAT
+User disconnected: Iln156pwjCFBFuqoAAAP
+User connected: igdrBN2QqrS-1trKAAAV
+User disconnected: HQUhsGojNiKoTn9dAAAT
+User connected: YldbNPflGnrEyMRJAAAX
+User disconnected: YldbNPflGnrEyMRJAAAX
+User connected: CVy_jyzl5D80Hl10AAAZ
+User disconnected: CVy_jyzl5D80Hl10AAAZ
+User connected: mCHTvN2FaAXo0pelAAAb
+User disconnected: mCHTvN2FaAXo0pelAAAb
+User connected: oDJ4Wza9T0JlhqhyAAAd
+[32m[nodemon] restarting due to changes...[39m
 [32m[nodemon] starting `node server.js`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: azFHAGzmIFHxAu00AAAB
+User connected: CJw1CMeLyRtDdtuBAAAD
+User connected: ImY7nEuZrSV0Q_4gAAAF
+User disconnected: ImY7nEuZrSV0Q_4gAAAF
+User connected: ePxy-zTS7sCMRPrXAAAH
+User disconnected: CJw1CMeLyRtDdtuBAAAD
+User disconnected: ePxy-zTS7sCMRPrXAAAH
+User connected: YLGvd-LtzJntdTdxAAAK
+User connected: CzmPvm8l_5XI_PnXAAAL
+User disconnected: CzmPvm8l_5XI_PnXAAAL
+User connected: R5L2RLa4KuxMR3HmAAAN
+User disconnected: R5L2RLa4KuxMR3HmAAAN
+User connected: 6QAUyrKZ6zeM_KIfAAAP

@@ -103,9 +103,19 @@ const Receipt = ({
               {'Viðskiptavinur'}: {order.customer.name}
             </div>
           )}
+          {order.deliveryMethod && (
+            <div className="order-details">
+              {'Afhendingaraðferð'}: {order.deliveryMethod === 'PICKUP' ? 'Sækja í verslun' : 'Heimsending'}
+            </div>
+          )}
+          {order.deliveryMethod === 'PICKUP' && order.pickupTime && (
+            <div className="order-details">
+              {'Afhendingartími'}: {order.pickupTime}
+            </div>
+          )}
           {order.deliveryAddress && (
             <div className="order-details">
-              {'Afhending'}: {order.deliveryAddress.address}
+              {'Heimilisfang'}: {order.deliveryAddress.address}
             </div>
           )}
           {order.paymentMethod && (

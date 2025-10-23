@@ -37,22 +37,22 @@ const MediaList = ({
                 />
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                {t('adminMedia', 'preview')}
+                {t('adminMedia.preview')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                {t('adminMedia', 'name')}
+                {t('adminMedia.name')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                {t('adminMedia', 'type')}
+                {t('adminMedia.type')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                {t('adminMedia', 'size')}
+                {t('adminMedia.size')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                {t('adminMedia', 'uploaded')}
+                {t('adminMedia.uploaded')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                {t('adminMedia', 'actions')}
+                {t('adminMedia.actions')}
               </th>
             </tr>
           </thead>

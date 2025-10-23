@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from "../../contexts/LanguageContext";
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react';
 import api from '../../services/api';
 import ProductImage from './ProductImage';
 import LoadingSpinner from './LoadingSpinner';
 import { getProductName, getProductDescription } from '../../utils/languageUtils';
+import { addToCart } from '../../store/slices/cartSlice';
 
 const CategoryProducts = ({ category, limit = 6 }) => {
   const { t, currentLanguage } = useLanguage();
+  const dispatch = useDispatch();
   const [categoryProducts, setCategoryProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +19,7 @@ const CategoryProducts = ({ category, limit = 6 }) => {
     const fetchCategoryProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get('/products?category=${category', 'name}&limit=${limit}');
+        const response = await api.get(`/products?category=${category.name}&limit=${limit}`);
         setCategoryProducts(response.data.products || []);
       } catch (error) {
         console.error('Error fetching category products:', error);
@@ -35,6 +38,15 @@ const CategoryProducts = ({ category, limit = 6 }) => {
 
   const scrollRight = (element) => {
     element.scrollBy({ left: 300, behavior: 'smooth' });
+  };
+
+  const handleAddToCart = async (e, product) => {
+    e.preventDefault();
+    e.stopPropagation();
+    await dispatch(addToCart({
+      productId: product.id,
+      quantity: 1
+    }));
   };
 
   if (isLoading && categoryProducts.length === 0) {
@@ -64,14 +76,14 @@ const CategoryProducts = ({ category, limit = 6 }) => {
             {category.nameIs || category.name}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {categoryProducts.length} {t('common', 'itemsLabel')}
+            {categoryProducts.length} {t('common.itemsLabel')}
           </p>
         </div>
         <Link
           to={`/products?category=${category.name}`}
           className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm"
         >
-          {t('common', 'viewAll')}
+          {t('common.viewAll')}
         </Link>
       </div>
 
@@ -85,20 +97,20 @@ const CategoryProducts = ({ category, limit = 6 }) => {
               <div className="group h-full">
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 h-full flex flex-col overflow-hidden">
                   <Link to={`/products/${product.id}`} className="block flex-shrink-0">
-                    <div className="relative overflow-hidden bg-gray-50 dark:bg-gray-900">
-                      <ProductImage 
+                    <div className="relative overflow-hidden bg-white dark:bg-white p-2">
+                      <ProductImage
                         product={product}
-                        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="w-full h-48 object-contain transition-transform duration-300 group-hover:scale-105"
                         currentLanguage={currentLanguage}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                       <div className="absolute top-3 right-3">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium shadow-lg ${
-                          product.stock > 0 
-                            ? 'bg-green-500 text-white' 
+                          product.stock > 0
+                            ? 'bg-green-500 text-white'
                             : 'bg-red-500 text-white'
                         }`}>
-                          {product.stock > 0 ? t('products', 'inStock') : t('products', 'outOfStock')}
+                          {product.stock > 0 ? t('products.inStock') : t('products.outOfStock')}
                         </span>
                       </div>
                     </div>
@@ -106,18 +118,40 @@ const CategoryProducts = ({ category, limit = 6 }) => {
                   
                   <div className="p-4 flex-1 flex flex-col">
                     <div className="mb-3 flex-1">
-                      <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white line-clamp-2 leading-tight">
-                        {getProductName(currentLanguage, product)}
-                      </h4>
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <h4 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2 leading-tight flex-1">
+                          {getProductName(currentLanguage, product)}
+                        </h4>
+                        <div className="flex flex-col items-end gap-0.5">
+                          {product.volume && (
+                            <span className="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                              {product.volume}
+                            </span>
+                          )}
+                          {product.alcoholContent && (
+                            <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                              {product.alcoholContent}%
+                            </span>
+                          )}
+                        </div>
+                      </div>
                       <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2">
                         {getProductDescription(currentLanguage, product)}
                       </p>
                     </div>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                       <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                        {product.price.toLocaleString()} {t('common', 'currency')}
+                        {product.price.toLocaleString()} {t('common.currency')}
                       </span>
+                      <button
+                        onClick={(e) => handleAddToCart(e, product)}
+                        disabled={product.stock === 0}
+                        className="btn btn-sm bg-primary-600 hover:bg-primary-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed min-w-[44px] min-h-[44px] flex items-center justify-center"
+                        aria-label={t('products.addToCart')}
+                      >
+                        <ShoppingCart className="w-4 h-4" />
+                      </button>
                     </div>
                   </div>
                 </div>

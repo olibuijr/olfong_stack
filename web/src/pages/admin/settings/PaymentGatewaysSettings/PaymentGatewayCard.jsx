@@ -31,7 +31,7 @@ const PaymentGatewayCard = ({
           <button
             onClick={() => onTest(gateway.id)}
             className="p-2 text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20"
-            title={t('adminSettings', 'testConnection')}
+            title={t('adminSettings.testConnection')}
           >
             <Wifi className="h-4 w-4" />
           </button>
@@ -57,7 +57,7 @@ const PaymentGatewayCard = ({
         <div className="flex items-center space-x-3">
           <div className={`w-3 h-3 rounded-full ${gateway.isEnabled ? 'bg-green-500' : 'bg-gray-400'}`}></div>
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            {gateway.isEnabled ? t('adminSettings', 'enabled') : t('adminSettings', 'disabled')}
+            {gateway.isEnabled ? t('adminSettings.enabled') : t('adminSettings.disabled')}
           </span>
         </div>
         <div className="text-right">
@@ -92,7 +92,7 @@ const PaymentGatewayCard = ({
           onClick={() => onEdit(gateway)}
           className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg transition-colors duration-200"
         >
-          {t('adminSettings', 'edit')}
+          {t('adminSettings.edit')}
         </button>
       </div>
     </div>
@@ -101,7 +101,7 @@ const PaymentGatewayCard = ({
 
 PaymentGatewayCard.propTypes = {
   gateway: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     displayName: PropTypes.string.isRequired,
     provider: PropTypes.string.isRequired,
     description: PropTypes.string,

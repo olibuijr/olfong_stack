@@ -38,6 +38,9 @@ const createAddress = async (req, res) => {
     } = req.body;
     const userId = req.user.id;
 
+    // Generate a default label if not provided
+    const addressLabel = label || `${city} ${postalCode}`;
+
     // If setting as default, unset other default addresses
     if (isDefault) {
       await prisma.address.updateMany({
@@ -49,7 +52,7 @@ const createAddress = async (req, res) => {
     const address = await prisma.address.create({
       data: {
         userId,
-        label,
+        label: addressLabel,
         street,
         city,
         postalCode,
@@ -153,7 +156,7 @@ const deleteAddress = async (req, res) => {
 
 // Validation rules
 const addressValidation = [
-  body('label').notEmpty().withMessage('Address label is required'),
+  body('label').optional().isLength({ min: 1 }).withMessage('Address label must not be empty if provided'),
   body('street').notEmpty().withMessage('Street address is required'),
   body('city').notEmpty().withMessage('City is required'),
   body('postalCode').notEmpty().withMessage('Postal code is required'),

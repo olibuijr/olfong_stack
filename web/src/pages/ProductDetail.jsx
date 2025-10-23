@@ -289,20 +289,20 @@ const ProductDetail = () => {
       });
 
       await dispatch(updateProduct({ id: currentProduct.id, productData })).unwrap();
-      toast.success(t('common', 'success'));
+      toast.success(t('common.success'));
       setShowEditModal(false);
       reset();
       setUploadedImages([]);
       setImagePreviewUrls([]);
     } catch (error) {
       console.error('Error updating product:', error);
-      toast.error(error.message || t('common', 'error'));
+      toast.error(error.message || t('common.error'));
     }
   };
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {
-      toast.error(t('auth', 'loginRequired'));
+      toast.error(t('auth.loginRequired'));
       navigate('/login');
       return;
     }
@@ -357,9 +357,9 @@ const ProductDetail = () => {
       <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('products', 'title')} {t('orderDetailPage', 'orderNotFound')}</h1>
-            <p className="text-gray-600 mb-8">{t('orderDetailPage', 'orderNotFoundDesc')}</p>
-            <Link to="/products" className="btn btn-primary">{t('common', 'back')}</Link>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('products.title')} {t('orderDetailPage.orderNotFound')}</h1>
+            <p className="text-gray-600 mb-8">{t('orderDetailPage.orderNotFoundDesc')}</p>
+            <Link to="/products" className="btn btn-primary">{t('common.back')}</Link>
           </div>
         </div>
       </div>
@@ -375,7 +375,7 @@ const ProductDetail = () => {
           className="flex items-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mb-6 transition-colors duration-200"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('productDetailPage', 'back')}
+          {t('productDetailPage.back')}
         </button>
 
         {/* Main Product Content Card */}
@@ -384,14 +384,16 @@ const ProductDetail = () => {
             {/* Product Image */}
             <div className="space-y-4">
               {currentProduct.imageUrl ? (
-                <img
-                  src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${currentProduct.imageUrl}`}
-                  alt={getProductName(currentLanguage, currentProduct)}
-                  className="w-full h-96 object-cover rounded-lg shadow-lg"
-                />
+                <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
+                  <img
+                    src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${currentProduct.imageUrl}`}
+                    alt={getProductName(currentLanguage, currentProduct)}
+                    className="w-full h-96 object-contain rounded-lg"
+                  />
+                </div>
               ) : (
                 <div className="w-full h-96 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                  <span className="text-gray-400 dark:text-gray-500 text-lg">{t('cartPage', 'noImage')}</span>
+                  <span className="text-gray-400 dark:text-gray-500 text-lg">{t('cartPage.noImage')}</span>
                 </div>
               )}
             </div>
@@ -409,38 +411,70 @@ const ProductDetail = () => {
                       className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                     >
                       <Edit className="w-4 h-4 mr-2" />
-                      {t('common', 'edit')}
+                      {t('common.edit')}
                     </button>
                   )}
                 </div>
                 <div className="flex items-center space-x-4 mb-4">
                   <span className="text-3xl font-bold text-primary-600">
-                    {currentProduct.price.toLocaleString()} {t('common', 'currency')}
-                  </span>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    currentProduct.stock > 0 
-                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' 
-                      : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
-                  }`}>
-                    {currentProduct.stock > 0 ? `${currentProduct.stock} ${t('products', 'unitsAvailable')}` : t('products', 'outOfStock')}
+                    {currentProduct.price.toLocaleString()} {t('common.currency')}
                   </span>
                   <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
-                    {t('navigation', currentProduct.category.name.toLowerCase())}
+                    {t(`navigation.${currentProduct.category.name.toLowerCase()}`)}
                   </span>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('productDetailPage', 'description')}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('productDetailPage.description')}</h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {getProductDescription(currentLanguage, currentProduct) || t('productDetailPage', 'noDescription')}
+                  {getProductDescription(currentLanguage, currentProduct) || t('productDetailPage.noDescription')}
                 </p>
               </div>
+
+              {/* Product Specifications */}
+              {(currentProduct.volume || currentProduct.alcoholContent || currentProduct.producer || currentProduct.country || currentProduct.packaging) && (
+                <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('productDetailPage.specifications') || 'Specifications'}</h3>
+                  <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                    {(currentProduct.volume || currentProduct.volumeIs) && (
+                      <>
+                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('productDetailPage.volume') || 'Volume'}</dt>
+                        <dd className="text-sm text-gray-900 dark:text-white">{currentLanguage === 'is' && currentProduct.volumeIs ? currentProduct.volumeIs : currentProduct.volume}</dd>
+                      </>
+                    )}
+                    {currentProduct.alcoholContent && (
+                      <>
+                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('productDetailPage.alcoholContent') || 'Alcohol Content'}</dt>
+                        <dd className="text-sm text-gray-900 dark:text-white">{currentProduct.alcoholContent}%</dd>
+                      </>
+                    )}
+                    {(currentProduct.producer || currentProduct.producerIs) && (
+                      <>
+                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('productDetailPage.producer') || 'Producer'}</dt>
+                        <dd className="text-sm text-gray-900 dark:text-white">{currentLanguage === 'is' && currentProduct.producerIs ? currentProduct.producerIs : currentProduct.producer}</dd>
+                      </>
+                    )}
+                    {(currentProduct.country || currentProduct.countryIs) && (
+                      <>
+                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('productDetailPage.country') || 'Country'}</dt>
+                        <dd className="text-sm text-gray-900 dark:text-white">{currentLanguage === 'is' && currentProduct.countryIs ? currentProduct.countryIs : currentProduct.country}</dd>
+                      </>
+                    )}
+                    {(currentProduct.packaging || currentProduct.packagingIs) && (
+                      <>
+                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('productDetailPage.packaging') || 'Packaging'}</dt>
+                        <dd className="text-sm text-gray-900 dark:text-white">{currentLanguage === 'is' && currentProduct.packagingIs ? currentProduct.packagingIs : currentProduct.packaging}</dd>
+                      </>
+                    )}
+                  </dl>
+                </div>
+              )}
 
               {/* Food Pairings - Language-aware with icons */}
               {getProductFoodPairings(currentLanguage, currentProduct).length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('products', 'foodPairings')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('products.foodPairings')}</h3>
                   <div className="flex flex-wrap gap-3">
                     {getProductFoodPairings(currentLanguage, currentProduct).map((pairing, index) => (
                       <div
@@ -462,7 +496,7 @@ const ProductDetail = () => {
               {/* Special Attributes - Language-aware */}
               {getProductSpecialAttributes(currentLanguage, currentProduct).length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('products', 'specialAttributes')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{t('products.specialAttributes')}</h3>
                   <div className="flex flex-wrap gap-2">
                     {getProductSpecialAttributes(currentLanguage, currentProduct).map((attribute, index) => (
                       <span
@@ -483,12 +517,12 @@ const ProductDetail = () => {
                     <AlertTriangle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mr-2" />
                     <div>
                       <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-                        {t('products', 'availability')}: {t('products', currentProduct.availability)}
+                        {t('products.availability')}: {t('products', currentProduct.availability)}
                       </h4>
                       <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                        {currentProduct.availability === 'special-order' && t('productDetailPage', 'specialOrderDesc')}
-                        {currentProduct.availability === 'coming-soon' && t('productDetailPage', 'comingSoonDesc')}
-                        {currentProduct.availability === 'discontinued' && t('productDetailPage', 'discontinuedDesc')}
+                        {currentProduct.availability === 'special-order' && t('productDetailPage.specialOrderDesc')}
+                        {currentProduct.availability === 'coming-soon' && t('productDetailPage.comingSoonDesc')}
+                        {currentProduct.availability === 'discontinued' && t('productDetailPage.discontinuedDesc')}
                       </p>
                     </div>
                   </div>
@@ -501,8 +535,8 @@ const ProductDetail = () => {
                   <div className="flex items-start">
                     <AlertTriangle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5 mr-3 flex-shrink-0" />
                     <div>
-                      <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">{t('productDetailPage', 'ageRestriction')}</h4>
-                      <p className="text-sm text-yellow-700 dark:text-yellow-300">{t('productDetailPage', 'ageRestrictionDesc')}</p>
+                      <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">{t('productDetailPage.ageRestriction')}</h4>
+                      <p className="text-sm text-yellow-700 dark:text-yellow-300">{t('productDetailPage.ageRestrictionDesc')}</p>
                     </div>
                   </div>
                 </div>
@@ -512,7 +546,7 @@ const ProductDetail = () => {
               {currentProduct.stock > 0 && (
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('productDetailPage', 'quantity')}:</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('productDetailPage.quantity')}:</label>
                     <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg">
                       <button
                         onClick={decrementQuantity}
@@ -532,7 +566,7 @@ const ProductDetail = () => {
                         <Plus className="w-4 h-4" />
                       </button>
                     </div>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">{currentProduct.stock} {t('productDetailPage', 'available')}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{currentProduct.stock} {t('productDetailPage.available')}</span>
                   </div>
 
                   <button
@@ -541,14 +575,14 @@ const ProductDetail = () => {
                     className="btn btn-primary w-full flex items-center justify-center space-x-2 py-3"
                   >
                     <ShoppingCart className="w-5 h-5" />
-                    <span>{!isAuthenticated ? t('common', 'loginRequired') : cartLoading ? t('common', 'loading') : t('products', 'addToCart')}</span>
+                    <span>{!isAuthenticated ? t('common.loginRequired') : cartLoading ? t('common.loading') : t('products.addToCart')}</span>
                   </button>
 
                   {!isAuthenticated && (
                     <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                      {t('productDetailPage', 'loginToAdd')}
+                      {t('productDetailPage.loginToAdd')}
                       <Link to="/login" className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-1">
-                        {t('productDetailPage', 'loginHere')}
+                        {t('productDetailPage.loginHere')}
                       </Link>
                     </p>
                   )}
@@ -560,7 +594,7 @@ const ProductDetail = () => {
                       className="btn btn-outline w-full flex items-center justify-center space-x-2 py-3 mt-3"
                     >
                       <Calendar className="w-5 h-5" />
-                      <span>{t('productDetailPage', 'subscribe')}</span>
+                      <span>{t('productDetailPage.subscribe')}</span>
                     </button>
                   )}
                 </div>
@@ -576,7 +610,7 @@ const ProductDetail = () => {
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
             <div className="text-center">
               <AlertTriangle className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('ageVerification', 'title')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('ageVerification.title')}</h3>
               <p className="text-gray-600 mb-6">{t('ageVerification.message', { age: 18 })}</p>
               <div className="flex space-x-3">
                 <button
@@ -587,13 +621,13 @@ const ProductDetail = () => {
                   }}
                   className="btn btn-outline flex-1"
                 >
-                  {t('common', 'no')}
+                  {t('common.no')}
                 </button>
                 <button
                   onClick={confirmAge}
                   className="btn btn-primary flex-1"
                 >
-                  {t('common', 'yes')}
+                  {t('common.yes')}
                 </button>
               </div>
             </div>
@@ -606,7 +640,7 @@ const ProductDetail = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('productDetailPage', 'createSubscription')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('productDetailPage.createSubscription')}</h3>
               <button
                 onClick={() => setShowSubscriptionModal(false)}
                 className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
@@ -621,12 +655,12 @@ const ProductDetail = () => {
                 <h4 className="font-medium text-gray-900 dark:text-white">
                   {currentProduct.nameIs || currentProduct.name}
                 </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{currentProduct.price.toLocaleString()} {t('common', 'currency')} {t('cartPage', 'each')}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{currentProduct.price.toLocaleString()} {t('common.currency')} {t('cartPage.each')}</p>
               </div>
 
               {/* Quantity */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage', 'quantity')}</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage.quantity')}</label>
                 <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg w-32">
                   <button
                     onClick={() => setSubscriptionData({...subscriptionData, quantity: Math.max(1, subscriptionData.quantity - 1)})}
@@ -648,46 +682,46 @@ const ProductDetail = () => {
 
               {/* Interval Type */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage', 'deliveryFrequency')}</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage.deliveryFrequency')}</label>
                 <select
                   value={subscriptionData.intervalType}
                   onChange={(e) => setSubscriptionData({...subscriptionData, intervalType: e.target.value})}
                   className="input w-full"
                 >
                   <option value="WEEKLY">
-                    {t('subscription', 'weekly')}
+                    {t('subscription.weekly')}
                   </option>
                   <option value="BIWEEKLY">
-                    {t('subscription', 'biweekly')}
+                    {t('subscription.biweekly')}
                   </option>
                   <option value="MONTHLY">
-                    {t('subscription', 'monthly')}
+                    {t('subscription.monthly')}
                   </option>
                 </select>
               </div>
 
               {/* Preferred Day */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Calendar className="w-4 h-4 inline mr-1" />{t('productDetailPage', 'preferredDayOptional')}</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Calendar className="w-4 h-4 inline mr-1" />{t('productDetailPage.preferredDayOptional')}</label>
                 <select
                   value={subscriptionData.preferredDay}
                   onChange={(e) => setSubscriptionData({...subscriptionData, preferredDay: e.target.value})}
                   className="input w-full"
                 >
-                  <option value="">{t('subscription', 'noSpecificDay')}</option>
-                  <option value="MONDAY">{t('subscription', 'monday')}</option>
-                  <option value="TUESDAY">{t('subscription', 'tuesday')}</option>
-                  <option value="WEDNESDAY">{t('subscription', 'wednesday')}</option>
-                  <option value="THURSDAY">{t('subscription', 'thursday')}</option>
-                  <option value="FRIDAY">{t('subscription', 'friday')}</option>
-                  <option value="SATURDAY">{t('subscription', 'saturday')}</option>
-                  <option value="SUNDAY">{t('subscription', 'sunday')}</option>
+                  <option value="">{t('subscription.noSpecificDay')}</option>
+                  <option value="MONDAY">{t('subscription.monday')}</option>
+                  <option value="TUESDAY">{t('subscription.tuesday')}</option>
+                  <option value="WEDNESDAY">{t('subscription.wednesday')}</option>
+                  <option value="THURSDAY">{t('subscription.thursday')}</option>
+                  <option value="FRIDAY">{t('subscription.friday')}</option>
+                  <option value="SATURDAY">{t('subscription.saturday')}</option>
+                  <option value="SUNDAY">{t('subscription.sunday')}</option>
                 </select>
               </div>
 
               {/* Preferred Time */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Clock className="w-4 h-4 inline mr-1" />{t('productDetailPage', 'preferredTimeOptional')}</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Clock className="w-4 h-4 inline mr-1" />{t('productDetailPage.preferredTimeOptional')}</label>
                 <input
                   type="time"
                   value={subscriptionData.preferredTime}
@@ -698,10 +732,10 @@ const ProductDetail = () => {
 
               {/* Notes */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage', 'notesOptional')}</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('productDetailPage.notesOptional')}</label>
                 <textarea
                   rows={3}
-                  placeholder={t('subscription', 'specialNotesPlaceholder')}
+                  placeholder={t('subscription.specialNotesPlaceholder')}
                   className="input w-full"
                 />
               </div>
@@ -712,17 +746,17 @@ const ProductDetail = () => {
                   onClick={() => setShowSubscriptionModal(false)}
                   className="btn btn-outline flex-1"
                 >
-                  {t('subscription', 'cancel')}
+                  {t('subscription.cancel')}
                 </button>
                 <button
                   onClick={() => {
                     // TODO: Implement subscription creation
-                    toast.success(t('productDetailPage', 'subscriptionCreated'));
+                    toast.success(t('productDetailPage.subscriptionCreated'));
                     setShowSubscriptionModal(false);
                   }}
                   className="btn btn-primary flex-1"
                 >
-                  {t('subscription', 'createSubscription')}
+                  {t('subscription.createSubscription')}
                 </button>
               </div>
             </div>
@@ -736,7 +770,7 @@ const ProductDetail = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-xl">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                {t('adminProductsPage', 'editProduct')}
+                {t('adminProductsPage.editProduct')}
               </h2>
               <button
                 onClick={() => {
@@ -754,16 +788,16 @@ const ProductDetail = () => {
                 {/* Name (English) */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminProductsPage', 'nameEn')} *
+                    {t('adminProductsPage.nameEn')} *
                   </label>
                   <input
                     {...register('name', { required: true })}
                     className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder={t('products', 'title')}
+                    placeholder={t('products.title')}
                   />
                   {errors.name && (
                     <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                      {t('adminProductsPage', 'nameRequired')}
+                      {t('adminProductsPage.nameRequired')}
                     </p>
                   )}
                 </div>
@@ -771,12 +805,12 @@ const ProductDetail = () => {
                 {/* Name (Icelandic) */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminProductsPage', 'nameIs')}
+                    {t('adminProductsPage.nameIs')}
                   </label>
                   <input
                     {...register('nameIs')}
                     className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder={t('adminProductsPage', 'nameIs')}
+                    placeholder={t('adminProductsPage.nameIs')}
                   />
                 </div>
               </div>
@@ -785,7 +819,7 @@ const ProductDetail = () => {
                 {/* Price */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('common', 'price')} * ({t('common', 'currency')})
+                    {t('common.price')} * ({t('common.currency')})
                   </label>
                   <input
                     type="number"
@@ -796,7 +830,7 @@ const ProductDetail = () => {
                   />
                   {errors.price && (
                     <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                      {t('adminProductsPage', 'priceRequired')}
+                      {t('adminProductsPage.priceRequired')}
                     </p>
                   )}
                 </div>
@@ -804,7 +838,7 @@ const ProductDetail = () => {
                 {/* Stock */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('products', 'stock')} *
+                    {t('products.stock')} *
                   </label>
                   <input
                     type="number"
@@ -814,7 +848,7 @@ const ProductDetail = () => {
                   />
                   {errors.stock && (
                     <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                      {t('adminProductsPage', 'stockRequired')}
+                      {t('adminProductsPage.stockRequired')}
                     </p>
                   )}
                 </div>
@@ -823,33 +857,33 @@ const ProductDetail = () => {
               {/* Description */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('products', 'description')}
+                  {t('products.description')}
                 </label>
                 <textarea
                   {...register('description')}
                   rows={3}
                   className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder={t('products', 'description')}
+                  placeholder={t('products.description')}
                 />
               </div>
 
               {/* Description (Icelandic) */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminProductsPage', 'descriptionIs')}
+                  {t('adminProductsPage.descriptionIs')}
                 </label>
                 <textarea
                   {...register('descriptionIs')}
                   rows={3}
                   className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder={t('adminProductsPage', 'descriptionIs')}
+                  placeholder={t('adminProductsPage.descriptionIs')}
                 />
               </div>
 
               {/* Image Upload */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminProductsPage', 'productImages')}
+                  {t('adminProductsPage.productImages')}
                 </label>
                 <input
                   type="file"
@@ -883,7 +917,7 @@ const ProductDetail = () => {
               {/* Image URL (fallback) */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminProductsPage', 'imageUrl')}
+                  {t('adminProductsPage.imageUrl')}
                 </label>
                 <input
                   {...register('imageUrl')}
@@ -900,7 +934,7 @@ const ProductDetail = () => {
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
                 <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                  {t('adminProductsPage', 'ageRestricted')}
+                  {t('adminProductsPage.ageRestricted')}
                 </label>
               </div>
 
@@ -914,13 +948,13 @@ const ProductDetail = () => {
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                 >
-                  {t('common', 'cancel')}
+                  {t('common.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                 >
-                  {t('common', 'save')}
+                  {t('common.save')}
                 </button>
               </div>
             </form>

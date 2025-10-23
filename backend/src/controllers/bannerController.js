@@ -53,7 +53,15 @@ const getBanner = async (req, res) => {
  */
 const createBanner = async (req, res) => {
   try {
-    const { title, titleIs, description, descriptionIs, imageUrl, alt, link, sortOrder } = req.body;
+    const {
+      title, titleIs, description, descriptionIs, imageUrl, alt, link, sortOrder,
+      // Hero banner fields
+      isHero, backgroundType, gradientStartColor, gradientEndColor, gradientDirection,
+      backgroundImageUrl, backgroundMediaId, backgroundOpacity,
+      marqueeText, marqueeTextIs, marqueeSpeed, marqueeCount,
+      heroLogoUrl, heroButtonText, heroButtonTextIs, heroButtonLink, heroSubtitle, heroSubtitleIs,
+      textColor, buttonBgColor, buttonTextColor, overlayOpacity
+    } = req.body;
 
     const bannerData = {
       title,
@@ -64,6 +72,29 @@ const createBanner = async (req, res) => {
       alt,
       link,
       sortOrder: sortOrder ? parseInt(sortOrder) : 0,
+      // Hero banner fields
+      isHero: isHero || false,
+      backgroundType: backgroundType || 'gradient',
+      gradientStartColor,
+      gradientEndColor,
+      gradientDirection: gradientDirection || 'to-r',
+      backgroundImageUrl,
+      backgroundMediaId,
+      backgroundOpacity: backgroundOpacity !== undefined ? parseFloat(backgroundOpacity) : 1.0,
+      marqueeText,
+      marqueeTextIs,
+      marqueeSpeed: marqueeSpeed ? parseInt(marqueeSpeed) : 50,
+      marqueeCount: marqueeCount ? parseInt(marqueeCount) : 3,
+      heroLogoUrl,
+      heroButtonText,
+      heroButtonTextIs,
+      heroButtonLink,
+      heroSubtitle,
+      heroSubtitleIs,
+      textColor: textColor || '#ffffff',
+      buttonBgColor: buttonBgColor || '#ffffff',
+      buttonTextColor: buttonTextColor || '#1f2937',
+      overlayOpacity: overlayOpacity !== undefined ? parseFloat(overlayOpacity) : 0.0,
     };
 
     const banner = await prisma.banner.create({
@@ -173,6 +204,30 @@ const getFeaturedBanners = async (req, res) => {
 };
 
 /**
+ * Get hero banner for homepage
+ */
+const getHeroBanner = async (req, res) => {
+  try {
+    const banner = await prisma.banner.findFirst({
+      where: {
+        isActive: true,
+        isHero: true
+      },
+      orderBy: { updatedAt: 'desc' }
+    });
+
+    if (!banner) {
+      return successResponse(res, null, 'No active hero banner found');
+    }
+
+    return successResponse(res, banner, 'Hero banner retrieved successfully');
+  } catch (error) {
+    console.error('Get hero banner error:', error);
+    return errorResponse(res, 'Failed to retrieve hero banner', 500);
+  }
+};
+
+/**
  * Set banner as featured (Admin only)
  */
 const setFeaturedBanner = async (req, res) => {
@@ -248,6 +303,7 @@ module.exports = {
   deleteBanner,
   toggleBannerStatus,
   getFeaturedBanners,
+  getHeroBanner,
   setFeaturedBanner,
   removeFeaturedBanner,
   createBannerValidation,

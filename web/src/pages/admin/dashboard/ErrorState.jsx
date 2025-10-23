@@ -18,7 +18,7 @@ const ErrorState = ({ error, onRetry }) => {
             onClick={onRetry}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            {t('common', 'retry')}
+            {t('common.retry')}
           </button>
         </div>
       </div>

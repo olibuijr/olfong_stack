@@ -124,13 +124,14 @@ const getProfile = async (req, res) => {
  */
 const updateProfile = async (req, res) => {
   try {
-    const { fullName, phone, age } = req.body;
+    const { fullName, email, phone, age } = req.body;
     const userId = req.user.id;
 
     const user = await prisma.user.update({
       where: { id: userId },
       data: {
         fullName,
+        email,
         phone,
         age,
       },
@@ -138,6 +139,7 @@ const updateProfile = async (req, res) => {
         id: true,
         username: true,
         fullName: true,
+        email: true,
         role: true,
         phone: true,
         age: true,
@@ -169,7 +171,8 @@ const loginValidation = [
 
 const updateProfileValidation = [
   body('fullName').optional().isLength({ min: 2 }).withMessage('Full name must be at least 2 characters'),
-  body('phone').optional().isMobilePhone().withMessage('Invalid phone number'),
+  body('email').optional().isEmail().withMessage('Invalid email address'),
+  body('phone').optional().trim().isLength({ min: 1 }).withMessage('Phone number cannot be empty'),
   body('age').optional().isInt({ min: 13 }).withMessage('Age must be at least 13'),
 ];
 

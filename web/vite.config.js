@@ -23,6 +23,18 @@ export default defineConfig({
   server: {
     port: 3001,
     host: 'localhost',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/socket.io': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        ws: true,
+      }
+    }
   },
   build: {
     outDir: 'dist',

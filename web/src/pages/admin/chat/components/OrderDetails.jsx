@@ -13,14 +13,14 @@ const OrderDetails = ({ conversation }) => {
       <div className="flex items-center space-x-2 mb-2">
         <ShoppingBag className="h-4 w-4 text-blue-600 dark:text-blue-400" />
         <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-          {t('adminChat', 'orderDetails')}
+          {t('adminChat.orderDetails')}
         </h3>
       </div>
       <div className="text-sm text-gray-600 dark:text-gray-400">
-        <p><strong>{t('order', 'orderNumber')}:</strong> {conversation.metadata.orderNumber}</p>
-        <p><strong>{t('chat.topics', 'topic')}:</strong> {conversation.metadata.topic}</p>
+        <p><strong>{t('order.orderNumber')}:</strong> {conversation.metadata.orderNumber}</p>
+        <p><strong>{t('chat.topics.topic')}:</strong> {conversation.metadata.topic}</p>
         {conversation.metadata.customTopic && (
-          <p><strong>{t('chat', 'customTopic')}:</strong> {conversation.metadata.customTopic}</p>
+          <p><strong>{t('chat.customTopic')}:</strong> {conversation.metadata.customTopic}</p>
         )}
       </div>
     </div>

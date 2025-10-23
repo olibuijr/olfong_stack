@@ -65,7 +65,7 @@ const ReceiptModal = ({
       }
     } catch (error) {
       console.error('Error downloading PDF:', error);
-      alert(t('receipts', 'pdfDownloadError'));
+      alert(t('receipts.pdfDownloadError'));
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +73,7 @@ const ReceiptModal = ({
 
   const handleEmailReceipt = async () => {
     if (!order?.id || !order?.customer?.email) {
-      alert(t('receipts', 'noEmailAddress'));
+      alert(t('receipts.noEmailAddress'));
       return;
     }
 
@@ -92,7 +92,7 @@ const ReceiptModal = ({
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      setEmailError(error.message || t('receipts', 'emailSendError'));
+      setEmailError(error.message || t('receipts.emailSendError'));
     } finally {
       setIsLoading(false);
     }
@@ -114,7 +114,7 @@ const ReceiptModal = ({
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium text-gray-900">
-              {t('receipts', 'receiptForOrder')} #{order.orderNumber}
+              {t('receipts.receiptForOrder')} #{order.orderNumber}
             </h3>
             <button
               onClick={onClose}
@@ -131,7 +131,7 @@ const ReceiptModal = ({
               className="btn btn-outline flex items-center gap-2"
             >
               <Printer className="w-4 h-4" />
-              {t('receipts', 'print')}
+              {t('receipts.print')}
             </button>
             
             <button
@@ -140,7 +140,7 @@ const ReceiptModal = ({
               className="btn btn-outline flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
-              {isLoading ? t('common', 'loading') : t('receipts', 'downloadPdf')}
+              {isLoading ? t('common.loading') : t('receipts.downloadPdf')}
             </button>
             
             {order.customer?.email && (
@@ -153,10 +153,10 @@ const ReceiptModal = ({
               >
                 <Mail className="w-4 h-4" />
                 {isLoading 
-                  ? t('common', 'sending') 
+                  ? t('common.sending') 
                   : emailSent 
-                    ? t('receipts', 'emailSent') 
-                    : t('receipts', 'emailReceipt')
+                    ? t('receipts.emailSent') 
+                    : t('receipts.emailReceipt')
                 }
               </button>
             )}
@@ -171,7 +171,7 @@ const ReceiptModal = ({
 
           {emailSent && (
             <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
-              {t('receipts', 'emailSentSuccess')}
+              {t('receipts.emailSentSuccess')}
             </div>
           )}
 
@@ -179,7 +179,7 @@ const ReceiptModal = ({
           <div className="border rounded-lg p-4 bg-gray-50">
             {settingsLoading ? (
               <div className="flex items-center justify-center h-64">
-                <div className="text-gray-500">{t('common', 'loading')}</div>
+                <div className="text-gray-500">{t('common.loading')}</div>
               </div>
             ) : receiptSettings ? (
               <div className="max-w-md mx-auto">
@@ -195,7 +195,7 @@ const ReceiptModal = ({
               </div>
             ) : (
               <div className="text-center text-gray-500">
-                {t('receipts', 'settingsNotFound')}
+                {t('receipts.settingsNotFound')}
               </div>
             )}
           </div>
@@ -206,7 +206,7 @@ const ReceiptModal = ({
               onClick={onClose}
               className="btn btn-secondary"
             >
-              {t('common', 'close')}
+              {t('common.close')}
             </button>
           </div>
         </div>

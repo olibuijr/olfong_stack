@@ -45,7 +45,7 @@ const MediaFilters = ({
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
-                placeholder={t('adminMedia', 'searchMedia')}
+                placeholder={t('adminMedia.searchMedia')}
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -81,7 +81,7 @@ const MediaFilters = ({
                 className="inline-flex items-center px-3 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               >
                 <span className="mr-2">🗑️</span>
-                {t('adminMedia', 'deleteSelected')} ({selectedItems.length})
+                {t('adminMedia.deleteSelected')} ({selectedItems.length})
               </button>
             )}
 
@@ -90,7 +90,7 @@ const MediaFilters = ({
               className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
               <Upload className="h-4 w-4 mr-2" />
-              {t('adminMedia', 'upload')}
+              {t('adminMedia.upload')}
             </button>
           </div>
         </div>

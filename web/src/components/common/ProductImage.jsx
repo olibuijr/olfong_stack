@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Wine, Beer, Package } from 'lucide-react';
 import { getProductName } from '../../utils/languageUtils';
 
-const ProductImage = ({ product, className = "w-full h-64 object-cover", currentLanguage = 'is' }) => {
+const ProductImage = ({ product, className = "w-full h-64 object-contain", currentLanguage = 'is' }) => {
   const [imageError, setImageError] = useState(false);
 
   // Normalize category input which can be a string or an object { name, slug }
@@ -62,7 +62,7 @@ const ProductImage = ({ product, className = "w-full h-64 object-cover", current
 
   return (
     <img
-      src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
+      src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
       alt={getProductName(currentLanguage, product)}
       className={className}
       onError={() => setImageError(true)}

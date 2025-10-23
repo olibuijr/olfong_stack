@@ -49,6 +49,9 @@ const Products = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  // Filter categories to only show those with products
+  const categoriesWithProducts = categories.filter(cat => cat._count?.products > 0);
+
   // Handle URL parameters for initial category and subcategory filter
   useEffect(() => {
     const categoryFromUrl = searchParams.get('category');
@@ -111,7 +114,16 @@ const Products = () => {
     dispatch(setFilters({ minAlcoholVolume, maxAlcoholVolume }));
   };
 
-  if (translationsLoading || (isLoading && products.length === 0)) {
+  // Show loading skeleton only on initial load
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading && !hasLoadedOnce) {
+      setHasLoadedOnce(true);
+    }
+  }, [isLoading, hasLoadedOnce]);
+
+  if (translationsLoading || (isLoading && !hasLoadedOnce)) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,23 +148,23 @@ const Products = () => {
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
                   <Filter className="w-5 h-5 mr-2" />
-                  {t('productsPage', 'filters')}
+                  {t('productsPage.filters')}
                 </h2>
 
                 {/* Search */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {t('common', 'search')}
+                    {t('common.search')}
                   </label>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="text"
-                      placeholder={t('common', 'search')}
+                      placeholder={t('common.search')}
                       value={filters.search}
                       onChange={(e) => handleSearchChange(e.target.value)}
-                      className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      aria-label={t('aria', 'searchProducts')}
+                      className="input pl-10 pr-3"
+                      aria-label={t('aria.searchProducts')}
                     />
                   </div>
                 </div>
@@ -160,7 +172,7 @@ const Products = () => {
                  {/* Categories */}
                  <div>
                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                     {t('productsPage', 'category')}
+                     {t('productsPage.category')}
                    </label>
                    <div className="space-y-2">
                      <button
@@ -172,9 +184,9 @@ const Products = () => {
                        }`}
                        aria-pressed={filters.category === ''}
                      >
-                       {t('productsPage', 'all')}
+                       {t('productsPage.all')}
                      </button>
-                     {categories.map((category) => (
+                     {categoriesWithProducts.map((category) => (
                        <div key={category.id}>
                          <button
                            onClick={() => handleCategoryChange(category)}
@@ -204,7 +216,7 @@ const Products = () => {
                                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                                }`}
                              >
-                               {t('productsPage', 'all')}
+                               {t('productsPage.all')}
                              </button>
                              {category.subcategories.map((subcategory) => (
                                <button
@@ -240,7 +252,7 @@ const Products = () => {
                     step={100}
                     value={[filters.minPrice || 0, filters.maxPrice || 50000]}
                     onChange={(values) => handlePriceFilterChange(values[0], values[1])}
-                    label={`${t('productsPage', 'priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
+                    label={`${t('productsPage.priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
                     formatValue={(val) => `${val} kr`}
                   />
                 </div>
@@ -253,7 +265,7 @@ const Products = () => {
                     step={0.5}
                     value={[filters.minAlcoholVolume || 0, filters.maxAlcoholVolume || 50]}
                     onChange={(values) => handleAlcoholVolumeFilterChange(values[0], values[1])}
-                    label={`${t('productsPage', 'alcoholVolume')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
+                    label={`${t('productsPage.alcoholContent')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
                     formatValue={(val) => `${val}%`}
                   />
                 </div>
@@ -267,7 +279,7 @@ const Products = () => {
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {t('products', 'title')}
+                  {t('productsPage.title')}
                 </h1>
                 
                 <div className="flex items-center gap-4">
@@ -282,12 +294,12 @@ const Products = () => {
                       }}
                       className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
-                      <option value="name-asc">{t('productsPage', 'sortByNameAsc')}</option>
-                      <option value="name-desc">{t('productsPage', 'sortByNameDesc')}</option>
-                      <option value="price-asc">{t('productsPage', 'sortByPriceAsc')}</option>
-                      <option value="price-desc">{t('productsPage', 'sortByPriceDesc')}</option>
-                      <option value="alcoholVolume-asc">{t('productsPage', 'sortByAlcoholAsc')}</option>
-                      <option value="alcoholVolume-desc">{t('productsPage', 'sortByAlcoholDesc')}</option>
+                      <option value="name-asc">{t('productsPage.sortOptions.nameAZ')}</option>
+                      <option value="name-desc">{t('productsPage.sortOptions.nameZA')}</option>
+                      <option value="price-asc">{t('productsPage.sortOptions.priceLowToHigh')}</option>
+                      <option value="price-desc">{t('productsPage.sortOptions.priceHighToLow')}</option>
+                      <option value="alcoholVolume-asc">{t('productsPage.sortBy')}</option>
+                      <option value="alcoholVolume-desc">{t('productsPage.sortBy')}</option>
                     </select>
                   </div>
                   
@@ -297,13 +309,13 @@ const Products = () => {
                     className="lg:hidden btn btn-outline flex items-center gap-2"
                   >
                     <Filter className="w-4 h-4" />
-                    {t('productsPage', 'filters')}
+                    {t('productsPage.filters')}
                   </button>
                 </div>
               </div>
               
                <p className="text-gray-600 dark:text-gray-400">
-                 {products.length} {t('productsPage', 'products')}
+                 {products.length} {t('common.item')}
                </p>
              </div>
 
@@ -321,9 +333,9 @@ const Products = () => {
                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                    }`}
                  >
-                   {t('productsPage', 'all')}
+                   {t('productsPage.all')}
                  </button>
-                 {categories.map((category) => (
+                 {categoriesWithProducts.map((category) => (
                    <button
                      key={category.id}
                      onClick={() => {
@@ -345,7 +357,7 @@ const Products = () => {
                 {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.length > 0 && (
                   <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-2 pl-4 border-l-2 border-primary-200 dark:border-primary-800 custom-scrollbar">
                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium flex-shrink-0">
-                     {t('productsPage', 'subcategories')}:
+                     {t('productsPage.subcategory')}:
                    </span>
                    <button
                      onClick={() => handleCategoryChange(selectedCategory)}
@@ -355,7 +367,7 @@ const Products = () => {
                          : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                      }`}
                    >
-                     {t('productsPage', 'all')}
+                     {t('productsPage.all')}
                    </button>
                    {selectedCategory.subcategories.map((subcategory) => (
                      <button
@@ -396,16 +408,16 @@ const Products = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {t('productsPage', 'noProductsFound')}
+                    {t('productsPage.noProducts')}
                   </h3>
                   <p className="text-gray-500 dark:text-gray-400 mb-6">
-                    {t('productsPage', 'adjustSearch')}
+                    {t('productsPage.tryAdjusting')}
                   </p>
                   <button
                     onClick={() => handleSearchChange('')}
                     className="btn btn-outline"
                   >
-                    {t('common', 'clearSearch')}
+                    {t('productsPage.clearFilters')}
                   </button>
                 </div>
               </div>
@@ -415,17 +427,17 @@ const Products = () => {
                   <div key={product.id} className="group h-full">
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 h-full flex flex-col overflow-hidden">
                       <Link to={`/products/${product.id}`} className="block flex-shrink-0">
-                        <div className="relative overflow-hidden bg-gray-50 dark:bg-gray-900">
-                          <ProductImage 
+                        <div className="relative overflow-hidden bg-white dark:bg-white">
+                          <ProductImage
                             product={product}
-                            className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                            className="w-full h-64 object-contain transition-transform duration-300 group-hover:scale-105"
                             currentLanguage={currentLanguage}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
                           {product.stock === 0 && (
                             <div className="absolute top-3 right-3">
                               <span className="px-3 py-1 rounded-full text-xs font-medium shadow-lg bg-red-500 text-white">
-                                {t('products', 'outOfStock')}
+                                {t('productsPage.outOfStock')}
                               </span>
                             </div>
                           )}
@@ -446,17 +458,17 @@ const Products = () => {
                             <div className="mt-3 space-y-1">
                               {product.volume && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-medium">{t('products', 'volume')}:</span> {product.volume}
+                                  <span className="font-medium">{t('product.volume')}:</span> {product.volume}
                                 </p>
                               )}
                               {product.alcoholContent && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-medium">{t('products', 'alcoholContent')}:</span> {product.alcoholContent}%
+                                  <span className="font-medium">{t('product.abv')}:</span> {product.alcoholContent}%
                                 </p>
                               )}
                               {product.country && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  <span className="font-medium">{t('products', 'country')}:</span> {getProductCountry(currentLanguage, product)}
+                                  <span className="font-medium">{t('product.origin')}:</span> {getProductCountry(currentLanguage, product)}
                                 </p>
                               )}
                             </div>
@@ -465,7 +477,7 @@ const Products = () => {
                         
                         <div className="flex items-center justify-between mb-6">
                           <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                            {product.price.toLocaleString()} {t('common', 'currency')}
+                            {product.price.toLocaleString()} {t('common.currency')}
                           </span>
                         </div>
                         
@@ -500,7 +512,7 @@ const Products = () => {
                               <svg className="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
                               </svg>
-                              {t('products', 'addToCart')}
+                              {t('productsPage.addToCart')}
                             </Link>
                           )}
                           
@@ -513,7 +525,7 @@ const Products = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
-                              {t('common', 'view')}
+                              {t('common.view')}
                             </Link>
                           )}
                         </div>
@@ -535,7 +547,7 @@ const Products = () => {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center">
                 <Filter className="w-5 h-5 mr-2" />
-                {t('productsPage', 'filters')}
+                {t('productsPage.filters')}
               </h2>
               <button
                 onClick={() => setIsMobileFilterOpen(false)}
@@ -548,17 +560,17 @@ const Products = () => {
             {/* Search */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                {t('common', 'search')}
+                {t('common.search')}
               </label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                 <input
                   type="text"
-                  placeholder={t('common', 'search')}
+                  placeholder={t('common.search')}
                   value={filters.search}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  aria-label={t('aria', 'searchProducts')}
+                  className="input pl-10 pr-3"
+                  aria-label={t('aria.filterBy')}
                 />
               </div>
             </div>
@@ -566,7 +578,7 @@ const Products = () => {
              {/* Categories */}
              <div className="mb-6">
                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                 {t('productsPage', 'category')}
+                 {t('productsPage.category')}
                </label>
                <div className="space-y-2">
                  <button
@@ -578,9 +590,9 @@ const Products = () => {
                    }`}
                    aria-pressed={!filters.category || filters.category === '' || filters.category === null}
                  >
-                   {t('productsPage', 'all')}
+                   {t('productsPage.all')}
                  </button>
-                 {categories.map((category) => (
+                 {categoriesWithProducts.map((category) => (
                    <div key={category.id}>
                      <button
                        onClick={() => handleCategoryChange(category)}
@@ -611,7 +623,7 @@ const Products = () => {
                                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                            }`}
                          >
-                           {t('productsPage', 'all')}
+                           {t('productsPage.all')}
                          </button>
                          {category.subcategories.map((subcategory) => (
                            <button
@@ -648,7 +660,7 @@ const Products = () => {
                 step={100}
                 value={[filters.minPrice || 0, filters.maxPrice || 50000]}
                 onChange={(values) => handlePriceFilterChange(values[0], values[1])}
-                label={`${t('productsPage', 'priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
+                label={`${t('productsPage.priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
                 formatValue={(val) => `${val} kr`}
               />
             </div>
@@ -661,7 +673,7 @@ const Products = () => {
                 step={0.5}
                 value={[filters.minAlcoholVolume || 0, filters.maxAlcoholVolume || 50]}
                 onChange={(values) => handleAlcoholVolumeFilterChange(values[0], values[1])}
-                label={`${t('productsPage', 'alcoholVolume')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
+                label={`${t('productsPage.alcoholContent')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
                 formatValue={(val) => `${val}%`}
               />
             </div>

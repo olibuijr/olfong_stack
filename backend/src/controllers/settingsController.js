@@ -196,6 +196,41 @@ const getPublicSettings = async (req, res) => {
 };
 
 /**
+ * Get opening hours (public endpoint)
+ */
+const getOpeningHours = async (req, res) => {
+  try {
+    const setting = await prisma.setting.findUnique({
+      where: { key: 'openingHours' },
+      select: {
+        value: true
+      }
+    });
+
+    if (!setting || !setting.value) {
+      return successResponse(res, {
+        openingHours: {
+          monday: { open: '10:00', close: '22:00', closed: false },
+          tuesday: { open: '10:00', close: '22:00', closed: false },
+          wednesday: { open: '10:00', close: '22:00', closed: false },
+          thursday: { open: '10:00', close: '22:00', closed: false },
+          friday: { open: '10:00', close: '22:00', closed: false },
+          saturday: { open: '12:00', close: '24:00', closed: false },
+          sunday: { open: '12:00', close: '24:00', closed: false }
+        }
+      }, 'Opening hours retrieved successfully');
+    }
+
+    return successResponse(res, {
+      openingHours: JSON.parse(setting.value)
+    }, 'Opening hours retrieved successfully');
+  } catch (error) {
+    console.error('Error fetching opening hours:', error);
+    return errorResponse(res, 'Failed to fetch opening hours', 500);
+  }
+};
+
+/**
  * Initialize default settings
  */
 const initializeDefaultSettings = async (req, res) => {
@@ -409,5 +444,6 @@ module.exports = {
   updateSettings,
   deleteSetting,
   getPublicSettings,
+  getOpeningHours,
   initializeDefaultSettings
 };

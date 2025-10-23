@@ -14,12 +14,12 @@ const TranslationExample: React.FC = () => {
       <div className="space-y-4">
         <div>
           <h3 className="font-semibold">Basic Translation:</h3>
-          <p>{t('common', 'loading')}</p>
+          <p>{t('common.loading')}</p>
         </div>
         
         <div>
           <h3 className="font-semibold">Nested Translation:</h3>
-          <p>{t('search', 'placeholder')}</p>
+          <p>{t('search.placeholder')}</p>
         </div>
         
         <div>
@@ -38,7 +38,7 @@ const TranslationExample: React.FC = () => {
           onClick={toggleLanguage}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          {t('common', 'language')}: {currentLanguage === 'is' ? 'English' : 'Íslenska'}
+          {t('common.language')}: {currentLanguage === 'is' ? 'English' : 'Íslenska'}
         </button>
       </div>
     </div>

@@ -104,6 +104,39 @@ model Banner {
   sortOrder     Int      @default(0)
   isFeatured    Boolean  @default(false) // Whether banner appears on homepage
   featuredOrder Int?     // Position on homepage (1, 2, 3)
+
+  // Hero Banner Settings
+  isHero        Boolean  @default(false) // Whether this is a hero banner
+
+  // Background Settings
+  backgroundType String  @default("gradient") // gradient, image, marquee, video
+  gradientStartColor String? // Start color for gradient (hex)
+  gradientEndColor String?   // End color for gradient (hex)
+  gradientDirection String @default("to-r") // Tailwind gradient direction (to-r, to-br, etc.)
+  backgroundImageUrl String? // Background image URL
+  backgroundMediaId String?  // Background media relation
+  backgroundOpacity Float @default(1.0) // Background opacity (0.0-1.0)
+
+  // Marquee Settings
+  marqueeText   String?  // Marquee text (English)
+  marqueeTextIs String?  // Marquee text (Icelandic)
+  marqueeSpeed  Int @default(50) // Speed of marquee animation (pixels per second)
+  marqueeCount  Int @default(3)  // Number of times to repeat marquee text
+
+  // Hero Content Customization
+  heroLogoUrl   String?  // Custom logo for hero section
+  heroButtonText String? // Custom button text (English)
+  heroButtonTextIs String? // Custom button text (Icelandic)
+  heroButtonLink String? // Custom button link
+  heroSubtitle  String?  // Hero subtitle (English)
+  heroSubtitleIs String? // Hero subtitle (Icelandic)
+
+  // Styling
+  textColor     String @default("#ffffff") // Text color (hex)
+  buttonBgColor String @default("#ffffff") // Button background color (hex)
+  buttonTextColor String @default("#1f2937") // Button text color (hex)
+  overlayOpacity Float @default(0.0) // Dark overlay opacity for better text readability (0.0-1.0)
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

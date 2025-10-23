@@ -28,7 +28,7 @@ const MessagesList = ({ messages, isLoading }) => {
     return (
       <div className="text-center py-8">
         <MessageCircle className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-        <p className="text-gray-600 dark:text-gray-400">{t('adminChat', 'noMessages')}</p>
+        <p className="text-gray-600 dark:text-gray-400">{t('adminChat.noMessages')}</p>
       </div>
     );
   }

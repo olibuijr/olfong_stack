@@ -99,7 +99,7 @@ const Analytics = () => {
               <span className={`text-sm font-medium ${growthColor}`}>
                 {growth >= 0 ? '+' : ''}{growth.toFixed(1)}%
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">{t('adminAnalytics', 'vsPreviousPeriod')}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">{t('adminAnalytics.vsPreviousPeriod')}</span>
             </div>
           </div>
           <div className={`p-3 rounded-lg bg-${color}-100 dark:bg-${color}-900/20`}>
@@ -111,10 +111,10 @@ const Analytics = () => {
   };
 
   const timeRanges = [
-    { value: '7d', label: t('adminAnalytics', 'last7Days') },
-    { value: '30d', label: t('adminAnalytics', 'last30Days') },
-    { value: '90d', label: t('adminAnalytics', 'last90Days') },
-    { value: '1y', label: t('adminAnalytics', 'lastYear') }
+    { value: '7d', label: t('adminAnalytics.last7Days') },
+    { value: '30d', label: t('adminAnalytics.last30Days') },
+    { value: '90d', label: t('adminAnalytics.last90Days') },
+    { value: '1y', label: t('adminAnalytics.lastYear') }
   ];
 
   if (user?.role !== 'ADMIN') {
@@ -122,17 +122,17 @@ const Analytics = () => {
       <AdminLayout>
         <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage', 'accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage.accessDenied')}</h1>
           </div>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('adminPage', 'accessDenied')}
+                {t('adminPage.accessDenied')}
               </h2>
               <p className="text-gray-600">
-                {t('adminPage', 'noPermission')}
+                {t('adminPage.noPermission')}
               </p>
             </div>
           </div>
@@ -149,8 +149,8 @@ const Analytics = () => {
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminAnalytics', 'analyticsDashboard')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminAnalytics', 'businessInsights')}</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminAnalytics.analyticsDashboard')}</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminAnalytics.businessInsights')}</p>
               </div>
               <div className="flex items-center space-x-4 mt-4 sm:mt-0">
                 <select
@@ -166,7 +166,7 @@ const Analytics = () => {
                 </select>
                 <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                   <Download className="h-4 w-4 mr-2" />
-                  {t('adminAnalytics', 'export')}
+                  {t('adminAnalytics.export')}
                 </button>
               </div>
             </div>
@@ -181,12 +181,12 @@ const Analytics = () => {
           {isLoading ? (
             <div className="col-span-full flex items-center justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-              <span className="ml-2 text-gray-600 dark:text-gray-400">{t('adminAnalytics', 'loading')}</span>
+              <span className="ml-2 text-gray-600 dark:text-gray-400">{t('adminAnalytics.loading')}</span>
             </div>
           ) : (
             <>
               <MetricCard
-                title={t('adminAnalytics', 'totalRevenue')}
+                title={t('adminAnalytics.totalRevenue')}
                 value={formatCurrency(metrics.revenue.current)}
                 previous={metrics.revenue.previous}
                 growth={metrics.revenue.growth}
@@ -194,7 +194,7 @@ const Analytics = () => {
                 color="green"
               />
               <MetricCard
-                title={t('adminAnalytics', 'totalOrders')}
+                title={t('adminAnalytics.totalOrders')}
                 value={metrics.orders.current.toLocaleString()}
                 previous={metrics.orders.previous}
                 growth={metrics.orders.growth}
@@ -202,7 +202,7 @@ const Analytics = () => {
                 color="blue"
               />
               <MetricCard
-                title={t('adminAnalytics', 'totalCustomers')}
+                title={t('adminAnalytics.totalCustomers')}
                 value={metrics.customers.current.toLocaleString()}
                 previous={metrics.customers.previous}
                 growth={metrics.customers.growth}
@@ -210,7 +210,7 @@ const Analytics = () => {
                 color="purple"
               />
               <MetricCard
-                title={t('adminAnalytics', 'totalProducts')}
+                title={t('adminAnalytics.totalProducts')}
                 value={metrics.products.current}
                 previous={metrics.products.previous}
                 growth={metrics.products.growth}
@@ -225,7 +225,7 @@ const Analytics = () => {
           {/* Revenue Chart */}
           <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-600">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminAnalytics', 'revenueTrend')}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminAnalytics.revenueTrend')}</h2>
             </div>
             <div className="p-6">
               {isLoading ? (
@@ -241,7 +241,7 @@ const Analytics = () => {
                         return date.toLocaleDateString('is-IS', { month: 'short', day: 'numeric' });
                       }),
                       datasets: [{
-                        label: t('adminAnalytics', 'revenue'),
+                        label: t('adminAnalytics.revenue'),
                         data: revenueTrend.dailyRevenue.map(item => parseFloat(item.revenue) || 0),
                         borderColor: 'rgb(59, 130, 246)',
                         backgroundColor: 'rgba(59, 130, 246, 0.1)',
@@ -277,7 +277,7 @@ const Analytics = () => {
                 <div className="h-80 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div className="text-center">
                     <TrendingUp className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-                    <p className="text-gray-500 dark:text-gray-400">{t('adminAnalytics', 'noRevenueData')}</p>
+                    <p className="text-gray-500 dark:text-gray-400">{t('adminAnalytics.noRevenueData')}</p>
                   </div>
                 </div>
               )}
@@ -287,13 +287,13 @@ const Analytics = () => {
           {/* Order Status Distribution */}
           <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-600">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminAnalytics', 'orderStatusDistribution')}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminAnalytics.orderStatusDistribution')}</h2>
             </div>
             <div className="p-6">
               {isLoading ? (
                 <div className="flex items-center justify-center py-12">
                   <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
-                  <span className="ml-2 text-gray-600 dark:text-gray-400">{t('adminAnalytics', 'loading')}</span>
+                  <span className="ml-2 text-gray-600 dark:text-gray-400">{t('adminAnalytics.loading')}</span>
                 </div>
               ) : orderStatusDistribution && orderStatusDistribution.length > 0 ? (
                 <div className="h-80">
@@ -301,16 +301,16 @@ const Analytics = () => {
                     data={{
                       labels: orderStatusDistribution.map(status => {
                         const statusLabels = {
-                          'DELIVERED': t('adminAnalytics', 'delivered'),
-                          'SHIPPED': t('adminAnalytics', 'shipped'),
-                          'PROCESSING': t('adminAnalytics', 'processing'),
-                          'PENDING': t('adminAnalytics', 'pending'),
-                          'CANCELLED': t('adminAnalytics', 'cancelled')
+                          'DELIVERED': t('adminAnalytics.delivered'),
+                          'SHIPPED': t('adminAnalytics.shipped'),
+                          'PROCESSING': t('adminAnalytics.processing'),
+                          'PENDING': t('adminAnalytics.pending'),
+                          'CANCELLED': t('adminAnalytics.cancelled')
                         };
                         return statusLabels[status.status] || status.status;
                       }),
                       datasets: [{
-                        label: t('adminAnalytics', 'orders'),
+                        label: t('adminAnalytics.orders'),
                         data: orderStatusDistribution.map(status => status.count || 0),
                         backgroundColor: [
                           'rgba(34, 197, 94, 0.8)', // green for delivered
@@ -338,7 +338,7 @@ const Analytics = () => {
                         },
                         tooltip: {
                           callbacks: {
-                            label: (context) => `${context.parsed.y} ${t('adminAnalytics', 'orders').toLowerCase()}`
+                            label: (context) => `${context.parsed.y} ${t('adminAnalytics.orders').toLowerCase()}`
                           }
                         }
                       },
@@ -355,7 +355,7 @@ const Analytics = () => {
                 </div>
               ) : (
                 <div className="text-center py-4 text-gray-500 dark:text-gray-400">
-                  {t('adminAnalytics', 'noData')}
+                  {t('adminAnalytics.noData')}
                 </div>
               )}
             </div>
@@ -366,7 +366,7 @@ const Analytics = () => {
         <div className="mt-8">
           <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-600">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminAnalytics', 'topPerformingProducts')}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminAnalytics.topPerformingProducts')}</h2>
             </div>
             <div className="p-6">
               <div className="overflow-x-auto">
@@ -374,19 +374,19 @@ const Analytics = () => {
                   <thead className="bg-gray-50 dark:bg-gray-700">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        {t('adminAnalytics', 'product')}
+                        {t('adminAnalytics.product')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        {t('adminAnalytics', 'category')}
+                        {t('adminAnalytics.category')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        {t('adminAnalytics', 'sales')}
+                        {t('adminAnalytics.sales')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        {t('adminAnalytics', 'revenue')}
+                        {t('adminAnalytics.revenue')}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                        {t('adminAnalytics', 'growth')}
+                        {t('adminAnalytics.growth')}
                       </th>
                     </tr>
                   </thead>
@@ -396,7 +396,7 @@ const Analytics = () => {
                         <td colSpan="5" className="px-6 py-8 text-center">
                           <div className="flex items-center justify-center">
                             <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
-                            <span className="ml-2 text-gray-600 dark:text-gray-400">{t('adminAnalytics', 'loading')}</span>
+                            <span className="ml-2 text-gray-600 dark:text-gray-400">{t('adminAnalytics.loading')}</span>
                           </div>
                         </td>
                       </tr>
@@ -404,10 +404,10 @@ const Analytics = () => {
                       topProducts.map((product, index) => (
                         <tr key={product.productId || index} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                            {product.product?.name || t('adminAnalytics', 'unknownProduct')}
+                            {product.product?.name || t('adminAnalytics.unknownProduct')}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                            {product.product?.category?.name || t('adminAnalytics', 'unknownCategory')}
+                            {product.product?.category?.name || t('adminAnalytics.unknownCategory')}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                             {product._sum?.quantity || 0}
@@ -417,7 +417,7 @@ const Analytics = () => {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
-                              {t('adminAnalytics', 'topPerformer')}
+                              {t('adminAnalytics.topPerformer')}
                             </span>
                           </td>
                         </tr>
@@ -425,7 +425,7 @@ const Analytics = () => {
                     ) : (
                       <tr>
                         <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                          {t('adminAnalytics', 'noProducts')}
+                          {t('adminAnalytics.noProducts')}
                         </td>
                       </tr>
                     )}

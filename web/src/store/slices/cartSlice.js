@@ -20,10 +20,10 @@ export const addToCart = createAsyncThunk(
   async ({ productId, quantity = 1 }, { rejectWithValue }) => {
     try {
       const response = await api.post('/cart/items', { productId, quantity });
-      toast.success('Vara bætt við körfu');
+      toast.success('Vöru bætt í körfu');
       return response.data;
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Mistókst að bæta við körfu');
+      toast.error(error.response?.data?.message || 'Mistókst að bæta vöru í körfu');
       return rejectWithValue(error.response?.data?.message || 'Failed to add to cart');
     }
   }
@@ -47,10 +47,10 @@ export const removeFromCart = createAsyncThunk(
   async (itemId, { rejectWithValue }) => {
     try {
       await api.delete(`/cart/items/${itemId}`);
-      toast.success('Vara fjarlægð úr körfu');
+      toast.success('Vöru fjarlægð úr körfu');
       return itemId;
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Mistókst að fjarlægja úr körfu');
+      toast.error(error.response?.data?.message || 'Mistókst að fjarlægja vöru úr körfu');
       return rejectWithValue(error.response?.data?.message || 'Failed to remove from cart');
     }
   }

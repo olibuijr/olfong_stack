@@ -187,37 +187,37 @@ const Settings = () => {
   // Settings categories configuration
   const settingsCategories = [
     {
-      title: t('adminSettings', 'storeSettings'),
-      description: t('adminSettings', 'storeSettingsDescription'),
+      title: t('adminSettings.storeSettings'),
+      description: t('adminSettings.storeSettingsDescription'),
       tabs: [
-        { id: 'general', name: t('adminSettings', 'general'), icon: SettingsIcon, description: t('adminSettings', 'generalDescription') },
-        { id: 'business', name: t('adminSettings', 'business'), icon: Building, description: t('adminSettings', 'businessDescription') },
-        { id: 'shipping', name: t('adminSettings', 'shipping'), icon: Truck, description: t('adminSettings', 'shippingDescription') },
-        { id: 'vat', name: t('adminSettings', 'vat'), icon: Percent, description: t('adminSettings', 'vatDescription') }
+        { id: 'general', name: t('adminSettings.general'), icon: SettingsIcon, description: t('adminSettings.generalDescription') },
+        { id: 'business', name: t('adminSettings.business'), icon: Building, description: t('adminSettings.businessDescription') },
+        { id: 'shipping', name: t('adminSettings.shipping'), icon: Truck, description: t('adminSettings.shippingDescription') },
+        { id: 'vat', name: t('adminSettings.vat'), icon: Percent, description: t('adminSettings.vatDescription') }
       ]
     },
     {
-      title: t('adminSettings', 'securityAndAccess'),
-      description: t('adminSettings', 'securityAndAccessDescription'),
+      title: t('adminSettings.securityAndAccess'),
+      description: t('adminSettings.securityAndAccessDescription'),
       tabs: [
-        { id: 'security', name: t('adminSettings', 'security'), icon: Shield, description: t('adminSettings', 'securityDescription') },
-        { id: 'api-keys', name: t('adminSettings', 'apiKeys'), icon: Key, description: t('adminSettings', 'apiKeysDescription') }
+        { id: 'security', name: t('adminSettings.security'), icon: Shield, description: t('adminSettings.securityDescription') },
+        { id: 'api-keys', name: t('adminSettings.apiKeys'), icon: Key, description: t('adminSettings.apiKeysDescription') }
       ]
     },
     {
-      title: t('adminSettings', 'integrations'),
-      description: t('adminSettings', 'integrationsDescription'),
+      title: t('adminSettings.integrations'),
+      description: t('adminSettings.integrationsDescription'),
       tabs: [
-        { id: 'payment-gateways', name: t('adminSettings', 'paymentGateways'), icon: CreditCard, description: t('adminSettings', 'paymentGatewayDescription') },
-        { id: 'integration', name: t('adminSettings', 'integrations'), icon: Wifi, description: t('adminSettings', 'integrationsDescription') },
-        { id: 'notifications', name: t('adminSettings', 'notifications'), icon: Bell, description: t('adminSettings', 'notificationsDescription') }
+        { id: 'payment-gateways', name: t('adminSettings.paymentGateways'), icon: CreditCard, description: t('adminSettings.paymentGatewayDescription') },
+        { id: 'integration', name: t('adminSettings.integrations'), icon: Wifi, description: t('adminSettings.integrationsDescription') },
+        { id: 'notifications', name: t('adminSettings.notifications'), icon: Bell, description: t('adminSettings.notificationsDescription') }
       ]
     },
     {
-      title: t('adminSettings', 'system'),
-      description: t('adminSettings', 'systemDescription'),
+      title: t('adminSettings.system'),
+      description: t('adminSettings.systemDescription'),
       tabs: [
-        { id: 'maintenance', name: t('adminSettings', 'maintenance'), icon: Server, description: t('adminSettings', 'maintenanceDescription') }
+        { id: 'maintenance', name: t('adminSettings.maintenance'), icon: Server, description: t('adminSettings.maintenanceDescription') }
       ]
     }
   ];
@@ -294,7 +294,7 @@ const Settings = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white shadow-lg rounded-lg border border-gray-200">
             <AlertTriangle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminLabels', 'accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminLabels.accessDenied')}</h1>
             <p className="text-gray-700">You do not have permission to view this page.</p>
           </div>
         </div>
@@ -400,7 +400,7 @@ const Settings = () => {
   };
 
   const handleShippingDelete = async (shippingId) => {
-    if (!window.confirm(t('adminSettings', 'confirmDeleteShipping'))) {
+    if (!window.confirm(t('adminSettings.confirmDeleteShipping'))) {
       return;
     }
 
@@ -430,8 +430,8 @@ const Settings = () => {
         <div className="flex items-start">
           <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5" />
           <div className="text-sm text-blue-800 dark:text-blue-200">
-            <p className="font-medium mb-1">{t('adminSettings', 'shippingConfiguration')}</p>
-            <p>{t('adminSettings', 'shippingDescription')}</p>
+            <p className="font-medium mb-1">{t('adminSettings.shippingConfiguration')}</p>
+            <p>{t('adminSettings.shippingDescription')}</p>
           </div>
         </div>
       </div>
@@ -446,7 +446,7 @@ const Settings = () => {
           className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
         >
           <Plus className="h-4 w-4 mr-2" />
-          {t('adminSettings', 'addShippingOption')}
+          {t('adminSettings.addShippingOption')}
         </button>
       </div>
 
@@ -472,7 +472,7 @@ const Settings = () => {
                 <button
                   onClick={() => handleShippingDelete(option.id)}
                   className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  title={t('adminSettings', 'delete')}
+                  title={t('adminSettings.delete')}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -501,7 +501,7 @@ const Settings = () => {
               <div className="flex items-center space-x-3">
                 <div className={`w-3 h-3 rounded-full ${option.isEnabled ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {option.isEnabled ? t('adminSettings', 'enabled') : t('adminSettings', 'disabled')}
+                  {option.isEnabled ? t('adminSettings.enabled') : t('adminSettings.disabled')}
                 </span>
               </div>
               <div className="text-right">
@@ -525,7 +525,7 @@ const Settings = () => {
                 }}
                 className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg transition-colors duration-200"
               >
-                {t('adminSettings', 'edit')}
+                {t('adminSettings.edit')}
               </button>
             </div>
           </div>
@@ -535,8 +535,8 @@ const Settings = () => {
       {shippingOptions.length === 0 && (
         <div className="text-center py-12">
           <Truck className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'noShippingOptions')}</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings', 'noShippingOptionsDescription')}</p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.noShippingOptions')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings.noShippingOptionsDescription')}</p>
           <button
             onClick={() => {
               setEditingShippingData({});
@@ -545,7 +545,7 @@ const Settings = () => {
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {t('adminSettings', 'addFirstShippingOption')}
+            {t('adminSettings.addFirstShippingOption')}
           </button>
         </div>
       )}
@@ -554,11 +554,11 @@ const Settings = () => {
         <div className="flex items-start">
           <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 mt-0.5" />
           <div className="text-sm text-yellow-800 dark:text-yellow-200">
-            <p className="font-medium mb-1">{t('adminSettings', 'shippingNotes')}</p>
+            <p className="font-medium mb-1">{t('adminSettings.shippingNotes')}</p>
             <ul className="list-disc list-inside space-y-1">
-              <li>{t('adminSettings', 'shippingNote1')}</li>
-              <li>{t('adminSettings', 'shippingNote2')}</li>
-              <li>{t('adminSettings', 'shippingNote3')}</li>
+              <li>{t('adminSettings.shippingNote1')}</li>
+              <li>{t('adminSettings.shippingNote2')}</li>
+              <li>{t('adminSettings.shippingNote3')}</li>
             </ul>
           </div>
         </div>
@@ -572,19 +572,19 @@ const Settings = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center mb-6">
           <SettingsIcon className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-3" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings', 'generalSettings')}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings.generalSettings')}</h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Store Information */}
           <div className="space-y-4">
             <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-              {t('adminSettings', 'storeName')}
+              {t('adminSettings.storeName')}
             </h4>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'storeName')}
+                {t('adminSettings.storeName')}
               </label>
               <input
                 type="text"
@@ -597,13 +597,13 @@ const Settings = () => {
                   setHasUnsavedChanges(true);
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                placeholder={t('adminSettings', 'storeName')}
+                placeholder={t('adminSettings.storeName')}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'storeEmail')}
+                {t('adminSettings.storeEmail')}
               </label>
               <input
                 type="email"
@@ -616,13 +616,13 @@ const Settings = () => {
                   setHasUnsavedChanges(true);
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                placeholder={t('adminSettings', 'storeEmail')}
+                placeholder={t('adminSettings.storeEmail')}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'phoneNumber')}
+                {t('adminSettings.phoneNumber')}
               </label>
               <input
                 type="tel"
@@ -635,13 +635,13 @@ const Settings = () => {
                   setHasUnsavedChanges(true);
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                placeholder={t('adminSettings', 'phoneNumber')}
+                placeholder={t('adminSettings.phoneNumber')}
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'storeAddress')}
+                {t('adminSettings.storeAddress')}
               </label>
               <textarea
                 value={settings.general.storeAddress}
@@ -654,7 +654,7 @@ const Settings = () => {
                 }}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                placeholder={t('adminSettings', 'storeAddress')}
+                placeholder={t('adminSettings.storeAddress')}
               />
             </div>
           </div>
@@ -662,12 +662,12 @@ const Settings = () => {
           {/* Preferences */}
           <div className="space-y-4">
             <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-              {t('adminSettings', 'configureGeneral')}
+              {t('adminSettings.configureGeneral')}
             </h4>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'currency')}
+                {t('adminSettings.currency')}
               </label>
               <select
                 value={settings.general.currency}
@@ -680,15 +680,15 @@ const Settings = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option value="ISK">{t('adminSettings', 'currencyISK')}</option>
-                <option value="USD">{t('adminSettings', 'currencyUSD')}</option>
-                <option value="EUR">{t('adminSettings', 'currencyEUR')}</option>
+                <option value="ISK">{t('adminSettings.currencyISK')}</option>
+                <option value="USD">{t('adminSettings.currencyUSD')}</option>
+                <option value="EUR">{t('adminSettings.currencyEUR')}</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'language')}
+                {t('adminSettings.language')}
               </label>
               <select
                 value={settings.general.language}
@@ -701,14 +701,14 @@ const Settings = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option value="is">{t('adminSettings', 'languageIcelandic')}</option>
-                <option value="en">{t('adminSettings', 'languageEnglish')}</option>
+                <option value="is">{t('adminSettings.languageIcelandic')}</option>
+                <option value="en">{t('adminSettings.languageEnglish')}</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'dateFormat')}
+                {t('adminSettings.dateFormat')}
               </label>
               <select
                 value={settings.general.dateFormat}
@@ -721,15 +721,15 @@ const Settings = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option value="DD/MM/YYYY">{t('adminSettings', 'dateFormatDDMMYYYY')}</option>
-                <option value="MM/DD/YYYY">{t('adminSettings', 'dateFormatMMDDYYYY')}</option>
-                <option value="YYYY-MM-DD">{t('adminSettings', 'dateFormatYYYYMMDD')}</option>
+                <option value="DD/MM/YYYY">{t('adminSettings.dateFormatDDMMYYYY')}</option>
+                <option value="MM/DD/YYYY">{t('adminSettings.dateFormatMMDDYYYY')}</option>
+                <option value="YYYY-MM-DD">{t('adminSettings.dateFormatYYYYMMDD')}</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                {t('adminSettings', 'timeFormat')}
+                {t('adminSettings.timeFormat')}
               </label>
               <select
                 value={settings.general.timeFormat}
@@ -742,8 +742,8 @@ const Settings = () => {
                 }}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option value="24h">{t('adminSettings', 'timeFormat24h')}</option>
-                <option value="12h">{t('adminSettings', 'timeFormat12h')}</option>
+                <option value="24h">{t('adminSettings.timeFormat24h')}</option>
+                <option value="12h">{t('adminSettings.timeFormat12h')}</option>
               </select>
             </div>
           </div>
@@ -752,7 +752,7 @@ const Settings = () => {
         {/* Store Description */}
         <div className="mt-6">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            {t('adminSettings', 'storeDescription')}
+            {t('adminSettings.storeDescription')}
           </label>
           <textarea
             value={settings.general.storeDescription}
@@ -765,7 +765,7 @@ const Settings = () => {
             }}
             rows={4}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            placeholder={t('adminSettings', 'storeDescription')}
+            placeholder={t('adminSettings.storeDescription')}
           />
         </div>
       </div>
@@ -777,13 +777,13 @@ const Settings = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center mb-6">
           <Building className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-3" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings', 'businessSettings')}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings.businessSettings')}</h3>
         </div>
 
         {/* Opening Hours */}
         <div className="mb-8">
           <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-            {t('adminSettings', 'openingHours')}
+            {t('adminSettings.openingHours')}
           </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -812,7 +812,7 @@ const Settings = () => {
                     disabled={hours.closed}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50"
                   />
-                  <span className="text-gray-500 dark:text-gray-400">{t('adminSettings', 'to')}</span>
+                  <span className="text-gray-500 dark:text-gray-400">{t('adminSettings.to')}</span>
                   <input
                     type="time"
                     value={hours.close}
@@ -851,7 +851,7 @@ const Settings = () => {
                       }}
                       className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
                     />
-                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{t('adminSettings', 'closed')}</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{t('adminSettings.closed')}</span>
                   </label>
                 </div>
               </div>
@@ -862,7 +862,7 @@ const Settings = () => {
         {/* Delivery Settings */}
         <div className="mb-8">
           <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-            {t('adminSettings', 'deliverySettings')}
+            {t('adminSettings.deliverySettings')}
           </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -885,13 +885,13 @@ const Settings = () => {
                   className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label htmlFor="enableDelivery" className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('adminSettings', 'enableDelivery')}
+                  {t('adminSettings.enableDelivery')}
                 </label>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'deliveryFee')} (kr)
+                  {t('adminSettings.deliveryFee')} (kr)
                 </label>
                 <input
                   type="number"
@@ -914,7 +914,7 @@ const Settings = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'freeDeliveryThreshold')} (kr)
+                  {t('adminSettings.freeDeliveryThreshold')} (kr)
                 </label>
                 <input
                   type="number"
@@ -937,7 +937,7 @@ const Settings = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'deliveryRadius')} (km)
+                  {t('adminSettings.deliveryRadius')} (km)
                 </label>
                 <input
                   type="number"
@@ -962,10 +962,10 @@ const Settings = () => {
             <div className="space-y-4">
               <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md">
                 <h5 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
-                  {t('adminSettings', 'deliverySettings')}
+                  {t('adminSettings.deliverySettings')}
                 </h5>
                 <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
-                  <li>• {t('adminSettings', 'enableDelivery')} delivery service</li>
+                  <li>• {t('adminSettings.enableDelivery')} delivery service</li>
                   <li>• Set delivery fees and free delivery thresholds</li>
                   <li>• Define delivery radius for geographic restrictions</li>
                   <li>• All settings are automatically applied to checkout</li>
@@ -978,7 +978,7 @@ const Settings = () => {
         {/* Age Restriction */}
         <div className="mb-8">
           <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-            {t('adminSettings', 'ageRestriction')}
+            {t('adminSettings.ageRestriction')}
           </h4>
 
           <div className="space-y-4">
@@ -1000,14 +1000,14 @@ const Settings = () => {
                 className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
               />
               <label htmlFor="enableAgeRestriction" className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('adminSettings', 'enableAgeRestriction')}
+                {t('adminSettings.enableAgeRestriction')}
               </label>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'nicotineProducts')} ({t('adminSettings', 'years')})
+                  {t('adminSettings.nicotineProducts')} ({t('adminSettings.years')})
                 </label>
                 <input
                   type="number"
@@ -1028,13 +1028,13 @@ const Settings = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {t('adminSettings', 'nicotineAgeDescription')}
+                  {t('adminSettings.nicotineAgeDescription')}
                 </p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'alcoholNicotineProducts')} ({t('adminSettings', 'years')})
+                  {t('adminSettings.alcoholNicotineProducts')} ({t('adminSettings.years')})
                 </label>
                 <input
                   type="number"
@@ -1055,13 +1055,13 @@ const Settings = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {t('adminSettings', 'alcoholNicotineAgeDescription')}
+                  {t('adminSettings.alcoholNicotineAgeDescription')}
                 </p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'generalProducts')} ({t('adminSettings', 'years')})
+                  {t('adminSettings.generalProducts')} ({t('adminSettings.years')})
                 </label>
                 <input
                   type="number"
@@ -1082,17 +1082,17 @@ const Settings = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {t('adminSettings', 'generalProductsDescription')}
+                  {t('adminSettings.generalProductsDescription')}
                 </p>
               </div>
             </div>
 
             <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md">
               <h5 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
-                {t('adminSettings', 'ageRestrictionNotice')}
+                {t('adminSettings.ageRestrictionNotice')}
               </h5>
               <p className="text-sm text-blue-700 dark:text-blue-300">
-                {t('adminSettings', 'ageRestrictionDescription')}
+                {t('adminSettings.ageRestrictionDescription')}
               </p>
             </div>
           </div>
@@ -1106,13 +1106,13 @@ const Settings = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center mb-6">
           <Percent className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-3" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings', 'vatSettings')}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings.vatSettings')}</h3>
         </div>
 
         {/* VAT Configuration */}
         <div className="mb-8">
           <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-            {t('adminSettings', 'vatConfiguration')}
+            {t('adminSettings.vatConfiguration')}
           </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1132,13 +1132,13 @@ const Settings = () => {
                   className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label htmlFor="vatEnabled" className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('adminSettings', 'vatEnabled')}
+                  {t('adminSettings.vatEnabled')}
                 </label>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'vatRate')} (%)
+                  {t('adminSettings.vatRate')} (%)
                 </label>
                 <input
                   type="number"
@@ -1161,7 +1161,7 @@ const Settings = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminSettings', 'country')}
+                  {t('adminSettings.country')}
                 </label>
                 <select
                   value={settings.vat.country}
@@ -1175,9 +1175,9 @@ const Settings = () => {
                   disabled={!settings.vat.enabled}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50"
                 >
-                  <option value="IS">{t('adminSettings', 'iceland')}</option>
-                  <option value="EU">{t('adminSettings', 'euCountries')}</option>
-                  <option value="OTHER">{t('adminSettings', 'otherCountries')}</option>
+                  <option value="IS">{t('adminSettings.iceland')}</option>
+                  <option value="EU">{t('adminSettings.euCountries')}</option>
+                  <option value="OTHER">{t('adminSettings.otherCountries')}</option>
                 </select>
               </div>
             </div>
@@ -1185,10 +1185,10 @@ const Settings = () => {
             <div className="space-y-4">
               <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md">
                 <h5 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
-                  {t('adminSettings', 'vatInformation')}
+                  {t('adminSettings.vatInformation')}
                 </h5>
                 <p className="text-sm text-blue-700 dark:text-blue-300">
-                  {t('adminSettings', 'vatInformationDescription')}
+                  {t('adminSettings.vatInformationDescription')}
                 </p>
               </div>
             </div>
@@ -1198,7 +1198,7 @@ const Settings = () => {
         {/* VAT Display Settings */}
         <div className="mb-8">
           <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-            {t('adminSettings', 'vatDisplaySettings')}
+            {t('adminSettings.vatDisplaySettings')}
           </h4>
 
           <div className="space-y-4">
@@ -1219,10 +1219,10 @@ const Settings = () => {
               />
               <div className="ml-2">
                 <label htmlFor="showVatInAdmin" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('adminSettings', 'showVatInAdmin')}
+                  {t('adminSettings.showVatInAdmin')}
                 </label>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {t('adminSettings', 'showVatInAdminDescription')}
+                  {t('adminSettings.showVatInAdminDescription')}
                 </p>
               </div>
             </div>
@@ -1244,10 +1244,10 @@ const Settings = () => {
               />
               <div className="ml-2">
                 <label htmlFor="includeVatInCustomerPrice" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('adminSettings', 'includeVatInCustomerPrice')}
+                  {t('adminSettings.includeVatInCustomerPrice')}
                 </label>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {t('adminSettings', 'includeVatInCustomerPriceDescription')}
+                  {t('adminSettings.includeVatInCustomerPriceDescription')}
                 </p>
               </div>
             </div>
@@ -1269,10 +1269,10 @@ const Settings = () => {
               />
               <div className="ml-2">
                 <label htmlFor="showVatBreakdown" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('adminSettings', 'showVatBreakdown')}
+                  {t('adminSettings.showVatBreakdown')}
                 </label>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {t('adminSettings', 'showVatBreakdownDescription')}
+                  {t('adminSettings.showVatBreakdownDescription')}
                 </p>
               </div>
             </div>
@@ -1287,16 +1287,16 @@ const Settings = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center mb-6">
           <Key className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-3" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings', 'apiKeys')}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings.apiKeys')}</h3>
         </div>
 
         <div className="mb-6">
           <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md mb-6">
             <h4 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
-              {t('adminSettings', 'apiKeysConfiguration')}
+              {t('adminSettings.apiKeysConfiguration')}
             </h4>
             <p className="text-sm text-blue-700 dark:text-blue-300">
-              {t('adminSettings', 'apiKeysDescription')}
+              {t('adminSettings.apiKeysDescription')}
             </p>
           </div>
         </div>
@@ -1312,10 +1312,10 @@ const Settings = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                    {t('adminSettings', 'unsplashApiKey')}
+                    {t('adminSettings.unsplashApiKey')}
                   </h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'unsplashDevelopers')}
+                    {t('adminSettings.unsplashDevelopers')}
                   </p>
                 </div>
               </div>
@@ -1327,11 +1327,11 @@ const Settings = () => {
             <div className="flex space-x-3">
               <input
                 type="password"
-                placeholder={t('adminSettings', 'enterUnsplashApiKey')}
+                placeholder={t('adminSettings.enterUnsplashApiKey')}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               />
               <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                {t('adminSettings', 'save')}
+                {t('adminSettings.save')}
               </button>
             </div>
           </div>
@@ -1345,10 +1345,10 @@ const Settings = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                    {t('adminSettings', 'pexelsApiKey')}
+                    {t('adminSettings.pexelsApiKey')}
                   </h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'pexelsApi')}
+                    {t('adminSettings.pexelsApi')}
                   </p>
                 </div>
               </div>
@@ -1360,11 +1360,11 @@ const Settings = () => {
             <div className="flex space-x-3">
               <input
                 type="password"
-                placeholder={t('adminSettings', 'enterPexelsApiKey')}
+                placeholder={t('adminSettings.enterPexelsApiKey')}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               />
               <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                {t('adminSettings', 'save')}
+                {t('adminSettings.save')}
               </button>
             </div>
           </div>
@@ -1378,10 +1378,10 @@ const Settings = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                    {t('adminSettings', 'pixabayApiKey')}
+                    {t('adminSettings.pixabayApiKey')}
                   </h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'pixabayApi')}
+                    {t('adminSettings.pixabayApi')}
                   </p>
                 </div>
               </div>
@@ -1393,11 +1393,11 @@ const Settings = () => {
             <div className="flex space-x-3">
               <input
                 type="password"
-                placeholder={t('adminSettings', 'enterPixabayApiKey')}
+                placeholder={t('adminSettings.enterPixabayApiKey')}
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               />
               <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                {t('adminSettings', 'save')}
+                {t('adminSettings.save')}
               </button>
             </div>
           </div>
@@ -1411,10 +1411,10 @@ const Settings = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                    {t('adminSettings', 'googleApiKey')}
+                    {t('adminSettings.googleApiKey')}
                   </h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'googleCloudConsole')}
+                    {t('adminSettings.googleCloudConsole')}
                   </p>
                 </div>
               </div>
@@ -1427,21 +1427,21 @@ const Settings = () => {
               <div className="flex space-x-3">
                 <input
                   type="password"
-                  placeholder={t('adminSettings', 'enterGoogleApiKey')}
+                  placeholder={t('adminSettings.enterGoogleApiKey')}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
                 <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                  {t('adminSettings', 'save')}
+                  {t('adminSettings.save')}
                 </button>
               </div>
               <div className="flex space-x-3">
                 <input
                   type="text"
-                  placeholder={t('adminSettings', 'enterGoogleSearchEngineId')}
+                  placeholder={t('adminSettings.enterGoogleSearchEngineId')}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
                 <button className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                  {t('adminSettings', 'test')}
+                  {t('adminSettings.test')}
                 </button>
               </div>
             </div>
@@ -1451,13 +1451,13 @@ const Settings = () => {
         {/* Important Notes */}
         <div className="mt-8 bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-md">
           <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-3">
-            {t('adminSettings', 'importantNotes')}
+            {t('adminSettings.importantNotes')}
           </h4>
           <ul className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1">
-            <li>• {t('adminSettings', 'apiKeysImportantNote1')}</li>
-            <li>• {t('adminSettings', 'apiKeysImportantNote2')}</li>
-            <li>• {t('adminSettings', 'apiKeysImportantNote3')}</li>
-            <li>• {t('adminSettings', 'apiKeysImportantNote4')}</li>
+            <li>• {t('adminSettings.apiKeysImportantNote1')}</li>
+            <li>• {t('adminSettings.apiKeysImportantNote2')}</li>
+            <li>• {t('adminSettings.apiKeysImportantNote3')}</li>
+            <li>• {t('adminSettings.apiKeysImportantNote4')}</li>
           </ul>
         </div>
       </div>
@@ -1468,8 +1468,8 @@ const Settings = () => {
     <div className="space-y-6">
       <div className="text-center py-12">
         <Bell className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'notifications')}</h3>
-        <p className="text-gray-600 dark:text-gray-400">{t('adminSettings', 'notificationsComingSoon')}</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.notifications')}</h3>
+        <p className="text-gray-600 dark:text-gray-400">{t('adminSettings.notificationsComingSoon')}</p>
       </div>
     </div>
   );
@@ -1478,8 +1478,8 @@ const Settings = () => {
     <div className="space-y-6">
       <div className="text-center py-12">
         <Shield className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'security')}</h3>
-        <p className="text-gray-600 dark:text-gray-400">{t('adminSettings', 'securityComingSoon')}</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.security')}</h3>
+        <p className="text-gray-600 dark:text-gray-400">{t('adminSettings.securityComingSoon')}</p>
       </div>
     </div>
   );
@@ -1572,7 +1572,7 @@ const Settings = () => {
   };
 
   const handleGatewayDelete = async (gatewayId) => {
-    if (!window.confirm(t('adminSettings', 'confirmDeleteGateway'))) {
+    if (!window.confirm(t('adminSettings.confirmDeleteGateway'))) {
       return;
     }
 
@@ -1623,8 +1623,8 @@ const Settings = () => {
         <div className="flex items-start">
           <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5" />
           <div className="text-sm text-blue-800 dark:text-blue-200">
-            <p className="font-medium mb-1">{t('adminSettings', 'paymentGatewayConfiguration')}</p>
-            <p>{t('adminSettings', 'paymentGatewayDescription')}</p>
+            <p className="font-medium mb-1">{t('adminSettings.paymentGatewayConfiguration')}</p>
+            <p>{t('adminSettings.paymentGatewayDescription')}</p>
           </div>
         </div>
       </div>
@@ -1639,7 +1639,7 @@ const Settings = () => {
           className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
         >
           <Plus className="h-4 w-4 mr-2" />
-          {t('adminSettings', 'addPaymentGateway')}
+          {t('adminSettings.addPaymentGateway')}
         </button>
       </div>
 
@@ -1665,14 +1665,14 @@ const Settings = () => {
                 <button
                   onClick={() => handleGatewayTest(gateway.id)}
                   className="p-2 text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20"
-                  title={t('adminSettings', 'testConnection')}
+                  title={t('adminSettings.testConnection')}
                 >
                   <Wifi className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => handleGatewayDelete(gateway.id)}
                   className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  title={t('adminSettings', 'delete')}
+                  title={t('adminSettings.delete')}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -1698,7 +1698,7 @@ const Settings = () => {
               <div className="flex items-center space-x-3">
                 <div className={`w-3 h-3 rounded-full ${gateway.isEnabled ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {gateway.isEnabled ? t('adminSettings', 'enabled') : t('adminSettings', 'disabled')}
+                  {gateway.isEnabled ? t('adminSettings.enabled') : t('adminSettings.disabled')}
                 </span>
               </div>
               <div className="text-right">
@@ -1711,7 +1711,7 @@ const Settings = () => {
             {/* Supported Methods */}
             <div className="mb-4">
               <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                {t('adminSettings', 'supportedMethods')}:
+                {t('adminSettings.supportedMethods')}:
               </div>
               <div className="flex flex-wrap gap-1">
                 {gateway.supportedMethods?.slice(0, 4).map((method) => (
@@ -1739,7 +1739,7 @@ const Settings = () => {
                 }}
                 className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg transition-colors duration-200"
               >
-                {t('adminSettings', 'edit')}
+                {t('adminSettings.edit')}
               </button>
             </div>
           </div>
@@ -1749,8 +1749,8 @@ const Settings = () => {
       {paymentGateways.length === 0 && (
         <div className="text-center py-12">
           <CreditCard className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'noPaymentGateways')}</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings', 'noPaymentGatewaysDescription')}</p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.noPaymentGateways')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings.noPaymentGatewaysDescription')}</p>
           <button
             onClick={() => {
               setEditingGatewayData({});
@@ -1759,7 +1759,7 @@ const Settings = () => {
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {t('adminSettings', 'addFirstPaymentGateway')}
+            {t('adminSettings.addFirstPaymentGateway')}
           </button>
         </div>
       )}
@@ -1768,11 +1768,11 @@ const Settings = () => {
         <div className="flex items-start">
           <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 mt-0.5" />
           <div className="text-sm text-yellow-800 dark:text-yellow-200">
-            <p className="font-medium mb-1">{t('adminSettings', 'paymentGatewayNotes')}</p>
+            <p className="font-medium mb-1">{t('adminSettings.paymentGatewayNotes')}</p>
             <ul className="list-disc list-inside space-y-1">
-              <li>{t('adminSettings', 'paymentGatewayNote1')}</li>
-              <li>{t('adminSettings', 'paymentGatewayNote2')}</li>
-              <li>{t('adminSettings', 'paymentGatewayNote3')}</li>
+              <li>{t('adminSettings.paymentGatewayNote1')}</li>
+              <li>{t('adminSettings.paymentGatewayNote2')}</li>
+              <li>{t('adminSettings.paymentGatewayNote3')}</li>
             </ul>
           </div>
         </div>
@@ -1868,7 +1868,7 @@ const Settings = () => {
   };
 
   const handleIntegrationDelete = async (integrationId) => {
-    if (!window.confirm(t('adminSettings', 'confirmDeleteIntegration'))) {
+    if (!window.confirm(t('adminSettings.confirmDeleteIntegration'))) {
       return;
     }
 
@@ -1940,8 +1940,8 @@ const Settings = () => {
         <div className="flex items-start">
           <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5" />
           <div className="text-sm text-blue-800 dark:text-blue-200">
-            <p className="font-medium mb-1">{t('adminSettings', 'integrationConfiguration')}</p>
-            <p>{t('adminSettings', 'integrationDescription')}</p>
+            <p className="font-medium mb-1">{t('adminSettings.integrationConfiguration')}</p>
+            <p>{t('adminSettings.integrationDescription')}</p>
           </div>
         </div>
       </div>
@@ -1956,7 +1956,7 @@ const Settings = () => {
           className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
         >
           <Plus className="h-4 w-4 mr-2" />
-          {t('adminSettings', 'addIntegration')}
+          {t('adminSettings.addIntegration')}
         </button>
       </div>
 
@@ -1982,21 +1982,21 @@ const Settings = () => {
                 <button
                   onClick={() => handleIntegrationSync(integration.id)}
                   className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                  title={t('adminSettings', 'syncData')}
+                  title={t('adminSettings.syncData')}
                 >
                   <RefreshCw className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => handleIntegrationTest(integration.id)}
                   className="p-2 text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20"
-                  title={t('adminSettings', 'testConnection')}
+                  title={t('adminSettings.testConnection')}
                 >
                   <Wifi className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => handleIntegrationDelete(integration.id)}
                   className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  title={t('adminSettings', 'delete')}
+                  title={t('adminSettings.delete')}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -2022,7 +2022,7 @@ const Settings = () => {
               <div className="flex items-center space-x-3">
                 <div className={`w-3 h-3 rounded-full ${integration.isEnabled ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {integration.isEnabled ? t('adminSettings', 'enabled') : t('adminSettings', 'disabled')}
+                  {integration.isEnabled ? t('adminSettings.enabled') : t('adminSettings.disabled')}
                 </span>
               </div>
               <div className="text-right">
@@ -2031,7 +2031,7 @@ const Settings = () => {
                 </div>
                 {integration.lastSync && (
                   <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'lastSync')}: {new Date(integration.lastSync).toLocaleDateString()}
+                    {t('adminSettings.lastSync')}: {new Date(integration.lastSync).toLocaleDateString()}
                   </div>
                 )}
               </div>
@@ -2046,7 +2046,7 @@ const Settings = () => {
                 }}
                 className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg transition-colors duration-200"
               >
-                {t('adminSettings', 'edit')}
+                {t('adminSettings.edit')}
               </button>
             </div>
           </div>
@@ -2056,8 +2056,8 @@ const Settings = () => {
       {integrations.length === 0 && (
         <div className="text-center py-12">
           <Wifi className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'noIntegrations')}</h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings', 'noIntegrationsDescription')}</p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.noIntegrations')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{t('adminSettings.noIntegrationsDescription')}</p>
           <button
             onClick={() => {
               setEditingIntegrationData({});
@@ -2066,7 +2066,7 @@ const Settings = () => {
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {t('adminSettings', 'addFirstIntegration')}
+            {t('adminSettings.addFirstIntegration')}
           </button>
         </div>
       )}
@@ -2075,11 +2075,11 @@ const Settings = () => {
         <div className="flex items-start">
           <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 mt-0.5" />
           <div className="text-sm text-yellow-800 dark:text-yellow-200">
-            <p className="font-medium mb-1">{t('adminSettings', 'integrationNotes')}</p>
+            <p className="font-medium mb-1">{t('adminSettings.integrationNotes')}</p>
             <ul className="list-disc list-inside space-y-1">
-              <li>{t('adminSettings', 'integrationNote1')}</li>
-              <li>{t('adminSettings', 'integrationNote2')}</li>
-              <li>{t('adminSettings', 'integrationNote3')}</li>
+              <li>{t('adminSettings.integrationNote1')}</li>
+              <li>{t('adminSettings.integrationNote2')}</li>
+              <li>{t('adminSettings.integrationNote3')}</li>
             </ul>
           </div>
         </div>
@@ -2091,8 +2091,8 @@ const Settings = () => {
     <div className="space-y-6">
       <div className="text-center py-12">
         <Server className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings', 'maintenance')}</h3>
-        <p className="text-gray-600 dark:text-gray-400">{t('adminSettings', 'maintenanceComingSoon')}</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('adminSettings.maintenance')}</h3>
+        <p className="text-gray-600 dark:text-gray-400">{t('adminSettings.maintenanceComingSoon')}</p>
       </div>
     </div>
   );
@@ -2109,7 +2109,7 @@ const Settings = () => {
           <div className="mt-3">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {editingGatewayData.id ? t('adminSettings', 'editPaymentGateway') : t('adminSettings', 'addPaymentGateway')}
+                {editingGatewayData.id ? t('adminSettings.editPaymentGateway') : t('adminSettings.addPaymentGateway')}
               </h3>
               <button
                 onClick={() => {
@@ -2136,7 +2136,7 @@ const Settings = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'gatewayName')}
+                    {t('adminSettings.gatewayName')}
                   </label>
                   <input
                     type="text"
@@ -2149,7 +2149,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'displayName')}
+                    {t('adminSettings.displayName')}
                   </label>
                   <input
                     type="text"
@@ -2162,7 +2162,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'provider')}
+                    {t('adminSettings.provider')}
                   </label>
                   <input
                     type="text"
@@ -2175,7 +2175,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'environment')}
+                    {t('adminSettings.environment')}
                   </label>
                   <select
                     name="environment"
@@ -2189,7 +2189,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'description')}
+                    {t('adminSettings.description')}
                   </label>
                   <textarea
                     name="description"
@@ -2209,13 +2209,13 @@ const Settings = () => {
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500"
                 >
-                  {t('adminSettings', 'cancel')}
+                  {t('adminSettings.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  {editingGatewayData.id ? t('adminSettings', 'update') : t('adminSettings', 'create')}
+                  {editingGatewayData.id ? t('adminSettings.update') : t('adminSettings.create')}
                 </button>
               </div>
             </form>
@@ -2234,7 +2234,7 @@ const Settings = () => {
           <div className="mt-3">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {editingIntegrationData.id ? t('adminSettings', 'editIntegration') : t('adminSettings', 'addIntegration')}
+                {editingIntegrationData.id ? t('adminSettings.editIntegration') : t('adminSettings.addIntegration')}
               </h3>
               <button
                 onClick={() => {
@@ -2261,7 +2261,7 @@ const Settings = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'integrationName')}
+                    {t('adminSettings.integrationName')}
                   </label>
                   <input
                     type="text"
@@ -2274,7 +2274,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'displayName')}
+                    {t('adminSettings.displayName')}
                   </label>
                   <input
                     type="text"
@@ -2287,7 +2287,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'provider')}
+                    {t('adminSettings.provider')}
                   </label>
                   <input
                     type="text"
@@ -2300,7 +2300,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'baseUrl')}
+                    {t('adminSettings.baseUrl')}
                   </label>
                   <input
                     type="url"
@@ -2312,7 +2312,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'environment')}
+                    {t('adminSettings.environment')}
                   </label>
                   <select
                     name="environment"
@@ -2326,7 +2326,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'description')}
+                    {t('adminSettings.description')}
                   </label>
                   <textarea
                     name="description"
@@ -2346,13 +2346,13 @@ const Settings = () => {
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500"
                 >
-                  {t('adminSettings', 'cancel')}
+                  {t('adminSettings.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  {editingIntegrationData.id ? t('adminSettings', 'update') : t('adminSettings', 'create')}
+                  {editingIntegrationData.id ? t('adminSettings.update') : t('adminSettings.create')}
                 </button>
               </div>
             </form>
@@ -2371,7 +2371,7 @@ const Settings = () => {
           <div className="mt-3">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {editingShippingData.id ? t('adminSettings', 'editShippingOption') : t('adminSettings', 'addShippingOption')}
+                {editingShippingData.id ? t('adminSettings.editShippingOption') : t('adminSettings.addShippingOption')}
               </h3>
               <button
                 onClick={() => {
@@ -2404,7 +2404,7 @@ const Settings = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'shippingName')}
+                      {t('adminSettings.shippingName')}
                     </label>
                     <input
                       type="text"
@@ -2417,7 +2417,7 @@ const Settings = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'shippingNameIs')}
+                      {t('adminSettings.shippingNameIs')}
                     </label>
                     <input
                       type="text"
@@ -2431,7 +2431,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'shippingType')}
+                    {t('adminSettings.shippingType')}
                   </label>
                   <select
                     name="type"
@@ -2446,7 +2446,7 @@ const Settings = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'fee')} (ISK)
+                      {t('adminSettings.fee')} (ISK)
                     </label>
                     <input
                       type="number"
@@ -2461,7 +2461,7 @@ const Settings = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'estimatedDays')}
+                      {t('adminSettings.estimatedDays')}
                     </label>
                     <input
                       type="number"
@@ -2474,7 +2474,7 @@ const Settings = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('adminSettings', 'sortOrder')}
+                      {t('adminSettings.sortOrder')}
                     </label>
                     <input
                       type="number"
@@ -2488,7 +2488,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'cutoffTime')}
+                    {t('adminSettings.cutoffTime')}
                   </label>
                   <input
                     type="time"
@@ -2500,7 +2500,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'description')}
+                    {t('adminSettings.description')}
                   </label>
                   <textarea
                     name="description"
@@ -2512,7 +2512,7 @@ const Settings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'descriptionIs')}
+                    {t('adminSettings.descriptionIs')}
                   </label>
                   <textarea
                     name="descriptionIs"
@@ -2532,13 +2532,13 @@ const Settings = () => {
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500"
                 >
-                  {t('adminSettings', 'cancel')}
+                  {t('adminSettings.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  {editingShippingData.id ? t('adminSettings', 'update') : t('adminSettings', 'create')}
+                  {editingShippingData.id ? t('adminSettings.update') : t('adminSettings.create')}
                 </button>
               </div>
             </form>
@@ -2597,7 +2597,7 @@ const Settings = () => {
         throw new Error('Failed to save settings');
       }
 
-      toast.success(t('adminSettings', 'settingsSaved'));
+      toast.success(t('adminSettings.settingsSaved'));
       setHasUnsavedChanges(false);
     } catch (error) {
       console.error('Error saving settings:', error);
@@ -2606,9 +2606,9 @@ const Settings = () => {
   };
 
   const handleResetSettings = () => {
-    if (window.confirm(t('adminSettings', 'confirmReset'))) {
+    if (window.confirm(t('adminSettings.confirmReset'))) {
       // Reset logic would go here
-      toast.success(t('adminSettings', 'settingsReset'));
+      toast.success(t('adminSettings.settingsReset'));
     }
   };
 
@@ -2619,8 +2619,8 @@ const Settings = () => {
         <div className="px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings', 'settings')}</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSettings', 'manageSystemSettings')}</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.settings')}</h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSettings.manageSystemSettings')}</p>
             </div>
           </div>
 
@@ -2636,20 +2636,20 @@ const Settings = () => {
               }`}
             >
               <Save className="h-4 w-4 mr-2" />
-              {t('adminSettings', 'saveChanges')}
+              {t('adminSettings.saveChanges')}
             </button>
             <button
               onClick={handleResetSettings}
               className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
             >
               <RefreshCw className="h-4 w-4 mr-2" />
-              {t('adminSettings', 'resetToDefaults')}
+              {t('adminSettings.resetToDefaults')}
             </button>
             <button
               className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
             >
               <Download className="h-4 w-4 mr-2" />
-              {t('adminSettings', 'backupSettings')}
+              {t('adminSettings.backupSettings')}
             </button>
           </div>
         </div>

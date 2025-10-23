@@ -30,8 +30,8 @@ const SettingsOverview = () => {
             <div className="text-red-400 mb-4">
               <RefreshCw className="w-16 h-16 mx-auto" />
             </div>
-            <h1 className="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
-            <p className="text-gray-700">You do not have permission to view this page.</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-gray-700">{t('admin.accessDeniedMessage')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -40,58 +40,58 @@ const SettingsOverview = () => {
 
   const settingsCategories = [
     {
-      title: t('adminSettings', 'storeSettings'),
-      description: t('adminSettings', 'storeSettingsDescription'),
+      title: t('adminSettings.storeSettings'),
+      description: t('adminSettings.storeSettingsDescription'),
       icon: SettingsIcon,
       color: 'blue',
       items: [
         {
-          name: t('adminSettings', 'general'),
-          description: t('adminSettings', 'generalDescription'),
+          name: t('adminSettings.general'),
+          description: t('adminSettings.generalDescription'),
           href: '/admin/settings/general',
           icon: SettingsIcon
         },
         {
-          name: t('adminSettings', 'business'),
-          description: t('adminSettings', 'businessDescription'),
+          name: t('adminSettings.business'),
+          description: t('adminSettings.businessDescription'),
           href: '/admin/settings/business',
           icon: Building
         },
         {
-          name: t('adminSettings', 'shipping'),
-          description: t('adminSettings', 'shippingDescription'),
+          name: t('adminSettings.shipping'),
+          description: t('adminSettings.shippingDescription'),
           href: '/admin/settings/shipping',
           icon: Truck
         },
         {
-          name: t('adminSettings', 'vat'),
-          description: t('adminSettings', 'vatDescription'),
+          name: t('adminSettings.vat'),
+          description: t('adminSettings.vatDescription'),
           href: '/admin/settings/vat',
           icon: Percent
         }
       ]
     },
     {
-      title: t('adminSettings', 'integrations'),
-      description: t('adminSettings', 'integrationsDescription'),
+      title: t('adminSettings.integrations'),
+      description: t('adminSettings.integrationsDescription'),
       icon: Wifi,
       color: 'green',
       items: [
         {
-          name: t('adminSettings', 'apiKeys'),
-          description: t('adminSettings', 'apiKeysDescription'),
+          name: t('adminSettings.apiKeys'),
+          description: t('adminSettings.apiKeysDescription'),
           href: '/admin/settings/api-keys',
           icon: Key
         },
         {
-          name: t('adminSettings', 'paymentGateways'),
-          description: t('adminSettings', 'paymentGatewayDescription'),
+          name: t('adminSettings.paymentGateways'),
+          description: t('adminSettings.paymentGatewayDescription'),
           href: '/admin/settings/payment-gateways',
           icon: CreditCard
         },
         {
-          name: t('adminSettings', 'integrations'),
-          description: t('adminSettings', 'integrationsDescription'),
+          name: t('adminSettings.integrations'),
+          description: t('adminSettings.integrationsDescription'),
           href: '/admin/settings/integrations',
           icon: Wifi
         }
@@ -104,8 +104,8 @@ const SettingsOverview = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings', 'settings')}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSettings', 'manageSystemSettings')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.settings')}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSettings.manageSystemSettings')}</p>
         </div>
 
         {/* Settings Categories */}

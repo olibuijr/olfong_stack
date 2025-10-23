@@ -71,7 +71,7 @@ const ApiKeysSettings = () => {
         throw new Error('Failed to save API key');
       }
 
-      toast.success(t('adminSettings', 'settingsSaved'));
+      toast.success(t('adminSettings.settingsSaved'));
       setHasUnsavedChanges(false);
     } catch (error) {
       console.error('Error saving API key:', error);
@@ -96,8 +96,8 @@ const ApiKeysSettings = () => {
             <div className="text-red-400 mb-4">
               <RefreshCw className="w-16 h-16 mx-auto" />
             </div>
-            <h1 className="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
-            <p className="text-gray-700">You do not have permission to view this page.</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-gray-700">{t('admin.accessDeniedMessage')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -128,8 +128,8 @@ const ApiKeysSettings = () => {
                 <ArrowLeft className="w-5 h-5" />
               </Link>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings', 'apiKeys')}</h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings', 'apiKeysDescription')}</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.apiKeys')}</h1>
+                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings.apiKeysDescription')}</p>
               </div>
             </div>
           </div>
@@ -140,16 +140,16 @@ const ApiKeysSettings = () => {
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
           <div className="flex items-center mb-6">
             <Key className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-3" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings', 'apiKeys')}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings.apiKeys')}</h3>
           </div>
 
           <div className="mb-6">
             <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md mb-6">
               <h4 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
-                {t('adminSettings', 'apiKeysConfiguration')}
+                {t('adminSettings.apiKeysConfiguration')}
               </h4>
               <p className="text-sm text-blue-700 dark:text-blue-300">
-                {t('adminSettings', 'apiKeysDescription')}
+                {t('adminSettings.apiKeysDescription')}
               </p>
             </div>
           </div>
@@ -165,10 +165,10 @@ const ApiKeysSettings = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                      {t('adminSettings', 'unsplashApiKey')}
+                      {t('adminSettings.unsplashApiKey')}
                     </h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {t('adminSettings', 'unsplashDevelopers')}
+                      {t('adminSettings.unsplashDevelopers')}
                     </p>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ const ApiKeysSettings = () => {
                 <div className="flex-1 relative">
                   <input
                     type={showApiKeys.unsplash ? "text" : "password"}
-                    placeholder={t('adminSettings', 'enterUnsplashApiKey')}
+                    placeholder={t('adminSettings.enterUnsplashApiKey')}
                     value={apiKeys.unsplash || ''}
                     onChange={(e) => {
                       setApiKeys(prev => ({ ...prev, unsplash: e.target.value }));
@@ -205,7 +205,7 @@ const ApiKeysSettings = () => {
                   disabled={isSaving || !hasUnsavedChanges}
                   className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50"
                 >
-                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings', 'save')}
+                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings.save')}
                 </button>
               </div>
             </div>
@@ -219,10 +219,10 @@ const ApiKeysSettings = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                      {t('adminSettings', 'pexelsApiKey')}
+                      {t('adminSettings.pexelsApiKey')}
                     </h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {t('adminSettings', 'pexelsApi')}
+                      {t('adminSettings.pexelsApi')}
                     </p>
                   </div>
                 </div>
@@ -235,7 +235,7 @@ const ApiKeysSettings = () => {
                 <div className="flex-1 relative">
                   <input
                     type={showApiKeys.pexels ? "text" : "password"}
-                    placeholder={t('adminSettings', 'enterPexelsApiKey')}
+                    placeholder={t('adminSettings.enterPexelsApiKey')}
                     value={apiKeys.pexels || ''}
                     onChange={(e) => {
                       setApiKeys(prev => ({ ...prev, pexels: e.target.value }));
@@ -260,7 +260,7 @@ const ApiKeysSettings = () => {
                   disabled={isSaving || !hasUnsavedChanges}
                   className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50"
                 >
-                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings', 'save')}
+                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings.save')}
                 </button>
               </div>
             </div>
@@ -274,10 +274,10 @@ const ApiKeysSettings = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                      {t('adminSettings', 'pixabayApiKey')}
+                      {t('adminSettings.pixabayApiKey')}
                     </h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {t('adminSettings', 'pixabayApi')}
+                      {t('adminSettings.pixabayApi')}
                     </p>
                   </div>
                 </div>
@@ -290,7 +290,7 @@ const ApiKeysSettings = () => {
                 <div className="flex-1 relative">
                   <input
                     type={showApiKeys.pixabay ? "text" : "password"}
-                    placeholder={t('adminSettings', 'enterPixabayApiKey')}
+                    placeholder={t('adminSettings.enterPixabayApiKey')}
                     value={apiKeys.pixabay || ''}
                     onChange={(e) => {
                       setApiKeys(prev => ({ ...prev, pixabay: e.target.value }));
@@ -315,7 +315,7 @@ const ApiKeysSettings = () => {
                   disabled={isSaving || !hasUnsavedChanges}
                   className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50"
                 >
-                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings', 'save')}
+                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings.save')}
                 </button>
               </div>
             </div>
@@ -329,10 +329,10 @@ const ApiKeysSettings = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                      {t('adminSettings', 'googleApiKey')}
+                      {t('adminSettings.googleApiKey')}
                     </h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {t('adminSettings', 'googleCloudConsole')}
+                      {t('adminSettings.googleCloudConsole')}
                     </p>
                   </div>
                 </div>
@@ -346,7 +346,7 @@ const ApiKeysSettings = () => {
                   <div className="flex-1 relative">
                     <input
                       type={showApiKeys.google ? "text" : "password"}
-                      placeholder={t('adminSettings', 'enterGoogleApiKey')}
+                      placeholder={t('adminSettings.enterGoogleApiKey')}
                       value={apiKeys.google || ''}
                       onChange={(e) => {
                         setApiKeys(prev => ({ ...prev, google: e.target.value }));
@@ -371,13 +371,13 @@ const ApiKeysSettings = () => {
                     disabled={isSaving || !hasUnsavedChanges}
                     className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50"
                   >
-                    {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings', 'save')}
+                    {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings.save')}
                   </button>
                 </div>
                 <div className="flex space-x-3">
                   <input
                     type="text"
-                    placeholder={t('adminSettings', 'enterGoogleSearchEngineId')}
+                    placeholder={t('adminSettings.enterGoogleSearchEngineId')}
                     value={apiKeys.googleSearchEngineId || ''}
                     onChange={(e) => {
                       setApiKeys(prev => ({ ...prev, googleSearchEngineId: e.target.value }));
@@ -390,7 +390,7 @@ const ApiKeysSettings = () => {
                     disabled={isSaving || !hasUnsavedChanges}
                     className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50"
                   >
-                    {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings', 'test')}
+                    {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings.test')}
                   </button>
                 </div>
               </div>
@@ -400,13 +400,13 @@ const ApiKeysSettings = () => {
           {/* Important Notes */}
           <div className="mt-8 bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-md">
             <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-3">
-              {t('adminSettings', 'importantNotes')}
+              {t('adminSettings.importantNotes')}
             </h4>
             <ul className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1">
-              <li>• {t('adminSettings', 'apiKeysImportantNote1')}</li>
-              <li>• {t('adminSettings', 'apiKeysImportantNote2')}</li>
-              <li>• {t('adminSettings', 'apiKeysImportantNote3')}</li>
-              <li>• {t('adminSettings', 'apiKeysImportantNote4')}</li>
+              <li>• {t('adminSettings.apiKeysImportantNote1')}</li>
+              <li>• {t('adminSettings.apiKeysImportantNote2')}</li>
+              <li>• {t('adminSettings.apiKeysImportantNote3')}</li>
+              <li>• {t('adminSettings.apiKeysImportantNote4')}</li>
             </ul>
           </div>
         </div>

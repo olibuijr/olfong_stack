@@ -1,6 +1,6 @@
 import { useLanguage } from "../../../contexts/LanguageContext";
 import PropTypes from 'prop-types';
-import { getStatusIcon } from './utils';
+import { getStatusIcon, getStatusLabel } from './utils';
 
 const OrderStatusChart = ({ orderStatusCounts }) => {
   const { t } = useLanguage();
@@ -9,7 +9,7 @@ const OrderStatusChart = ({ orderStatusCounts }) => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
       <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
         <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
-          {t('adminDashboard', 'orderStatus')}
+          {t('adminDashboard.orderStatus')}
         </h2>
       </div>
       <div className="p-4 sm:p-6">
@@ -18,13 +18,13 @@ const OrderStatusChart = ({ orderStatusCounts }) => {
             const StatusIcon = getStatusIcon(status);
             const total = Object.values(orderStatusCounts).reduce((a, b) => a + b, 0);
             const percentage = total > 0 ? (count / total) * 100 : 0;
-            
+
             return (
               <div key={status} className="flex items-center justify-between py-2">
                 <div className="flex items-center">
                   <StatusIcon className="h-4 w-4 text-gray-400 dark:text-gray-500 mr-3" />
                   <span className="text-sm font-medium text-gray-900 dark:text-gray-100 capitalize">
-                    {t('orders', 'statuses')[status.toUpperCase()]}
+                    {getStatusLabel(status, t)}
                   </span>
                 </div>
                 <div className="flex items-center">

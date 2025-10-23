@@ -44,7 +44,7 @@ const AdminLayout = ({ children, showSidebar = true }) => {
         <div className="fixed right-0 top-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 ease-in-out z-50 lg:hidden">
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('navigation', 'menu')}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('navigation.menu')}</h2>
               <button
                 onClick={() => setSidebarOpen(false)}
                 className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -62,7 +62,7 @@ const AdminLayout = ({ children, showSidebar = true }) => {
       {/* Desktop sidebar - positioned on the left with proper alignment */}
       <div className="hidden lg:flex lg:flex-1">
         {/* Sidebar */}
-        <div className="fixed top-16 bottom-0 left-0 z-50 flex-shrink-0">
+        <div className="fixed top-16 bottom-0 left-0 z-10 flex-shrink-0">
           <div className="m-4 lg:m-0 lg:mt-0 lg:mb-0 lg:pt-6" style={{height: 'calc(100vh - 4rem)'}}>
             <AdminSidebar onCollapseChange={handleSidebarCollapse} />
           </div>
@@ -90,7 +90,7 @@ const AdminLayout = ({ children, showSidebar = true }) => {
             className="text-gray-700 dark:text-gray-300"
             onClick={() => setSidebarOpen(true)}
           >
-            <span className="sr-only">{t('adminLayout', 'openSidebar')}</span>
+            <span className="sr-only">{t('adminLayout.openSidebar')}</span>
             <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>

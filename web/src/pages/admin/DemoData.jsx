@@ -24,13 +24,13 @@ const DemoData = () => {
       const data = await response.json();
 
       if (data.success) {
-        toast.success(t('demoData', 'insertSuccess'));
+        toast.success(t('demoData.insertSuccess'));
       } else {
-        toast.error(data.message || t('demoData', 'insertError'));
+        toast.error(data.message || t('demoData.insertError'));
       }
     } catch (error) {
       console.error('Error inserting demo data:', error);
-      toast.error(t('demoData', 'insertError'));
+      toast.error(t('demoData.insertError'));
     } finally {
       setIsLoading(false);
       setOperation(null);
@@ -52,13 +52,13 @@ const DemoData = () => {
       const data = await response.json();
 
       if (data.success) {
-        toast.success(t('demoData', 'removeSuccess'));
+        toast.success(t('demoData.removeSuccess'));
       } else {
-        toast.error(data.message || t('demoData', 'removeError'));
+        toast.error(data.message || t('demoData.removeError'));
       }
     } catch (error) {
       console.error('Error removing demo data:', error);
-      toast.error(t('demoData', 'removeError'));
+      toast.error(t('demoData.removeError'));
     } finally {
       setIsLoading(false);
       setOperation(null);
@@ -69,7 +69,7 @@ const DemoData = () => {
     {
       type: 'customers',
       count: 5,
-      description: t('demoData', 'customersDescription'),
+      description: t('demoData.customersDescription'),
       details: [
         'Anna Johnson (anna.johnson@example.com)',
         'Björn Andersson (bjorn.andersson@example.com)',
@@ -81,7 +81,7 @@ const DemoData = () => {
     {
       type: 'addresses',
       count: 5,
-      description: t('demoData', 'addressesDescription'),
+      description: t('demoData.addressesDescription'),
       details: [
         'Reykjavík addresses for each customer',
         'Default shipping addresses',
@@ -91,7 +91,7 @@ const DemoData = () => {
     {
       type: 'orders',
       count: 8,
-      description: t('demoData', 'ordersDescription'),
+      description: t('demoData.ordersDescription'),
       details: [
         'Various order statuses (PENDING, CONFIRMED, PREPARING, etc.)',
         'Different shipping methods (delivery & pickup)',
@@ -102,7 +102,7 @@ const DemoData = () => {
     {
       type: 'orderItems',
       count: 15,
-      description: t('demoData', 'orderItemsDescription'),
+      description: t('demoData.orderItemsDescription'),
       details: [
         'Multiple items per order',
         'Various quantities and prices',
@@ -119,8 +119,8 @@ const DemoData = () => {
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                <div>
-                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('demoData', 'title')}</h1>
-                 <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">{t('demoData', 'description')}</p>
+                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('demoData.title')}</h1>
+                 <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">{t('demoData.description')}</p>
                </div>
              </div>
            </div>
@@ -130,7 +130,7 @@ const DemoData = () => {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-          {t('demoData', 'overview')}
+          {t('demoData.overview')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {demoDataInfo.map((item) => (
@@ -166,10 +166,10 @@ const DemoData = () => {
           <AlertTriangle className="h-6 w-6 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
           <div>
             <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-200">
-              {t('demoData', 'warningTitle')}
+              {t('demoData.warningTitle')}
             </h3>
             <p className="text-base text-yellow-700 dark:text-yellow-300 mt-2">
-              {t('demoData', 'warningMessage')}
+              {t('demoData.warningMessage')}
             </p>
           </div>
         </div>
@@ -179,7 +179,7 @@ const DemoData = () => {
        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-             {t('demoData', 'actions')}
+             {t('demoData.actions')}
            </h2>
            <div className="flex flex-col sm:flex-row gap-6">
              <button
@@ -192,7 +192,7 @@ const DemoData = () => {
                ) : (
                  <Play className="h-5 w-5" />
                )}
-               {t('demoData', 'insertButton')}
+               {t('demoData.insertButton')}
              </button>
 
              <button
@@ -205,18 +205,18 @@ const DemoData = () => {
                ) : (
                  <Trash2 className="h-5 w-5" />
                )}
-               {t('demoData', 'removeButton')}
+               {t('demoData.removeButton')}
              </button>
            </div>
 
            <div className="mt-6 text-base text-gray-600 dark:text-gray-400">
              <p className="flex items-center gap-3 mb-3">
                <CheckCircle className="h-5 w-5 text-green-500" />
-               {t('demoData', 'insertNote')}
+               {t('demoData.insertNote')}
              </p>
              <p className="flex items-center gap-3">
                <XCircle className="h-5 w-5 text-red-500" />
-               {t('demoData', 'removeNote')}
+               {t('demoData.removeNote')}
              </p>
            </div>
          </div>

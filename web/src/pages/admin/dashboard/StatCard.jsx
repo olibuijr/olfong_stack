@@ -13,8 +13,6 @@ const StatCard = ({ title, value, growth, icon: Icon, color = 'blue' }) => {
           <div className="flex items-center mt-2 sm:mt-3">
             <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-green-500 mr-1 flex-shrink-0" />
             <span className="text-xs sm:text-sm text-green-600 dark:text-green-400 font-medium">+{growth}%</span>
-            <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 ml-1 hidden sm:inline">{t('adminDashboard', 'vsLastMonth')}</span>
-            <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 ml-1 sm:hidden">{t('adminDashboard', 'vsLastMonthShort')}</span>
           </div>
         </div>
         <div className={`p-1 sm:p-1.5 lg:p-2 rounded-lg bg-${color}-100 dark:bg-${color}-900/20 ml-2 sm:ml-3 flex-shrink-0`}>

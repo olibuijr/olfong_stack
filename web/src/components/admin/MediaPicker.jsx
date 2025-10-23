@@ -42,12 +42,12 @@ const MediaPicker = ({
 
   // Collections
   const collections = [
-    { id: 'PRODUCTS', name: t('adminMedia', 'products'), icon: '🛍️' },
-    { id: 'CATEGORIES', name: t('adminMedia', 'categories'), icon: '📁' },
-    { id: 'BANNERS', name: t('adminMedia', 'banners'), icon: '📢' },
-    { id: 'PROFILE', name: t('adminMedia', 'profile'), icon: '👤' },
-    { id: 'DOCUMENTS', name: t('adminMedia', 'documents'), icon: '📄' },
-    { id: 'VIDEOS', name: t('adminMedia', 'videos'), icon: '🎥' }
+    { id: 'PRODUCTS', name: t('adminMedia.products'), icon: '🛍️' },
+    { id: 'CATEGORIES', name: t('adminMedia.categories'), icon: '📁' },
+    { id: 'BANNERS', name: t('adminMedia.banners'), icon: '📢' },
+    { id: 'PROFILE', name: t('adminMedia.profile'), icon: '👤' },
+    { id: 'DOCUMENTS', name: t('adminMedia.documents'), icon: '📄' },
+    { id: 'VIDEOS', name: t('adminMedia.videos'), icon: '🎥' }
   ];
 
   useEffect(() => {
@@ -144,12 +144,12 @@ const MediaPicker = ({
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t('adminMedia', 'selectMedia')}
+              {t('adminMedia.selectMedia')}
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               {multiple
-                ? t('adminMedia', 'selectMultipleMedia')
-                : t('adminMedia', 'selectSingleMedia')
+                ? t('adminMedia.selectMultipleMedia')
+                : t('adminMedia.selectSingleMedia')
               }
             </p>
           </div>
@@ -192,7 +192,7 @@ const MediaPicker = ({
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder={t('adminMedia', 'searchMedia')}
+                  placeholder={t('adminMedia.searchMedia')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -227,7 +227,7 @@ const MediaPicker = ({
                 className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <Upload className="h-4 w-4 mr-2" />
-                {t('adminMedia', 'upload')}
+                {t('adminMedia.upload')}
               </button>
             </div>
           </div>
@@ -243,17 +243,17 @@ const MediaPicker = ({
             <div className="text-center py-12">
               <ImageIcon className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                {t('adminMedia', 'noMediaFound')}
+                {t('adminMedia.noMediaFound')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                {t('adminMedia', 'noMediaInCollection')}
+                {t('adminMedia.noMediaInCollection')}
               </p>
               <button
                 onClick={handleUploadRedirect}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
               >
                 <Upload className="h-4 w-4 mr-2" />
-                {t('adminMedia', 'uploadFirstMedia')}
+                {t('adminMedia.uploadFirstMedia')}
               </button>
             </div>
           ) : (
@@ -358,7 +358,7 @@ const MediaPicker = ({
                     disabled={pagination.page === 1}
                     className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700"
                   >
-                    {t('adminMedia', 'previous')}
+                    {t('adminMedia.previous')}
                   </button>
                   <span className="text-sm text-gray-700 dark:text-gray-300">
                     {pagination.page} / {pagination.pages}
@@ -368,7 +368,7 @@ const MediaPicker = ({
                     disabled={pagination.page === pagination.pages}
                     className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700"
                   >
-                    {t('adminMedia', 'next')}
+                    {t('adminMedia.next')}
                   </button>
                 </div>
               )}
@@ -382,8 +382,8 @@ const MediaPicker = ({
             {selectedItems.length > 0 && (
               <span>
                 {multiple
-                  ? `${selectedItems.length} ${t('adminMedia', 'itemsSelected')}`
-                  : `${selectedItems.length} ${t('adminMedia', 'itemSelected')}`
+                  ? `${selectedItems.length} ${t('adminMedia.itemsSelected')}`
+                  : `${selectedItems.length} ${t('adminMedia.itemSelected')}`
                 }
               </span>
             )}
@@ -393,14 +393,14 @@ const MediaPicker = ({
               onClick={onClose}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
             >
-              {t('adminMedia', 'cancel')}
+              {t('adminMedia.cancel')}
             </button>
             <button
               onClick={handleConfirm}
               disabled={selectedItems.length === 0}
               className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {multiple ? t('adminMedia', 'selectItems') : t('adminMedia', 'selectItem')}
+              {multiple ? t('adminMedia.selectItems') : t('adminMedia.selectItem')}
             </button>
           </div>
         </div>

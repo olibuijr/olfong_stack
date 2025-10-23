@@ -2,6 +2,16 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { chromium } = require('playwright');
 const { successResponse, errorResponse } = require('../utils/response');
+const { PrismaClient } = require('@prisma/client');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const { v4: uuidv4 } = require('uuid');
+const sharp = require('sharp');
+const { generateMediaVariants } = require('../services/mediaService');
+
+const prisma = new PrismaClient();
+const MEDIA_BASE_URL = process.env.MEDIA_BASE_URL || process.env.BASE_URL || 'http://localhost:5000';
 
 // ATVR base URLs
 const ATVR_BASE_URLS = {
@@ -42,17 +52,181 @@ const PRODUCT_CATEGORIES = {
   'packaging': { is: 'Umbúðir', en: 'Packaging' }
 };
 
+// Helper function to generate file hash
+const generateFileHash = (buffer) => {
+  return crypto.createHash('sha256').update(buffer).digest('hex');
+};
+
+// Helper function to ensure upload directories exist
+const ensureDirectories = () => {
+  const baseDir = path.join(__dirname, '../../uploads');
+  const collectionDir = path.join(baseDir, 'products');
+  const originalsDir = path.join(collectionDir, 'originals');
+  const thumbnailsDir = path.join(collectionDir, 'thumbnails');
+  const webpDir = path.join(collectionDir, 'webp');
+
+  [collectionDir, originalsDir, thumbnailsDir, webpDir].forEach(dir => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  });
+};
+
+// Download and save ATVR product image
+const downloadAndSaveImage = async (imageUrl, productName, atvrProductId, userId) => {
+  try {
+    console.log(`Downloading image from ${imageUrl}`);
+
+    // Download image
+    const response = await axios.get(imageUrl, {
+      responseType: 'arraybuffer',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      },
+      timeout: 10000
+    });
+
+    const imageBuffer = Buffer.from(response.data);
+    const mimeType = response.headers['content-type'] || 'image/jpeg';
+
+    // Generate file hash for deduplication
+    const fileHash = generateFileHash(imageBuffer);
+
+    // Check for existing file with same hash
+    const existingMedia = await prisma.media.findFirst({
+      where: { hash: fileHash, collection: 'PRODUCTS' }
+    });
+
+    if (existingMedia) {
+      console.log('Image already exists in media library, using existing media');
+      return existingMedia;
+    }
+
+    // Generate unique filename
+    const fileExtension = mimeType.split('/')[1] || 'jpg';
+    const filename = `${uuidv4()}.${fileExtension}`;
+    const collectionDir = 'products';
+
+    // Create directory structure
+    ensureDirectories();
+
+    // Save original image
+    const originalPath = path.join(__dirname, '../../uploads', collectionDir, 'originals', filename);
+    fs.writeFileSync(originalPath, imageBuffer);
+
+    // Get image dimensions
+    let width = null;
+    let height = null;
+    try {
+      const metadata = await sharp(originalPath).metadata();
+      width = metadata.width;
+      height = metadata.height;
+    } catch (error) {
+      console.error('Error processing image metadata:', error);
+      // Clean up the file if metadata extraction fails
+      if (fs.existsSync(originalPath)) {
+        fs.unlinkSync(originalPath);
+      }
+      throw new Error('Invalid image file or unsupported format');
+    }
+
+    // Create media record
+    const media = await prisma.media.create({
+      data: {
+        filename,
+        originalName: `${productName}_${atvrProductId}.${fileExtension}`,
+        mimeType,
+        size: imageBuffer.length,
+        width,
+        height,
+        alt: productName,
+        caption: `${productName} - ATVR Product ${atvrProductId}`,
+        description: `Product image imported from ATVR for ${productName}`,
+        collection: 'PRODUCTS',
+        hash: fileHash,
+        url: `${MEDIA_BASE_URL}/uploads/${collectionDir}/originals/${filename}`,
+        path: `${collectionDir}/originals/${filename}`,
+        uploadedBy: userId
+      }
+    });
+
+    console.log(`Successfully saved image to media library: ${media.id}`);
+
+    // Process different formats and sizes asynchronously (don't wait for it)
+    generateMediaVariants(media, originalPath, 'PRODUCTS')
+      .then(async (results) => {
+        const formats = [];
+        const sizes = [];
+
+        for (const result of results) {
+          if (result.success) {
+            if (result.type === 'format') {
+              formats.push({
+                mediaId: media.id,
+                format: result.name,
+                url: result.url,
+                size: result.size
+              });
+            } else if (result.type === 'size') {
+              sizes.push({
+                mediaId: media.id,
+                size: result.name,
+                url: result.url,
+                width: result.width,
+                height: result.height
+              });
+            }
+          }
+        }
+
+        if (formats.length > 0) {
+          await prisma.mediaFormat.createMany({ data: formats });
+        }
+        if (sizes.length > 0) {
+          await prisma.mediaSize.createMany({ data: sizes });
+        }
+
+        console.log(`Generated ${formats.length} formats and ${sizes.length} sizes for media ${media.id}`);
+      })
+      .catch(err => {
+        console.error('Error generating media variants:', err);
+      });
+
+    return media;
+  } catch (error) {
+    console.error('Error downloading and saving image:', error.message);
+    return null; // Return null if image download fails (non-critical error)
+  }
+};
+
 // Parse product data from ATVR search results with enhanced information extraction
 const parseProductFromSearchResult = async ($, productElement, language = 'is') => {
   try {
     const product = {};
 
-    // Product name and ID - look for the main product link
-    const nameLink = productElement.find('a[href*="productID"]').first();
-    if (!nameLink.length) {
+    // Product name and ID - look for the text link (not the image link)
+    // The first link is usually the image, the second is the product name
+    const productLinks = productElement.find('a[href*="productID"]');
+    if (!productLinks.length) {
       return null; // Skip if no product link found
     }
-    
+
+    // Find the link that has actual text (not just an image)
+    let nameLink = null;
+    for (let i = 0; i < productLinks.length; i++) {
+      const link = productLinks.eq(i);
+      const linkText = link.text().trim();
+      // Skip links that only contain images or have no text
+      if (linkText && linkText.length > 0 && !linkText.match(/^\(\d+\)$/)) {
+        nameLink = link;
+        break;
+      }
+    }
+
+    if (!nameLink) {
+      return null; // Skip if no text link found
+    }
+
     const productName = nameLink.text().trim();
     product.name = productName;
     product.nameIs = productName; // For now, use same name for both languages
@@ -706,35 +880,20 @@ const searchATVRInLanguage = async (searchTerm, language) => {
     const products = [];
 
     console.log('Searching for products in HTML...');
-    console.log('Total listitem elements found:', $('listitem').length);
-    console.log('Total div elements found:', $('div').length);
+    console.log('Total li.product elements found:', $('li.product').length);
     console.log('Total a[href*="productID"] elements found:', $('a[href*="productID"]').length);
 
-    // Find product list items
-    for (let i = 0; i < $('listitem').length; i++) {
-      const element = $('listitem').eq(i);
-      console.log(`Processing listitem ${i}:`, element.find('a[href*="productID"]').length, 'product links found');
+    // Find product list items - ATVR uses <li class="product"> elements
+    const productElements = $('li.product');
+    console.log(`Found ${productElements.length} product containers`);
+
+    for (let i = 0; i < productElements.length; i++) {
+      const element = productElements.eq(i);
       const product = await parseProductFromSearchResult($, element, language);
-      
+
       if (product && product.id) {
         console.log('Found product:', product.name, product.id);
         products.push(product);
-      }
-    }
-
-    // If no products found in listitem, try alternative selectors
-    if (products.length === 0) {
-      console.log('No products found in listitem, trying div elements...');
-      for (let i = 0; i < $('div').length; i++) {
-        const element = $('div').eq(i);
-        if (element.find('a[href*="productID"]').length > 0) {
-          console.log(`Found div with product link at index ${i}`);
-          const product = await parseProductFromSearchResult($, element, language);
-          if (product && product.id) {
-            console.log('Found product in div:', product.name, product.id);
-            products.push(product);
-          }
-        }
       }
     }
 
@@ -825,5 +984,6 @@ module.exports = {
   searchProducts,
   getProductById,
   getFoodCategories,
-  getProductCategories
+  getProductCategories,
+  downloadAndSaveImage
 };

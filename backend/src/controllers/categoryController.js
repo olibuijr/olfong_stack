@@ -72,7 +72,7 @@ const getCategory = async (req, res) => {
  */
 const createCategory = async (req, res) => {
   try {
-    const { name, nameIs, slug, description, descriptionIs, icon, sortOrder } = req.body;
+    const { name, nameIs, slug, description, descriptionIs, icon, sortOrder, imageUrl } = req.body;
 
     const categoryData = {
       name: name.toUpperCase(),
@@ -84,9 +84,11 @@ const createCategory = async (req, res) => {
       sortOrder: sortOrder ? parseInt(sortOrder) : 0,
     };
 
-    // Add image URL if file was uploaded
+    // Add image URL if file was uploaded or if imageUrl was provided in request body
     if (req.file) {
       categoryData.imageUrl = `/uploads/${req.file.filename}`;
+    } else if (imageUrl) {
+      categoryData.imageUrl = imageUrl;
     }
 
     const category = await prisma.category.create({
@@ -118,9 +120,12 @@ const updateCategory = async (req, res) => {
       updateData.sortOrder = parseInt(updateData.sortOrder);
     }
 
-    // Add image URL if file was uploaded
+    // Add image URL if file was uploaded or if imageUrl was provided in request body
     if (req.file) {
       updateData.imageUrl = `/uploads/${req.file.filename}`;
+    } else if (updateData.imageUrl === null) {
+      // Allow clearing imageUrl when explicitly set to null
+      updateData.imageUrl = null;
     }
 
     const category = await prisma.category.update({
@@ -160,6 +165,11 @@ const deleteCategory = async (req, res) => {
 
     if (!categoryWithProducts) {
       return errorResponse(res, 'Category not found', 404);
+    }
+
+    // Prevent deletion of Tilboðin (discounted products) category
+    if (categoryWithProducts.slug === 'tilbodin' || categoryWithProducts.name === 'TILBOÐIN') {
+      return errorResponse(res, 'Cannot delete the Tilboðin category as it is required for displaying discounted products', 400);
     }
 
     if (categoryWithProducts._count.products > 0) {

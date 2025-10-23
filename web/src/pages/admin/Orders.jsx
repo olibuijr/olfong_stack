@@ -61,7 +61,7 @@ const AdminOrders = () => {
     }
   };
 
-  const getStatusText = (status) => t('orders', 'statuses')[status];
+  const getStatusText = (status) => t('orders.statuses')[status];
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -100,12 +100,12 @@ const AdminOrders = () => {
         orderId: selectedOrder.id, 
         status: newStatus 
       })).unwrap();
-      toast.success(t('adminPage', 'statusUpdated'));
+      toast.success(t('adminPage.statusUpdated'));
       setShowStatusModal(false);
       setSelectedOrder(null);
       setNewStatus('');
     } catch (error) {
-      toast.error(error.message || t('adminPage', 'errorOccurred'));
+      toast.error(error.message || t('adminPage.errorOccurred'));
     }
   };
 
@@ -115,22 +115,22 @@ const AdminOrders = () => {
         id: selectedOrder.id, 
         deliveryPersonId: assignedDelivery 
       })).unwrap();
-      toast.success(t('adminPage', 'deliveryAssigned'));
+      toast.success(t('adminPage.deliveryAssigned'));
       setShowAssignModal(false);
       setSelectedOrder(null);
       setAssignedDelivery('');
     } catch (error) {
-      toast.error(error.message || t('adminPage', 'errorOccurred'));
+      toast.error(error.message || t('adminPage.errorOccurred'));
     }
   };
 
   const statusOptions = [
-    { value: 'PENDING', label: t('orders.statuses', 'PENDING') },
-    { value: 'CONFIRMED', label: t('orders.statuses', 'CONFIRMED') },
-    { value: 'PREPARING', label: t('orders.statuses', 'PREPARING') },
-    { value: 'OUT_FOR_DELIVERY', label: t('orders.statuses', 'OUT_FOR_DELIVERY') },
-    { value: 'DELIVERED', label: t('orders.statuses', 'DELIVERED') },
-    { value: 'CANCELLED', label: t('orders.statuses', 'CANCELLED') },
+    { value: 'PENDING', label: t('orders.statuses.PENDING') },
+    { value: 'CONFIRMED', label: t('orders.statuses.CONFIRMED') },
+    { value: 'PREPARING', label: t('orders.statuses.PREPARING') },
+    { value: 'OUT_FOR_DELIVERY', label: t('orders.statuses.OUT_FOR_DELIVERY') },
+    { value: 'DELIVERED', label: t('orders.statuses.DELIVERED') },
+    { value: 'CANCELLED', label: t('orders.statuses.CANCELLED') },
   ];
 
   // Mock delivery persons - in real app, this would come from API
@@ -145,7 +145,7 @@ const AdminOrders = () => {
       <AdminLayout>
         <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="px-4 sm:px-6 lg:px-8 py-6">
-            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage', 'accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{t('adminPage.accessDenied')}</h1>
           </div>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 py-8">
@@ -153,10 +153,10 @@ const AdminOrders = () => {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                {t('adminPage', 'accessDenied')}
+                {t('adminPage.accessDenied')}
               </h2>
               <p className="text-gray-600">
-                {t('adminPage', 'noPermission')}
+                {t('adminPage.noPermission')}
               </p>
             </div>
           </div>
@@ -183,8 +183,8 @@ const AdminOrders = () => {
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminPage', 'orderManagement')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminPage', 'manageOrders')}</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminPage.orderManagement')}</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminPage.manageOrders')}</p>
               </div>
             </div>
           </div>
@@ -202,7 +202,7 @@ const AdminOrders = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder={t('adminPage', 'searchOrders')}
+                placeholder={t('adminPage.searchOrders')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="input pl-10 w-full"
@@ -215,7 +215,7 @@ const AdminOrders = () => {
               onChange={(e) => setStatusFilter(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminPage', 'allStatuses')}</option>
+              <option value="">{t('adminPage.allStatuses')}</option>
               {statusOptions.map(status => (
                 <option key={status.value} value={status.value}>
                   {status.label}
@@ -229,15 +229,15 @@ const AdminOrders = () => {
               onChange={(e) => setDeliveryMethodFilter(e.target.value)}
               className="input w-full"
             >
-              <option value="">{t('adminPage', 'allDeliveryMethods')}</option>
-              <option value="DELIVERY">{t('adminPage', 'homeDelivery')}</option>
-              <option value="PICKUP">{t('adminPage', 'storePickup')}</option>
+              <option value="">{t('adminPage.allDeliveryMethods')}</option>
+              <option value="DELIVERY">{t('adminPage.homeDelivery')}</option>
+              <option value="PICKUP">{t('adminPage.storePickup')}</option>
             </select>
 
             {/* Results Count */}
             <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
               <Filter className="w-4 h-4 mr-2" />
-              {filteredOrders.length} {t('adminPage', 'results')}
+              {filteredOrders.length} {t('adminPage.results')}
             </div>
           </div>
         </div>
@@ -249,25 +249,25 @@ const AdminOrders = () => {
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'order')}
+                    {t('adminPage.order')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'customer')}
+                    {t('adminPage.customer')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'status')}
+                    {t('adminPage.status')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'delivery')}
+                    {t('adminPage.delivery')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'amount')}
+                    {t('adminPage.amount')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'date')}
+                    {t('adminPage.date')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    {t('adminPage', 'actions')}
+                    {t('adminPage.actions')}
                   </th>
                 </tr>
               </thead>
@@ -282,7 +282,7 @@ const AdminOrders = () => {
                             #{order.orderNumber}
                           </div>
                           <div className="text-sm text-gray-500 dark:text-gray-400">
-                            {order.items.length} {t('cart', 'items')}
+                            {order.items.length} {t('cart.items')}
                           </div>
                         </div>
                       </div>
@@ -292,7 +292,7 @@ const AdminOrders = () => {
                         <User className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2" />
                         <div>
                           <div className="text-sm font-medium text-gray-900 dark:text-white">
-                            {order.user?.fullName || order.user?.username || t('common', 'unknown')}
+                            {order.user?.fullName || order.user?.username || t('common.unknown')}
                           </div>
                           {order.user?.email && (
                             <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -312,17 +312,17 @@ const AdminOrders = () => {
                       <div className="flex items-center">
                         <MapPin className="w-4 h-4 text-gray-400 dark:text-gray-500 mr-2" />
                         <div className="text-sm text-gray-900 dark:text-white">
-                          {order.deliveryMethod === 'PICKUP' ? t('ordersPage', 'pickup') : t('ordersPage', 'homeDelivery')}
+                          {order.deliveryMethod === 'PICKUP' ? t('ordersPage.pickup') : t('ordersPage.homeDelivery')}
                         </div>
                       </div>
                       {order.deliveryPerson && (
                         <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                          {t('adminPage', 'deliveryPerson')}: {order.deliveryPerson.fullName}
+                          {t('adminPage.deliveryPerson')}: {order.deliveryPerson.fullName}
                         </div>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                      {order.totalAmount.toLocaleString()} {t('common', 'currency')}
+                      {order.totalAmount.toLocaleString()} {t('common.currency')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                       {new Date(order.createdAt).toLocaleDateString()}
@@ -335,10 +335,10 @@ const AdminOrders = () => {
                             setShowReceiptModal(true);
                           }}
                           className="text-purple-600 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300 transition-colors duration-200 flex items-center space-x-1"
-                          title={t('receipts', 'viewReceipt')}
+                          title={t('receipts.viewReceipt')}
                         >
                           <Receipt className="w-4 h-4" />
-                          <span>{t('receipts', 'receipt')}</span>
+                          <span>{t('receipts.receipt')}</span>
                         </button>
                         <button
                           onClick={() => {
@@ -348,7 +348,7 @@ const AdminOrders = () => {
                           }}
                           className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors duration-200"
                         >
-                          {t('adminPage', 'update')}
+                          {t('adminPage.update')}
                         </button>
                         {order.deliveryMethod === 'DELIVERY' && !order.deliveryPerson && order.status === 'CONFIRMED' && (
                           <button
@@ -358,7 +358,7 @@ const AdminOrders = () => {
                             }}
                             className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors duration-200"
                           >
-                            {t('adminPage', 'assign')}
+                            {t('adminPage.assign')}
                           </button>
                         )}
                       </div>
@@ -374,10 +374,10 @@ const AdminOrders = () => {
           <div className="text-center py-12">
             <Package className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              {t('adminPage', 'noOrdersFound')}
+              {t('adminPage.noOrdersFound')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
-              {t('adminPage', 'adjustSearchCriteria')}
+              {t('adminPage.adjustSearchCriteria')}
             </p>
           </div>
         )}
@@ -387,12 +387,12 @@ const AdminOrders = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                {t('adminPage', 'updateOrder')} #{selectedOrder.orderNumber}
+                {t('adminPage.updateOrder')} #{selectedOrder.orderNumber}
               </h2>
               
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('adminPage', 'newStatus')}
+                  {t('adminPage.newStatus')}
                 </label>
                 <select
                   value={newStatus}
@@ -416,13 +416,13 @@ const AdminOrders = () => {
                   }}
                   className="btn btn-outline flex-1"
                 >
-                  {t('common', 'cancel')}
+                  {t('common.cancel')}
                 </button>
                 <button
                   onClick={handleStatusUpdate}
                   className="btn btn-primary flex-1"
                 >
-                  {t('adminPage', 'update')}
+                  {t('adminPage.update')}
                 </button>
               </div>
             </div>
@@ -434,19 +434,19 @@ const AdminOrders = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                {t('adminPage', 'assignDeliveryPerson')} #{selectedOrder.orderNumber}
+                {t('adminPage.assignDeliveryPerson')} #{selectedOrder.orderNumber}
               </h2>
               
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('adminPage', 'deliveryPerson')}
+                  {t('adminPage.deliveryPerson')}
                 </label>
                 <select
                   value={assignedDelivery}
                   onChange={(e) => setAssignedDelivery(e.target.value)}
                   className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 >
-                  <option value="">{t('adminPage', 'selectDeliveryPerson')}</option>
+                  <option value="">{t('adminPage.selectDeliveryPerson')}</option>
                   {deliveryPersons.map(person => (
                     <option key={person.id} value={person.id}>
                       {person.name} ({person.phone})
@@ -464,14 +464,14 @@ const AdminOrders = () => {
                   }}
                   className="btn btn-outline flex-1"
                 >
-                  {t('common', 'cancel')}
+                  {t('common.cancel')}
                 </button>
                 <button
                   onClick={handleDeliveryAssignment}
                   disabled={!assignedDelivery}
                   className="btn btn-primary flex-1"
                 >
-                  {t('adminPage', 'assign')}
+                  {t('adminPage.assign')}
                 </button>
               </div>
             </div>
@@ -484,7 +484,7 @@ const AdminOrders = () => {
           onClose={() => setShowReceiptModal(false)}
           order={selectedOrder}
           onEmailSent={() => {
-            toast.success(t('receipts', 'emailSentSuccess'));
+            toast.success(t('receipts.emailSentSuccess'));
           }}
         />
           </div>

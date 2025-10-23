@@ -9,7 +9,7 @@ const TopProductsList = ({ topProducts }) => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
       <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
         <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
-          {t('adminDashboard', 'topProducts')}
+          {t('adminDashboard.topProducts')}
         </h2>
       </div>
       <div className="p-4 sm:p-6">
@@ -27,7 +27,7 @@ const TopProductsList = ({ topProducts }) => {
                     {product.name}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {product.sales} {t('adminDashboard', 'sales')}
+                    {product.sales} {t('adminDashboard.sales')}
                   </p>
                 </div>
               </div>

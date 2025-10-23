@@ -72,17 +72,12 @@ const Media = () => {
 
   // Collections
   const collections = [
-    { id: 'PRODUCTS', name: t('adminMedia', 'products'), icon: '🛍️' },
-    { id: 'CATEGORIES', name: t('adminMedia', 'categories'), icon: '📁' },
-    { id: 'BANNERS', name: t('adminMedia', 'banners'), icon: '📢' },
-    { id: 'PROFILE', name: t('adminMedia', 'profile'), icon: '👤' },
-    { id: 'DOCUMENTS', name: t('adminMedia', 'documents'), icon: '📄' },
-    { id: 'VIDEOS', name: t('adminMedia', 'videos'), icon: '🎥' }
+    { id: 'PRODUCTS', name: t('adminMedia.products'), icon: '🛍️' },
+    { id: 'CATEGORIES', name: t('adminMedia.categories'), icon: '📁' },
+    { id: 'PROFILE', name: t('adminMedia.profile'), icon: '👤' },
+    { id: 'DOCUMENTS', name: t('adminMedia.documents'), icon: '📄' },
+    { id: 'VIDEOS', name: t('adminMedia.videos'), icon: '🎥' }
   ];
-
-  useEffect(() => {
-    loadMedia();
-  }, [loadMedia]);
 
   const loadMedia = useCallback(async () => {
     setIsLoading(true);
@@ -115,8 +110,12 @@ const Media = () => {
     }
   }, [selectedCollection, pagination.page, pagination.limit, searchQuery]);
 
+  useEffect(() => {
+    loadMedia();
+  }, [loadMedia]);
+
   const handleDelete = async (mediaId) => {
-    if (!window.confirm(t('adminMedia', 'confirmDelete'))) {
+    if (!window.confirm(t('adminMedia.confirmDelete'))) {
       return;
     }
 
@@ -198,7 +197,7 @@ const Media = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white shadow-lg rounded-lg border border-gray-200">
             <AlertTriangle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminLabels', 'accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminLabels.accessDenied')}</h1>
             <p className="text-gray-700">You do not have permission to view this page.</p>
           </div>
         </div>
@@ -213,10 +212,10 @@ const Media = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('adminNavigation', 'media')}
+              {t('adminNavigation.media')}
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              {t('adminMedia', 'manageMediaDescription')}
+              {t('adminMedia.manageMediaDescription')}
             </p>
           </div>
           <div className="flex gap-2">
@@ -225,7 +224,7 @@ const Media = () => {
               className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
             >
               <Upload className="h-4 w-4 mr-2" />
-              {t('adminMedia', 'uploadMedia')}
+              {t('adminMedia.uploadMedia')}
             </button>
           </div>
         </div>
@@ -258,17 +257,17 @@ const Media = () => {
           <div className="text-center py-12">
             <ImageIcon className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              {t('adminMedia', 'noMediaFound')}
+              {t('adminMedia.noMediaFound')}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              {t('adminMedia', 'noMediaDescription')}
+              {t('adminMedia.noMediaDescription')}
             </p>
             <button
               onClick={() => setShowUploadModal(true)}
               className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               <Plus className="h-4 w-4 mr-2" />
-              {t('adminMedia', 'uploadFirstMedia')}
+              {t('adminMedia.uploadFirstMedia')}
             </button>
           </div>
         ) : (
@@ -299,7 +298,7 @@ const Media = () => {
             {pagination.pages > 1 && (
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-700 dark:text-gray-300">
-                  {t('adminMedia', 'showing')} {((pagination.page - 1) * pagination.limit) + 1} {t('adminMedia', 'to')} {Math.min(pagination.page * pagination.limit, pagination.total)} {t('adminMedia', 'of')} {pagination.total} {t('adminMedia', 'results')}
+                  {t('adminMedia.showing')} {((pagination.page - 1) * pagination.limit) + 1} {t('adminMedia.to')} {Math.min(pagination.page * pagination.limit, pagination.total)} {t('adminMedia.of')} {pagination.total} {t('adminMedia.results')}
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -307,7 +306,7 @@ const Media = () => {
                     disabled={pagination.page === 1}
                     className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700"
                   >
-                    {t('adminMedia', 'previous')}
+                    {t('adminMedia.previous')}
                   </button>
                   <span className="text-sm text-gray-700 dark:text-gray-300">
                     {pagination.page} / {pagination.pages}
@@ -317,7 +316,7 @@ const Media = () => {
                     disabled={pagination.page === pagination.pages}
                     className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700"
                   >
-                    {t('adminMedia', 'next')}
+                    {t('adminMedia.next')}
                   </button>
                 </div>
               </div>

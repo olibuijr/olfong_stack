@@ -9,6 +9,7 @@ const {
   deleteBanner,
   toggleBannerStatus,
   getFeaturedBanners,
+  getHeroBanner,
   setFeaturedBanner,
   removeFeaturedBanner,
   createBannerValidation,
@@ -19,6 +20,7 @@ const { validate } = require('../middleware/validator');
 // Public routes
 router.get('/', getBanners);
 router.get('/featured', getFeaturedBanners);
+router.get('/hero/active', getHeroBanner);
 router.get('/:id', getBanner);
 
 // Admin routes

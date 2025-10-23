@@ -15,31 +15,31 @@ const BottomNav = () => {
     {
       to: '/',
       icon: Home,
-      label: t('navigation', 'home'),
+      label: t('navigation.home'),
       active: location.pathname === '/',
     },
     {
       to: '/products',
       icon: Package,
-      label: t('navigation', 'products'),
+      label: t('navigation.products'),
       active: location.pathname === '/products' || location.pathname.startsWith('/products/'),
     },
     ...(isAuthenticated ? [{
       to: '/cart',
       icon: ShoppingCart,
-      label: t('navigation', 'cart'),
+      label: t('navigation.cart'),
       active: location.pathname === '/cart',
       badge: cartItemCount > 0 ? cartItemCount : null,
     }] : []),
     ...(isAuthenticated ? [{
       to: '/profile',
       icon: User,
-      label: t('navigation', 'profile'),
+      label: t('navigation.profile'),
       active: location.pathname === '/profile',
     }] : [{
       to: '/login',
       icon: User,
-      label: t('navigation', 'login'),
+      label: t('navigation.login'),
       active: location.pathname === '/login',
     }]),
   ];

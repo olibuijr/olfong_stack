@@ -2,14 +2,17 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useSelector, useDispatch } from 'react-redux';
-import { Menu, X, ShoppingCart, User, Globe, Settings, Search, Package } from 'lucide-react';
+import { Menu, X, ShoppingCart, User, Globe, Settings, Search, Package, LayoutDashboard, BarChart3, FileText, MessageCircle, Bell, Truck, Calculator, FolderOpen, Image, FileImage, Languages, Play, CreditCard, Receipt, Clock, Plus } from 'lucide-react';
 import { logout } from '../../store/slices/authSlice';
 import { fetchCategories } from '../../store/slices/productSlice';
+import { addToCart } from '../../store/slices/cartSlice';
 import DarkModeToggle from '../common/DarkModeToggle';
 import api from '../../services/api';
+import { getTodayHours, isStoreOpen } from '../../utils/openingHours';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
-  const { t } = useLanguage();
+  const { t, currentLanguage, setCurrentLanguage } = useLanguage();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,6 +24,10 @@ const Navbar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
   const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+
+  // Opening hours state
+  const [openingHours, setOpeningHours] = useState(null);
 
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,12 +42,65 @@ const Navbar = () => {
   const searchTimeoutRef = useRef(null);
   const shopMenuRef = useRef(null);
   const userMenuRef = useRef(null);
+  const languageMenuRef = useRef(null);
+  const adminMenuRef = useRef(null);
 
-  const cartItemCount = cart?.items?.length || 0;
+  const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
 
   useEffect(() => {
     dispatch(fetchCategories());
+    fetchOpeningHours();
   }, [dispatch]);
+
+  // Fetch opening hours from the database
+  const fetchOpeningHours = async () => {
+    try {
+      const response = await fetch('/api/settings/opening-hours');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.data?.openingHours) {
+          setOpeningHours(data.data.openingHours);
+        } else {
+          // Fallback to hardcoded values
+          setOpeningHours(getTodayHours());
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching opening hours:', error);
+      // Fallback to hardcoded values
+      setOpeningHours(getTodayHours());
+    }
+  };
+
+  // Get today's hours from the fetched opening hours (with fallback to hardcoded if not yet loaded)
+  const getTodayHoursFromDB = () => {
+    // If opening hours haven't loaded yet, use hardcoded values as fallback
+    if (!openingHours) {
+      return getTodayHours();
+    }
+
+    const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const today = new Date().getDay();
+    const dayName = daysOfWeek[today];
+
+    return openingHours[dayName] || getTodayHours();
+  };
+
+  // Check if store is currently open based on fetched hours
+  const isStoreOpenNow = () => {
+    // If opening hours haven't loaded yet, use hardcoded function as fallback
+    if (!openingHours) {
+      return isStoreOpen();
+    }
+
+    const todayHours = getTodayHoursFromDB();
+    if (todayHours.closed) return false;
+
+    const now = new Date();
+    const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+    return currentTime >= todayHours.open && currentTime < todayHours.close;
+  };
 
   // Close user menu when clicking outside
   useEffect(() => {
@@ -58,6 +118,23 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isUserMenuOpen]);
+
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+
+    if (isLanguageMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isLanguageMenuOpen]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -82,7 +159,7 @@ const Navbar = () => {
     setIsSearching(true);
     try {
       const response = await api.get(`/products?search=${encodeURIComponent(query)}&limit=5`);
-      setSearchResults(response.data.data?.products || []);
+      setSearchResults(response.data?.products || []);
       setIsSearchDropdownOpen(true);
     } catch (error) {
       console.error('Search error:', error);
@@ -129,6 +206,17 @@ const Navbar = () => {
     setIsSearchDropdownOpen(false);
     setSearchQuery('');
     setSearchResults([]);
+  };
+
+  const handleAddToCart = async (e, product) => {
+    e.stopPropagation(); // Prevent navigation to product detail
+    try {
+      await dispatch(addToCart({ productId: product.id, quantity: 1 })).unwrap();
+      toast.success(t('cart.itemAdded'));
+    } catch (error) {
+      console.error('Add to cart error:', error);
+      toast.error(error.message || t('cart.addError'));
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -203,6 +291,24 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isShopMenuOpen]);
 
+  // Close admin menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        adminMenuRef.current &&
+        !adminMenuRef.current.contains(event.target)
+      ) {
+        setIsAdminMenuOpen(false);
+      }
+    };
+
+    if (isAdminMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isAdminMenuOpen]);
+
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
@@ -216,14 +322,49 @@ const Navbar = () => {
     <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700 fixed top-0 left-0 right-0 z-50" role="navigation" aria-label={t('aria.mainNavigation')}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center" aria-label={t('aria.homepage')}>
-            <img
-              src="/logo_black-web.webp"
-              alt={t('aria.logo')}
-              className="h-12 w-auto dark:invert"
-            />
-          </Link>
+          {/* Logo and Hours */}
+          <div className="flex items-center gap-4">
+            <Link to="/" className="flex items-center" aria-label={t('aria.homepage')}>
+              <img
+                src="/logo_black-web.webp"
+                alt={t('aria.logo')}
+                className="h-12 w-auto dark:invert"
+              />
+            </Link>
+
+            {/* Today's Hours */}
+            <div className="hidden lg:flex items-center gap-2 text-sm">
+              <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+              <div className="flex items-center gap-2">
+                {getTodayHoursFromDB().closed ? (
+                  <>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      {currentLanguage === 'is' ? 'Í dag' : 'Today'}:
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+                      {currentLanguage === 'is' ? 'Lokað' : 'Closed'}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      {currentLanguage === 'is' ? 'Í dag' : 'Today'}: {getTodayHoursFromDB().open} - {getTodayHoursFromDB().close}
+                    </span>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                      isStoreOpenNow()
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                        : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                    }`}>
+                      {isStoreOpenNow()
+                        ? (currentLanguage === 'is' ? 'Opið' : 'Open')
+                        : (currentLanguage === 'is' ? 'Lokað' : 'Closed')
+                      }
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
@@ -251,7 +392,7 @@ const Navbar = () => {
 
               {/* Search Results Dropdown */}
               {isSearchDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto z-[70]">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[512px] bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto z-[70]">
                   {isSearching ? (
                     <div className="px-4 py-3 text-center text-gray-500 dark:text-gray-400">
                       <div className="flex items-center justify-center space-x-2">
@@ -262,43 +403,48 @@ const Navbar = () => {
                   ) : searchResults.length > 0 ? (
                     <div>
                       {searchResults.map((product, index) => (
-                        <button
+                        <div
                           key={product.id}
-                          onClick={() => handleResultClick(product)}
-                          className={`w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
+                          className={`w-full px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
                             index === selectedResultIndex ? 'bg-primary-50 dark:bg-primary-900/20' : ''
                           }`}
                         >
                           <div className="flex items-start space-x-3">
                             {/* Product Image */}
-                            <div className="flex-shrink-0 w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
+                            <button
+                              onClick={() => handleResultClick(product)}
+                              className="flex-shrink-0 w-16 h-16 bg-gray-50 dark:bg-gray-700 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 hover:border-primary-400 dark:hover:border-primary-600 transition-colors"
+                            >
                               {product.imageUrl ? (
                                 <img
-                                  src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
+                                  src={product.imageUrl}
                                   alt={product.name}
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-full object-contain p-1"
                                 />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center">
-                                  <Package className="w-5 h-5 text-gray-400" />
+                                  <Package className="w-6 h-6 text-gray-400 dark:text-gray-500" />
                                 </div>
                               )}
-                            </div>
+                            </button>
 
                             {/* Product Info */}
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <h4 className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                            <button
+                              onClick={() => handleResultClick(product)}
+                              className="flex-1 min-w-0 text-left"
+                            >
+                              <div className="flex items-start justify-between gap-2">
+                                <h4 className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">
                                   {product.nameIs || product.name}
                                 </h4>
-                                <span className="text-sm font-semibold text-primary-600 dark:text-primary-400 ml-2 flex-shrink-0">
+                                <span className="text-sm font-semibold text-primary-600 dark:text-primary-400 flex-shrink-0">
                                   {product.price.toLocaleString()} {t('common.currency')}
                                 </span>
                               </div>
                               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
                                 {product.descriptionIs || product.description}
                               </p>
-                              <div className="flex items-center mt-1 space-x-2">
+                              <div className="flex items-center mt-1.5 space-x-2">
                                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300">
                                   {product.category?.nameIs || 'Flokkur'}
                                 </span>
@@ -308,9 +454,20 @@ const Navbar = () => {
                                    </span>
                                  )}
                               </div>
-                            </div>
+                            </button>
+
+                            {/* Add to Cart Button */}
+                            {isAuthenticated && (
+                              <button
+                                onClick={(e) => handleAddToCart(e, product)}
+                                className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors shadow-sm hover:shadow-md"
+                                title={t('cart.addToCart')}
+                              >
+                                <Plus className="w-4 h-4" />
+                              </button>
+                            )}
                           </div>
-                        </button>
+                        </div>
                       ))}
 
                       {/* View All Results */}
@@ -351,7 +508,7 @@ const Navbar = () => {
                 onMouseLeave={() => setIsShopMenuOpen(false)}
                 className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center"
               >
-                {t('navigation', 'shop')}
+                {t('navigation.shop')}
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -361,7 +518,7 @@ const Navbar = () => {
               <div
                 onMouseEnter={() => setIsShopMenuOpen(true)}
                 onMouseLeave={() => setIsShopMenuOpen(false)}
-                className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[1100px] max-w-[90vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[70] transition-all duration-300 overflow-hidden ${
+                className={`fixed top-[4rem] left-1/2 transform -translate-x-1/2 mt-2 w-[1100px] max-w-[90vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[999] transition-all duration-300 overflow-hidden ${
                   isShopMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}
               >
@@ -394,19 +551,24 @@ const Navbar = () => {
                          key={category.id}
                          to={`/products?category=${category.name}`}
                          onClick={() => setIsShopMenuOpen(false)}
-                         className="group block p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-primary-200 dark:hover:border-primary-700"
+                         className="group block p-4 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-600 hover:border-primary-300 dark:hover:border-primary-600"
                        >
+                        {/* Category Image - Large */}
+                        {category.imageUrl && (
+                          <div className="mb-3 flex items-center justify-center w-full h-32 bg-white dark:bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-gray-200">
+                            <img
+                              src={category.imageUrl.startsWith('http') ? category.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${category.imageUrl}`}
+                              alt={category.name}
+                              className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-200"
+                            />
+                          </div>
+                        )}
+
                         {/* Enhanced Category Header */}
-                        <div className="flex items-center space-x-4 mb-3">
-                          <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-600 rounded-lg group-hover:scale-110 transition-transform duration-200 flex-shrink-0">
-                            {category.imageUrl ? (
-                              <img
-                                src={`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${category.imageUrl}`}
-                                alt={category.name}
-                                className="w-8 h-8 object-contain"
-                              />
-                            ) : (
-                              <span className="text-2xl">
+                        <div className="flex items-center space-x-3 mb-3">
+                          {!category.imageUrl && (
+                            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-lg flex-shrink-0">
+                              <span className="text-xl">
                                 {category.name === 'WINE' && '🍷'}
                                 {category.name === 'BEER' && '🍺'}
                                 {category.name === 'SPIRITS' && '🥃'}
@@ -414,8 +576,8 @@ const Navbar = () => {
                                 {category.name === 'NICOTINEPADS' && '📱'}
                                 {!['WINE', 'BEER', 'SPIRITS', 'VAPE', 'NICOTINEPADS'].includes(category.name) && '📦'}
                               </span>
-                            )}
-                          </div>
+                            </div>
+                          )}
                           <div className="flex-1 min-w-0">
                             <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors text-base truncate">
                               {category.nameIs}
@@ -490,14 +652,62 @@ const Navbar = () => {
             {/* Dark Mode Toggle */}
             <DarkModeToggle />
 
+            {/* Language Switcher */}
+            <div className="relative" ref={languageMenuRef}>
+              <button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                aria-label="Change language"
+                aria-expanded={isLanguageMenuOpen}
+              >
+                <Globe className="w-5 h-5" aria-hidden="true" />
+              </button>
+
+              {isLanguageMenuOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-[70] border border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => {
+                      setCurrentLanguage('is');
+                      setIsLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm ${
+                      currentLanguage === 'is'
+                        ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <span className="flex items-center">
+                      <span className="mr-2">🇮🇸</span>
+                      Íslenska
+                      {currentLanguage === 'is' && <span className="ml-auto">✓</span>}
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCurrentLanguage('en');
+                      setIsLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm ${
+                      currentLanguage === 'en'
+                        ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <span className="flex items-center">
+                      <span className="mr-2">🇬🇧</span>
+                      English
+                      {currentLanguage === 'en' && <span className="ml-auto">✓</span>}
+                    </span>
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Admin Mega Menu (Cogwheel) */}
             {isAuthenticated && isAdmin && (
-              <div className="relative group">
+              <div className="relative" ref={adminMenuRef}>
                 <button
-                  onClick={() => {
-                    navigate('/admin');
-                    setIsAdminMenuOpen(false);
-                  }}
+                  onClick={() => setIsAdminMenuOpen(!isAdminMenuOpen)}
                   className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
                   aria-label={t('navigation.admin')}
                   aria-expanded={isAdminMenuOpen}
@@ -505,9 +715,10 @@ const Navbar = () => {
                 >
                   <Settings className="w-5 h-5" />
                 </button>
-                
-                {/* Admin Mega Menu - More Zoomed In */}
-                <div className="absolute top-full right-0 mt-2 w-[850px] max-w-[90vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[70] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:right-auto">
+
+                {/* Admin Mega Menu - Centered on Viewport */}
+                {isAdminMenuOpen && (
+                <div className="fixed top-[4rem] left-1/2 transform -translate-x-1/2 w-[1200px] max-w-[95vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[999] overflow-hidden transition-all duration-300">
                   {/* Enhanced Header */}
                   <div className="px-8 py-4 bg-gradient-to-r from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-800/20 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
@@ -524,134 +735,149 @@ const Navbar = () => {
                         className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-semibold text-base"
                         onClick={() => setIsAdminMenuOpen(false)}
                       >
+                        <LayoutDashboard className="w-5 h-5 inline mr-2" />
                         {t('adminDashboard.dashboard')}
                       </Link>
                     </div>
                   </div>
 
-                  {/* Admin Pages Grid */}
-                  <div className="p-6">
-                    <div className="grid grid-cols-3 gap-6">
-                      {/* Core Management */}
+                  {/* Admin Pages Grid - 4 Columns */}
+                  <div className="p-8">
+                    <div className="grid grid-cols-4 gap-6">
+                      {/* Column 1: Sales & Orders */}
                       <div className="space-y-3">
-                        <h4 className="text-base font-bold text-gray-900 dark:text-white mb-4 px-2">
-                          {t('adminDashboard.coreManagement')}
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                          {t('adminSidebar.sales')}
                         </h4>
                         <Link
-                          to="/admin/products"
-                          className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-600 rounded-lg">
-                            <Package className="w-6 h-6 text-blue-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-semibold text-gray-900 dark:text-white text-base">
-                              {t('navigation.products')}
-                            </h5>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageProducts')}
-                            </p>
-                          </div>
-                        </Link>
-                        <Link
                           to="/admin/orders"
-                          className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <ShoppingCart className="w-5 h-5 text-blue-600" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h5 className="font-semibold text-gray-900 dark:text-white text-base">
-                              {t('navigation.orders')}
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminNavigation.orders')}
                             </h5>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageOrders')}
-                            </p>
                           </div>
                         </Link>
                         <Link
-                          to="/admin/customers"
-                          className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
+                          to="/admin/pos"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-600 rounded-lg">
-                            <User className="w-6 h-6 text-blue-600" />
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Calculator className="w-5 h-5 text-blue-600" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h5 className="font-semibold text-gray-900 dark:text-white text-base">
-                              {t('navigation.customers')}
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminNavigation.pos')}
                             </h5>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageCustomers')}
-                            </p>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/delivery"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Truck className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminNavigation.delivery')}
+                            </h5>
+                          </div>
+                        </Link>
+
+                        <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
+                          <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                            {t('adminSidebar.catalog')}
+                          </h4>
+                        </div>
+                        <Link
+                          to="/admin/products"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Package className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminNavigation.products')}
+                            </h5>
                           </div>
                         </Link>
                         <Link
                           to="/admin/categories"
-                          className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <FolderOpen className="w-5 h-5 text-blue-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('navigation.categories')}
+                              {t('adminNavigation.categories')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageCategories')}
-                            </p>
                           </div>
                         </Link>
                       </div>
 
-                      {/* Analytics & Reports */}
-                      <div className="space-y-2">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 px-2">
-                          {t('adminDashboard.analyticsReports')}
+                      {/* Column 2: Content & Communication */}
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                          {t('adminSidebar.content')}
                         </h4>
                         <Link
-                          to="/admin/analytics"
+                          to="/admin/media"
                           className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <FileImage className="w-5 h-5 text-green-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('admin.analytics')}
+                              {t('adminNavigation.media')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.viewAnalytics')}
-                            </p>
                           </div>
                         </Link>
                         <Link
-                          to="/admin/reports"
+                          to="/admin/banners"
                           className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Image className="w-5 h-5 text-green-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminDashboard.reports')}
+                              {t('adminNavigation.banners')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.generateReports')}
-                            </p>
+                          </div>
+                        </Link>
+
+                        <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
+                          <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                            {t('adminSidebar.customersAndCommunication')}
+                          </h4>
+                        </div>
+                        <Link
+                          to="/admin/customers"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <User className="w-5 h-5 text-green-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminNavigation.customers')}
+                            </h5>
                           </div>
                         </Link>
                         <Link
@@ -659,18 +885,13 @@ const Navbar = () => {
                           className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <MessageCircle className="w-5 h-5 text-green-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('chat.title')}
+                              {t('adminNavigation.chat')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageChat')}
-                            </p>
                           </div>
                         </Link>
                         <Link
@@ -678,97 +899,145 @@ const Navbar = () => {
                           className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM4.828 7l2.586 2.586a2 2 0 002.828 0L12.828 7H4.828zM4.828 7H3a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1v-1.828" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Bell className="w-5 h-5 text-green-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminDashboard.notifications')}
+                              {t('adminNavigation.notifications')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageNotifications')}
-                            </p>
                           </div>
                         </Link>
                       </div>
 
-                      {/* Settings & Tools */}
-                      <div className="space-y-2">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 px-2">
-                          {t('adminDashboard.settingsTools')}
+                      {/* Column 3: Analytics */}
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                          {t('adminSidebar.analytics')}
                         </h4>
                         <Link
-                          to="/admin/settings"
+                          to="/admin/analytics"
                           className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <Settings className="w-4 h-4 text-purple-600" />
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <BarChart3 className="w-5 h-5 text-purple-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('navigation.settings')}
+                              {t('adminNavigation.analytics')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.systemSettings')}
-                            </p>
                           </div>
                         </Link>
+                        <Link
+                          to="/admin/reports"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <FileText className="w-5 h-5 text-purple-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminNavigation.reports')}
+                            </h5>
+                          </div>
+                        </Link>
+                      </div>
+
+                      {/* Column 4: Settings & System */}
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                          {t('adminSidebar.settings')}
+                        </h4>
+                        <Link
+                          to="/admin/settings/general"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Settings className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminSettings.general')}
+                            </h5>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/admin/settings/shipping"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Truck className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminSettings.shipping')}
+                            </h5>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/admin/settings/payment-gateways"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <CreditCard className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminSettings.paymentGateways')}
+                            </h5>
+                          </div>
+                        </Link>
+                        <Link
+                          to="/admin/settings/receipts"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
+                          onClick={() => setIsAdminMenuOpen(false)}
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Receipt className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
+                              {t('adminSettings.receipts')}
+                            </h5>
+                          </div>
+                        </Link>
+
+                        <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
+                          <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
+                            {t('adminSidebar.system')}
+                          </h4>
+                        </div>
                         <Link
                           to="/admin/translations"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <Globe className="w-4 h-4 text-purple-600" />
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Languages className="w-5 h-5 text-orange-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminDashboard.translations')}
+                              {t('adminNavigation.translations')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageTranslations')}
-                            </p>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/banners"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminDashboard.banners')}
-                            </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageBanners')}
-                            </p>
                           </div>
                         </Link>
                         <Link
                           to="/admin/demo-data"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
+                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
                           onClick={() => setIsAdminMenuOpen(false)}
                         >
-                          <div className="flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-600 rounded-lg">
-                            <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
+                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
+                            <Play className="w-5 h-5 text-orange-600" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminDashboard.demoData')}
+                              {t('adminNavigation.demoData')}
                             </h5>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {t('adminDashboard.manageDemoData')}
-                            </p>
                           </div>
                         </Link>
                       </div>
@@ -776,7 +1045,7 @@ const Navbar = () => {
                   </div>
 
                   {/* Footer */}
-                  <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-700">
+                  <div className="px-8 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-700">
                     <div className="text-center">
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         {t('adminDashboard.quickAccess')} <Link to="/admin" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">{t('adminDashboard.dashboard')}</Link>
@@ -784,6 +1053,7 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
+                )}
               </div>
             )}
 

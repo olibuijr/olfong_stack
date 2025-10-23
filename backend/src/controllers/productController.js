@@ -1,6 +1,7 @@
 const { body, oneOf } = require('express-validator');
 const { successResponse, errorResponse } = require('../utils/response');
 const prisma = require('../config/database');
+const { downloadAndSaveImage } = require('./atvrController');
 
 /**
  * Get all products with optional filtering
@@ -195,6 +196,7 @@ const getProduct = async (req, res) => {
  */
 const createProduct = async (req, res) => {
   try {
+    console.log('Creating product with body:', JSON.stringify(req.body, null, 2));
     const productData = {
       ...req.body,
       price: parseFloat(req.body.price),
@@ -283,6 +285,29 @@ const createProduct = async (req, res) => {
     // Add image URL if file was uploaded
     if (req.file) {
       productData.imageUrl = `/uploads/${req.file.filename}`;
+    }
+
+    // Download and save ATVR image if available
+    if (productData.atvrImageUrl && !productData.imageUrl) {
+      try {
+        console.log('Downloading ATVR product image...');
+        const media = await downloadAndSaveImage(
+          productData.atvrImageUrl,
+          productData.name || productData.nameIs || 'Unknown Product',
+          productData.atvrProductId || 'unknown',
+          req.user.id
+        );
+
+        if (media) {
+          productData.imageUrl = media.url;
+          console.log(`Successfully set product image URL to: ${media.url}`);
+        } else {
+          console.log('Failed to download ATVR image, product will be created without image');
+        }
+      } catch (error) {
+        console.error('Error downloading ATVR image:', error);
+        // Continue without image - non-critical error
+      }
     }
 
     // Remove the category field since we're using categoryId for the relation

@@ -13,17 +13,18 @@ import {
   Printer
 } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
-import { 
-  fetchReceiptSettings, 
-  updateReceiptSettings, 
-  uploadReceiptLogo, 
+import {
+  fetchReceiptSettings,
+  updateReceiptSettings,
+  uploadReceiptLogo,
   deleteReceiptLogo,
-  updateSettingsField 
+  updateSettingsField
 } from '../../../store/slices/receiptSettingsSlice';
+import { useLanguage } from '../../../contexts/LanguageContext';
 import toast from 'react-hot-toast';
 
 const ReceiptSettings = () => {
-
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const { settings, isLoading, uploadProgress } = useSelector((state) => state.receiptSettings);
 
@@ -89,7 +90,7 @@ const ReceiptSettings = () => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        toast.error('File size must be less than 5MB');
+        toast.error(t('adminSettings.fileSizeTooLarge'));
         return;
       }
       dispatch(uploadReceiptLogo(file));
@@ -100,16 +101,16 @@ const ReceiptSettings = () => {
     setIsSaving(true);
     try {
       await dispatch(updateReceiptSettings(formData)).unwrap();
-      toast.success('Receipt settings saved successfully!');
+      toast.success(t('adminSettings.receiptSettingsSaved'));
     } catch (error) {
-      toast.error(error || 'Failed to save settings');
+      toast.error(error || t('adminSettings.failedToSaveSettings'));
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDeleteLogo = () => {
-    if (window.confirm('Are you sure you want to delete the logo?')) {
+    if (window.confirm(t('adminSettings.confirmDeleteLogo'))) {
       dispatch(deleteReceiptLogo());
     }
   };
@@ -185,16 +186,18 @@ const ReceiptSettings = () => {
 
   return (
     <AdminLayout>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-none">
         {/* Header */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Receipt Settings</h1>
-            <p className="text-gray-600 dark:text-gray-400">Customize your receipt appearance and branding</p>
+          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-4">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('adminSettings.receiptSettings')}</h1>
+            <p className="text-gray-600 dark:text-gray-400">{t('adminSettings.receiptSettingsDescription')}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Settings Form */}
           <div className="space-y-6">
             {/* Company Information */}
@@ -342,14 +345,14 @@ const ReceiptSettings = () => {
                 ) : (
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                     <Image className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 dark:text-gray-400 mb-2">No logo uploaded</p>
-                    <p className="text-sm text-gray-500">Upload a logo to appear on receipts</p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-2">{t('adminSettings.noLogoUploaded')}</p>
+                    <p className="text-sm text-gray-500">{t('adminSettings.uploadLogoDescription')}</p>
                   </div>
                 )}
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Upload Logo
+                    {t('adminSettings.uploadLogo')}
                   </label>
                   <input
                     type="file"
@@ -357,7 +360,7 @@ const ReceiptSettings = () => {
                     onChange={handleFileUpload}
                     className="input w-full"
                   />
-                  <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 5MB</p>
+                  <p className="text-xs text-gray-500 mt-1">{t('adminSettings.uploadLogoFormats')}</p>
                 </div>
 
                 {uploadProgress > 0 && uploadProgress < 100 && (
@@ -510,7 +513,7 @@ const ReceiptSettings = () => {
                       className="mr-3"
                     />
                     <label htmlFor="showBarcode" className="text-sm text-gray-700 dark:text-gray-300">
-                      Show Barcode
+                      {t('adminSettings.showBarcode')}
                     </label>
                   </div>
                   <div className="flex items-center">
@@ -522,7 +525,7 @@ const ReceiptSettings = () => {
                       className="mr-3"
                     />
                     <label htmlFor="showQrCode" className="text-sm text-gray-700 dark:text-gray-300">
-                      Show QR Code
+                      {t('adminSettings.showQRCode')}
                     </label>
                   </div>
                 </div>
@@ -532,30 +535,30 @@ const ReceiptSettings = () => {
             {/* Footer Messages */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Footer Messages
+                {t('adminSettings.footerMessages')}
               </h2>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Footer Text (English)
+                    {t('adminSettings.footerTextEnglish')}
                   </label>
                   <textarea
                     value={formData.footerText}
                     onChange={(e) => handleInputChange('footerText', e.target.value)}
                     className="input w-full h-20 resize-none"
-                    placeholder="Thank you for your business!"
+                    placeholder={t('adminSettings.footerTextEnPlaceholder')}
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Footer Text (Icelandic)
+                    {t('adminSettings.footerTextIcelandic')}
                   </label>
                   <textarea
                     value={formData.footerTextIs}
                     onChange={(e) => handleInputChange('footerTextIs', e.target.value)}
                     className="input w-full h-20 resize-none"
-                    placeholder="Takk fyrir viðskiptin!"
+                    placeholder={t('adminSettings.footerTextIsPlaceholder')}
                   />
                 </div>
               </div>
@@ -576,7 +579,7 @@ const ReceiptSettings = () => {
                 ) : (
                   <>
                     <Save className="w-4 h-4 mr-2" />
-                    Save Settings
+                    {t('adminSettings.saveSettings')}
                   </>
                 )}
               </button>
@@ -589,23 +592,25 @@ const ReceiptSettings = () => {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                   <Eye className="w-5 h-5 mr-2" />
-                  Live Preview
+                  {t('adminSettings.livePreview')}
                 </h2>
                 <button
                   onClick={() => setPreviewMode(!previewMode)}
                   className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
                 >
                   <Printer className="w-4 h-4 mr-1" />
-                  {previewMode ? 'Screen View' : 'Print View'}
+                  {previewMode ? t('adminSettings.screenView') : t('adminSettings.printView')}
                 </button>
               </div>
 
               <div className={`border rounded-lg p-4 ${previewMode ? 'bg-gray-50' : 'bg-white'}`}>
-                <div 
+                <div
                   dangerouslySetInnerHTML={{ __html: generatePreviewHTML() }}
                   className={previewMode ? 'transform scale-75 origin-top-left' : ''}
                 />
               </div>
+            </div>
+          </div>
             </div>
           </div>
         </div>

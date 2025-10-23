@@ -36,7 +36,7 @@ const MediaGrid = ({
           className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-shadow"
         >
           <div className="relative group">
-                      <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center relative">
+                      <div className="aspect-square bg-white dark:bg-white flex items-center justify-center relative">
                         {item.mimeType.startsWith('image/') ? (
                           <>
                             {loadingImages.has(item.id) && (
@@ -47,7 +47,7 @@ const MediaGrid = ({
                             <img
                               src={item.thumbnailUrl || item.url}
                               alt={item.alt || item.originalName}
-                              className={`w-full h-full object-cover transition-opacity duration-300 ${
+                              className={`w-full h-full object-contain transition-opacity duration-300 ${
                                 loadingImages.has(item.id) ? 'opacity-0' : 'opacity-100'
                               }`}
                               loading="lazy"
@@ -84,14 +84,14 @@ const MediaGrid = ({
               <button
                 onClick={() => onEdit(item)}
                 className="p-1 bg-white dark:bg-gray-700 rounded shadow hover:bg-gray-50 dark:hover:bg-gray-600"
-                title={t('adminMedia', 'edit')}
+                title={t('adminMedia.edit')}
               >
                 <Edit className="h-3 w-3" />
               </button>
               <button
                 onClick={() => onDelete(item.id)}
                 className="p-1 bg-white dark:bg-gray-700 rounded shadow hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600"
-                title={t('adminMedia', 'delete')}
+                title={t('adminMedia.delete')}
               >
                 <Trash2 className="h-3 w-3" />
               </button>

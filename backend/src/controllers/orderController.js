@@ -139,7 +139,7 @@ const getOrder = async (req, res) => {
         return errorResponse(res, 'Shipping option not found', 404);
       }
 
-      if (!shippingOption.isEnabled) {
+      if (!shippingOption.isActive) {
         return errorResponse(res, 'Selected shipping option is not available', 400);
       }
 
@@ -626,7 +626,7 @@ const createPOSOrder = async (req, res) => {
     });
 
     if (!shippingOption || !shippingOption.isActive) {
-      return errorResponse(res, 'Shipping option not found or inactive', 404);
+      return errorResponse(res, 'Shipping option not found or not available', 404);
     }
 
     // Determine user ID - either existing customer or create guest user

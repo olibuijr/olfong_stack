@@ -31,12 +31,12 @@ const MediaUpload = () => {
 
   // Collections
   const collections = [
-    { id: 'PRODUCTS', name: t('adminMedia', 'products'), icon: '🛍️', accept: 'image/*' },
-    { id: 'CATEGORIES', name: t('adminMedia', 'categories'), icon: '📁', accept: 'image/*' },
-    { id: 'BANNERS', name: t('adminMedia', 'banners'), icon: '📢', accept: 'image/*' },
-    { id: 'PROFILE', name: t('adminMedia', 'profile'), icon: '👤', accept: 'image/*' },
-    { id: 'DOCUMENTS', name: t('adminMedia', 'documents'), icon: '📄', accept: '.pdf,.doc,.docx' },
-    { id: 'VIDEOS', name: t('adminMedia', 'videos'), icon: '🎥', accept: 'video/*' }
+    { id: 'PRODUCTS', name: t('adminMedia.products'), icon: '🛍️', accept: 'image/*' },
+    { id: 'CATEGORIES', name: t('adminMedia.categories'), icon: '📁', accept: 'image/*' },
+    { id: 'BANNERS', name: t('adminMedia.banners'), icon: '📢', accept: 'image/*' },
+    { id: 'PROFILE', name: t('adminMedia.profile'), icon: '👤', accept: 'image/*' },
+    { id: 'DOCUMENTS', name: t('adminMedia.documents'), icon: '📄', accept: '.pdf,.doc,.docx' },
+    { id: 'VIDEOS', name: t('adminMedia.videos'), icon: '🎥', accept: 'video/*' }
   ];
 
   const currentCollection = collections.find(c => c.id === selectedCollection);
@@ -269,7 +269,7 @@ const removeFile = (index) => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white shadow-lg rounded-lg border border-gray-200">
             <AlertTriangle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminLabels', 'accessDenied')}</h1>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('adminLabels.accessDenied')}</h1>
             <p className="text-gray-700">You do not have permission to view this page.</p>
           </div>
         </div>
@@ -284,10 +284,10 @@ const removeFile = (index) => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('adminMedia', 'uploadMedia')}
+              {t('adminMedia.uploadMedia')}
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              {t('adminMedia', 'uploadMediaDescription')}
+              {t('adminMedia.uploadMediaDescription')}
             </p>
           </div>
         </div>
@@ -295,7 +295,7 @@ const removeFile = (index) => {
         {/* Collection Selection */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            {t('adminMedia', 'selectCollection')}
+            {t('adminMedia.selectCollection')}
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {collections.map((collection) => (
@@ -329,10 +329,10 @@ const removeFile = (index) => {
           >
             <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              {t('adminMedia', 'dragDropFiles')}
+              {t('adminMedia.dragDropFiles')}
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              {t('adminMedia', 'orClickToSelect')}
+              {t('adminMedia.orClickToSelect')}
             </p>
             <input
               type="file"
@@ -347,10 +347,10 @@ const removeFile = (index) => {
               className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
             >
               <Plus className="h-4 w-4 mr-2" />
-              {t('adminMedia', 'selectFiles')}
+              {t('adminMedia.selectFiles')}
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              {t('adminMedia', 'supportedFormats')}: {currentCollection?.accept}
+              {t('adminMedia.supportedFormats')}: {currentCollection?.accept}
             </p>
           </div>
         </div>
@@ -359,7 +359,7 @@ const removeFile = (index) => {
         {files.length > 0 && (
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              {t('adminMedia', 'selectedFiles')} ({files.length})
+              {t('adminMedia.selectedFiles')} ({files.length})
             </h3>
 
             <div className="space-y-4">
@@ -413,13 +413,13 @@ const removeFile = (index) => {
                   <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        {t('adminMedia', 'altText')}
+                        {t('adminMedia.altText')}
                       </label>
                       <input
                         type="text"
                         value={altTexts[index] || ''}
                         onChange={(e) => updateAltText(index, e.target.value)}
-                        placeholder={t('adminMedia', 'altTextPlaceholder')}
+                        placeholder={t('adminMedia.altTextPlaceholder')}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         disabled={uploading}
                       />
@@ -427,13 +427,13 @@ const removeFile = (index) => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        {t('adminMedia', 'caption')}
+                        {t('adminMedia.caption')}
                       </label>
                       <input
                         type="text"
                         value={captions[index] || ''}
                         onChange={(e) => updateCaption(index, e.target.value)}
-                        placeholder={t('adminMedia', 'captionPlaceholder')}
+                        placeholder={t('adminMedia.captionPlaceholder')}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         disabled={uploading}
                       />
@@ -441,13 +441,13 @@ const removeFile = (index) => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        {t('adminMedia', 'description')}
+                        {t('adminMedia.description')}
                       </label>
                       <input
                         type="text"
                         value={descriptions[index] || ''}
                         onChange={(e) => updateDescription(index, e.target.value)}
-                        placeholder={t('adminMedia', 'descriptionPlaceholder')}
+                        placeholder={t('adminMedia.descriptionPlaceholder')}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         disabled={uploading}
                       />
@@ -467,12 +467,12 @@ const removeFile = (index) => {
                 {uploading ? (
                   <>
                     <Loader className="h-4 w-4 mr-2 animate-spin" />
-                    {t('adminMedia', 'uploading')}
+                    {t('adminMedia.uploading')}
                   </>
                 ) : (
                   <>
                     <Upload className="h-4 w-4 mr-2" />
-                    {t('adminMedia', 'uploadFiles')} ({files.length})
+                    {t('adminMedia.uploadFiles')} ({files.length})
                   </>
                 )}
               </button>
@@ -485,12 +485,12 @@ const removeFile = (index) => {
           <div className="flex items-start">
             <AlertTriangle className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5" />
             <div className="text-sm text-blue-800 dark:text-blue-200">
-              <p className="font-medium mb-1">{t('adminMedia', 'uploadGuidelines')}</p>
+              <p className="font-medium mb-1">{t('adminMedia.uploadGuidelines')}</p>
               <ul className="list-disc list-inside space-y-1">
-                <li>{t('adminMedia', 'maxFileSize')}: {formatFileSize(getMaxFileSize(selectedCollection))}</li>
-                <li>{t('adminMedia', 'supportedFormats')}: {currentCollection?.accept}</li>
-                <li>{t('adminMedia', 'automaticOptimization')}</li>
-                <li>{t('adminMedia', 'altTextRecommendation')}</li>
+                <li>{t('adminMedia.maxFileSize')}: {formatFileSize(getMaxFileSize(selectedCollection))}</li>
+                <li>{t('adminMedia.supportedFormats')}: {currentCollection?.accept}</li>
+                <li>{t('adminMedia.automaticOptimization')}</li>
+                <li>{t('adminMedia.altTextRecommendation')}</li>
               </ul>
             </div>
           </div>

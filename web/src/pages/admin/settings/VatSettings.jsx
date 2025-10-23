@@ -100,7 +100,7 @@ const VatSettings = () => {
         throw new Error('Failed to save settings');
       }
 
-      toast.success(t('adminSettings', 'settingsSaved'));
+      toast.success(t('adminSettings.settingsSaved'));
       setHasUnsavedChanges(false);
     } catch (error) {
       console.error('Error saving settings:', error);
@@ -118,8 +118,8 @@ const VatSettings = () => {
             <div className="text-red-400 mb-4">
               <RefreshCw className="w-16 h-16 mx-auto" />
             </div>
-            <h1 className="text-3xl font-bold text-red-600 mb-4">Access Denied</h1>
-            <p className="text-gray-700">You do not have permission to view this page.</p>
+            <h1 className="text-3xl font-bold text-red-600 mb-4">{t('admin.accessDenied')}</h1>
+            <p className="text-gray-700">{t('admin.accessDeniedMessage')}</p>
           </div>
         </div>
       </AdminLayout>
@@ -150,8 +150,8 @@ const VatSettings = () => {
                 <ArrowLeft className="w-5 h-5" />
               </Link>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings', 'vatSettings')}</h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings', 'vatDescription')}</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.vatSettings')}</h1>
+                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings.vatDescription')}</p>
               </div>
             </div>
           </div>
@@ -162,13 +162,13 @@ const VatSettings = () => {
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
           <div className="flex items-center mb-6">
             <Percent className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-3" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings', 'vatSettings')}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('adminSettings.vatSettings')}</h3>
           </div>
 
           {/* VAT Configuration */}
           <div className="mb-8">
             <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-              {t('adminSettings', 'vatConfiguration')}
+              {t('adminSettings.vatConfiguration')}
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -185,13 +185,13 @@ const VatSettings = () => {
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label htmlFor="vatEnabled" className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('adminSettings', 'vatEnabled')}
+                    {t('adminSettings.vatEnabled')}
                   </label>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'vatRate')} (%)
+                    {t('adminSettings.vatRate')} (%)
                   </label>
                   <input
                     type="number"
@@ -211,7 +211,7 @@ const VatSettings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminSettings', 'country')}
+                    {t('adminSettings.country')}
                   </label>
                    <select
                      name="country"
@@ -223,9 +223,9 @@ const VatSettings = () => {
                      disabled={!settings.enabled}
                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white disabled:opacity-50"
                    >
-                    <option value="IS">{t('adminSettings', 'iceland')}</option>
-                    <option value="EU">{t('adminSettings', 'euCountries')}</option>
-                    <option value="OTHER">{t('adminSettings', 'otherCountries')}</option>
+                    <option value="IS">{t('adminSettings.iceland')}</option>
+                    <option value="EU">{t('adminSettings.euCountries')}</option>
+                    <option value="OTHER">{t('adminSettings.otherCountries')}</option>
                   </select>
                 </div>
               </div>
@@ -233,10 +233,10 @@ const VatSettings = () => {
               <div className="space-y-4">
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md">
                   <h5 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
-                    {t('adminSettings', 'vatInformation')}
+                    {t('adminSettings.vatInformation')}
                   </h5>
                   <p className="text-sm text-blue-700 dark:text-blue-300">
-                    {t('adminSettings', 'vatInformationDescription')}
+                    {t('adminSettings.vatInformationDescription')}
                   </p>
                 </div>
               </div>
@@ -246,7 +246,7 @@ const VatSettings = () => {
           {/* VAT Display Settings */}
           <div className="mb-8">
             <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-              {t('adminSettings', 'vatDisplaySettings')}
+              {t('adminSettings.vatDisplaySettings')}
             </h4>
 
             <div className="space-y-4">
@@ -264,10 +264,10 @@ const VatSettings = () => {
                 />
                 <div className="ml-2">
                   <label htmlFor="showVatInAdmin" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('adminSettings', 'showVatInAdmin')}
+                    {t('adminSettings.showVatInAdmin')}
                   </label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'showVatInAdminDescription')}
+                    {t('adminSettings.showVatInAdminDescription')}
                   </p>
                 </div>
               </div>
@@ -286,10 +286,10 @@ const VatSettings = () => {
                 />
                 <div className="ml-2">
                   <label htmlFor="includeVatInCustomerPrice" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('adminSettings', 'includeVatInCustomerPrice')}
+                    {t('adminSettings.includeVatInCustomerPrice')}
                   </label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'includeVatInCustomerPriceDescription')}
+                    {t('adminSettings.includeVatInCustomerPriceDescription')}
                   </p>
                 </div>
               </div>
@@ -308,10 +308,10 @@ const VatSettings = () => {
                 />
                 <div className="ml-2">
                   <label htmlFor="showVatBreakdown" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('adminSettings', 'showVatBreakdown')}
+                    {t('adminSettings.showVatBreakdown')}
                   </label>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('adminSettings', 'showVatBreakdownDescription')}
+                    {t('adminSettings.showVatBreakdownDescription')}
                   </p>
                 </div>
               </div>
@@ -333,7 +333,7 @@ const VatSettings = () => {
             ) : (
               <Save className="w-4 h-4 mr-2" />
             )}
-            {isSaving ? t('common', 'loading') : t('adminSettings', 'saveChanges')}
+            {isSaving ? t('common.loading') : t('adminSettings.saveChanges')}
           </button>
           </div>
         </div>

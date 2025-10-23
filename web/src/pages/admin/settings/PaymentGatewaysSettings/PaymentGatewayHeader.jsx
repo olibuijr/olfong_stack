@@ -17,10 +17,10 @@ const PaymentGatewayHeader = () => {
           </Link>
           <div className="flex-1">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {t('adminSettings', 'paymentGateways')}
+              {t('adminSettings.paymentGateways')}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              {t('adminSettings', 'paymentGatewayDescription')}
+              {t('adminSettings.paymentGatewayDescription')}
             </p>
           </div>
         </div>

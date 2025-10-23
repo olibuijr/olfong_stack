@@ -78,7 +78,7 @@ const MediaEditor = ({ isOpen, onClose, media, onSave }) => {
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t('adminMedia', 'editMedia')}
+              {t('adminMedia.editMedia')}
             </h2>
             <button
               type="button"
@@ -122,49 +122,49 @@ const MediaEditor = ({ isOpen, onClose, media, onSave }) => {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminMedia', 'altText')}
+                  {t('adminMedia.altText')}
                 </label>
                 <input
                   type="text"
                   value={formData.alt}
                   onChange={(e) => handleChange('alt', e.target.value)}
-                  placeholder={t('adminMedia', 'altTextPlaceholder')}
+                  placeholder={t('adminMedia.altTextPlaceholder')}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {t('adminMedia', 'altTextDescription')}
+                  {t('adminMedia.altTextDescription')}
                 </p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminMedia', 'caption')}
+                  {t('adminMedia.caption')}
                 </label>
                 <input
                   type="text"
                   value={formData.caption}
                   onChange={(e) => handleChange('caption', e.target.value)}
-                  placeholder={t('adminMedia', 'captionPlaceholder')}
+                  placeholder={t('adminMedia.captionPlaceholder')}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {t('adminMedia', 'captionDescription')}
+                  {t('adminMedia.captionDescription')}
                 </p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminMedia', 'description')}
+                  {t('adminMedia.description')}
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => handleChange('description', e.target.value)}
-                  placeholder={t('adminMedia', 'descriptionPlaceholder')}
+                  placeholder={t('adminMedia.descriptionPlaceholder')}
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {t('adminMedia', 'descriptionDescription')}
+                  {t('adminMedia.descriptionDescription')}
                 </p>
               </div>
             </div>
@@ -177,7 +177,7 @@ const MediaEditor = ({ isOpen, onClose, media, onSave }) => {
               onClick={onClose}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
             >
-              {t('adminMedia', 'cancel')}
+              {t('adminMedia.cancel')}
             </button>
             <button
               type="submit"
@@ -187,12 +187,12 @@ const MediaEditor = ({ isOpen, onClose, media, onSave }) => {
               {saving ? (
                 <>
                   <Loader className="h-4 w-4 mr-2 animate-spin" />
-                  {t('adminMedia', 'saving')}
+                  {t('adminMedia.saving')}
                 </>
               ) : (
                 <>
                   <Save className="h-4 w-4 mr-2" />
-                  {t('adminMedia', 'save')}
+                  {t('adminMedia.save')}
                 </>
               )}
             </button>

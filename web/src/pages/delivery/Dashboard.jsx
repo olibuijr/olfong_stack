@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { 
   Truck, 
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { fetchAllOrders, updateOrderStatus } from '../../store/slices/orderSlice';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import AdminLayout from '../../components/admin/AdminLayout';
 import toast from 'react-hot-toast';
 
 const DeliveryDashboard = () => {
@@ -32,17 +33,29 @@ const DeliveryDashboard = () => {
   useEffect(() => {
     if (user?.role === 'DELIVERY') {
       dispatch(fetchAllOrders({ deliveryPersonId: user.id }));
+    } else if (user?.role === 'ADMIN') {
+      // Admins can see all delivery orders
+      dispatch(fetchAllOrders());
     }
   }, [dispatch, user]);
 
   useEffect(() => {
     if (orders) {
-      // Filter orders assigned to this delivery person
-      const myOrders = orders.filter(order => 
-        order.deliveryPerson?.id === user?.id && 
-        ['CONFIRMED', 'PREPARING', 'OUT_FOR_DELIVERY'].includes(order.status)
-      );
-      setAssignedOrders(myOrders);
+      if (user?.role === 'DELIVERY') {
+        // Filter orders assigned to this delivery person
+        const myOrders = orders.filter(order =>
+          order.deliveryPerson?.id === user?.id &&
+          ['CONFIRMED', 'PREPARING', 'OUT_FOR_DELIVERY'].includes(order.status)
+        );
+        setAssignedOrders(myOrders);
+      } else if (user?.role === 'ADMIN') {
+        // Admins see all orders with delivery method
+        const deliveryOrders = orders.filter(order =>
+          order.deliveryMethod === 'DELIVERY' &&
+          ['CONFIRMED', 'PREPARING', 'OUT_FOR_DELIVERY'].includes(order.status)
+        );
+        setAssignedOrders(deliveryOrders);
+      }
     }
   }, [orders, user]);
 
@@ -51,17 +64,12 @@ const DeliveryDashboard = () => {
     
     if (isTracking && navigator.geolocation) {
       watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const location = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            timestamp: new Date().toISOString()
-          };
+        () => {
           // TODO: Implement location update functionality
           // dispatch(updateLocation({
           //   deliveryPersonId: user.id,
-          //   latitude: location.lat,
-          //   longitude: location.lng
+          //   latitude: position.coords.latitude,
+          //   longitude: position.coords.longitude
           // }));
         },
         (error) => {
@@ -171,13 +179,13 @@ const DeliveryDashboard = () => {
     { value: 'DELIVERED', label: 'Afhent' },
   ];
 
-  if (user?.role !== 'DELIVERY') {
+  if (user?.role !== 'DELIVERY' && user?.role !== 'ADMIN') {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">
-              {t('delivery', 'title')}
+              {t('delivery.title')}
             </h1>
             <div className="card p-8">
               <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
@@ -203,42 +211,52 @@ const DeliveryDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <AdminLayout>
+      <div className="max-w-none">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {t('delivery', 'title')}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {'Velkomin, ' + (user?.fullName || user?.username) + '. Stjórnaðu afhendingum þínum.'}
-            </p>
-          </div>
-          
-          {/* Location Tracking Toggle */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-              <span className="text-sm text-gray-600">
-                {isTracking 
-                  ? ('Staðsetning virk')
-                  : ('Staðsetning óvirk')
-                }
-              </span>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  {user?.role === 'ADMIN' ? 'Yfirlit afhendinga' : 'Afhendingarborð'}
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
+                  {user?.role === 'ADMIN'
+                    ? 'Fylgstu með öllum afhendingum í kerfinu.'
+                    : 'Velkomin, ' + (user?.fullName || user?.username) + '. Stjórnaðu afhendingum þínum.'
+                  }
+                </p>
+              </div>
+
+              {/* Location Tracking Toggle - Only for delivery personnel */}
+              {user?.role === 'DELIVERY' && (
+                <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+                  <div className="flex items-center space-x-2">
+                    <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {isTracking
+                        ? 'Staðsetning virk'
+                        : 'Staðsetning óvirk'
+                      }
+                    </span>
+                  </div>
+                  <button
+                    onClick={toggleTracking}
+                    className={`inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                      isTracking
+                        ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
+                        : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500'
+                    } focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200`}
+                  >
+                    {isTracking ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
+                    <span>
+                      {isTracking ? 'Stöðva' : 'Byrja'}
+                    </span>
+                  </button>
+                </div>
+              )}
             </div>
-            <button
-              onClick={toggleTracking}
-              className={`btn ${isTracking ? 'btn-outline' : 'btn-primary'} flex items-center space-x-2`}
-            >
-              {isTracking ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-              <span>
-                {isTracking 
-                  ? ('Stöðva')
-                  : ('Byrja')
-                }
-              </span>
-            </button>
           </div>
         </div>
 
@@ -246,28 +264,28 @@ const DeliveryDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <Package className="w-6 h-6 text-blue-600" />
+              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                <Package className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">
-'Úthlutaðar pantanir'
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  {user?.role === 'ADMIN' ? 'Allar pantanir' : 'Úthlutaðar pantanir'}
                 </p>
-                <p className="text-2xl font-bold text-gray-900">{assignedOrders.length}</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{assignedOrders.length}</p>
               </div>
             </div>
           </div>
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <Truck className="w-6 h-6 text-orange-600" />
+              <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                <Truck className="w-6 h-6 text-orange-600 dark:text-orange-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">
-'Í afhendingu'
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Í afhendingu
                 </p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {assignedOrders.filter(order => order.status === 'OUT_FOR_DELIVERY').length}
                 </p>
               </div>
@@ -276,16 +294,16 @@ const DeliveryDashboard = () => {
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <CheckCircle className="w-6 h-6 text-green-600" />
+              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">
-'Afhent í dag'
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Afhent í dag
                 </p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {assignedOrders.filter(order => 
-                    order.status === 'DELIVERED' && 
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {assignedOrders.filter(order =>
+                    order.status === 'DELIVERED' &&
                     new Date(order.updatedAt).toDateString() === new Date().toDateString()
                   ).length}
                 </p>
@@ -295,14 +313,14 @@ const DeliveryDashboard = () => {
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <Clock className="w-6 h-6 text-purple-600" />
+              <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                <Clock className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">
-'Bíður afhendingar'
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Bíður afhendingar
                 </p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {assignedOrders.filter(order => ['CONFIRMED', 'PREPARING'].includes(order.status)).length}
                 </p>
               </div>
@@ -312,18 +330,21 @@ const DeliveryDashboard = () => {
 
         {/* Assigned Orders */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900">
-  'Úthlutaðar pantanir'
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            {user?.role === 'ADMIN' ? 'Afhendingarpantanir' : 'Úthlutaðar pantanir'}
           </h2>
 
           {assignedOrders.length === 0 ? (
             <div className="card p-8 text-center">
               <Truck className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-'Engar pantanir úthlutaðar'
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                {user?.role === 'ADMIN' ? 'Engar afhendingarpantanir' : 'Engar pantanir úthlutaðar'}
               </h3>
-              <p className="text-gray-600">
-'Engar pantanir hafa verið úthlutaðar þér ennþá.'
+              <p className="text-gray-600 dark:text-gray-400">
+                {user?.role === 'ADMIN'
+                  ? 'Engar afhendingarpantanir fundust í kerfinu.'
+                  : 'Engar pantanir hafa verið úthlutaðar þér ennþá.'
+                }
               </p>
             </div>
           ) : (
@@ -333,7 +354,7 @@ const DeliveryDashboard = () => {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">
-'Pöntun' #{order.orderNumber}
+Pöntun #{order.orderNumber}
                       </h3>
                       <p className="text-sm text-gray-600">
                         {new Date(order.createdAt).toLocaleDateString()}
@@ -382,20 +403,20 @@ const DeliveryDashboard = () => {
                   {/* Order Items */}
                   <div className="mb-4">
                     <h4 className="font-medium text-gray-900 mb-2">
-'Vörur:'
+Vörur:
                     </h4>
                     <div className="space-y-1">
                       {order.items.slice(0, 3).map((item, index) => (
                         <div key={index} className="flex justify-between text-sm">
                           <span>{item.quantity}x {item.product.nameIs || item.product.name}</span>
                           <span className="font-medium">
-                            {(item.price * item.quantity).toLocaleString()} {t('common', 'currency')}
+                            {(item.price * item.quantity).toLocaleString()} {t('common.currency')}
                           </span>
                         </div>
                       ))}
                       {order.items.length > 3 && (
                         <p className="text-xs text-gray-500">
-'fleiri'
+fleiri
                         </p>
                       )}
                     </div>
@@ -405,10 +426,10 @@ const DeliveryDashboard = () => {
                   <div className="border-t pt-4 mb-4">
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-900">
-  'Samtals:'
+  Samtals:
                       </span>
                       <span className="text-lg font-bold text-primary-600">
-                        {order.totalAmount.toLocaleString()} {t('common', 'currency')}
+                        {order.totalAmount.toLocaleString()} {t('common.currency')}
                       </span>
                     </div>
                   </div>
@@ -421,7 +442,7 @@ const DeliveryDashboard = () => {
                         className="btn btn-primary flex-1 flex items-center justify-center space-x-2"
                       >
                         <Play className="w-4 h-4" />
-'Byrja afhendingu'
+Byrja afhendingu
                       </button>
                     )}
                     
@@ -431,7 +452,7 @@ const DeliveryDashboard = () => {
                         className="btn btn-success flex-1 flex items-center justify-center space-x-2"
                       >
                         <CheckCircle className="w-4 h-4" />
-'Ljúka afhendingu'
+Ljúka afhendingu
                       </button>
                     )}
 
@@ -443,7 +464,7 @@ const DeliveryDashboard = () => {
                       }}
                       className="btn btn-outline"
                     >
-'Breyta'
+Breyta
                     </button>
                   </div>
                 </div>
@@ -457,12 +478,12 @@ const DeliveryDashboard = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-'Uppfæra pöntun' #{selectedOrder.orderNumber}
+                Uppfæra pöntun #{selectedOrder.orderNumber}
               </h2>
               
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-'Ný staða'
+Ný staða
                 </label>
                 <select
                   value={newStatus}
@@ -486,20 +507,20 @@ const DeliveryDashboard = () => {
                   }}
                   className="btn btn-outline flex-1"
                 >
-'Hætta við'
+Hætta við
                 </button>
                 <button
                   onClick={handleStatusUpdate}
                   className="btn btn-primary flex-1"
                 >
-'Uppfæra'
+Uppfæra
                 </button>
               </div>
             </div>
           </div>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 
