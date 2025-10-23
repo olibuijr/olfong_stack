@@ -314,15 +314,16 @@ const ProductDetail = () => {
     }
 
     try {
-      await dispatch(addToCart({ 
-        productId: currentProduct.id, 
-        quantity 
+      await dispatch(addToCart({
+        productId: currentProduct.id,
+        quantity
       })).unwrap();
-      
-      // Navigate to cart after successful add
-      navigate('/cart');
+
+      // Show success toast instead of navigating
+      toast.success(t('products.addedToCart'));
     } catch (error) {
       console.error('Failed to add to cart:', error);
+      toast.error(t('products.failedToAddToCart'));
     }
   };
 
