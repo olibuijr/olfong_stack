@@ -389,10 +389,10 @@ const Cart = () => {
                           {/* Price */}
                           <div className="text-left sm:text-right">
                             <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                              {(item.product.price * item.quantity).toLocaleString()} {t('common.currency')}
+                              {(item.product.price * item.quantity).toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
                             </div>
                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                              {item.product.price.toLocaleString()} {t('common.currency')} {t('cartPage.each')}
+                              {item.product.price.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')} {t('cartPage.each')}
                             </div>
                           </div>
                         </div>
@@ -447,7 +447,7 @@ const Cart = () => {
                                 {currentLanguage === 'is' ? (option.nameIs || option.name) : (option.name || option.nameEn)}
                               </div>
                               <div className="text-sm font-semibold text-primary-600">
-                                {option.fee === 0 ? t('common.free') : `${option.fee.toLocaleString()} ${t('common.currency')}`}
+                                {option.fee === 0 ? t('common.free') : `${option.fee.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ${t('common.currency')}`}
                               </div>
                             </div>
                             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -720,7 +720,7 @@ const Cart = () => {
                   <div className="flex justify-between">
                     <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage.subtotal')} ({totalItems} {t('checkoutPage.items')})</span>
                     <span className="font-medium">
-                      {subtotal.toLocaleString()} {t('common.currency')}
+                      {subtotal.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
                     </span>
                   </div>
 
@@ -732,7 +732,7 @@ const Cart = () => {
                       {getSelectedShippingOption()?.fee === 0 ? (
                         <span className="text-green-600">{t('common.free')}</span>
                       ) : (
-                        `${getSelectedShippingOption()?.fee?.toLocaleString() || 0} ${t('common.currency')}`
+                        `${getSelectedShippingOption()?.fee?.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) || 0} ${t('common.currency')}`
                       )}
                     </span>
                   </div>
@@ -741,7 +741,7 @@ const Cart = () => {
                     <div className="flex justify-between">
                       <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('common.total')}</span>
                       <span className="text-lg font-bold text-primary-600">
-                        {totalPrice.toLocaleString()} {t('common.currency')}
+                        {totalPrice.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
                       </span>
                     </div>
                   </div>
