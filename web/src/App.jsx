@@ -73,7 +73,10 @@ function App() {
 
   // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Scroll to top with requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
   }, [location.pathname]);
 
   // Check authentication on app load
