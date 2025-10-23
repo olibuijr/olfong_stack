@@ -209,8 +209,8 @@ const OrderDetail = () => {
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 font-medium">
                       {currentOrder.shippingOption?.type === 'pickup'
-                        ? (t('navigation.language') === 'is' ? 'Sækja í verslun' : 'Store Pickup')
-                        : (t('navigation.language') === 'is' ? 'Heimsending' : 'Home Delivery')}
+                        ? t('orderDetailPage.storePickup')
+                        : t('orderDetailPage.homeDelivery')}
                     </p>
                     {currentOrder.pickupTime && (
                       <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
@@ -351,12 +351,12 @@ const OrderDetail = () => {
             {/* Contact Information Footer */}
             <div className="px-6 sm:px-8 py-8 bg-gray-900 dark:bg-black text-white">
               <h2 className="text-xl font-bold mb-6">
-                {t('navigation.language') === 'is' ? 'Hafa samband' : 'Contact'}
+                {t('footer.contact')}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <p className="text-sm text-gray-300 mb-2">
-                    {t('navigation.language') === 'is' ? 'Netfang' : 'Email'}
+                    {t('footer.email')}
                   </p>
                   <a href="mailto:info@olfong.is" className="text-primary-400 hover:text-primary-300 font-medium break-all">
                     info@olfong.is
@@ -364,7 +364,7 @@ const OrderDetail = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-300 mb-2">
-                    {t('navigation.language') === 'is' ? 'Sími' : 'Phone'}
+                    {t('footer.phone')}
                   </p>
                   <a href="tel:+3541234567" className="text-primary-400 hover:text-primary-300 font-medium">
                     +354 123 4567
