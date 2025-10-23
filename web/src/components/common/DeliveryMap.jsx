@@ -146,7 +146,7 @@ const DeliveryMap = ({
       <div
         ref={mapRef}
         className="relative w-full min-h-96 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden"
-        style={{ height: '400px' }}
+        style={{ height: '600px' }}
       />
 
       <div className="text-xs text-gray-500 dark:text-gray-400">
