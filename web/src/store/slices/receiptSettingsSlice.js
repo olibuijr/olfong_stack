@@ -33,7 +33,12 @@ export const uploadReceiptLogo = createAsyncThunk(
       const formData = new FormData();
       formData.append('logo', file);
 
-      const response = await api.post('/receipt-settings/logo', formData);
+      // Don't set Content-Type header - let axios handle it with proper boundary for FormData
+      const response = await api.post('/receipt-settings/logo', formData, {
+        headers: {
+          'Content-Type': undefined
+        }
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to upload logo');
