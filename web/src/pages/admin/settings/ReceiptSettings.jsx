@@ -38,6 +38,8 @@ const ReceiptSettings = () => {
     companyWebsite: '',
     taxId: '',
     headerColor: '#1e40af',
+    headerGradient: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+    useGradient: false,
     accentColor: '#3b82f6',
     fontFamily: 'Inter, system-ui, sans-serif',
     fontSize: '14px',
@@ -48,6 +50,18 @@ const ReceiptSettings = () => {
     template: 'modern',
     paperSize: '80mm'
   });
+
+  // Predefined gradient options
+  const gradientPresets = [
+    { name: 'Blue Gradient', value: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)' },
+    { name: 'Purple Gradient', value: 'linear-gradient(135deg, #7c3aed 0%, #d946ef 100%)' },
+    { name: 'Green Gradient', value: 'linear-gradient(135deg, #059669 0%, #10b981 100%)' },
+    { name: 'Orange Gradient', value: 'linear-gradient(135deg, #ea580c 0%, #f97316 100%)' },
+    { name: 'Red Gradient', value: 'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)' },
+    { name: 'Teal Gradient', value: 'linear-gradient(135deg, #0d9488 0%, #14b8a6 100%)' },
+    { name: 'Pink Gradient', value: 'linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)' },
+    { name: 'Indigo Gradient', value: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)' }
+  ];
 
   const [previewMode, setPreviewMode] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -68,6 +82,8 @@ const ReceiptSettings = () => {
         companyWebsite: settings.companyWebsite || '',
         taxId: settings.taxId || '',
         headerColor: settings.headerColor || '#1e40af',
+        headerGradient: settings.headerGradient || 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+        useGradient: settings.useGradient || false,
         accentColor: settings.accentColor || '#3b82f6',
         fontFamily: settings.fontFamily || 'Inter, system-ui, sans-serif',
         fontSize: settings.fontSize || '14px',
@@ -140,9 +156,10 @@ const ReceiptSettings = () => {
   };
 
   const generatePreviewHTML = () => {
+    const headerStyle = formData.useGradient ? formData.headerGradient : formData.headerColor;
     return `
       <div class="receipt receipt-${formData.template}" style="max-width: ${formData.paperSize === '80mm' ? '300px' : '100%'}; margin: 0 auto; font-family: ${formData.fontFamily}; font-size: ${formData.fontSize}; background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
-        <div class="header" style="background: ${formData.headerColor}; color: white; text-align: center; padding: 15px;">
+        <div class="header" style="background: ${headerStyle}; color: white; text-align: center; padding: 15px;">
           <h1 style="font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${formData.companyNameIs || formData.companyName}</h1>
           ${formData.companyAddress ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyAddressIs || formData.companyAddress}</div>` : ''}
           ${formData.companyPhone ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyPhone}</div>` : ''}
@@ -350,9 +367,9 @@ const ReceiptSettings = () => {
               <div className="space-y-4">
                 {settings?.logoUrl ? (
                   <div className="flex items-center space-x-4">
-                    <div className="w-20 h-20 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 p-2 flex items-center justify-center">
+                    <div className="w-32 h-32 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 p-2 flex items-center justify-center">
                       <img
-                        src={settings.logoUrl}
+                        src={`${(import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api').replace('/api', '')}${settings.logoUrl}`}
                         alt="Company Logo"
                         className="max-w-full max-h-full object-contain"
                       />
@@ -408,44 +425,103 @@ const ReceiptSettings = () => {
               </h2>
               
               <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('adminSettings.headerColor')}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t('adminSettings.headerColor')}
+                  </label>
+
+                  {/* Toggle between solid color and gradient */}
+                  <div className="flex items-center space-x-4 mb-4">
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        checked={!formData.useGradient}
+                        onChange={() => handleInputChange('useGradient', false)}
+                        className="mr-2"
+                      />
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{t('adminSettings.solidColor')}</span>
                     </label>
-                    <div className="flex items-center space-x-2">
+                    <label className="flex items-center cursor-pointer">
                       <input
-                        type="color"
-                        value={formData.headerColor}
-                        onChange={(e) => handleInputChange('headerColor', e.target.value)}
-                        className="w-12 h-10 rounded border border-gray-300"
+                        type="radio"
+                        checked={formData.useGradient}
+                        onChange={() => handleInputChange('useGradient', true)}
+                        className="mr-2"
                       />
-                      <input
-                        type="text"
-                        value={formData.headerColor}
-                        onChange={(e) => handleInputChange('headerColor', e.target.value)}
-                        className="input flex-1"
-                      />
-                    </div>
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{t('adminSettings.gradientColor')}</span>
+                    </label>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      {t('adminSettings.accentColor')}
-                    </label>
-                    <div className="flex items-center space-x-2">
+
+                  {/* Solid color picker */}
+                  {!formData.useGradient && (
+                    <div className="flex items-center space-x-2 mb-4">
                       <input
                         type="color"
-                        value={formData.accentColor}
-                        onChange={(e) => handleInputChange('accentColor', e.target.value)}
+                        value={formData.headerColor}
+                        onChange={(e) => handleInputChange('headerColor', e.target.value)}
                         className="w-12 h-10 rounded border border-gray-300"
                       />
                       <input
                         type="text"
-                        value={formData.accentColor}
-                        onChange={(e) => handleInputChange('accentColor', e.target.value)}
+                        value={formData.headerColor}
+                        onChange={(e) => handleInputChange('headerColor', e.target.value)}
                         className="input flex-1"
                       />
                     </div>
+                  )}
+
+                  {/* Gradient presets */}
+                  {formData.useGradient && (
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                        {gradientPresets.map((preset) => (
+                          <button
+                            key={preset.value}
+                            onClick={() => handleInputChange('headerGradient', preset.value)}
+                            className={`p-3 rounded-lg border-2 transition-all ${
+                              formData.headerGradient === preset.value
+                                ? 'border-blue-500'
+                                : 'border-gray-300 dark:border-gray-600'
+                            }`}
+                            style={{ background: preset.value, minHeight: '60px' }}
+                            title={preset.name}
+                          />
+                        ))}
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {t('adminSettings.customGradient')}
+                        </label>
+                        <textarea
+                          value={formData.headerGradient}
+                          onChange={(e) => handleInputChange('headerGradient', e.target.value)}
+                          className="input w-full h-20 resize-none font-mono text-xs"
+                          placeholder="linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">{t('adminSettings.gradientHelpText')}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {t('adminSettings.accentColor')}
+                  </label>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="color"
+                      value={formData.accentColor}
+                      onChange={(e) => handleInputChange('accentColor', e.target.value)}
+                      className="w-12 h-10 rounded border border-gray-300"
+                    />
+                    <input
+                      type="text"
+                      value={formData.accentColor}
+                      onChange={(e) => handleInputChange('accentColor', e.target.value)}
+                      className="input flex-1"
+                    />
                   </div>
                 </div>
 
