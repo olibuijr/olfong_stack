@@ -160,7 +160,15 @@ const ReceiptSettings = () => {
   const generatePreviewHTML = () => {
     const headerStyle = formData.useGradient ? formData.headerGradient : formData.headerColor;
     const logoUrl = settings?.logoUrl ? `${(import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api').replace('/api', '')}${settings.logoUrl}` : null;
-    const logoFilter = settings?.logoInversion === 'always' ? 'filter: invert(1);' : '';
+
+    let logoFilter = '';
+    if (formData.logoInversion === 'always') {
+      logoFilter = 'filter: invert(1);';
+    } else if (formData.logoInversion === 'theme-aware') {
+      // In dark mode, apply inversion. Check if dark mode is active
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      logoFilter = isDarkMode ? 'filter: invert(1);' : '';
+    }
 
     return `
       <div class="receipt receipt-${formData.template}" style="max-width: ${formData.paperSize === '80mm' ? '300px' : '100%'}; margin: 0 auto; font-family: ${formData.fontFamily}; font-size: ${formData.fontSize}; background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
