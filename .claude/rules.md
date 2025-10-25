@@ -32,9 +32,81 @@ The process manager handles both frontend and backend services automatically.
 
 Always attempt to use Playwright for browser automation tasks, but **never run it in non-headless mode**. Always use headless mode (`headless: true`) and 2K resolution (2560x1440). If Playwright encounters an error, report it clearly and suggest alternatives if applicable.
 
-## Translation Strings
+## Translation Management
 
-Always create translation strings via the API when creating new strings not already available. Do not hardcode text strings in the application - they must be registered in the translation system to support multi-language functionality.
+Always create translation strings via the translation system when creating new strings not already available. Do not hardcode text strings in the application - they must be registered to support multi-language functionality.
+
+### When Adding New Translation Keys
+
+1. **Use translation keys in UI**: Always reference translations via `t('key.name')` in components, never hardcode text.
+
+2. **Create translation script**: When adding new translation keys, create a script in `backend/scripts/add-[feature]-translations.js`:
+   ```javascript
+   const { PrismaClient } = require('@prisma/client');
+   const prisma = new PrismaClient();
+
+   const translations = [
+     { key: 'feature.key', en: 'English text', is: 'Icelandic text' },
+     // Add all keys needed
+   ];
+
+   async function addTranslations() {
+     console.log('Adding translations...\n');
+     try {
+       for (const { key, en, is } of translations) {
+         // Add English translation
+         await prisma.lang.upsert({
+           where: { key_locale: { key, locale: 'en' } },
+           update: { value: en },
+           create: { key, locale: 'en', value: en }
+         });
+
+         // Add Icelandic translation
+         await prisma.lang.upsert({
+           where: { key_locale: { key, locale: 'is' } },
+           update: { value: is },
+           create: { key, locale: 'is', value: is }
+         });
+
+         console.log(`✓ Added/Updated: ${key}`);
+       }
+       console.log('\n✓ All translations added successfully!');
+     } catch (error) {
+       console.error('Error adding translations:', error);
+       throw error;
+     } finally {
+       await prisma.$disconnect();
+     }
+   }
+
+   addTranslations();
+   ```
+
+3. **Run the translation script**: Execute `node scripts/add-[feature]-translations.js` from the backend directory to add translations to the database.
+
+4. **Use correct key format**: Follow the naming convention `section.key` (e.g., `adminSettings.logoColorMode`, `forms.submit`, `errors.validation`).
+
+5. **Always provide both languages**: Every translation key must have both English (`en`) and Icelandic (`is`) translations.
+
+6. **Commit together**: Commit the translation script along with the component changes that use the new keys.
+
+### Translation Key Naming Conventions
+
+- `adminSettings.*` - Admin settings page labels and options
+- `forms.*` - Form labels and messages
+- `errors.*` - Error messages
+- `success.*` - Success notifications
+- `buttons.*` - Button labels
+- `labels.*` - General labels
+- `messages.*` - General messages and status text
+
+### Example Workflow
+
+1. Add translation key to component: `{t('adminSettings.newFeature')}`
+2. Create `backend/scripts/add-new-feature-translations.js` with both English and Icelandic text
+3. Run the script: `node scripts/add-new-feature-translations.js`
+4. Verify translations appear in the UI
+5. Commit all changes together
 
 ## Code Cleanup
 
