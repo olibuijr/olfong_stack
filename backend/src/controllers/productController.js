@@ -107,7 +107,11 @@ const getProducts = async (req, res) => {
         take: parseInt(limit),
         orderBy,
         include: {
-          category: true,
+          category: {
+            include: {
+              vatProfile: true,
+            }
+          },
           subcategory: true,
         }
       }),
@@ -160,7 +164,11 @@ const getProduct = async (req, res) => {
     const product = await prisma.product.findUnique({
       where: { id: parseInt(id) },
       include: {
-        category: true,
+        category: {
+          include: {
+            vatProfile: true,
+          }
+        },
         subcategory: true,
       }
     });
@@ -283,9 +291,9 @@ const createProduct = async (req, res) => {
         'Líkjör': 'SPIRITS',
         'Síder': 'CIDER_RTD'
       };
-      
+
       const mappedCategoryName = categoryMapping[req.body.category] || req.body.category.toUpperCase();
-      
+
       const category = await prisma.category.findFirst({
         where: { name: mappedCategoryName }
       });
@@ -298,6 +306,13 @@ const createProduct = async (req, res) => {
         });
         productData.categoryId = defaultCategory?.id || 1;
       }
+    }
+
+    // For ATVR imports, automatically assign 24% VAT profile (Standard Rate)
+    if (req.body.atvrProductId && !req.body.vatProfileId) {
+      productData.vatProfileId = 1; // Standard Rate (24% VAT)
+    } else if (req.body.vatProfileId) {
+      productData.vatProfileId = parseInt(req.body.vatProfileId);
     }
 
     // Add image URL if file was uploaded
