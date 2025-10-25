@@ -36,6 +36,15 @@ Always attempt to use Playwright for browser automation tasks, but **never run i
 
 Always create translation strings via the API when creating new strings not already available. Do not hardcode text strings in the application - they must be registered in the translation system to support multi-language functionality.
 
+## Code Cleanup
+
+Never create summary documents, analysis files, or documentation files (*.md, *.txt) in the codebase root unless explicitly requested. This keeps the codebase clean and organized. Examples of files to avoid creating:
+- SUMMARY.md, ANALYSIS.md, REPORT.md, etc.
+- FIX_SUMMARY.txt, VERIFICATION_REPORT.md, etc.
+- Architecture or code fix documentation files
+
+Only create documentation when the user explicitly asks for it.
+
 ## Frontend Development
 
 The frontend has hot reload enabled. You do NOT need to restart the frontend service when making CSS or component changes - the changes will be automatically reflected in the browser when you save files. Only restart if you encounter issues or if changes don't appear after saving.
