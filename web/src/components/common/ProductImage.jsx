@@ -62,7 +62,7 @@ const ProductImage = ({ product, className = "w-full h-64 object-contain", curre
 
   return (
     <img
-      src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
+      src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${product.imageUrl}`}
       alt={getProductName(currentLanguage, product)}
       className={className}
       onError={() => setImageError(true)}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/product_provider.dart';
 import '../../widgets/product_card.dart';
+import '../../widgets/layout/custom_app_bar.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -24,10 +25,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Products'),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(showCart: true),
       body: Consumer<ProductProvider>(
         builder: (context, productProvider, child) {
           if (productProvider.isLoading) {
@@ -58,8 +56,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
               : productProvider.getProductsByCategory(_selectedCategory!);
 
           return Column(
-            children: [
-              // Category filter
+              children: [
+                // Category filter
               if (categories.isNotEmpty)
                 Container(
                   height: 50,
@@ -99,30 +97,31 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     },
                   ),
                 ),
-              
-              // Products grid
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async {
-                    await productProvider.loadProducts();
-                  },
-                  child: GridView.builder(
-                    padding: const EdgeInsets.all(16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.75,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
-                    itemCount: filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = filteredProducts[index];
-                      return ProductCard(product: product);
+
+
+                // Products grid
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      await productProvider.loadProducts();
                     },
+                    child: GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.75,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                      ),
+                      itemCount: filteredProducts.length,
+                      itemBuilder: (context, index) {
+                        final product = filteredProducts[index];
+                        return ProductCard(product: product);
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
           );
         },
       ),

@@ -4,43 +4,11 @@
 
 [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
 
-  VITE v5.4.20  ready in 216 ms
+  VITE v5.4.20  ready in 197 ms
 
   ➜  Local:   http://localhost:3001/
-(node:408214) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/olibuijr/Projects/olfong_stack/web/postcss.config.js is not specified and it doesn't parse as CommonJS.
+  ➜  Network: http://192.168.8.62:3001/
+(node:246210) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/olibuijr/Projects/olfong_stack/web/postcss.config.js is not specified and it doesn't parse as CommonJS.
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/olibuijr/Projects/olfong_stack/web/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
-1:24:01 AM [vite] hmr update /src/pages/Home.jsx, /src/index.css
-1:25:56 AM [vite] hmr update /src/pages/Products.jsx, /src/index.css
-1:25:59 AM [vite] hmr update /src/components/common/ProductImage.jsx, /src/index.css
-1:26:09 AM [vite] hmr update /src/pages/Products.jsx, /src/index.css
-1:27:00 AM [vite] hmr update /src/components/layout/Navbar.jsx, /src/index.css
-1:28:24 AM [vite] hmr update /src/components/layout/Navbar.jsx, /src/index.css
-1:29:11 AM [vite] hmr update /src/components/layout/Navbar.jsx, /src/index.css
-1:35:19 AM [vite] hmr update /src/index.css
-1:37:34 AM [vite] hmr update /src/pages/admin/Customers.jsx, /src/index.css
-1:37:38 AM [vite] hmr update /src/pages/admin/Customers.jsx, /src/index.css
-1:38:03 AM [vite] hmr update /src/pages/admin/Categories.jsx, /src/index.css
-1:38:15 AM [vite] hmr update /src/pages/Products.jsx, /src/index.css
-1:38:22 AM [vite] hmr update /src/pages/Products.jsx, /src/index.css
-1:49:03 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:49:04 AM [vite] ✨ new dependencies optimized: leaflet
-1:49:04 AM [vite] ✨ optimized dependencies changed. reloading
-1:49:26 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:49:56 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:51:23 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
-1:51:33 AM [vite] hmr update /src/index.css
-1:55:05 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:55:13 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:56:57 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
-1:57:01 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
-1:57:06 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:57:28 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
-1:57:32 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
-1:57:49 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:57:54 AM [vite] hmr update /src/pages/OrderDetail.jsx, /src/index.css
-1:58:49 AM [vite] hmr update /src/components/common/DeliveryMap.jsx, /src/index.css
-2:06:22 AM [vite] hmr update /src/pages/Cart.jsx, /src/index.css
-2:06:32 AM [vite] hmr update /src/pages/Cart.jsx, /src/index.css
-2:06:38 AM [vite] hmr update /src/pages/Cart.jsx, /src/index.css

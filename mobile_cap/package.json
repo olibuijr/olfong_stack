@@ -1,0 +1,35 @@
+{
+  "name": "olfong-mobile",
+  "version": "1.0.0",
+  "description": "Ölföng Mobile App - iOS & Android",
+  "main": "index.js",
+  "scripts": {
+    "build:web": "cd ../web && npm run build",
+    "sync": "npm run build:web && npx cap sync",
+    "open:ios": "npx cap open ios",
+    "open:android": "npx cap open android",
+    "run:ios": "npm run sync && npx cap run ios",
+    "run:android": "npm run sync && npx cap run android",
+    "dev:android": "npx cap run android --live-reload --host=192.168.8.62 --port=3001",
+    "dev:ios": "npx cap run ios --live-reload --host=192.168.8.62 --port=3001"
+  },
+  "keywords": [
+    "capacitor",
+    "mobile",
+    "ios",
+    "android",
+    "ecommerce"
+  ],
+  "author": "Ölföng",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "@capacitor/ios": "^7.4.4",
+    "@capacitor/status-bar": "^7.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.4",
+    "typescript": "^5.9.3"
+  }
+}

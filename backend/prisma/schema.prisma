@@ -499,13 +499,14 @@ model PaymentGateway {
   supportedCurrencies String[] // Array of supported currency codes
   supportedCountries  String[] // Array of supported country codes
   supportedMethods    String[] // Array of supported payment methods
-  
+  supportsSubscriptions Boolean @default(false) // Whether this gateway supports recurring/subscription payments
+
   // Metadata
   description String?
   logoUrl     String?
   website     String?
   documentation String?
-  
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

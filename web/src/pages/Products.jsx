@@ -10,6 +10,7 @@ import { fetchProducts, fetchCategories, setFilters } from '../store/slices/prod
 import ProductImage from '../components/common/ProductImage';
 import SkeletonLoader from '../components/common/SkeletonLoader';
 import DualThumbSlider from '../components/common/DualThumbSlider';
+import CategoryHeader from '../components/common/CategoryHeader';
 import { getProductName, getProductDescription, getProductCountry, getProductFoodPairings } from '../utils/languageUtils';
 import '../styles/scrollbar.css';
 
@@ -44,6 +45,7 @@ const Products = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -57,17 +59,26 @@ const Products = () => {
     const categoryFromUrl = searchParams.get('category');
     const subcategoryFromUrl = searchParams.get('subcategory');
 
-    if (categoryFromUrl && categoryFromUrl !== filters.category) {
+    if (categoryFromUrl && (categoryFromUrl !== filters.category || subcategoryFromUrl !== filters.subcategory)) {
       dispatch(setFilters({ category: categoryFromUrl, subcategory: subcategoryFromUrl || '' }));
       // Set selected category for UI state
       const category = categories.find(cat => cat.name === categoryFromUrl);
       setSelectedCategory(category || null);
+
+      // Set selected subcategory if available
+      if (subcategoryFromUrl && category) {
+        const subcategory = category.subcategories?.find(sub => sub.name === subcategoryFromUrl);
+        setSelectedSubcategory(subcategory || null);
+      } else {
+        setSelectedSubcategory(null);
+      }
     } else if (!categoryFromUrl && filters.category) {
       // Clear category and subcategory if no category in URL
       dispatch(setFilters({ category: '', subcategory: '' }));
       setSelectedCategory(null);
+      setSelectedSubcategory(null);
     }
-  }, [searchParams, dispatch, filters.category, categories]);
+  }, [searchParams, dispatch, filters.category, filters.subcategory, categories]);
 
   // Fetch products whenever filters change
   useEffect(() => {
@@ -113,6 +124,37 @@ const Products = () => {
   const handleAlcoholVolumeFilterChange = (minAlcoholVolume, maxAlcoholVolume) => {
     dispatch(setFilters({ minAlcoholVolume, maxAlcoholVolume }));
   };
+
+  // Calculate min/max values from visible products
+  const getVisibleProductPriceRange = () => {
+    if (products.length === 0) return { min: 0, max: 50000 };
+
+    const prices = products.map(p => p.price).filter(p => p !== null && p !== undefined);
+    if (prices.length === 0) return { min: 0, max: 50000 };
+
+    const minPrice = Math.min(...prices);
+    const maxPrice = Math.max(...prices);
+
+    return { min: minPrice, max: maxPrice };
+  };
+
+  const getVisibleProductAlcoholRange = () => {
+    if (products.length === 0) return { min: 0, max: 50 };
+
+    const alcoholValues = products
+      .map(p => p.alcoholContent)
+      .filter(a => a !== null && a !== undefined);
+
+    if (alcoholValues.length === 0) return { min: 0, max: 50 };
+
+    const minAlc = Math.min(...alcoholValues);
+    const maxAlc = Math.max(...alcoholValues);
+
+    return { min: minAlc, max: maxAlc };
+  };
+
+  const visiblePriceRange = getVisibleProductPriceRange();
+  const visibleAlcoholRange = getVisibleProductAlcoholRange();
 
   // Show loading skeleton only on initial load
   const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
@@ -170,7 +212,7 @@ const Products = () => {
                 </div>
 
                  {/* Categories */}
-                 <div>
+                 <div className="mb-6">
                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                      {t('productsPage.category')}
                    </label>
@@ -199,12 +241,13 @@ const Products = () => {
                          >
                            {currentLanguage === 'is' ? category.nameIs : category.name}
                          </button>
-                         {/* Subcategories in sidebar */}
-                         {filters.category === category.name && category.subcategories && category.subcategories.length > 0 && (
+                         {/* Subcategories in sidebar - only show if they have products */}
+                         {filters.category === category.name && category.subcategories && category.subcategories.filter(sub => sub._count?.products > 0).length > 0 && (
                            <div className="ml-4 mt-2 space-y-1">
                              <button
                                onClick={() => {
                                  dispatch(setFilters({ subcategory: '' }));
+                                 setSelectedSubcategory(null);
                                  const newSearchParams = new URLSearchParams(searchParams);
                                  newSearchParams.set('category', category.name);
                                  newSearchParams.delete('subcategory');
@@ -218,11 +261,12 @@ const Products = () => {
                              >
                                {t('productsPage.all')}
                              </button>
-                             {category.subcategories.map((subcategory) => (
+                             {category.subcategories.filter(sub => sub._count?.products > 0).map((subcategory) => (
                                <button
                                  key={subcategory.id}
                                  onClick={() => {
                                    dispatch(setFilters({ subcategory: subcategory.name }));
+                                   setSelectedSubcategory(subcategory);
                                    const newSearchParams = new URLSearchParams(searchParams);
                                    newSearchParams.set('category', category.name);
                                    newSearchParams.set('subcategory', subcategory.name);
@@ -247,12 +291,12 @@ const Products = () => {
                 {/* Price Range Filter */}
                 <div>
                   <DualThumbSlider
-                    min={0}
-                    max={50000}
+                    min={visiblePriceRange.min}
+                    max={visiblePriceRange.max}
                     step={100}
-                    value={[filters.minPrice || 0, filters.maxPrice || 50000]}
+                    value={[filters.minPrice || visiblePriceRange.min, filters.maxPrice || visiblePriceRange.max]}
                     onChange={(values) => handlePriceFilterChange(values[0], values[1])}
-                    label={`${t('productsPage.priceRange')} (${filters.minPrice || 0} - ${filters.maxPrice || 50000} kr)`}
+                    label={`${t('productsPage.priceRange')} (${filters.minPrice || visiblePriceRange.min} - ${filters.maxPrice || visiblePriceRange.max} kr)`}
                     formatValue={(val) => `${val} kr`}
                   />
                 </div>
@@ -260,12 +304,12 @@ const Products = () => {
                 {/* Alcohol Volume Range Filter */}
                 <div>
                   <DualThumbSlider
-                    min={0}
-                    max={50}
+                    min={visibleAlcoholRange.min}
+                    max={visibleAlcoholRange.max}
                     step={0.5}
-                    value={[filters.minAlcoholVolume || 0, filters.maxAlcoholVolume || 50]}
+                    value={[filters.minAlcoholVolume || visibleAlcoholRange.min, filters.maxAlcoholVolume || visibleAlcoholRange.max]}
                     onChange={(values) => handleAlcoholVolumeFilterChange(values[0], values[1])}
-                    label={`${t('productsPage.alcoholContent')} (${filters.minAlcoholVolume || 0} - ${filters.maxAlcoholVolume || 50}%)`}
+                    label={`${t('productsPage.alcoholContent')} (${filters.minAlcoholVolume || visibleAlcoholRange.min} - ${filters.maxAlcoholVolume || visibleAlcoholRange.max}%)`}
                     formatValue={(val) => `${val}%`}
                   />
                 </div>
@@ -277,22 +321,22 @@ const Products = () => {
           <div className="flex-1 min-w-0">
             {/* Header */}
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
                   {t('productsPage.title')}
                 </h1>
-                
-                <div className="flex items-center gap-4">
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
                   {/* Sort Dropdown */}
-                  <div className="flex items-center gap-2">
-                    <ArrowUpDown className="w-4 h-4 text-gray-500" />
+                  <div className="flex items-center gap-2 flex-1 sm:flex-none min-w-0">
+                    <ArrowUpDown className="w-4 h-4 text-gray-500 flex-shrink-0" />
                     <select
                       value={`${filters.sortBy}-${filters.sortOrder}`}
                       onChange={(e) => {
                         const [sortBy, sortOrder] = e.target.value.split('-');
                         handleSortChange(sortBy, sortOrder);
                       }}
-                      className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="flex-1 sm:flex-none px-3 py-2 text-sm sm:text-base border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     >
                       <option value="name-asc">{t('productsPage.sortOptions.nameAZ')}</option>
                       <option value="name-desc">{t('productsPage.sortOptions.nameZA')}</option>
@@ -302,22 +346,22 @@ const Products = () => {
                       <option value="alcoholVolume-desc">{t('productsPage.sortBy')}</option>
                     </select>
                   </div>
-                  
+
                   {/* Mobile Filter Button */}
                   <button
                     onClick={() => setIsMobileFilterOpen(true)}
-                    className="lg:hidden btn btn-outline flex items-center gap-2"
+                    className="lg:hidden btn btn-outline flex items-center justify-center gap-2 py-2 px-3 text-sm sm:text-base flex-1 sm:flex-none whitespace-nowrap"
                   >
-                    <Filter className="w-4 h-4" />
-                    {t('productsPage.filters')}
+                    <Filter className="w-4 h-4 flex-shrink-0" />
+                    <span className="hidden sm:inline">{t('productsPage.filters')}</span>
+                    <span className="sm:hidden">{t('productsPage.filters')}</span>
                   </button>
                 </div>
               </div>
-              
-               <p className="text-gray-600 dark:text-gray-400">
-                 {products.length} {t('common.item')}
-               </p>
              </div>
+
+            {/* Category Description Header */}
+            {selectedCategory && <CategoryHeader category={selectedCategory} subcategory={selectedSubcategory} />}
 
 {/* Category Navigation */}
               <div className="mb-6">
@@ -353,8 +397,8 @@ const Products = () => {
                  ))}
                </div>
 
-{/* Subcategories */}
-                {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.length > 0 && (
+{/* Subcategories - only show if they have products */}
+                {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.filter(sub => sub._count?.products > 0).length > 0 && (
                   <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-2 pl-4 border-l-2 border-primary-200 dark:border-primary-800 custom-scrollbar">
                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium flex-shrink-0">
                      {t('productsPage.subcategory')}:
@@ -369,7 +413,7 @@ const Products = () => {
                    >
                      {t('productsPage.all')}
                    </button>
-                   {selectedCategory.subcategories.map((subcategory) => (
+                   {selectedCategory.subcategories.filter(sub => sub._count?.products > 0).map((subcategory) => (
                      <button
                        key={subcategory.id}
                        onClick={() => {
@@ -399,6 +443,12 @@ const Products = () => {
              </div>
 
             {/* Products Grid */}
+            <div className="relative">
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                  <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent"></div>
+                </div>
+              )}
             {products.length === 0 ? (
               <div className="text-center py-20">
                 <div className="max-w-md mx-auto">
@@ -422,7 +472,7 @@ const Products = () => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+              <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 transition-opacity duration-200 ${isLoading ? 'opacity-60 pointer-events-none' : 'opacity-100'}`}>
                 {products.map((product) => (
                   <div key={product.id} className="group h-full">
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 h-full flex flex-col overflow-hidden">
@@ -456,12 +506,17 @@ const Products = () => {
                           {/* ATVR Product Info */}
                           {(product.volume || product.alcoholContent || product.country) && (
                             <div className="mt-3 space-y-1">
-                              {product.volume && (
+                              {product.volume && product.alcoholContent && (
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                  <span className="font-medium">{t('product.volume')}:</span> {product.volume} - {product.alcoholContent}%
+                                </p>
+                              )}
+                              {product.volume && !product.alcoholContent && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
                                   <span className="font-medium">{t('product.volume')}:</span> {product.volume}
                                 </p>
                               )}
-                              {product.alcoholContent && (
+                              {!product.volume && product.alcoholContent && (
                                 <p className="text-xs text-gray-500 dark:text-gray-400">
                                   <span className="font-medium">{t('product.abv')}:</span> {product.alcoholContent}%
                                 </p>
@@ -535,6 +590,7 @@ const Products = () => {
                 ))}
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>
@@ -605,8 +661,8 @@ const Products = () => {
                      >
                        {currentLanguage === 'is' ? category.nameIs : category.name}
                      </button>
-                     {/* Subcategories in mobile */}
-                     {filters.category === category.name && category.subcategories && category.subcategories.length > 0 && (
+                     {/* Subcategories in mobile - only show if they have products */}
+                     {filters.category === category.name && category.subcategories && category.subcategories.filter(sub => sub._count?.products > 0).length > 0 && (
                        <div className="ml-4 mt-2 space-y-1">
                          <button
                            onClick={() => {
@@ -625,7 +681,7 @@ const Products = () => {
                          >
                            {t('productsPage.all')}
                          </button>
-                         {category.subcategories.map((subcategory) => (
+                         {category.subcategories.filter(sub => sub._count?.products > 0).map((subcategory) => (
                            <button
                              key={subcategory.id}
                              onClick={() => {

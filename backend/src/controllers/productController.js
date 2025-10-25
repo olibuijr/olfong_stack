@@ -8,17 +8,18 @@ const { downloadAndSaveImage } = require('./atvrController');
  */
 const getProducts = async (req, res) => {
   try {
-    const { 
-      category, 
-      search, 
-      minPrice, 
-      maxPrice, 
-      minAlcoholVolume, 
+    const {
+      category,
+      subcategory,
+      search,
+      minPrice,
+      maxPrice,
+      minAlcoholVolume,
       maxAlcoholVolume,
       sortBy,
       sortOrder,
-      page = 1, 
-      limit = 20 
+      page = 1,
+      limit = 20
     } = req.query;
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
@@ -39,6 +40,21 @@ const getProducts = async (req, res) => {
       } catch (error) {
         console.error('Category lookup error:', error);
         // Continue without category filter if lookup fails
+      }
+    }
+
+    if (subcategory) {
+      // Find subcategory by name and use its ID
+      try {
+        const subcategoryRecord = await prisma.subcategory.findFirst({
+          where: { name: subcategory.toUpperCase() }
+        });
+        if (subcategoryRecord) {
+          where.subcategoryId = subcategoryRecord.id;
+        }
+      } catch (error) {
+        console.error('Subcategory lookup error:', error);
+        // Continue without subcategory filter if lookup fails
       }
     }
 
@@ -92,6 +108,7 @@ const getProducts = async (req, res) => {
         orderBy,
         include: {
           category: true,
+          subcategory: true,
         }
       }),
       prisma.product.count({ where }),
@@ -144,6 +161,7 @@ const getProduct = async (req, res) => {
       where: { id: parseInt(id) },
       include: {
         category: true,
+        subcategory: true,
       }
     });
 

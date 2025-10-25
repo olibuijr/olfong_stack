@@ -2,10 +2,13 @@ import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { AdminSidebarProvider } from './contexts/AdminSidebarContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from './store/slices/authSlice';
 import { updateOrderStatusRealtime } from './store/slices/orderSlice';
 import socketService from './services/socket';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import AdminSidebarWidget from './components/admin/AdminSidebarWidget';
 
 // Components
 import Navbar from './components/layout/Navbar';
@@ -69,6 +72,41 @@ function App() {
     };
 
     updateTitle();
+
+    // Configure status bar for mobile apps
+    const updateStatusBar = () => {
+      if (typeof window !== 'undefined' && window.Capacitor?.isNativePlatform()) {
+        const isDark = document.documentElement.classList.contains('dark');
+
+        // Style.Dark = white text (for dark backgrounds)
+        // Style.Light = dark text (for light backgrounds)
+        StatusBar.setStyle({ style: isDark ? Style.Dark : Style.Light }).catch(err => {
+          console.warn('Status bar styling not available:', err);
+        });
+        StatusBar.setBackgroundColor({ color: isDark ? '#1f2937' : '#ffffff' }).catch(err => {
+          console.warn('Status bar background color not available:', err);
+        });
+      }
+    };
+
+    // Initial status bar setup
+    updateStatusBar();
+
+    // Watch for theme changes using MutationObserver
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateStatusBar();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   // Scroll to top on route change
@@ -137,11 +175,12 @@ function App() {
 
   return (
     <LanguageProvider>
-      <div className="min-h-screen flex flex-col bg-gray-50">
-        <Navbar />
+      <AdminSidebarProvider>
+        <div className="min-h-screen flex flex-col bg-gray-50">
+          <Navbar />
 
-        <main className="flex-1 pt-16 pb-16 md:pb-0">
-          <Routes>
+          <main className="flex-1 pt-16-safe pb-16-safe md:pb-0">
+            <Routes>
             {/* Public routes */}
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
@@ -203,7 +242,11 @@ function App() {
 
         {/* Chat Widget - Available on all pages */}
         <ChatWidget />
+
+        {/* Admin Sidebar Widget - Available globally for admin users */}
+        <AdminSidebarWidget />
       </div>
+      </AdminSidebarProvider>
     </LanguageProvider>
   );
 

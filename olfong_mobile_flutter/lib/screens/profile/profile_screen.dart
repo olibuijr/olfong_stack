@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import '../../providers/auth_provider.dart';
+import '../../widgets/layout/custom_app_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,28 +10,33 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: 'Profile',
+        showCart: false,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => _showLogoutDialog(context),
+          Consumer<AuthProvider>(
+            builder: (context, authProvider, child) {
+              return IconButton(
+                icon: const Icon(Icons.logout),
+                onPressed: () => _showLogoutDialog(context),
+                tooltip: 'Logout',
+              );
+            },
           ),
         ],
       ),
       body: Consumer<AuthProvider>(
-        builder: (context, authProvider, child) {
-          if (authProvider.user == null) {
-            return const Center(child: CircularProgressIndicator());
-          }
+          builder: (context, authProvider, child) {
+            if (authProvider.user == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-          final user = authProvider.user!;
+            final user = authProvider.user!;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
+            return SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
+              child: Column(
+                children: [
                 // Profile header
                 Card(
                   child: Padding(
@@ -163,10 +169,10 @@ class ProfileScreen extends StatelessWidget {
                     );
                   },
                 ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
       ),
     );
   }

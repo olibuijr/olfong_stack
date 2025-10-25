@@ -15,7 +15,7 @@ export default defineConfig({
     video: 'retain-on-failure',
     actionTimeout: 15000, // Increased from 10000
     navigationTimeout: 45000, // Increased from 30000
-    headless: false, // Set to false for debugging
+    headless: true, // Run headless always
   },
 
   // Enhanced reporting for better debugging

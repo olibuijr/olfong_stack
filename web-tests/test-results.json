@@ -10,9 +10,7 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {
-      "actualWorkers": 1
-    },
+    "metadata": {},
     "preserveOutput": "always",
     "reporter": [
       [
@@ -44,9 +42,7 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "firefox",
         "name": "firefox",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
@@ -64,106 +60,29 @@
     "workers": 2,
     "webServer": null
   },
-  "suites": [
+  "suites": [],
+  "errors": [
     {
-      "title": "products/browse-products.spec.ts",
-      "file": "products/browse-products.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Product Browsing",
-          "file": "products/browse-products.spec.ts",
-          "line": 3,
-          "column": 6,
-          "specs": [
-            {
-              "title": "should display products on home page",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "firefox",
-                  "projectName": "firefox",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 14044,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\u001b[22m\n\n    at /home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts:8:91",
-                        "location": {
-                          "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts",
-                          "column": 91,
-                          "line": 8
-                        },
-                        "snippet": "   6 |\n   7 |     // Wait for page to load and check for main content\n>  8 |     await expect(page.getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })).toBeVisible();\n     |                                                                                           ^\n   9 |     // Check for main content area\n  10 |     await expect(page.locator('main')).toBeVisible();\n  11 |   });"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts",
-                            "column": 91,
-                            "line": 8
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })\u001b[22m\n\n\n   6 |\n   7 |     // Wait for page to load and check for main content\n>  8 |     await expect(page.getByRole('heading', { name: /Why Ölföng\\?|Af hverju Ölföng\\?/i })).toBeVisible();\n     |                                                                                           ^\n   9 |     // Check for main content area\n  10 |     await expect(page.locator('main')).toBeVisible();\n  11 |   });\n    at /home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts:8:91"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-10-22T16:02:01.962Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results/products-browse-products-P-c9632-splay-products-on-home-page-firefox/test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results/products-browse-products-P-c9632-splay-products-on-home-page-firefox/error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results/products-browse-products-P-c9632-splay-products-on-home-page-firefox/trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/products/browse-products.spec.ts",
-                        "column": 91,
-                        "line": 8
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "6ab804ad8168167ac4cf-c84e256cea8c3e05965b",
-              "file": "products/browse-products.spec.ts",
-              "line": 4,
-              "column": 7
-            }
-          ]
-        }
-      ]
+      "message": "SyntaxError: /home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts: Unterminated string constant. (340:39)\n\n  338 |     // Step 7: Verify status update was saved\n  339 |     logTestStep('Step 7: Verify status was updated');\n> 340 |     const currentStatus = page.locator('[class*=\"current-status\"], text=/Status:\\\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();\n      |                                        ^\n  341 |     if (await currentStatus.count() > 0) {\n  342 |       const statusText = await currentStatus.textContent();\n  343 |       logTestStep(`Current order status: ${statusText}`);",
+      "stack": "SyntaxError: /home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts: Unterminated string constant. (340:39)\n\n  338 |     // Step 7: Verify status update was saved\n  339 |     logTestStep('Step 7: Verify status was updated');\n> 340 |     const currentStatus = page.locator('[class*=\"current-status\"], text=/Status:\\\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();\n      |                                        ^\n  341 |     if (await currentStatus.count() > 0) {\n  342 |       const statusText = await currentStatus.textContent();\n  343 |       logTestStep(`Current order status: ${statusText}`);",
+      "location": {
+        "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts",
+        "line": 340,
+        "column": 39
+      },
+      "snippet": "\u001b[90m   at \u001b[39mcheckout/complete-order-flow.spec.ts:340\n\n  338 |     // Step 7: Verify status update was saved\n  339 |     logTestStep('Step 7: Verify status was updated');\n> 340 |     const currentStatus = page.locator('[class*=\"current-status\"], text=/Status:\\\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();\n      |                                       ^\n  341 |     if (await currentStatus.count() > 0) {\n  342 |       const statusText = await currentStatus.textContent();\n  343 |       logTestStep(`Current order status: ${statusText}`);"
+    },
+    {
+      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
+      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
     }
   ],
-  "errors": [],
   "stats": {
-    "startTime": "2025-10-22T16:01:59.830Z",
-    "duration": 19693.146999999997,
+    "startTime": "2025-10-25T15:13:15.414Z",
+    "duration": 75.66300000000001,
     "expected": 0,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   }
 }

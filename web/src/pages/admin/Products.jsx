@@ -486,7 +486,7 @@ const AdminProducts = () => {
                   <div className="aspect-square bg-white dark:bg-white rounded-lg mb-4 overflow-hidden p-2">
                     {product.imageUrl ? (
                       <img
-                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
+                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${product.imageUrl}`}
                         alt={product.name}
                         className="w-full h-full object-contain"
                       />
@@ -558,7 +558,7 @@ const AdminProducts = () => {
                   <div className="w-24 h-24 bg-white dark:bg-white rounded-lg overflow-hidden flex-shrink-0 p-2">
                     {product.imageUrl ? (
                       <img
-                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${product.imageUrl}`}
+                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${product.imageUrl}`}
                         alt={product.name}
                         className="w-full h-full object-contain"
                       />

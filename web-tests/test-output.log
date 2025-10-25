@@ -1,0 +1,29 @@
+SyntaxError: /home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts: Unterminated string constant. (340:39)
+
+  338 |     // Step 7: Verify status update was saved
+  339 |     logTestStep('Step 7: Verify status was updated');
+> 340 |     const currentStatus = page.locator('[class*="current-status"], text=/Status:\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();
+      |                                        ^
+  341 |     if (await currentStatus.count() > 0) {
+  342 |       const statusText = await currentStatus.textContent();
+  343 |       logTestStep(`Current order status: ${statusText}`);
+
+   at checkout/complete-order-flow.spec.ts:340
+
+  338 |     // Step 7: Verify status update was saved
+  339 |     logTestStep('Step 7: Verify status was updated');
+> 340 |     const currentStatus = page.locator('[class*="current-status"], text=/Status:\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();
+      |                                       ^
+  341 |     if (await currentStatus.count() > 0) {
+  342 |       const statusText = await currentStatus.textContent();
+  343 |       logTestStep(`Current order status: ${statusText}`);
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

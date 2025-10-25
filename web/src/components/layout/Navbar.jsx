@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from "../../contexts/LanguageContext";
+import { useAdminSidebar } from "../../contexts/AdminSidebarContext";
 import { useSelector, useDispatch } from 'react-redux';
 import { Menu, X, ShoppingCart, User, Globe, Settings, Search, Package, LayoutDashboard, BarChart3, FileText, MessageCircle, Bell, Truck, Calculator, FolderOpen, Image, FileImage, Languages, Play, CreditCard, Receipt, Clock, Plus } from 'lucide-react';
 import { logout } from '../../store/slices/authSlice';
@@ -13,16 +14,20 @@ import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const { t, currentLanguage, setCurrentLanguage } = useLanguage();
+  const location = useLocation();
+  const { setSidebarOpen } = useAdminSidebar();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { categories } = useSelector((state) => state.products);
+
+  // Check if we're on an admin page
+  const isAdminPage = location.pathname.startsWith('/admin');
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
   const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 
@@ -35,6 +40,7 @@ const Navbar = () => {
   const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // Refs
   const searchInputRef = useRef(null);
@@ -43,7 +49,6 @@ const Navbar = () => {
   const shopMenuRef = useRef(null);
   const userMenuRef = useRef(null);
   const languageMenuRef = useRef(null);
-  const adminMenuRef = useRef(null);
 
   const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
 
@@ -51,6 +56,16 @@ const Navbar = () => {
     dispatch(fetchCategories());
     fetchOpeningHours();
   }, [dispatch]);
+
+  // Handle window resize to detect mobile/desktop
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Fetch opening hours from the database
   const fetchOpeningHours = async () => {
@@ -291,23 +306,6 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isShopMenuOpen]);
 
-  // Close admin menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        adminMenuRef.current &&
-        !adminMenuRef.current.contains(event.target)
-      ) {
-        setIsAdminMenuOpen(false);
-      }
-    };
-
-    if (isAdminMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isAdminMenuOpen]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -319,7 +317,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700 fixed top-0 left-0 right-0 z-50" role="navigation" aria-label={t('aria.mainNavigation')}>
+    <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700 fixed top-0 left-0 right-0 z-50 pt-safe" role="navigation" aria-label={t('aria.mainNavigation')}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Hours */}
@@ -328,7 +326,7 @@ const Navbar = () => {
               <img
                 src="/logo_black-web.webp"
                 alt={t('aria.logo')}
-                className="h-12 w-auto dark:invert"
+                className="h-10 sm:h-12 w-auto dark:invert"
               />
             </Link>
 
@@ -519,7 +517,7 @@ const Navbar = () => {
                 onMouseEnter={() => setIsShopMenuOpen(true)}
                 onMouseLeave={() => setIsShopMenuOpen(false)}
                 className={`fixed top-[4rem] left-1/2 transform -translate-x-1/2 mt-2 w-[1100px] max-w-[90vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[999] transition-all duration-300 overflow-hidden ${
-                  isShopMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  isShopMenuOpen ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'
                 }`}
               >
                 {/* Enhanced Header */}
@@ -557,7 +555,7 @@ const Navbar = () => {
                         {category.imageUrl && (
                           <div className="mb-3 flex items-center justify-center w-full h-32 bg-white dark:bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-gray-200">
                             <img
-                              src={category.imageUrl.startsWith('http') ? category.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${category.imageUrl}`}
+                              src={category.imageUrl.startsWith('http') ? category.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${category.imageUrl}`}
                               alt={category.name}
                               className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-200"
                             />
@@ -652,409 +650,68 @@ const Navbar = () => {
             {/* Dark Mode Toggle */}
             <DarkModeToggle />
 
-            {/* Language Switcher */}
-            <div className="relative" ref={languageMenuRef}>
-              <button
-                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-                aria-label="Change language"
-                aria-expanded={isLanguageMenuOpen}
-              >
-                <Globe className="w-5 h-5" aria-hidden="true" />
-              </button>
-
-              {isLanguageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-[70] border border-gray-200 dark:border-gray-700">
-                  <button
-                    onClick={() => {
-                      setCurrentLanguage('is');
-                      setIsLanguageMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-4 py-2 text-sm ${
-                      currentLanguage === 'is'
-                        ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
-                  >
-                    <span className="flex items-center">
-                      <span className="mr-2">🇮🇸</span>
-                      Íslenska
-                      {currentLanguage === 'is' && <span className="ml-auto">✓</span>}
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      setCurrentLanguage('en');
-                      setIsLanguageMenuOpen(false);
-                    }}
-                    className={`block w-full text-left px-4 py-2 text-sm ${
-                      currentLanguage === 'en'
-                        ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
-                  >
-                    <span className="flex items-center">
-                      <span className="mr-2">🇬🇧</span>
-                      English
-                      {currentLanguage === 'en' && <span className="ml-auto">✓</span>}
-                    </span>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Admin Mega Menu (Cogwheel) */}
-            {isAuthenticated && isAdmin && (
-              <div className="relative" ref={adminMenuRef}>
+            {/* Language Switcher - Only show for unauthenticated users */}
+            {!isAuthenticated && (
+              <div className="relative" ref={languageMenuRef}>
                 <button
-                  onClick={() => setIsAdminMenuOpen(!isAdminMenuOpen)}
+                  onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                   className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-                  aria-label={t('navigation.admin')}
-                  aria-expanded={isAdminMenuOpen}
-                  aria-haspopup="true"
+                  aria-label="Change language"
+                  aria-expanded={isLanguageMenuOpen}
                 >
-                  <Settings className="w-5 h-5" />
+                  <Globe className="w-5 h-5" aria-hidden="true" />
                 </button>
 
-                {/* Admin Mega Menu - Centered on Viewport */}
-                {isAdminMenuOpen && (
-                <div className="fixed top-[4rem] left-1/2 transform -translate-x-1/2 w-[1200px] max-w-[95vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[999] overflow-hidden transition-all duration-300">
-                  {/* Enhanced Header */}
-                  <div className="px-8 py-4 bg-gradient-to-r from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-800/20 border-b border-gray-200 dark:border-gray-700">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                          {t('navigation.admin')}
-                        </h3>
-                        <p className="text-base text-gray-600 dark:text-gray-400">
-                          {t('adminDashboard.manageYourStore')}
-                        </p>
-                      </div>
-                      <Link
-                        to="/admin"
-                        className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-semibold text-base"
-                        onClick={() => setIsAdminMenuOpen(false)}
-                      >
-                        <LayoutDashboard className="w-5 h-5 inline mr-2" />
-                        {t('adminDashboard.dashboard')}
-                      </Link>
-                    </div>
+                {isLanguageMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-[70] border border-gray-200 dark:border-gray-700">
+                    <button
+                      onClick={() => {
+                        setCurrentLanguage('is');
+                        setIsLanguageMenuOpen(false);
+                      }}
+                      className={`block w-full text-left px-4 py-2 text-sm ${
+                        currentLanguage === 'is'
+                          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      <span className="flex items-center">
+                        <span className="mr-2">🇮🇸</span>
+                        Íslenska
+                        {currentLanguage === 'is' && <span className="ml-auto">✓</span>}
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCurrentLanguage('en');
+                        setIsLanguageMenuOpen(false);
+                      }}
+                      className={`block w-full text-left px-4 py-2 text-sm ${
+                        currentLanguage === 'en'
+                          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      <span className="flex items-center">
+                        <span className="mr-2">🇬🇧</span>
+                        English
+                        {currentLanguage === 'en' && <span className="ml-auto">✓</span>}
+                      </span>
+                    </button>
                   </div>
-
-                  {/* Admin Pages Grid - 4 Columns */}
-                  <div className="p-8">
-                    <div className="grid grid-cols-4 gap-6">
-                      {/* Column 1: Sales & Orders */}
-                      <div className="space-y-3">
-                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                          {t('adminSidebar.sales')}
-                        </h4>
-                        <Link
-                          to="/admin/orders"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <ShoppingCart className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.orders')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/pos"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Calculator className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.pos')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/delivery"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Truck className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.delivery')}
-                            </h5>
-                          </div>
-                        </Link>
-
-                        <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
-                          <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                            {t('adminSidebar.catalog')}
-                          </h4>
-                        </div>
-                        <Link
-                          to="/admin/products"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Package className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.products')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/categories"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <FolderOpen className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.categories')}
-                            </h5>
-                          </div>
-                        </Link>
-                      </div>
-
-                      {/* Column 2: Content & Communication */}
-                      <div className="space-y-3">
-                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                          {t('adminSidebar.content')}
-                        </h4>
-                        <Link
-                          to="/admin/media"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <FileImage className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.media')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/banners"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Image className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.banners')}
-                            </h5>
-                          </div>
-                        </Link>
-
-                        <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
-                          <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                            {t('adminSidebar.customersAndCommunication')}
-                          </h4>
-                        </div>
-                        <Link
-                          to="/admin/customers"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <User className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.customers')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/chat"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <MessageCircle className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.chat')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/notifications"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-green-200 dark:hover:border-green-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Bell className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.notifications')}
-                            </h5>
-                          </div>
-                        </Link>
-                      </div>
-
-                      {/* Column 3: Analytics */}
-                      <div className="space-y-3">
-                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                          {t('adminSidebar.analytics')}
-                        </h4>
-                        <Link
-                          to="/admin/analytics"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <BarChart3 className="w-5 h-5 text-purple-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.analytics')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/reports"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <FileText className="w-5 h-5 text-purple-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.reports')}
-                            </h5>
-                          </div>
-                        </Link>
-                      </div>
-
-                      {/* Column 4: Settings & System */}
-                      <div className="space-y-3">
-                        <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                          {t('adminSidebar.settings')}
-                        </h4>
-                        <Link
-                          to="/admin/settings/general"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Settings className="w-5 h-5 text-orange-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminSettings.general')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/settings/shipping"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Truck className="w-5 h-5 text-orange-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminSettings.shipping')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/settings/payment-gateways"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <CreditCard className="w-5 h-5 text-orange-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminSettings.paymentGateways')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/settings/receipts"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Receipt className="w-5 h-5 text-orange-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminSettings.receipts')}
-                            </h5>
-                          </div>
-                        </Link>
-
-                        <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
-                          <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 px-2 uppercase tracking-wide">
-                            {t('adminSidebar.system')}
-                          </h4>
-                        </div>
-                        <Link
-                          to="/admin/translations"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Languages className="w-5 h-5 text-orange-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.translations')}
-                            </h5>
-                          </div>
-                        </Link>
-                        <Link
-                          to="/admin/demo-data"
-                          className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:shadow-md transition-all duration-200 border border-transparent hover:border-orange-200 dark:hover:border-orange-700"
-                          onClick={() => setIsAdminMenuOpen(false)}
-                        >
-                          <div className="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-600 rounded-lg flex-shrink-0">
-                            <Play className="w-5 h-5 text-orange-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h5 className="font-medium text-gray-900 dark:text-white text-sm">
-                              {t('adminNavigation.demoData')}
-                            </h5>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="px-8 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-700">
-                    <div className="text-center">
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {t('adminDashboard.quickAccess')} <Link to="/admin" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">{t('adminDashboard.dashboard')}</Link>
-                      </p>
-                    </div>
-                  </div>
-                </div>
                 )}
               </div>
+            )}
+
+            {/* Admin Menu - Sidebar Toggle */}
+            {isAuthenticated && isAdmin && (
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                aria-label={t('navigation.admin')}
+              >
+                <Settings className="w-5 h-5" />
+              </button>
             )}
 
 
@@ -1099,6 +756,47 @@ const Navbar = () => {
                     >
                       {t('navigation.profile')}
                     </Link>
+
+                    {/* Language Selection */}
+                    <div className="border-t border-gray-200 dark:border-gray-700 py-1">
+                      <button
+                        onClick={() => {
+                          setCurrentLanguage('is');
+                          setIsUserMenuOpen(false);
+                        }}
+                        className={`block w-full text-left px-4 py-2 text-sm ${
+                          currentLanguage === 'is'
+                            ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                        role="menuitem"
+                      >
+                        <span className="flex items-center">
+                          <span className="mr-2">🇮🇸</span>
+                          Íslenska
+                          {currentLanguage === 'is' && <span className="ml-auto">✓</span>}
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setCurrentLanguage('en');
+                          setIsUserMenuOpen(false);
+                        }}
+                        className={`block w-full text-left px-4 py-2 text-sm ${
+                          currentLanguage === 'en'
+                            ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-semibold'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                        role="menuitem"
+                      >
+                        <span className="flex items-center">
+                          <span className="mr-2">🇬🇧</span>
+                          English
+                          {currentLanguage === 'en' && <span className="ml-auto">✓</span>}
+                        </span>
+                      </button>
+                    </div>
+
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -1112,9 +810,11 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="btn btn-outline"
+                className="btn btn-outline p-2 sm:px-4"
+                aria-label={t('navigation.login')}
               >
-                {t('navigation.login')}
+                <User className="w-5 h-5 sm:hidden" aria-hidden="true" />
+                <span className="hidden sm:inline">{t('navigation.login')}</span>
               </Link>
             )}
 
@@ -1132,9 +832,15 @@ const Navbar = () => {
 
         {/* Mobile Navigation Overlay */}
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-[60] md:hidden">
-            <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setIsMobileMenuOpen(false)}></div>
-            <div className="fixed right-0 top-0 h-full w-80 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 ease-in-out">
+          <div className="fixed inset-0 z-[60] md:hidden" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="fixed inset-0 bg-black bg-opacity-50" />
+          </div>
+        )}
+
+        {/* Mobile Navigation Sidebar - slides in from right */}
+        <div className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-800 shadow-2xl transform transition-transform duration-300 ease-in-out z-[70] md:hidden ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                   <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{t('navigation.menu')}</h2>
@@ -1237,9 +943,7 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </nav>
   );

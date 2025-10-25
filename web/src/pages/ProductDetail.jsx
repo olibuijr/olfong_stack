@@ -385,7 +385,7 @@ const ProductDetail = () => {
               {currentProduct.imageUrl ? (
                 <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
                   <img
-                    src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${currentProduct.imageUrl}`}
+                    src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${currentProduct.imageUrl}`}
                     alt={getProductName(currentLanguage, currentProduct)}
                     className="w-full h-96 object-contain rounded-lg"
                   />
@@ -418,9 +418,16 @@ const ProductDetail = () => {
                   <span className="text-3xl font-bold text-primary-600">
                     {currentProduct.price.toLocaleString()} {t('common.currency')}
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
-                    {t(`navigation.${currentProduct.category.name.toLowerCase()}`)}
-                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
+                      {t(`navigation.${currentProduct.category.name.toLowerCase()}`)}
+                    </span>
+                    {currentProduct.subcategory && (
+                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 rounded-full text-sm font-medium">
+                        {currentProduct.subcategory}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -720,13 +727,24 @@ const ProductDetail = () => {
 
               {/* Preferred Time */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"><Clock className="w-4 h-4 inline mr-1" />{t('productDetailPage.preferredTimeOptional')}</label>
-                <input
-                  type="time"
-                  value={subscriptionData.preferredTime}
-                  onChange={(e) => setSubscriptionData({...subscriptionData, preferredTime: e.target.value})}
-                  className="input w-full"
-                />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"><Clock className="w-4 h-4 inline mr-1" />{t('productDetailPage.preferredTimeOptional')}</label>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">{t('subscription.selectPreferredTimeHelp')}</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'].map((time) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => setSubscriptionData({...subscriptionData, preferredTime: time})}
+                      className={`p-2 text-sm rounded-lg border transition-colors ${
+                        subscriptionData.preferredTime === time
+                          ? 'bg-primary-600 text-white border-primary-600'
+                          : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-primary-300'
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* Notes */}
@@ -748,10 +766,32 @@ const ProductDetail = () => {
                   {t('subscription.cancel')}
                 </button>
                 <button
-                  onClick={() => {
-                    // TODO: Implement subscription creation
-                    toast.success(t('productDetailPage.subscriptionCreated'));
-                    setShowSubscriptionModal(false);
+                  onClick={async () => {
+                    // Check if user is authenticated
+                    if (!isAuthenticated) {
+                      toast.error(t('subscription.mustBeLoggedIn'));
+                      return;
+                    }
+
+                    // Validate that payment provider supports subscriptions
+                    try {
+                      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}/api/payment-gateways/config`);
+                      const { gateways } = await response.json();
+
+                      const supportsSubscription = gateways.some(gw => gw.supportsSubscriptions && gw.isEnabled);
+
+                      if (!supportsSubscription) {
+                        toast.error(t('subscription.noPaymentProviderSupport'));
+                        return;
+                      }
+
+                      // TODO: Create subscription in database
+                      toast.success(t('productDetailPage.subscriptionCreated'));
+                      setShowSubscriptionModal(false);
+                    } catch (error) {
+                      console.error('Error creating subscription:', error);
+                      toast.error(t('subscription.creationFailed'));
+                    }
                   }}
                   className="btn btn-primary flex-1"
                 >

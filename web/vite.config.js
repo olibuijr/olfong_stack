@@ -22,7 +22,7 @@ export default defineConfig({
   },
   server: {
     port: 3001,
-    host: 'localhost',
+    host: '0.0.0.0', // Allow access from network (needed for mobile live reload)
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

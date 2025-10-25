@@ -54,7 +54,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const loadTranslations = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/translations?locale=${currentLanguage}`);
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api';
+      const response = await fetch(`${API_BASE_URL}/translations?locale=${currentLanguage}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -107,6 +108,28 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'common.sort': 'Raða',
         'common.yes': 'Já',
         'common.no': 'Nei',
+        'common.close': 'Loka',
+        'common.sending': 'Sendir...',
+        'common.unknown': 'Óþekkt',
+        'adminPage.update': 'Uppfæra',
+        'adminPage.updateOrder': 'Uppfæra pöntun',
+        'adminPage.newStatus': 'Ný staða',
+        'adminPage.assign': 'Úthluta',
+        'adminPage.assignDeliveryPerson': 'Úthluta afhendingaraðila',
+        'adminPage.deliveryPerson': 'Afhendingaraðili',
+        'receipts.print': 'Prenta',
+        'receipts.downloadPdf': 'Sækja PDF',
+        'receipts.emailReceipt': 'Senda kvittun í tölvupósti',
+        'receipts.emailSent': 'Tölvupóstur sendur',
+        'receipts.emailSentSuccess': 'Kvittun send',
+        'receipts.emailSendError': 'Villa við að senda tölvupóst',
+        'receipts.noEmailAddress': 'Enginn tölvupóstur skráður',
+        'receipts.pdfDownloadError': 'Villa við að sækja PDF',
+        'receipts.receipt': 'Kvittun',
+        'receipts.receiptForOrder': 'Kvittun fyrir pöntun',
+        'receipts.settingsNotFound': 'Stillingar fundust ekki',
+        'receipts.viewReceipt': 'Skoða kvittun',
+        'receipts.configureInSettings': 'Vinsamlegast stilltu kvittanastillingar til að birta kvittunina þína',
       },
       en: {
         'nav.home': 'Home',
@@ -130,6 +153,28 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'common.sort': 'Sort',
         'common.yes': 'Yes',
         'common.no': 'No',
+        'common.close': 'Close',
+        'common.sending': 'Sending...',
+        'common.unknown': 'Unknown',
+        'adminPage.update': 'Update',
+        'adminPage.updateOrder': 'Update Order',
+        'adminPage.newStatus': 'New Status',
+        'adminPage.assign': 'Assign',
+        'adminPage.assignDeliveryPerson': 'Assign Delivery Person',
+        'adminPage.deliveryPerson': 'Delivery Person',
+        'receipts.print': 'Print',
+        'receipts.downloadPdf': 'Download PDF',
+        'receipts.emailReceipt': 'Email Receipt',
+        'receipts.emailSent': 'Email Sent',
+        'receipts.emailSentSuccess': 'Receipt sent successfully',
+        'receipts.emailSendError': 'Error sending email',
+        'receipts.noEmailAddress': 'No email address on file',
+        'receipts.pdfDownloadError': 'Error downloading PDF',
+        'receipts.receipt': 'Receipt',
+        'receipts.receiptForOrder': 'Receipt for Order',
+        'receipts.settingsNotFound': 'Settings Not Found',
+        'receipts.viewReceipt': 'View Receipt',
+        'receipts.configureInSettings': 'Please configure receipt settings to display your receipt',
       }
     };
 

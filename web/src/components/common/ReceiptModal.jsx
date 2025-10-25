@@ -19,7 +19,7 @@ const ReceiptModal = ({
   const [emailError, setEmailError] = useState(null);
   const [previewMode, setPreviewMode] = useState('screen'); // screen, print
 
-  const { receiptSettings, loading: settingsLoading } = useSelector(
+  const { settings: receiptSettings, isLoading: settingsLoading } = useSelector(
     state => state.receiptSettings
   );
 
@@ -104,36 +104,37 @@ const ReceiptModal = ({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         {/* Backdrop */}
-        <div 
-          className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"
+        <div
+          className="fixed inset-0 transition-opacity bg-black/50 dark:bg-black/70"
           onClick={onClose}
         />
 
         {/* Modal */}
-        <div className="inline-block w-full max-w-4xl px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6">
+        <div className="inline-block w-full max-w-4xl px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6">
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {t('receipts.receiptForOrder')} #{order.orderNumber}
             </h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
           </div>
 
           {/* Actions */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-6">
             <button
               onClick={handlePrint}
               className="btn btn-outline flex items-center gap-2"
+              disabled={isLoading}
             >
               <Printer className="w-4 h-4" />
               {t('receipts.print')}
             </button>
-            
+
             <button
               onClick={handleDownloadPDF}
               disabled={isLoading}
@@ -142,7 +143,7 @@ const ReceiptModal = ({
               <Download className="w-4 h-4" />
               {isLoading ? t('common.loading') : t('receipts.downloadPdf')}
             </button>
-            
+
             {order.customer?.email && (
               <button
                 onClick={handleEmailReceipt}
@@ -152,10 +153,10 @@ const ReceiptModal = ({
                 }`}
               >
                 <Mail className="w-4 h-4" />
-                {isLoading 
-                  ? t('common.sending') 
-                  : emailSent 
-                    ? t('receipts.emailSent') 
+                {isLoading
+                  ? t('common.sending')
+                  : emailSent
+                    ? t('receipts.emailSent')
                     : t('receipts.emailReceipt')
                 }
               </button>
@@ -164,22 +165,22 @@ const ReceiptModal = ({
 
           {/* Email Status */}
           {emailError && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+            <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded">
               {emailError}
             </div>
           )}
 
           {emailSent && (
-            <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+            <div className="mb-4 p-3 bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded">
               {t('receipts.emailSentSuccess')}
             </div>
           )}
 
           {/* Receipt Preview */}
-          <div className="border rounded-lg p-4 bg-gray-50">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900/50">
             {settingsLoading ? (
               <div className="flex items-center justify-center h-64">
-                <div className="text-gray-500">{t('common.loading')}</div>
+                <div className="text-gray-500 dark:text-gray-400">{t('common.loading')}</div>
               </div>
             ) : receiptSettings ? (
               <div className="max-w-md mx-auto">
@@ -194,17 +195,68 @@ const ReceiptModal = ({
                 />
               </div>
             ) : (
-              <div className="text-center text-gray-500">
-                {t('receipts.settingsNotFound')}
+              <div className="py-12">
+                <div className="text-center mb-6">
+                  <div className="text-red-600 dark:text-red-400 font-semibold mb-2">
+                    {t('receipts.settingsNotFound')}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    {t('receipts.configureInSettings')}
+                  </div>
+                </div>
+
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                  <div className="font-semibold text-red-900 dark:text-red-200 mb-3 text-sm">
+                    Required Configuration:
+                  </div>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                      <span>Company Name (English & Icelandic)</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                      <span>Company Address (English & Icelandic)</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                      <span>Company Phone Number</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                      <span>Company Email Address</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                      <span>Header Color</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                      <span>Paper Size Selection</span>
+                    </li>
+                  </ul>
+
+                  <div className="mt-4 pt-4 border-t border-red-200 dark:border-red-800">
+                    <a
+                      href="/admin/settings/receipts"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium text-sm"
+                    >
+                      <span>Configure Receipt Settings</span>
+                      <span>→</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             )}
           </div>
 
           {/* Footer */}
-          <div className="mt-4 flex justify-end gap-2">
+          <div className="mt-6 flex justify-end gap-2">
             <button
               onClick={onClose}
-              className="btn btn-secondary"
+              className="btn btn-secondary dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
             >
               {t('common.close')}
             </button>

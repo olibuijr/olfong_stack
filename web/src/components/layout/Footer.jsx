@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { getSimplifiedOpeningHours } from '../../utils/openingHours';
+import api from '../../services/api';
 
 const Footer = () => {
   const { t, currentLanguage } = useLanguage();
@@ -14,15 +15,12 @@ const Footer = () => {
 
   const fetchOpeningHours = async () => {
     try {
-      const response = await fetch('/api/settings/opening-hours');
-      if (response.ok) {
-        const data = await response.json();
-        if (data.data?.openingHours) {
-          setOpeningHours(formatOpeningHoursForDisplay(data.data.openingHours, currentLanguage));
-        } else {
-          // Fallback to hardcoded values
-          setOpeningHours(getSimplifiedOpeningHours(currentLanguage));
-        }
+      const response = await api.get('/settings/opening-hours');
+      if (response.data?.openingHours) {
+        setOpeningHours(formatOpeningHoursForDisplay(response.data.openingHours, currentLanguage));
+      } else {
+        // Fallback to hardcoded values
+        setOpeningHours(getSimplifiedOpeningHours(currentLanguage));
       }
     } catch (error) {
       console.error('Error fetching opening hours:', error);

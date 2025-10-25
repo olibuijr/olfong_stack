@@ -1,7 +1,10 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Use external IP as default for mobile/network access
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api';
+
+console.log('[API] API_BASE_URL:', API_BASE_URL);
 
 // Create axios instance
 const api = axios.create({

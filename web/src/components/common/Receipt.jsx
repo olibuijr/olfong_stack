@@ -45,7 +45,13 @@ const Receipt = ({
   };
 
   return (
-    <div className={`receipt receipt-${template} receipt-${paperSize} ${className}`}>
+    <div
+      className={`receipt receipt-${template} receipt-${paperSize} ${className}`}
+      style={{
+        '--receipt-header-color': settings.headerColor || '#1e40af',
+        '--receipt-accent-color': settings.accentColor || '#3b82f6',
+      }}
+    >
       {/* Header */}
       <div className="header" style={{ backgroundColor: settings.headerColor, color: 'white' }}>
         {settings.logoUrl && (

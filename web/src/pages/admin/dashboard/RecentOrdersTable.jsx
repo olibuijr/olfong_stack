@@ -24,11 +24,11 @@ const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
             </div>
           </div>
         </div>
-        <div className="overflow-x-auto -mx-4 sm:-mx-6 md:mx-0">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="overflow-x-auto">
+          <table className="w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th className="hidden sm:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   {t('adminDashboard.orderId')}
                 </th>
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -40,7 +40,7 @@ const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
                 <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   {t('adminDashboard.status')}
                 </th>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th className="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   {t('adminDashboard.date')}
                 </th>
               </tr>
@@ -50,22 +50,22 @@ const RecentOrdersTable = ({ recentOrders, formatCurrency, formatDate }) => {
                 const StatusIcon = getStatusIcon(order.status);
                 return (
                   <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
-                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                       #{order.id}
                     </td>
-                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 truncate max-w-[120px]">
                       {order.customer}
                     </td>
-                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(order.amount)}
                     </td>
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
-                        <StatusIcon className="h-3 w-3 mr-1" />
-                        {getStatusLabel(order.status, t)}
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                        <StatusIcon className="h-3 w-3 mr-0.5" />
+                        <span className="hidden sm:inline">{getStatusLabel(order.status, t)}</span>
                       </span>
                     </td>
-                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                    <td className="hidden md:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                       {formatDate(order.date)}
                     </td>
                   </tr>

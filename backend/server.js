@@ -37,9 +37,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' 
-      ? ['http://localhost:3000', 'http://localhost:3001'] 
-      : ['http://localhost:3000', 'http://localhost:3001'],
+    origin: function(origin, callback) {
+      // Allow all origins for Socket.IO (including mobile apps)
+      callback(null, true);
+    },
     methods: ['GET', 'POST'],
   },
 });
@@ -48,9 +49,17 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.8.62:3000', 'http://192.168.8.62:3001'] 
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://192.168.8.62:3000', 'http://192.168.8.62:3001'],
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+
+    // Allow all capacitor:// and ionic:// origins (mobile apps)
+    if (origin.startsWith('capacitor://') || origin.startsWith('ionic://') || origin.startsWith('http://') || origin.startsWith('https://')) {
+      return callback(null, true);
+    }
+
+    callback(null, true); // Allow all origins in development
+  },
   credentials: true,
 }));
 

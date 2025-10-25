@@ -20,6 +20,7 @@ import '../screens/admin/admin_dashboard.dart';
 import '../screens/admin/admin_products.dart';
 import '../screens/admin/admin_orders.dart';
 import '../screens/delivery/delivery_dashboard.dart';
+import '../widgets/layout/bottom_nav.dart';
 
 class AppRouter {
   // Route names
@@ -195,72 +196,19 @@ class MainNavigationWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    
+    final location = GoRouterState.of(context).uri.path;
+
+    // Don't show bottom nav on certain screens
+    final hideBottomNav = location.startsWith('/admin') ||
+        location.startsWith('/delivery') ||
+        location == '/register' ||
+        location == '/auth-callback' ||
+        location.startsWith('/checkout') ||
+        location.startsWith('/order-confirmation');
+
     return Scaffold(
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _getCurrentIndex(context),
-        onTap: (index) => _onTabTapped(context, index),
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            activeIcon: const Icon(Icons.home),
-            label: l10n.homeWelcome.split(' ').last, // "Ölföng" or "Wine & Beer Shop"
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.store_outlined),
-            activeIcon: const Icon(Icons.store),
-            label: l10n.productsTitle,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            activeIcon: const Icon(Icons.shopping_cart),
-            label: l10n.cartTitle,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline),
-            activeIcon: const Icon(Icons.person),
-            label: l10n.profileTitle,
-          ),
-        ],
-      ),
+      bottomNavigationBar: hideBottomNav ? null : BottomNav(currentRoute: location),
     );
-  }
-
-  int _getCurrentIndex(BuildContext context) {
-    final location = GoRouterState.of(context).matchedLocation;
-    switch (location) {
-      case '/':
-        return 0;
-      case '/products':
-        return 1;
-      case '/cart':
-        return 2;
-      case '/profile':
-        return 3;
-      default:
-        return 0;
-    }
-  }
-
-  void _onTabTapped(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        context.go('/');
-        break;
-      case 1:
-        context.go('/products');
-        break;
-      case 2:
-        context.go('/cart');
-        break;
-      case 3:
-        context.go('/profile');
-        break;
-    }
   }
 }

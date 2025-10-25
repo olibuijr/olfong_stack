@@ -27,10 +27,12 @@ import {
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
 import { useLanguage } from "../../contexts/LanguageContext";
+import { useAdminSidebar } from "../../contexts/AdminSidebarContext";
 import useUnreadCount from '../../hooks/useUnreadCount';
 
 const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
   const { t } = useLanguage();
+  const { setSidebarOpen } = useAdminSidebar();
   const [isCollapsed, setIsCollapsed] = useState(() => {
     // Initialize from localStorage, default to false (expanded)
     const saved = localStorage.getItem('adminSidebarCollapsed');
@@ -181,6 +183,12 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
                    <Link
                      key={item.name}
                      to={item.href}
+                     onClick={() => {
+                       // Close sidebar on mobile when a link is clicked
+                       if (isMobile) {
+                         setSidebarOpen(false);
+                       }
+                     }}
                       className={`relative flex items-center px-2 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ease-in-out group ${
                         active
                           ? 'bg-blue-600 text-white'

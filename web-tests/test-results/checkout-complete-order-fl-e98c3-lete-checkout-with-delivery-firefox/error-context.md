@@ -1,0 +1,142 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation "Aðal leiðarkerfi" [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - link "Forsíða" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img "Ölföng merki" [ref=e9]
+        - generic [ref=e10]:
+          - img [ref=e11]
+          - generic [ref=e14]:
+            - generic [ref=e15]: "Í dag: 12:00 - 24:00"
+            - generic [ref=e16]: Opið
+      - generic [ref=e17]:
+        - generic [ref=e19]:
+          - textbox "Leita að vörum..." [ref=e20]
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e22]
+        - link "Allar vörur" [ref=e25] [cursor=pointer]:
+          - /url: /products
+        - button "Verslun" [ref=e27] [cursor=pointer]:
+          - text: Verslun
+          - img [ref=e28]
+      - generic [ref=e30]:
+        - button "Switch to dark mode" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+        - button "Change language" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+        - link "Innskrá" [ref=e40] [cursor=pointer]:
+          - /url: /login
+  - main [ref=e41]:
+    - generic [ref=e43]:
+      - button "Til baka" [ref=e44] [cursor=pointer]:
+        - img [ref=e45]
+        - text: Til baka
+      - generic [ref=e49]:
+        - img "Egils Gull" [ref=e52]
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - heading "Egils Gull" [level=1] [ref=e56]
+            - generic [ref=e57]:
+              - generic [ref=e58]: 489 kr.
+              - generic [ref=e60]: Bjór
+          - generic [ref=e61]:
+            - heading "Lýsing" [level=3] [ref=e62]
+            - paragraph [ref=e63]: Ferskur íslenskur bjór með skarpan smekk og gullna lit. Fullkomin fyrir alla tilefni.
+          - generic [ref=e64]:
+            - heading "Upplýsingar" [level=3] [ref=e65]
+            - generic [ref=e66]:
+              - term [ref=e67]: Magn
+              - definition [ref=e68]: 500 ml
+              - term [ref=e69]: Áfengismagn
+              - definition [ref=e70]: 5%
+              - term [ref=e71]: Framleiðandi
+              - definition [ref=e72]: Egils Malt
+              - term [ref=e73]: Land
+              - definition [ref=e74]: Ísland
+              - term [ref=e75]: Umbúðir
+              - definition [ref=e76]: Flaska
+          - generic [ref=e77]:
+            - heading "Matar Pörun" [level=3] [ref=e78]
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - img [ref=e82]
+                - generic [ref=e84]: Fiskur
+              - generic [ref=e85]:
+                - img [ref=e87]
+                - generic [ref=e89]: Alifuglar
+              - generic [ref=e90]:
+                - img [ref=e92]
+                - generic [ref=e94]: Nautakjöt
+              - generic [ref=e95]:
+                - img [ref=e97]
+                - generic [ref=e99]: Lambakjöt
+              - generic [ref=e100]:
+                - img [ref=e102]
+                - generic [ref=e104]: Svínakjöt
+          - generic [ref=e105]:
+            - heading "Sérstakir Eiginleikar" [level=3] [ref=e106]
+            - generic [ref=e107]:
+              - generic [ref=e108]: Premium Lager
+              - generic [ref=e109]: Helles
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - generic [ref=e112]: "Magn:"
+              - generic [ref=e113]:
+                - button [disabled] [ref=e114]:
+                  - img [ref=e115]
+                - generic [ref=e117]: "1"
+                - button [ref=e118] [cursor=pointer]:
+                  - img [ref=e119]
+              - generic [ref=e122]: 91 Til á lager
+            - button "Common LoginRequired" [disabled] [ref=e123]:
+              - img [ref=e124]
+              - generic [ref=e128]: Common LoginRequired
+            - paragraph [ref=e129]:
+              - text: ProductDetailPage LoginToAdd
+              - link "ProductDetailPage LoginHere" [ref=e130] [cursor=pointer]:
+                - /url: /login
+  - contentinfo [ref=e131]:
+    - generic [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - img "Ölföng Logo" [ref=e136]
+          - paragraph [ref=e137]: Um okkur
+          - generic [ref=e138]:
+            - generic [ref=e139]: 📞 +354 555 1234
+            - generic [ref=e140]: ✉️ info@olfong.is
+        - generic [ref=e141]:
+          - heading "Flýtileiðir" [level=3] [ref=e142]
+          - list [ref=e143]:
+            - listitem [ref=e144]:
+              - link "Vörur" [ref=e145] [cursor=pointer]:
+                - /url: /products
+            - listitem [ref=e146]:
+              - link "Vín" [ref=e147] [cursor=pointer]:
+                - /url: /products?category=WINE
+            - listitem [ref=e148]:
+              - link "Bjór" [ref=e149] [cursor=pointer]:
+                - /url: /products?category=BEER
+            - listitem [ref=e150]:
+              - link "Áfengi" [ref=e151] [cursor=pointer]:
+                - /url: /products?category=SPIRITS
+            - listitem [ref=e152]:
+              - link "Óáfengir drykkir" [ref=e153] [cursor=pointer]:
+                - /url: /products?category=NON_ALCOHOLIC
+        - generic [ref=e154]:
+          - heading "Opnunartímar" [level=3] [ref=e155]:
+            - img [ref=e156]
+            - text: Opnunartímar
+          - list [ref=e159]:
+            - listitem [ref=e160]:
+              - generic [ref=e161]: Alla daga
+              - generic [ref=e162]: 12:00 - 24:00
+      - generic [ref=e163]:
+        - paragraph [ref=e164]: © 2025 Ölföng. Öll réttindi áskilin
+        - paragraph [ref=e165]: Lagalegt
+  - button [ref=e167] [cursor=pointer]:
+    - img [ref=e168]
+```

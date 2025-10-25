@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../models/cart_item.dart';
+import '../../widgets/layout/custom_app_bar.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -9,21 +10,9 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shopping Cart'),
-        centerTitle: true,
-        actions: [
-          Consumer<CartProvider>(
-            builder: (context, cartProvider, child) {
-              return cartProvider.items.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear_all),
-                      onPressed: () => _showClearCartDialog(context, cartProvider),
-                    )
-                  : const SizedBox.shrink();
-            },
-          ),
-        ],
+      appBar: CustomAppBar(
+        title: 'Shopping Cart',
+        showCart: false,
       ),
       body: Consumer<CartProvider>(
         builder: (context, cartProvider, child) {
@@ -62,7 +51,7 @@ class CartScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.builder(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                   itemCount: cartProvider.items.length,
                   itemBuilder: (context, index) {
                     final cartItem = cartProvider.items[index];
@@ -73,7 +62,7 @@ class CartScreen extends StatelessWidget {
               
               // Cart summary
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
                   boxShadow: [

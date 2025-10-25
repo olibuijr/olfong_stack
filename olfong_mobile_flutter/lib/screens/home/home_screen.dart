@@ -6,7 +6,7 @@ import '../../providers/product_provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../widgets/product_card.dart';
 import '../../widgets/chat_widget.dart';
-import '../../widgets/common/custom_app_bar.dart';
+import '../../widgets/layout/custom_app_bar.dart';
 import '../../widgets/common/loading_widget.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/home/hero_section.dart';
@@ -32,52 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
-      appBar: CustomAppBar(
-        title: l10n.appTitle,
-        showBackButton: false,
-        actions: [
-          Consumer<CartProvider>(
-            builder: (context, cartProvider, child) {
-              return Stack(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart_outlined),
-                    onPressed: () => context.go('/cart'),
-                    tooltip: l10n.cartTitle,
-                  ),
-                  if (cartProvider.itemCount > 0)
-                    Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.error,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        constraints: const BoxConstraints(
-                          minWidth: 16,
-                          minHeight: 16,
-                        ),
-                        child: Text(
-                          '${cartProvider.itemCount}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(showCart: true),
       body: Stack(
         children: [
           Consumer<ProductProvider>(
@@ -111,13 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                        // Discounted Products Section
                        const DiscountedProductsSection(),
-                      
+
                       // Main Content
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 8),
                             // Categories section
                             Text(
                               l10n.homeCategories,
@@ -165,8 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                               ),
                             ),
-                            const SizedBox(height: 24),
-                            
+                            const SizedBox(height: 32),
+
                             // Featured products section
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -201,6 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return ProductCard(product: product);
                               },
                             ),
+                            // Add bottom padding to account for bottom navigation bar
+                            const SizedBox(height: 80),
                           ],
                         ),
                       ),

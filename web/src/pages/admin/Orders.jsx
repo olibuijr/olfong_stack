@@ -273,7 +273,13 @@ const AdminOrders = () => {
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {filteredOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                  <tr
+                    key={order.id}
+                    onClick={() => {
+                      setSelectedOrder(order);
+                      setShowReceiptModal(true);
+                    }}
+                    className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150 cursor-pointer">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Package className="w-5 h-5 text-gray-400 dark:text-gray-500 mr-2" />
@@ -330,7 +336,8 @@ const AdminOrders = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">
                         <button
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             setSelectedOrder(order);
                             setShowReceiptModal(true);
                           }}
@@ -341,7 +348,8 @@ const AdminOrders = () => {
                           <span>{t('receipts.receipt')}</span>
                         </button>
                         <button
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             setSelectedOrder(order);
                             setShowStatusModal(true);
                             setNewStatus(order.status);
@@ -352,7 +360,8 @@ const AdminOrders = () => {
                         </button>
                         {order.deliveryMethod === 'DELIVERY' && !order.deliveryPerson && order.status === 'CONFIRMED' && (
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               setSelectedOrder(order);
                               setShowAssignModal(true);
                             }}

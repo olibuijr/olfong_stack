@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 
 const DualThumbSlider = ({ 
@@ -20,21 +20,21 @@ const DualThumbSlider = ({
     setLocalValue(value);
   }, [value]);
 
-  const getPercentage = (val) => {
+  const getPercentage = useCallback((val) => {
     return ((val - min) / (max - min)) * 100;
-  };
+  }, [min, max]);
 
-  const getValueFromPercentage = (percentage) => {
+  const getValueFromPercentage = useCallback((percentage) => {
     return min + (percentage / 100) * (max - min);
-  };
+  }, [min, max]);
 
-  const handleMouseDown = (thumb) => (e) => {
+  const handleMouseDown = useCallback((thumb) => (e) => {
     if (disabled) return;
     e.preventDefault();
     setIsDragging(thumb);
-  };
+  }, [disabled]);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = useCallback((e) => {
     if (!isDragging || !sliderRef.current || disabled) return;
 
     const rect = sliderRef.current.getBoundingClientRect();
@@ -44,20 +44,22 @@ const DualThumbSlider = ({
     const clampedValue = Math.max(min, Math.min(max, steppedValue));
 
     let newValues = [...localValue];
-    
+
     if (isDragging === 'min') {
-      newValues[0] = Math.min(clampedValue, localValue[1]);
-    } else {
-      newValues[1] = Math.max(clampedValue, localValue[0]);
+      newValues[0] = Math.min(clampedValue, newValues[1]);
+    } else if (isDragging === 'max') {
+      newValues[1] = Math.max(clampedValue, newValues[0]);
     }
 
     setLocalValue(newValues);
-    onChange && onChange(newValues);
-  };
+    if (onChange) {
+      onChange(newValues);
+    }
+  }, [isDragging, localValue, disabled, step, min, max, getValueFromPercentage, onChange]);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setIsDragging(null);
-  };
+  }, []);
 
   useEffect(() => {
     if (isDragging) {
@@ -68,8 +70,7 @@ const DualThumbSlider = ({
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDragging, localValue]);
+  }, [isDragging, handleMouseMove, handleMouseUp]);
 
   const minPercentage = getPercentage(localValue[0]);
   const maxPercentage = getPercentage(localValue[1]);
@@ -85,7 +86,6 @@ const DualThumbSlider = ({
         <div
           ref={sliderRef}
           className="relative h-2 bg-gray-200 dark:bg-gray-600 rounded-lg cursor-pointer"
-          onMouseDown={handleMouseDown('min')}
         >
           {/* Track */}
           <div className="absolute inset-0 bg-gray-200 dark:bg-gray-600 rounded-lg"></div>
@@ -101,16 +101,16 @@ const DualThumbSlider = ({
           
           {/* Min thumb */}
           <div
-            className={`absolute w-4 h-4 bg-white border-2 border-primary-500 rounded-full shadow-lg transform -translate-y-1 cursor-pointer hover:scale-110 transition-transform ${
+            className={`absolute w-4 h-4 bg-white border-2 border-primary-500 rounded-full shadow-lg transform -translate-x-1/2 -translate-y-1 cursor-pointer hover:scale-110 transition-transform ${
               disabled ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             style={{ left: `${minPercentage}%` }}
             onMouseDown={handleMouseDown('min')}
           ></div>
-          
+
           {/* Max thumb */}
           <div
-            className={`absolute w-4 h-4 bg-white border-2 border-primary-500 rounded-full shadow-lg transform -translate-y-1 cursor-pointer hover:scale-110 transition-transform ${
+            className={`absolute w-4 h-4 bg-white border-2 border-primary-500 rounded-full shadow-lg transform -translate-x-1/2 -translate-y-1 cursor-pointer hover:scale-110 transition-transform ${
               disabled ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             style={{ left: `${maxPercentage}%` }}

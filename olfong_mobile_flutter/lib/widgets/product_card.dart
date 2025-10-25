@@ -20,11 +20,13 @@ class ProductCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     
     return Card(
-      elevation: 2,
+      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
-          color: Colors.grey[200]!,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey[700]!
+              : Colors.grey[200]!,
           width: 1,
         ),
       ),
@@ -44,7 +46,9 @@ class ProductCard extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-                  color: Colors.grey[50],
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey[800]
+                      : Colors.grey[50],
                 ),
                 child: Stack(
                   children: [
@@ -53,26 +57,30 @@ class ProductCard extends StatelessWidget {
                       child: product.imageUrl != null
                           ? Image.network(
                               product.imageUrl!,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                               width: double.infinity,
                               height: double.infinity,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
-                                  color: Colors.grey[100],
-                                  child: const Icon(
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.grey[800]
+                                      : Colors.grey[100],
+                                  child: Icon(
                                     Icons.image_not_supported,
                                     size: 50,
-                                    color: Colors.grey,
+                                    color: Colors.grey[400],
                                   ),
                                 );
                               },
                             )
                           : Container(
-                              color: Colors.grey[100],
-                              child: const Icon(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[800]
+                                  : Colors.grey[100],
+                              child: Icon(
                                 Icons.image_not_supported,
                                 size: 50,
-                                color: Colors.grey,
+                                color: Colors.grey[400],
                               ),
                             ),
                     ),
@@ -164,23 +172,24 @@ class ProductCard extends StatelessWidget {
                       product.name,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontSize: 13,
                         height: 1.2,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      product.description,
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 12,
-                        height: 1.3,
+                    const SizedBox(height: 4),
+                    if (product.description.isNotEmpty)
+                      Text(
+                        product.description,
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 11,
+                          height: 1.2,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
                     const Spacer(),
                      Row(
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,

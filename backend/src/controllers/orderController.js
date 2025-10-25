@@ -38,6 +38,8 @@ const getUserOrders = async (req, res) => {
             },
           },
           address: true,
+          shippingOption: true,
+          transaction: true,
           deliveryPerson: {
             select: {
               id: true,
@@ -88,6 +90,7 @@ const getOrder = async (req, res) => {
           },
         },
         address: true,
+        shippingOption: true,
         user: {
           select: {
             id: true,
@@ -542,6 +545,8 @@ const getAllOrders = async (req, res) => {
             },
           },
           address: true,
+          shippingOption: true,
+          transaction: true,
           user: {
             select: {
               id: true,
