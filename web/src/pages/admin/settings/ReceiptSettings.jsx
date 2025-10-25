@@ -159,10 +159,13 @@ const ReceiptSettings = () => {
 
   const generatePreviewHTML = () => {
     const headerStyle = formData.useGradient ? formData.headerGradient : formData.headerColor;
+    const logoUrl = settings?.logoUrl ? `${(import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api').replace('/api', '')}${settings.logoUrl}` : null;
+    const logoFilter = settings?.logoInversion === 'always' ? 'filter: invert(1);' : '';
+
     return `
       <div class="receipt receipt-${formData.template}" style="max-width: ${formData.paperSize === '80mm' ? '300px' : '100%'}; margin: 0 auto; font-family: ${formData.fontFamily}; font-size: ${formData.fontSize}; background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
         <div class="header" style="background: ${headerStyle}; color: white; text-align: center; padding: 15px;">
-          <h1 style="font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${formData.companyNameIs || formData.companyName}</h1>
+          ${logoUrl ? `<img src="${logoUrl}" alt="${formData.companyNameIs || formData.companyName}" style="max-height: 48px; margin-bottom: 10px; ${logoFilter}" />` : `<h1 style="font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${formData.companyNameIs || formData.companyName}</h1>`}
           ${formData.companyAddress ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyAddressIs || formData.companyAddress}</div>` : ''}
           ${formData.companyPhone ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyPhone}</div>` : ''}
           ${formData.companyEmail ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyEmail}</div>` : ''}
@@ -750,10 +753,10 @@ const ReceiptSettings = () => {
                 </button>
               </div>
 
-              <div className={`border rounded-lg p-4 ${previewMode ? 'bg-gray-50' : 'bg-white'}`}>
+              <div className={`border rounded-lg p-4 ${previewMode ? 'bg-gray-50' : 'bg-white'} flex items-center justify-center min-h-96`}>
                 <div
                   dangerouslySetInnerHTML={{ __html: generatePreviewHTML() }}
-                  className={previewMode ? 'transform scale-75 origin-top-left' : ''}
+                  className={previewMode ? 'transform scale-90 origin-center' : ''}
                 />
               </div>
             </div>
