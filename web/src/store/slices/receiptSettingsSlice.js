@@ -60,7 +60,9 @@ export const deleteReceiptLogo = createAsyncThunk(
 
 // Initial state
 const initialState = {
-  settings: null,
+  settings: {
+    logoInversion: 'none'
+  },
   isLoading: false,
   error: null,
   uploadProgress: 0,

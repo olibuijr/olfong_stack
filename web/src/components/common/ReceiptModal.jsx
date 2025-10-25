@@ -183,16 +183,18 @@ const ReceiptModal = ({
                 <div className="text-gray-500 dark:text-gray-400">{t('common.loading')}</div>
               </div>
             ) : receiptSettings ? (
-              <div className="flex-1 overflow-y-auto flex items-start justify-center p-4">
-                <Receipt
-                  order={order}
-                  settings={receiptSettings}
-                  template={receiptSettings.template}
-                  paperSize={receiptSettings.paperSize}
-                  showBarcode={receiptSettings.showBarcode}
-                  showQrCode={receiptSettings.showQrCode}
-                  className={previewMode === 'print' ? 'receipt-print' : ''}
-                />
+              <div className="flex-1 overflow-y-auto flex items-center justify-center p-4 w-full">
+                <div className="w-full h-full flex items-center justify-center">
+                  <Receipt
+                    order={order}
+                    settings={receiptSettings}
+                    template={receiptSettings.template}
+                    paperSize={receiptSettings.paperSize}
+                    showBarcode={receiptSettings.showBarcode}
+                    showQrCode={receiptSettings.showQrCode}
+                    className={previewMode === 'print' ? 'receipt-print' : ''}
+                  />
+                </div>
               </div>
             ) : (
               <div className="flex-1 flex items-center justify-center overflow-y-auto p-4">

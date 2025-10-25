@@ -44,6 +44,18 @@ const Receipt = ({
     return settings.fromNameIs || settings.fromName;
   };
 
+  const getLogoStyle = () => {
+    const logoInversion = settings.logoInversion || 'none';
+
+    if (logoInversion === 'always') {
+      return { filter: 'invert(1)' };
+    }
+
+    // For theme-aware, we would need to detect dark mode
+    // Since this is just for receipt display, we'll leave it as is
+    return {};
+  };
+
   return (
     <div
       className={`receipt receipt-${template} receipt-${paperSize} ${className}`}
@@ -56,17 +68,19 @@ const Receipt = ({
       <div className="header" style={{ backgroundColor: settings.headerColor, color: 'white' }}>
         {settings.logoUrl && (
           <div className="mb-2">
-            <img 
-              src={settings.logoUrl} 
+            <img
+              src={settings.logoUrl}
               alt={getCompanyName()}
               className="h-12 mx-auto"
-              style={{ maxHeight: '48px' }}
+              style={{ maxHeight: '48px', ...getLogoStyle() }}
             />
           </div>
         )}
-        <div className="company-name" style={{ color: 'white' }}>
-          {getCompanyName()}
-        </div>
+        {!settings.logoUrl && (
+          <div className="company-name" style={{ color: 'white' }}>
+            {getCompanyName()}
+          </div>
+        )}
         {getCompanyAddress() && (
           <div className="company-details">
             {getCompanyAddress()}

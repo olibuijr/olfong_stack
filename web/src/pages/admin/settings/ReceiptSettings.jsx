@@ -48,7 +48,8 @@ const ReceiptSettings = () => {
     showBarcode: true,
     showQrCode: true,
     template: 'modern',
-    paperSize: '80mm'
+    paperSize: '80mm',
+    logoInversion: 'none'
   });
 
   // Predefined gradient options
@@ -92,7 +93,8 @@ const ReceiptSettings = () => {
         showBarcode: settings.showBarcode !== undefined ? settings.showBarcode : true,
         showQrCode: settings.showQrCode !== undefined ? settings.showQrCode : true,
         template: settings.template || 'modern',
-        paperSize: settings.paperSize || '80mm'
+        paperSize: settings.paperSize || '80mm',
+        logoInversion: settings.logoInversion || 'none'
       });
     }
   }, [settings]);
@@ -408,10 +410,53 @@ const ReceiptSettings = () => {
 
                 {uploadProgress > 0 && uploadProgress < 100 && (
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
                     ></div>
+                  </div>
+                )}
+
+                {settings?.logoUrl && (
+                  <div className="space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      {t('adminSettings.logoColorMode')}
+                    </label>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="logoInversion"
+                          value="none"
+                          checked={formData.logoInversion === 'none'}
+                          onChange={(e) => handleInputChange('logoInversion', e.target.value)}
+                          className="mr-2"
+                        />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{t('adminSettings.logoNoInversion')}</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="logoInversion"
+                          value="theme-aware"
+                          checked={formData.logoInversion === 'theme-aware'}
+                          onChange={(e) => handleInputChange('logoInversion', e.target.value)}
+                          className="mr-2"
+                        />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{t('adminSettings.logoThemeAware')}</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="logoInversion"
+                          value="always"
+                          checked={formData.logoInversion === 'always'}
+                          onChange={(e) => handleInputChange('logoInversion', e.target.value)}
+                          className="mr-2"
+                        />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{t('adminSettings.logoAlwaysInvert')}</span>
+                      </label>
+                    </div>
                   </div>
                 )}
               </div>

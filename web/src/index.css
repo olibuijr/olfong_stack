@@ -149,27 +149,47 @@
   border-radius: 8px;
   padding: 20px;
   margin: 0 auto;
-  max-width: 400px;
   font-family: 'Courier New', monospace;
   color: #000;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Responsive receipt sizing based on parent container */
 .receipt-thermal {
-  width: 80mm;
+  width: 100%;
   max-width: 80mm;
-  font-size: 10px;
+  font-size: clamp(8px, 2vw, 10px);
 }
 
 .receipt-a4 {
-  width: 210mm;
+  width: 100%;
   max-width: 210mm;
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 .receipt-letter {
-  width: 8.5in;
+  width: 100%;
   max-width: 8.5in;
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
+}
+
+/* Responsive scaling on smaller devices */
+@media (max-width: 640px) {
+  .receipt {
+    padding: 12px;
+  }
+
+  .receipt-thermal {
+    max-width: 90vw;
+  }
+
+  .receipt-a4,
+  .receipt-letter {
+    max-width: 95vw;
+  }
 }
 
 .receipt .header {

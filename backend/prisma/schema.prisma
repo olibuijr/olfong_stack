@@ -399,6 +399,7 @@ model Setting {
 model ReceiptSettings {
   id              Int      @id @default(autoincrement())
   logoUrl         String?  // Company logo URL
+  logoInversion   String   @default("none") // none, theme-aware, always
   companyName     String   @default("Ölföng")
   companyNameIs   String   @default("Ölföng")
   companyAddress  String?  // Full address

@@ -12,3 +12,1470 @@
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/olibuijr/Projects/olfong_stack/web/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
+3:32:05 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:32:08 PM [vite] hmr update /src/index.css
+3:32:11 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:32:12 PM [vite] hmr update /src/components/common/ReceiptModal.jsx, /src/index.css
+3:32:16 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:32:25 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:32:25 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (741:8)
+
+  739 |             </div>
+  740 |           </div>
+> 741 |         </div>
+      |         ^
+  742 |       </div>
+  743 |     </AdminLayout>
+  744 |   );
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:741:8
+  739|              </div>
+  740|            </div>
+  741|          </div>
+     |          ^
+  742|        </div>
+  743|      </AdminLayout>
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:32:25 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (741:8)
+
+  739 |             </div>
+  740 |           </div>
+> 741 |         </div>
+      |         ^
+  742 |       </div>
+  743 |     </AdminLayout>
+  744 |   );
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:741:8
+  739|              </div>
+  740|            </div>
+  741|          </div>
+     |          ^
+  742|        </div>
+  743|      </AdminLayout>
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:32:25 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (741:8)
+
+  739 |             </div>
+  740 |           </div>
+> 741 |         </div>
+      |         ^
+  742 |       </div>
+  743 |     </AdminLayout>
+  744 |   );
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:741:8
+  739|              </div>
+  740|            </div>
+  741|          </div>
+     |          ^
+  742|        </div>
+  743|      </AdminLayout>
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:32:28 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:32:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:32:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:32:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:32:36 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:32:36 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:32:36 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:32:37 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:32:59 PM [vite] Pre-transform error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+3:32:59 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:33:28 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:33:28 PM [vite] Pre-transform error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+3:33:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:33:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:33:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:33:31 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Expected corresponding JSX closing tag for <AdminLayout>. (720:6)
+
+  718 |           </div>
+  719 |         </div>
+> 720 |       </div>
+      |       ^
+  721 |     </AdminLayout>
+  722 |   );
+  723 | };
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:720:6
+  718|            </div>
+  719|          </div>
+  720|        </div>
+     |        ^
+  721|      </AdminLayout>
+  722|    );
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4760:16)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+3:33:58 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:33:58 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:33:58 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:34:00 PM [vite] Pre-transform error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+3:34:00 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:34:25 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:34:25 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (719:18)
+
+  717 |         </div>
+  718 |       </div>
+> 719 |     </AdminLayout>
+      |                   ^
+  720 |   );
+  721 | };
+  722 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:719:18
+  717|          </div>
+  718|        </div>
+  719|      </AdminLayout>
+     |                    ^
+  720|    );
+  721|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+3:34:28 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:34:28 PM [vite] Pre-transform error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (718:18)
+
+  716 |         </div>
+  717 |       </div>
+> 718 |     </AdminLayout>
+      |                   ^
+  719 |   );
+  720 | };
+  721 |
+3:34:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (718:18)
+
+  716 |         </div>
+  717 |       </div>
+> 718 |     </AdminLayout>
+      |                   ^
+  719 |   );
+  720 | };
+  721 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:718:18
+  716|          </div>
+  717|        </div>
+  718|      </AdminLayout>
+     |                    ^
+  719|    );
+  720|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+3:34:28 PM [vite] Internal server error: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx: Unterminated JSX contents. (718:18)
+
+  716 |         </div>
+  717 |       </div>
+> 718 |     </AdminLayout>
+      |                   ^
+  719 |   );
+  720 | };
+  721 |
+  Plugin: vite:react-babel
+  File: /home/olibuijr/Projects/olfong_stack/web/src/pages/admin/settings/ReceiptSettings.jsx:718:18
+  716|          </div>
+  717|        </div>
+  718|      </AdminLayout>
+     |                    ^
+  719|    );
+  720|  };
+      at constructor (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:367:19)
+      at JSXParserMixin.raise (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6630:19)
+      at JSXParserMixin.jsxReadToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4481:20)
+      at JSXParserMixin.getTokenFromCode (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4807:12)
+      at JSXParserMixin.nextToken (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5813:10)
+      at JSXParserMixin.next (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5723:10)
+      at JSXParserMixin.eat (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:5727:12)
+      at JSXParserMixin.expect (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:6929:15)
+      at JSXParserMixin.jsxParseClosingElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4713:10)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4728:37)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElementAt (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4731:32)
+      at JSXParserMixin.jsxParseElement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4782:17)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4792:19)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12436:12)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10804:17)
+      at JSXParserMixin.parseMaybeAssignAllowInOrVoidPattern (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12503:17)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11683:28)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:4797:20)
+      at JSXParserMixin.parseExprSubscripts (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11085:23)
+      at JSXParserMixin.parseUpdate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11070:21)
+      at JSXParserMixin.parseMaybeUnary (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11050:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10903:61)
+      at JSXParserMixin.parseExprOps (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10908:23)
+      at JSXParserMixin.parseMaybeConditional (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10885:23)
+      at JSXParserMixin.parseMaybeAssign (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10835:21)
+      at JSXParserMixin.parseExpressionBase (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10788:23)
+      at /home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:39
+      at JSXParserMixin.allowInAnd (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12431:16)
+      at JSXParserMixin.parseExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:10784:17)
+      at JSXParserMixin.parseReturnStatement (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13151:28)
+      at JSXParserMixin.parseStatementContent (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12807:21)
+      at JSXParserMixin.parseStatementLike (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12776:17)
+      at JSXParserMixin.parseStatementListItem (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12756:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13325:61)
+      at JSXParserMixin.parseBlockBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13318:10)
+      at JSXParserMixin.parseBlock (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:13306:10)
+      at JSXParserMixin.parseFunctionBody (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12110:24)
+      at JSXParserMixin.parseArrowExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:12085:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11695:12)
+      at JSXParserMixin.parseExprAtom (/home/olibuijr/Projects/olfong_stack/web/node_modules/@babel/parser/lib/index.js:11335:23)
+3:34:40 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:36:16 PM [vite] page reload src/store/slices/receiptSettingsSlice.js
+3:36:20 PM [vite] page reload src/store/slices/receiptSettingsSlice.js
+3:39:23 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:39:30 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:40:08 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:41:11 PM [vite] page reload src/store/slices/receiptSettingsSlice.js
+3:41:16 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:41:22 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:41:32 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css
+3:41:43 PM [vite] hmr update /src/components/common/Receipt.jsx, /src/index.css
+3:41:48 PM [vite] hmr update /src/components/common/Receipt.jsx, /src/index.css
+3:42:04 PM [vite] hmr update /src/pages/admin/settings/ReceiptSettings.jsx, /src/index.css

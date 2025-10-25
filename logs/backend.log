@@ -230,3 +230,65 @@ User connected: dD3yaRVrSrbnRUzqAAAD
 User connected: 0tWII4hFnKPPyiKUAAAF
 User disconnected: 0tWII4hFnKPPyiKUAAAF
 User connected: lQs_6g7UWxkRZp4lAAAH
+User disconnected: lQs_6g7UWxkRZp4lAAAH
+User connected: t4DCYqjtv5TLXJXnAAAJ
+User disconnected: t4DCYqjtv5TLXJXnAAAJ
+User connected: tvisdjC6z_kmt2gQAAAL
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: HNUkYPY6CFaQtecLAAAB
+User connected: 6723eBRmNjHGFrPeAAAD
+User connected: KohEV9lbY1XAPBPbAAAF
+User disconnected: KohEV9lbY1XAPBPbAAAF
+User disconnected: 6723eBRmNjHGFrPeAAAD
+User connected: h7oltl4DXgIpev7OAAAH
+User connected: UwJx5FKX9iF8aqGPAAAJ
+User disconnected: h7oltl4DXgIpev7OAAAH
+User disconnected: UwJx5FKX9iF8aqGPAAAJ
+User connected: yv-DpuWfzUcKtS4rAAAL
+User connected: Ev7OGoQK2nDLVS6JAAAN
+User disconnected: Ev7OGoQK2nDLVS6JAAAN
+User disconnected: yv-DpuWfzUcKtS4rAAAL
+User connected: jX9zs34wzQF0rHonAAAP
+User connected: 5TgNFR8W875H77JOAAAR
+User disconnected: jX9zs34wzQF0rHonAAAP
+User connected: xxymgKEXDwM1OautAAAT
+User disconnected: xxymgKEXDwM1OautAAAT
+User connected: 0UJWSiUvY1TP4p7kAAAV
+User disconnected: 0UJWSiUvY1TP4p7kAAAV
+User connected: caPW5Y7GHhO36ZtrAAAX
+User disconnected: caPW5Y7GHhO36ZtrAAAX
+User connected: GBbMw2v1nfLtl1pSAAAZ
+User disconnected: GBbMw2v1nfLtl1pSAAAZ
+User connected: 0PIQzSPAHLCOFKyWAAAb
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: zwxhFkEpRDgwlle5AAAB
+User connected: fYx1YuQicYTJ72yhAAAD
+User connected: 6oldzRdmoL335S0pAAAF
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: YcVfVG0FcgWFQguBAAAB
+User connected: yscUTXaBfgDdlL2cAAAD
+User connected: 9kBqVro2QGCEi-PSAAAF
+User disconnected: 9kBqVro2QGCEi-PSAAAF
+User disconnected: YcVfVG0FcgWFQguBAAAB
+User connected: sTUeZYggE_LtSVK6AAAH
+User connected: ldgr8H9alBSp1AdTAAAJ
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: 2nfN_C74ZXyDoVD2AAAB
+User connected: acCdckugEXmbvF7DAAAD
+User connected: MIV8Fb4GhzbIQYp7AAAF

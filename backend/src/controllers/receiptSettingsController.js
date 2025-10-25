@@ -80,6 +80,7 @@ const updateReceiptSettings = async (req, res) => {
   try {
     const {
       logoUrl,
+      logoInversion,
       companyName,
       companyNameIs,
       companyAddress,
@@ -110,6 +111,7 @@ const updateReceiptSettings = async (req, res) => {
       where: { id: 1 },
       update: {
         logoUrl,
+        logoInversion: logoInversion || 'none',
         companyName,
         companyNameIs,
         companyAddress,
@@ -148,7 +150,8 @@ const updateReceiptSettings = async (req, res) => {
         showQrCode: showQrCode !== undefined ? showQrCode : true,
         template: template || 'modern',
         paperSize: paperSize || '80mm',
-        logoUrl
+        logoUrl,
+        logoInversion: logoInversion || 'none'
       }
     });
 
