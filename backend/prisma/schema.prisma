@@ -43,6 +43,9 @@ model User {
    sentMessages     ChatMessage[] @relation("MessageSender")
    receivedMessages ChatMessage[] @relation("MessageReceiver")
    conversations    ConversationParticipant[]
+   // Notification relations
+   notifications    Notification[]
+   notificationPreference NotificationPreference?
 }
 
 model Category {
@@ -56,6 +59,28 @@ model Category {
   imageUrl    String?  // Category image URL (legacy)
   mediaId     String?  // New media relation
   media       Media?   @relation(fields: [mediaId], references: [id])
+
+  // SEO fields
+  metaTitle   String?  // SEO meta title (English)
+  metaTitleIs String?  // SEO meta title (Icelandic)
+  metaDescription String?  // SEO meta description (English)
+  metaDescriptionIs String?  // SEO meta description (Icelandic)
+
+  // Discount fields
+  hasDiscount Boolean         @default(false)
+  discountPercentage Float?   // Discount percentage (0-100)
+  discountStartDate DateTime? // When discount starts
+  discountEndDate DateTime?   // When discount ends
+  discountReason String?      // Discount reason (English)
+  discountReasonIs String?    // Discount reason (Icelandic)
+
+  // VAT fields (LEGACY - use vatProfileId instead)
+  vatRate     Float?          // VAT rate for this category (DEPRECATED - use vatProfile instead)
+
+  // VAT Profile Reference (NEW)
+  vatProfileId Int?
+  vatProfile   VatProfile?     @relation(fields: [vatProfileId], references: [id])
+
   isActive    Boolean  @default(true)
   sortOrder   Int      @default(0)
   createdAt   DateTime @default(now())
@@ -64,6 +89,24 @@ model Category {
   // Relations
   products      Product[]
   subcategories Subcategory[]
+}
+
+model VatProfile {
+  id          Int      @id @default(autoincrement())
+  name        String   // Profile name (e.g., "Standard", "Reduced", "Zero-rated")
+  nameIs      String   // Icelandic name
+  description String?  // Description of when to use this profile
+  descriptionIs String? // Icelandic description
+  vatRate     Float    // VAT rate for this profile (0-100)
+  isActive    Boolean  @default(true)
+  isDefault   Boolean  @default(false) // Whether this is the default profile
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  categories  Category[]
+  products    Product[]
 }
 
 model Subcategory {
@@ -213,6 +256,10 @@ model Product {
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
+  // VAT Profile Reference
+  vatProfileId Int?
+  vatProfile   VatProfile?     @relation(fields: [vatProfileId], references: [id])
+
    // Relations
    orderItems     OrderItem[]
    cartItems      CartItem[]
@@ -273,7 +320,13 @@ model Order {
   shippingOption  ShippingOption? @relation(fields: [shippingOptionId], references: [id])
   pickupTime      String?     // HH:MM format for pickup orders
   status          String      @default("PENDING") // PENDING, CONFIRMED, PREPARING, OUT_FOR_DELIVERY, DELIVERED, CANCELLED
+
+  // VAT TRACKING (NEW)
+  subtotalBeforeVat Float?     // Items subtotal before VAT
+  taxAmount       Float?      // VAT amount
+  vatRate         Float?      // VAT rate used at time of order
   totalAmount     Float
+
   deliveryFee     Float       @default(0) // Kept for backward compatibility, but shippingOption.fee should be used
   notes           String?
   deliveryPersonId Int?
@@ -297,6 +350,11 @@ model OrderItem {
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   quantity  Int      @default(1)
   price     Float    // Price at time of order
+
+  // VAT TRACKING (NEW) - Optional, for detailed breakdowns
+  priceBeforeVat Float? // Price per unit before VAT (if applicable)
+  vatAmount      Float? // VAT amount for this line item
+
   createdAt DateTime @default(now())
 
   @@unique([orderId, productId])
@@ -408,23 +466,28 @@ model ReceiptSettings {
   companyEmail    String?
   companyWebsite  String?
   taxId           String?  // VAT/Tax ID (Kennitala)
-  
+
   // Receipt styling
   headerColor     String   @default("#1e40af") // Primary color
   accentColor     String   @default("#3b82f6")
   fontFamily      String   @default("Inter, system-ui, sans-serif")
   fontSize        String   @default("14px")
-  
+  useGradient     Boolean  @default(false) // Whether to use gradient header
+  headerGradient  String?  // Gradient definition (e.g., "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)")
+
   // Receipt content
   footerText      String?  // Custom footer message
   footerTextIs    String?
   showBarcode     Boolean  @default(true)
   showQrCode      Boolean  @default(true)
-  
+
   // Template layout
   template        String   @default("modern") // modern, classic, minimal
   paperSize       String   @default("80mm") // 80mm, A4, letter
-  
+
+  // Generated CSS for sitewide application
+  customCss       String?  // Auto-generated CSS from settings
+
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
@@ -571,6 +634,39 @@ model Lang {
   value  String
 
   @@unique([key, locale])
+}
+
+model Notification {
+  id            Int      @id @default(autoincrement())
+  type          String   // order, payment, delivery, system, security, marketing
+  priority      String   @default("medium") // high, medium, low
+  title         String
+  message       String
+  userId        Int?     // Null for admin/broadcast notifications
+  user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isRead        Boolean  @default(false)
+  isArchived    Boolean  @default(false)
+  metadata      Json?    // Additional data like orderId, productId, etc.
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([isRead, isArchived])
+}
+
+model NotificationPreference {
+  id              Int     @id @default(autoincrement())
+  userId          Int     @unique
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailEnabled    Boolean @default(true)
+  pushEnabled     Boolean @default(true)
+  smsEnabled      Boolean @default(false)
+  orderUpdates    Boolean @default(true)
+  systemAlerts    Boolean @default(true)
+  marketing       Boolean @default(false)
+  securityAlerts  Boolean @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 
