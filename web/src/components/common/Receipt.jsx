@@ -67,11 +67,11 @@ const Receipt = ({
       {/* Header */}
       <div className="header" style={{ backgroundColor: settings.headerColor, color: 'white' }}>
         {settings.logoUrl && (
-          <div className="mb-2">
+          <div className="mb-2 flex justify-center">
             <img
               src={settings.logoUrl}
               alt={getCompanyName()}
-              className="h-12 mx-auto"
+              className="h-12"
               style={{ maxHeight: '48px', ...getLogoStyle() }}
             />
           </div>

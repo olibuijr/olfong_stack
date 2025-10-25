@@ -173,7 +173,7 @@ const ReceiptSettings = () => {
     return `
       <div class="receipt receipt-${formData.template}" style="max-width: ${formData.paperSize === '80mm' ? '300px' : '100%'}; margin: 0 auto; font-family: ${formData.fontFamily}; font-size: ${formData.fontSize}; background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
         <div class="header" style="background: ${headerStyle}; color: white; text-align: center; padding: 15px;">
-          ${logoUrl ? `<img src="${logoUrl}" alt="${formData.companyNameIs || formData.companyName}" style="max-height: 48px; margin-bottom: 10px; ${logoFilter}" />` : `<h1 style="font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${formData.companyNameIs || formData.companyName}</h1>`}
+          ${logoUrl ? `<div style="display: flex; justify-content: center; margin-bottom: 10px;"><img src="${logoUrl}" alt="${formData.companyNameIs || formData.companyName}" style="max-height: 48px; ${logoFilter}" /></div>` : `<h1 style="font-size: 18px; font-weight: bold; margin: 0 0 5px 0;">${formData.companyNameIs || formData.companyName}</h1>`}
           ${formData.companyAddress ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyAddressIs || formData.companyAddress}</div>` : ''}
           ${formData.companyPhone ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyPhone}</div>` : ''}
           ${formData.companyEmail ? `<div style="font-size: 12px; opacity: 0.9; margin: 2px 0;">${formData.companyEmail}</div>` : ''}
