@@ -81,6 +81,17 @@ const ReceiptSettings = () => {
     }
   }, [settings]);
 
+  // Handle upload success/failure notifications
+  useEffect(() => {
+    if (uploadProgress === 100) {
+      toast.success(t('adminSettings.logoUploadedSuccessfully'));
+      // Reset progress after a short delay
+      setTimeout(() => {
+        dispatch({ type: 'receiptSettings/setUploadProgress', payload: 0 });
+      }, 1000);
+    }
+  }, [uploadProgress, dispatch, t]);
+
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     dispatch(updateSettingsField({ field, value }));
@@ -93,7 +104,20 @@ const ReceiptSettings = () => {
         toast.error(t('adminSettings.fileSizeTooLarge'));
         return;
       }
-      dispatch(uploadReceiptLogo(file));
+      if (!file.type.startsWith('image/')) {
+        toast.error(t('adminSettings.invalidFileType'));
+        return;
+      }
+      dispatch(uploadReceiptLogo(file))
+        .then((result) => {
+          if (result.payload?.error) {
+            toast.error(result.payload.error);
+          }
+        })
+        .catch((error) => {
+          toast.error(t('adminSettings.logoUploadFailed'));
+          console.error('Upload error:', error);
+        });
     }
   };
 
@@ -204,14 +228,14 @@ const ReceiptSettings = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <Settings className="w-5 h-5 mr-2" />
-                Company Information
+                {t('adminSettings.companyInformation')}
               </h2>
               
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Company Name (English)
+                      {t('adminSettings.companyNameEnglish')}
                     </label>
                     <input
                       type="text"
@@ -223,7 +247,7 @@ const ReceiptSettings = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Company Name (Icelandic)
+                      {t('adminSettings.companyNameIcelandic')}
                     </label>
                     <input
                       type="text"
@@ -238,7 +262,7 @@ const ReceiptSettings = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Address (English)
+                      {t('adminSettings.addressEnglish')}
                     </label>
                     <input
                       type="text"
@@ -250,7 +274,7 @@ const ReceiptSettings = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Address (Icelandic)
+                      {t('adminSettings.addressIcelandic')}
                     </label>
                     <input
                       type="text"
@@ -265,7 +289,7 @@ const ReceiptSettings = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Phone
+                      {t('adminSettings.phone')}
                     </label>
                     <input
                       type="tel"
@@ -277,7 +301,7 @@ const ReceiptSettings = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email
+                      {t('adminSettings.email')}
                     </label>
                     <input
                       type="email"
@@ -289,7 +313,7 @@ const ReceiptSettings = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Website
+                      {t('adminSettings.website')}
                     </label>
                     <input
                       type="url"
@@ -303,7 +327,7 @@ const ReceiptSettings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Tax ID (Kennitala)
+                    {t('adminSettings.taxId')}
                   </label>
                   <input
                     type="text"
@@ -320,25 +344,27 @@ const ReceiptSettings = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <Image className="w-5 h-5 mr-2" />
-                Logo
+                {t('adminSettings.logo')}
               </h2>
               
               <div className="space-y-4">
                 {settings?.logoUrl ? (
                   <div className="flex items-center space-x-4">
-                    <img
-                      src={settings.logoUrl}
-                      alt="Company Logo"
-                      className="w-20 h-20 object-contain border border-gray-200 rounded-lg"
-                    />
+                    <div className="w-20 h-20 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 p-2 flex items-center justify-center">
+                      <img
+                        src={settings.logoUrl}
+                        alt="Company Logo"
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
                     <div className="flex-1">
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Current logo</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('adminSettings.currentLogo')}</p>
                       <button
                         onClick={handleDeleteLogo}
                         className="text-red-600 hover:text-red-800 text-sm flex items-center mt-1"
                       >
                         <Trash2 className="w-4 h-4 mr-1" />
-                        Remove
+                        {t('adminSettings.remove')}
                       </button>
                     </div>
                   </div>
@@ -378,14 +404,14 @@ const ReceiptSettings = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <Palette className="w-5 h-5 mr-2" />
-                Design & Colors
+                {t('adminSettings.designColors')}
               </h2>
               
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Header Color
+                      {t('adminSettings.headerColor')}
                     </label>
                     <div className="flex items-center space-x-2">
                       <input
@@ -404,7 +430,7 @@ const ReceiptSettings = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Accent Color
+                      {t('adminSettings.accentColor')}
                     </label>
                     <div className="flex items-center space-x-2">
                       <input
@@ -426,7 +452,7 @@ const ReceiptSettings = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Font Family
+                      {t('adminSettings.fontFamily')}
                     </label>
                     <select
                       value={formData.fontFamily}
@@ -442,7 +468,7 @@ const ReceiptSettings = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Font Size
+                      {t('adminSettings.fontSize')}
                     </label>
                     <select
                       value={formData.fontSize}
@@ -463,13 +489,13 @@ const ReceiptSettings = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <Type className="w-5 h-5 mr-2" />
-                Template & Layout
+                {t('adminSettings.templateLayout')}
               </h2>
-              
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Template Style
+                    {t('adminSettings.templateStyle')}
                   </label>
                   <div className="grid grid-cols-3 gap-3">
                     {['modern', 'classic', 'minimal'].map(template => (
@@ -490,7 +516,7 @@ const ReceiptSettings = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Paper Size
+                    {t('adminSettings.paperSize')}
                   </label>
                   <select
                     value={formData.paperSize}
@@ -574,7 +600,7 @@ const ReceiptSettings = () => {
                 {isSaving ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Saving...
+                    {t('adminSettings.saving')}
                   </>
                 ) : (
                   <>

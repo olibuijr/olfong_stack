@@ -32,12 +32,8 @@ export const uploadReceiptLogo = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append('logo', file);
-      
-      const response = await api.post('/receipt-settings/logo', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+
+      const response = await api.post('/receipt-settings/logo', formData);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to upload logo');

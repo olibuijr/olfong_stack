@@ -101,16 +101,16 @@ const ReceiptModal = ({
   if (!isOpen || !order) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-        {/* Backdrop */}
-        <div
-          className="fixed inset-0 transition-opacity bg-black/50 dark:bg-black/70"
-          onClick={onClose}
-        />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 transition-opacity bg-black/50 dark:bg-black/70"
+        onClick={onClose}
+      />
 
-        {/* Modal */}
-        <div className="inline-block w-full max-w-4xl px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white dark:bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6">
+      {/* Modal */}
+      <div className="relative w-full max-w-4xl h-[90vh] bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden flex flex-col">
+        <div className="flex flex-col flex-1 overflow-hidden px-4 sm:px-6 py-5 sm:py-6">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -177,13 +177,13 @@ const ReceiptModal = ({
           )}
 
           {/* Receipt Preview */}
-          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900/50">
+          <div className="flex flex-col flex-1 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900/50 overflow-hidden">
             {settingsLoading ? (
-              <div className="flex items-center justify-center h-64">
+              <div className="flex items-center justify-center h-full">
                 <div className="text-gray-500 dark:text-gray-400">{t('common.loading')}</div>
               </div>
             ) : receiptSettings ? (
-              <div className="max-w-md mx-auto">
+              <div className="flex-1 overflow-y-auto flex items-start justify-center p-4">
                 <Receipt
                   order={order}
                   settings={receiptSettings}
@@ -195,72 +195,74 @@ const ReceiptModal = ({
                 />
               </div>
             ) : (
-              <div className="py-12">
-                <div className="text-center mb-6">
-                  <div className="text-red-600 dark:text-red-400 font-semibold mb-2">
-                    {t('receipts.settingsNotFound')}
+              <div className="flex-1 flex items-center justify-center overflow-y-auto p-4">
+                <div className="max-w-md">
+                  <div className="text-center mb-6">
+                    <div className="text-red-600 dark:text-red-400 font-semibold mb-2">
+                      {t('receipts.settingsNotFound')}
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      {t('receipts.configureInSettings')}
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                    {t('receipts.configureInSettings')}
-                  </div>
-                </div>
 
-                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                  <div className="font-semibold text-red-900 dark:text-red-200 mb-3 text-sm">
-                    Required Configuration:
-                  </div>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                      <span>Company Name (English & Icelandic)</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                      <span>Company Address (English & Icelandic)</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                      <span>Company Phone Number</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                      <span>Company Email Address</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                      <span>Header Color</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
-                      <span>Paper Size Selection</span>
-                    </li>
-                  </ul>
+                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                    <div className="font-semibold text-red-900 dark:text-red-200 mb-3 text-sm">
+                      Required Configuration:
+                    </div>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                        <span>Company Name (English & Icelandic)</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                        <span>Company Address (English & Icelandic)</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                        <span>Company Phone Number</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                        <span>Company Email Address</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                        <span>Header Color</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-red-800 dark:text-red-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0"></span>
+                        <span>Paper Size Selection</span>
+                      </li>
+                    </ul>
 
-                  <div className="mt-4 pt-4 border-t border-red-200 dark:border-red-800">
-                    <a
-                      href="/admin/settings/receipts"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium text-sm"
-                    >
-                      <span>Configure Receipt Settings</span>
-                      <span>→</span>
-                    </a>
+                    <div className="mt-4 pt-4 border-t border-red-200 dark:border-red-800">
+                      <a
+                        href="/admin/settings/receipts"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 font-medium text-sm"
+                      >
+                        <span>Configure Receipt Settings</span>
+                        <span>→</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
           </div>
+        </div>
 
-          {/* Footer */}
-          <div className="mt-6 flex justify-end gap-2">
-            <button
-              onClick={onClose}
-              className="btn btn-secondary dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-            >
-              {t('common.close')}
-            </button>
-          </div>
+        {/* Footer */}
+        <div className="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 px-4 sm:px-6 py-3 sm:py-4 flex justify-end gap-2">
+          <button
+            onClick={onClose}
+            className="btn btn-secondary dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+          >
+            {t('common.close')}
+          </button>
         </div>
       </div>
     </div>

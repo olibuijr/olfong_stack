@@ -196,3 +196,37 @@ User connected: 9htgnF7K5nUkodMJAAA2
 User connected: kLNV32p43L97j6OQAAA3
 User disconnected: 9htgnF7K5nUkodMJAAA2
 User connected: eogFL5PoxREThBC1AAA5
+User disconnected: eogFL5PoxREThBC1AAA5
+User connected: 52dNsYTS4TYTeCUXAAA7
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: PMzkwoSZ3jawzRP8AAAB
+User connected: HGj8ocWgipkcqvwbAAAD
+User connected: r95alyIydOL8FXC8AAAF
+User disconnected: HGj8ocWgipkcqvwbAAAD
+User connected: feRC6RN5mE6L0YTtAAAH
+User disconnected: feRC6RN5mE6L0YTtAAAH
+User connected: Z5CV7jGiElGgGCY4AAAJ
+User disconnected: PMzkwoSZ3jawzRP8AAAB
+User disconnected: Z5CV7jGiElGgGCY4AAAJ
+User connected: 8sAaJdQPbGu0B_YnAAAL
+User connected: D1QVYq28gV2ttYRCAAAN
+User disconnected: D1QVYq28gV2ttYRCAAAN
+User disconnected: 8sAaJdQPbGu0B_YnAAAL
+User connected: wrEAy7hByeFo3CemAAAP
+User connected: eX-vmthmHzt-pK7QAAAR
+User disconnected: wrEAy7hByeFo3CemAAAP
+User connected: 9Fv2UP1YtDoK2o--AAAT
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+🚀 Server running on http://0.0.0.0:5000
+📊 Environment: development
+🗄️  Database: postgresql://olfong_user:olfong_password@localhost:5432/olfong_db?schema=public
+User connected: 6jfjbyuGA58DUndvAAAB
+User connected: dD3yaRVrSrbnRUzqAAAD
+User connected: 0tWII4hFnKPPyiKUAAAF
+User disconnected: 0tWII4hFnKPPyiKUAAAF
+User connected: lQs_6g7UWxkRZp4lAAAH
