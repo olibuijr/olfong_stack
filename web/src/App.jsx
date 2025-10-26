@@ -56,6 +56,8 @@ import Translations from './pages/admin/Translations';
 import Media from './pages/admin/Media';
 import MediaUpload from './pages/admin/MediaUpload';
 import Discounts from './pages/admin/Discounts';
+import AdminPages from './pages/admin/Pages';
+import Page from './pages/Page';
 import DeliveryDashboard from './pages/delivery/Dashboard';
 
 function App() {
@@ -191,6 +193,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/pages/:slug" element={<Page />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
@@ -219,6 +222,7 @@ function App() {
               <Route path="/admin/media" element={<Media />} />
               <Route path="/admin/media/upload" element={<MediaUpload />} />
               <Route path="/admin/banners" element={<AdminBanners />} />
+              <Route path="/admin/pages" element={<AdminPages />} />
               <Route path="/admin/demo-data" element={<DemoData />} />
               <Route path="/admin/translations" element={<Translations />} />
               <Route path="/admin/settings" element={<SettingsOverview />} />

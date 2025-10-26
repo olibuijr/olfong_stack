@@ -45,16 +45,45 @@ const MediaGrid = ({
                                 <Loader className="w-6 h-6 animate-spin text-gray-400" />
                               </div>
                             )}
-                            <img
-                              src={item.thumbnailUrl || item.url}
-                              alt={item.alt || item.originalName}
-                              className={`w-full h-full object-contain transition-opacity duration-300 ${
-                                loadingImages.has(item.id) ? 'opacity-0' : 'opacity-100'
-                              }`}
-                              loading="lazy"
-                              onLoad={() => handleImageLoad(item.id)}
-                              onError={() => handleImageLoad(item.id)}
-                            />
+                            {item.responsiveData ? (
+                              <picture>
+                                {item.responsiveData.picture?.webp?.srcset && (
+                                  <source
+                                    srcSet={item.responsiveData.picture.webp.srcset}
+                                    type="image/webp"
+                                    sizes="150px"
+                                  />
+                                )}
+                                {item.responsiveData.picture?.jpeg?.srcset && (
+                                  <source
+                                    srcSet={item.responsiveData.picture.jpeg.srcset}
+                                    type="image/jpeg"
+                                    sizes="150px"
+                                  />
+                                )}
+                                <img
+                                  src={item.responsiveData.picture?.img?.src || item.responsiveData.src}
+                                  alt={item.responsiveData.picture?.img?.alt || item.responsiveData.alt}
+                                  className={`w-full h-full object-contain transition-opacity duration-300 ${
+                                    loadingImages.has(item.id) ? 'opacity-0' : 'opacity-100'
+                                  }`}
+                                  loading="lazy"
+                                  onLoad={() => handleImageLoad(item.id)}
+                                  onError={() => handleImageLoad(item.id)}
+                                />
+                              </picture>
+                            ) : (
+                              <img
+                                src={item.thumbnailUrl || item.url}
+                                alt={item.alt || item.originalName}
+                                className={`w-full h-full object-contain transition-opacity duration-300 ${
+                                  loadingImages.has(item.id) ? 'opacity-0' : 'opacity-100'
+                                }`}
+                                loading="lazy"
+                                onLoad={() => handleImageLoad(item.id)}
+                                onError={() => handleImageLoad(item.id)}
+                              />
+                            )}
                           </>
                         ) : (
                           <div className="text-center text-gray-400">

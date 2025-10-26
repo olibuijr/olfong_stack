@@ -2,16 +2,21 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import { Link } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPublicPages } from '../../store/slices/pagesSlice';
 import { getSimplifiedOpeningHours } from '../../utils/openingHours';
 import api from '../../services/api';
 
 const Footer = () => {
   const { t, currentLanguage } = useLanguage();
+  const dispatch = useDispatch();
+  const { publicPages } = useSelector((state) => state.pages);
   const [openingHours, setOpeningHours] = useState(null);
 
   useEffect(() => {
     fetchOpeningHours();
-  }, []);
+    dispatch(fetchPublicPages());
+  }, [dispatch]);
 
   const fetchOpeningHours = async () => {
     try {
@@ -105,9 +110,9 @@ const Footer = () => {
     <footer className="bg-white dark:bg-gray-800 shadow-lg border-t border-gray-200 dark:border-gray-700 pb-16-safe md:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Mobile-optimized layout */}
-        <div className="grid grid-cols-2 gap-6 md:gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 md:gap-8 md:grid-cols-4 lg:grid-cols-5">
           {/* Company Info */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 lg:col-span-2">
             <div className="flex items-center mb-4">
               <img
                 src="/logo_black-web.webp"
@@ -155,6 +160,27 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* Pages - Only show if there are published pages */}
+          {publicPages && publicPages.length > 0 && (
+            <div>
+              <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-gray-900 dark:text-white">
+                {t('footer.pages')}
+              </h3>
+              <ul className="space-y-2">
+                {publicPages.map((page) => (
+                  <li key={page.id}>
+                    <Link
+                      to={`/pages/${page.slug}`}
+                      className="text-sm md:text-base text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                    >
+                      {currentLanguage === 'is' ? page.titleIs : page.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Opening Hours */}
           <div>

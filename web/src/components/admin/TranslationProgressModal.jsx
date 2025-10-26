@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { Loader2, X, Check, AlertCircle } from 'lucide-react';
 
-const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, targetLocale, itemKey, itemValue, translatingKey }) => {
+// Use relative paths for API calls - works with any domain/proxy setup
+const API_BASE_URL = '/api';
+
+const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, targetLocale, itemKey, itemValue }) => {
   const [logs, setLogs] = useState([]);
   const [isComplete, setIsComplete] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [result, setResult] = useState(null);
+  const [countdown, setCountdown] = useState(0);
   const logsEndRef = useRef(null);
 
   // Auto-scroll to bottom
@@ -13,13 +16,33 @@ const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, 
     logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [logs]);
 
+  // Countdown timer for auto-close on success
+  useEffect(() => {
+    if (isComplete && !hasError && countdown === 0) {
+      setCountdown(3);
+    }
+  }, [isComplete, hasError, countdown]);
+
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => {
+        if (countdown === 1) {
+          onClose();
+        } else {
+          setCountdown(countdown - 1);
+        }
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [countdown, onClose]);
+
   // Start listening to SSE when modal opens
   useEffect(() => {
     if (!isOpen) {
       setLogs([]);
       setIsComplete(false);
       setHasError(false);
-      setResult(null);
+      setCountdown(0);
       return;
     }
 
@@ -29,13 +52,13 @@ const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, 
         let body = {};
 
         if (type === 'batch') {
-          endpoint = '/api/translations/generate-stream';
+          endpoint = `${API_BASE_URL}/translations/generate-stream`;
           body = {
             sourceLocale,
             targetLocale
           };
         } else if (type === 'single') {
-          endpoint = '/api/translations/translate-item-stream';
+          endpoint = `${API_BASE_URL}/translations/translate-item-stream`;
           body = {
             key: itemKey,
             sourceLocale,
@@ -60,6 +83,7 @@ const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
+        // eslint-disable-next-line no-constant-condition
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -81,7 +105,6 @@ const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, 
                   setHasError(true);
                 } else if (data.type === 'complete') {
                   setLogs(prev => [...prev, { type: 'success', message: 'Translation completed successfully!' }]);
-                  setResult(data.data);
                   setIsComplete(true);
                 }
               } catch (e) {
@@ -102,7 +125,7 @@ const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, 
     };
 
     startTranslation();
-  }, [isOpen, type, sourceLocale, targetLocale, itemKey, itemValue]);
+  }, [isOpen, type, sourceLocale, targetLocale, itemKey, itemValue, hasError]);
 
   if (!isOpen) return null;
 
@@ -162,13 +185,14 @@ const TranslationProgressModal = ({ isOpen, type, title, onClose, sourceLocale, 
           <div className="flex justify-end gap-3 p-6 border-t border-gray-200 dark:border-gray-700">
             <button
               onClick={onClose}
+              disabled={countdown > 0}
               className={`px-4 py-2 rounded-lg text-white font-medium transition-colors ${
                 hasError
-                  ? 'bg-red-600 hover:bg-red-700'
-                  : 'bg-green-600 hover:bg-green-700'
+                  ? 'bg-red-600 hover:bg-red-700 disabled:bg-red-600 disabled:opacity-75'
+                  : 'bg-green-600 hover:bg-green-700 disabled:bg-green-600 disabled:opacity-75'
               }`}
             >
-              {hasError ? 'Close' : 'Done'}
+              {hasError ? 'Close' : countdown > 0 ? `Done (${countdown}s)` : 'Done'}
             </button>
           </div>
         )}

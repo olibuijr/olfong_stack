@@ -323,8 +323,33 @@ const Banners = () => {
           {banners.map((banner) => (
             <div key={banner.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
               {/* Banner Image */}
-              <div className="relative h-48 bg-gray-100 dark:bg-gray-700">
-                {banner.imageUrl ? (
+              <div className="relative h-48 bg-gray-100 dark:bg-gray-700 overflow-hidden">
+                {banner.responsiveData ? (
+                  <picture>
+                    {banner.responsiveData.picture?.webp?.srcset && (
+                      <source
+                        srcSet={banner.responsiveData.picture.webp.srcset}
+                        type="image/webp"
+                        sizes={banner.responsiveData.sizes}
+                      />
+                    )}
+                    {banner.responsiveData.picture?.jpeg?.srcset && (
+                      <source
+                        srcSet={banner.responsiveData.picture.jpeg.srcset}
+                        type="image/jpeg"
+                        sizes={banner.responsiveData.sizes}
+                      />
+                    )}
+                    <img
+                      src={banner.responsiveData.picture?.img?.src || banner.responsiveData.src}
+                      alt={banner.responsiveData.picture?.img?.alt || banner.responsiveData.alt}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      sizes={banner.responsiveData.sizes}
+                      srcSet={banner.responsiveData.picture?.jpeg?.srcset || banner.responsiveData.srcset}
+                    />
+                  </picture>
+                ) : banner.imageUrl ? (
                   <img
                     src={banner.imageUrl}
                     alt={banner.alt || 'Banner'}

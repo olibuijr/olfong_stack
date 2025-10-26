@@ -4,6 +4,56 @@ import { Page, Locator } from '@playwright/test';
  * Enhanced test utilities with self-healing capabilities
  */
 
+// Translation cache to avoid repeated API calls
+const translationCache = new Map<string, string>();
+
+/**
+ * Get translation value from the database by key
+ * Fetches from /api/translations/:key
+ * @param key - Translation key (e.g., 'common.login', 'admin.products')
+ * @param locale - Language locale ('is' for Icelandic, 'en' for English)
+ * @returns Translation value or fallback key if not found
+ */
+export async function getTranslation(key: string, locale: string = 'is'): Promise<string> {
+  const cacheKey = `${locale}:${key}`;
+
+  // Check cache first
+  if (translationCache.has(cacheKey)) {
+    return translationCache.get(cacheKey)!;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:5000/api/translations/${key}?locale=${locale}`);
+    if (response.ok) {
+      const data = await response.json();
+      const value = data.data?.value || key;
+      translationCache.set(cacheKey, value);
+      return value;
+    }
+  } catch (error) {
+    console.warn(`Failed to fetch translation for key: ${key}`, error);
+  }
+
+  // Fallback: return the key itself
+  return key;
+}
+
+/**
+ * Get multiple translations at once
+ * @param keys - Array of translation keys
+ * @param locale - Language locale
+ * @returns Object mapping keys to values
+ */
+export async function getTranslations(keys: string[], locale: string = 'is'): Promise<Record<string, string>> {
+  const results: Record<string, string> = {};
+
+  for (const key of keys) {
+    results[key] = await getTranslation(key, locale);
+  }
+
+  return results;
+}
+
 // Retry mechanism for flaky operations
 export async function retryOperation<T>(
   operation: () => Promise<T>,

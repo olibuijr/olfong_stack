@@ -13,7 +13,7 @@ import {
   Heart,
   Check
 } from 'lucide-react';
-import imageSearchService from '../../services/imageSearchService';
+// Image search now handled by backend API at /api/images/search
 import toast from 'react-hot-toast';
 
 const ImageSearchModal = ({ 
@@ -32,9 +32,8 @@ const ImageSearchModal = ({
   const [selectedImage, setSelectedImage] = useState(null);
   const [viewMode, setViewMode] = useState('grid');
   const [filters, setFilters] = useState({
-    orientation: 'all',
-    color: 'all',
-    sources: imageSearchService.getAvailableSources().map(s => s.key)
+    collection: 'PRODUCTS', // Search within PRODUCTS collection by default
+    provider: 'unsplash' // Backend supports 'unsplash' and 'pexels'
   });
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -57,11 +56,21 @@ const ImageSearchModal = ({
     }
   }, []);
 
-  // Generate search suggestions
+  // Generate search suggestions from product name and category
   useEffect(() => {
-    if (productName || category) {
-      const newSuggestions = imageSearchService.getSearchSuggestions(productName, category);
-      setSuggestions(newSuggestions);
+    const suggestions = [];
+    if (productName) {
+      suggestions.push(productName);
+    }
+    if (category) {
+      suggestions.push(category);
+      if (productName) {
+        suggestions.push(`${productName} ${category}`);
+        suggestions.push(`${category} ${productName}`);
+      }
+    }
+    if (suggestions.length > 0) {
+      setSuggestions(suggestions.slice(0, 5));
     }
   }, [productName, category]);
 
@@ -88,7 +97,7 @@ const ImageSearchModal = ({
     };
   }, [isOpen, onClose]);
 
-  // Handle search
+  // Handle search using backend API
   const handleSearch = async (searchQuery = query) => {
     if (!searchQuery.trim()) return;
 
@@ -97,20 +106,49 @@ const ImageSearchModal = ({
     setSelectedImage(null);
 
     try {
-      const results = await imageSearchService.searchImages(searchQuery, {
-        perPage: 24,
-        ...filters
+      const response = await fetch('/api/images/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: searchQuery,
+          collection: filters.collection,
+          provider: filters.provider,
+          limit: 24
+        })
       });
 
-      setImages(results);
-      
+      if (!response.ok) {
+        throw new Error('Search failed');
+      }
+
+      const data = await response.json();
+      const results = data.data?.downloaded || [];
+
+      // Transform backend response to match expected image format
+      const formattedResults = results.map(item => ({
+        id: item.id,
+        source: filters.provider,
+        sourceName: filters.provider.toUpperCase(),
+        url: item.responsiveData?.src || item.url,
+        thumbnail: item.responsiveData?.picture?.img?.src || item.url,
+        alt: item.alt || item.originalName,
+        photographer: 'Ölföng Library',
+        photographerUrl: null,
+        width: item.width,
+        height: item.height
+      }));
+
+      setImages(formattedResults);
+
       // Add to recent searches
       const newRecent = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 10);
       setRecentSearches(newRecent);
       localStorage.setItem('imageSearchRecent', JSON.stringify(newRecent));
 
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Search failed');
       toast.error(`Search failed: ${err.message}`);
     } finally {
       setLoading(false);
@@ -135,46 +173,24 @@ const ImageSearchModal = ({
     setSelectedImage(image);
   };
 
-  // Handle image download and selection
+  // Handle image selection - image is already in media library from search
   const handleDownloadAndSelect = async (image) => {
     try {
-      setLoading(true);
-      
-      // Download image to server
-      const response = await fetch('/api/images/download', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          imageUrl: image.url,
-          source: image.source,
-          photographer: image.photographer,
-          photographerUrl: image.photographerUrl
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to download image');
-      }
-
-      const { imageUrl } = await response.json();
-      
-      // Call parent callback with the downloaded image URL
-      onSelectImage(imageUrl, {
+      // Image from backend search is already processed and in media library
+      // Pass the responsive image data to parent
+      onSelectImage(image, {
         originalUrl: image.url,
         source: image.source,
         photographer: image.photographer,
-        photographerUrl: image.photographerUrl
+        photographerUrl: image.photographerUrl,
+        responsiveData: image.responsiveData
       });
 
-      toast.success('Image downloaded and selected successfully');
+      toast.success('Image selected successfully');
       onClose();
 
     } catch (err) {
-      toast.error(`Failed to download image: ${err.message}`);
-    } finally {
-      setLoading(false);
+      toast.error(`Failed to select image: ${err.message}`);
     }
   };
 
@@ -300,39 +316,18 @@ const ImageSearchModal = ({
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Filter className="w-4 h-4 text-gray-500" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Filters:</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Source:</span>
             </div>
-            
+
             <select
-              value={filters.orientation}
-              onChange={(e) => setFilters({...filters, orientation: e.target.value})}
+              value={filters.provider}
+              onChange={(e) => setFilters({...filters, provider: e.target.value})}
               className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-800"
             >
-              <option value="all">{t('imageSearchModal.allOrientations')}</option>
-              <option value="landscape">{t('imageSearchModal.landscape')}</option>
-              <option value="portrait">{t('imageSearchModal.portrait')}</option>
-              <option value="squarish">{t('imageSearchModal.square')}</option>
+              <option value="unsplash">Unsplash</option>
+              <option value="pexels">Pexels</option>
             </select>
-            
-            <select
-              value={filters.color}
-              onChange={(e) => setFilters({...filters, color: e.target.value})}
-              className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-800"
-            >
-              <option value="all">{t('imageSearchModal.allColors')}</option>
-              <option value="black_and_white">Black & White</option>
-              <option value="black">{t('imageSearchModal.black')}</option>
-              <option value="white">{t('imageSearchModal.white')}</option>
-              <option value="yellow">{t('imageSearchModal.yellow')}</option>
-              <option value="orange">{t('imageSearchModal.orange')}</option>
-              <option value="red">{t('imageSearchModal.red')}</option>
-              <option value="purple">{t('imageSearchModal.purple')}</option>
-              <option value="magenta">{t('imageSearchModal.magenta')}</option>
-              <option value="green">{t('imageSearchModal.green')}</option>
-              <option value="teal">{t('imageSearchModal.teal')}</option>
-              <option value="blue">{t('imageSearchModal.blue')}</option>
-            </select>
-            
+
             <button
               onClick={() => handleSearch()}
               className="btn btn-primary btn-sm"

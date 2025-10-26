@@ -55,11 +55,38 @@ const Banner = ({ banners = [], autoPlay = true, interval = 5000 }) => {
 
       {/* Banner Image */}
       <div className="relative">
-        <img
-          src={currentBanner.imageUrl}
-          alt={currentBanner.alt || t('home.banner.alt')}
-          className="w-full h-64 md:h-80 object-cover"
-        />
+        {currentBanner.responsiveData ? (
+          <picture>
+            {currentBanner.responsiveData.picture?.webp?.srcset && (
+              <source
+                srcSet={currentBanner.responsiveData.picture.webp.srcset}
+                type="image/webp"
+                sizes={currentBanner.responsiveData.sizes}
+              />
+            )}
+            {currentBanner.responsiveData.picture?.jpeg?.srcset && (
+              <source
+                srcSet={currentBanner.responsiveData.picture.jpeg.srcset}
+                type="image/jpeg"
+                sizes={currentBanner.responsiveData.sizes}
+              />
+            )}
+            <img
+              src={currentBanner.responsiveData.picture?.img?.src || currentBanner.responsiveData.src}
+              alt={currentBanner.responsiveData.picture?.img?.alt || currentBanner.responsiveData.alt}
+              className="w-full h-64 md:h-80 object-cover"
+              loading="lazy"
+              sizes={currentBanner.responsiveData.sizes}
+              srcSet={currentBanner.responsiveData.picture?.jpeg?.srcset || currentBanner.responsiveData.srcset}
+            />
+          </picture>
+        ) : (
+          <img
+            src={currentBanner.imageUrl}
+            alt={currentBanner.alt || t('home.banner.alt')}
+            className="w-full h-64 md:h-80 object-cover"
+          />
+        )}
         
         {/* Overlay with text if provided */}
         {(currentBanner.title || currentBanner.description) && (

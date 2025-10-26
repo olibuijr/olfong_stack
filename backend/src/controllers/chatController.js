@@ -12,19 +12,17 @@ const getConversations = async (req, res) => {
     const { page = 1, limit = 20, status = 'ACTIVE' } = req.query;
     const skip = (page - 1) * limit;
 
-    // For admin and delivery users, show all conversations
-    // For regular users, show only their conversations
-    const whereClause = userRole === 'ADMIN' || userRole === 'DELIVERY' 
-      ? { status }
-      : {
-          participants: {
-            some: {
-              userId,
-              isActive: true,
-            },
-          },
-          status,
-        };
+    // All users (including admin/delivery) should only see conversations they're participants in
+    // This ensures privacy - users can only see conversations they've been added to
+    const whereClause = {
+      participants: {
+        some: {
+          userId,
+          isActive: true,
+        },
+      },
+      status,
+    };
 
     const conversations = await prisma.conversation.findMany({
       where: whereClause,

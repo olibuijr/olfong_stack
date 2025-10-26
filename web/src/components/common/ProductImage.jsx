@@ -45,16 +45,30 @@ const ProductImage = ({ product, className = "w-full h-64 object-contain", curre
     }
   };
 
-  // Construct full image URL if needed
-  const getFullImageUrl = (imageUrl) => {
-    if (!imageUrl) return '';
-    if (imageUrl.startsWith('http')) return imageUrl;
-    // For relative paths, prepend the API base URL
-    const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
-    return `${apiBase}${imageUrl}`;
+  // Check if we have responsive image data from backend
+  const getResponsiveImageData = () => {
+    if (product.responsiveData) {
+      return product.responsiveData;
+    }
+    // Fallback for old image URL format
+    if (product.imageUrl) {
+      return {
+        src: product.imageUrl,
+        alt: getProductName(currentLanguage, product),
+        picture: {
+          webp: { srcset: product.imageUrl },
+          jpeg: { srcset: product.imageUrl },
+          img: { src: product.imageUrl }
+        },
+        sizes: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+      };
+    }
+    return null;
   };
 
-  if (!product.imageUrl || imageError) {
+  const responsiveData = getResponsiveImageData();
+
+  if (!responsiveData || imageError) {
     return (
       <div className={`bg-gradient-to-br ${getCategoryGradient(product.category)} flex items-center justify-center relative ${className}`}>
         <div className="text-center">
@@ -69,14 +83,33 @@ const ProductImage = ({ product, className = "w-full h-64 object-contain", curre
     );
   }
 
+  // Render responsive picture element with WebP and JPEG variants
   return (
-    <img
-      src={getFullImageUrl(product.imageUrl)}
-      alt={getProductName(currentLanguage, product)}
-      className={className}
-      onError={() => setImageError(true)}
-      loading="lazy"
-    />
+    <picture>
+      {responsiveData.picture?.webp?.srcset && (
+        <source
+          srcSet={responsiveData.picture.webp.srcset}
+          type="image/webp"
+          sizes={responsiveData.sizes}
+        />
+      )}
+      {responsiveData.picture?.jpeg?.srcset && (
+        <source
+          srcSet={responsiveData.picture.jpeg.srcset}
+          type="image/jpeg"
+          sizes={responsiveData.sizes}
+        />
+      )}
+      <img
+        src={responsiveData.picture?.img?.src || responsiveData.src}
+        alt={responsiveData.picture?.img?.alt || responsiveData.alt}
+        className={className}
+        onError={() => setImageError(true)}
+        loading="lazy"
+        sizes={responsiveData.sizes}
+        srcSet={responsiveData.picture?.jpeg?.srcset || responsiveData.srcset}
+      />
+    </picture>
   );
 };
 

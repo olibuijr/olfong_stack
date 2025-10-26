@@ -760,6 +760,12 @@
       "value": "Teya Greiðslugátt"
     },
     {
+      "id": "41e05034-d047-40d5-8fe2-a1908d80aec7",
+      "key": "addresses.add",
+      "locale": "en",
+      "value": "Add address"
+    },
+    {
       "id": "753365d5-ff93-443a-a2d4-6114e4ccde7e",
       "key": "addresses.add",
       "locale": "is",
@@ -1178,6 +1184,858 @@
       "key": "adminAnalytics.processing",
       "locale": "is",
       "value": "Í vinnslu"
+    },
+    {
+      "id": "abc2ba98-0da1-42e9-94a7-c188ba6fc4f4",
+      "key": "addresses.city",
+      "locale": "en",
+      "value": "City"
+    },
+    {
+      "id": "0eab6fa8-7434-4738-bf59-b64b6fff888b",
+      "key": "addresses.country",
+      "locale": "en",
+      "value": "Country"
+    },
+    {
+      "id": "47856db9-fe79-4795-8920-5c128b075ab7",
+      "key": "adminNavigation.pages",
+      "locale": "en",
+      "value": "Pages"
+    },
+    {
+      "id": "21f3344d-f71f-4818-96e5-e38a0cb78143",
+      "key": "adminNavigation.pages",
+      "locale": "is",
+      "value": "Síður"
+    },
+    {
+      "id": "12eec61e-ba36-4cf8-8783-da71cf8f3a51",
+      "key": "adminPages.title",
+      "locale": "en",
+      "value": "Pages"
+    },
+    {
+      "id": "6e4a9fdd-00bb-4cb1-b633-0f13ce1f9e4c",
+      "key": "adminPages.title",
+      "locale": "is",
+      "value": "Síður"
+    },
+    {
+      "id": "2f98360a-b6dd-474b-8c68-d0300245d4e6",
+      "key": "adminPages.subtitle",
+      "locale": "en",
+      "value": "Manage custom pages for your website"
+    },
+    {
+      "id": "17656242-8763-4d7e-a82c-1f541102ecf9",
+      "key": "adminPages.subtitle",
+      "locale": "is",
+      "value": "Stjórnaðu sérsniðnum síðum fyrir vefsíðuna þína"
+    },
+    {
+      "id": "5b0d8ba9-09b0-4390-90ce-1dba5bd9ee6d",
+      "key": "adminPages.createPage",
+      "locale": "en",
+      "value": "Create Page"
+    },
+    {
+      "id": "2cc942c2-6836-46c0-9934-e8deb9f28e14",
+      "key": "adminPages.createPage",
+      "locale": "is",
+      "value": "Búa til síðu"
+    },
+    {
+      "id": "af296bfc-1896-4faf-8d81-f90389084597",
+      "key": "adminPages.editPage",
+      "locale": "en",
+      "value": "Edit Page"
+    },
+    {
+      "id": "1ac1cc48-bd84-4aaf-807d-9e31fbfe6f98",
+      "key": "adminPages.editPage",
+      "locale": "is",
+      "value": "Breyta síðu"
+    },
+    {
+      "id": "431e1665-cf48-4b01-a5a1-52e9226981f0",
+      "key": "adminPages.deletePage",
+      "locale": "en",
+      "value": "Delete Page"
+    },
+    {
+      "id": "a2538425-e8b2-4358-955e-7db2a17d4cdc",
+      "key": "adminPages.deletePage",
+      "locale": "is",
+      "value": "Eyða síðu"
+    },
+    {
+      "id": "461e3d16-4c6e-4667-9b77-039371311b22",
+      "key": "adminPages.pageDeleted",
+      "locale": "en",
+      "value": "Page deleted successfully"
+    },
+    {
+      "id": "5e2b2a99-542a-489d-be5b-933bddd25db9",
+      "key": "adminPages.pageDeleted",
+      "locale": "is",
+      "value": "Síða eytt með góðum árangri"
+    },
+    {
+      "id": "336f3ec1-0ad0-49f1-a1b6-09efa39fc9ea",
+      "key": "adminPages.table.title",
+      "locale": "en",
+      "value": "Title"
+    },
+    {
+      "id": "268a1b8a-4929-4b03-a928-155fb05ef5a5",
+      "key": "adminPages.table.title",
+      "locale": "is",
+      "value": "Titill"
+    },
+    {
+      "id": "5b458653-13fa-48ec-925a-ea50c06eff33",
+      "key": "adminPages.table.slug",
+      "locale": "en",
+      "value": "Slug"
+    },
+    {
+      "id": "abcbec29-1b7c-4b11-9d18-c057ca5e41e0",
+      "key": "adminPages.table.slug",
+      "locale": "is",
+      "value": "Slúg"
+    },
+    {
+      "id": "e9598a68-c53a-4372-96d6-a6f428844e71",
+      "key": "adminPages.table.status",
+      "locale": "en",
+      "value": "Status"
+    },
+    {
+      "id": "fe5bcd21-1065-4590-b4d8-72029c82495d",
+      "key": "adminPages.table.status",
+      "locale": "is",
+      "value": "Staða"
+    },
+    {
+      "id": "c932abd6-532a-4a7b-8b53-18e935489bee",
+      "key": "adminPages.table.visibility",
+      "locale": "en",
+      "value": "Visibility"
+    },
+    {
+      "id": "96802560-2a6d-4846-bf96-b09fb6e9a360",
+      "key": "adminPages.table.visibility",
+      "locale": "is",
+      "value": "Sýnileiki"
+    },
+    {
+      "id": "ee865ac1-42ce-40b2-8564-a9d87d3a95e4",
+      "key": "adminPages.table.order",
+      "locale": "en",
+      "value": "Order"
+    },
+    {
+      "id": "cc550747-3e5b-4b8b-8c60-4f1e2405ba27",
+      "key": "adminPages.table.order",
+      "locale": "is",
+      "value": "Röðun"
+    },
+    {
+      "id": "b6f43945-2345-420a-800a-09dd81546280",
+      "key": "adminPages.table.actions",
+      "locale": "en",
+      "value": "Actions"
+    },
+    {
+      "id": "83f67e78-e2e6-4b5d-9f0d-4cae15c92e72",
+      "key": "adminPages.table.actions",
+      "locale": "is",
+      "value": "Aðgerðir"
+    },
+    {
+      "id": "4928fff2-068b-433e-b34f-d2ce25f11576",
+      "key": "adminPages.table.createdAt",
+      "locale": "en",
+      "value": "Created"
+    },
+    {
+      "id": "e45cd97c-d8ab-49d4-ad33-f8c8f4888669",
+      "key": "adminPages.table.createdAt",
+      "locale": "is",
+      "value": "Búið til"
+    },
+    {
+      "id": "bc2a4db9-c936-4d6b-b0f3-f591d7ef49b8",
+      "key": "adminPages.table.updatedAt",
+      "locale": "en",
+      "value": "Updated"
+    },
+    {
+      "id": "54230310-2f13-4abe-8614-a6ac84a69d34",
+      "key": "adminPages.table.updatedAt",
+      "locale": "is",
+      "value": "Uppfært"
+    },
+    {
+      "id": "6711a309-61b1-477b-9284-0954eb222cb7",
+      "key": "adminPages.status.draft",
+      "locale": "en",
+      "value": "Draft"
+    },
+    {
+      "id": "ccc2f334-6a8f-473b-b6a7-ffbb6774aaa5",
+      "key": "adminPages.status.draft",
+      "locale": "is",
+      "value": "Drög"
+    },
+    {
+      "id": "1bcaf836-4ef3-49de-af7a-fbd50e25473a",
+      "key": "adminPages.status.published",
+      "locale": "en",
+      "value": "Published"
+    },
+    {
+      "id": "8ce154e9-ef9b-4a4e-b359-ba9fb10f62b9",
+      "key": "adminPages.status.published",
+      "locale": "is",
+      "value": "Birt"
+    },
+    {
+      "id": "d1a2c168-ad81-400f-b763-334092877da7",
+      "key": "adminPages.visibility.visible",
+      "locale": "en",
+      "value": "Visible in Footer"
+    },
+    {
+      "id": "fef903e8-dbb8-4d65-88be-1a28733e76f0",
+      "key": "adminPages.visibility.visible",
+      "locale": "is",
+      "value": "Sýnilegt í fæti"
+    },
+    {
+      "id": "e5f6829b-8084-4e39-8609-28a82518b293",
+      "key": "adminPages.visibility.hidden",
+      "locale": "en",
+      "value": "Hidden from Footer"
+    },
+    {
+      "id": "e4115431-3325-4830-b321-e15253ef3c55",
+      "key": "adminPages.visibility.hidden",
+      "locale": "is",
+      "value": "Falið frá fæti"
+    },
+    {
+      "id": "bc34302d-5ea7-4942-a1b9-923d62291d61",
+      "key": "adminPages.modal.basicInfo",
+      "locale": "en",
+      "value": "Basic Info"
+    },
+    {
+      "id": "339dd0fd-dc28-4839-abbf-d61579eb5a51",
+      "key": "adminPages.modal.basicInfo",
+      "locale": "is",
+      "value": "Grunnupplýsingar"
+    },
+    {
+      "id": "cc27d651-a040-449b-bb82-4aade1ed6d0c",
+      "key": "adminPages.modal.title",
+      "locale": "en",
+      "value": "Page Title (English)"
+    },
+    {
+      "id": "35321849-67f4-4693-b3b4-35ba90a257d6",
+      "key": "adminPages.modal.title",
+      "locale": "is",
+      "value": "Titill síðu (Ensku)"
+    },
+    {
+      "id": "5725d192-63b2-40a2-bd40-5e70e12cfdf0",
+      "key": "adminPages.modal.titleIs",
+      "locale": "en",
+      "value": "Page Title (Icelandic)"
+    },
+    {
+      "id": "5b0b1a5f-19cd-4fcc-aafb-8f30666dad6c",
+      "key": "adminPages.modal.titleIs",
+      "locale": "is",
+      "value": "Titill síðu (Íslenska)"
+    },
+    {
+      "id": "c95c0f68-52a2-4475-844c-3d29d2a3f90a",
+      "key": "adminPages.modal.slug",
+      "locale": "en",
+      "value": "URL Slug"
+    },
+    {
+      "id": "7aeb2a61-6451-47ca-97eb-c79f1032fd8a",
+      "key": "adminPages.modal.slug",
+      "locale": "is",
+      "value": "URL slúg"
+    },
+    {
+      "id": "a2933554-0fac-4a17-8f22-addb6deb27d0",
+      "key": "adminPages.modal.slugHelper",
+      "locale": "en",
+      "value": "e.g., privacy-policy, about-us"
+    },
+    {
+      "id": "957c3826-9378-4bf3-adc2-c21399170ef5",
+      "key": "adminPages.modal.slugHelper",
+      "locale": "is",
+      "value": "t.d., privacy-policy, about-us"
+    },
+    {
+      "id": "a51fe2b8-3189-47aa-bb6d-b7caf87f5b37",
+      "key": "adminPages.modal.status",
+      "locale": "en",
+      "value": "Status"
+    },
+    {
+      "id": "44006ecf-0c41-40b1-bc40-aa9f93900445",
+      "key": "adminPages.modal.status",
+      "locale": "is",
+      "value": "Staða"
+    },
+    {
+      "id": "c7ca2888-36ba-4dda-b325-2adfa338ceca",
+      "key": "adminPages.modal.visibility",
+      "locale": "en",
+      "value": "Show in Footer"
+    },
+    {
+      "id": "2cceb216-7531-4ede-8d48-b4dc70d9d0bf",
+      "key": "adminPages.modal.visibility",
+      "locale": "is",
+      "value": "Sýna í fæti"
+    },
+    {
+      "id": "e2a9e8fa-edb2-4557-acf4-4ed5a0260e4d",
+      "key": "adminPages.modal.sortOrder",
+      "locale": "en",
+      "value": "Display Order"
+    },
+    {
+      "id": "fa523a1a-7f02-4ae7-bd0f-5c6dea8c839e",
+      "key": "adminPages.modal.sortOrder",
+      "locale": "is",
+      "value": "Birting röðun"
+    },
+    {
+      "id": "9c501c0f-f631-4734-a75e-62f5cb0e195f",
+      "key": "adminPages.modal.sortOrderHelper",
+      "locale": "en",
+      "value": "Lower numbers appear first"
+    },
+    {
+      "id": "1fe7bb06-39b5-46c0-ab2e-133b47341e20",
+      "key": "adminPages.modal.sortOrderHelper",
+      "locale": "is",
+      "value": "Lægri tölur koma fyrst"
+    },
+    {
+      "id": "422f8730-b7d6-41be-9fcf-10a462578384",
+      "key": "adminPages.modal.content",
+      "locale": "en",
+      "value": "Content"
+    },
+    {
+      "id": "15c3531b-c8d4-4d1d-97bb-a7af70f49968",
+      "key": "adminPages.modal.content",
+      "locale": "is",
+      "value": "Efni"
+    },
+    {
+      "id": "7299e9ba-22af-45f6-b4c2-a60745caca65",
+      "key": "adminPages.modal.contentEn",
+      "locale": "en",
+      "value": "Content (English)"
+    },
+    {
+      "id": "4d2cede4-ae6a-4557-9203-9f82c4d9255c",
+      "key": "adminPages.modal.contentEn",
+      "locale": "is",
+      "value": "Efni (Ensku)"
+    },
+    {
+      "id": "5b976e22-a334-4192-9367-12f30b4b2cb8",
+      "key": "adminPages.modal.contentIs",
+      "locale": "en",
+      "value": "Content (Icelandic)"
+    },
+    {
+      "id": "244fa738-e21c-4f28-a6b5-50acbf7d3511",
+      "key": "adminPages.modal.contentIs",
+      "locale": "is",
+      "value": "Efni (Íslenska)"
+    },
+    {
+      "id": "45db3cc5-d71c-4d3d-9439-0b389caeade2",
+      "key": "adminPages.modal.featuredImage",
+      "locale": "en",
+      "value": "Featured Image"
+    },
+    {
+      "id": "69de7622-a194-4b17-8f14-cd6a59cc5b47",
+      "key": "adminPages.modal.featuredImage",
+      "locale": "is",
+      "value": "Myndskeið mynd"
+    },
+    {
+      "id": "3b5bfa12-2039-446c-805d-14f47f3189ed",
+      "key": "adminPages.modal.selectImage",
+      "locale": "en",
+      "value": "Select Image"
+    },
+    {
+      "id": "b15bb61d-9020-4786-874b-cdc0d753ddaf",
+      "key": "adminPages.modal.selectImage",
+      "locale": "is",
+      "value": "Velja mynd"
+    },
+    {
+      "id": "1fc99dad-c26e-4cd4-b9cd-2324f58f385a",
+      "key": "adminPages.modal.noImageSelected",
+      "locale": "en",
+      "value": "No image selected"
+    },
+    {
+      "id": "acde2cb2-05ca-42aa-9c4b-6c2e7677d31e",
+      "key": "adminPages.modal.noImageSelected",
+      "locale": "is",
+      "value": "Engin mynd valin"
+    },
+    {
+      "id": "959b7f78-ff7a-4558-ae64-57ef2b22bf0a",
+      "key": "adminPages.modal.imageHelper",
+      "locale": "en",
+      "value": "This image will be displayed at the top of the page"
+    },
+    {
+      "id": "180833b5-cf0f-4c69-8da1-dc708967fee5",
+      "key": "adminPages.modal.imageHelper",
+      "locale": "is",
+      "value": "Þessi mynd verður sýnd efst á síðunni"
+    },
+    {
+      "id": "4d7264df-778c-4574-a82a-6619cf5c9b57",
+      "key": "adminPages.modal.seo",
+      "locale": "en",
+      "value": "SEO"
+    },
+    {
+      "id": "1aa386e1-22cd-4015-b8dd-ec144baa7827",
+      "key": "adminPages.modal.seo",
+      "locale": "is",
+      "value": "SEO"
+    },
+    {
+      "id": "3b0790ca-69c9-4078-8898-9267d7770058",
+      "key": "adminPages.modal.metaTitle",
+      "locale": "en",
+      "value": "Meta Title (English)"
+    },
+    {
+      "id": "b502955b-53e2-44dd-a79c-537d8329154a",
+      "key": "adminPages.modal.metaTitle",
+      "locale": "is",
+      "value": "Lýsigögn titill (Ensku)"
+    },
+    {
+      "id": "2878c5a6-3498-49e2-badb-a4cc7a39f271",
+      "key": "adminPages.modal.metaTitleIs",
+      "locale": "en",
+      "value": "Meta Title (Icelandic)"
+    },
+    {
+      "id": "9c910bce-bfd0-41f6-bf84-6bb8c6ec37ab",
+      "key": "adminPages.modal.metaTitleIs",
+      "locale": "is",
+      "value": "Lýsigögn titill (Íslenska)"
+    },
+    {
+      "id": "e10f1355-b9d7-4760-935a-5e654d4276f4",
+      "key": "adminPages.modal.metaDescription",
+      "locale": "en",
+      "value": "Meta Description (English)"
+    },
+    {
+      "id": "cf9da839-77d9-4471-adaa-6dfb461f5265",
+      "key": "adminPages.modal.metaDescription",
+      "locale": "is",
+      "value": "Lýsigögn lýsing (Ensku)"
+    },
+    {
+      "id": "e74bac0b-a197-43ef-a44d-1a601a1f7051",
+      "key": "adminPages.modal.metaDescriptionIs",
+      "locale": "en",
+      "value": "Meta Description (Icelandic)"
+    },
+    {
+      "id": "7ad0912e-25e6-4ecf-b925-c59a787993b3",
+      "key": "adminPages.modal.metaDescriptionIs",
+      "locale": "is",
+      "value": "Lýsigögn lýsing (Íslenska)"
+    },
+    {
+      "id": "deaf994b-7e76-457c-9cf0-add2b642bd12",
+      "key": "adminPages.modal.metaHelper",
+      "locale": "en",
+      "value": "Appears in search results"
+    },
+    {
+      "id": "907e1b56-b838-4037-b519-ca8ef334aade",
+      "key": "adminPages.modal.metaHelper",
+      "locale": "is",
+      "value": "Birtist í leitarniðurstöðum"
+    },
+    {
+      "id": "148bc279-d2d6-428a-8462-4904421cd135",
+      "key": "adminPages.modal.canonicalUrl",
+      "locale": "en",
+      "value": "Canonical URL"
+    },
+    {
+      "id": "b09efcdb-2df7-4b52-95af-b4279c6ea8c7",
+      "key": "adminPages.modal.canonicalUrl",
+      "locale": "is",
+      "value": "Helstu URL"
+    },
+    {
+      "id": "635a0825-43d4-4d99-a891-22a0f4674549",
+      "key": "adminPages.modal.canonicalHelper",
+      "locale": "en",
+      "value": "Use for duplicate content on other domains"
+    },
+    {
+      "id": "8a618002-1683-46ac-8d12-c8ffae6aff99",
+      "key": "adminPages.modal.canonicalHelper",
+      "locale": "is",
+      "value": "Nota fyrir afrit efnis á öðrum lénum"
+    },
+    {
+      "id": "8daefb1e-ef50-433a-a2ff-29e6ae33b930",
+      "key": "adminPages.validation.titleRequired",
+      "locale": "en",
+      "value": "Title is required"
+    },
+    {
+      "id": "f98c5ae4-f793-4f83-83bc-e593fb78690b",
+      "key": "adminPages.validation.titleRequired",
+      "locale": "is",
+      "value": "Titill er nauðsynlegur"
+    },
+    {
+      "id": "545d9627-368a-4a51-9b7c-ce54341f6873",
+      "key": "adminPages.validation.slugRequired",
+      "locale": "en",
+      "value": "Slug is required"
+    },
+    {
+      "id": "d96650b8-4a19-4cac-99c2-efdb16563fcf",
+      "key": "adminPages.validation.slugRequired",
+      "locale": "is",
+      "value": "Slúg er nauðsynlegur"
+    },
+    {
+      "id": "6264bd4e-bf12-4cca-89e2-2bc240c7d2fd",
+      "key": "adminPages.validation.contentRequired",
+      "locale": "en",
+      "value": "Content is required"
+    },
+    {
+      "id": "67e33301-953c-474a-a411-003cfcd85730",
+      "key": "adminPages.validation.contentRequired",
+      "locale": "is",
+      "value": "Efni er nauðsynlegt"
+    },
+    {
+      "id": "5756dc09-27ca-44e0-b443-df365822de7d",
+      "key": "adminPages.validation.slugExists",
+      "locale": "en",
+      "value": "A page with this slug already exists"
+    },
+    {
+      "id": "b14b264b-983b-4ca9-9f4d-03873c94b5ab",
+      "key": "adminPages.validation.slugExists",
+      "locale": "is",
+      "value": "Síða með þessari slúg er þegar til"
+    },
+    {
+      "id": "75adda61-8b8f-4c5a-9552-28c066d0a49c",
+      "key": "adminPages.actions.edit",
+      "locale": "en",
+      "value": "Edit"
+    },
+    {
+      "id": "0fe256a3-68ff-4e3d-a342-f49376066358",
+      "key": "adminPages.actions.edit",
+      "locale": "is",
+      "value": "Breyta"
+    },
+    {
+      "id": "75cfe4af-2ae7-4e63-a6f6-e945fa3a22aa",
+      "key": "adminPages.actions.delete",
+      "locale": "en",
+      "value": "Delete"
+    },
+    {
+      "id": "026a3539-a43e-4e0e-9a15-27f8f02636ec",
+      "key": "adminPages.actions.delete",
+      "locale": "is",
+      "value": "Eyða"
+    },
+    {
+      "id": "a618860c-4263-4b68-998e-12d6cf20ace9",
+      "key": "adminPages.actions.duplicate",
+      "locale": "en",
+      "value": "Duplicate"
+    },
+    {
+      "id": "01da89a4-90bd-43a8-a49d-199b554426a1",
+      "key": "adminPages.actions.duplicate",
+      "locale": "is",
+      "value": "Afrita"
+    },
+    {
+      "id": "f67114e1-38fb-4527-87e8-a84cf89d4b8d",
+      "key": "adminPages.actions.toggleVisibility",
+      "locale": "en",
+      "value": "Toggle Visibility"
+    },
+    {
+      "id": "257204a9-26c7-4977-abe1-1e83cc576d61",
+      "key": "adminPages.actions.toggleVisibility",
+      "locale": "is",
+      "value": "Kveikja á sýnileika"
+    },
+    {
+      "id": "9bae3ab5-d021-487a-b9ee-bc99d11ef6a1",
+      "key": "adminPages.deleteConfirm",
+      "locale": "en",
+      "value": "Are you sure you want to delete this page?"
+    },
+    {
+      "id": "baa03f11-6466-4037-8ab4-adc79cecb85a",
+      "key": "adminPages.deleteConfirm",
+      "locale": "is",
+      "value": "Ertu viss um að þú vilt eyða þessari síðu?"
+    },
+    {
+      "id": "44ebdf1d-2f69-42a3-85e1-3763fab9b447",
+      "key": "adminPages.deleteWarning",
+      "locale": "en",
+      "value": "This action cannot be undone"
+    },
+    {
+      "id": "3c4ab389-be30-4a31-a456-f5319646c767",
+      "key": "adminPages.deleteWarning",
+      "locale": "is",
+      "value": "Þessa aðgerð er ekki hægt að afturkalla"
+    },
+    {
+      "id": "c403b4cf-1a0a-45f2-88d4-883e7516a99a",
+      "key": "adminPages.editor.bold",
+      "locale": "en",
+      "value": "Bold"
+    },
+    {
+      "id": "c508edc5-e87e-4b1c-99e9-6075ad88772f",
+      "key": "adminPages.editor.bold",
+      "locale": "is",
+      "value": "Feiti"
+    },
+    {
+      "id": "88a5d8c6-b3c2-4dc5-869c-64e10acf8e99",
+      "key": "adminPages.editor.italic",
+      "locale": "en",
+      "value": "Italic"
+    },
+    {
+      "id": "2d3ccccd-68c2-4d86-8140-e2c9f573b6f0",
+      "key": "adminPages.editor.italic",
+      "locale": "is",
+      "value": "Skáletra"
+    },
+    {
+      "id": "44070914-d5e4-4670-bb1b-ea993e59e30e",
+      "key": "adminPages.editor.underline",
+      "locale": "en",
+      "value": "Underline"
+    },
+    {
+      "id": "cd200436-b4a5-4568-adef-bd4df8d32670",
+      "key": "adminPages.editor.underline",
+      "locale": "is",
+      "value": "Undirstrika"
+    },
+    {
+      "id": "3354f508-d6a2-4913-ac13-8209c03c1fce",
+      "key": "adminPages.editor.heading1",
+      "locale": "en",
+      "value": "Heading 1"
+    },
+    {
+      "id": "32cdfc11-1e4c-4b20-b7a1-5658e9b7caf5",
+      "key": "adminPages.editor.heading1",
+      "locale": "is",
+      "value": "Fyrirsögn 1"
+    },
+    {
+      "id": "4530ddf9-2902-41a0-b1a5-b7fc8d430fcd",
+      "key": "adminPages.editor.heading2",
+      "locale": "en",
+      "value": "Heading 2"
+    },
+    {
+      "id": "629a6c0e-442c-4238-a9d2-b21675bdef37",
+      "key": "adminPages.editor.heading2",
+      "locale": "is",
+      "value": "Fyrirsögn 2"
+    },
+    {
+      "id": "6ec2cce2-0b44-4fa0-aa9c-714659069acd",
+      "key": "adminPages.editor.heading3",
+      "locale": "en",
+      "value": "Heading 3"
+    },
+    {
+      "id": "63463c72-7150-4b38-a595-d29488113217",
+      "key": "adminPages.editor.heading3",
+      "locale": "is",
+      "value": "Fyrirsögn 3"
+    },
+    {
+      "id": "3a60c99e-eced-474b-96b2-68d7c0080f4b",
+      "key": "adminPages.editor.unorderedList",
+      "locale": "en",
+      "value": "Unordered List"
+    },
+    {
+      "id": "2101fe07-b4ef-4f1e-b8fe-039bea403585",
+      "key": "adminPages.editor.unorderedList",
+      "locale": "is",
+      "value": "Óróðuð listi"
+    },
+    {
+      "id": "156803fe-c0a2-4d79-b1e8-5c6b2e1a86a7",
+      "key": "adminPages.editor.orderedList",
+      "locale": "en",
+      "value": "Ordered List"
+    },
+    {
+      "id": "dbfcdaea-1f8a-438d-9b19-f95aeeb17bca",
+      "key": "adminPages.editor.orderedList",
+      "locale": "is",
+      "value": "Röðuð listi"
+    },
+    {
+      "id": "081ff925-ccdb-4590-a4f2-1f9bd9246dc5",
+      "key": "adminPages.editor.blockquote",
+      "locale": "en",
+      "value": "Blockquote"
+    },
+    {
+      "id": "ed160ebc-7b37-4e4b-8a3a-325e51e416f5",
+      "key": "adminPages.editor.blockquote",
+      "locale": "is",
+      "value": "Blokkatilboð"
+    },
+    {
+      "id": "b5023c26-24f6-4b7a-b0cd-ee63559d3595",
+      "key": "adminPages.editor.codeBlock",
+      "locale": "en",
+      "value": "Code Block"
+    },
+    {
+      "id": "8f8739b5-736c-4719-85eb-6bfa832e3025",
+      "key": "adminPages.editor.codeBlock",
+      "locale": "is",
+      "value": "Kóðablikki"
+    },
+    {
+      "id": "5f39b969-3dd8-4662-bb19-21abeb1df066",
+      "key": "adminPages.editor.link",
+      "locale": "en",
+      "value": "Link"
+    },
+    {
+      "id": "4dcdee5a-4140-4e10-9625-0f514d7dc258",
+      "key": "adminPages.editor.link",
+      "locale": "is",
+      "value": "Tengill"
+    },
+    {
+      "id": "dd325782-8c02-4e91-b711-47f159fa62ba",
+      "key": "adminPages.editor.image",
+      "locale": "en",
+      "value": "Image"
+    },
+    {
+      "id": "87dcfc8d-0092-4610-9a1d-06b2f89a2596",
+      "key": "adminPages.editor.image",
+      "locale": "is",
+      "value": "Mynd"
+    },
+    {
+      "id": "a686a5d6-5d6c-494f-9c24-d04a65ca0082",
+      "key": "adminPages.editor.insertImage",
+      "locale": "en",
+      "value": "Insert Image"
+    },
+    {
+      "id": "79e5c761-1363-4ce0-8e69-2d9a1062a2ff",
+      "key": "adminPages.editor.insertImage",
+      "locale": "is",
+      "value": "Setja inn mynd"
+    },
+    {
+      "id": "3a0e5975-5073-4054-baaa-7b20b8d2bae3",
+      "key": "page.notFound",
+      "locale": "en",
+      "value": "Page not found"
+    },
+    {
+      "id": "bfd9b837-bd6a-4473-bf21-fbcd31d151e2",
+      "key": "page.notFound",
+      "locale": "is",
+      "value": "Síða fannst ekki"
+    },
+    {
+      "id": "d75d776f-286a-428f-8b0c-b19b483e4d15",
+      "key": "page.backToHome",
+      "locale": "en",
+      "value": "Back to Home"
+    },
+    {
+      "id": "e4d5a6f0-fe91-459b-8ced-0f573383cb91",
+      "key": "page.backToHome",
+      "locale": "is",
+      "value": "Til baka á heimasíðu"
+    },
+    {
+      "id": "6a8bc323-cce8-40bf-b139-bfa7f67aea05",
+      "key": "page.breadcrumb",
+      "locale": "en",
+      "value": "Pages"
+    },
+    {
+      "id": "794ce96b-bf88-4be5-b3a9-2dcd0c49d5e4",
+      "key": "page.breadcrumb",
+      "locale": "is",
+      "value": "Síður"
+    },
+    {
+      "id": "fe79bb65-83c1-4482-ab21-3fd97a30fb46",
+      "key": "footer.pages",
+      "locale": "en",
+      "value": "Pages"
+    },
+    {
+      "id": "0677da57-4bc0-46ae-9cfd-eeedb7d39bd1",
+      "key": "footer.pages",
+      "locale": "is",
+      "value": "Síður"
     },
     {
       "id": "3a954f95-1658-40fa-87b2-fd6637252957",

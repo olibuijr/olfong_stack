@@ -105,7 +105,8 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
       title: t('adminSidebar.content'),
       items: [
         { name: t('adminNavigation.media'), href: '/admin/media', icon: FileImage },
-        { name: t('adminNavigation.banners'), href: '/admin/banners', icon: Image }
+        { name: t('adminNavigation.banners'), href: '/admin/banners', icon: Image },
+        { name: t('adminNavigation.pages'), href: '/admin/pages', icon: FileText }
       ]
     },
     {

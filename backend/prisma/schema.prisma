@@ -672,7 +672,31 @@ model NotificationPreference {
 }
 
 
+model Page {
+  id          Int      @id @default(autoincrement())
+  title       String   // English page title
+  titleIs     String   // Icelandic page title
+  slug        String   @unique // URL-friendly identifier (e.g., "privacy-policy")
+  content     String   // Slate editor JSON content (English)
+  contentIs   String   // Slate editor JSON content (Icelandic)
+  status      String   @default("DRAFT") // DRAFT, PUBLISHED
+  isVisible   Boolean  @default(true) // Show/hide in footer
+  sortOrder   Int      @default(0) // Display order in footer
 
+  // Featured image
+  featuredImageId String?
+  featuredImage   Media?   @relation("PageFeaturedImage", fields: [featuredImageId], references: [id])
+
+  // SEO fields
+  metaTitle       String?  // SEO meta title (English)
+  metaTitleIs     String?  // SEO meta title (Icelandic)
+  metaDescription String?  // SEO meta description (English)
+  metaDescriptionIs String? // SEO meta description (Icelandic)
+  canonicalUrl    String?  // Canonical URL for this page
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 
 
 // Media Management System
@@ -680,6 +704,7 @@ enum MediaCollection {
   PRODUCTS
   CATEGORIES
   BANNERS
+  PAGES
   PROFILE
   DOCUMENTS
   VIDEOS
@@ -722,6 +747,7 @@ model Media {
   products    Product[]
   categories  Category[]
   banners     Banner[]
+  pagesFeaturedImage Page[]  @relation("PageFeaturedImage")
 
   @@index([collection, createdAt])
   @@index([entityType, entityId])

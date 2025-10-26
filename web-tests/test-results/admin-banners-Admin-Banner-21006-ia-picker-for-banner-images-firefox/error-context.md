@@ -1,0 +1,288 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation "Aðalvalmynd" [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - link "Forsíða" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img "Merki" [ref=e9]
+        - generic [ref=e10]:
+          - img [ref=e11]
+          - generic [ref=e14]:
+            - generic [ref=e15]: "Í dag: 12:00 - 24:00"
+            - generic [ref=e16]: Opið
+      - generic [ref=e17]:
+        - generic [ref=e19]:
+          - textbox "Leita að vörum..." [ref=e20]
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e22]
+        - link "Allt" [ref=e25] [cursor=pointer]:
+          - /url: /products
+        - button "Verslun" [ref=e27] [cursor=pointer]:
+          - text: Verslun
+          - img [ref=e28]
+      - generic [ref=e30]:
+        - button "Switch to dark mode" [ref=e31] [cursor=pointer]:
+          - img [ref=e32]
+        - button "Stjórnborð" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+        - link "Notifications with 0 unread" [ref=e39] [cursor=pointer]:
+          - /url: /admin/notifications
+          - img [ref=e40]
+        - link "Shopping cart with 0 items" [ref=e43] [cursor=pointer]:
+          - /url: /cart
+          - img [ref=e44]
+        - button "Notendavalmynd" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: Admin
+  - main [ref=e54]:
+    - generic [ref=e56]:
+      - generic [ref=e59]:
+        - button [ref=e62] [cursor=pointer]:
+          - img [ref=e64]
+        - navigation [ref=e66]:
+          - generic [ref=e67]:
+            - heading "Yfirlit" [level=3] [ref=e69]
+            - link "Mælaborð" [ref=e71] [cursor=pointer]:
+              - /url: /admin
+              - img [ref=e72]
+              - generic [ref=e78]: Mælaborð
+          - generic [ref=e81]:
+            - heading "Sala" [level=3] [ref=e83]
+            - generic [ref=e84]:
+              - link "Pantanir" [ref=e85] [cursor=pointer]:
+                - /url: /admin/orders
+                - img [ref=e86]
+                - generic [ref=e91]: Pantanir
+              - link "Sölustaður" [ref=e92] [cursor=pointer]:
+                - /url: /admin/pos
+                - img [ref=e93]
+                - generic [ref=e105]: Sölustaður
+              - link "Afhending" [ref=e106] [cursor=pointer]:
+                - /url: /delivery
+                - img [ref=e107]
+                - generic [ref=e114]: Afhending
+          - generic [ref=e117]:
+            - heading "Vörulisti" [level=3] [ref=e119]
+            - generic [ref=e120]:
+              - link "Vörur" [ref=e121] [cursor=pointer]:
+                - /url: /admin/products
+                - img [ref=e122]
+                - generic [ref=e128]: Vörur
+              - link "Afslættir" [ref=e129] [cursor=pointer]:
+                - /url: /admin/discounts
+                - img [ref=e130]
+                - generic [ref=e134]: Afslættir
+              - link "Flokkar" [ref=e135] [cursor=pointer]:
+                - /url: /admin/categories
+                - img [ref=e136]
+                - generic [ref=e139]: Flokkar
+          - generic [ref=e142]:
+            - heading "Innihald" [level=3] [ref=e144]
+            - generic [ref=e145]:
+              - link "Myndefni" [ref=e146] [cursor=pointer]:
+                - /url: /admin/media
+                - img [ref=e147]
+                - generic [ref=e153]: Myndefni
+              - link "Borðar" [ref=e154] [cursor=pointer]:
+                - /url: /admin/banners
+                - img [ref=e155]
+                - generic [ref=e160]: Borðar
+              - link "Síður" [ref=e161] [cursor=pointer]:
+                - /url: /admin/pages
+                - img [ref=e162]
+                - generic [ref=e169]: Síður
+          - generic [ref=e172]:
+            - heading "Viðskiptavinir og samskipti" [level=3] [ref=e174]
+            - generic [ref=e175]:
+              - link "Viðskiptavinir" [ref=e176] [cursor=pointer]:
+                - /url: /admin/customers
+                - img [ref=e177]
+                - generic [ref=e183]: Viðskiptavinir
+              - link "Spjall" [ref=e184] [cursor=pointer]:
+                - /url: /admin/chat
+                - img [ref=e185]
+                - generic [ref=e188]: Spjall
+              - link "Tilkynningar" [ref=e189] [cursor=pointer]:
+                - /url: /admin/notifications
+                - img [ref=e190]
+                - generic [ref=e194]: Tilkynningar
+          - generic [ref=e197]:
+            - heading "Vefgreining" [level=3] [ref=e199]
+            - generic [ref=e200]:
+              - link "Greiningar" [ref=e201] [cursor=pointer]:
+                - /url: /admin/analytics
+                - img [ref=e202]
+                - generic [ref=e208]: Greiningar
+              - link "Skýrslur" [ref=e209] [cursor=pointer]:
+                - /url: /admin/reports
+                - img [ref=e210]
+                - generic [ref=e217]: Skýrslur
+          - generic [ref=e220]:
+            - heading "Stillingar" [level=3] [ref=e222]
+            - button "Stillingar" [ref=e224] [cursor=pointer]:
+              - img [ref=e225]
+              - generic [ref=e228]:
+                - generic [ref=e229]: Stillingar
+                - img [ref=e230]
+          - generic [ref=e234]:
+            - heading "Kerfisstillingar" [level=3] [ref=e236]
+            - generic [ref=e237]:
+              - link "Þýðingar" [ref=e238] [cursor=pointer]:
+                - /url: /admin/translations
+                - img [ref=e239]
+                - generic [ref=e247]: Þýðingar
+              - link "Sýnisgögn" [ref=e248] [cursor=pointer]:
+                - /url: /admin/demo-data
+                - img [ref=e249]
+                - generic [ref=e252]: Sýnisgögn
+        - generic [ref=e253]:
+          - generic [ref=e254]:
+            - generic [ref=e256]: A
+            - generic [ref=e257]:
+              - paragraph [ref=e258]: Kerfisstjóri
+              - paragraph [ref=e259]: Netfang stjórnanda
+          - button "Útskrá" [ref=e260] [cursor=pointer]:
+            - img [ref=e261]
+            - generic [ref=e265]: Útskrá
+      - main [ref=e267]:
+        - generic [ref=e268]:
+          - generic [ref=e271]:
+            - generic [ref=e273]:
+              - heading "Titill" [level=1] [ref=e274]:
+                - img [ref=e275]
+                - generic [ref=e279]: Titill
+              - paragraph [ref=e280]: Undirtitill
+            - button "Bæta við borða" [ref=e282] [cursor=pointer]:
+              - img [ref=e283]
+              - text: Bæta við borða
+          - generic [ref=e287]:
+            - generic [ref=e288]:
+              - img "Banner" [ref=e289]
+              - generic [ref=e291]: Virkt
+            - generic [ref=e292]:
+              - heading "Test Banner" [level=3] [ref=e293]
+              - paragraph [ref=e294]: Engin lýsing
+              - generic [ref=e295]:
+                - generic [ref=e296]:
+                  - button "Breyta" [ref=e297] [cursor=pointer]:
+                    - img [ref=e298]
+                  - button "Bæta við á forsíðu" [ref=e301] [cursor=pointer]:
+                    - img [ref=e302]
+                  - button "Afvirkja" [ref=e305] [cursor=pointer]:
+                    - img [ref=e306]
+                  - button "Eyða" [ref=e311] [cursor=pointer]:
+                    - img [ref=e312]
+                - generic [ref=e318]: "#0"
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - heading "Bæta við borða" [level=2] [ref=e323]
+            - button [ref=e324] [cursor=pointer]:
+              - img [ref=e325]
+          - generic [ref=e328]:
+            - generic [ref=e329]:
+              - generic [ref=e330]:
+                - generic [ref=e331]: Titill (enska)
+                - textbox "Titill" [ref=e332]
+              - generic [ref=e333]:
+                - generic [ref=e334]: Titill (íslenska)
+                - textbox "Titill (íslenska)" [ref=e335]
+            - generic [ref=e336]:
+              - generic [ref=e337]:
+                - generic [ref=e338]: Lýsing (enska)
+                - textbox "Lýsing" [ref=e339]
+              - generic [ref=e340]:
+                - generic [ref=e341]: Lýsing (íslenska)
+                - textbox "Lýsing (íslenska)" [ref=e342]
+            - generic [ref=e343]:
+              - generic [ref=e344]:
+                - generic [ref=e345]: Slóð myndar *
+                - paragraph [ref=e346]: Hlaða upp mynd fyrir borðann.
+                - generic [ref=e347]:
+                  - textbox "Sláðu inn slóð myndar" [ref=e348]
+                  - generic [ref=e349]:
+                    - button "Velja" [active] [ref=e350] [cursor=pointer]:
+                      - img [ref=e351]
+                      - generic [ref=e355]: Velja
+                    - button "Sýsla með myndir" [ref=e356] [cursor=pointer]:
+                      - img [ref=e357]
+                      - generic [ref=e361]: Sýsla með myndir
+              - generic [ref=e362]:
+                - generic [ref=e363]: Myndtexti
+                - textbox "Myndtexti" [ref=e364]
+            - generic [ref=e365]:
+              - generic [ref=e366]:
+                - generic [ref=e367]: Tengill
+                - generic [ref=e368]:
+                  - textbox "Sláðu inn vefslóð" [ref=e369]
+                  - button "Velja tengil" [ref=e370] [cursor=pointer]:
+                    - img [ref=e371]
+              - generic [ref=e373]:
+                - generic [ref=e374]: Röðun
+                - spinbutton [ref=e375]: "0"
+            - generic [ref=e377]:
+              - generic [ref=e378]:
+                - checkbox "Forsíðuborði" [ref=e379]
+                - generic [ref=e380]: Forsíðuborði
+              - paragraph [ref=e381]: Forsíðuborðar birtast á aðalsíðu verslunarinnar.
+            - generic [ref=e383]:
+              - generic [ref=e384]:
+                - checkbox "Hero Banner (Homepage)" [ref=e385]
+                - generic [ref=e386]: Hero Banner (Homepage)
+              - paragraph [ref=e387]: Use this banner as the hero section on the homepage
+            - generic [ref=e388]:
+              - button "Hætta við" [ref=e389] [cursor=pointer]
+              - button "Búa til" [ref=e390] [cursor=pointer]:
+                - img [ref=e391]
+                - text: Búa til
+        - generic [ref=e396]:
+          - generic [ref=e397]:
+            - generic [ref=e398]:
+              - heading "Velja miðil" [level=2] [ref=e399]
+              - paragraph [ref=e400]: Velja einn miðil
+            - button [ref=e401] [cursor=pointer]:
+              - img [ref=e402]
+          - generic [ref=e406]:
+            - button "🛍️ Vörur" [ref=e407] [cursor=pointer]:
+              - generic [ref=e408]: 🛍️
+              - text: Vörur
+            - button "📁 Vöruflokkar" [ref=e409] [cursor=pointer]:
+              - generic [ref=e410]: 📁
+              - text: Vöruflokkar
+            - button "📢 Auglýsingaborðar" [ref=e411] [cursor=pointer]:
+              - generic [ref=e412]: 📢
+              - text: Auglýsingaborðar
+            - button "👤 Prófíll" [ref=e413] [cursor=pointer]:
+              - generic [ref=e414]: 👤
+              - text: Prófíll
+            - button "📄 Skjöl" [ref=e415] [cursor=pointer]:
+              - generic [ref=e416]: 📄
+              - text: Skjöl
+            - button "🎥 Myndbönd" [ref=e417] [cursor=pointer]:
+              - generic [ref=e418]: 🎥
+              - text: Myndbönd
+          - generic [ref=e420]:
+            - generic [ref=e422]:
+              - img [ref=e423]
+              - textbox "Leita í miðlasafni" [ref=e426]
+            - generic [ref=e427]:
+              - button [ref=e428] [cursor=pointer]:
+                - img [ref=e429]
+              - button [ref=e435] [cursor=pointer]:
+                - img [ref=e436]
+              - button "Hlaða upp" [ref=e443] [cursor=pointer]:
+                - img [ref=e444]
+                - text: Hlaða upp
+          - generic [ref=e449]:
+            - img [ref=e450]
+            - heading "Engar skrár fundust" [level=3] [ref=e454]
+            - paragraph [ref=e455]: Engar skrár í þessum flokki
+            - button "Hlaða upp fyrsta miðli" [ref=e456] [cursor=pointer]:
+              - img [ref=e457]
+              - text: Hlaða upp fyrsta miðli
+          - generic [ref=e462]:
+            - button "Hætta við" [ref=e463] [cursor=pointer]
+            - button "Velja atriði" [disabled] [ref=e464]
+```

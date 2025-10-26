@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const { successResponse, errorResponse } = require('../utils/response');
 const { generateMediaVariants } = require('../services/mediaService');
+const { getResponsiveImageData } = require('../services/responsiveImageService');
 const sharp = require('sharp');
 
 // CDN/Media base URL configuration
@@ -121,8 +122,19 @@ const uploadMedia = async (req, res) => {
     if (existingMedia) {
       // Clean up uploaded file
       fs.unlinkSync(file.path);
+      // Get full media with relations
+      const fullMedia = await prisma.media.findUnique({
+        where: { id: existingMedia.id },
+        include: {
+          mediaFormats: true,
+          mediaSizes: true
+        }
+      });
       return successResponse(res, {
-        media: existingMedia,
+        media: {
+          ...fullMedia,
+          responsiveData: getResponsiveImageData(fullMedia, MEDIA_BASE_URL)
+        },
         message: 'File already exists, using existing media'
       });
     }
@@ -226,7 +238,21 @@ const uploadMedia = async (req, res) => {
         console.error('Media processing error:', error);
       });
 
-    return successResponse(res, { media }, 'Media uploaded successfully');
+    // Fetch media with variants and return responsive data
+    const mediaWithVariants = await prisma.media.findUnique({
+      where: { id: media.id },
+      include: {
+        mediaFormats: true,
+        mediaSizes: true
+      }
+    });
+
+    return successResponse(res, {
+      media: {
+        ...mediaWithVariants,
+        responsiveData: getResponsiveImageData(mediaWithVariants, MEDIA_BASE_URL)
+      }
+    }, 'Media uploaded successfully');
 
   } catch (error) {
     console.error('Upload media error:', error);
@@ -273,8 +299,8 @@ const getMedia = async (req, res) => {
     const media = await prisma.media.findMany({
       where,
       include: {
-        formats: true,
-        sizes: true,
+        mediaFormats: true,
+        mediaSizes: true,
         uploadedByUser: {
           select: { id: true, username: true, fullName: true }
         }
@@ -284,8 +310,14 @@ const getMedia = async (req, res) => {
       take: limitNum
     });
 
+    // Add responsive image data to each media item
+    const mediaWithResponsive = media.map(item => ({
+      ...item,
+      responsiveData: getResponsiveImageData(item, MEDIA_BASE_URL)
+    }));
+
     return successResponse(res, {
-      media,
+      media: mediaWithResponsive,
       pagination: {
         page: pageNum,
         limit: limitNum,
@@ -308,8 +340,8 @@ const getMediaById = async (req, res) => {
     const media = await prisma.media.findUnique({
       where: { id },
       include: {
-        formats: true,
-        sizes: true,
+        mediaFormats: true,
+        mediaSizes: true,
         uploadedByUser: {
           select: { id: true, username: true, fullName: true }
         }
@@ -320,7 +352,13 @@ const getMediaById = async (req, res) => {
       return errorResponse(res, 'Media not found', 404);
     }
 
-    return successResponse(res, { media });
+    // Add responsive image data
+    const mediaWithResponsive = {
+      ...media,
+      responsiveData: getResponsiveImageData(media, MEDIA_BASE_URL)
+    };
+
+    return successResponse(res, { media: mediaWithResponsive });
 
   } catch (error) {
     console.error('Get media by ID error:', error);
@@ -342,12 +380,18 @@ const updateMedia = async (req, res) => {
         description: description !== undefined ? description : undefined
       },
       include: {
-        formats: true,
-        sizes: true
+        mediaFormats: true,
+        mediaSizes: true
       }
     });
 
-    return successResponse(res, { media }, 'Media updated successfully');
+    // Add responsive image data
+    const mediaWithResponsive = {
+      ...media,
+      responsiveData: getResponsiveImageData(media, MEDIA_BASE_URL)
+    };
+
+    return successResponse(res, { media: mediaWithResponsive }, 'Media updated successfully');
 
   } catch (error) {
     console.error('Update media error:', error);
@@ -364,8 +408,8 @@ const deleteMedia = async (req, res) => {
     const media = await prisma.media.findUnique({
       where: { id },
       include: {
-        formats: true,
-        sizes: true
+        mediaFormats: true,
+        mediaSizes: true
       }
     });
 
@@ -389,19 +433,23 @@ const deleteMedia = async (req, res) => {
     }
 
     // Delete processed files
-    media.formats.forEach(format => {
-      const formatPath = path.join(__dirname, '../../uploads', collectionDir, format.format.toLowerCase(), `${media.id}.${format.format}`);
-      if (fs.existsSync(formatPath)) {
-        fs.unlinkSync(formatPath);
-      }
-    });
+    if (media.mediaFormats && media.mediaFormats.length > 0) {
+      media.mediaFormats.forEach(format => {
+        const formatPath = path.join(__dirname, '../../uploads', collectionDir, format.format.toLowerCase(), `${media.id}.${format.format}`);
+        if (fs.existsSync(formatPath)) {
+          fs.unlinkSync(formatPath);
+        }
+      });
+    }
 
-    media.sizes.forEach(size => {
-      const sizePath = path.join(__dirname, '../../uploads', collectionDir, 'thumbnails', `${media.id}_${size.size}.webp`);
-      if (fs.existsSync(sizePath)) {
-        fs.unlinkSync(sizePath);
-      }
-    });
+    if (media.mediaSizes && media.mediaSizes.length > 0) {
+      media.mediaSizes.forEach(size => {
+        const sizePath = path.join(__dirname, '../../uploads', collectionDir, 'thumbnails', `${media.id}_${size.size}.webp`);
+        if (fs.existsSync(sizePath)) {
+          fs.unlinkSync(sizePath);
+        }
+      });
+    }
 
     // Delete from database
     await prisma.media.delete({ where: { id } });
@@ -464,7 +512,7 @@ const bulkDeleteMedia = async (req, res) => {
         // Get media record
         const media = await prisma.media.findUnique({
           where: { id },
-          include: { formats: true, sizes: true }
+          include: { mediaFormats: true, mediaSizes: true }
         });
 
         if (!media) {
@@ -513,19 +561,23 @@ const deleteMediaFiles = async (media) => {
   }
 
   // Delete processed files
-  media.formats.forEach(format => {
-    const formatPath = path.join(__dirname, '../../uploads', collectionDir, format.format.toLowerCase(), `${media.id}.${format.format}`);
-    if (fs.existsSync(formatPath)) {
-      fs.unlinkSync(formatPath);
-    }
-  });
+  if (media.mediaFormats && media.mediaFormats.length > 0) {
+    media.mediaFormats.forEach(format => {
+      const formatPath = path.join(__dirname, '../../uploads', collectionDir, format.format.toLowerCase(), `${media.id}.${format.format}`);
+      if (fs.existsSync(formatPath)) {
+        fs.unlinkSync(formatPath);
+      }
+    });
+  }
 
-  media.sizes.forEach(size => {
-    const sizePath = path.join(__dirname, '../../uploads', collectionDir, 'thumbnails', `${media.id}_${size.size}.webp`);
-    if (fs.existsSync(sizePath)) {
-      fs.unlinkSync(sizePath);
-    }
-  });
+  if (media.mediaSizes && media.mediaSizes.length > 0) {
+    media.mediaSizes.forEach(size => {
+      const sizePath = path.join(__dirname, '../../uploads', collectionDir, 'thumbnails', `${media.id}_${size.size}.webp`);
+      if (fs.existsSync(sizePath)) {
+        fs.unlinkSync(sizePath);
+      }
+    });
+  }
 };
 
 module.exports = {

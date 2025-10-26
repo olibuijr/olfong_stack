@@ -36,6 +36,7 @@ const Home = () => {
     return featuredBanners.map(banner => ({
       id: banner.id,
       imageUrl: banner.imageUrl,
+      responsiveData: banner.responsiveData,
       alt: banner.alt || 'Ölföng Banner',
       title: banner.titleIs || banner.title,
       description: banner.descriptionIs || banner.description,

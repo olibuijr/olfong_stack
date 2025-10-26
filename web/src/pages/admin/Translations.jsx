@@ -382,7 +382,7 @@ const Translations = () => {
                 className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
               >
                 <FileJson className="w-4 h-4 mr-2" />
-                <span>Generate with Gemini</span>
+                <span>Generate with Claude</span>
               </button>
               <button
                 onClick={() => {
@@ -751,7 +751,7 @@ const Translations = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full">
               <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Generate Translations with Gemini
+                  Generate Translations with Claude
                 </h2>
                 <button
                   onClick={() => setShowGenerateModal(false)}
@@ -764,7 +764,7 @@ const Translations = () => {
 
               <div className="p-6 space-y-6">
                 <p className="text-gray-600 dark:text-gray-400">
-                  Generate missing translations using Gemini Flash 2.5 model. This will translate from the source language to the target language for any keys that don't already have translations.
+                  Generate missing translations using Claude AI. This will translate from the source language to the target language for any keys that don&apos;t already have translations.
                 </p>
 
                 <div className="space-y-4">

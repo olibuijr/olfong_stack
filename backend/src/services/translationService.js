@@ -443,7 +443,7 @@ class TranslationService {
   }
 
   /**
-   * Generate translations using Gemini Flash 2.5 model
+   * Generate translations using Claude CLI
    */
   async generateTranslations(sourceLocale, targetLocale, keysToTranslate, onProgress = null) {
     try {
@@ -508,17 +508,24 @@ class TranslationService {
         const item = toTranslate[idx];
 
         try {
+          const preparingMsg = `[${idx + 1}/${toTranslate.length}] Preparing to translate "${item.key}"...`;
+          console.log(preparingMsg);
+          if (onProgress) onProgress({ type: 'log', message: preparingMsg });
+
           const prompt = `You are a professional UI translation expert. Translate this single ${sourceLabel} UI text to ${targetLabel}. Return ONLY the translated text, nothing else. Do not include quotes.
 
 "${item.key}": "${item.value}"`;
 
-          // Write prompt to temporary file
-          const tempPromptFile = path.join('/tmp', `gemini-item-${Date.now()}-${idx}.txt`);
-          fs.writeFileSync(tempPromptFile, prompt);
-
           try {
-            // Call Gemini Flash 2.5
-            const result = execSync(`gemini --model flash-2.5 -p "$(cat ${tempPromptFile})"`, {
+            // Call Claude CLI
+            const tempPromptFile = path.join('/tmp', `claude-item-${Date.now()}-${idx}.txt`);
+            fs.writeFileSync(tempPromptFile, prompt);
+
+            const translatingMsg = `[${idx + 1}/${toTranslate.length}] Calling Claude to translate "${item.key}"...`;
+            console.log(translatingMsg);
+            if (onProgress) onProgress({ type: 'log', message: translatingMsg });
+
+            const result = execSync(`claude -p "$(cat ${tempPromptFile})" --dangerously-skip-permissions`, {
               encoding: 'utf8',
               maxBuffer: 10 * 1024 * 1024,
               shell: '/bin/bash',
@@ -585,7 +592,7 @@ class TranslationService {
   }
 
   /**
-   * Translate a single item using Gemini Flash 2.5
+   * Translate a single item using Claude CLI
    */
   async translateItem(key, sourceLocale, targetLocale, value, onProgress = null) {
     try {
@@ -604,13 +611,12 @@ class TranslationService {
 
 "${key}": "${value}"`;
 
-      // Write prompt to temporary file
-      const tempPromptFile = path.join('/tmp', `gemini-item-${Date.now()}.txt`);
-      fs.writeFileSync(tempPromptFile, prompt);
-
       try {
-        // Call Gemini Flash 2.5
-        const result = execSync(`gemini --model flash-2.5 -p "$(cat ${tempPromptFile})"`, {
+        // Call Claude CLI
+        const tempPromptFile = path.join('/tmp', `claude-item-${Date.now()}.txt`);
+        fs.writeFileSync(tempPromptFile, prompt);
+
+        const result = execSync(`claude -p "$(cat ${tempPromptFile})" --dangerously-skip-permissions`, {
           encoding: 'utf8',
           maxBuffer: 10 * 1024 * 1024,
           shell: '/bin/bash',
@@ -624,7 +630,7 @@ class TranslationService {
 
         // Check if translation is empty
         if (!translatedValue || translatedValue.length === 0) {
-          const emptyMsg = `Error: Gemini returned empty translation for "${key}"`;
+          const emptyMsg = `Error: Claude returned empty translation for "${key}"`;
           console.error(emptyMsg);
           if (onProgress) onProgress({ type: 'error', message: emptyMsg });
           throw new Error(emptyMsg);

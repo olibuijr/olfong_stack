@@ -673,6 +673,27 @@ const AdminProducts = () => {
                           {t('adminProductsPage.generatingAIImage') || 'Generating AI Image'}
                         </p>
                       </div>
+                    ) : product.responsiveData ? (
+                      <picture>
+                        {product.responsiveData.picture?.webp?.srcset && (
+                          <source
+                            srcSet={product.responsiveData.picture.webp.srcset}
+                            type="image/webp"
+                          />
+                        )}
+                        {product.responsiveData.picture?.jpeg?.srcset && (
+                          <source
+                            srcSet={product.responsiveData.picture.jpeg.srcset}
+                            type="image/jpeg"
+                          />
+                        )}
+                        <img
+                          src={product.responsiveData.picture?.img?.src || product.responsiveData.src}
+                          alt={product.responsiveData.picture?.img?.alt || product.responsiveData.alt}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
+                      </picture>
                     ) : product.imageUrl ? (
                       <img
                         src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${product.imageUrl}`}
@@ -755,6 +776,27 @@ const AdminProducts = () => {
                           {t('adminProductsPage.generatingAIImage') || 'Gen'}
                         </p>
                       </div>
+                    ) : product.responsiveData ? (
+                      <picture>
+                        {product.responsiveData.picture?.webp?.srcset && (
+                          <source
+                            srcSet={product.responsiveData.picture.webp.srcset}
+                            type="image/webp"
+                          />
+                        )}
+                        {product.responsiveData.picture?.jpeg?.srcset && (
+                          <source
+                            srcSet={product.responsiveData.picture.jpeg.srcset}
+                            type="image/jpeg"
+                          />
+                        )}
+                        <img
+                          src={product.responsiveData.picture?.img?.src || product.responsiveData.src}
+                          alt={product.responsiveData.picture?.img?.alt || product.responsiveData.alt}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
+                      </picture>
                     ) : product.imageUrl ? (
                       <img
                         src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${product.imageUrl}`}

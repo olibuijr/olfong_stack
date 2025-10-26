@@ -384,7 +384,34 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Product Image */}
             <div className="space-y-4">
-              {currentProduct.imageUrl ? (
+              {currentProduct.responsiveData ? (
+                <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
+                  <picture>
+                    {currentProduct.responsiveData.picture?.webp?.srcset && (
+                      <source
+                        srcSet={currentProduct.responsiveData.picture.webp.srcset}
+                        type="image/webp"
+                        sizes={currentProduct.responsiveData.sizes}
+                      />
+                    )}
+                    {currentProduct.responsiveData.picture?.jpeg?.srcset && (
+                      <source
+                        srcSet={currentProduct.responsiveData.picture.jpeg.srcset}
+                        type="image/jpeg"
+                        sizes={currentProduct.responsiveData.sizes}
+                      />
+                    )}
+                    <img
+                      src={currentProduct.responsiveData.picture?.img?.src || currentProduct.responsiveData.src}
+                      alt={currentProduct.responsiveData.picture?.img?.alt || currentProduct.responsiveData.alt}
+                      className="w-full h-96 object-contain rounded-lg"
+                      loading="lazy"
+                      sizes={currentProduct.responsiveData.sizes}
+                      srcSet={currentProduct.responsiveData.picture?.jpeg?.srcset || currentProduct.responsiveData.srcset}
+                    />
+                  </picture>
+                </div>
+              ) : currentProduct.imageUrl ? (
                 <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
                   <img
                     src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${currentProduct.imageUrl}`}
