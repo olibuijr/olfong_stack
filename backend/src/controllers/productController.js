@@ -280,16 +280,32 @@ const createProduct = async (req, res) => {
     if (req.body.categoryId) {
       productData.categoryId = parseInt(req.body.categoryId);
     } else if (req.body.category) {
-      // Map ATVR category names to internal category names
+      // Map ATVR category names to internal category names (both Icelandic and English)
       const categoryMapping = {
+        // Beers
         'Bjór': 'BEERS',
-        'Rauðvín': 'WINE',
-        'Hvítvín': 'WINE',
-        'Rósavín': 'WINE',
-        'Freyðivín': 'WINE',
+        'Beer': 'BEERS',
+        'BEER': 'BEERS',
+        // Light Wines
+        'Rauðvín': 'LIGHT_WINE',
+        'Red wine': 'LIGHT_WINE',
+        'Hvítvín': 'LIGHT_WINE',
+        'White wine': 'LIGHT_WINE',
+        'Rósavín': 'LIGHT_WINE',
+        'Rosé wine': 'LIGHT_WINE',
+        'Rose wine': 'LIGHT_WINE',
+        'Freyðivín': 'LIGHT_WINE',
+        'Sparkling wine': 'LIGHT_WINE',
+        // Spirits
         'Sterkt áfengi': 'SPIRITS',
+        'Spirits': 'SPIRITS',
+        'SPIRITS': 'SPIRITS',
         'Líkjör': 'SPIRITS',
-        'Síder': 'CIDER_RTD'
+        'Liqueur': 'SPIRITS',
+        // Cider & Ready-to-Drink
+        'Síder': 'CIDER_RTD',
+        'Cider': 'CIDER_RTD',
+        'CIDER': 'CIDER_RTD'
       };
 
       const mappedCategoryName = categoryMapping[req.body.category] || req.body.category.toUpperCase();
@@ -300,11 +316,11 @@ const createProduct = async (req, res) => {
       if (category) {
         productData.categoryId = category.id;
       } else {
-        // Default to WINE category if not found
+        // Default to LIGHT_WINE category if not found
         const defaultCategory = await prisma.category.findFirst({
-          where: { name: 'WINE' }
+          where: { name: 'LIGHT_WINE' }
         });
-        productData.categoryId = defaultCategory?.id || 1;
+        productData.categoryId = defaultCategory?.id || 2;
       }
     }
 
@@ -676,83 +692,156 @@ const generateDescription = async (req, res) => {
       return errorResponse(res, 'Language must be "en" or "is"', 400);
     }
 
-    const { execSync } = require('child_process');
+    const { spawnSync } = require('child_process');
 
     try {
       // Generate the prompt based on language
       let description = '';
 
       if (language === 'en') {
-        // For English, use claude CLI to search and generate description
-        const prompt = `Search for information about the product "${productName}" online and create a professional product description of 2-3 sentences. Include key characteristics, uses, and any notable features. Keep it concise and marketing-friendly.`;
+        // For English, use claude CLI to generate description
+        const prompt = `Write a product description for "${productName}". Focus on taste profile, ingredients, and characteristics. Write only the description without any additional commentary or explanations. Keep it to 2-3 sentences maximum.`;
 
-        const command = `claude --continue --print "${prompt}" --dangerously-skip-permissions --verbose --output-format stream-json`;
-        const output = execSync(command, { encoding: 'utf-8' });
-
-        // Parse the JSON output and extract the description text
         try {
-          const lines = output.split('\n').filter(line => line.trim());
-          const lastLine = lines[lines.length - 1];
-          const parsed = JSON.parse(lastLine);
+          const args = ['--print', prompt, '--dangerously-skip-permissions', '--verbose', '--output-format', 'stream-json'];
+          const result = spawnSync('claude', args, { encoding: 'utf-8', timeout: 30000, maxBuffer: 10 * 1024 * 1024 });
 
-          if (parsed.type === 'text' && parsed.text) {
-            description = parsed.text.trim();
+          if (result.error) {
+            throw new Error(`Failed to execute claude: ${result.error.message}`);
           }
-        } catch (parseError) {
-          // Fallback: use raw output if JSON parsing fails
-          description = output.trim();
+
+          if (result.status !== 0) {
+            console.error('Claude stderr:', result.stderr);
+            throw new Error(`Claude returned status ${result.status}: ${result.stderr}`);
+          }
+
+          const output = result.stdout || result.stderr;
+
+          const lines = output.split('\n').filter(line => line.trim());
+
+          // Try to find JSON line with assistant message
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            try {
+              const parsed = JSON.parse(line);
+
+              // Look for assistant message type with content
+              if (parsed.type === 'assistant' && parsed.message && parsed.message.content) {
+                const content = parsed.message.content;
+                if (Array.isArray(content) && content[0] && content[0].text) {
+                  description = content[0].text.trim();
+                  break;
+                }
+              }
+            } catch (e) {
+              // Skip non-JSON lines
+            }
+          }
+
+          // Fallback: try to find any text in result message
+          if (!description) {
+            for (let i = lines.length - 1; i >= 0; i--) {
+              const line = lines[i];
+              try {
+                const parsed = JSON.parse(line);
+                if (parsed.type === 'result' && parsed.result) {
+                  description = parsed.result.trim();
+                  break;
+                }
+              } catch (e) {
+                // Skip non-JSON lines
+              }
+            }
+          }
+
+          description = description.replace(/^["']|["']$/g, '').trim();
+        } catch (execError) {
+          console.error('Claude CLI execution error for English:', execError.message);
+          return errorResponse(res, `Failed to generate English description: ${execError.message}`, 500);
         }
       } else if (language === 'is') {
-        // For Icelandic, first generate in English, then translate using icelandic-text-generator
-        const engPrompt = `Search for information about the product "${productName}" online and create a professional product description of 2-3 sentences. Include key characteristics, uses, and any notable features. Keep it concise and marketing-friendly.`;
-
-        const engCommand = `claude --continue --print "${engPrompt}" --dangerously-skip-permissions --verbose --output-format stream-json`;
-        const engOutput = execSync(engCommand, { encoding: 'utf-8' });
-
-        let englishDescription = '';
-        try {
-          const lines = engOutput.split('\n').filter(line => line.trim());
-          const lastLine = lines[lines.length - 1];
-          const parsed = JSON.parse(lastLine);
-
-          if (parsed.type === 'text' && parsed.text) {
-            englishDescription = parsed.text.trim();
-          }
-        } catch (parseError) {
-          englishDescription = engOutput.trim();
-        }
-
-        // Now translate using Icelandic text generator
-        const translatePrompt = `Translate the following product description to Icelandic. Keep it professional and marketing-friendly: "${englishDescription}"`;
-
-        const transCommand = `claude --continue --print "${translatePrompt}" --dangerously-skip-permissions --verbose --output-format stream-json`;
-        const transOutput = execSync(transCommand, { encoding: 'utf-8' });
+        // For Icelandic, first generate in English, then translate
+        const engPrompt = `Write a product description for "${productName}". Focus on taste profile, ingredients, and characteristics. Write only the description without any additional commentary or explanations. Keep it to 2-3 sentences maximum.`;
 
         try {
-          const lines = transOutput.split('\n').filter(line => line.trim());
-          const lastLine = lines[lines.length - 1];
-          const parsed = JSON.parse(lastLine);
+          const engArgs = ['--print', engPrompt, '--dangerously-skip-permissions', '--verbose', '--output-format', 'stream-json'];
+          const engResult = spawnSync('claude', engArgs, { encoding: 'utf-8', timeout: 30000, maxBuffer: 10 * 1024 * 1024 });
 
-          if (parsed.type === 'text' && parsed.text) {
-            description = parsed.text.trim();
+          if (engResult.error || engResult.status !== 0) {
+            throw new Error(`Claude failed: ${engResult.stderr || engResult.error?.message}`);
           }
-        } catch (parseError) {
-          description = transOutput.trim();
+
+          let englishDescription = '';
+          const engLines = (engResult.stdout || engResult.stderr).split('\n').filter(line => line.trim());
+
+          // Try to find JSON line with assistant message
+          for (let line of engLines) {
+            try {
+              const parsed = JSON.parse(line);
+              // Look for assistant message type with content
+              if (parsed.type === 'assistant' && parsed.message && parsed.message.content) {
+                const content = parsed.message.content;
+                if (Array.isArray(content) && content[0] && content[0].text) {
+                  englishDescription = content[0].text.trim();
+                  break;
+                }
+              }
+            } catch (e) {
+              // Skip non-JSON lines
+            }
+          }
+
+          // Fallback: try to find any text in result message
+          if (!englishDescription) {
+            for (let line of engLines.reverse()) {
+              try {
+                const parsed = JSON.parse(line);
+                if (parsed.type === 'result' && parsed.result) {
+                  englishDescription = parsed.result.trim();
+                  break;
+                } else if (typeof parsed === 'string') {
+                  englishDescription = parsed.trim();
+                  break;
+                }
+              } catch (e) {
+                // Skip non-JSON lines
+              }
+            }
+          }
+
+          englishDescription = englishDescription.replace(/^["']|["']$/g, '').trim();
+
+          // Now translate using Gemini Flash (has no quota limits)
+          const translatePrompt = `Translate this product description to Icelandic. Return ONLY the Icelandic translation, nothing else:\n\n${englishDescription}`;
+
+          const transArgs = ['-p', translatePrompt, '--model', 'gemini-2.5-flash'];
+          const transResult = spawnSync('gemini', transArgs, { encoding: 'utf-8', timeout: 60000, maxBuffer: 10 * 1024 * 1024 });
+
+          if (transResult.error || transResult.status !== 0) {
+            throw new Error(`Gemini translation failed: ${transResult.stderr || transResult.error?.message}`);
+          }
+
+          // With text format, the output is just plain text
+          description = (transResult.stdout || transResult.stderr || '').trim();
+          description = description.replace(/^["']|["']$/g, '').trim();
+        } catch (execError) {
+          console.error('Gemini translation error for Icelandic:', execError.message);
+          return errorResponse(res, `Failed to generate Icelandic description: ${execError.message}`, 500);
         }
       }
 
       if (!description) {
-        return errorResponse(res, 'Failed to generate description', 500);
+        return errorResponse(res, 'Failed to generate description - no output from AI', 500);
       }
 
       return successResponse(res, { description }, 'Description generated successfully');
     } catch (error) {
       console.error('Claude CLI error:', error);
-      return errorResponse(res, 'Failed to generate description with AI', 500);
+      return errorResponse(res, `Failed to generate description with AI: ${error.message}`, 500);
     }
   } catch (error) {
     console.error('Generate description error:', error);
-    return errorResponse(res, 'Failed to generate description', 500);
+    return errorResponse(res, `Failed to generate description: ${error.message}`, 500);
   }
 };
 
