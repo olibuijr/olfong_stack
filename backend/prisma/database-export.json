@@ -8798,6 +8798,18 @@
       "key": "search.placeholder",
       "locale": "is",
       "value": "Leita að vörum..."
+    },
+    {
+      "id": "f7b2c6b2-a340-4c91-8a91-08cd4f929ed9",
+      "key": "adminCustomers.customersCount",
+      "locale": "en",
+      "value": "{{filtered}} of {{total}} customers"
+    },
+    {
+      "id": "3100a6a6-6435-47ed-94bf-96fc46807e52",
+      "key": "adminCustomers.customersCount",
+      "locale": "is",
+      "value": "{{filtered}} af {{total}} viðskiptavinum"
     }
   ],
   "shippingMethods": [],
