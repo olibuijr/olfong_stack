@@ -402,9 +402,9 @@ const parseProductFromSearchResult = async ($, productElement, language = 'is') 
       product.country = 'Iceland';
       product.countryIs = 'Ísland';
       product.description = 'A refreshing Icelandic beer with a crisp taste and golden color. Perfect for any occasion.';
-      product.descriptionIs = 'Ferskur íslenskur bjór með skarpan smekk og gullna lit. Fullkomin fyrir alla tilefni.';
+      // Note: descriptionIs is extracted from ATVR scraper in getProductDetailsForLanguage
       product.foodPairings = ['Fish', 'Fowl', 'Beef', 'Lamb', 'Pork'];
-      product.foodPairingsIs = ['Fiskur', 'Alifuglar', 'Nautakjöt', 'Lambakjöt', 'Svínakjöt'];
+      product.foodPairingsIs = ['Fiskur', 'Alifuglar', 'Nautakjöt', 'Lambakjöt', 'Svínakjótt'];
       product.specialAttributes = ['Premium Lager', 'Helles'];
       product.specialAttributesIs = ['Premium Lager', 'Helles'];
       product.packaging = 'Bottle';
@@ -545,58 +545,81 @@ const getProductDetailsForLanguage = async (productId, lang) => {
     // Try multiple strategies to find the product description
     let foundDescription = null;
 
-    // Strategy 1: Look for text that contains flavor/tasting notes (contains common descriptors)
-    const flavorKeywords = ['color|taste|flavor|note|aroma|body|palate|finish|sweet|dry|crisp|fresh|smooth|fruity|citrus|berry|spice|wood|vanilla|oak|mineral'];
+    // Strategy 1: Look for text that contains flavor/tasting notes or Icelandic beer style descriptions
+    const flavorKeywords = ['color|taste|flavor|note|aroma|body|palate|finish|sweet|dry|crisp|fresh|smooth|fruity|citrus|berry|spice|wood|vanilla|oak|mineral|bjór|lager|ale|helles|pilsner|porter|stout|áfengis|smekk|beiskja|malt|humlar'];
     const allElements = $('p, span, div');
+
+    // Look for longer descriptions (more than 300 chars) first
+    let longDescription = null;
     for (let i = 0; i < allElements.length; i++) {
       const element = allElements.eq(i);
       let text = element.text().trim();
 
       // Skip empty or very short text
-      if (!text || text.length < 10) continue;
+      if (!text || text.length < 50) continue;
 
       // Skip if it's contact info or navigation
       if (text.match(/@|vinbudin|navigation|instagram|facebook|twitter|email|contact/i)) continue;
 
       // Check if it contains flavor-related keywords
       if (text.match(new RegExp(flavorKeywords, 'i')) && !text.match(/^(Standard|VAT|Price|Stock|In|Ekki|Out)/i)) {
-        // Clean up: remove "Sjá meira" or "See more"
-        text = text.replace(/\s*Sjá meira.*$/i, '').replace(/\s*See more.*$/i, '').trim();
+        // Clean up: remove "Sjá meira" or "See more" and everything after
+        text = text.replace(/[\s\n]*Sjá meira.*$/i, '').replace(/[\s\n]*See more.*$/i, '').trim();
 
-        // Additional cleaning: remove parenthetical references
-        text = text.replace(/\s*\([^)]*\)\s*$/g, '').trim();
+        // Additional cleaning: remove extra whitespace and newlines
+        text = text.replace(/\s+/g, ' ').trim();
 
-        if (text.length > 15 && text.length < 300) {
-          foundDescription = text;
+        // If it's a long description (typical for full product descriptions), prefer it
+        if (text.length > 300 && text.length < 2000) {
+          longDescription = text;
           break;
+        }
+
+        // Otherwise, store shorter descriptions as fallback
+        if (text.length > 15 && text.length < 300 && !foundDescription) {
+          foundDescription = text;
         }
       }
     }
 
+    // Use long description if found, otherwise use regular description
+    if (longDescription) {
+      foundDescription = longDescription;
+    }
+
     // Strategy 2: If no flavor description found, look for any meaningful paragraph
     if (!foundDescription) {
-      const descriptionSelectors = ['p', '.description', '.product-description', '.product-info'];
+      const descriptionSelectors = ['p', '.description', '.product-description', '.product-info', 'div[class*="description"]'];
       for (const selector of descriptionSelectors) {
-        const descElement = $(selector).first();
-        if (descElement.length) {
+        const descElements = $(selector);
+        // Check all elements, not just first
+        for (let j = 0; j < descElements.length; j++) {
+          const descElement = descElements.eq(j);
           let descText = descElement.text().trim();
 
           // Skip unwanted content
-          if (descText.match(/@|vinbudin|navigation|Sjá meira|See more|instagram|facebook|twitter|email|contact/i)) {
+          if (descText.match(/@|vinbudin|navigation|instagram|facebook|twitter|email|contact/i)) {
             continue;
           }
 
           // Skip if too short or contains unwanted patterns
-          if (descText.length > 10 && !descText.match(/^(Standard|VAT|Price|Stock|In stock|Ekki til|Out of stock)/i)) {
-            // Clean up the description
-            descText = descText.replace(/\s*Sjá meira\s*$/i, '').replace(/\s*See more\s*$/i, '').trim();
+          if (descText.length > 50 && !descText.match(/^(Standard|VAT|Price|Stock|In stock|Ekki til|Out of stock)/i)) {
+            // Clean up the description - remove "Sjá meira" and everything after
+            descText = descText.replace(/[\s\n]*Sjá meira.*$/i, '').replace(/[\s\n]*See more.*$/i, '').trim();
 
-            if (descText.length > 10 && descText.length < 300) {
+            // Remove extra whitespace
+            descText = descText.replace(/\s+/g, ' ').trim();
+
+            // Prefer longer descriptions (full product descriptions)
+            if (descText.length > 300) {
               foundDescription = descText;
               break;
+            } else if (descText.length > 50 && !foundDescription) {
+              foundDescription = descText;
             }
           }
         }
+        if (foundDescription) break;
       }
     }
 
