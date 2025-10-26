@@ -661,6 +661,101 @@ const updateProductValidation = [
   body('ageRestriction').optional().isInt({ min: 18 }).withMessage('Age restriction must be at least 18'),
 ];
 
+/**
+ * Generate product description using AI
+ */
+const generateDescription = async (req, res) => {
+  try {
+    const { productName, language } = req.body;
+
+    if (!productName) {
+      return errorResponse(res, 'Product name is required', 400);
+    }
+
+    if (!['en', 'is'].includes(language)) {
+      return errorResponse(res, 'Language must be "en" or "is"', 400);
+    }
+
+    const { execSync } = require('child_process');
+
+    try {
+      // Generate the prompt based on language
+      let description = '';
+
+      if (language === 'en') {
+        // For English, use claude CLI to search and generate description
+        const prompt = `Search for information about the product "${productName}" online and create a professional product description of 2-3 sentences. Include key characteristics, uses, and any notable features. Keep it concise and marketing-friendly.`;
+
+        const command = `claude --continue --print "${prompt}" --dangerously-skip-permissions --verbose --output-format stream-json`;
+        const output = execSync(command, { encoding: 'utf-8' });
+
+        // Parse the JSON output and extract the description text
+        try {
+          const lines = output.split('\n').filter(line => line.trim());
+          const lastLine = lines[lines.length - 1];
+          const parsed = JSON.parse(lastLine);
+
+          if (parsed.type === 'text' && parsed.text) {
+            description = parsed.text.trim();
+          }
+        } catch (parseError) {
+          // Fallback: use raw output if JSON parsing fails
+          description = output.trim();
+        }
+      } else if (language === 'is') {
+        // For Icelandic, first generate in English, then translate using icelandic-text-generator
+        const engPrompt = `Search for information about the product "${productName}" online and create a professional product description of 2-3 sentences. Include key characteristics, uses, and any notable features. Keep it concise and marketing-friendly.`;
+
+        const engCommand = `claude --continue --print "${engPrompt}" --dangerously-skip-permissions --verbose --output-format stream-json`;
+        const engOutput = execSync(engCommand, { encoding: 'utf-8' });
+
+        let englishDescription = '';
+        try {
+          const lines = engOutput.split('\n').filter(line => line.trim());
+          const lastLine = lines[lines.length - 1];
+          const parsed = JSON.parse(lastLine);
+
+          if (parsed.type === 'text' && parsed.text) {
+            englishDescription = parsed.text.trim();
+          }
+        } catch (parseError) {
+          englishDescription = engOutput.trim();
+        }
+
+        // Now translate using Icelandic text generator
+        const translatePrompt = `Translate the following product description to Icelandic. Keep it professional and marketing-friendly: "${englishDescription}"`;
+
+        const transCommand = `claude --continue --print "${translatePrompt}" --dangerously-skip-permissions --verbose --output-format stream-json`;
+        const transOutput = execSync(transCommand, { encoding: 'utf-8' });
+
+        try {
+          const lines = transOutput.split('\n').filter(line => line.trim());
+          const lastLine = lines[lines.length - 1];
+          const parsed = JSON.parse(lastLine);
+
+          if (parsed.type === 'text' && parsed.text) {
+            description = parsed.text.trim();
+          }
+        } catch (parseError) {
+          description = transOutput.trim();
+        }
+      }
+
+      if (!description) {
+        return errorResponse(res, 'Failed to generate description', 500);
+      }
+
+      return successResponse(res, { description }, 'Description generated successfully');
+    } catch (error) {
+      console.error('Claude CLI error:', error);
+      return errorResponse(res, 'Failed to generate description with AI', 500);
+    }
+  } catch (error) {
+    console.error('Generate description error:', error);
+    return errorResponse(res, 'Failed to generate description', 500);
+  }
+};
+
 module.exports = {
   getProducts,
   getProduct,
@@ -671,6 +766,7 @@ module.exports = {
   setProductDiscount,
   removeProductDiscount,
   getCategories,
+  generateDescription,
   createProductValidation,
   updateProductValidation,
 };

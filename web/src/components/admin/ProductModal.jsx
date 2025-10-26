@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, Upload, Search, Image as ImageIcon } from 'lucide-react';
+import { X, Upload, Search, Image as ImageIcon, Wand2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useLanguage } from '../../contexts/LanguageContext';
+import api from '../../services/api';
 
 const ProductModal = ({
   isOpen,
@@ -18,6 +19,8 @@ const ProductModal = ({
 }) => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('basic');
+  const [generatingEn, setGeneratingEn] = useState(false);
+  const [generatingIs, setGeneratingIs] = useState(false);
 
   const {
     register,
@@ -34,7 +37,7 @@ const ProductModal = ({
       if (e.key === 'Escape' && isOpen) {
         if (isDirty) {
           const confirmClose = window.confirm(
-            'You have unsaved changes. Are you sure you want to close without saving?'
+            t('productModal.unsavedChanges') || 'You have unsaved changes. Are you sure you want to close without saving?'
           );
           if (confirmClose) {
             handleClose();
@@ -47,7 +50,7 @@ const ProductModal = ({
 
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen, isDirty]);
+  }, [isOpen, isDirty, t]);
 
   // Reset form when editing product changes
   useEffect(() => {
@@ -180,15 +183,56 @@ const ProductModal = ({
     onSubmit(formattedData);
   };
 
+  const handleGenerateDescription = async (language) => {
+    const productName = language === 'en' ? watch('name') : watch('nameIs');
+
+    if (!productName) {
+      alert(language === 'en' ? 'Please enter product name first' : 'Please enter Icelandic product name first');
+      return;
+    }
+
+    if (language === 'en') {
+      setGeneratingEn(true);
+    } else {
+      setGeneratingIs(true);
+    }
+
+    try {
+      const response = await api.post('/products/generate/description', {
+        productName,
+        language,
+      });
+
+      if (response.success && response.data?.description) {
+        if (language === 'en') {
+          setValue('description', response.data.description);
+        } else {
+          setValue('descriptionIs', response.data.description);
+        }
+      } else {
+        alert('Failed to generate description. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error generating description:', error);
+      alert('Error generating description: ' + (error.response?.data?.message || error.message));
+    } finally {
+      if (language === 'en') {
+        setGeneratingEn(false);
+      } else {
+        setGeneratingIs(false);
+      }
+    }
+  };
+
   if (!isOpen) return null;
 
   const tabs = [
-    { id: 'basic', label: 'Basic Info', icon: '📋' },
-    { id: 'details', label: 'Details', icon: '📝' },
-    { id: 'origin', label: 'Origin', icon: '🌍' },
-    { id: 'pairings', label: 'Pairings & Attributes', icon: '🍽️' },
-    { id: 'images', label: 'Images', icon: '🖼️' },
-    { id: 'discounts', label: 'Discounts', icon: '💰' },
+    { id: 'basic', label: t('productModal.tabs.basicInfo'), icon: '📋' },
+    { id: 'details', label: t('productModal.tabs.details'), icon: '📝' },
+    { id: 'origin', label: t('productModal.tabs.origin'), icon: '🌍' },
+    { id: 'pairings', label: t('productModal.tabs.pairingsAttributes'), icon: '🍽️' },
+    { id: 'images', label: t('productModal.tabs.images'), icon: '🖼️' },
+    { id: 'discounts', label: t('productModal.tabs.discounts'), icon: '💰' },
   ];
 
   return (
@@ -270,7 +314,7 @@ const ProductModal = ({
                   {/* Price */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Price (kr) *
+                      {t('productModal.fields.price')} *
                     </label>
                     <input
                       type="number"
@@ -280,14 +324,14 @@ const ProductModal = ({
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     {errors.price && (
-                      <p className="text-red-600 dark:text-red-400 text-sm mt-1">Price is required</p>
+                      <p className="text-red-600 dark:text-red-400 text-sm mt-1">{t('productModal.errors.priceRequired')}</p>
                     )}
                   </div>
 
                   {/* Stock */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Stock *
+                      {t('productModal.fields.stock')} *
                     </label>
                     <input
                       type="number"
@@ -296,14 +340,14 @@ const ProductModal = ({
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     {errors.stock && (
-                      <p className="text-red-600 dark:text-red-400 text-sm mt-1">Stock is required</p>
+                      <p className="text-red-600 dark:text-red-400 text-sm mt-1">{t('productModal.errors.stockRequired')}</p>
                     )}
                   </div>
 
                   {/* Age Restriction */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Age Restriction
+                      {t('productModal.fields.ageRestriction')}
                     </label>
                     <input
                       type="number"
@@ -320,13 +364,13 @@ const ProductModal = ({
                   {/* Category */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Category *
+                      {t('productModal.fields.category')} *
                     </label>
                     <select
                       {...register('category', { required: true })}
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
-                      <option value="">Select a category</option>
+                      <option value="">{t('productModal.fields.selectCategory')}</option>
                       {categories?.map(category => (
                         <option key={category.value} value={category.value}>
                           {category.label}
@@ -334,20 +378,20 @@ const ProductModal = ({
                       ))}
                     </select>
                     {errors.category && (
-                      <p className="text-red-600 dark:text-red-400 text-sm mt-1">Category is required</p>
+                      <p className="text-red-600 dark:text-red-400 text-sm mt-1">{t('productModal.errors.categoryRequired')}</p>
                     )}
                   </div>
 
                   {/* Subcategory */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Subcategory
+                      {t('productModal.fields.subcategory')}
                     </label>
                     <select
                       {...register('subcategory')}
                       className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
-                      <option value="">Select a subcategory</option>
+                      <option value="">{t('productModal.fields.selectSubcategory')}</option>
                       {subcategories
                         ?.filter(sub => sub.category === watch('category'))
                         .map(subcategory => (
@@ -366,7 +410,7 @@ const ProductModal = ({
                     className="rounded border-gray-300 dark:border-gray-600"
                   />
                   <label className="text-sm text-gray-700 dark:text-gray-300">
-                    Age Restricted Product
+                    {t('productModal.fields.ageRestrictedProduct')}
                   </label>
                 </div>
               </div>
@@ -377,9 +421,24 @@ const ProductModal = ({
               <div className="space-y-4">
                 {/* Descriptions */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Description (English)
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      {t('productModal.fields.descriptionEn')}
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => handleGenerateDescription('en')}
+                      disabled={generatingEn || !watch('name')}
+                      className={`flex items-center space-x-1 px-3 py-1 rounded text-sm transition-colors ${
+                        generatingEn || !watch('name')
+                          ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                          : 'bg-primary-600 hover:bg-primary-700 text-white'
+                      }`}
+                    >
+                      <Wand2 className="w-4 h-4" />
+                      <span>{generatingEn ? 'Generating...' : 'Generate with AI'}</span>
+                    </button>
+                  </div>
                   <textarea
                     {...register('description')}
                     rows={4}
@@ -389,9 +448,24 @@ const ProductModal = ({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Description (Icelandic)
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      {t('productModal.fields.descriptionIs')}
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => handleGenerateDescription('is')}
+                      disabled={generatingIs || !watch('nameIs')}
+                      className={`flex items-center space-x-1 px-3 py-1 rounded text-sm transition-colors ${
+                        generatingIs || !watch('nameIs')
+                          ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                          : 'bg-primary-600 hover:bg-primary-700 text-white'
+                      }`}
+                    >
+                      <Wand2 className="w-4 h-4" />
+                      <span>{generatingIs ? 'Generating...' : 'Generate with AI'}</span>
+                    </button>
+                  </div>
                   <textarea
                     {...register('descriptionIs')}
                     rows={4}
@@ -838,7 +912,7 @@ const ProductModal = ({
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Product Image
+                    {t('productModal.fields.productImage')}
                   </label>
 
                   <div className="flex space-x-2 mb-4">
@@ -854,7 +928,7 @@ const ProductModal = ({
                       className="btn btn-outline flex items-center space-x-2"
                     >
                       <Search className="w-4 h-4" />
-                      <span>Search Online</span>
+                      <span>{t('productModal.buttons.searchOnline')}</span>
                     </button>
                     <button
                       type="button"
@@ -862,7 +936,7 @@ const ProductModal = ({
                       className="btn btn-outline flex items-center space-x-2"
                     >
                       <ImageIcon className="w-4 h-4" />
-                      <span>Media Library</span>
+                      <span>{t('productModal.buttons.mediaLibrary')}</span>
                     </button>
                   </div>
 
@@ -886,9 +960,9 @@ const ProductModal = ({
                   {!uploadedImage && (
                     <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-12 text-center">
                       <ImageIcon className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                      <p className="text-gray-600 dark:text-gray-400">No image selected</p>
+                      <p className="text-gray-600 dark:text-gray-400">{t('productModal.fields.noImageSelected')}</p>
                       <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                        Upload an image, search online, or select from media library
+                        {t('productModal.help.uploadImageHelp')}
                       </p>
                     </div>
                   )}
@@ -896,7 +970,7 @@ const ProductModal = ({
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Image URL (if not uploading)
+                    {t('productModal.fields.imageUrl')}
                   </label>
                   <input
                     {...register('imageUrl')}
@@ -1019,13 +1093,13 @@ const ProductModal = ({
                 onClick={handleClose}
                 className="btn btn-outline px-6"
               >
-                Cancel
+                {t('productModal.buttons.cancel')}
               </button>
               <button
                 type="submit"
                 className="btn btn-primary px-6"
               >
-                {editingProduct ? 'Update Product' : 'Create Product'}
+                {editingProduct ? t('productModal.buttons.updateProduct') : t('productModal.buttons.createProduct')}
               </button>
             </div>
           </div>
