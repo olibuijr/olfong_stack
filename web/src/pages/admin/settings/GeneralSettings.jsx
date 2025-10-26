@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Settings as SettingsIcon, Save, RefreshCw, ArrowLeft, Store, Globe, Mail, Phone, MapPin, Clock, DollarSign, Calendar, Info, AlertCircle, CheckCircle, Key, Eye, EyeOff, Building, Copy, Sparkles, Server, Lock, User, TestTube, Loader2, Percent } from 'lucide-react';
+import { Settings as SettingsIcon, Save, RefreshCw, ArrowLeft, Store, Globe, Mail, Phone, MapPin, Clock, DollarSign, Calendar, Info, AlertCircle, CheckCircle, Key, Eye, EyeOff, Building, Copy, Sparkles, Server, Lock, User, TestTube, Loader2, Percent, Trash2, Plus, X } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
 import { useLanguage } from "../../../contexts/LanguageContext";
@@ -25,11 +25,19 @@ const GeneralSettings = () => {
     storeEmail: 'info@olfong.is',
     storePhone: '+354 555 1234',
     storeAddress: 'Laugavegur 123, 101 Reykjavík, Iceland',
-    currency: 'ISK',
     language: 'is',
     dateFormat: 'DD/MM/YYYY',
     timeFormat: '24h'
   });
+
+  const [availableCurrencies, setAvailableCurrencies] = useState([
+    { code: 'ISK', symbol: 'kr', name: t('adminSettings.currencyISK'), isActive: true },
+    { code: 'USD', symbol: '$', name: t('adminSettings.currencyUSD'), isActive: false },
+    { code: 'EUR', symbol: '€', name: t('adminSettings.currencyEUR'), isActive: false }
+  ]);
+
+  const [showAddCurrency, setShowAddCurrency] = useState(false);
+  const [newCurrencyForm, setNewCurrencyForm] = useState({ code: '', symbol: '', name: '' });
 
   // Business Settings state
   const [businessSettings, setBusinessSettings] = useState({
@@ -180,6 +188,11 @@ const GeneralSettings = () => {
         dispatch(fetchSMTPSettings());
       }
 
+      // Load currencies if on currencies tab
+      if (activeTab === 'currencies') {
+        await loadCurrenciesFromDB();
+      }
+
       // Load VAT settings if on VAT tab
       if (activeTab === 'vat') {
         const vatResponse = await fetch('/api/settings?category=VAT', {
@@ -225,29 +238,158 @@ const GeneralSettings = () => {
     }
   };
 
+  const loadCurrenciesFromDB = async () => {
+    try {
+      const response = await fetch('/api/settings?category=CURRENCY', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const currencySettings = data.data.settings.CURRENCY || [];
+
+        if (currencySettings.length > 0) {
+          try {
+            const currencies = JSON.parse(currencySettings[0].value);
+            setAvailableCurrencies(currencies);
+          } catch (e) {
+            console.warn('Failed to parse currencies:', e);
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to load currencies:', error);
+    }
+  };
+
   const validateSettings = () => {
     const errors = {};
-    
+
     if (!settings.storeName.trim()) {
       errors.storeName = 'Store name is required';
     }
-    
+
     if (!settings.storeEmail.trim()) {
       errors.storeEmail = 'Store email is required';
     } else if (!/\S+@\S+\.\S+/.test(settings.storeEmail)) {
       errors.storeEmail = 'Please enter a valid email address';
     }
-    
+
     if (!settings.storePhone.trim()) {
       errors.storePhone = 'Phone number is required';
     }
-    
+
     if (!settings.storeAddress.trim()) {
       errors.storeAddress = 'Store address is required';
     }
 
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
+  };
+
+  const handleAddCurrency = () => {
+    if (!newCurrencyForm.code || !newCurrencyForm.symbol || !newCurrencyForm.name) {
+      toast.error('Please fill in all currency fields');
+      return;
+    }
+
+    // Check if currency code already exists
+    if (availableCurrencies.some(c => c.code === newCurrencyForm.code)) {
+      toast.error('Currency code already exists');
+      return;
+    }
+
+    const newCurrency = {
+      code: newCurrencyForm.code.toUpperCase(),
+      symbol: newCurrencyForm.symbol,
+      name: newCurrencyForm.name,
+      isActive: false
+    };
+
+    setAvailableCurrencies([...availableCurrencies, newCurrency]);
+    setNewCurrencyForm({ code: '', symbol: '', name: '' });
+    setShowAddCurrency(false);
+    setHasUnsavedChanges(true);
+    toast.success('Currency added. Don\'t forget to save!');
+  };
+
+  const handleRemoveCurrency = (code) => {
+    const currency = availableCurrencies.find(c => c.code === code);
+
+    // Prevent removing active currency
+    if (currency?.isActive) {
+      toast.error('Cannot remove active currency. Set another currency as active first.');
+      return;
+    }
+
+    setAvailableCurrencies(availableCurrencies.filter(c => c.code !== code));
+    setHasUnsavedChanges(true);
+    toast.success('Currency removed. Don\'t forget to save!');
+  };
+
+  const handleSetActiveCurrency = (code) => {
+    setAvailableCurrencies(availableCurrencies.map(c => ({
+      ...c,
+      isActive: c.code === code
+    })));
+    setHasUnsavedChanges(true);
+  };
+
+  const handleSaveCurrencies = async () => {
+    if (!availableCurrencies.some(c => c.isActive)) {
+      toast.error('Please set an active currency');
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      const settingsToSave = [
+        {
+          key: 'currencies',
+          value: JSON.stringify(availableCurrencies),
+          category: 'CURRENCY',
+          description: 'Available currencies in the system',
+          isPublic: true
+        },
+        {
+          key: 'currencySymbol',
+          value: availableCurrencies.find(c => c.isActive)?.symbol || 'kr',
+          category: 'GENERAL',
+          description: 'Active currency symbol',
+          isPublic: true
+        },
+        {
+          key: 'currencyCode',
+          value: availableCurrencies.find(c => c.isActive)?.code || 'ISK',
+          category: 'GENERAL',
+          description: 'Active currency code',
+          isPublic: true
+        }
+      ];
+
+      const response = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ settings: settingsToSave })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save currencies');
+      }
+
+      toast.success('Currencies saved successfully');
+      setHasUnsavedChanges(false);
+    } catch (error) {
+      console.error('Error saving currencies:', error);
+      toast.error('Failed to save currencies');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleSaveSettings = async () => {
@@ -259,15 +401,14 @@ const GeneralSettings = () => {
     setIsSaving(true);
     try {
       const settingsToSave = [
-        { key: 'storeName', value: settings.storeName, category: 'GENERAL', description: 'Store name' },
-        { key: 'storeDescription', value: settings.storeDescription, category: 'GENERAL', description: 'Store description' },
-        { key: 'storeEmail', value: settings.storeEmail, category: 'GENERAL', description: 'Store email' },
-        { key: 'storePhone', value: settings.storePhone, category: 'GENERAL', description: 'Store phone number' },
-        { key: 'storeAddress', value: settings.storeAddress, category: 'GENERAL', description: 'Store address' },
-        { key: 'currency', value: settings.currency, category: 'GENERAL', description: 'Store currency' },
-        { key: 'language', value: settings.language, category: 'GENERAL', description: 'Default language' },
-        { key: 'dateFormat', value: settings.dateFormat, category: 'GENERAL', description: 'Date format' },
-        { key: 'timeFormat', value: settings.timeFormat, category: 'GENERAL', description: 'Time format' }
+        { key: 'storeName', value: settings.storeName, category: 'GENERAL', description: 'Store name', isPublic: true },
+        { key: 'storeDescription', value: settings.storeDescription, category: 'GENERAL', description: 'Store description', isPublic: true },
+        { key: 'storeEmail', value: settings.storeEmail, category: 'GENERAL', description: 'Store email', isPublic: true },
+        { key: 'storePhone', value: settings.storePhone, category: 'GENERAL', description: 'Store phone number', isPublic: true },
+        { key: 'storeAddress', value: settings.storeAddress, category: 'GENERAL', description: 'Store address', isPublic: true },
+        { key: 'language', value: settings.language, category: 'GENERAL', description: 'Default language', isPublic: true },
+        { key: 'dateFormat', value: settings.dateFormat, category: 'GENERAL', description: 'Date format', isPublic: true },
+        { key: 'timeFormat', value: settings.timeFormat, category: 'GENERAL', description: 'Time format', isPublic: true }
       ];
 
       const response = await fetch('/api/settings', {
@@ -741,6 +882,8 @@ const GeneralSettings = () => {
                      handleSaveSmtp();
                    } else if (activeTab === 'vat') {
                      handleSaveVatSettings();
+                   } else if (activeTab === 'currencies') {
+                     handleSaveCurrencies();
                    } else {
                      handleSaveSettings();
                    }
@@ -840,6 +983,19 @@ const GeneralSettings = () => {
                 <div className="flex items-center gap-1 sm:gap-2">
                   <Percent className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                   <span className="hidden sm:inline">{t('adminSettings.vat')}</span>
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveTab('currencies')}
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
+                  activeTab === 'currencies'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.currencies') || 'Currencies'}</span>
                 </div>
               </button>
             </nav>
@@ -984,24 +1140,6 @@ const GeneralSettings = () => {
               </div>
                 <div className="p-4 xl:p-6 2xl:p-8 space-y-4 xl:space-y-6 2xl:space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-4 xl:gap-6 2xl:gap-8">
-                    <div className="2xl:col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        {t('adminSettings.currency')}
-                      </label>
-                      <div className="relative">
-                        <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                        <select
-                          value={settings.currency}
-                          onChange={(e) => handleInputChange('currency', e.target.value)}
-                          className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                        >
-                          <option value="ISK">{t('adminSettings.currencyISK')}</option>
-                          <option value="USD">{t('adminSettings.currencyUSD')}</option>
-                          <option value="EUR">{t('adminSettings.currencyEUR')}</option>
-                        </select>
-                      </div>
-                    </div>
-
                     <div className="2xl:col-span-1">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         {t('adminSettings.language')}
@@ -1336,6 +1474,72 @@ const GeneralSettings = () => {
                       </button>
                     </div>
                   </div>
+                </div>
+
+                {/* RunPod API Key */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mr-3">
+                        <Sparkles className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                          RunPod API Key
+                        </h4>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          Required for AI product image generation (FLUX models)
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-xs text-green-600 dark:text-green-400 mr-2">●</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">Active</span>
+                    </div>
+                  </div>
+                  <div className="flex space-x-3">
+                    <div className="flex-1 relative">
+                      <input
+                        type={showApiKeys.runpodApiKey ? "text" : "password"}
+                        placeholder="Enter RunPod API key (rpa_...)"
+                        value={apiKeys.runpodApiKey || ''}
+                        onChange={(e) => {
+                          setApiKeys(prev => ({ ...prev, runpodApiKey: e.target.value }));
+                          setHasUnsavedChanges(true);
+                        }}
+                        className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => toggleApiKeyVisibility('runpodApiKey')}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                      >
+                        {showApiKeys.runpodApiKey ? (
+                          <EyeOff className="h-4 w-4 text-gray-400" />
+                        ) : (
+                          <Eye className="h-4 w-4 text-gray-400" />
+                        )}
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => handleSaveApiKey('runpodApiKey', apiKeys.runpodApiKey || '')}
+                      disabled={isSaving || !hasUnsavedChanges}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+                    >
+                      {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : t('adminSettings.save')}
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    Get your API key from{' '}
+                    <a
+                      href="https://runpod.io"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      RunPod Dashboard
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -2072,21 +2276,23 @@ const GeneralSettings = () => {
 
                   {vatSettings.enabled && (
                     <>
-                      {/* VAT Rate */}
+                      {/* VAT Rate - Dropdown from available VAT Profiles */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                          {t('adminSettings.vatRate')} (%) <span className="text-red-500">*</span>
+                          {t('adminSettings.vatRate')} <span className="text-red-500">*</span>
                         </label>
-                        <input
-                          type="number"
+                        <select
                           value={vatSettings.rate}
                           onChange={(e) => handleVatInputChange('rate', parseFloat(e.target.value) || 0)}
-                          min="0"
-                          max="100"
-                          step="0.01"
-                          placeholder="24.00"
                           className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-                        />
+                        >
+                          <option value="">Select a VAT profile...</option>
+                          {vatProfiles.map((profile) => (
+                            <option key={profile.id} value={profile.vatRate}>
+                              {profile.name} ({profile.nameIs}) - {profile.vatRate}%
+                            </option>
+                          ))}
+                        </select>
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                           {t('adminSettings.vatRateDescription')}
                         </p>
@@ -2443,6 +2649,202 @@ const GeneralSettings = () => {
                     <p className="text-sm text-blue-700 dark:text-blue-300">
                       {t('adminSettings.vatInformationDescription')}
                     </p>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : activeTab === 'currencies' ? (
+            // Currencies Settings Content
+            <>
+              {/* Active Currency */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center">
+                    <DollarSign className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-3" />
+                    <div>
+                      <h3 className="text-lg xl:text-xl 2xl:text-2xl font-semibold text-gray-900 dark:text-white">
+                        {t('adminSettings.currencyManagement')}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                        {t('adminSettings.currencyManagementDesc')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-6">
+                  {/* Active Currency Indicator */}
+                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-medium text-blue-900 dark:text-blue-100">
+                          {t('adminSettings.activeCurrency')}
+                        </h4>
+                        <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
+                          {availableCurrencies.find(c => c.isActive)?.name} ({availableCurrencies.find(c => c.isActive)?.code}) - {availableCurrencies.find(c => c.isActive)?.symbol}
+                        </p>
+                      </div>
+                      <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                        {availableCurrencies.find(c => c.isActive)?.symbol}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Available Currencies Grid */}
+                  <div className="space-y-3">
+                    <h4 className="font-medium text-gray-900 dark:text-white">{t('adminSettings.availableCurrencies')}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {availableCurrencies.map((currency) => (
+                        <div
+                          key={currency.code}
+                          className={`p-4 border rounded-lg transition-colors duration-200 ${
+                            currency.isActive
+                              ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700'
+                              : 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                                  {currency.symbol}
+                                </span>
+                                <span className="text-xs font-medium bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100 px-2 py-1 rounded">
+                                  {currency.code}
+                                </span>
+                              </div>
+                              <p className="text-sm text-gray-600 dark:text-gray-300">
+                                {currency.name}
+                              </p>
+                            </div>
+                            <div className="flex gap-2 flex-col">
+                              {!currency.isActive && (
+                                <button
+                                  onClick={() => handleSetActiveCurrency(currency.code)}
+                                  className="px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                                >
+                                  {t('adminSettings.setActive')}
+                                </button>
+                              )}
+                              {currency.code !== 'ISK' && !currency.isActive && (
+                                <button
+                                  onClick={() => handleRemoveCurrency(currency.code)}
+                                  className="px-3 py-1 text-xs font-medium bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded hover:bg-red-200 dark:hover:bg-red-900/40 transition-colors"
+                                >
+                                  <Trash2 className="w-3 h-3 inline mr-1" />
+                                  {t('common.remove')}
+                                </button>
+                              )}
+                              {currency.isActive && (
+                                <span className="px-3 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded text-center">
+                                  {t('adminSettings.active')}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Add Currency Section */}
+                  {showAddCurrency ? (
+                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-medium text-gray-900 dark:text-white">{t('adminSettings.addNewCurrency')}</h4>
+                        <button
+                          onClick={() => setShowAddCurrency(false)}
+                          className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {t('adminSettings.currencyCode')} <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            maxLength="3"
+                            value={newCurrencyForm.code}
+                            onChange={(e) => setNewCurrencyForm({ ...newCurrencyForm, code: e.target.value.toUpperCase() })}
+                            placeholder="e.g., USD"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {t('adminSettings.currencySymbol')} <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            maxLength="5"
+                            value={newCurrencyForm.symbol}
+                            onChange={(e) => setNewCurrencyForm({ ...newCurrencyForm, symbol: e.target.value })}
+                            placeholder="e.g., $"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {t('adminSettings.currencyName')} <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={newCurrencyForm.name}
+                            onChange={(e) => setNewCurrencyForm({ ...newCurrencyForm, name: e.target.value })}
+                            placeholder="e.g., US Dollar"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:text-white"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <button
+                          onClick={handleAddCurrency}
+                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium text-sm"
+                        >
+                          <Plus className="w-4 h-4 inline mr-2" />
+                          {t('adminSettings.addNewCurrency')}
+                        </button>
+                        <button
+                          onClick={() => setShowAddCurrency(false)}
+                          className="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors font-medium text-sm"
+                        >
+                          {t('common.cancel')}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowAddCurrency(true)}
+                      className="w-full px-4 py-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:border-blue-400 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-colors font-medium"
+                    >
+                      <Plus className="w-5 h-5 inline mr-2" />
+                      {t('adminSettings.addNewCurrency')}
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Currency Information */}
+              <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <div className="flex gap-3">
+                  <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">
+                      {t('adminSettings.currencyManagementGuide')}
+                    </h4>
+                    <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                      <li>• {t('adminSettings.onlyOneCurrency')}</li>
+                      <li>• {t('adminSettings.currencySymbolDisplay')}</li>
+                      <li>• {t('adminSettings.cannotDeleteActive')}</li>
+                      <li>• {t('adminSettings.currencyChangesSaved')}</li>
+                    </ul>
                   </div>
                 </div>
               </div>

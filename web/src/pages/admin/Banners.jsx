@@ -96,6 +96,56 @@ const Banners = () => {
     };
   }, [showLinkDropdown]);
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleEscapeKey = (e) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false);
+        setEditingBanner(null);
+        setFormData({
+          title: '',
+          titleIs: '',
+          description: '',
+          descriptionIs: '',
+          imageUrl: '',
+          alt: '',
+          link: '',
+          sortOrder: 0,
+          isFeatured: false,
+          featuredOrder: null,
+          isHero: false,
+          backgroundType: 'gradient',
+          gradientStartColor: '#374151',
+          gradientEndColor: '#111827',
+          gradientDirection: 'to-r',
+          backgroundImageUrl: '',
+          backgroundOpacity: 1.0,
+          marqueeText: '',
+          marqueeTextIs: '',
+          marqueeSpeed: 50,
+          marqueeCount: 3,
+          heroLogoUrl: '',
+          heroButtonText: '',
+          heroButtonTextIs: '',
+          heroButtonLink: '',
+          heroSubtitle: '',
+          heroSubtitleIs: '',
+          textColor: '#ffffff',
+          buttonBgColor: '#ffffff',
+          buttonTextColor: '#1f2937',
+          overlayOpacity: 0.0
+        });
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isModalOpen]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     

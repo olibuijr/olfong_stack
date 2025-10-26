@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminSettings.generalSettings",
+    "value": "Almennar stillingar"
+  },
+  {
+    "key": "adminSettings.googleApiKey",
+    "value": "Google API lykill"
+  },
+  {
+    "key": "adminSettings.googleCloudConsole",
+    "value": "Google Cloud Console"
+  },
+  {
+    "key": "adminSettings.gradientColor",
+    "value": "Stigullitur"
+  },
+  {
+    "key": "adminSettings.gradientHelpText",
+    "value": "Veldu upphafs- og endalit til að búa til stigul."
+  },
+  {
+    "key": "adminSettings.headerColor",
+    "value": "Hauslitur"
+  },
+  {
+    "key": "adminSettings.iceland",
+    "value": "Ísland"
+  },
+  {
+    "key": "adminSettings.importantNotes",
+    "value": "Mikilvægar athugasemdir"
+  },
+  {
+    "key": "adminSettings.includeVatInCustomerPrice",
+    "value": "VSK innifalinn í verði til viðskiptavinar"
+  },
+  {
+    "key": "adminSettings.includeVatInCustomerPriceDescription",
+    "value": "Ef virkt er VSK innifalinn í vöruverði sem viðskiptavinur sér."
+  },
+  {
+    "key": "adminSettings.integrationConfiguration",
+    "value": "Samþættingarstillingar"
+  },
+  {
+    "key": "adminSettings.integrationDescription",
+    "value": "Lýsing á samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationName",
+    "value": "Nafn samþættingar"
+  },
+  {
+    "key": "adminSettings.integrationNote1",
+    "value": "Athugasemd 1 um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationNote2",
+    "value": "Athugasemd 2 um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationNote3",
+    "value": "Athugasemd 3 um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationNotes",
+    "value": "Athugasemdir um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrations",
+    "value": "Samþættingar"
+  },
+  {
+    "key": "adminSettings.integrationsDescription",
+    "value": "Hafa umsjón með samþættingum við þriðja aðila."
+  },
+  {
+    "key": "adminSettings.invalidFileType",
+    "value": "Ógild skráartegund"
+  },
+  {
+    "key": "adminSettings.language",
+    "value": "Tungumál"
+  },
+  {
+    "key": "adminSettings.languageEnglish",
+    "value": "Enska"
+  },
+  {
+    "key": "adminSettings.languageIcelandic",
+    "value": "Íslenska"
+  },
+  {
+    "key": "adminSettings.languageSets",
+    "value": "Tungumálasett"
+  },
+  {
+    "key": "adminSettings.lastSync",
+    "value": "Síðasta samstilling"
+  },
+  {
+    "key": "adminSettings.livePreview",
+    "value": "Forskoðun í beinni"
+  },
+  {
+    "key": "adminSettings.logo",
+    "value": "Lógó"
+  },
+  {
+    "key": "adminSettings.logoAlwaysInvert",
+    "value": "Alltaf öfugsnúið lógó"
+  },
+  {
+    "key": "adminSettings.logoColorMode",
+    "value": "Litastilling lógós"
+  },
+  {
+    "key": "adminSettings.logoNoInversion",
+    "value": "Engin öfugsnúningur"
+  },
+  {
+    "key": "adminSettings.logoThemeAware",
+    "value": "Þemamiðað lógó"
+  },
+  {
+    "key": "adminSettings.logoUploadFailed",
+    "value": "Mistókst að hlaða upp lógói"
+  },
+  {
+    "key": "adminSettings.webhookSecret",
+    "value": "Webhook leynilykill"
+  },
+  {
+    "key": "adminSettings.logoUploadedSuccessfully",
+    "value": "Tókst að hlaða upp lógói"
+  },
+  {
+    "key": "adminSettings.maintenance",
+    "value": "Viðhald"
+  },
+  {
+    "key": "adminSettings.maintenanceComingSoon",
+    "value": "Væntanlegt"
+  },
+  {
+    "key": "adminSettings.maintenanceDescription",
+    "value": "Virkjaðu viðhaldsham til að taka vefsíðuna niður tímabundið."
+  },
+  {
+    "key": "adminSettings.manageSystemSettings",
+    "value": "Hafa umsjón með kerfisstillingum"
+  },
+  {
+    "key": "adminSettings.merchantId",
+    "value": "Auðkenni söluaðila"
+  },
+  {
+    "key": "adminSettings.monday",
+    "value": "Mánudagur"
+  },
+  {
+    "key": "adminSettings.nameEnglish",
+    "value": "Nafn (enska)"
+  },
+  {
+    "key": "adminSettings.nameIcelandic",
+    "value": "Nafn (íslenska)"
+  },
+  {
+    "key": "adminSettings.needHelp",
+    "value": "Þarftu hjálp?"
+  },
+  {
+    "key": "adminSettings.netgiro",
+    "value": "Netgíró"
+  },
+  {
+    "key": "adminSettings.nicotineAgeDescription",
+    "value": "Lýsing á aldurstakmarki fyrir nikótín"
+  },
+  {
+    "key": "adminSettings.nicotineProducts",
+    "value": "Nikótínvörur"
+  },
+  {
+    "key": "adminSettings.noCategoriesAvailable",
+    "value": "Engir flokkar í boði"
+  },
+  {
+    "key": "adminSettings.noIntegrations",
+    "value": "Engar samþættingar"
+  },
+  {
+    "key": "adminSettings.noIntegrationsDescription",
+    "value": "Engar samþættingar hafa verið settar upp."
+  },
+  {
+    "key": "adminSettings.noLogoUploaded",
+    "value": "Ekkert lógó hefur verið hlaðið upp"
+  },
+  {
+    "key": "adminSettings.noPaymentGateways",
+    "value": "Engar greiðslugáttir"
+  },
+  {
+    "key": "adminSettings.noPaymentGatewaysDescription",
+    "value": "Engar greiðslugáttir hafa verið settar upp."
+  },
+  {
+    "key": "adminSettings.noPermissionMessage",
+    "value": "Þú hefur ekki heimild til að skoða þessa síðu."
+  },
+  {
+    "key": "adminSettings.noShippingOptions",
+    "value": "Engir sendingarmöguleikar"
+  },
+  {
+    "key": "adminSettings.noShippingOptionsDescription",
+    "value": "Engir sendingarmöguleikar hafa verið settir upp."
+  },
+  {
+    "key": "adminSettings.noVatProfilesCreated",
+    "value": "Engir VSK sniðmát hafa verið stofnuð"
+  },
+  {
+    "key": "adminSettings.notifications",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminSettings.notificationsComingSoon",
+    "value": "Tilkynningar væntanlegar"
+  },
+  {
+    "key": "adminSettings.notificationsDescription",
+    "value": "Hafa umsjón með tilkynningum viðskiptavina."
+  },
+  {
+    "key": "adminSettings.openDays",
+    "value": "Opnunardagar"
+  },
+  {
+    "key": "adminSettings.openingHours",
+    "value": "Opnunartími"
+  },
+  {
+    "key": "adminSettings.openingTime",
+    "value": "Opnunartími"
+  },
+  {
+    "key": "adminSettings.operation24h",
+    "value": "Opið allan sólarhringinn"
+  },
+  {
+    "key": "adminSettings.otherCountries",
+    "value": "Önnur lönd"
+  },
+  {
+    "key": "adminSettings.paperSize",
+    "value": "Pappírsstærð"
+  },
+  {
+    "key": "adminSettings.paymentGatewayConfiguration",
+    "value": "Stillingar greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.paymentGatewayDescription",
+    "value": "Hafa umsjón með greiðslugáttum."
+  },
+  {
+    "key": "adminSettings.paymentGatewayId",
+    "value": "Auðkenni greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.paymentGatewayNote1",
+    "value": "Athugið: Teya þarf að vera virkjað af starfsfólki Ölföngs."
+  },
+  {
+    "key": "adminSettings.paymentGatewayNote2",
+    "value": "Athugið: Valitor þarf að vera virkjað af starfsfólki Ölföngs."
+  },
+  {
+    "key": "adminSettings.paymentGatewayNote3",
+    "value": "Athugið: Rapyd þarf að vera virkjað af starfsfólki Ölföngs."
+  },
+  {
+    "key": "adminSettings.paymentGatewayNotes",
+    "value": "Athugasemdir um greiðslugáttir"
+  },
+  {
+    "key": "adminSettings.paymentGatewayTestSuccessful",
+    "value": "Prófun greiðslugáttar tókst"
+  },
+  {
+    "key": "adminSettings.paymentGatewayUpdatedSuccessfully",
+    "value": "Greiðslugátt uppfærð"
+  },
+  {
+    "key": "adminSettings.paymentGateways",
+    "value": "Greiðslugáttir"
+  },
+  {
+    "key": "adminSettings.paypal",
+    "value": "PayPal"
+  },
+  {
+    "key": "adminSettings.pexelsApi",
+    "value": "Pexels API"
+  },
+  {
+    "key": "adminSettings.pexelsApiKey",
+    "value": "Pexels API lykill"
+  },
+  {
+    "key": "adminSettings.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "adminSettings.phoneNumber",
+    "value": "Símanúmer"
+  },
+  {
+    "key": "adminSettings.pickup",
+    "value": "Sækja"
+  },
+  {
+    "key": "adminSettings.pixabayApi",
+    "value": "Pixabay API"
+  },
+  {
+    "key": "adminSettings.pixabayApiKey",
+    "value": "Pixabay API lykill"
+  },
+  {
+    "key": "adminSettings.pleaseSelectProvider",
+    "value": "Vinsamlegast veldu þjónustuaðila"
+  },
+  {
+    "key": "adminSettings.preferences",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSettings.preferencesDesc",
+    "value": "Hafa umsjón með almennum stillingum verslunar."
+  },
+  {
+    "key": "adminSettings.price",
+    "value": "Verð"
+  },
+  {
+    "key": "adminSettings.printView",
+    "value": "Prentvæn útgáfa"
+  },
+  {
+    "key": "adminSettings.privateKey",
+    "value": "Einkalykill"
+  },
+  {
+    "key": "adminSettings.production",
+    "value": "Raunvinnsluumhverfi"
+  },
+  {
+    "key": "adminSettings.provider",
+    "value": "Þjónustuaðili"
+  },
+  {
+    "key": "adminSettings.publicKey",
+    "value": "Opinber lykill"
+  },
+  {
+    "key": "adminSettings.publishableKey",
+    "value": "Birtingarlykill"
+  },
+  {
+    "key": "adminSettings.quickActions",
+    "value": "Flýtiaðgerðir"
+  },
+  {
+    "key": "adminSettings.rapyd",
+    "value": "Rapyd"
+  },
+  {
+    "key": "adminSettings.receiptSettings",
+    "value": "Stillingar kvittana"
+  },
+  {
+    "key": "adminSettings.receiptSettingsDescription",
+    "value": "Sérsníddu útlit og innihald kvittana fyrir viðskiptavini."
+  },
+  {
+    "key": "adminSettings.receiptSettingsSaved",
+    "value": "Stillingar kvittana vistaðar."
+  },
+  {
+    "key": "adminSettings.receipts",
+    "value": "Kvittanir"
+  },
+  {
+    "key": "adminSettings.remove",
+    "value": "Fjarlægja"
+  }
+]

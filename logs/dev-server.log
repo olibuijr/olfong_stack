@@ -1,0 +1,14 @@
+
+> olfong-web@1.0.0 dev
+> vite
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+  VITE v5.4.20  ready in 199 ms
+
+  ➜  Local:   http://localhost:3002/
+  ➜  Network: http://192.168.8.62:3002/
+(node:1787803) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/olibuijr/Projects/olfong_stack/web/postcss.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/olibuijr/Projects/olfong_stack/web/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -25,6 +25,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [translations, setTranslations] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const availableLanguages = ['is', 'en'];
+  const [storeDefaultLanguage, setStoreDefaultLanguage] = useState<string | null>(null);
 
   // Simple translation function with fallback
   const t = useCallback((key: string, params?: Record<string, string | number>): string => {
@@ -44,14 +45,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
 
     return translation;
-  }, [translations, currentLanguage]);
+  }, [translations]);
 
   // Load translations from API based on current language
   const loadTranslations = useCallback(async () => {
     setIsLoading(true);
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api';
-      const response = await fetch(`${API_BASE_URL}/translations?locale=${currentLanguage}`);
+      const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${API_BASE_URL}/translations?locale=${currentLanguage}`, {});
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -230,6 +231,34 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
     setTranslations(fallbacks[currentLanguage as keyof typeof fallbacks] || fallbacks.is);
   };
+
+  // Fetch store's default language on mount
+  useEffect(() => {
+    const fetchStoreDefaultLanguage = async () => {
+      try {
+        const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${API_BASE_URL}/settings/public`, {});
+        if (response.ok) {
+          const data = await response.json();
+          const defaultLang = data.data?.settings?.language;
+          if (defaultLang && ['is', 'en'].includes(defaultLang)) {
+            setStoreDefaultLanguage(defaultLang);
+
+            // If user has no preference, use store default
+            const savedPreference = localStorage.getItem('preferred_language');
+            if (!savedPreference) {
+              setCurrentLanguageState(defaultLang);
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to fetch store default language:', error);
+        // Silently fail - will use localStorage or fallback to 'is'
+      }
+    };
+
+    fetchStoreDefaultLanguage();
+  }, []);
 
   // Initialize translations on mount and when language changes
   useEffect(() => {

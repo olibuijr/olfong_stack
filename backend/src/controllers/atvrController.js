@@ -52,6 +52,18 @@ const PRODUCT_CATEGORIES = {
   'packaging': { is: 'Umbúðir', en: 'Packaging' }
 };
 
+/**
+ * Normalize text by adding spaces after periods that are followed directly by letters
+ * Fixes issues like ".TextMore" -> ". Text More"
+ * Supports both ASCII and Unicode/Icelandic characters
+ */
+function normalizeTextSpacing(text) {
+  if (!text || typeof text !== 'string') return text;
+  // Add space after period if followed by a letter (including Unicode/Icelandic characters)
+  // Using \p{L} for any Unicode letter requires Unicode flag
+  return text.replace(/\.([A-Za-zÁáÉéÍíÓóÚúÝýÞþÐðÆæÖö])/g, '. $1');
+}
+
 // Helper function to generate file hash
 const generateFileHash = (buffer) => {
   return crypto.createHash('sha256').update(buffer).digest('hex');
@@ -394,42 +406,16 @@ const parseProductFromSearchResult = async ($, productElement, language = 'is') 
       product.availabilityIs = 'Til ráðstöfunar';
     }
 
-    // Enhanced data extraction for specific known products
-    if (productName.includes('Egils Gull') && product.id === '01448') {
-      // Specific data for Egils Gull 500ml
-      product.producer = 'Egils Malt';
-      product.producerIs = 'Egils Malt';
+    // Set reasonable default values if extraction didn't find them
+    if (!product.country && !product.countryIs) {
       product.country = 'Iceland';
       product.countryIs = 'Ísland';
-      product.description = 'A refreshing Icelandic beer with a crisp taste and golden color. Perfect for any occasion.';
-      // Note: descriptionIs is extracted from ATVR scraper in getProductDetailsForLanguage
-      product.foodPairings = ['Fish', 'Fowl', 'Beef', 'Lamb', 'Pork'];
-      product.foodPairingsIs = ['Fiskur', 'Alifuglar', 'Nautakjöt', 'Lambakjöt', 'Svínakjótt'];
-      product.specialAttributes = ['Premium Lager', 'Helles'];
-      product.specialAttributesIs = ['Premium Lager', 'Helles'];
-      product.packaging = 'Bottle';
-      product.packagingIs = 'Flaska';
-      product.availability = 'available';
-      product.availabilityIs = 'Til ráðstöfunar';
-    } else {
-      // Set default values for other products
-      if (!product.producer && !product.producerIs) {
-        if (productName.includes('Egils')) {
-          product.producer = 'Egils Malt';
-          product.producerIs = 'Egils Malt';
-        }
-      }
-      
-      if (!product.country && !product.countryIs) {
-        product.country = 'Iceland';
-        product.countryIs = 'Ísland';
-      }
-      
-      if (!product.description && !product.descriptionIs) {
-        const baseDescription = `A quality ${product.category?.toLowerCase() || 'beverage'} from ${product.country || 'Iceland'}.`;
-        product.description = baseDescription;
-        product.descriptionIs = `Gæðavara ${product.category?.toLowerCase() || 'drykkur'} frá ${product.countryIs || 'Íslandi'}.`;
-      }
+    }
+
+    if (!product.description && !product.descriptionIs) {
+      const baseDescription = `A quality ${product.category?.toLowerCase() || 'beverage'} from ${product.country || 'Iceland'}.`;
+      product.description = normalizeTextSpacing(baseDescription);
+      product.descriptionIs = normalizeTextSpacing(`Gæðavara ${product.category?.toLowerCase() || 'drykkur'} frá ${product.countryIs || 'Íslandi'}.`);
     }
 
     return product;
@@ -451,20 +437,56 @@ const getProductDetails = async (productId, language = 'is') => {
     ]);
 
     // Merge data with preference for the requested language
+    // Start with icelandic data as base
+    Object.assign(product, icelandicData);
+
+    // Fill in English-specific fields from English data, with fallback to Icelandic if empty
+    if (englishData.producer && !product.producer) {
+      product.producer = englishData.producer;
+    } else if (icelandicData.producerIs && !product.producer) {
+      // Use Icelandic producer if English is empty
+      product.producer = icelandicData.producerIs;
+    }
+
+    if (englishData.distributor && !product.distributor) {
+      product.distributor = englishData.distributor;
+    } else if (icelandicData.distributorIs && !product.distributor) {
+      // Use Icelandic distributor if English is empty
+      product.distributor = icelandicData.distributorIs;
+    }
+
+    if (englishData.packaging && !product.packaging) {
+      product.packaging = englishData.packaging;
+    } else if (icelandicData.packagingIs && !product.packaging) {
+      // Use Icelandic packaging if English is empty
+      product.packaging = icelandicData.packagingIs;
+    }
+
+    if (englishData.packagingWeight && !product.packagingWeight) {
+      product.packagingWeight = englishData.packagingWeight;
+    } else if (icelandicData.packagingWeightIs && !product.packagingWeight) {
+      // Use Icelandic packaging weight if English is empty
+      product.packagingWeight = icelandicData.packagingWeightIs;
+    }
+
+    if (englishData.country && !product.country) {
+      product.country = englishData.country;
+    } else if (icelandicData.countryIs && !product.country) {
+      // Use Icelandic country if English is empty
+      product.country = icelandicData.countryIs;
+    }
+
+    // Set language-specific fields
     if (language === 'is') {
-      Object.assign(product, icelandicData, {
-        name: icelandicData.name,
-        nameIs: icelandicData.name,
-        description: englishData.description || icelandicData.description,
-        descriptionIs: icelandicData.description
-      });
+      product.name = icelandicData.name;
+      product.nameIs = icelandicData.name;
+      product.description = normalizeTextSpacing(englishData.description || icelandicData.description);
+      product.descriptionIs = normalizeTextSpacing(icelandicData.description);
     } else {
-      Object.assign(product, englishData, {
-        name: englishData.name,
-        nameIs: icelandicData.name,
-        description: englishData.description,
-        descriptionIs: icelandicData.description
-      });
+      product.name = englishData.name;
+      product.nameIs = icelandicData.name;
+      product.description = normalizeTextSpacing(englishData.description);
+      product.descriptionIs = normalizeTextSpacing(icelandicData.description);
     }
 
     return product;
@@ -541,90 +563,85 @@ const getProductDetailsForLanguage = async (productId, lang) => {
       }
     }
 
-    // Enhanced description extraction - look for product flavor/taste descriptions
-    // Try multiple strategies to find the product description
+    // Enhanced description extraction - Target ATVR-specific description structure
+    // ATVR uses: <div class="synishorn"> for short view, <div class="entire-text"> for full description
     let foundDescription = null;
 
-    // Strategy 1: Look for text that contains flavor/tasting notes or Icelandic beer style descriptions
-    const flavorKeywords = ['color|taste|flavor|note|aroma|body|palate|finish|sweet|dry|crisp|fresh|smooth|fruity|citrus|berry|spice|wood|vanilla|oak|mineral|bjór|lager|ale|helles|pilsner|porter|stout|áfengis|smekk|beiskja|malt|humlar'];
-    const allElements = $('p, span, div');
+    // Strategy 1: Try ATVR-specific selectors first (most reliable)
+    const entireTextDiv = $('.entire-text');
+    if (entireTextDiv.length > 0) {
+      let descText = entireTextDiv.text().trim();
+      // Remove "Sjá meira" / "See more" and "Sjá minna" / "Read less" links
+      descText = descText.replace(/[\s\n]*(Sjá meira|See more|Sjá minna|Read less)[\s\n]*/gi, ' ').trim();
+      // Remove extra whitespace
+      descText = descText.replace(/\s+/g, ' ').trim();
 
-    // Look for longer descriptions (more than 300 chars) first
-    let longDescription = null;
-    for (let i = 0; i < allElements.length; i++) {
-      const element = allElements.eq(i);
-      let text = element.text().trim();
+      if (descText.length > 50) {
+        foundDescription = descText;
+      }
+    }
 
-      // Skip empty or very short text
-      if (!text || text.length < 50) continue;
+    // Strategy 2: If entire-text not found, try synishorn (short description)
+    if (!foundDescription) {
+      const synishornDiv = $('.synishorn');
+      if (synishornDiv.length > 0) {
+        let descText = synishornDiv.text().trim();
+        descText = descText.replace(/[\s\n]*(Sjá meira|See more|Sjá minna|Read less)[\s\n]*/gi, ' ').trim();
+        descText = descText.replace(/\s+/g, ' ').trim();
 
-      // Skip if it's contact info or navigation
-      if (text.match(/@|vinbudin|navigation|instagram|facebook|twitter|email|contact/i)) continue;
-
-      // Check if it contains flavor-related keywords
-      if (text.match(new RegExp(flavorKeywords, 'i')) && !text.match(/^(Standard|VAT|Price|Stock|In|Ekki|Out)/i)) {
-        // Clean up: remove "Sjá meira" or "See more" and everything after
-        text = text.replace(/[\s\n]*Sjá meira.*$/i, '').replace(/[\s\n]*See more.*$/i, '').trim();
-
-        // Additional cleaning: remove extra whitespace and newlines
-        text = text.replace(/\s+/g, ' ').trim();
-
-        // If it's a long description (typical for full product descriptions), prefer it
-        if (text.length > 300 && text.length < 2000) {
-          longDescription = text;
-          break;
-        }
-
-        // Otherwise, store shorter descriptions as fallback
-        if (text.length > 15 && text.length < 300 && !foundDescription) {
-          foundDescription = text;
+        if (descText.length > 50) {
+          foundDescription = descText;
         }
       }
     }
 
-    // Use long description if found, otherwise use regular description
-    if (longDescription) {
-      foundDescription = longDescription;
-    }
-
-    // Strategy 2: If no flavor description found, look for any meaningful paragraph
+    // Strategy 3: Fallback - look for text that contains flavor/tasting notes or Icelandic beer style descriptions
     if (!foundDescription) {
-      const descriptionSelectors = ['p', '.description', '.product-description', '.product-info', 'div[class*="description"]'];
-      for (const selector of descriptionSelectors) {
-        const descElements = $(selector);
-        // Check all elements, not just first
-        for (let j = 0; j < descElements.length; j++) {
-          const descElement = descElements.eq(j);
-          let descText = descElement.text().trim();
+      const flavorKeywords = ['color|taste|flavor|note|aroma|body|palate|finish|sweet|dry|crisp|fresh|smooth|fruity|citrus|berry|spice|wood|vanilla|oak|mineral|bjór|lager|ale|helles|pilsner|porter|stout|áfengis|smekk|beiskja|malt|humlar'];
+      const allText = $.text();
 
-          // Skip unwanted content
-          if (descText.match(/@|vinbudin|navigation|instagram|facebook|twitter|email|contact/i)) {
-            continue;
+      // Search for paragraphs with flavor keywords
+      const allElements = $('p');
+      let longDescription = null;
+
+      for (let i = 0; i < allElements.length; i++) {
+        const element = allElements.eq(i);
+        let text = element.text().trim();
+
+        // Skip empty or very short text
+        if (!text || text.length < 50) continue;
+
+        // Skip if it's contact info or navigation
+        if (text.match(/@|vinbudin|navigation|instagram|facebook|twitter|email|contact/i)) continue;
+
+        // Check if it contains flavor-related keywords
+        if (text.match(new RegExp(flavorKeywords, 'i')) && !text.match(/^(Standard|VAT|Price|Stock|In|Ekki|Out)/i)) {
+          // Clean up: remove "Sjá meira" or "See more" and everything after
+          text = text.replace(/[\s\n]*(Sjá meira|See more|Sjá minna|Read less)[\s\n]*/gi, ' ').trim();
+          // Additional cleaning: remove extra whitespace
+          text = text.replace(/\s+/g, ' ').trim();
+
+          // Prefer longer descriptions
+          if (text.length > 300 && text.length < 2000) {
+            longDescription = text;
+            break;
           }
 
-          // Skip if too short or contains unwanted patterns
-          if (descText.length > 50 && !descText.match(/^(Standard|VAT|Price|Stock|In stock|Ekki til|Out of stock)/i)) {
-            // Clean up the description - remove "Sjá meira" and everything after
-            descText = descText.replace(/[\s\n]*Sjá meira.*$/i, '').replace(/[\s\n]*See more.*$/i, '').trim();
-
-            // Remove extra whitespace
-            descText = descText.replace(/\s+/g, ' ').trim();
-
-            // Prefer longer descriptions (full product descriptions)
-            if (descText.length > 300) {
-              foundDescription = descText;
-              break;
-            } else if (descText.length > 50 && !foundDescription) {
-              foundDescription = descText;
-            }
+          // Otherwise store as fallback
+          if (text.length > 50 && !foundDescription) {
+            foundDescription = text;
           }
         }
-        if (foundDescription) break;
+      }
+
+      // Use long description if found
+      if (longDescription) {
+        foundDescription = longDescription;
       }
     }
 
     if (foundDescription) {
-      product.description = foundDescription;
+      product.description = normalizeTextSpacing(foundDescription);
     }
 
     // Enhanced price extraction
@@ -663,20 +680,38 @@ const getProductDetailsForLanguage = async (productId, lang) => {
     }
 
     // Enhanced volume and alcohol content extraction
-    const volumePatterns = [
-      /(\d+(?:\.\d+)?)\s*ml\s*(\d+(?:\.\d+)?%)/,
-      /(\d+(?:\.\d+)?)\s*ml\s*(\d+(?:\.\d+)?)\s*%/,
-      /(\d+(?:\.\d+)?)\s*ml/
-    ];
+    // First try using ATVR-specific element IDs
+    const volumeElement = $('#ctl00_ctl01_Label_ProductBottledVolume, #Label_ProductBottledVolume');
+    if (volumeElement.length) {
+      const volumeText = volumeElement.text().trim();
+      const volumeMatch = volumeText.match(/(\d+(?:\.\d+)?)\s*(?:ml|L)/i);
+      if (volumeMatch) {
+        const volumeValue = volumeMatch[0].trim();
+        product.volume = volumeValue;
+        // Set volumeIs to same value (volume is language-neutral)
+        product.volumeIs = volumeValue;
+      }
+    }
 
-    for (const pattern of volumePatterns) {
-      const match = allText.match(pattern);
-      if (match) {
-        product.volume = match[1] + ' ml';
-        if (match[2]) {
-          product.alcoholContent = match[2].replace('%', '');
+    // Fallback to regex pattern if specific selector didn't work
+    if (!product.volume) {
+      const volumePatterns = [
+        /(\d+(?:\.\d+)?)\s*ml\s*(\d+(?:\.\d+)?%)/,
+        /(\d+(?:\.\d+)?)\s*ml\s*(\d+(?:\.\d+)?)\s*%/,
+        /(\d+(?:\.\d+)?)\s*ml/
+      ];
+
+      for (const pattern of volumePatterns) {
+        const match = allText.match(pattern);
+        if (match) {
+          const volumeValue = match[1] + ' ml';
+          product.volume = volumeValue;
+          product.volumeIs = volumeValue;
+          if (match[2]) {
+            product.alcoholContent = match[2].replace('%', '');
+          }
+          break;
         }
-        break;
       }
     }
 
@@ -820,9 +855,19 @@ const getProductDetailsForLanguage = async (productId, lang) => {
       }
     }
 
-    // Packaging/Umbúðir
-    let packagingValue = extractLabelValuePair('Packaging') ||
-                         extractLabelValuePair('Umbúðir');
+    // Packaging/Umbúðir - first try specific ATVR element ID
+    let packagingValue = null;
+    const packagingElement = $('#ctl00_ctl01_Label_ProductPackaging, #Label_ProductPackaging');
+    if (packagingElement.length) {
+      packagingValue = packagingElement.text().trim();
+    }
+
+    // Fallback to label-value pair extraction if specific selector didn't work
+    if (!packagingValue) {
+      packagingValue = extractLabelValuePair('Packaging') ||
+                       extractLabelValuePair('Umbúðir');
+    }
+
     if (packagingValue) {
       if (lang === 'is') {
         product.packagingIs = packagingValue.trim();

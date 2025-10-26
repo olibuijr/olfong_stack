@@ -1,0 +1,214 @@
+{
+  "exportedAt": "2025-10-26T13:08:12.861Z",
+  "users": [],
+  "categories": [],
+  "subcategories": [],
+  "products": [],
+  "productImages": [],
+  "banners": [],
+  "settings": [],
+  "langs": [
+    {
+      "id": "fe087593-b315-4c03-b7e3-0aef1b658364",
+      "key": "checkoutPage.teyaPayment",
+      "locale": "en",
+      "value": "Teya Payment Gateway"
+    },
+    {
+      "id": "f121a27e-9124-4b85-af1f-3f3b1cc58a69",
+      "key": "checkoutPage.teyaPayment",
+      "locale": "is",
+      "value": "Teya Greiðslugátt"
+    },
+    {
+      "id": "3e285e3b-902b-43f0-b7b0-8b37493821a8",
+      "key": "checkoutPage.teyaDesc",
+      "locale": "en",
+      "value": "Pay securely with Teya payment gateway"
+    },
+    {
+      "id": "ce7989fe-15df-4036-80e9-d7bf3549fe4d",
+      "key": "checkoutPage.teyaDesc",
+      "locale": "is",
+      "value": "Greiddu á öruggan hátt með greiðslugátt Teya"
+    },
+    {
+      "id": "4dc223b7-bc12-4232-b15c-3e1512018af4",
+      "key": "checkoutPage.valitorPayment",
+      "locale": "en",
+      "value": "Valitor Payment Gateway"
+    },
+    {
+      "id": "7e0ace42-3f3a-4a6d-b87a-9270bd375ce9",
+      "key": "checkoutPage.valitorPayment",
+      "locale": "is",
+      "value": "Valitor Greiðslugátt"
+    },
+    {
+      "id": "35c81445-a2ab-4038-b643-3350275a36d3",
+      "key": "checkoutPage.valitorDesc",
+      "locale": "en",
+      "value": "Pay with Valitor online payment gateway"
+    },
+    {
+      "id": "e1499dd3-1a9b-4357-872d-546329d390a1",
+      "key": "checkoutPage.valitorDesc",
+      "locale": "is",
+      "value": "Greiddu með greiðslugátt Valitor"
+    },
+    {
+      "id": "49246769-6cc4-43ef-b8a8-0b42063d389e",
+      "key": "checkoutPage.cashOnDelivery",
+      "locale": "en",
+      "value": "Cash on Delivery"
+    },
+    {
+      "id": "eea725df-c5ae-4ccf-abd5-4c19fb687ec3",
+      "key": "checkoutPage.cashOnDelivery",
+      "locale": "is",
+      "value": "Póstkrafa"
+    },
+    {
+      "id": "c4dcc0ce-3c75-4872-9264-0b37c0e91215",
+      "key": "checkoutPage.cashOnDeliveryDesc",
+      "locale": "en",
+      "value": "Pay with cash when your order is delivered"
+    },
+    {
+      "id": "629dc953-a020-4112-913a-f0721c4672a5",
+      "key": "checkoutPage.cashOnDeliveryDesc",
+      "locale": "is",
+      "value": "Greiðið með reiðufé við afhendingu"
+    },
+    {
+      "id": "fc1341a2-6a86-448b-baa4-5431fc10e600",
+      "key": "checkoutPage.payOnPickup",
+      "locale": "en",
+      "value": "Pay on Pickup"
+    },
+    {
+      "id": "61930b26-0b91-4887-8a14-bd74623264e5",
+      "key": "checkoutPage.payOnPickup",
+      "locale": "is",
+      "value": "Greiðsla við sókn"
+    },
+    {
+      "id": "a3126d66-cfd3-405f-bfae-26c68482b8df",
+      "key": "checkoutPage.payOnPickupDesc",
+      "locale": "en",
+      "value": "Pay with cash when you pick up your order"
+    },
+    {
+      "id": "00259c9f-61bd-4e94-904a-497badb92341",
+      "key": "checkoutPage.payOnPickupDesc",
+      "locale": "is",
+      "value": "Greiðið með reiðufé þegar pöntunin er sótt"
+    },
+    {
+      "id": "93ad3c65-dd01-4df5-80ba-b66a71a7e312",
+      "key": "adminSettings.displayName",
+      "locale": "en",
+      "value": "Display Name"
+    },
+    {
+      "id": "64ed4e93-5a63-4fd6-b083-959c5ff604ea",
+      "key": "adminSettings.displayName",
+      "locale": "is",
+      "value": "Birtingarnafn"
+    },
+    {
+      "id": "07bc68e2-b98b-49ae-b157-29784baaf0e9",
+      "key": "adminSettings.paymentMethod",
+      "locale": "en",
+      "value": "Payment method"
+    },
+    {
+      "id": "a3f8a76f-71ac-4cd3-af28-5238345572ea",
+      "key": "adminSettings.paymentMethod",
+      "locale": "is",
+      "value": "Greiðslumáti"
+    }
+  ],
+  "shippingMethods": [],
+  "shippingRates": [],
+  "addresses": [],
+  "carts": [],
+  "cartItems": [],
+  "orders": [],
+  "orderItems": [],
+  "paymentGateways": [
+    {
+      "id": 1,
+      "name": "Teya",
+      "displayName": "Teya Payment Gateway",
+      "displayNameEn": "Teya Payment Gateway",
+      "displayNameIs": "Teya Greiðslugátt",
+      "provider": "teya",
+      "isEnabled": true,
+      "isActive": true,
+      "sortOrder": 8,
+      "config": null,
+      "merchantId": null,
+      "apiKey": null,
+      "secretKey": null,
+      "webhookSecret": null,
+      "environment": "sandbox",
+      "supportedCurrencies": [
+        "ISK",
+        "EUR",
+        "USD",
+        "GBP",
+        "DKK",
+        "NOK",
+        "SEK",
+        "CHF",
+        "CAD",
+        "AUD"
+      ],
+      "supportedCountries": [
+        "IS",
+        "DK",
+        "NO",
+        "SE",
+        "FI",
+        "DE",
+        "FR",
+        "GB",
+        "US",
+        "CA",
+        "AU",
+        "CH"
+      ],
+      "supportedMethods": [
+        "card",
+        "visa",
+        "mastercard",
+        "amex",
+        "diners",
+        "jcb",
+        "discover",
+        "maestro",
+        "visa_electron",
+        "bank_transfer",
+        "sepa",
+        "klarna",
+        "afterpay",
+        "paypal",
+        "apple_pay",
+        "google_pay"
+      ],
+      "supportsSubscriptions": false,
+      "description": "Icelandic payment gateway supporting major credit cards and international payment methods",
+      "logoUrl": "https://www.teya.com/wp-content/themes/teya/assets/images/teya-logo.svg",
+      "website": null,
+      "documentation": null,
+      "createdAt": "2025-10-26T13:05:35.015Z",
+      "updatedAt": "2025-10-26T13:05:35.015Z"
+    }
+  ],
+  "vatProfiles": [],
+  "discounts": [],
+  "notifications": [],
+  "conversations": [],
+  "chatMessages": []
+}

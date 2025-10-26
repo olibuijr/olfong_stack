@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminSettings.resetToDefaults",
+    "value": "Endurstilla á sjálfgefin gildi"
+  },
+  {
+    "key": "adminSettings.sandbox",
+    "value": "Sandkassi"
+  },
+  {
+    "key": "adminSettings.saturday",
+    "value": "Laugardagur"
+  },
+  {
+    "key": "adminSettings.save",
+    "value": "Vista"
+  },
+  {
+    "key": "adminSettings.saveChanges",
+    "value": "Vista breytingar"
+  },
+  {
+    "key": "adminSettings.saveProfile",
+    "value": "Vista prófíl"
+  },
+  {
+    "key": "adminSettings.saveSettings",
+    "value": "Vista stillingar"
+  },
+  {
+    "key": "adminSettings.saving",
+    "value": "Vistar..."
+  },
+  {
+    "key": "adminSettings.screenView",
+    "value": "Skjámynd"
+  },
+  {
+    "key": "adminSettings.secretKey",
+    "value": "Leynilykill"
+  },
+  {
+    "key": "adminSettings.security",
+    "value": "Öryggi"
+  },
+  {
+    "key": "adminSettings.securityAndAccess",
+    "value": "Öryggi og aðgangur"
+  },
+  {
+    "key": "adminSettings.securityAndAccessDescription",
+    "value": "Hafa umsjón með öryggisstillingum og aðgangsheimildum notenda."
+  },
+  {
+    "key": "adminSettings.securityComingSoon",
+    "value": "Öryggisstillingar væntanlegar"
+  },
+  {
+    "key": "adminSettings.securityDescription",
+    "value": "Hafa umsjón með öryggisstillingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.selectPaymentProvider",
+    "value": "Veldu greiðsluveitu"
+  },
+  {
+    "key": "adminSettings.set24hSuccess",
+    "value": "Opnunartímar stilltir á allan sólarhringinn."
+  },
+  {
+    "key": "adminSettings.setAsDefault",
+    "value": "Setja sem sjálfgefið"
+  },
+  {
+    "key": "adminSettings.setWeekdayHours",
+    "value": "Stilla opnunartíma virka daga"
+  },
+  {
+    "key": "adminSettings.setWeekdayHoursSuccess",
+    "value": "Opnunartímar virka daga vistaðir."
+  },
+  {
+    "key": "adminSettings.setWeekendHours",
+    "value": "Stilla opnunartíma helgar"
+  },
+  {
+    "key": "adminSettings.setWeekendHoursSuccess",
+    "value": "Opnunartímar helgar vistaðir."
+  },
+  {
+    "key": "adminSettings.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSettings.settingsControlDesc",
+    "value": "Hafa umsjón með almennum stillingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.settingsReset",
+    "value": "Stillingar endurstilltar."
+  },
+  {
+    "key": "adminSettings.settingsSaved",
+    "value": "Stillingar vistaðar."
+  },
+  {
+    "key": "adminSettings.shipping",
+    "value": "Sending"
+  },
+  {
+    "key": "adminSettings.shippingConfiguration",
+    "value": "Sendingarstillingar"
+  },
+  {
+    "key": "adminSettings.shippingDescription",
+    "value": "Hafa umsjón með sendingarmátum og gjöldum."
+  },
+  {
+    "key": "adminSettings.shippingName",
+    "value": "Heiti sendingarmáta"
+  },
+  {
+    "key": "adminSettings.shippingNameIs",
+    "value": "Heiti sendingarmáta er"
+  },
+  {
+    "key": "adminSettings.shippingNote1",
+    "value": "Athugasemd 1 fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingNote2",
+    "value": "Athugasemd 2 fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingNote3",
+    "value": "Athugasemd 3 fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingNotes",
+    "value": "Athugasemdir fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingType",
+    "value": "Tegund sendingar"
+  },
+  {
+    "key": "adminSettings.showBarcode",
+    "value": "Sýna strikamerki"
+  },
+  {
+    "key": "adminSettings.showQRCode",
+    "value": "Sýna QR kóða"
+  },
+  {
+    "key": "adminSettings.showVatBreakdown",
+    "value": "Sýna VSK sundurliðun"
+  },
+  {
+    "key": "adminSettings.showVatBreakdownDescription",
+    "value": "Sýna sundurliðun virðisaukaskatts á kvittunum."
+  },
+  {
+    "key": "adminSettings.showVatInAdmin",
+    "value": "Sýna VSK í stjórnborði"
+  },
+  {
+    "key": "adminSettings.showVatInAdminDescription",
+    "value": "Sýna verð með virðisaukaskatti í stjórnborðinu."
+  },
+  {
+    "key": "adminSettings.smtp",
+    "value": "SMTP"
+  },
+  {
+    "key": "adminSettings.smtp.authCredentials",
+    "value": "Auðkenningarskilríki"
+  },
+  {
+    "key": "adminSettings.smtp.commonProviders",
+    "value": "Algengar veitur"
+  },
+  {
+    "key": "adminSettings.smtp.connectionFailed",
+    "value": "Tenging mistókst"
+  },
+  {
+    "key": "adminSettings.smtp.connectionFailedMsg",
+    "value": "Ekki tókst að tengjast SMTP þjóninum. Vinsamlegast athugaðu stillingarnar og reynið aftur."
+  },
+  {
+    "key": "adminSettings.smtp.connectionSuccess",
+    "value": "Tenging tókst"
+  },
+  {
+    "key": "adminSettings.smtp.connectionSuccessMsg",
+    "value": "Tenging við SMTP þjóninn þinn tókst."
+  },
+  {
+    "key": "adminSettings.smtp.description",
+    "value": "Stilltu SMTP fyrir sendingu sjálfvirkra tölvupósta."
+  },
+  {
+    "key": "adminSettings.smtp.enableSmtp",
+    "value": "Virkja SMTP"
+  },
+  {
+    "key": "adminSettings.smtp.fromEmail",
+    "value": "Frá netfangi"
+  },
+  {
+    "key": "adminSettings.smtp.fromEmailHelp",
+    "value": "Netfangið sem birtist í 'Frá' reitnum."
+  },
+  {
+    "key": "adminSettings.smtp.fromNameEn",
+    "value": "Nafn sendanda (enska)"
+  },
+  {
+    "key": "adminSettings.smtp.fromNameIs",
+    "value": "Nafn sendanda (íslenska)"
+  },
+  {
+    "key": "adminSettings.smtp.gmailTip",
+    "value": "Fyrir Gmail gætirðu þurft að nota 'App lykilorð'."
+  },
+  {
+    "key": "adminSettings.smtp.host",
+    "value": "Vél"
+  },
+  {
+    "key": "adminSettings.smtp.hostHelp",
+    "value": "Veffang SMTP þjónsins (t.d. smtp.gmail.com)."
+  },
+  {
+    "key": "adminSettings.smtp.password",
+    "value": "Lykilorð"
+  },
+  {
+    "key": "adminSettings.smtp.passwordHelp",
+    "value": "Lykilorðið fyrir SMTP aðganginn þinn."
+  },
+  {
+    "key": "adminSettings.smtp.port",
+    "value": "Gátt"
+  },
+  {
+    "key": "adminSettings.smtp.portHelp",
+    "value": "Gáttin sem SMTP þjónninn þinn notar (t.d. 587 fyrir TLS)."
+  },
+  {
+    "key": "adminSettings.smtp.providerGmail",
+    "value": "Gmail"
+  },
+  {
+    "key": "adminSettings.smtp.providerMailgun",
+    "value": "Mailgun"
+  },
+  {
+    "key": "adminSettings.smtp.providerOutlook",
+    "value": "Outlook"
+  },
+  {
+    "key": "adminSettings.smtp.providerSendGrid",
+    "value": "SendGrid"
+  },
+  {
+    "key": "adminSettings.smtp.providerYahoo",
+    "value": "Yahoo"
+  },
+  {
+    "key": "adminSettings.smtp.saveSettings",
+    "value": "Vista stillingar"
+  },
+  {
+    "key": "adminSettings.smtp.secureHelp",
+    "value": "Notaðu SSL/TLS fyrir örugga tengingu."
+  },
+  {
+    "key": "adminSettings.smtp.senderInfo",
+    "value": "Upplýsingar um sendanda"
+  },
+  {
+    "key": "adminSettings.smtp.testConnection",
+    "value": "Prófa tengingu"
+  },
+  {
+    "key": "adminSettings.smtp.testingConnection",
+    "value": "Prófa tengingu..."
+  },
+  {
+    "key": "adminSettings.smtp.useSecure",
+    "value": "Nota örugga tengingu"
+  },
+  {
+    "key": "adminSettings.smtp.username",
+    "value": "Notandanafn"
+  },
+  {
+    "key": "adminSettings.smtpSettings",
+    "value": "SMTP stillingar"
+  },
+  {
+    "key": "adminSettings.solidColor",
+    "value": "Heill litur"
+  },
+  {
+    "key": "adminSettings.sortOrder",
+    "value": "Röðun"
+  },
+  {
+    "key": "adminSettings.storeAddress",
+    "value": "Heimilisfang verslunar"
+  },
+  {
+    "key": "adminSettings.storeDescription",
+    "value": "Lýsing á verslun"
+  },
+  {
+    "key": "adminSettings.storeEmail",
+    "value": "Netfang verslunar"
+  },
+  {
+    "key": "adminSettings.storeInformation",
+    "value": "Upplýsingar um verslun"
+  },
+  {
+    "key": "adminSettings.storeInformationDesc",
+    "value": "Hafðu umsjón með grunnupplýsingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.storeName",
+    "value": "Nafn verslunar"
+  },
+  {
+    "key": "adminSettings.storeNameAppears",
+    "value": "Þetta nafn birtist um alla verslunina þína."
+  },
+  {
+    "key": "adminSettings.storeSettings",
+    "value": "Stillingar verslunar"
+  },
+  {
+    "key": "adminSettings.storeSettingsDescription",
+    "value": "Hafðu umsjón með almennum stillingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.stripe",
+    "value": "Stripe"
+  },
+  {
+    "key": "adminSettings.sunday",
+    "value": "Sunnudagur"
+  },
+  {
+    "key": "adminSettings.supportedMethods",
+    "value": "Studdar aðferðir"
+  },
+  {
+    "key": "adminSettings.supportedPaymentMethods",
+    "value": "Studdar greiðslumáta"
+  },
+  {
+    "key": "adminSettings.syncData",
+    "value": "Samstilla gögn"
+  },
+  {
+    "key": "adminSettings.system",
+    "value": "Kerfi"
+  },
+  {
+    "key": "adminSettings.systemDescription",
+    "value": "Hafðu umsjón með kerfisstillingum."
+  },
+  {
+    "key": "adminSettings.taxId",
+    "value": "VSK númer"
+  },
+  {
+    "key": "adminSettings.templateLayout",
+    "value": "Sniðmátsskipulag"
+  },
+  {
+    "key": "adminSettings.templateStyle",
+    "value": "Stíll sniðmáts"
+  },
+  {
+    "key": "adminSettings.test",
+    "value": "Prófa"
+  },
+  {
+    "key": "adminSettings.testConnection",
+    "value": "Prófa tengingu"
+  },
+  {
+    "key": "adminSettings.testing",
+    "value": "Prófun"
+  },
+  {
+    "key": "adminSettings.teya",
+    "value": "Teya"
+  }
+]

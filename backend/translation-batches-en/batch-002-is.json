@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminCategories.discountReasonEn",
+    "value": "Ástæða (á ensku)"
+  },
+  {
+    "key": "adminCategories.discountReasonIs",
+    "value": "Ástæða (á íslensku)"
+  },
+  {
+    "key": "adminCategories.discountStartDate",
+    "value": "Upphafsdagur afsláttar"
+  },
+  {
+    "key": "adminCategories.discounts",
+    "value": "Afslættir"
+  },
+  {
+    "key": "adminCategories.editCategory",
+    "value": "Breyta vöruflokki"
+  },
+  {
+    "key": "adminCategories.enableCategoryDiscount",
+    "value": "Virkja afslátt fyrir vöruflokk"
+  },
+  {
+    "key": "adminCategories.enableDiscountMessage",
+    "value": "Virkjaðu til að stilla afslátt fyrir allar vörur í þessum flokki."
+  },
+  {
+    "key": "adminCategories.icon",
+    "value": "Táknmynd"
+  },
+  {
+    "key": "adminCategories.iconHelp",
+    "value": "Veldu táknmynd fyrir vöruflokkinn."
+  },
+  {
+    "key": "adminCategories.images",
+    "value": "Myndir"
+  },
+  {
+    "key": "adminCategories.inactive",
+    "value": "Óvirkur"
+  },
+  {
+    "key": "adminCategories.manageCategories",
+    "value": "Stjórna vöruflokkum"
+  },
+  {
+    "key": "adminCategories.metaDescEn",
+    "value": "Meta lýsing (EN)"
+  },
+  {
+    "key": "adminCategories.metaDescIs",
+    "value": "Meta lýsing (IS)"
+  },
+  {
+    "key": "adminCategories.metaTitleEn",
+    "value": "Meta titill (EN)"
+  },
+  {
+    "key": "adminCategories.metaTitleIs",
+    "value": "Meta titill (IS)"
+  },
+  {
+    "key": "adminCategories.name",
+    "value": "Nafn"
+  },
+  {
+    "key": "adminCategories.nameEn",
+    "value": "Nafn (EN)"
+  },
+  {
+    "key": "adminCategories.nameIs",
+    "value": "Nafn (IS)"
+  },
+  {
+    "key": "adminCategories.nameRequired",
+    "value": "Nafn er áskilið."
+  },
+  {
+    "key": "adminCategories.newCategory",
+    "value": "Nýr vöruflokkur"
+  },
+  {
+    "key": "adminCategories.noCategories",
+    "value": "Engir vöruflokkar fundust."
+  },
+  {
+    "key": "adminCategories.noDescription",
+    "value": "Engin lýsing"
+  },
+  {
+    "key": "adminCategories.productCount",
+    "value": "Fjöldi vöru"
+  },
+  {
+    "key": "adminCategories.rate",
+    "value": "Gjald"
+  },
+  {
+    "key": "adminCategories.removeImage",
+    "value": "Fjarlægja mynd"
+  },
+  {
+    "key": "adminCategories.selectFromMedia",
+    "value": "Velja úr myndasafni"
+  },
+  {
+    "key": "adminCategories.selectVatProfile",
+    "value": "Veldu VSK flokk"
+  },
+  {
+    "key": "adminCategories.selectedVatProfile",
+    "value": "Valinn VSK flokkur"
+  },
+  {
+    "key": "adminCategories.seo",
+    "value": "Leitarvélabestun (SEO)"
+  },
+  {
+    "key": "adminCategories.seoHelp",
+    "value": "Stilltu SEO fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminCategories.slug",
+    "value": "Slóð"
+  },
+  {
+    "key": "adminCategories.slugHelp",
+    "value": "Slóðin er notuð í vefslóðinni. Notaðu aðeins lágstafi, tölustafi og bandstrik."
+  },
+  {
+    "key": "adminCategories.sortOrder",
+    "value": "Röðun"
+  },
+  {
+    "key": "adminCategories.subcategories",
+    "value": "Undirflokkar"
+  },
+  {
+    "key": "adminCategories.title",
+    "value": "Titill"
+  },
+  {
+    "key": "adminCategories.vat",
+    "value": "VSK"
+  },
+  {
+    "key": "adminCategories.vatHelp",
+    "value": "Veldu virðisaukaskatt fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminCategories.vatProfile",
+    "value": "VSK flokkur"
+  },
+  {
+    "key": "adminCategories.vatProfileHelp",
+    "value": "Veldu VSK flokk fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminChat.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "adminChat.accessDeniedMessage",
+    "value": "Þú hefur ekki heimild til að skoða þetta spjall."
+  },
+  {
+    "key": "adminChat.active",
+    "value": "Virkt"
+  },
+  {
+    "key": "adminChat.allStatuses",
+    "value": "Allar stöður"
+  },
+  {
+    "key": "adminChat.archived",
+    "value": "Sett í geymslu"
+  },
+  {
+    "key": "adminChat.customerTyping",
+    "value": "Viðskiptavinur skrifar..."
+  },
+  {
+    "key": "adminChat.noConversations",
+    "value": "Engin samtöl"
+  },
+  {
+    "key": "adminChat.noMessages",
+    "value": "Engin skilaboð"
+  },
+  {
+    "key": "adminChat.orderDetails",
+    "value": "Upplýsingar um pöntun"
+  },
+  {
+    "key": "adminChat.resolved",
+    "value": "Leyst"
+  },
+  {
+    "key": "adminChat.searchConversations",
+    "value": "Leita í samtölum"
+  },
+  {
+    "key": "adminChat.selectConversation",
+    "value": "Veldu samtal"
+  },
+  {
+    "key": "adminChat.selectConversationMessage",
+    "value": "Veldu samtal til að hefja spjall"
+  },
+  {
+    "key": "adminChat.sendMessageError",
+    "value": "Villa við að senda skilaboð"
+  },
+  {
+    "key": "adminChat.statusUpdated",
+    "value": "Staða uppfærð"
+  },
+  {
+    "key": "adminChat.subtitle",
+    "value": "Hafðu samband við viðskiptavini í rauntíma"
+  },
+  {
+    "key": "adminChat.title",
+    "value": "Spjall"
+  },
+  {
+    "key": "adminChat.unknownCustomer",
+    "value": "Óþekktur viðskiptavinur"
+  },
+  {
+    "key": "adminChat.updateStatusError",
+    "value": "Villa við að uppfæra stöðu"
+  },
+  {
+    "key": "adminCustomers.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminCustomers.active",
+    "value": "Virkur"
+  },
+  {
+    "key": "adminCustomers.adjustSearchCriteria",
+    "value": "Vinsamlegast aðlagaðu leitarskilyrðin"
+  },
+  {
+    "key": "adminCustomers.allStatus",
+    "value": "Öll staða"
+  },
+  {
+    "key": "adminCustomers.close",
+    "value": "Loka"
+  },
+  {
+    "key": "adminCustomers.contact",
+    "value": "Hafa samband"
+  },
+  {
+    "key": "adminCustomers.contactInformation",
+    "value": "Samskiptaupplýsingar"
+  },
+  {
+    "key": "adminCustomers.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminCustomers.customerDetails",
+    "value": "Upplýsingar um viðskiptavin"
+  },
+  {
+    "key": "adminCustomers.customerList",
+    "value": "Listi yfir viðskiptavini"
+  },
+  {
+    "key": "adminCustomers.customerManagement",
+    "value": "Umsjón viðskiptavina"
+  },
+  {
+    "key": "adminCustomers.export",
+    "value": "Flytja út"
+  },
+  {
+    "key": "adminCustomers.idLabel",
+    "value": "Auðkenni"
+  },
+  {
+    "key": "adminCustomers.inactive",
+    "value": "Óvirkur"
+  },
+  {
+    "key": "adminCustomers.lastOrder",
+    "value": "Síðasta pöntun"
+  },
+  {
+    "key": "adminCustomers.manageCustomerInfo",
+    "value": "Hafa umsjón með upplýsingum viðskiptavina"
+  },
+  {
+    "key": "adminCustomers.new",
+    "value": "Nýr"
+  },
+  {
+    "key": "adminCustomers.noCustomersFound",
+    "value": "Engir viðskiptavinir fundust"
+  },
+  {
+    "key": "adminCustomers.orderStatistics",
+    "value": "Tölfræði pantana"
+  },
+  {
+    "key": "adminCustomers.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminCustomers.searchCustomers",
+    "value": "Leita að viðskiptavinum"
+  },
+  {
+    "key": "adminCustomers.status",
+    "value": "Staða"
+  },
+  {
+    "key": "adminCustomers.totalOrders",
+    "value": "Samtals pantanir"
+  },
+  {
+    "key": "adminCustomers.totalSpent",
+    "value": "Heildareyðsla"
+  },
+  {
+    "key": "adminCustomers.vip",
+    "value": "VIP"
+  },
+  {
+    "key": "adminDashboard.addProduct",
+    "value": "Bæta við vöru"
+  },
+  {
+    "key": "adminDashboard.amount",
+    "value": "Upphæð"
+  },
+  {
+    "key": "adminDashboard.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminDashboard.dashboardOverview",
+    "value": "Yfirlit mælaborðs"
+  },
+  {
+    "key": "adminDashboard.date",
+    "value": "Dagsetning"
+  },
+  {
+    "key": "adminDashboard.export",
+    "value": "Flytja út"
+  },
+  {
+    "key": "adminDashboard.manageUsers",
+    "value": "Hafa umsjón með notendum"
+  },
+  {
+    "key": "adminDashboard.newOrder",
+    "value": "Ný pöntun"
+  },
+  {
+    "key": "adminDashboard.orderId",
+    "value": "Pöntunarnúmer"
+  },
+  {
+    "key": "adminDashboard.orderStatus",
+    "value": "Staða pöntunar"
+  },
+  {
+    "key": "adminDashboard.recentOrders",
+    "value": "Nýlegar pantanir"
+  },
+  {
+    "key": "adminDashboard.reports",
+    "value": "Skýrslur"
+  },
+  {
+    "key": "adminDashboard.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "adminDashboard.status",
+    "value": "Staða"
+  },
+  {
+    "key": "adminDashboard.topProducts",
+    "value": "Vinsælustu vörur"
+  },
+  {
+    "key": "adminDashboard.totalCustomers",
+    "value": "Fjöldi viðskiptavina"
+  }
+]

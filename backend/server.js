@@ -24,6 +24,7 @@ const mediaRoutes = require('./src/routes/media');
 const settingsRoutes = require('./src/routes/settings');
 const paymentGatewayRoutes = require('./src/routes/paymentGateways');
 const customerRoutes = require('./src/routes/customers');
+const staffRoutes = require('./src/routes/staff');
 const analyticsRoutes = require('./src/routes/analytics');
 const reportsRoutes = require('./src/routes/reports');
 const chatRoutes = require('./src/routes/chat');
@@ -33,6 +34,7 @@ const shippingRoutes = require('./src/routes/shipping');
 const demoDataRoutes = require('./src/routes/demo-data');
 const translationRoutes = require('./src/routes/translations');
 const vatProfileRoutes = require('./src/routes/vatProfiles');
+const aiImageRoutes = require('./src/routes/aiImage');
 const ChatService = require('./src/services/chatService');
 
 const app = express();
@@ -89,6 +91,7 @@ app.use('/api/banners', bannerRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/payment-gateways', paymentGatewayRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/staff', staffRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/receipt-settings', require('./src/routes/receiptSettings'));
 app.use('/api/smtp-settings', require('./src/routes/smtpSettings'));
@@ -100,6 +103,7 @@ app.use('/api/shipping', shippingRoutes);
 app.use('/api/admin/demo-data', demoDataRoutes);
 app.use('/api/translations', translationRoutes);
 app.use('/api/vat-profiles', vatProfileRoutes);
+app.use('/api/ai-image', aiImageRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

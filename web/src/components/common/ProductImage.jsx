@@ -45,6 +45,15 @@ const ProductImage = ({ product, className = "w-full h-64 object-contain", curre
     }
   };
 
+  // Construct full image URL if needed
+  const getFullImageUrl = (imageUrl) => {
+    if (!imageUrl) return '';
+    if (imageUrl.startsWith('http')) return imageUrl;
+    // For relative paths, prepend the API base URL
+    const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+    return `${apiBase}${imageUrl}`;
+  };
+
   if (!product.imageUrl || imageError) {
     return (
       <div className={`bg-gradient-to-br ${getCategoryGradient(product.category)} flex items-center justify-center relative ${className}`}>
@@ -62,7 +71,7 @@ const ProductImage = ({ product, className = "w-full h-64 object-contain", curre
 
   return (
     <img
-      src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${product.imageUrl}`}
+      src={getFullImageUrl(product.imageUrl)}
       alt={getProductName(currentLanguage, product)}
       className={className}
       onError={() => setImageError(true)}

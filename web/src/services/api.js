@@ -1,10 +1,21 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-// Use external IP as default for mobile/network access
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api';
+// Use relative path for API calls - proxied through Vite dev server
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 console.log('[API] API_BASE_URL:', API_BASE_URL);
+
+// Global fetch wrapper
+export const apiFetch = async (url, options = {}) => {
+  const headers = {
+    ...options.headers,
+  };
+  return fetch(url, {
+    ...options,
+    headers,
+  });
+};
 
 // Create axios instance
 const api = axios.create({

@@ -543,22 +543,24 @@ model Integration {
 model PaymentGateway {
   id          Int      @id @default(autoincrement())
   name        String   @unique // e.g., "Valitor", "Rapyd"
-  displayName String   // e.g., "Valitor Payment Gateway"
+  displayName String   // e.g., "Valitor Payment Gateway" (English - deprecated, use displayNameEn)
+  displayNameEn String? // Display name in English
+  displayNameIs String? // Display name in Icelandic (Birtingarnafn)
   provider    String   // e.g., "valitor", "rapyd"
   isEnabled   Boolean  @default(false)
   isActive    Boolean  @default(true) // Whether the gateway is available for use
   sortOrder   Int      @default(0)
-  
+
   // Configuration fields (JSON stored as string)
   config      String?  // JSON configuration for the gateway
-  
+
   // Common configuration fields
   merchantId  String?  // Merchant ID for the gateway
   apiKey      String?  // API key (encrypted)
   secretKey   String?  // Secret key (encrypted)
   webhookSecret String? // Webhook secret (encrypted)
   environment String   @default("sandbox") // sandbox, production
-  
+
   // Gateway-specific settings
   supportedCurrencies String[] // Array of supported currency codes
   supportedCountries  String[] // Array of supported country codes

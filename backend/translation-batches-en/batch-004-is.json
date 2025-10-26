@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminMenu.system",
+    "value": "Kerfi"
+  },
+  {
+    "key": "adminMenu.translations",
+    "value": "Þýðingar"
+  },
+  {
+    "key": "adminNavigation.adminUser",
+    "value": "Kerfisstjóri"
+  },
+  {
+    "key": "adminNavigation.analytics",
+    "value": "Greiningar"
+  },
+  {
+    "key": "adminNavigation.banners",
+    "value": "Borðar"
+  },
+  {
+    "key": "adminNavigation.categories",
+    "value": "Flokkar"
+  },
+  {
+    "key": "adminNavigation.chat",
+    "value": "Spjall"
+  },
+  {
+    "key": "adminNavigation.customers",
+    "value": "Viðskiptavinir"
+  },
+  {
+    "key": "adminNavigation.dashboard",
+    "value": "Mælaborð"
+  },
+  {
+    "key": "adminNavigation.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminNavigation.demoData",
+    "value": "Sýnisgögn"
+  },
+  {
+    "key": "adminNavigation.discounts",
+    "value": "Afslættir"
+  },
+  {
+    "key": "adminNavigation.logout",
+    "value": "Útskrá"
+  },
+  {
+    "key": "adminNavigation.media",
+    "value": "Myndefni"
+  },
+  {
+    "key": "adminNavigation.notifications",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminNavigation.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminNavigation.pos",
+    "value": "Sölustaður"
+  },
+  {
+    "key": "adminNavigation.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminNavigation.reports",
+    "value": "Skýrslur"
+  },
+  {
+    "key": "adminNavigation.translations",
+    "value": "Þýðingar"
+  },
+  {
+    "key": "adminNotifications.allStatus",
+    "value": "Allar stöður"
+  },
+  {
+    "key": "adminNotifications.allTypes",
+    "value": "Allar tegundir"
+  },
+  {
+    "key": "adminNotifications.archive",
+    "value": "Setja í geymslu"
+  },
+  {
+    "key": "adminNotifications.archived",
+    "value": "Í geymslu"
+  },
+  {
+    "key": "adminNotifications.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "adminNotifications.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminNotifications.markAllRead",
+    "value": "Merkja allt lesið"
+  },
+  {
+    "key": "adminNotifications.markRead",
+    "value": "Merkja lesið"
+  },
+  {
+    "key": "adminNotifications.markUnread",
+    "value": "Merkja ólesið"
+  },
+  {
+    "key": "adminNotifications.marketing",
+    "value": "Markaðssetning"
+  },
+  {
+    "key": "adminNotifications.notificationArchived",
+    "value": "Tilkynning sett í geymslu"
+  },
+  {
+    "key": "adminNotifications.notificationDeleted",
+    "value": "Tilkynningu eytt"
+  },
+  {
+    "key": "adminNotifications.notificationMarkedRead",
+    "value": "Tilkynning merkt lesin"
+  },
+  {
+    "key": "adminNotifications.notificationMarkedUnread",
+    "value": "Tilkynning merkt ólesin"
+  },
+  {
+    "key": "adminNotifications.notificationUnarchived",
+    "value": "Tilkynning tekin úr geymslu"
+  },
+  {
+    "key": "adminNotifications.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminNotifications.payments",
+    "value": "Greiðslur"
+  },
+  {
+    "key": "adminNotifications.read",
+    "value": "Lesið"
+  },
+  {
+    "key": "adminNotifications.searchNotifications",
+    "value": "Leita í tilkynningum"
+  },
+  {
+    "key": "adminNotifications.security",
+    "value": "Öryggi"
+  },
+  {
+    "key": "adminNotifications.selectAll",
+    "value": "Velja allt"
+  },
+  {
+    "key": "adminNotifications.selectNotificationsFirst",
+    "value": "Veldu tilkynningar fyrst"
+  },
+  {
+    "key": "adminNotifications.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminNotifications.system",
+    "value": "Kerfi"
+  },
+  {
+    "key": "adminNotifications.title",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminNotifications.totalCount",
+    "value": "Heildarfjöldi"
+  },
+  {
+    "key": "adminNotifications.unread",
+    "value": "Ólesið"
+  },
+  {
+    "key": "adminPage.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "adminPage.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminPage.adjustSearchCriteria",
+    "value": "Breyta leitarskilyrðum"
+  },
+  {
+    "key": "adminPage.allDeliveryMethods",
+    "value": "Allir afhendingarmátar"
+  },
+  {
+    "key": "adminPage.allStatuses",
+    "value": "Öll stöðulýsing"
+  },
+  {
+    "key": "adminPage.amount",
+    "value": "Upphæð"
+  },
+  {
+    "key": "adminPage.assign",
+    "value": "Úthluta"
+  },
+  {
+    "key": "adminPage.assignDeliveryPerson",
+    "value": "Úthluta sendli"
+  },
+  {
+    "key": "adminPage.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminPage.date",
+    "value": "Dagsetning"
+  },
+  {
+    "key": "adminPage.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminPage.deliveryAssigned",
+    "value": "Sendli úthlutað"
+  },
+  {
+    "key": "adminPage.deliveryPerson",
+    "value": "Sendill"
+  },
+  {
+    "key": "adminPage.errorOccurred",
+    "value": "Villa kom upp"
+  },
+  {
+    "key": "adminPage.homeDelivery",
+    "value": "Heimsending"
+  },
+  {
+    "key": "adminPage.manageOrders",
+    "value": "Umsjón pantana"
+  },
+  {
+    "key": "adminPage.newStatus",
+    "value": "Ný staða"
+  },
+  {
+    "key": "adminPage.noOrdersFound",
+    "value": "Engar pantanir fundust"
+  },
+  {
+    "key": "adminPage.noPermission",
+    "value": "Engin heimild"
+  },
+  {
+    "key": "adminPage.order",
+    "value": "Pöntun"
+  },
+  {
+    "key": "adminPage.orderManagement",
+    "value": "Pantanastjórnun"
+  },
+  {
+    "key": "adminPage.results",
+    "value": "Niðurstöður"
+  },
+  {
+    "key": "adminPage.searchOrders",
+    "value": "Leita í pöntunum"
+  },
+  {
+    "key": "adminPage.selectDeliveryPerson",
+    "value": "Veldu sendil"
+  },
+  {
+    "key": "adminPage.status",
+    "value": "Staða"
+  },
+  {
+    "key": "adminPage.statusUpdated",
+    "value": "Staða uppfærð"
+  },
+  {
+    "key": "adminPage.storePickup",
+    "value": "Sækja í verslun"
+  },
+  {
+    "key": "adminPage.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminPage.updateOrder",
+    "value": "Uppfæra pöntun"
+  },
+  {
+    "key": "adminPlaceholders.enterDescriptionEn",
+    "value": "Sláðu inn lýsingu (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterDescriptionIs",
+    "value": "Sláðu inn lýsingu (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterDiscountReasonEn",
+    "value": "Sláðu inn ástæðu afsláttar (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterDiscountReasonIs",
+    "value": "Sláðu inn ástæðu afsláttar (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterIcon",
+    "value": "Sláðu inn táknmynd"
+  },
+  {
+    "key": "adminPlaceholders.enterImageUrl",
+    "value": "Sláðu inn slóð myndar"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaDescEn",
+    "value": "Sláðu inn metalýsingu (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaDescIs",
+    "value": "Sláðu inn metalýsingu (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaTitleEn",
+    "value": "Sláðu inn metatitil (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaTitleIs",
+    "value": "Sláðu inn metatitil (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterNameEn",
+    "value": "Sláðu inn nafn (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterNameIs",
+    "value": "Sláðu inn nafn (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterSlugEn",
+    "value": "Sláðu inn vefslóð (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterSortOrder",
+    "value": "Sláðu inn röðunarnúmer"
+  },
+  {
+    "key": "adminPlaceholders.enterWebsiteUrl",
+    "value": "Sláðu inn vefslóð"
+  },
+  {
+    "key": "adminPlaceholders.searchForImages",
+    "value": "Leita að myndum"
+  },
+  {
+    "key": "adminProductModal.unsavedChanges",
+    "value": "Óvistaðar breytingar"
+  },
+  {
+    "key": "adminProducts.importFromATVR",
+    "value": "Flytja inn frá ÁTVR"
+  },
+  {
+    "key": "adminProductsPage.adjustSearchOrAdd",
+    "value": "Breyttu leitinni eða bættu við nýrri vöru"
+  },
+  {
+    "key": "adminProductsPage.ageRestricted",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "adminProductsPage.allCategories",
+    "value": "Allir flokkar"
+  },
+  {
+    "key": "adminProductsPage.create",
+    "value": "Stofna"
+  },
+  {
+    "key": "adminProductsPage.descriptionIs",
+    "value": "Lýsing (IS)"
+  },
+  {
+    "key": "adminProductsPage.editProduct",
+    "value": "Breyta vöru"
+  }
+]

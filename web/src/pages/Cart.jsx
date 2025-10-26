@@ -27,7 +27,7 @@ const Cart = () => {
   // Checkout state
   const [selectedAddressId, setSelectedAddressId] = useState('');
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState('valitor');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [selectedShippingOptionId, setSelectedShippingOptionId] = useState('');
   const [selectedPickupTime, setSelectedPickupTime] = useState('');
   const [enabledPaymentGateways, setEnabledPaymentGateways] = useState([]);
@@ -72,7 +72,21 @@ const Cart = () => {
     try {
       setIsLoadingGateways(true);
       const response = await api.get('/payment-gateways/config');
-      setEnabledPaymentGateways(response.data?.gateways || []);
+      const gateways = response.data?.gateways || [];
+      setEnabledPaymentGateways(gateways);
+
+      // Set default payment method based on available gateways
+      if (gateways.length > 0) {
+        // Prefer Teya if available, otherwise use the first available gateway
+        const teyaGateway = gateways.find(g => g.provider === 'teya');
+        if (teyaGateway) {
+          setPaymentMethod('teya');
+        } else if (gateways.find(g => g.provider === 'valitor')) {
+          setPaymentMethod('valitor');
+        } else {
+          setPaymentMethod(gateways[0].provider);
+        }
+      }
     } catch (error) {
       console.error('Failed to fetch payment gateways:', error);
     } finally {
@@ -143,11 +157,25 @@ const Cart = () => {
     return enabledPaymentGateways.some(gateway => gateway.provider === provider);
   };
 
+  const getPaymentGatewayByProvider = (provider) => {
+    return enabledPaymentGateways.find(gateway => gateway.provider === provider);
+  };
+
   const getSelectedShippingOption = () => {
     return shippingOptions.find(option => option.id === selectedShippingOptionId);
   };
 
+  // Helper function to get bilingual display name
+  const getPaymentGatewayDisplayName = (provider, language = 'en') => {
+    const gateway = getPaymentGatewayByProvider(provider);
+    if (!gateway) return '';
+
+    const displayName = language === 'is' ? gateway.displayNameIs : gateway.displayNameEn;
+    return displayName || gateway.displayName;
+  };
+
   const isValitorAvailable = () => isPaymentMethodAvailable('valitor');
+  const isTeyaAvailable = () => isPaymentMethodAvailable('teya');
   const isCashOnDeliveryAvailable = () => {
     const selectedOption = getSelectedShippingOption();
     return isPaymentMethodAvailable('cash_on_delivery') && selectedOption?.type === 'delivery';
@@ -189,7 +217,11 @@ const Cart = () => {
       const result = await dispatch(createOrder(orderData)).unwrap();
 
       // Redirect to order confirmation or payment
-      if (paymentMethod === 'valitor') {
+      if (paymentMethod === 'teya') {
+        // For now, redirect to order detail
+        // In a real implementation, this would redirect to Teya payment page
+        navigate(`/orders/${result.id}`);
+      } else if (paymentMethod === 'valitor') {
         // For now, redirect to order detail
         // In a real implementation, this would redirect to Valitor payment page
         navigate(`/orders/${result.id}`);
@@ -398,7 +430,7 @@ const Cart = () => {
                           {item.product.imageUrl ? (
                             <div className="w-14 h-14 sm:w-20 sm:h-20 bg-gray-50 dark:bg-gray-700 rounded-lg p-0.5 flex items-center justify-center">
                               <img
-                                src={item.product.imageUrl.startsWith('http') ? item.product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${item.product.imageUrl}`}
+                                src={item.product.imageUrl.startsWith('http') ? item.product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${item.product.imageUrl}`}
                                 alt={item.product.name}
                                 className="w-full h-full object-contain rounded"
                               />
@@ -705,6 +737,24 @@ const Cart = () => {
                       </div>
                     ) : (
                       <>
+                        {isTeyaAvailable() && (
+                          <label className="flex items-start space-x-3 cursor-pointer p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary-300 transition-colors">
+                            <input
+                              type="radio"
+                              value="teya"
+                              checked={paymentMethod === 'teya'}
+                              onChange={(e) => setPaymentMethod(e.target.value)}
+                              className="mt-1"
+                            />
+                            <div className="flex-1">
+                              <div className="font-medium text-gray-900 dark:text-white">
+                                {getPaymentGatewayDisplayName('teya', currentLanguage)}
+                              </div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">{t('checkoutPage.teyaDesc')}</div>
+                            </div>
+                          </label>
+                        )}
+
                         {isValitorAvailable() && (
                           <label className="flex items-start space-x-3 cursor-pointer p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-primary-300 transition-colors">
                             <input
@@ -753,7 +803,7 @@ const Cart = () => {
                           </label>
                         )}
 
-                        {!isValitorAvailable() && !isCashOnDeliveryAvailable() && !isPayOnPickupAvailable() && (
+                        {!isValitorAvailable() && !isTeyaAvailable() && !isCashOnDeliveryAvailable() && !isPayOnPickupAvailable() && (
                           <div className="text-center py-4 text-gray-500">
                             <p>{t('checkoutPage.noPaymentMethodsAvailable')}</p>
                             <p className="text-sm mt-1">{t('checkoutPage.contactAdmin')}</p>

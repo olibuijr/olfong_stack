@@ -159,7 +159,7 @@ const ReceiptSettings = () => {
 
   const generatePreviewHTML = () => {
     const headerStyle = formData.useGradient ? formData.headerGradient : formData.headerColor;
-    const logoUrl = settings?.logoUrl ? `${(import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api').replace('/api', '')}${settings.logoUrl}` : null;
+    const logoUrl = settings?.logoUrl ? `${(import.meta.env.VITE_API_URL || 'https://olfong.olibuijr.com/api').replace('/api', '')}${settings.logoUrl}` : null;
 
     let logoFilter = '';
     if (formData.logoInversion === 'always') {
@@ -382,7 +382,7 @@ const ReceiptSettings = () => {
                   <div className="flex items-center space-x-4">
                     <div className="w-32 h-32 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 p-2 flex items-center justify-center">
                       <img
-                        src={`${(import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api').replace('/api', '')}${settings.logoUrl}`}
+                        src={`${(import.meta.env.VITE_API_URL || 'https://olfong.olibuijr.com/api').replace('/api', '')}${settings.logoUrl}`}
                         alt="Company Logo"
                         className="max-w-full max-h-full object-contain"
                       />

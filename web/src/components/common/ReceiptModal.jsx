@@ -31,6 +31,22 @@ const ReceiptModal = ({
     }
   }, [isOpen, receiptSettings, dispatch]);
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscapeKey = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isOpen, onClose]);
+
   const handlePrint = () => {
     setPreviewMode('print');
     setTimeout(() => {

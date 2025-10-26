@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminSettings.thursday",
+    "value": "Fimmtudagur"
+  },
+  {
+    "key": "adminSettings.timeFormat",
+    "value": "Tímasnið"
+  },
+  {
+    "key": "adminSettings.timeFormat12h",
+    "value": "12 klst."
+  },
+  {
+    "key": "adminSettings.timeFormat24h",
+    "value": "24 klst."
+  },
+  {
+    "key": "adminSettings.to",
+    "value": "Til"
+  },
+  {
+    "key": "adminSettings.totalHoursPerWeek",
+    "value": "Heildarstundafjöldi á viku"
+  },
+  {
+    "key": "adminSettings.tuesday",
+    "value": "Þriðjudagur"
+  },
+  {
+    "key": "adminSettings.type",
+    "value": "Tegund"
+  },
+  {
+    "key": "adminSettings.unsplashApiKey",
+    "value": "Unsplash API lykill"
+  },
+  {
+    "key": "adminSettings.unsplashDevelopers",
+    "value": "Unsplash þróunaraðilar"
+  },
+  {
+    "key": "adminSettings.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminSettings.updateGateway",
+    "value": "Uppfæra greiðslugátt"
+  },
+  {
+    "key": "adminSettings.uploadLogo",
+    "value": "Hlaða upp merki"
+  },
+  {
+    "key": "adminSettings.uploadLogoDescription",
+    "value": "Hladdu upp merki fyrirtækisins til að sérsníða útlit verslunarinnar."
+  },
+  {
+    "key": "adminSettings.uploadLogoFormats",
+    "value": "Studd skráarsnið: PNG, JPG, SVG"
+  },
+  {
+    "key": "adminSettings.valitor",
+    "value": "Valitor"
+  },
+  {
+    "key": "adminSettings.vat",
+    "value": "VSK"
+  },
+  {
+    "key": "adminSettings.vatConfiguration",
+    "value": "Uppsetning VSK"
+  },
+  {
+    "key": "adminSettings.vatDescription",
+    "value": "Hafðu umsjón með stillingum fyrir virðisaukaskatt."
+  },
+  {
+    "key": "adminSettings.vatDisplaySettings",
+    "value": "Sýnileikastillingar VSK"
+  },
+  {
+    "key": "adminSettings.vatEnabled",
+    "value": "VSK virkt"
+  },
+  {
+    "key": "adminSettings.vatInformation",
+    "value": "Upplýsingar um VSK"
+  },
+  {
+    "key": "adminSettings.vatInformationDescription",
+    "value": "Stjórnaðu því hvernig upplýsingar um VSK eru sýndar á síðunni."
+  },
+  {
+    "key": "adminSettings.vatProfiles",
+    "value": "VSK flokkar"
+  },
+  {
+    "key": "adminSettings.vatRate",
+    "value": "VSK hlutfall"
+  },
+  {
+    "key": "adminSettings.vatRateDescription",
+    "value": "Sjálfgefið VSK hlutfall fyrir nýjar vörur."
+  },
+  {
+    "key": "adminSettings.vatRateLabel",
+    "value": "Heiti VSK hlutfalls"
+  },
+  {
+    "key": "adminSettings.vatRatePercent",
+    "value": "VSK í prósentum"
+  },
+  {
+    "key": "adminSettings.vatSettings",
+    "value": "VSK stillingar"
+  },
+  {
+    "key": "adminSettings.website",
+    "value": "Vefsíða"
+  },
+  {
+    "key": "adminSettings.wednesday",
+    "value": "Miðvikudagur"
+  },
+  {
+    "key": "adminSettings.weeklySummary",
+    "value": "Vikuyfirlit"
+  },
+  {
+    "key": "adminSettings.years",
+    "value": "Ár"
+  },
+  {
+    "key": "adminSidebar.adminEmail",
+    "value": "Netfang stjórnanda"
+  },
+  {
+    "key": "adminSidebar.analytics",
+    "value": "Vefgreining"
+  },
+  {
+    "key": "adminSidebar.catalog",
+    "value": "Vörulisti"
+  },
+  {
+    "key": "adminSidebar.comprehensiveInsights",
+    "value": "Ítarleg innsýn"
+  },
+  {
+    "key": "adminSidebar.content",
+    "value": "Innihald"
+  },
+  {
+    "key": "adminSidebar.customersAndCommunication",
+    "value": "Viðskiptavinir og samskipti"
+  },
+  {
+    "key": "adminSidebar.overview",
+    "value": "Yfirlit"
+  },
+  {
+    "key": "adminSidebar.reportsAnalytics",
+    "value": "Skýrslur og vefgreining"
+  },
+  {
+    "key": "adminSidebar.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "adminSidebar.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSidebar.system",
+    "value": "Kerfisstillingar"
+  },
+  {
+    "key": "adminTranslations.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminTranslations.addTranslation",
+    "value": "Bæta við þýðingu"
+  },
+  {
+    "key": "adminTranslations.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminTranslations.complete",
+    "value": "Lokið"
+  },
+  {
+    "key": "adminTranslations.confirmDelete",
+    "value": "Staðfesta eyðslu"
+  },
+  {
+    "key": "adminTranslations.editTranslation",
+    "value": "Breyta þýðingu"
+  },
+  {
+    "key": "adminTranslations.english",
+    "value": "Enska"
+  },
+  {
+    "key": "adminTranslations.errorDeleting",
+    "value": "Villa við eyðslu"
+  },
+  {
+    "key": "adminTranslations.errorFetching",
+    "value": "Villa við að sækja gögn"
+  },
+  {
+    "key": "adminTranslations.errorSaving",
+    "value": "Villa við vistun"
+  },
+  {
+    "key": "adminTranslations.exportCSV",
+    "value": "Flytja út sem CSV"
+  },
+  {
+    "key": "adminTranslations.exportError",
+    "value": "Villa við útflutning"
+  },
+  {
+    "key": "adminTranslations.exportJSON",
+    "value": "Flytja út sem JSON"
+  },
+  {
+    "key": "adminTranslations.exportSuccess",
+    "value": "Útflutningur tókst"
+  },
+  {
+    "key": "adminTranslations.hideStats",
+    "value": "Fela tölfræði"
+  },
+  {
+    "key": "adminTranslations.icelandic",
+    "value": "Íslenska"
+  },
+  {
+    "key": "adminTranslations.import",
+    "value": "Flytja inn"
+  },
+  {
+    "key": "adminTranslations.importError",
+    "value": "Villa við innflutning"
+  },
+  {
+    "key": "adminTranslations.importSuccess",
+    "value": "Innflutningur tókst"
+  },
+  {
+    "key": "adminTranslations.key",
+    "value": "Lykill"
+  },
+  {
+    "key": "adminTranslations.missing",
+    "value": "Vantar"
+  },
+  {
+    "key": "adminTranslations.missingInEnglish",
+    "value": "Vantar á ensku"
+  },
+  {
+    "key": "adminTranslations.missingInIcelandic",
+    "value": "Vantar á íslensku"
+  },
+  {
+    "key": "adminTranslations.missingTranslations",
+    "value": "Þýðingar sem vantar"
+  },
+  {
+    "key": "adminTranslations.noTranslationsFound",
+    "value": "Engar þýðingar fundust"
+  },
+  {
+    "key": "adminTranslations.refresh",
+    "value": "Endurhlaða"
+  },
+  {
+    "key": "adminTranslations.save",
+    "value": "Vista"
+  },
+  {
+    "key": "adminTranslations.searchPlaceholder",
+    "value": "Leita..."
+  },
+  {
+    "key": "adminTranslations.showStats",
+    "value": "Sýna tölfræði"
+  },
+  {
+    "key": "adminTranslations.statistics",
+    "value": "Tölfræði"
+  },
+  {
+    "key": "adminTranslations.subtitle",
+    "value": "Hér getur þú stjórnað þýðingum fyrir vefsíðuna."
+  },
+  {
+    "key": "adminTranslations.title",
+    "value": "Þýðingar"
+  },
+  {
+    "key": "adminTranslations.totalEntries",
+    "value": "Samtals færslur"
+  },
+  {
+    "key": "adminTranslations.translationAdded",
+    "value": "Þýðing hefur verið bætt við"
+  },
+  {
+    "key": "adminTranslations.translationDeleted",
+    "value": "Þýðingu hefur verið eytt"
+  },
+  {
+    "key": "adminTranslations.translationUpdated",
+    "value": "Þýðing hefur verið uppfærð"
+  },
+  {
+    "key": "adminTranslations.uniqueKeys",
+    "value": "Einstakir lyklar"
+  },
+  {
+    "key": "adminTranslations.validation.keyRequired",
+    "value": "Lykill er nauðsynlegur"
+  },
+  {
+    "key": "adminTranslations.validation.valueRequired",
+    "value": "Gildi er nauðsynlegt"
+  },
+  {
+    "key": "adminTranslations.value",
+    "value": "Gildi"
+  },
+  {
+    "key": "ageVerification.title",
+    "value": "Aldurssannprófun"
+  },
+  {
+    "key": "aria.filterBy",
+    "value": "Sía eftir"
+  },
+  {
+    "key": "aria.homepage",
+    "value": "Forsíða"
+  },
+  {
+    "key": "aria.logo",
+    "value": "Merki"
+  },
+  {
+    "key": "aria.mainNavigation",
+    "value": "Aðalvalmynd"
+  },
+  {
+    "key": "aria.searchProducts",
+    "value": "Leita að vörum"
+  },
+  {
+    "key": "aria.toggleMobileMenu",
+    "value": "Opna/loka farsímavalmynd"
+  },
+  {
+    "key": "aria.userMenu",
+    "value": "Notendavalmynd"
+  },
+  {
+    "key": "atvrImport.alcoholContent",
+    "value": "Áfengismagn"
+  },
+  {
+    "key": "atvrImport.availability",
+    "value": "Framboð"
+  },
+  {
+    "key": "atvrImport.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "atvrImport.clearAll",
+    "value": "Hreinsa allt"
+  },
+  {
+    "key": "atvrImport.country",
+    "value": "Land"
+  },
+  {
+    "key": "atvrImport.distributor",
+    "value": "Dreifingaraðili"
+  },
+  {
+    "key": "atvrImport.enterSearchTerm",
+    "value": "Sláðu inn leitarorð"
+  },
+  {
+    "key": "atvrImport.failedToImport",
+    "value": "Mistókst að flytja inn"
+  }
+]

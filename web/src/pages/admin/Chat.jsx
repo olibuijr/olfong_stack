@@ -7,6 +7,7 @@ import AdminLayout from '../../components/admin/AdminLayout';
 import PageHeader from '../../components/admin/PageHeader';
 import {
   fetchConversations,
+  fetchMessages,
     sendMessage,
     updateConversationStatus,
     markMessagesAsRead,
@@ -102,7 +103,14 @@ const Chat = () => {
   const handleSelectConversation = async (conversation) => {
     setSelectedConversation(conversation);
     await dispatch(setCurrentConversation(conversation)).unwrap();
-    
+
+    // Fetch messages for this conversation
+    try {
+      await dispatch(fetchMessages(conversation.id)).unwrap();
+    } catch (error) {
+      console.warn('Failed to fetch messages:', error);
+    }
+
     // Mark messages as read
     try {
       await dispatch(markMessagesAsRead(conversation.id)).unwrap();

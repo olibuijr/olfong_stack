@@ -35,6 +35,8 @@ const ConversationItem = ({
   return (
     <div
       onClick={onSelect}
+      data-conversation-id={conversation.id}
+      data-testid={`conversation-item-${conversation.id}`}
       className={`p-4 cursor-pointer border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
         isSelected ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700' : ''
       }`}

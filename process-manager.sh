@@ -24,10 +24,8 @@ PID_DIR="$PROJECT_ROOT/.pids"
 # Service configurations
 BACKEND_PORT=5000
 FRONTEND_PORT=3001
-PROD_FRONTEND_PORT=3002
 BACKEND_CMD="npm run dev"
 FRONTEND_CMD="npm run dev"
-PROD_FRONTEND_CMD="python3 -m http.server $PROD_FRONTEND_PORT"
 
 # Create necessary directories
 mkdir -p "$LOGS_DIR" "$PID_DIR"
@@ -204,54 +202,6 @@ start_frontend() {
     return 1
 }
 
-# Start production frontend service
-start_prod_frontend() {
-    log "Starting production frontend service..."
-
-    if is_port_in_use $PROD_FRONTEND_PORT; then
-        log_warning "Port $PROD_FRONTEND_PORT is in use. Attempting to kill the process..."
-        lsof -t -i:$PROD_FRONTEND_PORT | xargs kill -9
-        sleep 2
-    fi
-
-    if is_process_running "$PID_DIR/prod-frontend.pid"; then
-        log_warning "Production frontend service is already running"
-        return 0
-    fi
-
-    if is_port_in_use $PROD_FRONTEND_PORT; then
-        log_error "Port $PROD_FRONTEND_PORT is already in use"
-        return 1
-    fi
-
-    cd "$WEB_DIR/dist"
-
-    # Check if dist exists
-    if [ ! -d "." ]; then
-        log_error "Production build not found. Run 'npm run build' first."
-        return 1
-    fi
-
-    # Start the service
-    nohup python3 -m http.server $PROD_FRONTEND_PORT > "$LOGS_DIR/prod-frontend.log" 2>&1 &
-    local pid=$!
-    echo $pid > "$PID_DIR/prod-frontend.pid"
-
-    # Wait for service to start
-    local max_attempts=10
-    local attempt=0
-    while [ $attempt -lt $max_attempts ]; do
-        if is_port_in_use $PROD_FRONTEND_PORT; then
-            log_success "Production frontend service started successfully (PID: $pid, Port: $PROD_FRONTEND_PORT)"
-            return 0
-        fi
-        sleep 1
-        ((attempt++))
-    done
-
-    log_error "Production frontend service failed to start within 10 seconds"
-    return 1
-}
 
 # Stop backend service
 stop_backend() {
@@ -325,41 +275,6 @@ stop_frontend() {
     rm -f "$PID_DIR/frontend.pid"
 }
 
-# Stop production frontend service
-stop_prod_frontend() {
-    log "Stopping production frontend service..."
-
-    if ! is_process_running "$PID_DIR/prod-frontend.pid"; then
-        log_warning "Production frontend service is not running"
-        return 0
-    fi
-
-    local pid=$(cat "$PID_DIR/prod-frontend.pid")
-    if kill -TERM "$pid" 2>/dev/null; then
-        # Wait for graceful shutdown
-        local max_attempts=5
-        local attempt=0
-        while [ $attempt -lt $max_attempts ]; do
-            if ! ps -p "$pid" > /dev/null 2>&1; then
-                log_success "Production frontend service stopped gracefully"
-                rm -f "$PID_DIR/prod-frontend.pid"
-                return 0
-            fi
-            sleep 1
-            ((attempt++))
-        done
-
-        # Force kill if graceful shutdown failed
-        log_warning "Graceful shutdown failed, forcing termination..."
-        kill -KILL "$pid" 2>/dev/null || true
-        log_success "Production frontend service stopped forcefully"
-    else
-        log_error "Failed to stop production frontend service"
-        return 1
-    fi
-
-    rm -f "$PID_DIR/prod-frontend.pid"
-}
 
 # Restart service
 restart_service() {
@@ -392,15 +307,6 @@ show_status() {
         IFS='|' read -r pid cmd cpu mem <<< "$frontend_info"
         echo -e "Frontend: ${GREEN}● Running${NC} (PID: $pid, CPU: $cpu%, Memory: $mem%)"
     fi
-
-    # Production Frontend status
-    local prod_frontend_info=$(get_process_info "$PID_DIR/prod-frontend.pid")
-    if [ "$prod_frontend_info" = "not_running" ]; then
-        echo -e "Prod Frontend: ${RED}● Not Running${NC}"
-    else
-        IFS='|' read -r pid cmd cpu mem <<< "$prod_frontend_info"
-        echo -e "Prod Frontend: ${GREEN}● Running${NC} (PID: $pid, CPU: $cpu%, Memory: $mem%)"
-    fi
     
     echo
     echo -e "${PURPLE}=== Port Status ===${NC}"
@@ -416,17 +322,10 @@ show_status() {
         echo -e "Port $FRONTEND_PORT: ${RED}● Available${NC}"
     fi
 
-    if is_port_in_use $PROD_FRONTEND_PORT; then
-        echo -e "Port $PROD_FRONTEND_PORT: ${GREEN}● In Use${NC}"
-    else
-        echo -e "Port $PROD_FRONTEND_PORT: ${RED}● Available${NC}"
-    fi
-
     echo
     echo -e "${PURPLE}=== URLs ===${NC}"
     echo "Backend API:     http://localhost:$BACKEND_PORT/api"
     echo "Frontend App:    http://localhost:$FRONTEND_PORT"
-    echo "Prod Frontend:   http://localhost:$PROD_FRONTEND_PORT"
 }
 
 # Show logs
@@ -597,7 +496,6 @@ cleanup() {
     log "Cleaning up..."
     stop_backend
     stop_frontend
-    stop_prod_frontend
     rm -rf "$PID_DIR"
     log_success "Cleanup completed"
 }
@@ -609,12 +507,12 @@ show_help() {
     echo "Usage: $0 [command] [service]"
     echo
     echo "Commands:"
-    echo "  start [backend|frontend|prod-frontend|all]    Start service(s)"
-    echo "  stop [backend|frontend|prod-frontend|all]     Stop service(s)"
-    echo "  restart [backend|frontend|prod-frontend|all]  Restart service(s)"
+    echo "  start [backend|frontend|all]    Start service(s)"
+    echo "  stop [backend|frontend|all]     Stop service(s)"
+    echo "  restart [backend|frontend|all]  Restart service(s)"
     echo "  status                          Show service status"
-    echo "  logs [backend|frontend|prod-frontend]         Show service logs"
-    echo "  follow [backend|frontend|prod-frontend]       Follow service logs"
+    echo "  logs [backend|frontend]         Show service logs"
+    echo "  follow [backend|frontend]       Follow service logs"
     echo "  health                          Perform health check"
     echo "  lint [backend|frontend|all]     Run linting"
     echo "  test [backend|frontend|all]     Run tests"
@@ -640,7 +538,6 @@ main() {
             case $service in
                 backend) start_backend ;;
                 frontend) start_frontend ;;
-                prod-frontend) start_prod_frontend ;;
                 all|"")
                     start_backend
                     start_frontend
@@ -652,7 +549,6 @@ main() {
             case $service in
                 backend) stop_backend ;;
                 frontend) stop_frontend ;;
-                prod-frontend) stop_prod_frontend ;;
                 all|"")
                     stop_backend
                     stop_frontend
@@ -664,7 +560,6 @@ main() {
             case $service in
                 backend) restart_service backend ;;
                 frontend) restart_service frontend ;;
-                prod-frontend) restart_service prod-frontend ;;
                 all|"")
                     restart_service backend
                     restart_service frontend

@@ -381,14 +381,16 @@ const testPaymentGateway = async (req, res) => {
 const getPaymentGatewayConfig = async (req, res) => {
   try {
     const gateways = await prisma.paymentGateway.findMany({
-      where: { 
+      where: {
         isEnabled: true,
-        isActive: true 
+        isActive: true
       },
       select: {
         id: true,
         name: true,
         displayName: true,
+        displayNameEn: true,
+        displayNameIs: true,
         provider: true,
         supportedCurrencies: true,
         supportedCountries: true,

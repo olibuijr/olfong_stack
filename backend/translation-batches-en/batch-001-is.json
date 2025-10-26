@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminCategories.active",
+    "value": "Virkt"
+  },
+  {
+    "key": "adminMenu.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "addresses.add",
+    "value": "Bæta við heimilisfangi"
+  },
+  {
+    "key": "addresses.city",
+    "value": "Borg"
+  },
+  {
+    "key": "addresses.country",
+    "value": "Land"
+  },
+  {
+    "key": "addresses.delete",
+    "value": "Eyða heimilisfangi"
+  },
+  {
+    "key": "addresses.edit",
+    "value": "Breyta heimilisfangi"
+  },
+  {
+    "key": "addresses.postalCode",
+    "value": "Póstnúmer"
+  },
+  {
+    "key": "addresses.street",
+    "value": "Gata"
+  },
+  {
+    "key": "admin.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "admin.accessDeniedMessage",
+    "value": "Þú hefur ekki heimild til að skoða þessa síðu."
+  },
+  {
+    "key": "admin.banners.activate",
+    "value": "Virkja"
+  },
+  {
+    "key": "admin.banners.addBanner",
+    "value": "Bæta við borða"
+  },
+  {
+    "key": "admin.banners.addFirstBanner",
+    "value": "Bættu við fyrsta borðanum"
+  },
+  {
+    "key": "admin.banners.addToFeatured",
+    "value": "Bæta við á forsíðu"
+  },
+  {
+    "key": "admin.banners.altPlaceholder",
+    "value": "Myndtexti"
+  },
+  {
+    "key": "admin.banners.altText",
+    "value": "Myndtexti"
+  },
+  {
+    "key": "admin.banners.category",
+    "value": "Vöruflokkur"
+  },
+  {
+    "key": "admin.banners.confirmDelete",
+    "value": "Staðfesta eyðingu"
+  },
+  {
+    "key": "admin.banners.deactivate",
+    "value": "Afvirkja"
+  },
+  {
+    "key": "admin.banners.descriptionEn",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "admin.banners.descriptionIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "admin.banners.descriptionPlaceholder",
+    "value": "Lýsing"
+  },
+  {
+    "key": "admin.banners.descriptionPlaceholderIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "admin.banners.editBanner",
+    "value": "Breyta borða"
+  },
+  {
+    "key": "admin.banners.featured",
+    "value": "Á forsíðu"
+  },
+  {
+    "key": "admin.banners.featuredBanner",
+    "value": "Forsíðuborði"
+  },
+  {
+    "key": "admin.banners.featuredBannerHelp",
+    "value": "Forsíðuborðar birtast á aðalsíðu verslunarinnar."
+  },
+  {
+    "key": "admin.banners.featuredOrder",
+    "value": "Röðun á forsíðu"
+  },
+  {
+    "key": "admin.banners.imageHelpText",
+    "value": "Hlaða upp mynd fyrir borðann."
+  },
+  {
+    "key": "admin.banners.imageUrl",
+    "value": "Slóð myndar"
+  },
+  {
+    "key": "admin.banners.link",
+    "value": "Tengill"
+  },
+  {
+    "key": "admin.banners.manageImages",
+    "value": "Sýsla með myndir"
+  },
+  {
+    "key": "admin.banners.noBanners",
+    "value": "Engir borðar"
+  },
+  {
+    "key": "admin.banners.noBannersDescription",
+    "value": "Engir borðar hafa verið búnir til."
+  },
+  {
+    "key": "admin.banners.noDescription",
+    "value": "Engin lýsing"
+  },
+  {
+    "key": "admin.banners.position",
+    "value": "Staðsetning"
+  },
+  {
+    "key": "admin.banners.product",
+    "value": "Vara"
+  },
+  {
+    "key": "admin.banners.removeFromFeatured",
+    "value": "Fjarlægja af forsíðu"
+  },
+  {
+    "key": "admin.banners.selectLink",
+    "value": "Velja tengil"
+  },
+  {
+    "key": "admin.banners.selectPosition",
+    "value": "Velja staðsetningu"
+  },
+  {
+    "key": "admin.banners.sortOrder",
+    "value": "Röðun"
+  },
+  {
+    "key": "admin.banners.subcategory",
+    "value": "Undirflokkur"
+  },
+  {
+    "key": "admin.banners.subtitle",
+    "value": "Undirtitill"
+  },
+  {
+    "key": "admin.banners.title",
+    "value": "Titill"
+  },
+  {
+    "key": "admin.banners.titleEn",
+    "value": "Titill (enska)"
+  },
+  {
+    "key": "admin.banners.titleIs",
+    "value": "Titill (íslenska)"
+  },
+  {
+    "key": "admin.banners.titlePlaceholder",
+    "value": "Titill"
+  },
+  {
+    "key": "admin.banners.titlePlaceholderIs",
+    "value": "Titill (íslenska)"
+  },
+  {
+    "key": "admin.banners.untitled",
+    "value": "Án titils"
+  },
+  {
+    "key": "adminAnalytics.analyticsDashboard",
+    "value": "Greiningar mælaborð"
+  },
+  {
+    "key": "adminAnalytics.businessInsights",
+    "value": "Viðskiptainnsýn"
+  },
+  {
+    "key": "adminAnalytics.cancelled",
+    "value": "Hætt við"
+  },
+  {
+    "key": "adminAnalytics.category",
+    "value": "Flokkur"
+  },
+  {
+    "key": "adminAnalytics.delivered",
+    "value": "Afhent"
+  },
+  {
+    "key": "adminAnalytics.export",
+    "value": "Flytja út"
+  },
+  {
+    "key": "adminAnalytics.growth",
+    "value": "Vöxtur"
+  },
+  {
+    "key": "adminAnalytics.last30Days",
+    "value": "Síðustu 30 dagar"
+  },
+  {
+    "key": "adminAnalytics.last7Days",
+    "value": "Síðustu 7 dagar"
+  },
+  {
+    "key": "adminAnalytics.last90Days",
+    "value": "Síðustu 90 dagar"
+  },
+  {
+    "key": "adminAnalytics.lastYear",
+    "value": "Síðasta ár"
+  },
+  {
+    "key": "adminAnalytics.loading",
+    "value": "Hleður..."
+  },
+  {
+    "key": "adminAnalytics.netRevenue",
+    "value": "Nettótekjur"
+  },
+  {
+    "key": "adminAnalytics.noData",
+    "value": "Engin gögn"
+  },
+  {
+    "key": "adminAnalytics.noProducts",
+    "value": "Engar vörur"
+  },
+  {
+    "key": "adminAnalytics.noRevenueData",
+    "value": "Engin teknagögn"
+  },
+  {
+    "key": "adminAnalytics.ofRevenue",
+    "value": "af tekjum"
+  },
+  {
+    "key": "adminAnalytics.ofVat",
+    "value": "af VSK"
+  },
+  {
+    "key": "adminAnalytics.orderStatusDistribution",
+    "value": "Dreifing pöntunarstöðu"
+  },
+  {
+    "key": "adminAnalytics.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminAnalytics.pending",
+    "value": "Í bið"
+  },
+  {
+    "key": "adminAnalytics.processing",
+    "value": "Í vinnslu"
+  },
+  {
+    "key": "adminAnalytics.product",
+    "value": "Vara"
+  },
+  {
+    "key": "adminAnalytics.revenue",
+    "value": "Tekjur"
+  },
+  {
+    "key": "adminAnalytics.revenueBeforeVat",
+    "value": "Tekjur án VSK"
+  },
+  {
+    "key": "adminAnalytics.revenueTrend",
+    "value": "Tekjuþróun"
+  },
+  {
+    "key": "adminAnalytics.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "adminAnalytics.shipped",
+    "value": "Sent"
+  },
+  {
+    "key": "adminAnalytics.topPerformer",
+    "value": "Mest selda"
+  },
+  {
+    "key": "adminAnalytics.topPerformingProducts",
+    "value": "Mest seldu vörur"
+  },
+  {
+    "key": "adminAnalytics.totalCustomers",
+    "value": "Samtals viðskiptavinir"
+  },
+  {
+    "key": "adminAnalytics.totalOrders",
+    "value": "Samtals pantanir"
+  },
+  {
+    "key": "adminAnalytics.totalProducts",
+    "value": "Samtals vörur"
+  },
+  {
+    "key": "adminAnalytics.totalRevenue",
+    "value": "Samtals tekjur"
+  },
+  {
+    "key": "adminAnalytics.totalVat",
+    "value": "Samtals VSK"
+  },
+  {
+    "key": "adminAnalytics.unknownCategory",
+    "value": "Óþekktur flokkur"
+  },
+  {
+    "key": "adminAnalytics.unknownProduct",
+    "value": "Óþekkt vara"
+  },
+  {
+    "key": "adminAnalytics.vsPreviousPeriod",
+    "value": "samanborið við fyrra tímabil"
+  },
+  {
+    "key": "adminCategories.basicInfo",
+    "value": "Grunnupplýsingar"
+  },
+  {
+    "key": "adminCategories.cannotDeleteWithProducts",
+    "value": "Ekki er hægt að eyða flokki sem inniheldur vörur"
+  },
+  {
+    "key": "adminCategories.categoryImageFromProduct",
+    "value": "Nota mynd úr vöru"
+  },
+  {
+    "key": "adminCategories.changeImage",
+    "value": "Breyta mynd"
+  },
+  {
+    "key": "adminCategories.confirmDelete",
+    "value": "Staðfesta eyðingu"
+  },
+  {
+    "key": "adminCategories.createFirstCategory",
+    "value": "Stofna fyrsta flokkinn"
+  },
+  {
+    "key": "adminCategories.descEn",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "adminCategories.descIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "adminCategories.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "adminCategories.discountEndDate",
+    "value": "Afsláttur gildir til"
+  },
+  {
+    "key": "adminCategories.discountHelp",
+    "value": "Hér getur þú stillt afslátt fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminCategories.discountPercentage",
+    "value": "Afsláttarprósenta"
+  }
+]

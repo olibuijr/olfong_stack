@@ -1,0 +1,428 @@
+[
+  {
+    "id": "3a954f95-1658-40fa-87b2-fd6637252957",
+    "key": "checkoutPage.teyaPayment",
+    "locale": "en",
+    "value": "Teya Payment Gateway"
+  },
+  {
+    "id": "7249b681-bce4-4e69-b79d-5a51c5c433e1",
+    "key": "checkoutPage.teyaDesc",
+    "locale": "en",
+    "value": "Pay securely with Teya payment gateway"
+  },
+  {
+    "id": "f6c9188c-5201-4971-81b8-8296d964fa3b",
+    "key": "checkoutPage.valitorPayment",
+    "locale": "en",
+    "value": "Valitor Payment Gateway"
+  },
+  {
+    "id": "7ea0553e-93fb-473b-a5a6-a5d0ede1dec9",
+    "key": "checkoutPage.valitorDesc",
+    "locale": "en",
+    "value": "Pay with Valitor online payment gateway"
+  },
+  {
+    "id": "47910409-64da-4e27-8f4c-d7ad5f0f8a65",
+    "key": "checkoutPage.cashOnDelivery",
+    "locale": "en",
+    "value": "Cash on Delivery"
+  },
+  {
+    "id": "7116050c-4e30-483b-adee-23687262de40",
+    "key": "checkoutPage.cashOnDeliveryDesc",
+    "locale": "en",
+    "value": "Pay with cash when your order is delivered"
+  },
+  {
+    "id": "7d1ffa98-226d-4172-9f4c-c24adbe14947",
+    "key": "checkoutPage.payOnPickup",
+    "locale": "en",
+    "value": "Pay on Pickup"
+  },
+  {
+    "id": "18dd7d96-170b-49be-b768-1eae3f7e3dd2",
+    "key": "checkoutPage.payOnPickupDesc",
+    "locale": "en",
+    "value": "Pay with cash when you pick up your order"
+  },
+  {
+    "id": "6aebec44-e810-4468-877c-4509923a2a57",
+    "key": "adminSettings.displayName",
+    "locale": "en",
+    "value": "Display Name"
+  },
+  {
+    "id": "718ef28c-6c2b-47bc-b2f5-8f23affcb2e8",
+    "key": "adminSettings.paymentMethod",
+    "locale": "en",
+    "value": "Payment method"
+  },
+  {
+    "id": "2de537d7-267a-43a0-abdd-d5cb98dc9801",
+    "key": "search.placeholder",
+    "locale": "en",
+    "value": "Search products..."
+  },
+  {
+    "id": "f7b2c6b2-a340-4c91-8a91-08cd4f929ed9",
+    "key": "adminCustomers.customersCount",
+    "locale": "en",
+    "value": "{{filtered}} of {{total}} customers"
+  },
+  {
+    "id": "e9bf4a59-5b08-4cc1-aba1-7bbd874961e2",
+    "key": "adminSettings.paymentGatewayEnabled",
+    "locale": "en",
+    "value": "Payment gateway enabled"
+  },
+  {
+    "id": "5eb9a8a7-08b1-478d-8d9a-4b982e7d3f09",
+    "key": "adminSettings.paymentGatewayDisabled",
+    "locale": "en",
+    "value": "Payment gateway disabled"
+  },
+  {
+    "id": "6ce4be9d-6d3b-44f5-b443-9f79cc2cc107",
+    "key": "adminSettings.errorLoadingPaymentGateways",
+    "locale": "en",
+    "value": "Error loading payment gateways"
+  },
+  {
+    "id": "e1257bec-7a32-4e52-a542-9401e54ed911",
+    "key": "adminSettings.errorTogglingPaymentGateway",
+    "locale": "en",
+    "value": "Error toggling payment gateway"
+  },
+  {
+    "id": "7b0eacf6-9725-4ffa-8593-cc3de9b0a482",
+    "key": "adminSettings.paymentGatewayTestFailed",
+    "locale": "en",
+    "value": "Payment gateway test failed: {{message}}"
+  },
+  {
+    "id": "e5775d86-8edd-41f9-b17f-1de39b205a20",
+    "key": "adminSettings.errorTestingPaymentGateway",
+    "locale": "en",
+    "value": "Error testing payment gateway"
+  },
+  {
+    "id": "119716a7-7833-4bb2-a093-0b3a4efc7425",
+    "key": "adminSettings.errorSavingPaymentGateway",
+    "locale": "en",
+    "value": "Error saving payment gateway"
+  },
+  {
+    "id": "d1d2bdf6-34ea-4ebc-ac2f-03682d12e92a",
+    "key": "adminSettings.pleaseSelectProvider",
+    "locale": "en",
+    "value": "Please select a provider"
+  },
+  {
+    "id": "26b0b6d4-5055-4da8-a3c7-7af00c38216a",
+    "key": "adminSettings.connectionTestSuccessful",
+    "locale": "en",
+    "value": "Connection test successful"
+  },
+  {
+    "id": "2435d1d9-264a-497c-8cab-e9d3bc88d4e9",
+    "key": "adminSettings.connectionTestFailed",
+    "locale": "en",
+    "value": "Connection test failed"
+  },
+  {
+    "id": "97e2fc63-aca7-4ffd-89b0-2894c35135e5",
+    "key": "adminSettings.errorUpdatingPaymentGateway",
+    "locale": "en",
+    "value": "Error updating payment gateway"
+  },
+  {
+    "id": "5248fc6a-cc09-40ca-a7b9-4433ae9aa85c",
+    "key": "adminSettings.staffManagement",
+    "locale": "en",
+    "value": "Staff Management"
+  },
+  {
+    "id": "24ecf34f-7b22-4efb-891b-f5e91b593e75",
+    "key": "adminStaff.title",
+    "locale": "en",
+    "value": "Staff Management"
+  },
+  {
+    "id": "927539b1-88a7-4584-931a-e44c3f7827e1",
+    "key": "adminStaff.description",
+    "locale": "en",
+    "value": "Manage system staff and assign roles"
+  },
+  {
+    "id": "b2027132-a9b1-4961-a781-9ab66b4586a1",
+    "key": "adminStaff.createNew",
+    "locale": "en",
+    "value": "Create New Staff"
+  },
+  {
+    "id": "3287334e-a13c-458a-a1ec-0f59461b4cdf",
+    "key": "adminStaff.searchPlaceholder",
+    "locale": "en",
+    "value": "Search by name, email, or username..."
+  },
+  {
+    "id": "3d553351-3daf-49bc-ab6e-df595ee2394a",
+    "key": "adminStaff.allRoles",
+    "locale": "en",
+    "value": "All Roles"
+  },
+  {
+    "id": "6f4def4f-df5c-4a24-a39c-72e3eb3bb4bf",
+    "key": "adminStaff.roleAdmin",
+    "locale": "en",
+    "value": "Admin"
+  },
+  {
+    "id": "559c2a0b-257a-4f52-b8ff-f91950c4f101",
+    "key": "adminStaff.roleDelivery",
+    "locale": "en",
+    "value": "Delivery"
+  },
+  {
+    "id": "5cf7320f-1531-417b-89af-5bbd4ccc4887",
+    "key": "adminStaff.roleCustomer",
+    "locale": "en",
+    "value": "Customer"
+  },
+  {
+    "id": "0b4b7784-b492-443d-9c9d-d6252444281c",
+    "key": "adminStaff.requiredFields",
+    "locale": "en",
+    "value": "Username and full name are required"
+  },
+  {
+    "id": "1dcf8aa4-3594-45e7-9166-2b82ffe6602d",
+    "key": "adminStaff.errorSaving",
+    "locale": "en",
+    "value": "Error saving staff member"
+  },
+  {
+    "id": "ce04a2b9-4d07-4f39-b68b-82908b32f05b",
+    "key": "adminStaff.errorDeleting",
+    "locale": "en",
+    "value": "Error deleting staff member"
+  },
+  {
+    "id": "570333b0-6734-4016-b44b-d4950f186305",
+    "key": "adminStaff.confirmDelete",
+    "locale": "en",
+    "value": "Are you sure you want to delete this staff member?"
+  },
+  {
+    "id": "65bbe9a1-e744-43e1-be67-6df08ae7307d",
+    "key": "adminStaff.noStaffFound",
+    "locale": "en",
+    "value": "No staff found"
+  },
+  {
+    "id": "e893b5ee-61e8-4cc9-ab36-047fe0fb7572",
+    "key": "adminStaff.createFirstStaff",
+    "locale": "en",
+    "value": "Create your first staff member to get started"
+  },
+  {
+    "id": "0e693d4e-fe56-4907-9bb0-d5f913b892d7",
+    "key": "adminStaff.username",
+    "locale": "en",
+    "value": "Username"
+  },
+  {
+    "id": "d8cc1227-ed53-465e-8dc0-7010fea9f188",
+    "key": "adminStaff.fullName",
+    "locale": "en",
+    "value": "Full Name"
+  },
+  {
+    "id": "d12446af-50c2-48d6-b15a-1d98b6d88d33",
+    "key": "adminStaff.email",
+    "locale": "en",
+    "value": "Email"
+  },
+  {
+    "id": "45b1629d-cf3b-412f-aeb1-5ac1eeb6ed8c",
+    "key": "adminStaff.phone",
+    "locale": "en",
+    "value": "Phone"
+  },
+  {
+    "id": "2d8c87c5-1d49-4494-b255-913150b9d8fb",
+    "key": "adminStaff.role",
+    "locale": "en",
+    "value": "Role"
+  },
+  {
+    "id": "c0a18d41-737e-495b-90f7-5ce8ca80e24f",
+    "key": "adminStaff.actions",
+    "locale": "en",
+    "value": "Actions"
+  },
+  {
+    "id": "042427f0-e583-49a9-ab1f-17709c649fcf",
+    "key": "adminStaff.editStaff",
+    "locale": "en",
+    "value": "Edit Staff Member"
+  },
+  {
+    "id": "47198fe8-3fc3-44e6-a3ae-e8b16a09b7ae",
+    "key": "adminStaff.createStaff",
+    "locale": "en",
+    "value": "Create Staff Member"
+  },
+  {
+    "id": "9eae76ee-b99f-4c09-958a-ef31a3db6077",
+    "key": "adminStaff.cancel",
+    "locale": "en",
+    "value": "Cancel"
+  },
+  {
+    "id": "190bf0a4-daf7-43fa-98d2-17b106a26628",
+    "key": "adminStaff.create",
+    "locale": "en",
+    "value": "Create"
+  },
+  {
+    "id": "8cb306ca-02fd-4945-ac63-3d3ad4e74afb",
+    "key": "adminStaff.update",
+    "locale": "en",
+    "value": "Update"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5b6",
+    "key": "adminSettings.currencies",
+    "locale": "en",
+    "value": "Currencies"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5b8",
+    "key": "adminSettings.currencyManagement",
+    "locale": "en",
+    "value": "Currency Management"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5ca",
+    "key": "adminSettings.currencyManagementDesc",
+    "locale": "en",
+    "value": "Add, remove, and manage currencies available in your store"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5cc",
+    "key": "adminSettings.activeCurrency",
+    "locale": "en",
+    "value": "Active Currency"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5ce",
+    "key": "adminSettings.availableCurrencies",
+    "locale": "en",
+    "value": "Available Currencies"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5d0",
+    "key": "adminSettings.addNewCurrency",
+    "locale": "en",
+    "value": "Add New Currency"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5d2",
+    "key": "adminSettings.currencyCode",
+    "locale": "en",
+    "value": "Currency Code"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5d4",
+    "key": "adminSettings.currencySymbol",
+    "locale": "en",
+    "value": "Symbol"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5d6",
+    "key": "adminSettings.currencyName",
+    "locale": "en",
+    "value": "Name"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5d8",
+    "key": "adminSettings.setActive",
+    "locale": "en",
+    "value": "Set Active"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5da",
+    "key": "adminSettings.active",
+    "locale": "en",
+    "value": "Active"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5dc",
+    "key": "adminSettings.currencyManagementGuide",
+    "locale": "en",
+    "value": "Currency Management Guide"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5de",
+    "key": "adminSettings.onlyOneCurrency",
+    "locale": "en",
+    "value": "Only one currency can be active at a time"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5e0",
+    "key": "adminSettings.currencySymbolDisplay",
+    "locale": "en",
+    "value": "The active currency symbol is displayed throughout the store"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5e2",
+    "key": "adminSettings.cannotDeleteActive",
+    "locale": "en",
+    "value": "You cannot delete the currently active currency"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5e4",
+    "key": "adminSettings.currencyChangesSaved",
+    "locale": "en",
+    "value": "All currency changes are saved to the database"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5e6",
+    "key": "adminSettings.currencyISK",
+    "locale": "en",
+    "value": "Icelandic Króna"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5e8",
+    "key": "adminSettings.currencyUSD",
+    "locale": "en",
+    "value": "US Dollar"
+  },
+  {
+    "id": "c1a2b3c4-d5e6-47f8-a9b0-c1d2e3f4a5ea",
+    "key": "adminSettings.currencyEUR",
+    "locale": "en",
+    "value": "Euro"
+  },
+  {
+    "id": "c4e5f9d1-2a8b-4c7e-9f3a-1b2c3d4e5f6a",
+    "key": "adminProductsPage.generatingAIImage",
+    "locale": "en",
+    "value": "Generating AI Image"
+  },
+  {
+    "id": "e4e5f9d1-2a8b-4c7e-9f3a-1b2c3d4e5f6c",
+    "key": "atvrImport.generateAIImages",
+    "locale": "en",
+    "value": "Generate AI Images"
+  },
+  {
+    "id": "a5e5f9d1-2a8b-4c7e-9f3a-1b2c3d4e5f6e",
+    "key": "atvrImport.generateAIImagesDescription",
+    "locale": "en",
+    "value": "Automatically generate product images after import"
+  }
+]

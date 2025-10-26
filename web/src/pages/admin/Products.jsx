@@ -12,7 +12,8 @@ import {
   Upload,
   X,
   Grid,
-  List
+  List,
+  Sparkles
 } from 'lucide-react';
 import { 
   fetchProducts, 
@@ -45,6 +46,8 @@ const AdminProducts = () => {
   const [showAgeRestricted, setShowAgeRestricted] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [currencySymbol, setCurrencySymbol] = useState('kr'); // Default to kr
+  const [generatingMediaIds, setGeneratingMediaIds] = useState([]); // Track which products are generating AI images
 
   const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm({
     defaultValues: {
@@ -100,6 +103,32 @@ const AdminProducts = () => {
     }
   }, [editingProduct, setValue, reset]);
 
+  // Fetch currency symbol from settings
+  useEffect(() => {
+    const fetchCurrencySymbol = async () => {
+      try {
+        const response = await fetch('/api/settings/public', {});
+        const data = await response.json();
+        if (data.data && data.data.settings) {
+          // Handle both array and object formats
+          if (Array.isArray(data.data.settings)) {
+            const currencySetting = data.data.settings.find(s => s.key === 'currencySymbol');
+            if (currencySetting && currencySetting.value) {
+              setCurrencySymbol(currencySetting.value);
+            }
+          } else if (typeof data.data.settings === 'object' && data.data.settings.currencySymbol) {
+            // Direct object format
+            setCurrencySymbol(data.data.settings.currencySymbol);
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to fetch currency symbol:', error);
+        // Keep default 'kr'
+      }
+    };
+    fetchCurrencySymbol();
+  }, []);
+
   const onSubmit = async (data) => {
     try {
       const productData = {
@@ -124,6 +153,155 @@ const AdminProducts = () => {
     } catch (error) {
       toast.error(error.message || t('common.error'));
     }
+  };
+
+  const pollGenerationStatus = async (mediaId, jobId) => {
+    const maxAttempts = 120; // Poll for up to 10 minutes (120 * 5 second intervals)
+    let attempts = 0;
+
+    const poll = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+        const response = await fetch(`${apiBase}/api/ai-image/status/${jobId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          console.error(`Failed to check status for job ${jobId}`);
+          return false;
+        }
+
+        const data = await response.json();
+        console.log(`Job ${jobId} status:`, data.status);
+
+        if (data.status === 'COMPLETED' && data.media) {
+          // Update the product with the new image
+          const updatedProducts = products.map(p =>
+            p.mediaId === mediaId
+              ? { ...p, imageUrl: data.media.url }
+              : p
+          );
+
+          // Update Redux store with the new product list
+          // For now, we'll just update local state - in production, dispatch to Redux
+          console.log(`AI image generation completed for mediaId ${mediaId}`);
+
+          // Remove from generating list
+          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          return true;
+        } else if (data.status === 'FAILED') {
+          console.error(`Generation failed for job ${jobId}: ${data.error}`);
+          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          return true; // Stop polling on failure
+        }
+
+        // Still processing, continue polling
+        return false;
+      } catch (error) {
+        console.error(`Error polling status for job ${jobId}:`, error);
+        return false;
+      }
+    };
+
+    // Poll for status
+    const pollInterval = setInterval(async () => {
+      attempts++;
+      const isDone = await poll();
+
+      if (isDone || attempts >= maxAttempts) {
+        clearInterval(pollInterval);
+        if (attempts >= maxAttempts) {
+          console.warn(`Polling timeout for job ${jobId}`);
+          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+        }
+      }
+    }, 5000); // Poll every 5 seconds
+
+    return pollInterval;
+  };
+
+  const handleGeneratingProducts = async (mediaIds) => {
+    // Track which products are generating AI images
+    setGeneratingMediaIds(mediaIds);
+
+    // For each mediaId, we need to find the corresponding jobId
+    // Since we don't have it here, we'll need to get it from the backend
+    // For now, we'll start polling immediately and the backend will handle it
+    for (const mediaId of mediaIds) {
+      // In a real implementation, we'd store the jobId with the mediaId
+      // For now, we'll poll the media endpoint to check if the image has been updated
+      pollMediaStatus(mediaId);
+    }
+  };
+
+  const pollMediaStatus = async (mediaId) => {
+    const maxAttempts = 120; // Poll for up to 10 minutes (120 * 5 second intervals)
+    let attempts = 0;
+
+    const poll = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+        const response = await fetch(`${apiBase}/api/media/${mediaId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          return false;
+        }
+
+        const data = await response.json();
+        const media = data.data || data;
+
+        // Check if this is a newly generated image (contains 'ai-' in filename)
+        if (media.url && media.url.includes('ai-')) {
+          // Update the product with the new image
+          const updatedProducts = products.map(p =>
+            p.mediaId === mediaId
+              ? { ...p, imageUrl: media.url }
+              : p
+          );
+
+          // Dispatch to update Redux store
+          dispatch({
+            type: 'products/fulfilled',
+            payload: updatedProducts
+          });
+
+          console.log(`AI image generation completed for mediaId ${mediaId}`);
+
+          // Remove from generating list
+          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          return true;
+        }
+
+        return false;
+      } catch (error) {
+        console.error(`Error polling media status for ${mediaId}:`, error);
+        return false;
+      }
+    };
+
+    // Poll for status
+    const pollInterval = setInterval(async () => {
+      attempts++;
+      const isDone = await poll();
+
+      if (isDone || attempts >= maxAttempts) {
+        clearInterval(pollInterval);
+        if (attempts >= maxAttempts) {
+          console.warn(`Polling timeout for mediaId ${mediaId}`);
+          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+        }
+      }
+    }, 5000); // Poll every 5 seconds
+
+    return pollInterval;
   };
 
   const handleATVRImport = async (productData) => {
@@ -216,11 +394,14 @@ const AdminProducts = () => {
         availabilityIs: productData.availabilityIs
       };
 
-      await dispatch(createProduct(convertedProduct)).unwrap();
+      const result = await dispatch(createProduct(convertedProduct)).unwrap();
       toast.success(`Product "${productData.name}" imported successfully`);
+      // Return the created product with mediaId
+      return result;
     } catch (error) {
       console.error('Error importing product:', error);
       toast.error(`Failed to import product: ${error.message || 'Unknown error'}`);
+      throw error;
     }
   };
 
@@ -481,10 +662,20 @@ const AdminProducts = () => {
             {filteredProducts.map((product) => (
               <div key={product.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 p-4">
                   {/* Product Image */}
-                  <div className="aspect-square bg-white dark:bg-white rounded-lg mb-4 overflow-hidden p-2">
-                    {product.imageUrl ? (
+                  <div
+                    onClick={() => handleEdit(product)}
+                    className="aspect-square bg-white dark:bg-white rounded-lg mb-4 overflow-hidden p-2 cursor-pointer hover:shadow-md transition-shadow duration-200 relative"
+                  >
+                    {generatingMediaIds.includes(product.mediaId) ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded">
+                        <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-2 animate-spin" />
+                        <p className="text-sm font-medium text-blue-700 dark:text-blue-300 text-center px-2">
+                          {t('adminProductsPage.generatingAIImage') || 'Generating AI Image'}
+                        </p>
+                      </div>
+                    ) : product.imageUrl ? (
                       <img
-                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${product.imageUrl}`}
+                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${product.imageUrl}`}
                         alt={product.name}
                         className="w-full h-full object-contain"
                       />
@@ -512,7 +703,7 @@ const AdminProducts = () => {
 
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-blue-600 dark:text-blue-400">
-                      {product.price.toLocaleString()} {t('common.currency')}
+                      {product.price.toLocaleString()} {currencySymbol}
                     </span>
                     <span className={`text-sm px-2 py-1 rounded ${
                       product.stock > 10 
@@ -553,10 +744,20 @@ const AdminProducts = () => {
               <div key={product.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 p-4">
                 <div className="flex items-center gap-4">
                   {/* Product Image */}
-                  <div className="w-24 h-24 bg-white dark:bg-white rounded-lg overflow-hidden flex-shrink-0 p-2">
-                    {product.imageUrl ? (
+                  <div
+                    onClick={() => handleEdit(product)}
+                    className="w-24 h-24 bg-white dark:bg-white rounded-lg overflow-hidden flex-shrink-0 p-2 cursor-pointer hover:shadow-md transition-shadow duration-200 relative"
+                  >
+                    {generatingMediaIds.includes(product.mediaId) ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded">
+                        <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400 animate-spin" />
+                        <p className="text-xs font-medium text-blue-700 dark:text-blue-300 text-center mt-1">
+                          {t('adminProductsPage.generatingAIImage') || 'Gen'}
+                        </p>
+                      </div>
+                    ) : product.imageUrl ? (
                       <img
-                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${product.imageUrl}`}
+                        src={product.imageUrl.startsWith('http') ? product.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${product.imageUrl}`}
                         alt={product.name}
                         className="w-full h-full object-contain"
                       />
@@ -601,7 +802,7 @@ const AdminProducts = () => {
                       {/* Price and Actions */}
                       <div className="flex items-center gap-4">
                         <span className="font-bold text-blue-600 dark:text-blue-400 text-lg whitespace-nowrap">
-                          {product.price.toLocaleString()} {t('common.currency')}
+                          {product.price.toLocaleString()} {currencySymbol}
                         </span>
                         <div className="flex items-center gap-2">
                           <button
@@ -669,6 +870,7 @@ const AdminProducts = () => {
         <ATVRImport
           onImportProduct={handleATVRImport}
           onClose={() => setShowATVRImport(false)}
+          onGeneratingProducts={handleGeneratingProducts}
         />
       )}
 

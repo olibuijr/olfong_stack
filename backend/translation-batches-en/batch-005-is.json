@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminProductsPage.imageUrl",
+    "value": "Slóð mynda"
+  },
+  {
+    "key": "adminProductsPage.inStock",
+    "value": "Til á lager"
+  },
+  {
+    "key": "adminProductsPage.manageProducts",
+    "value": "Umsjón vöru"
+  },
+  {
+    "key": "adminProductsPage.nameEn",
+    "value": "Nafn (EN)"
+  },
+  {
+    "key": "adminProductsPage.nameIs",
+    "value": "Nafn (IS)"
+  },
+  {
+    "key": "adminProductsPage.nameRequired",
+    "value": "Nafn er áskilið"
+  },
+  {
+    "key": "adminProductsPage.newProduct",
+    "value": "Ný vara"
+  },
+  {
+    "key": "adminProductsPage.newProductTitle",
+    "value": "Ný vara"
+  },
+  {
+    "key": "adminProductsPage.noProductsFound",
+    "value": "Engar vörur fundust"
+  },
+  {
+    "key": "adminProductsPage.priceRequired",
+    "value": "Verð er áskilið"
+  },
+  {
+    "key": "adminProductsPage.productImages",
+    "value": "Vörumyndir"
+  },
+  {
+    "key": "adminProductsPage.productManagement",
+    "value": "Vörustjórnun"
+  },
+  {
+    "key": "adminProductsPage.searchProducts",
+    "value": "Leita að vörum"
+  },
+  {
+    "key": "adminProductsPage.showOnlyAgeRestricted",
+    "value": "Sýna aðeins aldurstakmarkaðar vörur"
+  },
+  {
+    "key": "adminProductsPage.stockRequired",
+    "value": "Lagerstaða er áskilin"
+  },
+  {
+    "key": "adminProductsPage.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminReports.activeProducts",
+    "value": "Vörur í sölu"
+  },
+  {
+    "key": "adminReports.averageOrderValue",
+    "value": "Meðalverð pöntunar"
+  },
+  {
+    "key": "adminReports.avgOrderFrequency",
+    "value": "Meðaltíðni pantana"
+  },
+  {
+    "key": "adminReports.avgProcessingTime",
+    "value": "Meðalafgreiðslutími"
+  },
+  {
+    "key": "adminReports.completedOrders",
+    "value": "Afgreiddar pantanir"
+  },
+  {
+    "key": "adminReports.completionRate",
+    "value": "Hlutfall afgreiddra pantana"
+  },
+  {
+    "key": "adminReports.customRange",
+    "value": "Sérsniðið tímabil"
+  },
+  {
+    "key": "adminReports.customerSegmentation",
+    "value": "Skipting viðskiptavina"
+  },
+  {
+    "key": "adminReports.customersReport",
+    "value": "Skýrsla viðskiptavina"
+  },
+  {
+    "key": "adminReports.dailySalesTrend",
+    "value": "Dagleg söl þróun"
+  },
+  {
+    "key": "adminReports.days",
+    "value": "Dagar"
+  },
+  {
+    "key": "adminReports.endDate",
+    "value": "Lokadagsetning"
+  },
+  {
+    "key": "adminReports.exportCSV",
+    "value": "Flytja út CSV"
+  },
+  {
+    "key": "adminReports.exportPDF",
+    "value": "Flytja út PDF"
+  },
+  {
+    "key": "adminReports.growthRate",
+    "value": "Vöxtur"
+  },
+  {
+    "key": "adminReports.last",
+    "value": "Síðustu"
+  },
+  {
+    "key": "adminReports.last30Days",
+    "value": "Síðustu 30 daga"
+  },
+  {
+    "key": "adminReports.last7Days",
+    "value": "Síðustu 7 daga"
+  },
+  {
+    "key": "adminReports.last90Days",
+    "value": "Síðustu 90 daga"
+  },
+  {
+    "key": "adminReports.lastYear",
+    "value": "Síðasta ár"
+  },
+  {
+    "key": "adminReports.newCustomers",
+    "value": "Nýir viðskiptavinir"
+  },
+  {
+    "key": "adminReports.noData",
+    "value": "Engin gögn"
+  },
+  {
+    "key": "adminReports.ofTotal",
+    "value": "af heild"
+  },
+  {
+    "key": "adminReports.ofTotalOrders",
+    "value": "af heildarpöntunum"
+  },
+  {
+    "key": "adminReports.orderDistributionByDeliveryMethod",
+    "value": "Dreifing pantana eftir afhendingarmáta"
+  },
+  {
+    "key": "adminReports.orderStatusDistribution",
+    "value": "Staða pantana"
+  },
+  {
+    "key": "adminReports.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminReports.ordersPerCustomer",
+    "value": "Pantanir á viðskiptavin"
+  },
+  {
+    "key": "adminReports.ordersReport",
+    "value": "Skýrsla pantana"
+  },
+  {
+    "key": "adminReports.outOfStock",
+    "value": "Ekki til á lager"
+  },
+  {
+    "key": "adminReports.pendingOrders",
+    "value": "Pantanir í bið"
+  },
+  {
+    "key": "adminReports.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminReports.productsReport",
+    "value": "Vöruskýrsla"
+  },
+  {
+    "key": "adminReports.refreshData",
+    "value": "Endurhlaða gögn"
+  },
+  {
+    "key": "adminReports.reportType",
+    "value": "Tegund skýrslu"
+  },
+  {
+    "key": "adminReports.revenue",
+    "value": "Tekjur"
+  },
+  {
+    "key": "adminReports.revenueByCategory",
+    "value": "Tekjur eftir flokkum"
+  },
+  {
+    "key": "adminReports.salesReport",
+    "value": "Söluskýrsla"
+  },
+  {
+    "key": "adminReports.startDate",
+    "value": "Upphafsdagsetning"
+  },
+  {
+    "key": "adminReports.thisPeriod",
+    "value": "Þetta tímabil"
+  },
+  {
+    "key": "adminReports.timePeriod",
+    "value": "Tímabil"
+  },
+  {
+    "key": "adminReports.topCustomersByRevenue",
+    "value": "Helstu viðskiptavinir eftir tekjum"
+  },
+  {
+    "key": "adminReports.topSellingProducts",
+    "value": "Mest seldu vörur"
+  },
+  {
+    "key": "adminReports.totalCustomers",
+    "value": "Samtals viðskiptavinir"
+  },
+  {
+    "key": "adminReports.totalOrders",
+    "value": "Samtals pantanir"
+  },
+  {
+    "key": "adminReports.totalProducts",
+    "value": "Samtals vörur"
+  },
+  {
+    "key": "adminReports.totalRevenue",
+    "value": "Samtals tekjur"
+  },
+  {
+    "key": "adminReports.vsPreviousPeriod",
+    "value": "samanborið við fyrra tímabil"
+  },
+  {
+    "key": "adminSettings.accentColor",
+    "value": "Áherslulitur"
+  },
+  {
+    "key": "adminSettings.accessDenied",
+    "value": "Aðgangur hafnaður"
+  },
+  {
+    "key": "adminSettings.accessKey",
+    "value": "Aðgangslykill"
+  },
+  {
+    "key": "adminSettings.addFirstIntegration",
+    "value": "Bættu við fyrstu samþættingu"
+  },
+  {
+    "key": "adminSettings.addFirstPaymentGateway",
+    "value": "Bættu við fyrstu greiðslugátt"
+  },
+  {
+    "key": "adminSettings.addFirstShippingOption",
+    "value": "Bættu við fyrsta sendingarmöguleika"
+  },
+  {
+    "key": "adminSettings.addIntegration",
+    "value": "Bæta við samþættingu"
+  },
+  {
+    "key": "adminSettings.addPaymentGateway",
+    "value": "Bæta við greiðslugátt"
+  },
+  {
+    "key": "adminSettings.addProfile",
+    "value": "Bæta við prófíl"
+  },
+  {
+    "key": "adminSettings.addShippingOption",
+    "value": "Bæta við sendingarmöguleika"
+  },
+  {
+    "key": "adminSettings.addressEnglish",
+    "value": "Heimilisfang (á ensku)"
+  },
+  {
+    "key": "adminSettings.addressIcelandic",
+    "value": "Heimilisfang (á íslensku)"
+  },
+  {
+    "key": "adminSettings.ageRestriction",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "adminSettings.ageRestrictionDescription",
+    "value": "Virkjaðu til að framfylgja aldurstakmörkunum fyrir vörur sem krefjast þess."
+  },
+  {
+    "key": "adminSettings.ageRestrictionNotice",
+    "value": "Tilkynning um aldurstakmark"
+  },
+  {
+    "key": "adminSettings.ageRestrictions",
+    "value": "Aldurstakmarkanir"
+  },
+  {
+    "key": "adminSettings.alcoholNicotineAgeDescription",
+    "value": "Stilltu aldurstakmark fyrir sölu á áfengi og nikótínvörum."
+  },
+  {
+    "key": "adminSettings.alcoholNicotineProducts",
+    "value": "Áfengis- og nikótínvörur"
+  },
+  {
+    "key": "adminSettings.apiKey",
+    "value": "API lykill"
+  },
+  {
+    "key": "adminSettings.apiKeys",
+    "value": "API lyklar"
+  },
+  {
+    "key": "adminSettings.apiKeysConfiguration",
+    "value": "Stillingar API lykla"
+  },
+  {
+    "key": "adminSettings.apiKeysDescription",
+    "value": "Hafa umsjón með API lyklum fyrir utanaðkomandi samþættingar."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote1",
+    "value": "Geymdu lyklana þína á öruggum stað."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote2",
+    "value": "Ekki deila þessum lyklum í biðlaraforritum."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote3",
+    "value": "Takmarkaðu aðgang með því að nota viðeigandi heimildir."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote4",
+    "value": "Endurnýjaðu lykla reglulega til að auka öryggi."
+  },
+  {
+    "key": "adminSettings.applicationId",
+    "value": "Auðkenni forrits"
+  },
+  {
+    "key": "adminSettings.assignCategories",
+    "value": "Úthluta flokkum"
+  },
+  {
+    "key": "adminSettings.avgHoursPerDay",
+    "value": "Meðaltímar á dag"
+  },
+  {
+    "key": "adminSettings.backupSettings",
+    "value": "Öryggisafritunarstillingar"
+  },
+  {
+    "key": "adminSettings.baseUrl",
+    "value": "Grunnslóð"
+  },
+  {
+    "key": "adminSettings.business",
+    "value": "Fyrirtæki"
+  },
+  {
+    "key": "adminSettings.businessDescription",
+    "value": "Lýsing fyrirtækis"
+  },
+  {
+    "key": "adminSettings.businessSettings",
+    "value": "Stillingar fyrirtækis"
+  },
+  {
+    "key": "adminSettings.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminSettings.categories",
+    "value": "Flokkar"
+  }
+]

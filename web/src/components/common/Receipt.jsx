@@ -67,7 +67,7 @@ const Receipt = ({
     }
 
     // Otherwise, construct the full URL using the API base URL
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api';
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://olfong.olibuijr.com/api';
     const baseUrl = apiUrl.replace('/api', '');
     return `${baseUrl}${settings.logoUrl}`;
   };

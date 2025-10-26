@@ -66,6 +66,22 @@ const MediaPicker = ({
     }
   }, [isOpen, collection, selectedMedia, multiple]);
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscapeKey = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isOpen, onClose]);
+
   const loadMedia = async () => {
     setLoading(true);
     try {

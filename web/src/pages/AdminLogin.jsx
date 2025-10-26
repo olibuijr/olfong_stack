@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
@@ -10,11 +10,18 @@ const AdminLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoading, error } = useSelector((state) => state.auth);
+  const { isLoading, error, user } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const from = location.state?.from?.pathname || '/admin';
+
+  // Redirect if already logged in as admin
+  useEffect(() => {
+    if (user && ['ADMIN', 'DELIVERY'].includes(user.role)) {
+      navigate('/admin', { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

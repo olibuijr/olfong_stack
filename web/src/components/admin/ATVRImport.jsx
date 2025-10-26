@@ -1,16 +1,45 @@
-import { useState } from 'react';
-import { Search, Eye, Download, AlertCircle, CheckCircle, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Eye, Download, AlertCircle, CheckCircle, X, Sparkles } from 'lucide-react';
 import { useLanguage } from "../../contexts/LanguageContext";
 import toast from 'react-hot-toast';
 
-const ATVRImport = ({ onImportProduct, onClose }) => {
+const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
   const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [showPreview, setShowPreview] = useState(false);
+  const [autoGenerateAI, setAutoGenerateAI] = useState(false);
+  const [hasRunPodKey, setHasRunPodKey] = useState(false);
+  const [isImporting, setIsImporting] = useState(false);
   // Language selection removed - now searches both languages automatically
+
+  // Check if RunPod API key is configured
+  useEffect(() => {
+    const checkRunPodKey = async () => {
+      try {
+        // Get token from localStorage
+        const token = localStorage.getItem('token');
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+        const response = await fetch(`${apiBase}/api/ai-image/settings`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const hasKey = data.settings?.runpodApiKey ? true : false;
+          setHasRunPodKey(hasKey);
+          console.log('RunPod API key check:', { hasKey, data });
+        }
+      } catch (error) {
+        console.error('Error checking RunPod API key:', error);
+      }
+    };
+
+    checkRunPodKey();
+  }, []);
 
   // Food categories mapping
   const foodCategories = {
@@ -51,7 +80,8 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
 
     setIsSearching(true);
     try {
-      const response = await fetch('http://192.168.8.62:5000/api/atvr/search', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+      const response = await fetch(`${apiBase}/api/atvr/search`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +180,8 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
   // Fetch detailed product information from ATVR
   const fetchProductDetails = async (productId) => {
     try {
-      const response = await fetch(`http://192.168.8.62:5000/api/atvr/product/${productId}`);
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+      const response = await fetch(`${apiBase}/api/atvr/product/${productId}`);
       if (!response.ok) {
         console.warn(`Failed to fetch details for product ${productId}`);
         return null;
@@ -170,6 +201,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
       return;
     }
 
+    setIsImporting(true);
     try {
       // Fetch detailed information for each product to capture all fields
       const enrichedProducts = await Promise.all(
@@ -191,11 +223,50 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
 
       const parsedProducts = enrichedProducts.map(parseATVRProduct);
 
+      // Import products and collect mediaIds for AI generation
+      const importedMediaIds = [];
       for (const product of parsedProducts) {
-        await onImportProduct(product);
+        const result = await onImportProduct(product);
+        // If auto-generate is enabled and we have a mediaId from the import, store it
+        if (autoGenerateAI && result?.mediaId) {
+          importedMediaIds.push(result.mediaId);
+        }
       }
 
-      toast.success(`${t('atvrImport.successfullyImported')} ${parsedProducts.length} ${t('atvrImport.productsImported')}`);
+      // Generate AI images if auto-generate is enabled
+      if (autoGenerateAI && importedMediaIds.length > 0) {
+        // Notify parent component about generating products
+        if (onGeneratingProducts) {
+          onGeneratingProducts(importedMediaIds);
+        }
+
+        toast.loading(`Generating AI images for ${importedMediaIds.length} product(s)...`);
+
+        for (const mediaId of importedMediaIds) {
+          try {
+            const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+            await fetch(`${apiBase}/api/ai-image/generate/${mediaId}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              },
+              body: JSON.stringify({
+                shadowStyle: 'soft',
+                backgroundColor: '#FFFFFF'
+              })
+            });
+          } catch (error) {
+            console.error(`Error generating AI image for media ${mediaId}:`, error);
+          }
+        }
+
+        toast.dismiss();
+        toast.success(`${t('atvrImport.successfullyImported')} ${parsedProducts.length} ${t('atvrImport.productsImported')} and AI images are being generated...`);
+      } else {
+        toast.success(`${t('atvrImport.successfullyImported')} ${parsedProducts.length} ${t('atvrImport.productsImported')}`);
+      }
+
       setSelectedProducts([]);
       setSearchResults([]);
       setSearchTerm('');
@@ -203,6 +274,8 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
     } catch (error) {
       console.error('Error importing products:', error);
       toast.error(t('atvrImport.failedToImport'));
+    } finally {
+      setIsImporting(false);
     }
   };
 
@@ -660,6 +733,29 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                   ))}
                 </div>
 
+                {/* Auto-generate AI images option */}
+                {hasRunPodKey && (
+                  <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={autoGenerateAI}
+                        onChange={(e) => setAutoGenerateAI(e.target.checked)}
+                        className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                      />
+                      <div className="flex-1">
+                        <span className="text-sm font-medium text-gray-900 dark:text-white flex items-center space-x-1">
+                          <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          <span>{t('atvrImport.generateAIImages') || 'Generate AI Images'}</span>
+                        </span>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                          {t('atvrImport.generateAIImagesDescription') || 'Automatically generate product images after import'}
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                )}
+
                 <div className="space-y-3">
                   <button
                     onClick={handlePreview}
@@ -670,10 +766,20 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                   </button>
                   <button
                     onClick={handleImport}
-                    className="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 flex items-center justify-center space-x-2"
+                    disabled={isImporting}
+                    className="w-full px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   >
-                    <Download className="h-4 w-4" />
-                    <span>{t('atvrImport.importProducts')}</span>
+                    {isImporting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                        <span>{t('atvrImport.importing') || 'Importing...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="h-4 w-4" />
+                        <span>{t('atvrImport.importProducts')}</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>

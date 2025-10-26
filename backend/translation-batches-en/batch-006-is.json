@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminSettings.clientId",
+    "value": "Client ID"
+  },
+  {
+    "key": "adminSettings.clientSecret",
+    "value": "Client Secret"
+  },
+  {
+    "key": "adminSettings.closed",
+    "value": "Lokað"
+  },
+  {
+    "key": "adminSettings.closingTime",
+    "value": "Lokunartími"
+  },
+  {
+    "key": "adminSettings.companyInformation",
+    "value": "Fyrirtækjaupplýsingar"
+  },
+  {
+    "key": "adminSettings.companyNameEnglish",
+    "value": "Nafn fyrirtækis (enska)"
+  },
+  {
+    "key": "adminSettings.companyNameIcelandic",
+    "value": "Nafn fyrirtækis (íslenska)"
+  },
+  {
+    "key": "adminSettings.configuration",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSettings.configureGeneral",
+    "value": "Almennar stillingar"
+  },
+  {
+    "key": "adminSettings.confirmDeleteGateway",
+    "value": "Staðfesta eyðingu greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.confirmDeleteIntegration",
+    "value": "Staðfesta eyðingu samþættingar"
+  },
+  {
+    "key": "adminSettings.confirmDeleteLogo",
+    "value": "Staðfesta eyðingu merkis"
+  },
+  {
+    "key": "adminSettings.confirmDeleteShipping",
+    "value": "Staðfesta eyðingu sendingarmáta"
+  },
+  {
+    "key": "adminSettings.confirmReset",
+    "value": "Staðfesta endurstillingu"
+  },
+  {
+    "key": "adminSettings.connectionTestFailed",
+    "value": "Tenging mistókst"
+  },
+  {
+    "key": "adminSettings.connectionTestSuccessful",
+    "value": "Tenging tókst"
+  },
+  {
+    "key": "adminSettings.copiedHoursToAllDays",
+    "value": "Afritaði opnunartíma yfir á alla daga"
+  },
+  {
+    "key": "adminSettings.copy",
+    "value": "Afrita"
+  },
+  {
+    "key": "adminSettings.copyHours",
+    "value": "Afrita opnunartíma"
+  },
+  {
+    "key": "adminSettings.country",
+    "value": "Land"
+  },
+  {
+    "key": "adminSettings.create",
+    "value": "Stofna"
+  },
+  {
+    "key": "adminSettings.createGateway",
+    "value": "Stofna greiðslugátt"
+  },
+  {
+    "key": "adminSettings.createNewVatProfile",
+    "value": "Stofna nýjan VSK flokk"
+  },
+  {
+    "key": "adminSettings.currency",
+    "value": "Gjaldmiðill"
+  },
+  {
+    "key": "adminSettings.currencyAffects",
+    "value": "Gjaldmiðill hefur áhrif á verðlagningu og greiðslur."
+  },
+  {
+    "key": "adminSettings.currentLogo",
+    "value": "Núverandi merki"
+  },
+  {
+    "key": "adminSettings.customGradient",
+    "value": "Sérsniðinn litahalli"
+  },
+  {
+    "key": "adminSettings.cutoffTime",
+    "value": "Lokunarfrestur fyrir pantanir"
+  },
+  {
+    "key": "adminSettings.dateFormat",
+    "value": "Dagsetningarsnið"
+  },
+  {
+    "key": "adminSettings.dateFormatDDMMYYYY",
+    "value": "DD.MM.YYYY"
+  },
+  {
+    "key": "adminSettings.dateFormatMMDDYYYY",
+    "value": "MM.DD.YYYY"
+  },
+  {
+    "key": "adminSettings.dateFormatYYYYMMDD",
+    "value": "YYYY.MM.DD"
+  },
+  {
+    "key": "adminSettings.dateTimeFormats",
+    "value": "Dagsetningar- og tímasnið"
+  },
+  {
+    "key": "adminSettings.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "adminSettings.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminSettings.deliveryFee",
+    "value": "Sendingargjald"
+  },
+  {
+    "key": "adminSettings.deliveryRadius",
+    "value": "Afhendingarsvæði (km)"
+  },
+  {
+    "key": "adminSettings.deliverySettings",
+    "value": "Sendingarstillingar"
+  },
+  {
+    "key": "adminSettings.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "adminSettings.descriptionEnglish",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "adminSettings.descriptionIcelandic",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "adminSettings.descriptionIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "adminSettings.designColors",
+    "value": "Hönnunarlitir"
+  },
+  {
+    "key": "adminSettings.disabled",
+    "value": "Óvirkt"
+  },
+  {
+    "key": "adminSettings.displayName",
+    "value": "Birtingarheiti"
+  },
+  {
+    "key": "adminSettings.edit",
+    "value": "Breyta"
+  },
+  {
+    "key": "adminSettings.editIntegration",
+    "value": "Breyta samþættingu"
+  },
+  {
+    "key": "adminSettings.editPaymentGateway",
+    "value": "Breyta greiðslugátt"
+  },
+  {
+    "key": "adminSettings.editShippingOption",
+    "value": "Breyta sendingarmöguleika"
+  },
+  {
+    "key": "adminSettings.editVatProfile",
+    "value": "Breyta VSK-sniði"
+  },
+  {
+    "key": "adminSettings.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "adminSettings.enableAgeRestriction",
+    "value": "Virkja aldurstakmark"
+  },
+  {
+    "key": "adminSettings.enableDelivery",
+    "value": "Virkja heimsendingu"
+  },
+  {
+    "key": "adminSettings.enableRestrictions",
+    "value": "Virkja takmarkanir"
+  },
+  {
+    "key": "adminSettings.enableVatForStore",
+    "value": "Virkja VSK fyrir verslun"
+  },
+  {
+    "key": "adminSettings.enabled",
+    "value": "Virkt"
+  },
+  {
+    "key": "adminSettings.enterAccessKey",
+    "value": "Sláðu inn aðgangslykil"
+  },
+  {
+    "key": "adminSettings.enterApiKey",
+    "value": "Sláðu inn API lykil"
+  },
+  {
+    "key": "adminSettings.enterApplicationId",
+    "value": "Sláðu inn auðkenni forrits"
+  },
+  {
+    "key": "adminSettings.enterClientId",
+    "value": "Sláðu inn viðskiptavinarauðkenni"
+  },
+  {
+    "key": "adminSettings.enterClientSecret",
+    "value": "Sláðu inn leynilykil viðskiptavinar"
+  },
+  {
+    "key": "adminSettings.enterGoogleApiKey",
+    "value": "Sláðu inn Google API lykil"
+  },
+  {
+    "key": "adminSettings.enterGoogleSearchEngineId",
+    "value": "Sláðu inn Google leitarvélarauðkenni"
+  },
+  {
+    "key": "adminSettings.enterMerchantId",
+    "value": "Sláðu inn söluaðilaauðkenni"
+  },
+  {
+    "key": "adminSettings.enterPaymentGatewayId",
+    "value": "Sláðu inn greiðslugáttarauðkenni"
+  },
+  {
+    "key": "adminSettings.enterPexelsApiKey",
+    "value": "Sláðu inn Pexels API lykil"
+  },
+  {
+    "key": "adminSettings.enterPixabayApiKey",
+    "value": "Sláðu inn Pixabay API lykil"
+  },
+  {
+    "key": "adminSettings.currencyUSD",
+    "value": "Bandaríkjadalur"
+  },
+  {
+    "key": "adminSettings.currencyEUR",
+    "value": "Evra"
+  },
+  {
+    "key": "adminSettings.enterPrivateKey",
+    "value": "Sláðu inn einkalykil"
+  },
+  {
+    "key": "adminSettings.enterPublicKey",
+    "value": "Sláðu inn almennan lykil"
+  },
+  {
+    "key": "adminSettings.enterPublishableKey",
+    "value": "Sláðu inn birtingarlykil"
+  },
+  {
+    "key": "adminSettings.enterSecretKey",
+    "value": "Sláðu inn leynilykil"
+  },
+  {
+    "key": "adminSettings.enterUnsplashApiKey",
+    "value": "Sláðu inn Unsplash API lykil"
+  },
+  {
+    "key": "adminSettings.enterWebhookSecret",
+    "value": "Sláðu inn Webhook leynilykil"
+  },
+  {
+    "key": "adminSettings.environment",
+    "value": "Umhverfi"
+  },
+  {
+    "key": "adminSettings.errorLoadingPaymentGateways",
+    "value": "Villa við að hlaða greiðslugáttum"
+  },
+  {
+    "key": "adminSettings.errorSavingPaymentGateway",
+    "value": "Villa við vistun greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.errorTestingPaymentGateway",
+    "value": "Villa við prófun greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.errorTogglingPaymentGateway",
+    "value": "Villa við að virkja/afvirkja greiðslugátt"
+  },
+  {
+    "key": "adminSettings.errorUpdatingPaymentGateway",
+    "value": "Villa við uppfærslu greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.estimatedDays",
+    "value": "Áætlaðir dagar"
+  },
+  {
+    "key": "adminSettings.euCountries",
+    "value": "ESB-lönd"
+  },
+  {
+    "key": "adminSettings.failedToSaveSettings",
+    "value": "Ekki tókst að vista stillingar"
+  },
+  {
+    "key": "adminSettings.fee",
+    "value": "Gjald"
+  },
+  {
+    "key": "adminSettings.fileSizeTooLarge",
+    "value": "Skráin er of stór"
+  },
+  {
+    "key": "adminSettings.fontFamily",
+    "value": "Leturgerð"
+  },
+  {
+    "key": "adminSettings.fontSize",
+    "value": "Leturstærð"
+  },
+  {
+    "key": "adminSettings.footerMessages",
+    "value": "Skilaboð í síðufæti"
+  },
+  {
+    "key": "adminSettings.footerTextEnPlaceholder",
+    "value": "Sláðu inn texta á ensku"
+  },
+  {
+    "key": "adminSettings.footerTextEnglish",
+    "value": "Texti í síðufæti (enska)"
+  },
+  {
+    "key": "adminSettings.footerTextIcelandic",
+    "value": "Texti í síðufæti (íslenska)"
+  },
+  {
+    "key": "adminSettings.footerTextIsPlaceholder",
+    "value": "Sláðu inn texta á íslensku"
+  },
+  {
+    "key": "adminSettings.freeDeliveryThreshold",
+    "value": "Lágmarksupphæð fyrir fría heimsendingu"
+  },
+  {
+    "key": "adminSettings.friday",
+    "value": "Föstudagur"
+  },
+  {
+    "key": "adminSettings.gatewayName",
+    "value": "Heiti greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.general",
+    "value": "Almennt"
+  },
+  {
+    "key": "adminSettings.generalDescription",
+    "value": "Almennar stillingar fyrir vefsíðuna."
+  },
+  {
+    "key": "adminSettings.generalProducts",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminSettings.generalProductsDescription",
+    "value": "Stillingar fyrir vörur og birgðir."
+  }
+]

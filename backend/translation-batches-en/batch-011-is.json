@@ -1,0 +1,402 @@
+[
+  {
+    "key": "checkoutPage.days",
+    "value": "dagar"
+  },
+  {
+    "key": "checkoutPage.deliveryAddress",
+    "value": "Afhendingarheimili"
+  },
+  {
+    "key": "checkoutPage.estimatedDelivery",
+    "value": "Áætluð afhending"
+  },
+  {
+    "key": "checkoutPage.newAddress",
+    "value": "Nýtt heimilisfang"
+  },
+  {
+    "key": "checkoutPage.noPaymentMethodsAvailable",
+    "value": "Engir greiðslumátar í boði"
+  },
+  {
+    "key": "checkoutPage.noPickupTimes",
+    "value": "Engir afhendingartímar í boði"
+  },
+  {
+    "key": "checkoutPage.noShippingOptions",
+    "value": "Engir sendingarmöguleikar í boði"
+  },
+  {
+    "key": "checkoutPage.orderNotes",
+    "value": "Athugasemdir við pöntun"
+  },
+  {
+    "key": "checkoutPage.payOnPickup",
+    "value": "Greiða við sótt"
+  },
+  {
+    "key": "checkoutPage.payOnPickupDesc",
+    "value": "Greitt er fyrir pöntunina þegar hún er sótt."
+  },
+  {
+    "key": "checkoutPage.paymentMethod",
+    "value": "Greiðslumáti"
+  },
+  {
+    "key": "checkoutPage.pickupTime",
+    "value": "Afhendingartími"
+  },
+  {
+    "key": "checkoutPage.placeOrder",
+    "value": "Staðfesta pöntun"
+  },
+  {
+    "key": "checkoutPage.saveAddress",
+    "value": "Vista heimilisfang"
+  },
+  {
+    "key": "checkoutPage.selectDeliveryAddress",
+    "value": "Veldu afhendingarheimili"
+  },
+  {
+    "key": "checkoutPage.selectPickupTime",
+    "value": "Veldu afhendingartíma"
+  },
+  {
+    "key": "checkoutPage.selectPickupTimeHelp",
+    "value": "Veldu tíma til að sækja pöntunina þína"
+  },
+  {
+    "key": "checkoutPage.selectShippingOption",
+    "value": "Veldu sendingarmöguleika"
+  },
+  {
+    "key": "checkoutPage.shippingOptions",
+    "value": "Sendingarmöguleikar"
+  },
+  {
+    "key": "checkoutPage.storeLocation",
+    "value": "Staðsetning verslunar"
+  },
+  {
+    "key": "checkoutPage.storeLocationValue",
+    "value": "Verslun"
+  },
+  {
+    "key": "checkoutPage.subtotal",
+    "value": "Millisamantekt"
+  },
+  {
+    "key": "checkoutPage.teyaDesc",
+    "value": "Greiða með Teya"
+  },
+  {
+    "key": "checkoutPage.valitorDesc",
+    "value": "Greiða með Valitor"
+  },
+  {
+    "key": "checkoutPage.valitorPayment",
+    "value": "Valitor greiðsla"
+  },
+  {
+    "key": "common.active",
+    "value": "Virkt"
+  },
+  {
+    "key": "common.add",
+    "value": "Bæta við"
+  },
+  {
+    "key": "common.back",
+    "value": "Til baka"
+  },
+  {
+    "key": "common.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "common.close",
+    "value": "Loka"
+  },
+  {
+    "key": "common.create",
+    "value": "Búa til"
+  },
+  {
+    "key": "common.created",
+    "value": "Búið til"
+  },
+  {
+    "key": "common.currency",
+    "value": "Gjaldmiðill"
+  },
+  {
+    "key": "common.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "common.deleted",
+    "value": "Eytt"
+  },
+  {
+    "key": "common.edit",
+    "value": "Breyta"
+  },
+  {
+    "key": "common.error",
+    "value": "Villa"
+  },
+  {
+    "key": "common.free",
+    "value": "Ókeypis"
+  },
+  {
+    "key": "common.goToSlide",
+    "value": "Fara á næstu glæru"
+  },
+  {
+    "key": "common.inactive",
+    "value": "Óvirkt"
+  },
+  {
+    "key": "common.itemsLabel",
+    "value": "vörur"
+  },
+  {
+    "key": "common.language",
+    "value": "Tungumál"
+  },
+  {
+    "key": "common.loading",
+    "value": "Hleður..."
+  },
+  {
+    "key": "common.loginRequired",
+    "value": "Innskráningar krafist"
+  },
+  {
+    "key": "common.next",
+    "value": "Næsta"
+  },
+  {
+    "key": "common.no",
+    "value": "Nei"
+  },
+  {
+    "key": "common.noResults",
+    "value": "Engar niðurstöður"
+  },
+  {
+    "key": "common.of",
+    "value": "af"
+  },
+  {
+    "key": "common.previous",
+    "value": "Fyrri"
+  },
+  {
+    "key": "common.price",
+    "value": "Verð"
+  },
+  {
+    "key": "common.remove",
+    "value": "Fjarlægja"
+  },
+  {
+    "key": "common.results",
+    "value": "Niðurstöður"
+  },
+  {
+    "key": "common.retry",
+    "value": "Reyna aftur"
+  },
+  {
+    "key": "common.save",
+    "value": "Vista"
+  },
+  {
+    "key": "common.saving",
+    "value": "Vistar..."
+  },
+  {
+    "key": "common.search",
+    "value": "Leita"
+  },
+  {
+    "key": "common.sending",
+    "value": "Sendir..."
+  },
+  {
+    "key": "common.showing",
+    "value": "Sýnir"
+  },
+  {
+    "key": "common.success",
+    "value": "Tókst"
+  },
+  {
+    "key": "common.to",
+    "value": "til"
+  },
+  {
+    "key": "common.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "common.unknown",
+    "value": "Óþekkt"
+  },
+  {
+    "key": "common.unsavedChanges",
+    "value": "Óvistaðar breytingar"
+  },
+  {
+    "key": "common.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "common.updated",
+    "value": "Uppfært"
+  },
+  {
+    "key": "common.view",
+    "value": "Skoða"
+  },
+  {
+    "key": "common.viewAll",
+    "value": "Skoða allt"
+  },
+  {
+    "key": "common.yes",
+    "value": "Já"
+  },
+  {
+    "key": "delivery.title",
+    "value": "Afhending"
+  },
+  {
+    "key": "demoData.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "demoData.addressesDescription",
+    "value": "Bættu við sýnisgögnum fyrir heimilisföng viðskiptavina."
+  },
+  {
+    "key": "demoData.customersDescription",
+    "value": "Bættu við sýnisgögnum fyrir viðskiptavini."
+  },
+  {
+    "key": "demoData.description",
+    "value": "Þessi síða gerir þér kleift að bæta við og fjarlægja sýnisgögn úr gagnagrunninum þínum. Þetta er gagnlegt til að prófa virkni vefsíðunnar."
+  },
+  {
+    "key": "demoData.insertButton",
+    "value": "Setja inn sýnisgögn"
+  },
+  {
+    "key": "demoData.insertError",
+    "value": "Villa við innsetningu sýnisgagna"
+  },
+  {
+    "key": "demoData.insertNote",
+    "value": "Þessi aðgerð mun bæta sýnisgögnum við gagnagrunninn."
+  },
+  {
+    "key": "demoData.insertSuccess",
+    "value": "Sýnisgögnum hefur verið bætt við"
+  },
+  {
+    "key": "demoData.orderItemsDescription",
+    "value": "Bættu við sýnisgögnum fyrir pöntunaratriði."
+  },
+  {
+    "key": "demoData.ordersDescription",
+    "value": "Bættu við sýnisgögnum fyrir pantanir."
+  },
+  {
+    "key": "demoData.overview",
+    "value": "Yfirlit"
+  },
+  {
+    "key": "demoData.removeButton",
+    "value": "Fjarlægja sýnisgögn"
+  },
+  {
+    "key": "demoData.removeError",
+    "value": "Villa við að fjarlægja sýnisgögn"
+  },
+  {
+    "key": "demoData.removeNote",
+    "value": "Þessi aðgerð mun fjarlægja öll sýnisgögn úr gagnagrunninum."
+  },
+  {
+    "key": "demoData.removeSuccess",
+    "value": "Sýnisgögnum hefur verið eytt"
+  },
+  {
+    "key": "demoData.title",
+    "value": "Sýnisgögn"
+  },
+  {
+    "key": "demoData.warningMessage",
+    "value": "Þessi aðgerð er óafturkræf. Vinsamlegast farðu varlega."
+  },
+  {
+    "key": "demoData.warningTitle",
+    "value": "Aðvörun"
+  },
+  {
+    "key": "discounts.allCategories",
+    "value": "Allir flokkar"
+  },
+  {
+    "key": "discounts.allStatuses",
+    "value": "Allar stöður"
+  },
+  {
+    "key": "discounts.confirm.removeDiscount",
+    "value": "Ertu viss um að þú viljir fjarlægja þennan afslátt?"
+  },
+  {
+    "key": "discounts.createDiscount",
+    "value": "Stofna afslátt"
+  },
+  {
+    "key": "discounts.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "discounts.messages.extendedSuccessfully",
+    "value": "Afsláttur framlengdur"
+  },
+  {
+    "key": "discounts.messages.invalidDiscount",
+    "value": "Ógildur afsláttur"
+  },
+  {
+    "key": "discounts.messages.noDiscounts",
+    "value": "Engir afslættir fundust"
+  },
+  {
+    "key": "discounts.messages.noDiscountsDescription",
+    "value": "Engir afslættir eru í boði eins og er. Vinsamlegast reyndu aftur síðar."
+  },
+  {
+    "key": "discounts.messages.selectProduct",
+    "value": "Veldu vöru til að sjá upplýsingar um afslátt."
+  },
+  {
+    "key": "discounts.messages.startAfterEnd",
+    "value": "Upphafsdagsetning má ekki vera á eftir lokadagsetningu."
+  },
+  {
+    "key": "discounts.modal.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "discounts.modal.createTitle",
+    "value": "Stofna nýjan afslátt"
+  }
+]

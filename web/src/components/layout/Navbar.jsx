@@ -85,7 +85,7 @@ const Navbar = () => {
   // Fetch opening hours from the database
   const fetchOpeningHours = async () => {
     try {
-      const response = await fetch('/api/settings/opening-hours');
+      const response = await fetch('/api/settings/opening-hours', {});
       if (response.ok) {
         const data = await response.json();
         if (data.data?.openingHours) {
@@ -611,7 +611,7 @@ const Navbar = () => {
                         {category.imageUrl && (
                           <div className="mb-3 flex items-center justify-center w-full h-32 bg-white dark:bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-gray-200">
                             <img
-                              src={category.imageUrl.startsWith('http') ? category.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${category.imageUrl}`}
+                              src={category.imageUrl.startsWith('http') ? category.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${category.imageUrl}`}
                               alt={category.name}
                               className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-200"
                             />

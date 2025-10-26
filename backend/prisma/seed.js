@@ -125,7 +125,15 @@ async function main() {
       // Seed translations
       if (data.langs && data.langs.length > 0) {
         for (const lang of data.langs) {
-          await prisma.lang.create({ data: lang });
+          try {
+            await prisma.lang.upsert({
+              where: { key_locale: { key: lang.key, locale: lang.locale } },
+              update: lang,
+              create: lang
+            });
+          } catch (e) {
+            console.warn(`    ⚠️  Could not seed translation ${lang.key} (${lang.locale}): ${e.message}`);
+          }
         }
         console.log(`  ✅ Seeded ${data.langs.length} translations`);
       }

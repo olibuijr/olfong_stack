@@ -1,0 +1,136 @@
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /assets/index-P2S1gHR4.js HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /assets/index-B6baAAH7.css HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /assets/index-P2S1gHR4.js HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /assets/index-B6baAAH7.css HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /assets/index-B6baAAH7.css HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /assets/index-P2S1gHR4.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/public HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/translations?locale=is HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/auth/profile HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /logo_black-web.webp HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/public HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/translations?locale=is HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/categories HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/categories? HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/banners/hero/active HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/products?limit=100 HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/banners/featured HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/public HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/translations?locale=is HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/auth/profile HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/public HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/auth/profile HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/translations?locale=is HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/public HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/translations?locale=is HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/public HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/translations?locale=is HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/categories HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /logo_black-web.webp HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/categories? HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/banners/featured HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/banners/hero/active HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/products?limit=100 HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/categories HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/categories? HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/banners/featured HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/banners/hero/active HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/products?limit=100 HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:34:46] "GET /logo_black-web.webp HTTP/1.1" 304 -
+127.0.0.1 - - [26/Oct/2025 17:34:47] "GET /sw.js HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:36:50] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:37:02] "GET /index.html HTTP/1.1" 200 -
+192.168.8.62 - - [26/Oct/2025 17:46:01] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET /assets/index-CybsXW3O.js HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET /assets/index-B6baAAH7.css HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET /api/settings/opening-hours HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:46:28] "GET /logo_black-web.webp HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:46:29] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:46:29] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:46:29] code 404, message File not found
+127.0.0.1 - - [26/Oct/2025 17:46:29] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.1" 404 -
+127.0.0.1 - - [26/Oct/2025 17:46:29] "GET /sw.js HTTP/1.1" 200 -
+192.168.8.62 - - [26/Oct/2025 17:46:31] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Oct/2025 17:50:15] "HEAD / HTTP/1.1" 200 -
+192.168.8.4 - - [26/Oct/2025 17:50:31] "HEAD / HTTP/1.1" 200 -
+192.168.8.4 - - [26/Oct/2025 17:50:41] "GET / HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:50:41] "GET /assets/index-B6baAAH7.css HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:50:41] "GET /assets/index-B7PTPFsC.js HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:50:41] "GET /logo_black-web.webp HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:50:41] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:50:41] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.0" 404 -
+192.168.8.4 - - [26/Oct/2025 17:52:31] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:52:31] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.0" 404 -
+192.168.8.4 - - [26/Oct/2025 17:53:17] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:53:17] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.0" 404 -
+192.168.8.4 - - [26/Oct/2025 17:53:26] "GET / HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:26] "GET /assets/index-C0I1G_hc.js HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:26] "GET /assets/index-B6baAAH7.css HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:26] "GET /logo_black-web.webp HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:27] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:53:27] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.0" 404 -
+192.168.8.4 - - [26/Oct/2025 17:53:50] "GET / HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:50] "GET /assets/index-B6baAAH7.css HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:50] "GET /assets/index-C0I1G_hc.js HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:51] "GET /logo_black-web.webp HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:51] "GET /manifest.json HTTP/1.0" 200 -
+192.168.8.4 - - [26/Oct/2025 17:53:51] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:53:51] "GET /uploads/products/originals/f11ec182-c082-4a47-85f9-5003e080f8bf.jpeg HTTP/1.0" 404 -
+192.168.8.4 - - [26/Oct/2025 17:53:54] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:53:54] "GET /products HTTP/1.0" 404 -
+192.168.8.4 - - [26/Oct/2025 17:53:54] code 404, message File not found
+192.168.8.4 - - [26/Oct/2025 17:53:54] "GET /favicon.ico HTTP/1.0" 404 -

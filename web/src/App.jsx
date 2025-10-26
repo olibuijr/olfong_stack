@@ -48,6 +48,7 @@ import ApiKeysSettings from './pages/admin/settings/ApiKeysSettings';
 import PaymentGatewaysSettings from './pages/admin/settings/PaymentGatewaysSettings';
 import ReceiptSettings from './pages/admin/settings/ReceiptSettings';
 import SMTPSettings from './pages/admin/settings/SMTPSettings';
+import StaffManagement from './pages/admin/settings/StaffManagement';
 import AdminBanners from './pages/admin/Banners';
 import AdminChat from './pages/admin/Chat';
 import DemoData from './pages/admin/DemoData';
@@ -229,6 +230,7 @@ function App() {
               <Route path="/admin/settings/payment-gateways" element={<PaymentGatewaysSettings />} />
               <Route path="/admin/settings/receipts" element={<ReceiptSettings />} />
               <Route path="/admin/settings/smtp" element={<SMTPSettings />} />
+              <Route path="/admin/settings/staff" element={<StaffManagement />} />
             </Route>
 
             {/* Delivery routes - accessible by both ADMIN and DELIVERY roles */}

@@ -81,13 +81,12 @@ const ChatWidget = () => {
     if (!newMessage.trim() || !currentConversation) return;
 
     const messageData = {
-      conversationId: currentConversation.id,
       content: newMessage.trim(),
-      topic: selectedTopic
+      messageType: 'TEXT'
     };
 
     try {
-      const response = await api.post('/chat/messages', messageData);
+      const response = await api.post(`/chat/conversations/${currentConversation.id}/messages`, messageData);
       setMessages(prev => [...prev, response.data]);
       setNewMessage('');
       scrollToBottom();
@@ -136,7 +135,8 @@ const ChatWidget = () => {
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    const handleNewMessage = (message) => {
+    const handleNewMessage = (data) => {
+      const message = data.message || data;
       if (message.conversationId === currentConversation?.id) {
         setMessages(prev => [...prev, message]);
       }
@@ -149,12 +149,12 @@ const ChatWidget = () => {
       }
     };
 
-    socketService.on('newMessage', handleNewMessage);
-    socketService.on('typingStatus', handleTypingStatus);
+    socketService.on('new-message', handleNewMessage);
+    socketService.on('user-typing', handleTypingStatus);
 
     return () => {
-      socketService.off('newMessage', handleNewMessage);
-      socketService.off('typingStatus', handleTypingStatus);
+      socketService.off('new-message', handleNewMessage);
+      socketService.off('user-typing', handleTypingStatus);
     };
   }, [isAuthenticated, currentConversation]);
 

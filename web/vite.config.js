@@ -23,8 +23,21 @@ export default defineConfig({
   server: {
     port: 3001,
     host: '0.0.0.0', // Allow access from network (needed for mobile live reload)
+    middlewareMode: false,
+    allowedHosts: [
+      'olfong.olibuijr.com',
+      'localhost',
+      '127.0.0.1',
+      '0.0.0.0',
+    ],
+    hmr: false,
     proxy: {
       '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/uploads': {
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,

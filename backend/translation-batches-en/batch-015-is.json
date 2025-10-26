@@ -1,0 +1,378 @@
+[
+  {
+    "key": "productsPage.sortOptions.nameAZ",
+    "value": "Nafn (A-Ö)"
+  },
+  {
+    "key": "productsPage.sortOptions.nameZA",
+    "value": "Nafn (Ö-A)"
+  },
+  {
+    "key": "productsPage.sortOptions.priceHighToLow",
+    "value": "Verð (hæst til lægst)"
+  },
+  {
+    "key": "productsPage.sortOptions.priceLowToHigh",
+    "value": "Verð (lægst til hæst)"
+  },
+  {
+    "key": "productsPage.subcategory",
+    "value": "Undirflokkur"
+  },
+  {
+    "key": "productsPage.title",
+    "value": "Vörur"
+  },
+  {
+    "key": "productsPage.tryAdjusting",
+    "value": "Prófaðu að breyta síuvalkostum"
+  },
+  {
+    "key": "profile.title",
+    "value": "Mín síða"
+  },
+  {
+    "key": "profile.updateError",
+    "value": "Villa við uppfærslu"
+  },
+  {
+    "key": "profile.updateSuccess",
+    "value": "Uppfærsla tókst"
+  },
+  {
+    "key": "profilePage.addressMissingWarning",
+    "value": "Vinsamlegast skráðu heimilisfang"
+  },
+  {
+    "key": "profilePage.addresses",
+    "value": "Heimilisföng"
+  },
+  {
+    "key": "profilePage.city",
+    "value": "Sveitarfélag"
+  },
+  {
+    "key": "profilePage.cityRequired",
+    "value": "Sveitarfélag er áskilið"
+  },
+  {
+    "key": "profilePage.country",
+    "value": "Land"
+  },
+  {
+    "key": "profilePage.default",
+    "value": "Sjálfgefið"
+  },
+  {
+    "key": "profilePage.editAddress",
+    "value": "Breyta heimilisfangi"
+  },
+  {
+    "key": "profilePage.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "profilePage.emailMissingWarning",
+    "value": "Vinsamlegast skráðu netfang"
+  },
+  {
+    "key": "profilePage.fullName",
+    "value": "Fullt nafn"
+  },
+  {
+    "key": "profilePage.logout",
+    "value": "Útskrá"
+  },
+  {
+    "key": "profilePage.manageInfo",
+    "value": "Stjórna upplýsingum"
+  },
+  {
+    "key": "profilePage.name",
+    "value": "Nafn"
+  },
+  {
+    "key": "profilePage.newAddress",
+    "value": "Nýtt heimilisfang"
+  },
+  {
+    "key": "profilePage.newAddressTitle",
+    "value": "Skrá nýtt heimilisfang"
+  },
+  {
+    "key": "profilePage.noAddresses",
+    "value": "Engin heimilisföng skráð"
+  },
+  {
+    "key": "profilePage.notSpecified",
+    "value": "Ótilgreint"
+  },
+  {
+    "key": "profilePage.personalInformation",
+    "value": "Persónuupplýsingar"
+  },
+  {
+    "key": "profilePage.phone",
+    "value": "Símanúmer"
+  },
+  {
+    "key": "profilePage.postalCode",
+    "value": "Póstnúmer"
+  },
+  {
+    "key": "profilePage.postalCodeRequired",
+    "value": "Póstnúmer er áskilið"
+  },
+  {
+    "key": "profilePage.setAsDefaultAddress",
+    "value": "Setja sem sjálfgefið heimilisfang"
+  },
+  {
+    "key": "profilePage.street",
+    "value": "Heimilisfang"
+  },
+  {
+    "key": "profilePage.streetRequired",
+    "value": "Heimilisfang er áskilið"
+  },
+  {
+    "key": "receipts.configureInSettings",
+    "value": "Stilltu í stillingum"
+  },
+  {
+    "key": "receipts.downloadPdf",
+    "value": "Sækja PDF"
+  },
+  {
+    "key": "receipts.emailReceipt",
+    "value": "Senda kvittun í tölvupósti"
+  },
+  {
+    "key": "receipts.emailSendError",
+    "value": "Villa við sendingu tölvupósts"
+  },
+  {
+    "key": "receipts.emailSent",
+    "value": "Tölvupóstur sendur"
+  },
+  {
+    "key": "receipts.emailSentSuccess",
+    "value": "Kvittun hefur verið send í tölvupósti"
+  },
+  {
+    "key": "receipts.noEmailAddress",
+    "value": "Ekkert netfang skráð"
+  },
+  {
+    "key": "receipts.pdfDownloadError",
+    "value": "Villa við niðurhal á PDF"
+  },
+  {
+    "key": "receipts.print",
+    "value": "Prenta"
+  },
+  {
+    "key": "receipts.receipt",
+    "value": "Kvittun"
+  },
+  {
+    "key": "receipts.receiptForOrder",
+    "value": "Kvittun fyrir pöntun"
+  },
+  {
+    "key": "receipts.settingsNotFound",
+    "value": "Stillingar fundust ekki"
+  },
+  {
+    "key": "search.placeholder",
+    "value": "Leita að vörum..."
+  },
+  {
+    "key": "adminCustomers.customersCount",
+    "value": "{{filtered}} af {{total}} viðskiptavinum"
+  },
+  {
+    "key": "adminSettings.paymentGatewayEnabled",
+    "value": "Greiðslugatið virkjað"
+  },
+  {
+    "key": "adminSettings.paymentGatewayDisabled",
+    "value": "Greiðslugatið óvirkjað"
+  },
+  {
+    "key": "adminSettings.paymentGatewayTestFailed",
+    "value": "Prófun greiðslugats mistókst: {{message}}"
+  },
+  {
+    "key": "adminSettings.staffManagement",
+    "value": "Starfsfólk"
+  },
+  {
+    "key": "adminStaff.title",
+    "value": "Starfsfólk"
+  },
+  {
+    "key": "adminStaff.description",
+    "value": "Stýra kerfisstafi og úthluta hlutverkum"
+  },
+  {
+    "key": "adminStaff.createNew",
+    "value": "Búa til nýja starfsmann"
+  },
+  {
+    "key": "adminStaff.searchPlaceholder",
+    "value": "Leita eftir nafni, tölvupósti eða notendanafni..."
+  },
+  {
+    "key": "adminStaff.allRoles",
+    "value": "Öll hlutverk"
+  },
+  {
+    "key": "adminStaff.roleAdmin",
+    "value": "Kerfisstjóri"
+  },
+  {
+    "key": "adminStaff.roleDelivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminStaff.roleCustomer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminStaff.requiredFields",
+    "value": "Notendanafn og fullt nafn eru nauðsynleg"
+  },
+  {
+    "key": "adminStaff.errorSaving",
+    "value": "Villa við að vista starfsmann"
+  },
+  {
+    "key": "adminStaff.errorDeleting",
+    "value": "Villa við að eyða starfsmanni"
+  },
+  {
+    "key": "adminStaff.confirmDelete",
+    "value": "Ertu viss um að þú viljir eyða þessari starfsmanni?"
+  },
+  {
+    "key": "adminStaff.noStaffFound",
+    "value": "Engir starfsmenn fundust"
+  },
+  {
+    "key": "adminStaff.createFirstStaff",
+    "value": "Búðu til fyrsta starfsmanninn þinn til að hefjast handa"
+  },
+  {
+    "key": "adminStaff.username",
+    "value": "Notendanafn"
+  },
+  {
+    "key": "adminStaff.fullName",
+    "value": "Fullt nafn"
+  },
+  {
+    "key": "adminStaff.email",
+    "value": "Tölvupóstur"
+  },
+  {
+    "key": "adminStaff.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "adminStaff.role",
+    "value": "Hlutverk"
+  },
+  {
+    "key": "adminStaff.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminStaff.editStaff",
+    "value": "Breyta starfsmanni"
+  },
+  {
+    "key": "adminStaff.createStaff",
+    "value": "Búa til starfsmann"
+  },
+  {
+    "key": "adminStaff.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminStaff.create",
+    "value": "Búa til"
+  },
+  {
+    "key": "adminStaff.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminSettings.currencies",
+    "value": "Gjaldmiðlar"
+  },
+  {
+    "key": "adminSettings.currencyManagement",
+    "value": "Gjaldmiðlastjórnun"
+  },
+  {
+    "key": "adminSettings.currencyManagementDesc",
+    "value": "Bættu við, fjarlægðu og stjórnaðu gjaldmiðlum sem eru í boði í versluninni þinni"
+  },
+  {
+    "key": "adminSettings.activeCurrency",
+    "value": "Virkur gjaldmiðill"
+  },
+  {
+    "key": "adminSettings.availableCurrencies",
+    "value": "Tiltækir gjaldmiðlar"
+  },
+  {
+    "key": "adminSettings.addNewCurrency",
+    "value": "Bæta við nýjum gjaldmiðli"
+  },
+  {
+    "key": "adminSettings.currencyCode",
+    "value": "Gjaldmiðilskóði"
+  },
+  {
+    "key": "adminSettings.currencySymbol",
+    "value": "Tákn"
+  },
+  {
+    "key": "adminSettings.currencyName",
+    "value": "Nafn"
+  },
+  {
+    "key": "adminSettings.setActive",
+    "value": "Gera virkan"
+  },
+  {
+    "key": "adminSettings.active",
+    "value": "Virkur"
+  },
+  {
+    "key": "adminSettings.currencyManagementGuide",
+    "value": "Leiðbeiningar um gjaldmiðlastjórnun"
+  },
+  {
+    "key": "adminSettings.onlyOneCurrency",
+    "value": "Aðeins einn gjaldmiðill getur verið virkur í einu"
+  },
+  {
+    "key": "adminSettings.currencySymbolDisplay",
+    "value": "Tákn virka gjaldmiðilsins birtist um alla verslunina"
+  },
+  {
+    "key": "adminSettings.cannotDeleteActive",
+    "value": "Þú getur ekki eytt gjaldmiðlinum sem er virkur"
+  },
+  {
+    "key": "adminSettings.currencyChangesSaved",
+    "value": "Allar breytingar á gjaldmiðlum eru vistaðar í gagnagrunninum"
+  },
+  {
+    "key": "adminSettings.currencyISK",
+    "value": "Íslensk króna"
+  }
+]

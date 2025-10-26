@@ -1,0 +1,402 @@
+[
+  {
+    "key": "atvrImport.foodPairings",
+    "value": "Pörun með mat"
+  },
+  {
+    "key": "atvrImport.icelandicLabel",
+    "value": "Íslenskur miði"
+  },
+  {
+    "key": "atvrImport.importProducts",
+    "value": "Flytja inn vörur"
+  },
+  {
+    "key": "atvrImport.importProductsButton",
+    "value": "Flytja inn vörur"
+  },
+  {
+    "key": "atvrImport.more",
+    "value": "Meira"
+  },
+  {
+    "key": "atvrImport.noImage",
+    "value": "Engin mynd"
+  },
+  {
+    "key": "atvrImport.noProductsFound",
+    "value": "Engar vörur fundust"
+  },
+  {
+    "key": "atvrImport.packaging",
+    "value": "Pökkun"
+  },
+  {
+    "key": "atvrImport.pleaseSelectOne",
+    "value": "Vinsamlegast veldu einn"
+  },
+  {
+    "key": "atvrImport.previewImport",
+    "value": "Forskoða innflutning"
+  },
+  {
+    "key": "atvrImport.previewImportTitle",
+    "value": "Forskoða innflutning"
+  },
+  {
+    "key": "atvrImport.producer",
+    "value": "Framleiðandi"
+  },
+  {
+    "key": "atvrImport.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "atvrImport.productsImported",
+    "value": "Vörur innfluttar"
+  },
+  {
+    "key": "atvrImport.search",
+    "value": "Leita"
+  },
+  {
+    "key": "atvrImport.searchATVRProducts",
+    "value": "Leita í vörum ÁTVR"
+  },
+  {
+    "key": "atvrImport.searchPlaceholderIs",
+    "value": "Leitarorð á íslensku"
+  },
+  {
+    "key": "atvrImport.searchResults",
+    "value": "Leitarniðurstöður"
+  },
+  {
+    "key": "atvrImport.selected",
+    "value": "Valið"
+  },
+  {
+    "key": "atvrImport.specialAttributes",
+    "value": "Sérstakir eiginleikar"
+  },
+  {
+    "key": "atvrImport.subtitle",
+    "value": "Undirtitill"
+  },
+  {
+    "key": "atvrImport.successfullyImported",
+    "value": "Tókst að flytja inn"
+  },
+  {
+    "key": "atvrImport.title",
+    "value": "Titill"
+  },
+  {
+    "key": "atvrImport.tryDifferentTerms",
+    "value": "Prófaðu önnur leitarorð"
+  },
+  {
+    "key": "atvrImport.viewOnATVR",
+    "value": "Skoða á ÁTVR"
+  },
+  {
+    "key": "atvrImport.volume",
+    "value": "Rúmmál"
+  },
+  {
+    "key": "auth.age",
+    "value": "Aldur"
+  },
+  {
+    "key": "auth.confirmPassword",
+    "value": "Staðfesta lykilorð"
+  },
+  {
+    "key": "auth.fullName",
+    "value": "Fullt nafn"
+  },
+  {
+    "key": "auth.login",
+    "value": "Innskráning"
+  },
+  {
+    "key": "auth.loginRequired",
+    "value": "Innskráning nauðsynleg"
+  },
+  {
+    "key": "auth.loginStaff",
+    "value": "Innskráning starfsmanna"
+  },
+  {
+    "key": "auth.logout",
+    "value": "Útskráning"
+  },
+  {
+    "key": "auth.password",
+    "value": "Lykilorð"
+  },
+  {
+    "key": "auth.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "auth.register",
+    "value": "Nýskráning"
+  },
+  {
+    "key": "auth.username",
+    "value": "Notandanafn"
+  },
+  {
+    "key": "authExtra.adminDeliveryLogin",
+    "value": "Innskráning fyrir stjórnendur og afhendingu"
+  },
+  {
+    "key": "authExtra.loginWithElectronicId",
+    "value": "Innskrá með rafrænum skilríkjum"
+  },
+  {
+    "key": "authExtra.loginWithElectronicIdDescription",
+    "value": "Skráðu þig inn á öruggan hátt með rafrænum skilríkjum."
+  },
+  {
+    "key": "authExtra.or",
+    "value": "eða"
+  },
+  {
+    "key": "authExtra.passwordMismatch",
+    "value": "Lykilorð stemma ekki"
+  },
+  {
+    "key": "authExtra.signInToYourAccount",
+    "value": "Skráðu þig inn á reikninginn þinn"
+  },
+  {
+    "key": "cart.addError",
+    "value": "Villa við að bæta í körfu"
+  },
+  {
+    "key": "cart.addToCart",
+    "value": "Bæta í körfu"
+  },
+  {
+    "key": "cart.failedToClearCart",
+    "value": "Mistókst að tæma körfu"
+  },
+  {
+    "key": "cart.itemAdded",
+    "value": "Vöru bætt í körfu"
+  },
+  {
+    "key": "cart.items",
+    "value": "Vörur"
+  },
+  {
+    "key": "cart.title",
+    "value": "Karfa"
+  },
+  {
+    "key": "cartPage.addItemsToStart",
+    "value": "Bættu vörum í körfuna til að byrja"
+  },
+  {
+    "key": "cartPage.cartDescription",
+    "value": "Hér getur þú séð vörurnar í körfunni þinni og gengið frá kaupum."
+  },
+  {
+    "key": "cartPage.cartItems",
+    "value": "Vörur í körfu"
+  },
+  {
+    "key": "cartPage.clearCart",
+    "value": "Hreinsa körfu"
+  },
+  {
+    "key": "cartPage.continueShopping",
+    "value": "Halda áfram að versla"
+  },
+  {
+    "key": "cartPage.each",
+    "value": "hver"
+  },
+  {
+    "key": "cartPage.emptyCart",
+    "value": "Karfan er tóm"
+  },
+  {
+    "key": "cartPage.login",
+    "value": "Innskráning"
+  },
+  {
+    "key": "cartPage.loginToViewCart",
+    "value": "Skráðu þig inn til að sjá körfuna þína"
+  },
+  {
+    "key": "cartPage.mustLoginToViewCart",
+    "value": "Þú verður að skrá þig inn til að sjá körfuna þína"
+  },
+  {
+    "key": "cartPage.noImage",
+    "value": "Engin mynd"
+  },
+  {
+    "key": "categories.BEER",
+    "value": "Bjór"
+  },
+  {
+    "key": "categories.BEERS",
+    "value": "Bjór"
+  },
+  {
+    "key": "categories.CIDER_RTD",
+    "value": "Síder & Tilbúnir Drykkir"
+  },
+  {
+    "key": "categories.NICOTINE",
+    "value": "Nikótín"
+  },
+  {
+    "key": "categories.NON_ALCOHOLIC",
+    "value": "Óáfengt"
+  },
+  {
+    "key": "categories.OFFERS",
+    "value": "Tilboð"
+  },
+  {
+    "key": "categories.SPIRITS",
+    "value": "Brennivín"
+  },
+  {
+    "key": "categories.WINE",
+    "value": "Vín"
+  },
+  {
+    "key": "category.fallbackDescription",
+    "value": "Engin lýsing í boði fyrir þennan flokk."
+  },
+  {
+    "key": "chat.customTopic",
+    "value": "Sérsniðið efni"
+  },
+  {
+    "key": "chat.customTopicPlaceholder",
+    "value": "Sláðu inn þitt eigið umræðuefni"
+  },
+  {
+    "key": "chat.initializing",
+    "value": "Undirbý spjall..."
+  },
+  {
+    "key": "chat.noOrders",
+    "value": "Engar pantanir fundust"
+  },
+  {
+    "key": "chat.selectOrder",
+    "value": "Veldu pöntun"
+  },
+  {
+    "key": "chat.selectTopic",
+    "value": "Veldu umræðuefni"
+  },
+  {
+    "key": "chat.selectTopicDesc",
+    "value": "Veldu umræðuefni til að hefja spjall."
+  },
+  {
+    "key": "chat.startChat",
+    "value": "Hefja spjall"
+  },
+  {
+    "key": "chat.title",
+    "value": "Spjall"
+  },
+  {
+    "key": "chat.topics.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "chat.topics.deliveryDesc",
+    "value": "Spurningar um afhendingu"
+  },
+  {
+    "key": "chat.topics.feedback",
+    "value": "Endurgjöf"
+  },
+  {
+    "key": "chat.topics.feedbackDesc",
+    "value": "Sendu okkur endurgjöf"
+  },
+  {
+    "key": "chat.topics.general",
+    "value": "Almennt"
+  },
+  {
+    "key": "chat.topics.generalDesc",
+    "value": "Almennar fyrirspurnir"
+  },
+  {
+    "key": "chat.topics.order",
+    "value": "Pöntun"
+  },
+  {
+    "key": "chat.topics.orderDesc",
+    "value": "Spurningar um pöntun"
+  },
+  {
+    "key": "chat.topics.payment",
+    "value": "Greiðsla"
+  },
+  {
+    "key": "chat.topics.paymentDesc",
+    "value": "Spurningar um greiðslur"
+  },
+  {
+    "key": "chat.topics.product",
+    "value": "Vara"
+  },
+  {
+    "key": "chat.topics.productDesc",
+    "value": "Spurningar um vöru"
+  },
+  {
+    "key": "chat.topics.topic",
+    "value": "Umræðuefni"
+  },
+  {
+    "key": "chat.typeMessage",
+    "value": "Sláðu inn skilaboð..."
+  },
+  {
+    "key": "checkout.shipping",
+    "value": "Sending"
+  },
+  {
+    "key": "checkout.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "checkout.vat",
+    "value": "VSK"
+  },
+  {
+    "key": "checkoutPage.cashOnDelivery",
+    "value": "Greiða við afhendingu"
+  },
+  {
+    "key": "checkoutPage.cashOnDeliveryDesc",
+    "value": "Greiðið með reiðufé þegar varan er afhent."
+  },
+  {
+    "key": "checkoutPage.checkout",
+    "value": "Greiðslusíða"
+  },
+  {
+    "key": "checkoutPage.contactAdmin",
+    "value": "Hafa samband við kerfisstjóra"
+  },
+  {
+    "key": "checkoutPage.creatingOrder",
+    "value": "Útbý pöntun..."
+  }
+]

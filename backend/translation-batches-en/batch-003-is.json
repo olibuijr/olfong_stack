@@ -1,0 +1,402 @@
+[
+  {
+    "key": "adminDashboard.totalOrders",
+    "value": "Fjöldi pantana"
+  },
+  {
+    "key": "adminDashboard.totalProducts",
+    "value": "Fjöldi vörutegunda"
+  },
+  {
+    "key": "adminDashboard.totalRevenue",
+    "value": "Heildarvelta"
+  },
+  {
+    "key": "adminDashboard.viewAnalytics",
+    "value": "Skoða tölfræði"
+  },
+  {
+    "key": "adminDashboard.welcomeBack",
+    "value": "Velkomin/n aftur"
+  },
+  {
+    "key": "adminLabels.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "adminLabels.addToFavorites",
+    "value": "Bæta í eftirlæti"
+  },
+  {
+    "key": "adminLabels.filters",
+    "value": "Síur"
+  },
+  {
+    "key": "adminLabels.gridView",
+    "value": "Netasýn"
+  },
+  {
+    "key": "adminLabels.listView",
+    "value": "Listasýn"
+  },
+  {
+    "key": "adminLabels.selectImage",
+    "value": "Velja mynd"
+  },
+  {
+    "key": "adminLabels.viewOriginal",
+    "value": "Skoða upprunalega skrá"
+  },
+  {
+    "key": "adminMedia.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminMedia.altText",
+    "value": "Valtexti (Alt text)"
+  },
+  {
+    "key": "adminMedia.altTextDescription",
+    "value": "Lýstu innihaldi myndarinnar. Þetta hjálpar sjónskertum notendum og bætir leitarvélabestun (SEO)."
+  },
+  {
+    "key": "adminMedia.altTextPlaceholder",
+    "value": "Dæmi: Flaska af rauðvíni við hliðina á vínglasi á viðarborði."
+  },
+  {
+    "key": "adminMedia.altTextRecommendation",
+    "value": "Mælt er með nákvæmum valtexta fyrir betra aðgengi og SEO."
+  },
+  {
+    "key": "adminMedia.automaticOptimization",
+    "value": "Sjálfvirk bestun"
+  },
+  {
+    "key": "adminMedia.banners",
+    "value": "Auglýsingaborðar"
+  },
+  {
+    "key": "adminMedia.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminMedia.caption",
+    "value": "Myndatexti"
+  },
+  {
+    "key": "adminMedia.captionDescription",
+    "value": "Stuttur texti sem birtist undir eða yfir myndinni."
+  },
+  {
+    "key": "adminMedia.captionPlaceholder",
+    "value": "Skrifaðu stuttan myndatexta..."
+  },
+  {
+    "key": "adminMedia.categories",
+    "value": "Vöruflokkar"
+  },
+  {
+    "key": "adminMedia.confirmDelete",
+    "value": "Viltu örugglega eyða þessu?"
+  },
+  {
+    "key": "adminMedia.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "adminMedia.deleteSelected",
+    "value": "Eyða völdum"
+  },
+  {
+    "key": "adminMedia.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "adminMedia.descriptionDescription",
+    "value": "Nánari upplýsingar um skrána. Þetta er eingöngu til innanhússnota."
+  },
+  {
+    "key": "adminMedia.descriptionPlaceholder",
+    "value": "Skrifaðu nánari lýsingu..."
+  },
+  {
+    "key": "adminMedia.documents",
+    "value": "Skjöl"
+  },
+  {
+    "key": "adminMedia.dragDropFiles",
+    "value": "Dragðu skrár hingað eða smelltu til að hlaða upp"
+  },
+  {
+    "key": "adminMedia.edit",
+    "value": "Breyta"
+  },
+  {
+    "key": "adminMedia.editMedia",
+    "value": "Breyta skrá"
+  },
+  {
+    "key": "adminMedia.itemSelected",
+    "value": "1 atriði valið"
+  },
+  {
+    "key": "adminMedia.itemsSelected",
+    "value": "atriði valin"
+  },
+  {
+    "key": "adminMedia.manageMediaDescription",
+    "value": "Hér getur þú hlaðið upp og stjórnað myndum, skjölum og öðrum skrám."
+  },
+  {
+    "key": "adminMedia.maxFileSize",
+    "value": "Hámarks skráarstærð"
+  },
+  {
+    "key": "adminMedia.name",
+    "value": "Heiti"
+  },
+  {
+    "key": "adminMedia.next",
+    "value": "Næsta"
+  },
+  {
+    "key": "adminMedia.noMediaDescription",
+    "value": "Engar skrár hafa verið hlaðið upp. Smelltu til að byrja."
+  },
+  {
+    "key": "adminMedia.noMediaFound",
+    "value": "Engar skrár fundust"
+  },
+  {
+    "key": "adminMedia.noMediaInCollection",
+    "value": "Engar skrár í þessum flokki"
+  },
+  {
+    "key": "adminMedia.of",
+    "value": "af"
+  },
+  {
+    "key": "adminMedia.orClickToSelect",
+    "value": "eða smelltu til að velja"
+  },
+  {
+    "key": "adminMedia.preview",
+    "value": "Forskoða"
+  },
+  {
+    "key": "adminMedia.previous",
+    "value": "Fyrri"
+  },
+  {
+    "key": "adminMedia.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminMedia.profile",
+    "value": "Prófíll"
+  },
+  {
+    "key": "adminMedia.results",
+    "value": "Niðurstöður"
+  },
+  {
+    "key": "adminMedia.save",
+    "value": "Vista"
+  },
+  {
+    "key": "adminMedia.saving",
+    "value": "Vistar..."
+  },
+  {
+    "key": "adminMedia.searchMedia",
+    "value": "Leita í miðlasafni"
+  },
+  {
+    "key": "adminMedia.select",
+    "value": "Velja"
+  },
+  {
+    "key": "adminMedia.selectCollection",
+    "value": "Velja safn"
+  },
+  {
+    "key": "adminMedia.selectFiles",
+    "value": "Velja skrár"
+  },
+  {
+    "key": "adminMedia.selectItem",
+    "value": "Velja atriði"
+  },
+  {
+    "key": "adminMedia.selectItems",
+    "value": "Velja atriði"
+  },
+  {
+    "key": "adminMedia.selectMedia",
+    "value": "Velja miðil"
+  },
+  {
+    "key": "adminMedia.selectMultipleMedia",
+    "value": "Velja marga miðla"
+  },
+  {
+    "key": "adminMedia.selectSingleMedia",
+    "value": "Velja einn miðil"
+  },
+  {
+    "key": "adminMedia.selectedFiles",
+    "value": "Valdar skrár"
+  },
+  {
+    "key": "adminMedia.showing",
+    "value": "Sýnir"
+  },
+  {
+    "key": "adminMedia.size",
+    "value": "Stærð"
+  },
+  {
+    "key": "adminMedia.supportedFormats",
+    "value": "Studd skráarsnið"
+  },
+  {
+    "key": "adminMedia.to",
+    "value": "til"
+  },
+  {
+    "key": "adminMedia.type",
+    "value": "Tegund"
+  },
+  {
+    "key": "adminMedia.upload",
+    "value": "Hlaða upp"
+  },
+  {
+    "key": "adminMedia.uploadFiles",
+    "value": "Hlaða upp skrám"
+  },
+  {
+    "key": "adminMedia.uploadFirstMedia",
+    "value": "Hlaða upp fyrsta miðli"
+  },
+  {
+    "key": "adminMedia.uploadGuidelines",
+    "value": "Leiðbeiningar um upphleðslu"
+  },
+  {
+    "key": "adminMedia.uploadMedia",
+    "value": "Hlaða upp miðli"
+  },
+  {
+    "key": "adminMedia.uploadMediaDescription",
+    "value": "Dragðu skrár hingað eða smelltu til að hlaða upp."
+  },
+  {
+    "key": "adminMedia.uploaded",
+    "value": "Upphlaðið"
+  },
+  {
+    "key": "adminMedia.uploading",
+    "value": "Hleður upp..."
+  },
+  {
+    "key": "adminMedia.videos",
+    "value": "Myndbönd"
+  },
+  {
+    "key": "adminMenu.analytics",
+    "value": "Greiningar"
+  },
+  {
+    "key": "adminMenu.analyticsLink",
+    "value": "Greiningar"
+  },
+  {
+    "key": "adminMenu.banners",
+    "value": "Borðar"
+  },
+  {
+    "key": "adminMenu.catalog",
+    "value": "Vörulisti"
+  },
+  {
+    "key": "adminMenu.categories",
+    "value": "Vöruflokkar"
+  },
+  {
+    "key": "adminMenu.content",
+    "value": "Innihald"
+  },
+  {
+    "key": "adminMenu.customers",
+    "value": "Viðskiptavinir"
+  },
+  {
+    "key": "adminMenu.dashboard",
+    "value": "Mælaborð"
+  },
+  {
+    "key": "adminMenu.deliveries",
+    "value": "Afhendingar"
+  },
+  {
+    "key": "adminMenu.demoData",
+    "value": "Sýnisgögn"
+  },
+  {
+    "key": "adminMenu.general",
+    "value": "Almennt"
+  },
+  {
+    "key": "adminMenu.helpText",
+    "value": "Hjálp"
+  },
+  {
+    "key": "adminMenu.manageBusinessSettings",
+    "value": "Fyrirtækisstillingar"
+  },
+  {
+    "key": "adminMenu.media",
+    "value": "Miðlasafn"
+  },
+  {
+    "key": "adminMenu.messages",
+    "value": "Skilaboð"
+  },
+  {
+    "key": "adminMenu.notifications",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminMenu.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminMenu.payment",
+    "value": "Greiðslur"
+  },
+  {
+    "key": "adminMenu.pointOfSale",
+    "value": "Sölukerfi"
+  },
+  {
+    "key": "adminMenu.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminMenu.receipts",
+    "value": "Kvittanir"
+  },
+  {
+    "key": "adminMenu.reports",
+    "value": "Skýrslur"
+  },
+  {
+    "key": "adminMenu.settingsSection",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminMenu.supportCenter",
+    "value": "Þjónustuver"
+  }
+]

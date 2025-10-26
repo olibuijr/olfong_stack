@@ -5,7 +5,8 @@ import {
   Upload,
   Plus,
   AlertTriangle,
-  FileImage
+  FileImage,
+  Sparkles
 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import PageHeader from '../../components/admin/PageHeader';
@@ -14,6 +15,8 @@ import MediaGrid from '../../components/admin/MediaGrid';
 import MediaList from '../../components/admin/MediaList';
 import MediaFilters from '../../components/admin/MediaFilters';
 import MediaEditor from '../../components/admin/MediaEditor';
+import AIImageSettings from '../../components/admin/AIImageSettings';
+import AIProductImageModal from '../../components/admin/AIProductImageModal';
 import { useLanguage } from "../../contexts/LanguageContext";
 import toast from 'react-hot-toast';
 
@@ -32,6 +35,10 @@ const Media = () => {
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingMedia, setEditingMedia] = useState(null);
+
+  const [showAISettings, setShowAISettings] = useState(false);
+  const [showAIModal, setShowAIModal] = useState(false);
+  const [aiTargetMedia, setAiTargetMedia] = useState(null);
 
   // Helper functions for components
   const handleSelectItem = (itemId, isSelected) => {
@@ -179,7 +186,16 @@ const Media = () => {
     setShowEditModal(true);
   };
 
+  const handleAIGenerate = (mediaItem) => {
+    setAiTargetMedia(mediaItem);
+    setShowAIModal(true);
+  };
 
+  const handleAIComplete = (updatedMedia) => {
+    // Update media in state
+    setMedia(prev => prev.map(m => m.id === updatedMedia.id ? updatedMedia : m));
+    toast.success('Product image updated with AI generation');
+  };
 
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
@@ -216,13 +232,22 @@ const Media = () => {
           title={t('adminNavigation.media')}
           description={t('adminMedia.manageMediaDescription')}
           actions={
-            <button
-              onClick={() => window.open('/admin/media/upload', '_blank')}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-            >
-              <Upload className="h-4 w-4 mr-2" />
-              {t('adminMedia.uploadMedia')}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowAISettings(true)}
+                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-md hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                AI Settings
+              </button>
+              <button
+                onClick={() => window.open('/admin/media/upload', '_blank')}
+                className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                {t('adminMedia.uploadMedia')}
+              </button>
+            </div>
           }
         />
 
@@ -276,6 +301,7 @@ const Media = () => {
                 onSelectItem={handleSelectItem}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
+                onAIGenerate={handleAIGenerate}
                 formatFileSize={formatFileSize}
                 formatDate={formatDate}
               />
@@ -338,6 +364,23 @@ const Media = () => {
             setShowEditModal(false);
             setEditingMedia(null);
           }}
+        />
+
+        {/* AI Image Settings Modal */}
+        <AIImageSettings
+          isOpen={showAISettings}
+          onClose={() => setShowAISettings(false)}
+        />
+
+        {/* AI Product Image Modal */}
+        <AIProductImageModal
+          media={aiTargetMedia}
+          isOpen={showAIModal}
+          onClose={() => {
+            setShowAIModal(false);
+            setAiTargetMedia(null);
+          }}
+          onComplete={handleAIComplete}
         />
       </div>
     </AdminLayout>

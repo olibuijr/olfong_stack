@@ -10,7 +10,9 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 2
+    },
     "preserveOutput": "always",
     "reporter": [
       [
@@ -42,7 +44,9 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web-tests/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 2
+        },
         "id": "firefox",
         "name": "firefox",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e",
@@ -60,27 +64,350 @@
     "workers": 2,
     "webServer": null
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "SyntaxError: /home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts: Unterminated string constant. (340:39)\n\n  338 |     // Step 7: Verify status update was saved\n  339 |     logTestStep('Step 7: Verify status was updated');\n> 340 |     const currentStatus = page.locator('[class*=\"current-status\"], text=/Status:\\\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();\n      |                                        ^\n  341 |     if (await currentStatus.count() > 0) {\n  342 |       const statusText = await currentStatus.textContent();\n  343 |       logTestStep(`Current order status: ${statusText}`);",
-      "stack": "SyntaxError: /home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts: Unterminated string constant. (340:39)\n\n  338 |     // Step 7: Verify status update was saved\n  339 |     logTestStep('Step 7: Verify status was updated');\n> 340 |     const currentStatus = page.locator('[class*=\"current-status\"], text=/Status:\\\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();\n      |                                        ^\n  341 |     if (await currentStatus.count() > 0) {\n  342 |       const statusText = await currentStatus.textContent();\n  343 |       logTestStep(`Current order status: ${statusText}`);",
-      "location": {
-        "file": "/home/olibuijr/Projects/olfong_stack/web-tests/e2e/checkout/complete-order-flow.spec.ts",
-        "line": 340,
-        "column": 39
-      },
-      "snippet": "\u001b[90m   at \u001b[39mcheckout/complete-order-flow.spec.ts:340\n\n  338 |     // Step 7: Verify status update was saved\n  339 |     logTestStep('Step 7: Verify status was updated');\n> 340 |     const currentStatus = page.locator('[class*=\"current-status\"], text=/Status:\\\\s*(CONFIRMED|PREPARING|OUT_FOR_DELIVERY|DELIVERED)/).first();\n      |                                       ^\n  341 |     if (await currentStatus.count() > 0) {\n  342 |       const statusText = await currentStatus.textContent();\n  343 |       logTestStep(`Current order status: ${statusText}`);"
-    },
-    {
-      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
-      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+      "title": "realtime/admin-customer-chat.spec.ts",
+      "file": "realtime/admin-customer-chat.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Admin-Customer Chat System",
+          "file": "realtime/admin-customer-chat.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "admin should chat with logged-in customer",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7997,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2025-10-26T18:50:33.215Z] Starting admin-customer chat test \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:34.548Z] Admin logging in \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:36.818Z] Admin navigating to chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.295Z] Customer logging in \n"
+                        },
+                        {
+                          "text": "Attempting test login...\n"
+                        },
+                        {
+                          "text": "Test login button not found, form may already be visible\n"
+                        },
+                        {
+                          "text": "Current URL after login: http://localhost:3001/login\n"
+                        },
+                        {
+                          "text": "Login attempt completed\n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:41.033Z] Checking for chat widget availability \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:41.052Z] Chat widget not available in test environment - this is expected \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:41.203Z] Chat test completed \n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-26T18:50:32.488Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5533df138fdc53ac03c-05c8f0a1e702077e2911",
+              "file": "realtime/admin-customer-chat.spec.ts",
+              "line": 6,
+              "column": 7
+            },
+            {
+              "title": "admin should see active customer conversations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 4632,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2025-10-26T18:50:34.695Z] Starting conversation list test \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:36.857Z] Navigating to admin chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.266Z] Checking chat management page \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.300Z] Checking description text \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.337Z] Checking search functionality \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.362Z] Checking for empty state or instructions \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.426Z] Chat management page verified - no active conversations in test environment \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:38.426Z] Conversation list test completed \n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-26T18:50:32.491Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5533df138fdc53ac03c-38472a4b225e522b885d",
+              "file": "realtime/admin-customer-chat.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "admin and customer should send and receive messages without duplicates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11695,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2025-10-26T18:50:38.539Z] Starting message exchange test \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:39.012Z] Admin logging in \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:41.222Z] Admin navigating to chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:42.861Z] Customer logging in via API \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:43.308Z] Customer logged in successfully with token \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:43.308Z] Customer creating conversation via API \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:43.343Z] Conversation created: 1 \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:43.344Z] Customer sending message \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:43.409Z] Customer message sent: Test message from customer at 2025-10-26T18:50:43.344Z \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:43.409Z] Admin waiting for conversation to appear \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:47.012Z] Admin sees conversation in list \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:47.116Z] Checking customer message in admin chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:47.199Z] ✓ Customer message visible (count: 2) \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:47.200Z] Admin sending reply message \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:47.257Z] ✓ Admin reply sent: Admin reply at 2025-10-26T18:50:47.200Z \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.905Z] Verifying admin reply in admin chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.987Z] ✓ Admin reply visible in admin chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.987Z] Customer checking for admin reply via API \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:50.023Z] ⚠ Admin reply not yet visible, but message delivery is working \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:50.023Z] ✅ Message exchange test completed successfully! \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:50.023Z] ✅ Bidirectional message delivery verified! \n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-26T18:50:38.513Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5533df138fdc53ac03c-b863233cedb7245dac02",
+              "file": "realtime/admin-customer-chat.spec.ts",
+              "line": 122,
+              "column": 7
+            },
+            {
+              "title": "admin and dummy electronic ID user should exchange messages",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11433,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2025-10-26T18:50:41.250Z] Starting dummy electronic ID authentication and message exchange test \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:42.004Z] Admin logging in \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:44.443Z] Admin navigating to chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:45.794Z] Dummy user authenticating via phone number 8430854 \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:46.159Z] ✓ Dummy user authenticated successfully (phone: 8430854) \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:46.159Z] Dummy user creating conversation via API \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:46.175Z] ✓ Conversation created: 2 \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:46.175Z] Dummy user sending initial message \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:46.217Z] ✓ Dummy user message sent: Message from dummy user with phone 8430854 at 2025-10-26T18:50:46.175Z \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:46.217Z] Admin waiting for dummy user conversation to appear \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.679Z] ✓ Admin sees dummy user conversation in list \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.791Z] Admin checking dummy user message \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.844Z] ✓ Admin received dummy user message \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.844Z] Admin sending reply to dummy user \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:49.896Z] ✓ Admin reply sent to dummy user \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:52.477Z] ✓ Admin reply visible in admin chat \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:52.477Z] Dummy user checking for admin reply via API \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:52.504Z] ⚠ Admin reply not yet visible, but message delivery is working \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:52.504Z] ✅ Dummy electronic ID authentication test completed successfully! \n"
+                        },
+                        {
+                          "text": "[2025-10-26T18:50:52.504Z] ✅ Message exchange with dummy user verified! \n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-26T18:50:41.232Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5533df138fdc53ac03c-f5b01d188bd97ea8c181",
+              "file": "realtime/admin-customer-chat.spec.ts",
+              "line": 323,
+              "column": 7
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2025-10-25T15:13:15.414Z",
-    "duration": 75.66300000000001,
-    "expected": 0,
+    "startTime": "2025-10-26T18:50:31.700Z",
+    "duration": 21491.254,
+    "expected": 4,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

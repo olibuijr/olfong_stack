@@ -385,7 +385,7 @@ const ProductDetail = () => {
               {currentProduct.imageUrl ? (
                 <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
                   <img
-                    src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}${currentProduct.imageUrl}`}
+                    src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${currentProduct.imageUrl}`}
                     alt={getProductName(currentLanguage, currentProduct)}
                     className="w-full h-96 object-contain rounded-lg"
                   />
@@ -848,7 +848,7 @@ const ProductDetail = () => {
 
                     // Validate that payment provider supports subscriptions
                     try {
-                      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://192.168.8.62:5000'}/api/payment-gateways/config`);
+                      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}/api/payment-gateways/config`);
                       const { gateways } = await response.json();
 
                       const supportsSubscription = gateways.some(gw => gw.supportsSubscriptions && gw.isEnabled);

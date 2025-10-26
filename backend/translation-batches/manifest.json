@@ -1,0 +1,158 @@
+{
+  "timestamp": "2025-10-26T13:17:22.175Z",
+  "totalBatches": 30,
+  "totalKeys": 1498,
+  "batchSize": 50,
+  "batches": [
+    {
+      "batchNum": 1,
+      "keyCount": 50,
+      "file": "batch-001.json"
+    },
+    {
+      "batchNum": 2,
+      "keyCount": 50,
+      "file": "batch-002.json"
+    },
+    {
+      "batchNum": 3,
+      "keyCount": 50,
+      "file": "batch-003.json"
+    },
+    {
+      "batchNum": 4,
+      "keyCount": 50,
+      "file": "batch-004.json"
+    },
+    {
+      "batchNum": 5,
+      "keyCount": 50,
+      "file": "batch-005.json"
+    },
+    {
+      "batchNum": 6,
+      "keyCount": 50,
+      "file": "batch-006.json"
+    },
+    {
+      "batchNum": 7,
+      "keyCount": 50,
+      "file": "batch-007.json"
+    },
+    {
+      "batchNum": 8,
+      "keyCount": 50,
+      "file": "batch-008.json"
+    },
+    {
+      "batchNum": 9,
+      "keyCount": 50,
+      "file": "batch-009.json"
+    },
+    {
+      "batchNum": 10,
+      "keyCount": 50,
+      "file": "batch-010.json"
+    },
+    {
+      "batchNum": 11,
+      "keyCount": 50,
+      "file": "batch-011.json"
+    },
+    {
+      "batchNum": 12,
+      "keyCount": 50,
+      "file": "batch-012.json"
+    },
+    {
+      "batchNum": 13,
+      "keyCount": 50,
+      "file": "batch-013.json"
+    },
+    {
+      "batchNum": 14,
+      "keyCount": 50,
+      "file": "batch-014.json"
+    },
+    {
+      "batchNum": 15,
+      "keyCount": 50,
+      "file": "batch-015.json"
+    },
+    {
+      "batchNum": 16,
+      "keyCount": 50,
+      "file": "batch-016.json"
+    },
+    {
+      "batchNum": 17,
+      "keyCount": 50,
+      "file": "batch-017.json"
+    },
+    {
+      "batchNum": 18,
+      "keyCount": 50,
+      "file": "batch-018.json"
+    },
+    {
+      "batchNum": 19,
+      "keyCount": 50,
+      "file": "batch-019.json"
+    },
+    {
+      "batchNum": 20,
+      "keyCount": 50,
+      "file": "batch-020.json"
+    },
+    {
+      "batchNum": 21,
+      "keyCount": 50,
+      "file": "batch-021.json"
+    },
+    {
+      "batchNum": 22,
+      "keyCount": 50,
+      "file": "batch-022.json"
+    },
+    {
+      "batchNum": 23,
+      "keyCount": 50,
+      "file": "batch-023.json"
+    },
+    {
+      "batchNum": 24,
+      "keyCount": 50,
+      "file": "batch-024.json"
+    },
+    {
+      "batchNum": 25,
+      "keyCount": 50,
+      "file": "batch-025.json"
+    },
+    {
+      "batchNum": 26,
+      "keyCount": 50,
+      "file": "batch-026.json"
+    },
+    {
+      "batchNum": 27,
+      "keyCount": 50,
+      "file": "batch-027.json"
+    },
+    {
+      "batchNum": 28,
+      "keyCount": 50,
+      "file": "batch-028.json"
+    },
+    {
+      "batchNum": 29,
+      "keyCount": 50,
+      "file": "batch-029.json"
+    },
+    {
+      "batchNum": 30,
+      "keyCount": 48,
+      "file": "batch-030.json"
+    }
+  ]
+}

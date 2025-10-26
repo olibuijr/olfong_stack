@@ -1,0 +1,402 @@
+[
+  {
+    "key": "login.password",
+    "value": "Lykilorð"
+  },
+  {
+    "key": "login.testLogin",
+    "value": "Prófa innskráningu"
+  },
+  {
+    "key": "navigation.admin",
+    "value": "Stjórnborð"
+  },
+  {
+    "key": "navigation.beer",
+    "value": "Bjór"
+  },
+  {
+    "key": "navigation.cart",
+    "value": "Karfa"
+  },
+  {
+    "key": "navigation.contactUs",
+    "value": "Hafa samband"
+  },
+  {
+    "key": "navigation.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "navigation.discoverCategories",
+    "value": "Skoða flokka"
+  },
+  {
+    "key": "navigation.home",
+    "value": "Heim"
+  },
+  {
+    "key": "navigation.language",
+    "value": "Tungumál"
+  },
+  {
+    "key": "navigation.login",
+    "value": "Innskráning"
+  },
+  {
+    "key": "navigation.logout",
+    "value": "Útskráning"
+  },
+  {
+    "key": "navigation.menu",
+    "value": "Valmynd"
+  },
+  {
+    "key": "navigation.needHelp",
+    "value": "Þarftu hjálp?"
+  },
+  {
+    "key": "navigation.nonAlcoholic",
+    "value": "Óáfengt"
+  },
+  {
+    "key": "navigation.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "navigation.profile",
+    "value": "Mín síða"
+  },
+  {
+    "key": "navigation.shop",
+    "value": "Verslun"
+  },
+  {
+    "key": "navigation.spirits",
+    "value": "Brennivín"
+  },
+  {
+    "key": "navigation.viewAllProducts",
+    "value": "Skoða allar vörur"
+  },
+  {
+    "key": "navigation.wine",
+    "value": "Vín"
+  },
+  {
+    "key": "notifications.deliveryMethods",
+    "value": "Afhendingarmátar"
+  },
+  {
+    "key": "notifications.emailNotifications",
+    "value": "Tilkynningar í tölvupósti"
+  },
+  {
+    "key": "notifications.marketing",
+    "value": "Markaðsefni"
+  },
+  {
+    "key": "notifications.noNotifications",
+    "value": "Engar tilkynningar"
+  },
+  {
+    "key": "notifications.orderUpdates",
+    "value": "Pöntunaruppfærslur"
+  },
+  {
+    "key": "notifications.pushNotifications",
+    "value": "Push-tilkynningar"
+  },
+  {
+    "key": "notifications.securityAlerts",
+    "value": "Öryggisviðvaranir"
+  },
+  {
+    "key": "notifications.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "notifications.smsNotifications",
+    "value": "SMS tilkynningar"
+  },
+  {
+    "key": "notifications.systemAlerts",
+    "value": "Kerfisviðvaranir"
+  },
+  {
+    "key": "notifications.types",
+    "value": "Tegundir"
+  },
+  {
+    "key": "order.orderNumber",
+    "value": "Pöntunarnúmer"
+  },
+  {
+    "key": "orderDetailPage.backToOrders",
+    "value": "Til baka í pantanir"
+  },
+  {
+    "key": "orderDetailPage.created",
+    "value": "Stofnuð"
+  },
+  {
+    "key": "orderDetailPage.deliveredAt",
+    "value": "Afhent"
+  },
+  {
+    "key": "orderDetailPage.deliveryAddress",
+    "value": "Afhendingarheimilisfang"
+  },
+  {
+    "key": "orderDetailPage.deliveryInfo",
+    "value": "Afhendingarupplýsingar"
+  },
+  {
+    "key": "orderDetailPage.deliveryMethod",
+    "value": "Afhendingarmáti"
+  },
+  {
+    "key": "orderDetailPage.deliveryPerson",
+    "value": "Sendill"
+  },
+  {
+    "key": "orderDetailPage.each",
+    "value": "hver"
+  },
+  {
+    "key": "orderDetailPage.estimatedDelivery",
+    "value": "Áætluð afhending"
+  },
+  {
+    "key": "orderDetailPage.homeDelivery",
+    "value": "Heimsending"
+  },
+  {
+    "key": "orderDetailPage.notes",
+    "value": "Athugasemdir"
+  },
+  {
+    "key": "orderDetailPage.order",
+    "value": "Pöntun"
+  },
+  {
+    "key": "orderDetailPage.orderItems",
+    "value": "Vörur í pöntun"
+  },
+  {
+    "key": "orderDetailPage.orderNotFound",
+    "value": "Pöntun fannst ekki"
+  },
+  {
+    "key": "orderDetailPage.orderNotFoundDesc",
+    "value": "Við fundum ekki pöntunina sem þú ert að leita að."
+  },
+  {
+    "key": "orderDetailPage.paymentInfo",
+    "value": "Greiðsluupplýsingar"
+  },
+  {
+    "key": "orderDetailPage.paymentMethod",
+    "value": "Greiðslumáti"
+  },
+  {
+    "key": "orderDetailPage.quantity",
+    "value": "Magn"
+  },
+  {
+    "key": "orderDetailPage.status",
+    "value": "Staða"
+  },
+  {
+    "key": "orderDetailPage.storePickup",
+    "value": "Sækja í verslun"
+  },
+  {
+    "key": "orders.reorder",
+    "value": "Endurpanta"
+  },
+  {
+    "key": "orders.statuses",
+    "value": "Stöður"
+  },
+  {
+    "key": "orders.statuses.CANCELLED",
+    "value": "Hætt við"
+  },
+  {
+    "key": "orders.statuses.CONFIRMED",
+    "value": "Staðfest"
+  },
+  {
+    "key": "orders.statuses.DELIVERED",
+    "value": "Afhent"
+  },
+  {
+    "key": "orders.statuses.OUT_FOR_DELIVERY",
+    "value": "Í afhendingu"
+  },
+  {
+    "key": "orders.statuses.PENDING",
+    "value": "Í bið"
+  },
+  {
+    "key": "orders.statuses.PREPARING",
+    "value": "Í undirbúningi"
+  },
+  {
+    "key": "orders.title",
+    "value": "Pantanir"
+  },
+  {
+    "key": "ordersPage.allOrders",
+    "value": "Allar pantanir"
+  },
+  {
+    "key": "ordersPage.confirmed",
+    "value": "Staðfest"
+  },
+  {
+    "key": "ordersPage.date",
+    "value": "Dagsetning"
+  },
+  {
+    "key": "ordersPage.delivered",
+    "value": "Afhent"
+  },
+  {
+    "key": "ordersPage.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "ordersPage.deliveryAddress",
+    "value": "Afhendingarheimilisfang"
+  },
+  {
+    "key": "ordersPage.homeDelivery",
+    "value": "Heimsending"
+  },
+  {
+    "key": "ordersPage.items",
+    "value": "Vörur"
+  },
+  {
+    "key": "ordersPage.loginToView",
+    "value": "Skráðu þig inn til að skoða pantanir þínar."
+  },
+  {
+    "key": "ordersPage.mustLogin",
+    "value": "Þú verður að vera skráður inn til að skoða pantanir."
+  },
+  {
+    "key": "ordersPage.next",
+    "value": "Næsta"
+  },
+  {
+    "key": "ordersPage.noOrders",
+    "value": "Engar pantanir"
+  },
+  {
+    "key": "ordersPage.noOrdersDesc",
+    "value": "Þú hefur engar pantanir ennþá."
+  },
+  {
+    "key": "ordersPage.notes",
+    "value": "Athugasemdir"
+  },
+  {
+    "key": "ordersPage.of",
+    "value": "af"
+  },
+  {
+    "key": "ordersPage.outForDelivery",
+    "value": "Í afhendingu"
+  },
+  {
+    "key": "ordersPage.page",
+    "value": "Síða"
+  },
+  {
+    "key": "ordersPage.pending",
+    "value": "Í bið"
+  },
+  {
+    "key": "ordersPage.pickup",
+    "value": "Sækja"
+  },
+  {
+    "key": "ordersPage.previous",
+    "value": "Fyrri"
+  },
+  {
+    "key": "ordersPage.reorder",
+    "value": "Endurpanta"
+  },
+  {
+    "key": "ordersPage.startShopping",
+    "value": "Byrja að versla"
+  },
+  {
+    "key": "ordersPage.time",
+    "value": "Tími"
+  },
+  {
+    "key": "ordersPage.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "ordersPage.view",
+    "value": "Skoða"
+  },
+  {
+    "key": "pos.allCategories",
+    "value": "Allir flokkar"
+  },
+  {
+    "key": "pos.cartItems",
+    "value": "Vörur í körfu"
+  },
+  {
+    "key": "pos.cartTitle",
+    "value": "Karfa"
+  },
+  {
+    "key": "pos.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "pos.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "pos.guestEmail",
+    "value": "Netfang gests"
+  },
+  {
+    "key": "pos.guestName",
+    "value": "Nafn gests"
+  },
+  {
+    "key": "pos.guestPhone",
+    "value": "Símanúmer gests"
+  },
+  {
+    "key": "pos.notes",
+    "value": "Athugasemdir"
+  },
+  {
+    "key": "pos.or",
+    "value": "eða"
+  },
+  {
+    "key": "pos.orderNotes",
+    "value": "Athugasemdir við pöntun"
+  },
+  {
+    "key": "pos.paymentMethod",
+    "value": "Greiðslumáti"
+  },
+  {
+    "key": "pos.processOrder",
+    "value": "Afgreiða pöntun"
+  }
+]

@@ -349,7 +349,9 @@ const createProduct = async (req, res) => {
 
         if (media) {
           productData.imageUrl = media.url;
+          productData.mediaId = media.id; // Set mediaId for AI image generation
           console.log(`Successfully set product image URL to: ${media.url}`);
+          console.log(`Successfully set product mediaId to: ${media.id}`);
         } else {
           console.log('Failed to download ATVR image, product will be created without image');
         }

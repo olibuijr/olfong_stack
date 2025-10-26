@@ -365,17 +365,30 @@ const ShippingSettings = () => {
         {/* Header */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/admin/settings"
-                className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.shipping')}</h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings.shippingDescription')}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/admin/settings"
+                  className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                </Link>
+                <Truck className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                <div>
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSettings.shipping')}</h1>
+                  <p className="text-lg text-gray-600 dark:text-gray-400">{t('adminSettings.shippingDescription')}</p>
+                </div>
               </div>
+              <button
+                onClick={() => {
+                  setEditingShippingData({});
+                  setShowShippingModal(true);
+                }}
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                {t('adminSettings.addShippingOption')}
+              </button>
             </div>
           </div>
         </div>
@@ -383,30 +396,6 @@ const ShippingSettings = () => {
         {/* Settings Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6 space-y-6">
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <div className="flex items-start">
-              <div className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5">ℹ️</div>
-              <div className="text-sm text-blue-800 dark:text-blue-200">
-                <p className="font-medium mb-1">{t('adminSettings.shippingConfiguration')}</p>
-                <p>{t('adminSettings.shippingDescription')}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <div></div>
-            <button
-              onClick={() => {
-                setEditingShippingData({});
-                setShowShippingModal(true);
-              }}
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              {t('adminSettings.addShippingOption')}
-            </button>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {shippingOptions.map((option) => (
               <div key={option.id} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-lg transition-all duration-300 p-6">
@@ -504,20 +493,6 @@ const ShippingSettings = () => {
               </button>
             </div>
           )}
-
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-            <div className="flex items-start">
-              <div className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 mt-0.5">⚠️</div>
-              <div className="text-sm text-yellow-800 dark:text-yellow-200">
-                <p className="font-medium mb-1">{t('adminSettings.shippingNotes')}</p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>{t('adminSettings.shippingNote1')}</li>
-                  <li>{t('adminSettings.shippingNote2')}</li>
-                  <li>{t('adminSettings.shippingNote3')}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

@@ -1,0 +1,402 @@
+[
+  {
+    "key": "pos.searchCustomers",
+    "value": "Leita að viðskiptavinum"
+  },
+  {
+    "key": "pos.searchProducts",
+    "value": "Leita að vörum"
+  },
+  {
+    "key": "pos.shipping",
+    "value": "Sending"
+  },
+  {
+    "key": "pos.shippingOption",
+    "value": "Sendingarmöguleiki"
+  },
+  {
+    "key": "pos.stock",
+    "value": "Lagerstaða"
+  },
+  {
+    "key": "pos.subtotal",
+    "value": "Millisamantekt"
+  },
+  {
+    "key": "pos.title",
+    "value": "Sölustaður"
+  },
+  {
+    "key": "pos.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "product.abv",
+    "value": "Áfengismagn"
+  },
+  {
+    "key": "product.origin",
+    "value": "Upprunaland"
+  },
+  {
+    "key": "product.volume",
+    "value": "Magn"
+  },
+  {
+    "key": "productDetailPage.ageRestriction",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "productDetailPage.ageRestrictionDesc",
+    "value": "Þú verður að hafa náð löglegum aldri til að kaupa þessa vöru."
+  },
+  {
+    "key": "productDetailPage.alcoholContent",
+    "value": "Áfengisinnihald"
+  },
+  {
+    "key": "productDetailPage.available",
+    "value": "Til á lager"
+  },
+  {
+    "key": "productDetailPage.back",
+    "value": "Til baka"
+  },
+  {
+    "key": "productDetailPage.comingSoonDesc",
+    "value": "Þessi vara er væntanleg."
+  },
+  {
+    "key": "productDetailPage.country",
+    "value": "Land"
+  },
+  {
+    "key": "productDetailPage.createSubscription",
+    "value": "Stofna áskrift"
+  },
+  {
+    "key": "productDetailPage.deliveryFrequency",
+    "value": "Afhendingartíðni"
+  },
+  {
+    "key": "productDetailPage.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "productDetailPage.discontinuedDesc",
+    "value": "Þessi vara er hætt í sölu."
+  },
+  {
+    "key": "productDetailPage.loginHere",
+    "value": "Innskráning hér"
+  },
+  {
+    "key": "productDetailPage.loginToAdd",
+    "value": "Skráðu þig inn til að bæta í körfu"
+  },
+  {
+    "key": "productDetailPage.noDescription",
+    "value": "Engin lýsing í boði."
+  },
+  {
+    "key": "productDetailPage.notesOptional",
+    "value": "Athugasemdir (valfrjálst)"
+  },
+  {
+    "key": "productDetailPage.packaging",
+    "value": "Pökkun"
+  },
+  {
+    "key": "productDetailPage.preferredDayOptional",
+    "value": "Valinn dagur (valfrjálst)"
+  },
+  {
+    "key": "productDetailPage.preferredTimeOptional",
+    "value": "Valinn tími (valfrjálst)"
+  },
+  {
+    "key": "productDetailPage.priceBeforeVat",
+    "value": "Verð án VSK"
+  },
+  {
+    "key": "productDetailPage.producer",
+    "value": "Framleiðandi"
+  },
+  {
+    "key": "productDetailPage.quantity",
+    "value": "Fjöldi"
+  },
+  {
+    "key": "productDetailPage.specialOrderDesc",
+    "value": "Þetta er sérpöntunarvara."
+  },
+  {
+    "key": "productDetailPage.specifications",
+    "value": "Eiginleikar"
+  },
+  {
+    "key": "productDetailPage.subscribe",
+    "value": "Í áskrift"
+  },
+  {
+    "key": "productDetailPage.subscriptionCreated",
+    "value": "Áskrift stofnuð"
+  },
+  {
+    "key": "productDetailPage.totalPrice",
+    "value": "Heildarverð"
+  },
+  {
+    "key": "productDetailPage.vatAmount",
+    "value": "VSK upphæð"
+  },
+  {
+    "key": "productDetailPage.vatInformation",
+    "value": "VSK upplýsingar"
+  },
+  {
+    "key": "productDetailPage.vatProfile",
+    "value": "VSK snið"
+  },
+  {
+    "key": "productDetailPage.vatRate",
+    "value": "VSK prósenta"
+  },
+  {
+    "key": "productDetailPage.volume",
+    "value": "Magn"
+  },
+  {
+    "key": "productModal.buttons.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "productModal.buttons.createProduct",
+    "value": "Stofna vöru"
+  },
+  {
+    "key": "productModal.buttons.mediaLibrary",
+    "value": "Myndasafn"
+  },
+  {
+    "key": "productModal.buttons.searchOnline",
+    "value": "Leita á netinu"
+  },
+  {
+    "key": "productModal.buttons.updateProduct",
+    "value": "Uppfæra vöru"
+  },
+  {
+    "key": "productModal.discounts.discountPercentage",
+    "value": "Afsláttarprósenta"
+  },
+  {
+    "key": "productModal.discounts.emptyStateMessage",
+    "value": "Engir afslættir hafa verið skráðir fyrir þessa vöru ennþá."
+  },
+  {
+    "key": "productModal.discounts.enableDiscount",
+    "value": "Virkja afslátt"
+  },
+  {
+    "key": "productModal.discounts.endDate",
+    "value": "Lokadagsetning"
+  },
+  {
+    "key": "productModal.discounts.originalPrice",
+    "value": "Upprunalegt verð"
+  },
+  {
+    "key": "productModal.discounts.reasonEn",
+    "value": "Ástæða (enska)"
+  },
+  {
+    "key": "productModal.discounts.reasonIs",
+    "value": "Ástæða (íslenska)"
+  },
+  {
+    "key": "productModal.discounts.reasonIsPlaceholder",
+    "value": "Sláðu inn ástæðu á íslensku"
+  },
+  {
+    "key": "productModal.discounts.reasonPlaceholder",
+    "value": "Sláðu inn ástæðu á ensku"
+  },
+  {
+    "key": "productModal.discounts.startDate",
+    "value": "Upphafsdagsetning"
+  },
+  {
+    "key": "productModal.errors.categoryRequired",
+    "value": "Vöruflokkur er nauðsynlegur"
+  },
+  {
+    "key": "productModal.errors.priceRequired",
+    "value": "Verð er nauðsynlegt"
+  },
+  {
+    "key": "productModal.errors.stockRequired",
+    "value": "Lagerstaða er nauðsynleg"
+  },
+  {
+    "key": "productModal.fields.ageRestrictedProduct",
+    "value": "Aldurstakmörkuð vara"
+  },
+  {
+    "key": "productModal.fields.ageRestriction",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "productModal.fields.category",
+    "value": "Vöruflokkur"
+  },
+  {
+    "key": "productModal.fields.descriptionEn",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "productModal.fields.descriptionIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "productModal.fields.imageUrl",
+    "value": "Slóð myndar"
+  },
+  {
+    "key": "productModal.fields.noImageSelected",
+    "value": "Engin mynd valin"
+  },
+  {
+    "key": "productModal.fields.price",
+    "value": "Verð"
+  },
+  {
+    "key": "productModal.fields.productImage",
+    "value": "Vörumynd"
+  },
+  {
+    "key": "productModal.fields.selectCategory",
+    "value": "Veldu vöruflokk"
+  },
+  {
+    "key": "productModal.fields.selectSubcategory",
+    "value": "Veldu undirflokk"
+  },
+  {
+    "key": "productModal.fields.stock",
+    "value": "Lagerstaða"
+  },
+  {
+    "key": "productModal.fields.subcategory",
+    "value": "Undirflokkur"
+  },
+  {
+    "key": "productModal.help.uploadImageHelp",
+    "value": "Hladdu upp mynd fyrir vöruna. Mælt með stærð: 800x800px."
+  },
+  {
+    "key": "productModal.tabs.basicInfo",
+    "value": "Grunnupplýsingar"
+  },
+  {
+    "key": "productModal.tabs.details",
+    "value": "Nánar"
+  },
+  {
+    "key": "productModal.tabs.discounts",
+    "value": "Afslættir"
+  },
+  {
+    "key": "productModal.tabs.images",
+    "value": "Myndir"
+  },
+  {
+    "key": "productModal.tabs.origin",
+    "value": "Uppruni"
+  },
+  {
+    "key": "productModal.tabs.pairingsAttributes",
+    "value": "Pörun og eiginleikar"
+  },
+  {
+    "key": "productModal.unsavedChanges",
+    "value": "Þú átt óvistaðar breytingar. Ertu viss um að þú viljir fara?"
+  },
+  {
+    "key": "products.addToCart",
+    "value": "Setja í körfu"
+  },
+  {
+    "key": "products.availability",
+    "value": "Framboð"
+  },
+  {
+    "key": "products.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "products.foodPairings",
+    "value": "Pörun með mat"
+  },
+  {
+    "key": "products.inStock",
+    "value": "Til á lager"
+  },
+  {
+    "key": "products.outOfStock",
+    "value": "Ekki til á lager"
+  },
+  {
+    "key": "products.specialAttributes",
+    "value": "Sérstakir eiginleikar"
+  },
+  {
+    "key": "products.stock",
+    "value": "Lagerstaða"
+  },
+  {
+    "key": "products.title",
+    "value": "Vörur"
+  },
+  {
+    "key": "productsPage.addToCart",
+    "value": "Setja í körfu"
+  },
+  {
+    "key": "productsPage.alcoholContent",
+    "value": "Áfengismagn"
+  },
+  {
+    "key": "productsPage.all",
+    "value": "Allt"
+  },
+  {
+    "key": "productsPage.category",
+    "value": "Vöruflokkur"
+  },
+  {
+    "key": "productsPage.clearFilters",
+    "value": "Hreinsa síur"
+  },
+  {
+    "key": "productsPage.filters",
+    "value": "Síur"
+  },
+  {
+    "key": "productsPage.noProducts",
+    "value": "Engar vörur fundust"
+  },
+  {
+    "key": "productsPage.outOfStock",
+    "value": "Uppselt"
+  },
+  {
+    "key": "productsPage.priceRange",
+    "value": "Verðbil"
+  },
+  {
+    "key": "productsPage.sortBy",
+    "value": "Raða eftir"
+  }
+]

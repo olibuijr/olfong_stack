@@ -1,0 +1,402 @@
+[
+  {
+    "key": "discounts.modal.discountEndDate",
+    "value": "Lokadagur afsláttar"
+  },
+  {
+    "key": "discounts.modal.discountPercentage",
+    "value": "Afsláttarprósenta"
+  },
+  {
+    "key": "discounts.modal.discountReason",
+    "value": "Ástæða afsláttar"
+  },
+  {
+    "key": "discounts.modal.discountReasonIs",
+    "value": "Ástæða afsláttar er"
+  },
+  {
+    "key": "discounts.modal.discountStartDate",
+    "value": "Upphafsdagur afsláttar"
+  },
+  {
+    "key": "discounts.modal.editTitle",
+    "value": "Breyta afslætti"
+  },
+  {
+    "key": "discounts.modal.loading",
+    "value": "Hleður..."
+  },
+  {
+    "key": "discounts.modal.originalPrice",
+    "value": "Upprunalegt verð"
+  },
+  {
+    "key": "discounts.modal.preview",
+    "value": "Forskoðun"
+  },
+  {
+    "key": "discounts.modal.previewDiscount",
+    "value": "Afsláttur"
+  },
+  {
+    "key": "discounts.modal.previewFinal",
+    "value": "Lokaverð"
+  },
+  {
+    "key": "discounts.modal.previewOriginal",
+    "value": "Upprunalegt"
+  },
+  {
+    "key": "discounts.modal.reasonCustom",
+    "value": "Sérsniðin ástæða"
+  },
+  {
+    "key": "discounts.modal.selectProduct",
+    "value": "Veldu vöru"
+  },
+  {
+    "key": "imageSearchModal.portrait",
+    "value": "Lóðrétt"
+  },
+  {
+    "key": "discounts.modal.selectProductPlaceholder",
+    "value": "Leitaðu að vöru eftir nafni eða vörunúmeri"
+  },
+  {
+    "key": "discounts.modal.selectReason",
+    "value": "Veldu ástæðu"
+  },
+  {
+    "key": "discounts.modal.submit",
+    "value": "Stofna afslátt"
+  },
+  {
+    "key": "discounts.modal.submitEdit",
+    "value": "Vista breytingar"
+  },
+  {
+    "key": "discounts.search",
+    "value": "Leita að afsláttum..."
+  },
+  {
+    "key": "discounts.statusActive",
+    "value": "Virkur"
+  },
+  {
+    "key": "discounts.statusExpired",
+    "value": "Útrunninn"
+  },
+  {
+    "key": "discounts.statusExpiringsoon",
+    "value": "Rennur út fljótlega"
+  },
+  {
+    "key": "discounts.statusScheduled",
+    "value": "Áætlaður"
+  },
+  {
+    "key": "discounts.summary.averageDiscount",
+    "value": "Meðalafsláttur"
+  },
+  {
+    "key": "discounts.summary.expiringCount",
+    "value": "Rennur út fljótlega"
+  },
+  {
+    "key": "discounts.summary.productsOnDiscount",
+    "value": "Vörur á afslætti"
+  },
+  {
+    "key": "discounts.summary.totalSaved",
+    "value": "Samtals sparað"
+  },
+  {
+    "key": "discounts.table.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "discounts.table.amountSaved",
+    "value": "Sparað"
+  },
+  {
+    "key": "discounts.table.category",
+    "value": "Flokkur"
+  },
+  {
+    "key": "discounts.table.currentPrice",
+    "value": "Núverandi verð"
+  },
+  {
+    "key": "discounts.table.discountPercent",
+    "value": "Afsláttur %"
+  },
+  {
+    "key": "discounts.table.originalPrice",
+    "value": "Upprunalegt verð"
+  },
+  {
+    "key": "discounts.table.product",
+    "value": "Vara"
+  },
+  {
+    "key": "discounts.table.status",
+    "value": "Staða"
+  },
+  {
+    "key": "discounts.title",
+    "value": "Afslættir"
+  },
+  {
+    "key": "footer.aboutUs",
+    "value": "Um okkur"
+  },
+  {
+    "key": "footer.contact",
+    "value": "Hafa samband"
+  },
+  {
+    "key": "footer.copyright",
+    "value": "© 2025 Ölföng. Allur réttur áskilinn."
+  },
+  {
+    "key": "footer.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "footer.legal",
+    "value": "Lagalegt"
+  },
+  {
+    "key": "footer.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "footer.quickLinks",
+    "value": "Hraðtenglar"
+  },
+  {
+    "key": "home.banner.alt",
+    "value": "Auglýsingaborði"
+  },
+  {
+    "key": "home.categories.subtitle",
+    "value": "Skoðaðu úrvalið okkar"
+  },
+  {
+    "key": "home.categories.title",
+    "value": "Skoða eftir flokkum"
+  },
+  {
+    "key": "home.discounted.subtitle",
+    "value": "Skoðaðu nýjustu tilboðin okkar og sértilboð."
+  },
+  {
+    "key": "home.discounted.title",
+    "value": "Afsláttarvörur"
+  },
+  {
+    "key": "home.features.ageVerificationDescription",
+    "value": "Við leggjum áherslu á ábyrga sölu. Aldursstaðfesting er skilyrði fyrir öllum kaupum."
+  },
+  {
+    "key": "home.features.ageVerificationTitle",
+    "value": "Aldursstaðfesting"
+  },
+  {
+    "key": "home.features.beerDescription",
+    "value": "Skoðaðu breitt úrval okkar af handverksbjór og innfluttum bjór."
+  },
+  {
+    "key": "home.features.beerTitle",
+    "value": "Heimur bjórsins"
+  },
+  {
+    "key": "home.features.deliveryDescription",
+    "value": "Hröð og áreiðanleg heimsending. Pantaðu í dag og njóttu."
+  },
+  {
+    "key": "home.features.deliveryTitle",
+    "value": "Þægileg heimsending"
+  },
+  {
+    "key": "home.features.wineDescription",
+    "value": "Allt frá fylltum rauðvínum til svalandi hvítvína, finndu hið fullkomna vín fyrir hvaða tilefni sem er."
+  },
+  {
+    "key": "home.features.wineTitle",
+    "value": "Úrvalsvín"
+  },
+  {
+    "key": "home.hero.startShopping",
+    "value": "Hefja kaup"
+  },
+  {
+    "key": "home.hero.subtitle",
+    "value": "Þinn áfangastaður fyrir bestu vínin, bjórana og sterku drykkina."
+  },
+  {
+    "key": "home.olfongLogoAlt",
+    "value": "Ölföng merki"
+  },
+  {
+    "key": "home.testimonials.review1",
+    "value": "Ótrúlegt úrval og hröð sending. Mitt fyrsta val fyrir gæðavín."
+  },
+  {
+    "key": "home.testimonials.review1Author",
+    "value": "Jón Jónsson"
+  },
+  {
+    "key": "home.testimonials.review1Location",
+    "value": "Reykjavík"
+  },
+  {
+    "key": "home.testimonials.review2",
+    "value": "Besta safn handverksbjóra sem ég hef fundið á netinu. Mæli eindregið með!"
+  },
+  {
+    "key": "home.testimonials.review2Author",
+    "value": "Guðrún Pálsdóttir"
+  },
+  {
+    "key": "home.testimonials.review2Location",
+    "value": "Akureyri"
+  },
+  {
+    "key": "home.testimonials.review3",
+    "value": "Frábær þjónusta og notendavænn vefur. Ég kem aftur."
+  },
+  {
+    "key": "home.testimonials.review3Author",
+    "value": "Bjarni Sigurðsson"
+  },
+  {
+    "key": "home.testimonials.review3Location",
+    "value": "Kópavogur"
+  },
+  {
+    "key": "home.testimonials.subtitle",
+    "value": "Það sem viðskiptavinir okkar segja"
+  },
+  {
+    "key": "home.testimonials.title",
+    "value": "Umsagnir viðskiptavina"
+  },
+  {
+    "key": "home.why.subtitle",
+    "value": "Við leggjum metnað okkar í að bjóða upp á vandlega valið úrval, sérfræðiþekkingu og framúrskarandi þjónustu."
+  },
+  {
+    "key": "home.why.title",
+    "value": "Af hverju að velja Ölföng?"
+  },
+  {
+    "key": "imageSearchModal.allColors",
+    "value": "Allir litir"
+  },
+  {
+    "key": "imageSearchModal.allOrientations",
+    "value": "Allar áttir"
+  },
+  {
+    "key": "imageSearchModal.black",
+    "value": "Svartur"
+  },
+  {
+    "key": "imageSearchModal.blue",
+    "value": "Blár"
+  },
+  {
+    "key": "imageSearchModal.green",
+    "value": "Grænn"
+  },
+  {
+    "key": "imageSearchModal.landscape",
+    "value": "Lárétt"
+  },
+  {
+    "key": "imageSearchModal.magenta",
+    "value": "Vínrauður"
+  },
+  {
+    "key": "imageSearchModal.orange",
+    "value": "Appelsínugulur"
+  },
+  {
+    "key": "imageSearchModal.purple",
+    "value": "Fjólublár"
+  },
+  {
+    "key": "imageSearchModal.recentSearches",
+    "value": "Nýlegar leitir"
+  },
+  {
+    "key": "imageSearchModal.red",
+    "value": "Rauður"
+  },
+  {
+    "key": "imageSearchModal.square",
+    "value": "Ferningslaga"
+  },
+  {
+    "key": "imageSearchModal.suggestions",
+    "value": "Tillögur"
+  },
+  {
+    "key": "imageSearchModal.teal",
+    "value": "Grænnblár"
+  },
+  {
+    "key": "imageSearchModal.white",
+    "value": "Hvítur"
+  },
+  {
+    "key": "imageSearchModal.yellow",
+    "value": "Gulur"
+  },
+  {
+    "key": "login.automatedTestLogin",
+    "value": "Sjálfvirk prófunarinnskráning"
+  },
+  {
+    "key": "login.dummyElectronicId",
+    "value": "Gervi rafræn skilríki"
+  },
+  {
+    "key": "login.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "login.emailPasswordTests",
+    "value": "Prófanir á netfangi/lykilorði"
+  },
+  {
+    "key": "login.enterEmailAddress",
+    "value": "Sláðu inn netfangið þitt"
+  },
+  {
+    "key": "login.enterPassword",
+    "value": "Sláðu inn lykilorðið þitt"
+  },
+  {
+    "key": "login.enterPhoneNumber",
+    "value": "Sláðu inn símanúmerið þitt"
+  },
+  {
+    "key": "login.insertPhoneNumber",
+    "value": "Sláðu inn símanúmer"
+  },
+  {
+    "key": "login.loggingIn",
+    "value": "Skrái inn"
+  },
+  {
+    "key": "login.loginWithEmail",
+    "value": "Innskrá með tölvupósti"
+  },
+  {
+    "key": "login.loginWithPhone",
+    "value": "Innskrá með símanúmeri"
+  }
+]

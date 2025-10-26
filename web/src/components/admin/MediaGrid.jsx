@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Edit, Trash2, Image as ImageIcon, Loader } from 'lucide-react';
+import { Edit, Trash2, Image as ImageIcon, Loader, Sparkles } from 'lucide-react';
 import { useLanguage } from "../../contexts/LanguageContext";
 
 const MediaGrid = ({
@@ -8,6 +8,7 @@ const MediaGrid = ({
   onSelectItem,
   onEdit,
   onDelete,
+  onAIGenerate,
   formatFileSize,
   formatDate
 }) => {
@@ -81,6 +82,19 @@ const MediaGrid = ({
 
             {/* Action Buttons */}
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+              {/* AI Generate Button - Only for PRODUCTS collection images */}
+              {item.collection === 'PRODUCTS' && item.mimeType.startsWith('image/') && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAIGenerate && onAIGenerate(item);
+                  }}
+                  className="p-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded shadow hover:from-purple-600 hover:to-pink-600 text-white"
+                  title="Generate AI Product Photo"
+                >
+                  <Sparkles className="h-3 w-3" />
+                </button>
+              )}
               <button
                 onClick={() => onEdit(item)}
                 className="p-1 bg-white dark:bg-gray-700 rounded shadow hover:bg-gray-50 dark:hover:bg-gray-600"

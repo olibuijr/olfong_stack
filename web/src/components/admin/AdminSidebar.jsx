@@ -24,7 +24,8 @@ import {
   Image,
   FileImage,
   ChevronDown,
-  Tag
+  Tag,
+  UserCheck
 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
@@ -133,7 +134,8 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
         { name: t('adminSettings.general'), href: '/admin/settings/general', icon: Settings },
         { name: t('adminSettings.shipping'), href: '/admin/settings/shipping', icon: Truck },
         { name: t('adminSettings.paymentGateways'), href: '/admin/settings/payment-gateways', icon: CreditCard },
-        { name: t('adminSettings.receipts'), href: '/admin/settings/receipts', icon: Receipt }
+        { name: t('adminSettings.receipts'), href: '/admin/settings/receipts', icon: Receipt },
+        { name: t('adminSettings.staffManagement'), href: '/admin/settings/staff', icon: UserCheck }
       ]
     },
     {

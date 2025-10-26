@@ -1,0 +1,5978 @@
+[
+  {
+    "key": "adminCategories.active",
+    "value": "Virkt"
+  },
+  {
+    "key": "adminMenu.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "addresses.add",
+    "value": "Bæta við heimilisfangi"
+  },
+  {
+    "key": "addresses.city",
+    "value": "Borg"
+  },
+  {
+    "key": "addresses.country",
+    "value": "Land"
+  },
+  {
+    "key": "addresses.delete",
+    "value": "Eyða heimilisfangi"
+  },
+  {
+    "key": "addresses.edit",
+    "value": "Breyta heimilisfangi"
+  },
+  {
+    "key": "addresses.postalCode",
+    "value": "Póstnúmer"
+  },
+  {
+    "key": "addresses.street",
+    "value": "Gata"
+  },
+  {
+    "key": "admin.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "admin.accessDeniedMessage",
+    "value": "Þú hefur ekki heimild til að skoða þessa síðu."
+  },
+  {
+    "key": "admin.banners.activate",
+    "value": "Virkja"
+  },
+  {
+    "key": "admin.banners.addBanner",
+    "value": "Bæta við borða"
+  },
+  {
+    "key": "admin.banners.addFirstBanner",
+    "value": "Bættu við fyrsta borðanum"
+  },
+  {
+    "key": "admin.banners.addToFeatured",
+    "value": "Bæta við á forsíðu"
+  },
+  {
+    "key": "admin.banners.altPlaceholder",
+    "value": "Myndtexti"
+  },
+  {
+    "key": "admin.banners.altText",
+    "value": "Myndtexti"
+  },
+  {
+    "key": "admin.banners.category",
+    "value": "Vöruflokkur"
+  },
+  {
+    "key": "admin.banners.confirmDelete",
+    "value": "Staðfesta eyðingu"
+  },
+  {
+    "key": "admin.banners.deactivate",
+    "value": "Afvirkja"
+  },
+  {
+    "key": "admin.banners.descriptionEn",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "admin.banners.descriptionIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "admin.banners.descriptionPlaceholder",
+    "value": "Lýsing"
+  },
+  {
+    "key": "admin.banners.descriptionPlaceholderIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "admin.banners.editBanner",
+    "value": "Breyta borða"
+  },
+  {
+    "key": "admin.banners.featured",
+    "value": "Á forsíðu"
+  },
+  {
+    "key": "admin.banners.featuredBanner",
+    "value": "Forsíðuborði"
+  },
+  {
+    "key": "admin.banners.featuredBannerHelp",
+    "value": "Forsíðuborðar birtast á aðalsíðu verslunarinnar."
+  },
+  {
+    "key": "admin.banners.featuredOrder",
+    "value": "Röðun á forsíðu"
+  },
+  {
+    "key": "admin.banners.imageHelpText",
+    "value": "Hlaða upp mynd fyrir borðann."
+  },
+  {
+    "key": "admin.banners.imageUrl",
+    "value": "Slóð myndar"
+  },
+  {
+    "key": "admin.banners.link",
+    "value": "Tengill"
+  },
+  {
+    "key": "admin.banners.manageImages",
+    "value": "Sýsla með myndir"
+  },
+  {
+    "key": "admin.banners.noBanners",
+    "value": "Engir borðar"
+  },
+  {
+    "key": "admin.banners.noBannersDescription",
+    "value": "Engir borðar hafa verið búnir til."
+  },
+  {
+    "key": "admin.banners.noDescription",
+    "value": "Engin lýsing"
+  },
+  {
+    "key": "admin.banners.position",
+    "value": "Staðsetning"
+  },
+  {
+    "key": "admin.banners.product",
+    "value": "Vara"
+  },
+  {
+    "key": "admin.banners.removeFromFeatured",
+    "value": "Fjarlægja af forsíðu"
+  },
+  {
+    "key": "admin.banners.selectLink",
+    "value": "Velja tengil"
+  },
+  {
+    "key": "admin.banners.selectPosition",
+    "value": "Velja staðsetningu"
+  },
+  {
+    "key": "admin.banners.sortOrder",
+    "value": "Röðun"
+  },
+  {
+    "key": "admin.banners.subcategory",
+    "value": "Undirflokkur"
+  },
+  {
+    "key": "admin.banners.subtitle",
+    "value": "Undirtitill"
+  },
+  {
+    "key": "admin.banners.title",
+    "value": "Titill"
+  },
+  {
+    "key": "admin.banners.titleEn",
+    "value": "Titill (enska)"
+  },
+  {
+    "key": "admin.banners.titleIs",
+    "value": "Titill (íslenska)"
+  },
+  {
+    "key": "admin.banners.titlePlaceholder",
+    "value": "Titill"
+  },
+  {
+    "key": "admin.banners.titlePlaceholderIs",
+    "value": "Titill (íslenska)"
+  },
+  {
+    "key": "admin.banners.untitled",
+    "value": "Án titils"
+  },
+  {
+    "key": "adminAnalytics.analyticsDashboard",
+    "value": "Greiningar mælaborð"
+  },
+  {
+    "key": "adminAnalytics.businessInsights",
+    "value": "Viðskiptainnsýn"
+  },
+  {
+    "key": "adminAnalytics.cancelled",
+    "value": "Hætt við"
+  },
+  {
+    "key": "adminAnalytics.category",
+    "value": "Flokkur"
+  },
+  {
+    "key": "adminAnalytics.delivered",
+    "value": "Afhent"
+  },
+  {
+    "key": "adminAnalytics.export",
+    "value": "Flytja út"
+  },
+  {
+    "key": "adminAnalytics.growth",
+    "value": "Vöxtur"
+  },
+  {
+    "key": "adminAnalytics.last30Days",
+    "value": "Síðustu 30 dagar"
+  },
+  {
+    "key": "adminAnalytics.last7Days",
+    "value": "Síðustu 7 dagar"
+  },
+  {
+    "key": "adminAnalytics.last90Days",
+    "value": "Síðustu 90 dagar"
+  },
+  {
+    "key": "adminAnalytics.lastYear",
+    "value": "Síðasta ár"
+  },
+  {
+    "key": "adminAnalytics.loading",
+    "value": "Hleður..."
+  },
+  {
+    "key": "adminAnalytics.netRevenue",
+    "value": "Nettótekjur"
+  },
+  {
+    "key": "adminAnalytics.noData",
+    "value": "Engin gögn"
+  },
+  {
+    "key": "adminAnalytics.noProducts",
+    "value": "Engar vörur"
+  },
+  {
+    "key": "adminAnalytics.noRevenueData",
+    "value": "Engin teknagögn"
+  },
+  {
+    "key": "adminAnalytics.ofRevenue",
+    "value": "af tekjum"
+  },
+  {
+    "key": "adminAnalytics.ofVat",
+    "value": "af VSK"
+  },
+  {
+    "key": "adminAnalytics.orderStatusDistribution",
+    "value": "Dreifing pöntunarstöðu"
+  },
+  {
+    "key": "adminAnalytics.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminAnalytics.pending",
+    "value": "Í bið"
+  },
+  {
+    "key": "adminAnalytics.processing",
+    "value": "Í vinnslu"
+  },
+  {
+    "key": "adminAnalytics.product",
+    "value": "Vara"
+  },
+  {
+    "key": "adminAnalytics.revenue",
+    "value": "Tekjur"
+  },
+  {
+    "key": "adminAnalytics.revenueBeforeVat",
+    "value": "Tekjur án VSK"
+  },
+  {
+    "key": "adminAnalytics.revenueTrend",
+    "value": "Tekjuþróun"
+  },
+  {
+    "key": "adminAnalytics.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "adminAnalytics.shipped",
+    "value": "Sent"
+  },
+  {
+    "key": "adminAnalytics.topPerformer",
+    "value": "Mest selda"
+  },
+  {
+    "key": "adminAnalytics.topPerformingProducts",
+    "value": "Mest seldu vörur"
+  },
+  {
+    "key": "adminAnalytics.totalCustomers",
+    "value": "Samtals viðskiptavinir"
+  },
+  {
+    "key": "adminAnalytics.totalOrders",
+    "value": "Samtals pantanir"
+  },
+  {
+    "key": "adminAnalytics.totalProducts",
+    "value": "Samtals vörur"
+  },
+  {
+    "key": "adminAnalytics.totalRevenue",
+    "value": "Samtals tekjur"
+  },
+  {
+    "key": "adminAnalytics.totalVat",
+    "value": "Samtals VSK"
+  },
+  {
+    "key": "adminAnalytics.unknownCategory",
+    "value": "Óþekktur flokkur"
+  },
+  {
+    "key": "adminAnalytics.unknownProduct",
+    "value": "Óþekkt vara"
+  },
+  {
+    "key": "adminAnalytics.vsPreviousPeriod",
+    "value": "samanborið við fyrra tímabil"
+  },
+  {
+    "key": "adminCategories.basicInfo",
+    "value": "Grunnupplýsingar"
+  },
+  {
+    "key": "adminCategories.cannotDeleteWithProducts",
+    "value": "Ekki er hægt að eyða flokki sem inniheldur vörur"
+  },
+  {
+    "key": "adminCategories.categoryImageFromProduct",
+    "value": "Nota mynd úr vöru"
+  },
+  {
+    "key": "adminCategories.changeImage",
+    "value": "Breyta mynd"
+  },
+  {
+    "key": "adminCategories.confirmDelete",
+    "value": "Staðfesta eyðingu"
+  },
+  {
+    "key": "adminCategories.createFirstCategory",
+    "value": "Stofna fyrsta flokkinn"
+  },
+  {
+    "key": "adminCategories.descEn",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "adminCategories.descIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "adminCategories.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "adminCategories.discountEndDate",
+    "value": "Afsláttur gildir til"
+  },
+  {
+    "key": "adminCategories.discountHelp",
+    "value": "Hér getur þú stillt afslátt fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminCategories.discountPercentage",
+    "value": "Afsláttarprósenta"
+  },
+  {
+    "key": "adminCategories.discountReasonEn",
+    "value": "Ástæða (á ensku)"
+  },
+  {
+    "key": "adminCategories.discountReasonIs",
+    "value": "Ástæða (á íslensku)"
+  },
+  {
+    "key": "adminCategories.discountStartDate",
+    "value": "Upphafsdagur afsláttar"
+  },
+  {
+    "key": "adminCategories.discounts",
+    "value": "Afslættir"
+  },
+  {
+    "key": "adminCategories.editCategory",
+    "value": "Breyta vöruflokki"
+  },
+  {
+    "key": "adminCategories.enableCategoryDiscount",
+    "value": "Virkja afslátt fyrir vöruflokk"
+  },
+  {
+    "key": "adminCategories.enableDiscountMessage",
+    "value": "Virkjaðu til að stilla afslátt fyrir allar vörur í þessum flokki."
+  },
+  {
+    "key": "adminCategories.icon",
+    "value": "Táknmynd"
+  },
+  {
+    "key": "adminCategories.iconHelp",
+    "value": "Veldu táknmynd fyrir vöruflokkinn."
+  },
+  {
+    "key": "adminCategories.images",
+    "value": "Myndir"
+  },
+  {
+    "key": "adminCategories.inactive",
+    "value": "Óvirkur"
+  },
+  {
+    "key": "adminCategories.manageCategories",
+    "value": "Stjórna vöruflokkum"
+  },
+  {
+    "key": "adminCategories.metaDescEn",
+    "value": "Meta lýsing (EN)"
+  },
+  {
+    "key": "adminCategories.metaDescIs",
+    "value": "Meta lýsing (IS)"
+  },
+  {
+    "key": "adminCategories.metaTitleEn",
+    "value": "Meta titill (EN)"
+  },
+  {
+    "key": "adminCategories.metaTitleIs",
+    "value": "Meta titill (IS)"
+  },
+  {
+    "key": "adminCategories.name",
+    "value": "Nafn"
+  },
+  {
+    "key": "adminCategories.nameEn",
+    "value": "Nafn (EN)"
+  },
+  {
+    "key": "adminCategories.nameIs",
+    "value": "Nafn (IS)"
+  },
+  {
+    "key": "adminCategories.nameRequired",
+    "value": "Nafn er áskilið."
+  },
+  {
+    "key": "adminCategories.newCategory",
+    "value": "Nýr vöruflokkur"
+  },
+  {
+    "key": "adminCategories.noCategories",
+    "value": "Engir vöruflokkar fundust."
+  },
+  {
+    "key": "adminCategories.noDescription",
+    "value": "Engin lýsing"
+  },
+  {
+    "key": "adminCategories.productCount",
+    "value": "Fjöldi vöru"
+  },
+  {
+    "key": "adminCategories.rate",
+    "value": "Gjald"
+  },
+  {
+    "key": "adminCategories.removeImage",
+    "value": "Fjarlægja mynd"
+  },
+  {
+    "key": "adminCategories.selectFromMedia",
+    "value": "Velja úr myndasafni"
+  },
+  {
+    "key": "adminCategories.selectVatProfile",
+    "value": "Veldu VSK flokk"
+  },
+  {
+    "key": "adminCategories.selectedVatProfile",
+    "value": "Valinn VSK flokkur"
+  },
+  {
+    "key": "adminCategories.seo",
+    "value": "Leitarvélabestun (SEO)"
+  },
+  {
+    "key": "adminCategories.seoHelp",
+    "value": "Stilltu SEO fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminCategories.slug",
+    "value": "Slóð"
+  },
+  {
+    "key": "adminCategories.slugHelp",
+    "value": "Slóðin er notuð í vefslóðinni. Notaðu aðeins lágstafi, tölustafi og bandstrik."
+  },
+  {
+    "key": "adminCategories.sortOrder",
+    "value": "Röðun"
+  },
+  {
+    "key": "adminCategories.subcategories",
+    "value": "Undirflokkar"
+  },
+  {
+    "key": "adminCategories.title",
+    "value": "Titill"
+  },
+  {
+    "key": "adminCategories.vat",
+    "value": "VSK"
+  },
+  {
+    "key": "adminCategories.vatHelp",
+    "value": "Veldu virðisaukaskatt fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminCategories.vatProfile",
+    "value": "VSK flokkur"
+  },
+  {
+    "key": "adminCategories.vatProfileHelp",
+    "value": "Veldu VSK flokk fyrir þennan vöruflokk."
+  },
+  {
+    "key": "adminChat.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "adminChat.accessDeniedMessage",
+    "value": "Þú hefur ekki heimild til að skoða þetta spjall."
+  },
+  {
+    "key": "adminChat.active",
+    "value": "Virkt"
+  },
+  {
+    "key": "adminChat.allStatuses",
+    "value": "Allar stöður"
+  },
+  {
+    "key": "adminChat.archived",
+    "value": "Sett í geymslu"
+  },
+  {
+    "key": "adminChat.customerTyping",
+    "value": "Viðskiptavinur skrifar..."
+  },
+  {
+    "key": "adminChat.noConversations",
+    "value": "Engin samtöl"
+  },
+  {
+    "key": "adminChat.noMessages",
+    "value": "Engin skilaboð"
+  },
+  {
+    "key": "adminChat.orderDetails",
+    "value": "Upplýsingar um pöntun"
+  },
+  {
+    "key": "adminChat.resolved",
+    "value": "Leyst"
+  },
+  {
+    "key": "adminChat.searchConversations",
+    "value": "Leita í samtölum"
+  },
+  {
+    "key": "adminChat.selectConversation",
+    "value": "Veldu samtal"
+  },
+  {
+    "key": "adminChat.selectConversationMessage",
+    "value": "Veldu samtal til að hefja spjall"
+  },
+  {
+    "key": "adminChat.sendMessageError",
+    "value": "Villa við að senda skilaboð"
+  },
+  {
+    "key": "adminChat.statusUpdated",
+    "value": "Staða uppfærð"
+  },
+  {
+    "key": "adminChat.subtitle",
+    "value": "Hafðu samband við viðskiptavini í rauntíma"
+  },
+  {
+    "key": "adminChat.title",
+    "value": "Spjall"
+  },
+  {
+    "key": "adminChat.unknownCustomer",
+    "value": "Óþekktur viðskiptavinur"
+  },
+  {
+    "key": "adminChat.updateStatusError",
+    "value": "Villa við að uppfæra stöðu"
+  },
+  {
+    "key": "adminCustomers.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminCustomers.active",
+    "value": "Virkur"
+  },
+  {
+    "key": "adminCustomers.adjustSearchCriteria",
+    "value": "Vinsamlegast aðlagaðu leitarskilyrðin"
+  },
+  {
+    "key": "adminCustomers.allStatus",
+    "value": "Öll staða"
+  },
+  {
+    "key": "adminCustomers.close",
+    "value": "Loka"
+  },
+  {
+    "key": "adminCustomers.contact",
+    "value": "Hafa samband"
+  },
+  {
+    "key": "adminCustomers.contactInformation",
+    "value": "Samskiptaupplýsingar"
+  },
+  {
+    "key": "adminCustomers.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminCustomers.customerDetails",
+    "value": "Upplýsingar um viðskiptavin"
+  },
+  {
+    "key": "adminCustomers.customerList",
+    "value": "Listi yfir viðskiptavini"
+  },
+  {
+    "key": "adminCustomers.customerManagement",
+    "value": "Umsjón viðskiptavina"
+  },
+  {
+    "key": "adminCustomers.export",
+    "value": "Flytja út"
+  },
+  {
+    "key": "adminCustomers.idLabel",
+    "value": "Auðkenni"
+  },
+  {
+    "key": "adminCustomers.inactive",
+    "value": "Óvirkur"
+  },
+  {
+    "key": "adminCustomers.lastOrder",
+    "value": "Síðasta pöntun"
+  },
+  {
+    "key": "adminCustomers.manageCustomerInfo",
+    "value": "Hafa umsjón með upplýsingum viðskiptavina"
+  },
+  {
+    "key": "adminCustomers.new",
+    "value": "Nýr"
+  },
+  {
+    "key": "adminCustomers.noCustomersFound",
+    "value": "Engir viðskiptavinir fundust"
+  },
+  {
+    "key": "adminCustomers.orderStatistics",
+    "value": "Tölfræði pantana"
+  },
+  {
+    "key": "adminCustomers.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminCustomers.searchCustomers",
+    "value": "Leita að viðskiptavinum"
+  },
+  {
+    "key": "adminCustomers.status",
+    "value": "Staða"
+  },
+  {
+    "key": "adminCustomers.totalOrders",
+    "value": "Samtals pantanir"
+  },
+  {
+    "key": "adminCustomers.totalSpent",
+    "value": "Heildareyðsla"
+  },
+  {
+    "key": "adminCustomers.vip",
+    "value": "VIP"
+  },
+  {
+    "key": "adminDashboard.addProduct",
+    "value": "Bæta við vöru"
+  },
+  {
+    "key": "adminDashboard.amount",
+    "value": "Upphæð"
+  },
+  {
+    "key": "adminDashboard.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminDashboard.dashboardOverview",
+    "value": "Yfirlit mælaborðs"
+  },
+  {
+    "key": "adminDashboard.date",
+    "value": "Dagsetning"
+  },
+  {
+    "key": "adminDashboard.export",
+    "value": "Flytja út"
+  },
+  {
+    "key": "adminDashboard.manageUsers",
+    "value": "Hafa umsjón með notendum"
+  },
+  {
+    "key": "adminDashboard.newOrder",
+    "value": "Ný pöntun"
+  },
+  {
+    "key": "adminDashboard.orderId",
+    "value": "Pöntunarnúmer"
+  },
+  {
+    "key": "adminDashboard.orderStatus",
+    "value": "Staða pöntunar"
+  },
+  {
+    "key": "adminDashboard.recentOrders",
+    "value": "Nýlegar pantanir"
+  },
+  {
+    "key": "adminDashboard.reports",
+    "value": "Skýrslur"
+  },
+  {
+    "key": "adminDashboard.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "adminDashboard.status",
+    "value": "Staða"
+  },
+  {
+    "key": "adminDashboard.topProducts",
+    "value": "Vinsælustu vörur"
+  },
+  {
+    "key": "adminDashboard.totalCustomers",
+    "value": "Fjöldi viðskiptavina"
+  },
+  {
+    "key": "adminDashboard.totalOrders",
+    "value": "Fjöldi pantana"
+  },
+  {
+    "key": "adminDashboard.totalProducts",
+    "value": "Fjöldi vörutegunda"
+  },
+  {
+    "key": "adminDashboard.totalRevenue",
+    "value": "Heildarvelta"
+  },
+  {
+    "key": "adminDashboard.viewAnalytics",
+    "value": "Skoða tölfræði"
+  },
+  {
+    "key": "adminDashboard.welcomeBack",
+    "value": "Velkomin/n aftur"
+  },
+  {
+    "key": "adminLabels.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "adminLabels.addToFavorites",
+    "value": "Bæta í eftirlæti"
+  },
+  {
+    "key": "adminLabels.filters",
+    "value": "Síur"
+  },
+  {
+    "key": "adminLabels.gridView",
+    "value": "Netasýn"
+  },
+  {
+    "key": "adminLabels.listView",
+    "value": "Listasýn"
+  },
+  {
+    "key": "adminLabels.selectImage",
+    "value": "Velja mynd"
+  },
+  {
+    "key": "adminLabels.viewOriginal",
+    "value": "Skoða upprunalega skrá"
+  },
+  {
+    "key": "adminMedia.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminMedia.altText",
+    "value": "Valtexti (Alt text)"
+  },
+  {
+    "key": "adminMedia.altTextDescription",
+    "value": "Lýstu innihaldi myndarinnar. Þetta hjálpar sjónskertum notendum og bætir leitarvélabestun (SEO)."
+  },
+  {
+    "key": "adminMedia.altTextPlaceholder",
+    "value": "Dæmi: Flaska af rauðvíni við hliðina á vínglasi á viðarborði."
+  },
+  {
+    "key": "adminMedia.altTextRecommendation",
+    "value": "Mælt er með nákvæmum valtexta fyrir betra aðgengi og SEO."
+  },
+  {
+    "key": "adminMedia.automaticOptimization",
+    "value": "Sjálfvirk bestun"
+  },
+  {
+    "key": "adminMedia.banners",
+    "value": "Auglýsingaborðar"
+  },
+  {
+    "key": "adminMedia.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminMedia.caption",
+    "value": "Myndatexti"
+  },
+  {
+    "key": "adminMedia.captionDescription",
+    "value": "Stuttur texti sem birtist undir eða yfir myndinni."
+  },
+  {
+    "key": "adminMedia.captionPlaceholder",
+    "value": "Skrifaðu stuttan myndatexta..."
+  },
+  {
+    "key": "adminMedia.categories",
+    "value": "Vöruflokkar"
+  },
+  {
+    "key": "adminMedia.confirmDelete",
+    "value": "Viltu örugglega eyða þessu?"
+  },
+  {
+    "key": "adminMedia.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "adminMedia.deleteSelected",
+    "value": "Eyða völdum"
+  },
+  {
+    "key": "adminMedia.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "adminMedia.descriptionDescription",
+    "value": "Nánari upplýsingar um skrána. Þetta er eingöngu til innanhússnota."
+  },
+  {
+    "key": "adminMedia.descriptionPlaceholder",
+    "value": "Skrifaðu nánari lýsingu..."
+  },
+  {
+    "key": "adminMedia.documents",
+    "value": "Skjöl"
+  },
+  {
+    "key": "adminMedia.dragDropFiles",
+    "value": "Dragðu skrár hingað eða smelltu til að hlaða upp"
+  },
+  {
+    "key": "adminMedia.edit",
+    "value": "Breyta"
+  },
+  {
+    "key": "adminMedia.editMedia",
+    "value": "Breyta skrá"
+  },
+  {
+    "key": "adminMedia.itemSelected",
+    "value": "1 atriði valið"
+  },
+  {
+    "key": "adminMedia.itemsSelected",
+    "value": "atriði valin"
+  },
+  {
+    "key": "adminMedia.manageMediaDescription",
+    "value": "Hér getur þú hlaðið upp og stjórnað myndum, skjölum og öðrum skrám."
+  },
+  {
+    "key": "adminMedia.maxFileSize",
+    "value": "Hámarks skráarstærð"
+  },
+  {
+    "key": "adminMedia.name",
+    "value": "Heiti"
+  },
+  {
+    "key": "adminMedia.next",
+    "value": "Næsta"
+  },
+  {
+    "key": "adminMedia.noMediaDescription",
+    "value": "Engar skrár hafa verið hlaðið upp. Smelltu til að byrja."
+  },
+  {
+    "key": "adminMedia.noMediaFound",
+    "value": "Engar skrár fundust"
+  },
+  {
+    "key": "adminMedia.noMediaInCollection",
+    "value": "Engar skrár í þessum flokki"
+  },
+  {
+    "key": "adminMedia.of",
+    "value": "af"
+  },
+  {
+    "key": "adminMedia.orClickToSelect",
+    "value": "eða smelltu til að velja"
+  },
+  {
+    "key": "adminMedia.preview",
+    "value": "Forskoða"
+  },
+  {
+    "key": "adminMedia.previous",
+    "value": "Fyrri"
+  },
+  {
+    "key": "adminMedia.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminMedia.profile",
+    "value": "Prófíll"
+  },
+  {
+    "key": "adminMedia.results",
+    "value": "Niðurstöður"
+  },
+  {
+    "key": "adminMedia.save",
+    "value": "Vista"
+  },
+  {
+    "key": "adminMedia.saving",
+    "value": "Vistar..."
+  },
+  {
+    "key": "adminMedia.searchMedia",
+    "value": "Leita í miðlasafni"
+  },
+  {
+    "key": "adminMedia.select",
+    "value": "Velja"
+  },
+  {
+    "key": "adminMedia.selectCollection",
+    "value": "Velja safn"
+  },
+  {
+    "key": "adminMedia.selectFiles",
+    "value": "Velja skrár"
+  },
+  {
+    "key": "adminMedia.selectItem",
+    "value": "Velja atriði"
+  },
+  {
+    "key": "adminMedia.selectItems",
+    "value": "Velja atriði"
+  },
+  {
+    "key": "adminMedia.selectMedia",
+    "value": "Velja miðil"
+  },
+  {
+    "key": "adminMedia.selectMultipleMedia",
+    "value": "Velja marga miðla"
+  },
+  {
+    "key": "adminMedia.selectSingleMedia",
+    "value": "Velja einn miðil"
+  },
+  {
+    "key": "adminMedia.selectedFiles",
+    "value": "Valdar skrár"
+  },
+  {
+    "key": "adminMedia.showing",
+    "value": "Sýnir"
+  },
+  {
+    "key": "adminMedia.size",
+    "value": "Stærð"
+  },
+  {
+    "key": "adminMedia.supportedFormats",
+    "value": "Studd skráarsnið"
+  },
+  {
+    "key": "adminMedia.to",
+    "value": "til"
+  },
+  {
+    "key": "adminMedia.type",
+    "value": "Tegund"
+  },
+  {
+    "key": "adminMedia.upload",
+    "value": "Hlaða upp"
+  },
+  {
+    "key": "adminMedia.uploadFiles",
+    "value": "Hlaða upp skrám"
+  },
+  {
+    "key": "adminMedia.uploadFirstMedia",
+    "value": "Hlaða upp fyrsta miðli"
+  },
+  {
+    "key": "adminMedia.uploadGuidelines",
+    "value": "Leiðbeiningar um upphleðslu"
+  },
+  {
+    "key": "adminMedia.uploadMedia",
+    "value": "Hlaða upp miðli"
+  },
+  {
+    "key": "adminMedia.uploadMediaDescription",
+    "value": "Dragðu skrár hingað eða smelltu til að hlaða upp."
+  },
+  {
+    "key": "adminMedia.uploaded",
+    "value": "Upphlaðið"
+  },
+  {
+    "key": "adminMedia.uploading",
+    "value": "Hleður upp..."
+  },
+  {
+    "key": "adminMedia.videos",
+    "value": "Myndbönd"
+  },
+  {
+    "key": "adminMenu.analytics",
+    "value": "Greiningar"
+  },
+  {
+    "key": "adminMenu.analyticsLink",
+    "value": "Greiningar"
+  },
+  {
+    "key": "adminMenu.banners",
+    "value": "Borðar"
+  },
+  {
+    "key": "adminMenu.catalog",
+    "value": "Vörulisti"
+  },
+  {
+    "key": "adminMenu.categories",
+    "value": "Vöruflokkar"
+  },
+  {
+    "key": "adminMenu.content",
+    "value": "Innihald"
+  },
+  {
+    "key": "adminMenu.customers",
+    "value": "Viðskiptavinir"
+  },
+  {
+    "key": "adminMenu.dashboard",
+    "value": "Mælaborð"
+  },
+  {
+    "key": "adminMenu.deliveries",
+    "value": "Afhendingar"
+  },
+  {
+    "key": "adminMenu.demoData",
+    "value": "Sýnisgögn"
+  },
+  {
+    "key": "adminMenu.general",
+    "value": "Almennt"
+  },
+  {
+    "key": "adminMenu.helpText",
+    "value": "Hjálp"
+  },
+  {
+    "key": "adminMenu.manageBusinessSettings",
+    "value": "Fyrirtækisstillingar"
+  },
+  {
+    "key": "adminMenu.media",
+    "value": "Miðlasafn"
+  },
+  {
+    "key": "adminMenu.messages",
+    "value": "Skilaboð"
+  },
+  {
+    "key": "adminMenu.notifications",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminMenu.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminMenu.payment",
+    "value": "Greiðslur"
+  },
+  {
+    "key": "adminMenu.pointOfSale",
+    "value": "Sölukerfi"
+  },
+  {
+    "key": "adminMenu.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminMenu.receipts",
+    "value": "Kvittanir"
+  },
+  {
+    "key": "adminMenu.reports",
+    "value": "Skýrslur"
+  },
+  {
+    "key": "adminMenu.settingsSection",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminMenu.supportCenter",
+    "value": "Þjónustuver"
+  },
+  {
+    "key": "adminMenu.system",
+    "value": "Kerfi"
+  },
+  {
+    "key": "adminMenu.translations",
+    "value": "Þýðingar"
+  },
+  {
+    "key": "adminNavigation.adminUser",
+    "value": "Kerfisstjóri"
+  },
+  {
+    "key": "adminNavigation.analytics",
+    "value": "Greiningar"
+  },
+  {
+    "key": "adminNavigation.banners",
+    "value": "Borðar"
+  },
+  {
+    "key": "adminNavigation.categories",
+    "value": "Flokkar"
+  },
+  {
+    "key": "adminNavigation.chat",
+    "value": "Spjall"
+  },
+  {
+    "key": "adminNavigation.customers",
+    "value": "Viðskiptavinir"
+  },
+  {
+    "key": "adminNavigation.dashboard",
+    "value": "Mælaborð"
+  },
+  {
+    "key": "adminNavigation.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminNavigation.demoData",
+    "value": "Sýnisgögn"
+  },
+  {
+    "key": "adminNavigation.discounts",
+    "value": "Afslættir"
+  },
+  {
+    "key": "adminNavigation.logout",
+    "value": "Útskrá"
+  },
+  {
+    "key": "adminNavigation.media",
+    "value": "Myndefni"
+  },
+  {
+    "key": "adminNavigation.notifications",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminNavigation.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminNavigation.pos",
+    "value": "Sölustaður"
+  },
+  {
+    "key": "adminNavigation.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminNavigation.reports",
+    "value": "Skýrslur"
+  },
+  {
+    "key": "adminNavigation.translations",
+    "value": "Þýðingar"
+  },
+  {
+    "key": "adminNotifications.allStatus",
+    "value": "Allar stöður"
+  },
+  {
+    "key": "adminNotifications.allTypes",
+    "value": "Allar tegundir"
+  },
+  {
+    "key": "adminNotifications.archive",
+    "value": "Setja í geymslu"
+  },
+  {
+    "key": "adminNotifications.archived",
+    "value": "Í geymslu"
+  },
+  {
+    "key": "adminNotifications.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "adminNotifications.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminNotifications.markAllRead",
+    "value": "Merkja allt lesið"
+  },
+  {
+    "key": "adminNotifications.markRead",
+    "value": "Merkja lesið"
+  },
+  {
+    "key": "adminNotifications.markUnread",
+    "value": "Merkja ólesið"
+  },
+  {
+    "key": "adminNotifications.marketing",
+    "value": "Markaðssetning"
+  },
+  {
+    "key": "adminNotifications.notificationArchived",
+    "value": "Tilkynning sett í geymslu"
+  },
+  {
+    "key": "adminNotifications.notificationDeleted",
+    "value": "Tilkynningu eytt"
+  },
+  {
+    "key": "adminNotifications.notificationMarkedRead",
+    "value": "Tilkynning merkt lesin"
+  },
+  {
+    "key": "adminNotifications.notificationMarkedUnread",
+    "value": "Tilkynning merkt ólesin"
+  },
+  {
+    "key": "adminNotifications.notificationUnarchived",
+    "value": "Tilkynning tekin úr geymslu"
+  },
+  {
+    "key": "adminNotifications.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminNotifications.payments",
+    "value": "Greiðslur"
+  },
+  {
+    "key": "adminNotifications.read",
+    "value": "Lesið"
+  },
+  {
+    "key": "adminNotifications.searchNotifications",
+    "value": "Leita í tilkynningum"
+  },
+  {
+    "key": "adminNotifications.security",
+    "value": "Öryggi"
+  },
+  {
+    "key": "adminNotifications.selectAll",
+    "value": "Velja allt"
+  },
+  {
+    "key": "adminNotifications.selectNotificationsFirst",
+    "value": "Veldu tilkynningar fyrst"
+  },
+  {
+    "key": "adminNotifications.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminNotifications.system",
+    "value": "Kerfi"
+  },
+  {
+    "key": "adminNotifications.title",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminNotifications.totalCount",
+    "value": "Heildarfjöldi"
+  },
+  {
+    "key": "adminNotifications.unread",
+    "value": "Ólesið"
+  },
+  {
+    "key": "adminPage.accessDenied",
+    "value": "Aðgangur óheimill"
+  },
+  {
+    "key": "adminPage.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminPage.adjustSearchCriteria",
+    "value": "Breyta leitarskilyrðum"
+  },
+  {
+    "key": "adminPage.allDeliveryMethods",
+    "value": "Allir afhendingarmátar"
+  },
+  {
+    "key": "adminPage.allStatuses",
+    "value": "Öll stöðulýsing"
+  },
+  {
+    "key": "adminPage.amount",
+    "value": "Upphæð"
+  },
+  {
+    "key": "adminPage.assign",
+    "value": "Úthluta"
+  },
+  {
+    "key": "adminPage.assignDeliveryPerson",
+    "value": "Úthluta sendli"
+  },
+  {
+    "key": "adminPage.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminPage.date",
+    "value": "Dagsetning"
+  },
+  {
+    "key": "adminPage.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminPage.deliveryAssigned",
+    "value": "Sendli úthlutað"
+  },
+  {
+    "key": "adminPage.deliveryPerson",
+    "value": "Sendill"
+  },
+  {
+    "key": "adminPage.errorOccurred",
+    "value": "Villa kom upp"
+  },
+  {
+    "key": "adminPage.homeDelivery",
+    "value": "Heimsending"
+  },
+  {
+    "key": "adminPage.manageOrders",
+    "value": "Umsjón pantana"
+  },
+  {
+    "key": "adminPage.newStatus",
+    "value": "Ný staða"
+  },
+  {
+    "key": "adminPage.noOrdersFound",
+    "value": "Engar pantanir fundust"
+  },
+  {
+    "key": "adminPage.noPermission",
+    "value": "Engin heimild"
+  },
+  {
+    "key": "adminPage.order",
+    "value": "Pöntun"
+  },
+  {
+    "key": "adminPage.orderManagement",
+    "value": "Pantanastjórnun"
+  },
+  {
+    "key": "adminPage.results",
+    "value": "Niðurstöður"
+  },
+  {
+    "key": "adminPage.searchOrders",
+    "value": "Leita í pöntunum"
+  },
+  {
+    "key": "adminPage.selectDeliveryPerson",
+    "value": "Veldu sendil"
+  },
+  {
+    "key": "adminPage.status",
+    "value": "Staða"
+  },
+  {
+    "key": "adminPage.statusUpdated",
+    "value": "Staða uppfærð"
+  },
+  {
+    "key": "adminPage.storePickup",
+    "value": "Sækja í verslun"
+  },
+  {
+    "key": "adminPage.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminPage.updateOrder",
+    "value": "Uppfæra pöntun"
+  },
+  {
+    "key": "adminPlaceholders.enterDescriptionEn",
+    "value": "Sláðu inn lýsingu (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterDescriptionIs",
+    "value": "Sláðu inn lýsingu (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterDiscountReasonEn",
+    "value": "Sláðu inn ástæðu afsláttar (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterDiscountReasonIs",
+    "value": "Sláðu inn ástæðu afsláttar (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterIcon",
+    "value": "Sláðu inn táknmynd"
+  },
+  {
+    "key": "adminPlaceholders.enterImageUrl",
+    "value": "Sláðu inn slóð myndar"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaDescEn",
+    "value": "Sláðu inn metalýsingu (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaDescIs",
+    "value": "Sláðu inn metalýsingu (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaTitleEn",
+    "value": "Sláðu inn metatitil (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterMetaTitleIs",
+    "value": "Sláðu inn metatitil (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterNameEn",
+    "value": "Sláðu inn nafn (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterNameIs",
+    "value": "Sláðu inn nafn (íslenska)"
+  },
+  {
+    "key": "adminPlaceholders.enterSlugEn",
+    "value": "Sláðu inn vefslóð (enska)"
+  },
+  {
+    "key": "adminPlaceholders.enterSortOrder",
+    "value": "Sláðu inn röðunarnúmer"
+  },
+  {
+    "key": "adminPlaceholders.enterWebsiteUrl",
+    "value": "Sláðu inn vefslóð"
+  },
+  {
+    "key": "adminPlaceholders.searchForImages",
+    "value": "Leita að myndum"
+  },
+  {
+    "key": "adminProductModal.unsavedChanges",
+    "value": "Óvistaðar breytingar"
+  },
+  {
+    "key": "adminProducts.importFromATVR",
+    "value": "Flytja inn frá ÁTVR"
+  },
+  {
+    "key": "adminProductsPage.adjustSearchOrAdd",
+    "value": "Breyttu leitinni eða bættu við nýrri vöru"
+  },
+  {
+    "key": "adminProductsPage.ageRestricted",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "adminProductsPage.allCategories",
+    "value": "Allir flokkar"
+  },
+  {
+    "key": "adminProductsPage.create",
+    "value": "Stofna"
+  },
+  {
+    "key": "adminProductsPage.descriptionIs",
+    "value": "Lýsing (IS)"
+  },
+  {
+    "key": "adminProductsPage.editProduct",
+    "value": "Breyta vöru"
+  },
+  {
+    "key": "adminProductsPage.imageUrl",
+    "value": "Slóð mynda"
+  },
+  {
+    "key": "adminProductsPage.inStock",
+    "value": "Til á lager"
+  },
+  {
+    "key": "adminProductsPage.manageProducts",
+    "value": "Umsjón vöru"
+  },
+  {
+    "key": "adminProductsPage.nameEn",
+    "value": "Nafn (EN)"
+  },
+  {
+    "key": "adminProductsPage.nameIs",
+    "value": "Nafn (IS)"
+  },
+  {
+    "key": "adminProductsPage.nameRequired",
+    "value": "Nafn er áskilið"
+  },
+  {
+    "key": "adminProductsPage.newProduct",
+    "value": "Ný vara"
+  },
+  {
+    "key": "adminProductsPage.newProductTitle",
+    "value": "Ný vara"
+  },
+  {
+    "key": "adminProductsPage.noProductsFound",
+    "value": "Engar vörur fundust"
+  },
+  {
+    "key": "adminProductsPage.priceRequired",
+    "value": "Verð er áskilið"
+  },
+  {
+    "key": "adminProductsPage.productImages",
+    "value": "Vörumyndir"
+  },
+  {
+    "key": "adminProductsPage.productManagement",
+    "value": "Vörustjórnun"
+  },
+  {
+    "key": "adminProductsPage.searchProducts",
+    "value": "Leita að vörum"
+  },
+  {
+    "key": "adminProductsPage.showOnlyAgeRestricted",
+    "value": "Sýna aðeins aldurstakmarkaðar vörur"
+  },
+  {
+    "key": "adminProductsPage.stockRequired",
+    "value": "Lagerstaða er áskilin"
+  },
+  {
+    "key": "adminProductsPage.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminReports.activeProducts",
+    "value": "Vörur í sölu"
+  },
+  {
+    "key": "adminReports.averageOrderValue",
+    "value": "Meðalverð pöntunar"
+  },
+  {
+    "key": "adminReports.avgOrderFrequency",
+    "value": "Meðaltíðni pantana"
+  },
+  {
+    "key": "adminReports.avgProcessingTime",
+    "value": "Meðalafgreiðslutími"
+  },
+  {
+    "key": "adminReports.completedOrders",
+    "value": "Afgreiddar pantanir"
+  },
+  {
+    "key": "adminReports.completionRate",
+    "value": "Hlutfall afgreiddra pantana"
+  },
+  {
+    "key": "adminReports.customRange",
+    "value": "Sérsniðið tímabil"
+  },
+  {
+    "key": "adminReports.customerSegmentation",
+    "value": "Skipting viðskiptavina"
+  },
+  {
+    "key": "adminReports.customersReport",
+    "value": "Skýrsla viðskiptavina"
+  },
+  {
+    "key": "adminReports.dailySalesTrend",
+    "value": "Dagleg söl þróun"
+  },
+  {
+    "key": "adminReports.days",
+    "value": "Dagar"
+  },
+  {
+    "key": "adminReports.endDate",
+    "value": "Lokadagsetning"
+  },
+  {
+    "key": "adminReports.exportCSV",
+    "value": "Flytja út CSV"
+  },
+  {
+    "key": "adminReports.exportPDF",
+    "value": "Flytja út PDF"
+  },
+  {
+    "key": "adminReports.growthRate",
+    "value": "Vöxtur"
+  },
+  {
+    "key": "adminReports.last",
+    "value": "Síðustu"
+  },
+  {
+    "key": "adminReports.last30Days",
+    "value": "Síðustu 30 daga"
+  },
+  {
+    "key": "adminReports.last7Days",
+    "value": "Síðustu 7 daga"
+  },
+  {
+    "key": "adminReports.last90Days",
+    "value": "Síðustu 90 daga"
+  },
+  {
+    "key": "adminReports.lastYear",
+    "value": "Síðasta ár"
+  },
+  {
+    "key": "adminReports.newCustomers",
+    "value": "Nýir viðskiptavinir"
+  },
+  {
+    "key": "adminReports.noData",
+    "value": "Engin gögn"
+  },
+  {
+    "key": "adminReports.ofTotal",
+    "value": "af heild"
+  },
+  {
+    "key": "adminReports.ofTotalOrders",
+    "value": "af heildarpöntunum"
+  },
+  {
+    "key": "adminReports.orderDistributionByDeliveryMethod",
+    "value": "Dreifing pantana eftir afhendingarmáta"
+  },
+  {
+    "key": "adminReports.orderStatusDistribution",
+    "value": "Staða pantana"
+  },
+  {
+    "key": "adminReports.orders",
+    "value": "Pantanir"
+  },
+  {
+    "key": "adminReports.ordersPerCustomer",
+    "value": "Pantanir á viðskiptavin"
+  },
+  {
+    "key": "adminReports.ordersReport",
+    "value": "Skýrsla pantana"
+  },
+  {
+    "key": "adminReports.outOfStock",
+    "value": "Ekki til á lager"
+  },
+  {
+    "key": "adminReports.pendingOrders",
+    "value": "Pantanir í bið"
+  },
+  {
+    "key": "adminReports.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminReports.productsReport",
+    "value": "Vöruskýrsla"
+  },
+  {
+    "key": "adminReports.refreshData",
+    "value": "Endurhlaða gögn"
+  },
+  {
+    "key": "adminReports.reportType",
+    "value": "Tegund skýrslu"
+  },
+  {
+    "key": "adminReports.revenue",
+    "value": "Tekjur"
+  },
+  {
+    "key": "adminReports.revenueByCategory",
+    "value": "Tekjur eftir flokkum"
+  },
+  {
+    "key": "adminReports.salesReport",
+    "value": "Söluskýrsla"
+  },
+  {
+    "key": "adminReports.startDate",
+    "value": "Upphafsdagsetning"
+  },
+  {
+    "key": "adminReports.thisPeriod",
+    "value": "Þetta tímabil"
+  },
+  {
+    "key": "adminReports.timePeriod",
+    "value": "Tímabil"
+  },
+  {
+    "key": "adminReports.topCustomersByRevenue",
+    "value": "Helstu viðskiptavinir eftir tekjum"
+  },
+  {
+    "key": "adminReports.topSellingProducts",
+    "value": "Mest seldu vörur"
+  },
+  {
+    "key": "adminReports.totalCustomers",
+    "value": "Samtals viðskiptavinir"
+  },
+  {
+    "key": "adminReports.totalOrders",
+    "value": "Samtals pantanir"
+  },
+  {
+    "key": "adminReports.totalProducts",
+    "value": "Samtals vörur"
+  },
+  {
+    "key": "adminReports.totalRevenue",
+    "value": "Samtals tekjur"
+  },
+  {
+    "key": "adminReports.vsPreviousPeriod",
+    "value": "samanborið við fyrra tímabil"
+  },
+  {
+    "key": "adminSettings.accentColor",
+    "value": "Áherslulitur"
+  },
+  {
+    "key": "adminSettings.accessDenied",
+    "value": "Aðgangur hafnaður"
+  },
+  {
+    "key": "adminSettings.accessKey",
+    "value": "Aðgangslykill"
+  },
+  {
+    "key": "adminSettings.addFirstIntegration",
+    "value": "Bættu við fyrstu samþættingu"
+  },
+  {
+    "key": "adminSettings.addFirstPaymentGateway",
+    "value": "Bættu við fyrstu greiðslugátt"
+  },
+  {
+    "key": "adminSettings.addFirstShippingOption",
+    "value": "Bættu við fyrsta sendingarmöguleika"
+  },
+  {
+    "key": "adminSettings.addIntegration",
+    "value": "Bæta við samþættingu"
+  },
+  {
+    "key": "adminSettings.addPaymentGateway",
+    "value": "Bæta við greiðslugátt"
+  },
+  {
+    "key": "adminSettings.addProfile",
+    "value": "Bæta við prófíl"
+  },
+  {
+    "key": "adminSettings.addShippingOption",
+    "value": "Bæta við sendingarmöguleika"
+  },
+  {
+    "key": "adminSettings.addressEnglish",
+    "value": "Heimilisfang (á ensku)"
+  },
+  {
+    "key": "adminSettings.addressIcelandic",
+    "value": "Heimilisfang (á íslensku)"
+  },
+  {
+    "key": "adminSettings.ageRestriction",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "adminSettings.ageRestrictionDescription",
+    "value": "Virkjaðu til að framfylgja aldurstakmörkunum fyrir vörur sem krefjast þess."
+  },
+  {
+    "key": "adminSettings.ageRestrictionNotice",
+    "value": "Tilkynning um aldurstakmark"
+  },
+  {
+    "key": "adminSettings.ageRestrictions",
+    "value": "Aldurstakmarkanir"
+  },
+  {
+    "key": "adminSettings.alcoholNicotineAgeDescription",
+    "value": "Stilltu aldurstakmark fyrir sölu á áfengi og nikótínvörum."
+  },
+  {
+    "key": "adminSettings.alcoholNicotineProducts",
+    "value": "Áfengis- og nikótínvörur"
+  },
+  {
+    "key": "adminSettings.apiKey",
+    "value": "API lykill"
+  },
+  {
+    "key": "adminSettings.apiKeys",
+    "value": "API lyklar"
+  },
+  {
+    "key": "adminSettings.apiKeysConfiguration",
+    "value": "Stillingar API lykla"
+  },
+  {
+    "key": "adminSettings.apiKeysDescription",
+    "value": "Hafa umsjón með API lyklum fyrir utanaðkomandi samþættingar."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote1",
+    "value": "Geymdu lyklana þína á öruggum stað."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote2",
+    "value": "Ekki deila þessum lyklum í biðlaraforritum."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote3",
+    "value": "Takmarkaðu aðgang með því að nota viðeigandi heimildir."
+  },
+  {
+    "key": "adminSettings.apiKeysImportantNote4",
+    "value": "Endurnýjaðu lykla reglulega til að auka öryggi."
+  },
+  {
+    "key": "adminSettings.applicationId",
+    "value": "Auðkenni forrits"
+  },
+  {
+    "key": "adminSettings.assignCategories",
+    "value": "Úthluta flokkum"
+  },
+  {
+    "key": "adminSettings.avgHoursPerDay",
+    "value": "Meðaltímar á dag"
+  },
+  {
+    "key": "adminSettings.backupSettings",
+    "value": "Öryggisafritunarstillingar"
+  },
+  {
+    "key": "adminSettings.baseUrl",
+    "value": "Grunnslóð"
+  },
+  {
+    "key": "adminSettings.business",
+    "value": "Fyrirtæki"
+  },
+  {
+    "key": "adminSettings.businessDescription",
+    "value": "Lýsing fyrirtækis"
+  },
+  {
+    "key": "adminSettings.businessSettings",
+    "value": "Stillingar fyrirtækis"
+  },
+  {
+    "key": "adminSettings.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminSettings.categories",
+    "value": "Flokkar"
+  },
+  {
+    "key": "adminSettings.clientId",
+    "value": "Client ID"
+  },
+  {
+    "key": "adminSettings.clientSecret",
+    "value": "Client Secret"
+  },
+  {
+    "key": "adminSettings.closed",
+    "value": "Lokað"
+  },
+  {
+    "key": "adminSettings.closingTime",
+    "value": "Lokunartími"
+  },
+  {
+    "key": "adminSettings.companyInformation",
+    "value": "Fyrirtækjaupplýsingar"
+  },
+  {
+    "key": "adminSettings.companyNameEnglish",
+    "value": "Nafn fyrirtækis (enska)"
+  },
+  {
+    "key": "adminSettings.companyNameIcelandic",
+    "value": "Nafn fyrirtækis (íslenska)"
+  },
+  {
+    "key": "adminSettings.configuration",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSettings.configureGeneral",
+    "value": "Almennar stillingar"
+  },
+  {
+    "key": "adminSettings.confirmDeleteGateway",
+    "value": "Staðfesta eyðingu greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.confirmDeleteIntegration",
+    "value": "Staðfesta eyðingu samþættingar"
+  },
+  {
+    "key": "adminSettings.confirmDeleteLogo",
+    "value": "Staðfesta eyðingu merkis"
+  },
+  {
+    "key": "adminSettings.confirmDeleteShipping",
+    "value": "Staðfesta eyðingu sendingarmáta"
+  },
+  {
+    "key": "adminSettings.confirmReset",
+    "value": "Staðfesta endurstillingu"
+  },
+  {
+    "key": "adminSettings.connectionTestFailed",
+    "value": "Tenging mistókst"
+  },
+  {
+    "key": "adminSettings.connectionTestSuccessful",
+    "value": "Tenging tókst"
+  },
+  {
+    "key": "adminSettings.copiedHoursToAllDays",
+    "value": "Afritaði opnunartíma yfir á alla daga"
+  },
+  {
+    "key": "adminSettings.copy",
+    "value": "Afrita"
+  },
+  {
+    "key": "adminSettings.copyHours",
+    "value": "Afrita opnunartíma"
+  },
+  {
+    "key": "adminSettings.country",
+    "value": "Land"
+  },
+  {
+    "key": "adminSettings.create",
+    "value": "Stofna"
+  },
+  {
+    "key": "adminSettings.createGateway",
+    "value": "Stofna greiðslugátt"
+  },
+  {
+    "key": "adminSettings.createNewVatProfile",
+    "value": "Stofna nýjan VSK flokk"
+  },
+  {
+    "key": "adminSettings.currency",
+    "value": "Gjaldmiðill"
+  },
+  {
+    "key": "adminSettings.currencyAffects",
+    "value": "Gjaldmiðill hefur áhrif á verðlagningu og greiðslur."
+  },
+  {
+    "key": "adminSettings.currentLogo",
+    "value": "Núverandi merki"
+  },
+  {
+    "key": "adminSettings.customGradient",
+    "value": "Sérsniðinn litahalli"
+  },
+  {
+    "key": "adminSettings.cutoffTime",
+    "value": "Lokunarfrestur fyrir pantanir"
+  },
+  {
+    "key": "adminSettings.dateFormat",
+    "value": "Dagsetningarsnið"
+  },
+  {
+    "key": "adminSettings.dateFormatDDMMYYYY",
+    "value": "DD.MM.YYYY"
+  },
+  {
+    "key": "adminSettings.dateFormatMMDDYYYY",
+    "value": "MM.DD.YYYY"
+  },
+  {
+    "key": "adminSettings.dateFormatYYYYMMDD",
+    "value": "YYYY.MM.DD"
+  },
+  {
+    "key": "adminSettings.dateTimeFormats",
+    "value": "Dagsetningar- og tímasnið"
+  },
+  {
+    "key": "adminSettings.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "adminSettings.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminSettings.deliveryFee",
+    "value": "Sendingargjald"
+  },
+  {
+    "key": "adminSettings.deliveryRadius",
+    "value": "Afhendingarsvæði (km)"
+  },
+  {
+    "key": "adminSettings.deliverySettings",
+    "value": "Sendingarstillingar"
+  },
+  {
+    "key": "adminSettings.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "adminSettings.descriptionEnglish",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "adminSettings.descriptionIcelandic",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "adminSettings.descriptionIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "adminSettings.designColors",
+    "value": "Hönnunarlitir"
+  },
+  {
+    "key": "adminSettings.disabled",
+    "value": "Óvirkt"
+  },
+  {
+    "key": "adminSettings.displayName",
+    "value": "Birtingarheiti"
+  },
+  {
+    "key": "adminSettings.edit",
+    "value": "Breyta"
+  },
+  {
+    "key": "adminSettings.editIntegration",
+    "value": "Breyta samþættingu"
+  },
+  {
+    "key": "adminSettings.editPaymentGateway",
+    "value": "Breyta greiðslugátt"
+  },
+  {
+    "key": "adminSettings.editShippingOption",
+    "value": "Breyta sendingarmöguleika"
+  },
+  {
+    "key": "adminSettings.editVatProfile",
+    "value": "Breyta VSK-sniði"
+  },
+  {
+    "key": "adminSettings.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "adminSettings.enableAgeRestriction",
+    "value": "Virkja aldurstakmark"
+  },
+  {
+    "key": "adminSettings.enableDelivery",
+    "value": "Virkja heimsendingu"
+  },
+  {
+    "key": "adminSettings.enableRestrictions",
+    "value": "Virkja takmarkanir"
+  },
+  {
+    "key": "adminSettings.enableVatForStore",
+    "value": "Virkja VSK fyrir verslun"
+  },
+  {
+    "key": "adminSettings.enabled",
+    "value": "Virkt"
+  },
+  {
+    "key": "adminSettings.enterAccessKey",
+    "value": "Sláðu inn aðgangslykil"
+  },
+  {
+    "key": "adminSettings.enterApiKey",
+    "value": "Sláðu inn API lykil"
+  },
+  {
+    "key": "adminSettings.enterApplicationId",
+    "value": "Sláðu inn auðkenni forrits"
+  },
+  {
+    "key": "adminSettings.enterClientId",
+    "value": "Sláðu inn viðskiptavinarauðkenni"
+  },
+  {
+    "key": "adminSettings.enterClientSecret",
+    "value": "Sláðu inn leynilykil viðskiptavinar"
+  },
+  {
+    "key": "adminSettings.enterGoogleApiKey",
+    "value": "Sláðu inn Google API lykil"
+  },
+  {
+    "key": "adminSettings.enterGoogleSearchEngineId",
+    "value": "Sláðu inn Google leitarvélarauðkenni"
+  },
+  {
+    "key": "adminSettings.enterMerchantId",
+    "value": "Sláðu inn söluaðilaauðkenni"
+  },
+  {
+    "key": "adminSettings.enterPaymentGatewayId",
+    "value": "Sláðu inn greiðslugáttarauðkenni"
+  },
+  {
+    "key": "adminSettings.enterPexelsApiKey",
+    "value": "Sláðu inn Pexels API lykil"
+  },
+  {
+    "key": "adminSettings.enterPixabayApiKey",
+    "value": "Sláðu inn Pixabay API lykil"
+  },
+  {
+    "key": "adminSettings.currencyUSD",
+    "value": "Bandaríkjadalur"
+  },
+  {
+    "key": "adminSettings.currencyEUR",
+    "value": "Evra"
+  },
+  {
+    "key": "adminSettings.enterPrivateKey",
+    "value": "Sláðu inn einkalykil"
+  },
+  {
+    "key": "adminSettings.enterPublicKey",
+    "value": "Sláðu inn almennan lykil"
+  },
+  {
+    "key": "adminSettings.enterPublishableKey",
+    "value": "Sláðu inn birtingarlykil"
+  },
+  {
+    "key": "adminSettings.enterSecretKey",
+    "value": "Sláðu inn leynilykil"
+  },
+  {
+    "key": "adminSettings.enterUnsplashApiKey",
+    "value": "Sláðu inn Unsplash API lykil"
+  },
+  {
+    "key": "adminSettings.enterWebhookSecret",
+    "value": "Sláðu inn Webhook leynilykil"
+  },
+  {
+    "key": "adminSettings.environment",
+    "value": "Umhverfi"
+  },
+  {
+    "key": "adminSettings.errorLoadingPaymentGateways",
+    "value": "Villa við að hlaða greiðslugáttum"
+  },
+  {
+    "key": "adminSettings.errorSavingPaymentGateway",
+    "value": "Villa við vistun greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.errorTestingPaymentGateway",
+    "value": "Villa við prófun greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.errorTogglingPaymentGateway",
+    "value": "Villa við að virkja/afvirkja greiðslugátt"
+  },
+  {
+    "key": "adminSettings.errorUpdatingPaymentGateway",
+    "value": "Villa við uppfærslu greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.estimatedDays",
+    "value": "Áætlaðir dagar"
+  },
+  {
+    "key": "adminSettings.euCountries",
+    "value": "ESB-lönd"
+  },
+  {
+    "key": "adminSettings.failedToSaveSettings",
+    "value": "Ekki tókst að vista stillingar"
+  },
+  {
+    "key": "adminSettings.fee",
+    "value": "Gjald"
+  },
+  {
+    "key": "adminSettings.fileSizeTooLarge",
+    "value": "Skráin er of stór"
+  },
+  {
+    "key": "adminSettings.fontFamily",
+    "value": "Leturgerð"
+  },
+  {
+    "key": "adminSettings.fontSize",
+    "value": "Leturstærð"
+  },
+  {
+    "key": "adminSettings.footerMessages",
+    "value": "Skilaboð í síðufæti"
+  },
+  {
+    "key": "adminSettings.footerTextEnPlaceholder",
+    "value": "Sláðu inn texta á ensku"
+  },
+  {
+    "key": "adminSettings.footerTextEnglish",
+    "value": "Texti í síðufæti (enska)"
+  },
+  {
+    "key": "adminSettings.footerTextIcelandic",
+    "value": "Texti í síðufæti (íslenska)"
+  },
+  {
+    "key": "adminSettings.footerTextIsPlaceholder",
+    "value": "Sláðu inn texta á íslensku"
+  },
+  {
+    "key": "adminSettings.freeDeliveryThreshold",
+    "value": "Lágmarksupphæð fyrir fría heimsendingu"
+  },
+  {
+    "key": "adminSettings.friday",
+    "value": "Föstudagur"
+  },
+  {
+    "key": "adminSettings.gatewayName",
+    "value": "Heiti greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.general",
+    "value": "Almennt"
+  },
+  {
+    "key": "adminSettings.generalDescription",
+    "value": "Almennar stillingar fyrir vefsíðuna."
+  },
+  {
+    "key": "adminSettings.generalProducts",
+    "value": "Vörur"
+  },
+  {
+    "key": "adminSettings.generalProductsDescription",
+    "value": "Stillingar fyrir vörur og birgðir."
+  },
+  {
+    "key": "adminSettings.generalSettings",
+    "value": "Almennar stillingar"
+  },
+  {
+    "key": "adminSettings.googleApiKey",
+    "value": "Google API lykill"
+  },
+  {
+    "key": "adminSettings.googleCloudConsole",
+    "value": "Google Cloud Console"
+  },
+  {
+    "key": "adminSettings.gradientColor",
+    "value": "Stigullitur"
+  },
+  {
+    "key": "adminSettings.gradientHelpText",
+    "value": "Veldu upphafs- og endalit til að búa til stigul."
+  },
+  {
+    "key": "adminSettings.headerColor",
+    "value": "Hauslitur"
+  },
+  {
+    "key": "adminSettings.iceland",
+    "value": "Ísland"
+  },
+  {
+    "key": "adminSettings.importantNotes",
+    "value": "Mikilvægar athugasemdir"
+  },
+  {
+    "key": "adminSettings.includeVatInCustomerPrice",
+    "value": "VSK innifalinn í verði til viðskiptavinar"
+  },
+  {
+    "key": "adminSettings.includeVatInCustomerPriceDescription",
+    "value": "Ef virkt er VSK innifalinn í vöruverði sem viðskiptavinur sér."
+  },
+  {
+    "key": "adminSettings.integrationConfiguration",
+    "value": "Samþættingarstillingar"
+  },
+  {
+    "key": "adminSettings.integrationDescription",
+    "value": "Lýsing á samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationName",
+    "value": "Nafn samþættingar"
+  },
+  {
+    "key": "adminSettings.integrationNote1",
+    "value": "Athugasemd 1 um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationNote2",
+    "value": "Athugasemd 2 um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationNote3",
+    "value": "Athugasemd 3 um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrationNotes",
+    "value": "Athugasemdir um samþættingu"
+  },
+  {
+    "key": "adminSettings.integrations",
+    "value": "Samþættingar"
+  },
+  {
+    "key": "adminSettings.integrationsDescription",
+    "value": "Hafa umsjón með samþættingum við þriðja aðila."
+  },
+  {
+    "key": "adminSettings.invalidFileType",
+    "value": "Ógild skráartegund"
+  },
+  {
+    "key": "adminSettings.language",
+    "value": "Tungumál"
+  },
+  {
+    "key": "adminSettings.languageEnglish",
+    "value": "Enska"
+  },
+  {
+    "key": "adminSettings.languageIcelandic",
+    "value": "Íslenska"
+  },
+  {
+    "key": "adminSettings.languageSets",
+    "value": "Tungumálasett"
+  },
+  {
+    "key": "adminSettings.lastSync",
+    "value": "Síðasta samstilling"
+  },
+  {
+    "key": "adminSettings.livePreview",
+    "value": "Forskoðun í beinni"
+  },
+  {
+    "key": "adminSettings.logo",
+    "value": "Lógó"
+  },
+  {
+    "key": "adminSettings.logoAlwaysInvert",
+    "value": "Alltaf öfugsnúið lógó"
+  },
+  {
+    "key": "adminSettings.logoColorMode",
+    "value": "Litastilling lógós"
+  },
+  {
+    "key": "adminSettings.logoNoInversion",
+    "value": "Engin öfugsnúningur"
+  },
+  {
+    "key": "adminSettings.logoThemeAware",
+    "value": "Þemamiðað lógó"
+  },
+  {
+    "key": "adminSettings.logoUploadFailed",
+    "value": "Mistókst að hlaða upp lógói"
+  },
+  {
+    "key": "adminSettings.webhookSecret",
+    "value": "Webhook leynilykill"
+  },
+  {
+    "key": "adminSettings.logoUploadedSuccessfully",
+    "value": "Tókst að hlaða upp lógói"
+  },
+  {
+    "key": "adminSettings.maintenance",
+    "value": "Viðhald"
+  },
+  {
+    "key": "adminSettings.maintenanceComingSoon",
+    "value": "Væntanlegt"
+  },
+  {
+    "key": "adminSettings.maintenanceDescription",
+    "value": "Virkjaðu viðhaldsham til að taka vefsíðuna niður tímabundið."
+  },
+  {
+    "key": "adminSettings.manageSystemSettings",
+    "value": "Hafa umsjón með kerfisstillingum"
+  },
+  {
+    "key": "adminSettings.merchantId",
+    "value": "Auðkenni söluaðila"
+  },
+  {
+    "key": "adminSettings.monday",
+    "value": "Mánudagur"
+  },
+  {
+    "key": "adminSettings.nameEnglish",
+    "value": "Nafn (enska)"
+  },
+  {
+    "key": "adminSettings.nameIcelandic",
+    "value": "Nafn (íslenska)"
+  },
+  {
+    "key": "adminSettings.needHelp",
+    "value": "Þarftu hjálp?"
+  },
+  {
+    "key": "adminSettings.netgiro",
+    "value": "Netgíró"
+  },
+  {
+    "key": "adminSettings.nicotineAgeDescription",
+    "value": "Lýsing á aldurstakmarki fyrir nikótín"
+  },
+  {
+    "key": "adminSettings.nicotineProducts",
+    "value": "Nikótínvörur"
+  },
+  {
+    "key": "adminSettings.noCategoriesAvailable",
+    "value": "Engir flokkar í boði"
+  },
+  {
+    "key": "adminSettings.noIntegrations",
+    "value": "Engar samþættingar"
+  },
+  {
+    "key": "adminSettings.noIntegrationsDescription",
+    "value": "Engar samþættingar hafa verið settar upp."
+  },
+  {
+    "key": "adminSettings.noLogoUploaded",
+    "value": "Ekkert lógó hefur verið hlaðið upp"
+  },
+  {
+    "key": "adminSettings.noPaymentGateways",
+    "value": "Engar greiðslugáttir"
+  },
+  {
+    "key": "adminSettings.noPaymentGatewaysDescription",
+    "value": "Engar greiðslugáttir hafa verið settar upp."
+  },
+  {
+    "key": "adminSettings.noPermissionMessage",
+    "value": "Þú hefur ekki heimild til að skoða þessa síðu."
+  },
+  {
+    "key": "adminSettings.noShippingOptions",
+    "value": "Engir sendingarmöguleikar"
+  },
+  {
+    "key": "adminSettings.noShippingOptionsDescription",
+    "value": "Engir sendingarmöguleikar hafa verið settir upp."
+  },
+  {
+    "key": "adminSettings.noVatProfilesCreated",
+    "value": "Engir VSK sniðmát hafa verið stofnuð"
+  },
+  {
+    "key": "adminSettings.notifications",
+    "value": "Tilkynningar"
+  },
+  {
+    "key": "adminSettings.notificationsComingSoon",
+    "value": "Tilkynningar væntanlegar"
+  },
+  {
+    "key": "adminSettings.notificationsDescription",
+    "value": "Hafa umsjón með tilkynningum viðskiptavina."
+  },
+  {
+    "key": "adminSettings.openDays",
+    "value": "Opnunardagar"
+  },
+  {
+    "key": "adminSettings.openingHours",
+    "value": "Opnunartími"
+  },
+  {
+    "key": "adminSettings.openingTime",
+    "value": "Opnunartími"
+  },
+  {
+    "key": "adminSettings.operation24h",
+    "value": "Opið allan sólarhringinn"
+  },
+  {
+    "key": "adminSettings.otherCountries",
+    "value": "Önnur lönd"
+  },
+  {
+    "key": "adminSettings.paperSize",
+    "value": "Pappírsstærð"
+  },
+  {
+    "key": "adminSettings.paymentGatewayConfiguration",
+    "value": "Stillingar greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.paymentGatewayDescription",
+    "value": "Hafa umsjón með greiðslugáttum."
+  },
+  {
+    "key": "adminSettings.paymentGatewayId",
+    "value": "Auðkenni greiðslugáttar"
+  },
+  {
+    "key": "adminSettings.paymentGatewayNote1",
+    "value": "Athugið: Teya þarf að vera virkjað af starfsfólki Ölföngs."
+  },
+  {
+    "key": "adminSettings.paymentGatewayNote2",
+    "value": "Athugið: Valitor þarf að vera virkjað af starfsfólki Ölföngs."
+  },
+  {
+    "key": "adminSettings.paymentGatewayNote3",
+    "value": "Athugið: Rapyd þarf að vera virkjað af starfsfólki Ölföngs."
+  },
+  {
+    "key": "adminSettings.paymentGatewayNotes",
+    "value": "Athugasemdir um greiðslugáttir"
+  },
+  {
+    "key": "adminSettings.paymentGatewayTestSuccessful",
+    "value": "Prófun greiðslugáttar tókst"
+  },
+  {
+    "key": "adminSettings.paymentGatewayUpdatedSuccessfully",
+    "value": "Greiðslugátt uppfærð"
+  },
+  {
+    "key": "adminSettings.paymentGateways",
+    "value": "Greiðslugáttir"
+  },
+  {
+    "key": "adminSettings.paypal",
+    "value": "PayPal"
+  },
+  {
+    "key": "adminSettings.pexelsApi",
+    "value": "Pexels API"
+  },
+  {
+    "key": "adminSettings.pexelsApiKey",
+    "value": "Pexels API lykill"
+  },
+  {
+    "key": "adminSettings.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "adminSettings.phoneNumber",
+    "value": "Símanúmer"
+  },
+  {
+    "key": "adminSettings.pickup",
+    "value": "Sækja"
+  },
+  {
+    "key": "adminSettings.pixabayApi",
+    "value": "Pixabay API"
+  },
+  {
+    "key": "adminSettings.pixabayApiKey",
+    "value": "Pixabay API lykill"
+  },
+  {
+    "key": "adminSettings.pleaseSelectProvider",
+    "value": "Vinsamlegast veldu þjónustuaðila"
+  },
+  {
+    "key": "adminSettings.preferences",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSettings.preferencesDesc",
+    "value": "Hafa umsjón með almennum stillingum verslunar."
+  },
+  {
+    "key": "adminSettings.price",
+    "value": "Verð"
+  },
+  {
+    "key": "adminSettings.printView",
+    "value": "Prentvæn útgáfa"
+  },
+  {
+    "key": "adminSettings.privateKey",
+    "value": "Einkalykill"
+  },
+  {
+    "key": "adminSettings.production",
+    "value": "Raunvinnsluumhverfi"
+  },
+  {
+    "key": "adminSettings.provider",
+    "value": "Þjónustuaðili"
+  },
+  {
+    "key": "adminSettings.publicKey",
+    "value": "Opinber lykill"
+  },
+  {
+    "key": "adminSettings.publishableKey",
+    "value": "Birtingarlykill"
+  },
+  {
+    "key": "adminSettings.quickActions",
+    "value": "Flýtiaðgerðir"
+  },
+  {
+    "key": "adminSettings.rapyd",
+    "value": "Rapyd"
+  },
+  {
+    "key": "adminSettings.receiptSettings",
+    "value": "Stillingar kvittana"
+  },
+  {
+    "key": "adminSettings.receiptSettingsDescription",
+    "value": "Sérsníddu útlit og innihald kvittana fyrir viðskiptavini."
+  },
+  {
+    "key": "adminSettings.receiptSettingsSaved",
+    "value": "Stillingar kvittana vistaðar."
+  },
+  {
+    "key": "adminSettings.receipts",
+    "value": "Kvittanir"
+  },
+  {
+    "key": "adminSettings.remove",
+    "value": "Fjarlægja"
+  },
+  {
+    "key": "adminSettings.resetToDefaults",
+    "value": "Endurstilla á sjálfgefin gildi"
+  },
+  {
+    "key": "adminSettings.sandbox",
+    "value": "Sandkassi"
+  },
+  {
+    "key": "adminSettings.saturday",
+    "value": "Laugardagur"
+  },
+  {
+    "key": "adminSettings.save",
+    "value": "Vista"
+  },
+  {
+    "key": "adminSettings.saveChanges",
+    "value": "Vista breytingar"
+  },
+  {
+    "key": "adminSettings.saveProfile",
+    "value": "Vista prófíl"
+  },
+  {
+    "key": "adminSettings.saveSettings",
+    "value": "Vista stillingar"
+  },
+  {
+    "key": "adminSettings.saving",
+    "value": "Vistar..."
+  },
+  {
+    "key": "adminSettings.screenView",
+    "value": "Skjámynd"
+  },
+  {
+    "key": "adminSettings.secretKey",
+    "value": "Leynilykill"
+  },
+  {
+    "key": "adminSettings.security",
+    "value": "Öryggi"
+  },
+  {
+    "key": "adminSettings.securityAndAccess",
+    "value": "Öryggi og aðgangur"
+  },
+  {
+    "key": "adminSettings.securityAndAccessDescription",
+    "value": "Hafa umsjón með öryggisstillingum og aðgangsheimildum notenda."
+  },
+  {
+    "key": "adminSettings.securityComingSoon",
+    "value": "Öryggisstillingar væntanlegar"
+  },
+  {
+    "key": "adminSettings.securityDescription",
+    "value": "Hafa umsjón með öryggisstillingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.selectPaymentProvider",
+    "value": "Veldu greiðsluveitu"
+  },
+  {
+    "key": "adminSettings.set24hSuccess",
+    "value": "Opnunartímar stilltir á allan sólarhringinn."
+  },
+  {
+    "key": "adminSettings.setAsDefault",
+    "value": "Setja sem sjálfgefið"
+  },
+  {
+    "key": "adminSettings.setWeekdayHours",
+    "value": "Stilla opnunartíma virka daga"
+  },
+  {
+    "key": "adminSettings.setWeekdayHoursSuccess",
+    "value": "Opnunartímar virka daga vistaðir."
+  },
+  {
+    "key": "adminSettings.setWeekendHours",
+    "value": "Stilla opnunartíma helgar"
+  },
+  {
+    "key": "adminSettings.setWeekendHoursSuccess",
+    "value": "Opnunartímar helgar vistaðir."
+  },
+  {
+    "key": "adminSettings.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSettings.settingsControlDesc",
+    "value": "Hafa umsjón með almennum stillingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.settingsReset",
+    "value": "Stillingar endurstilltar."
+  },
+  {
+    "key": "adminSettings.settingsSaved",
+    "value": "Stillingar vistaðar."
+  },
+  {
+    "key": "adminSettings.shipping",
+    "value": "Sending"
+  },
+  {
+    "key": "adminSettings.shippingConfiguration",
+    "value": "Sendingarstillingar"
+  },
+  {
+    "key": "adminSettings.shippingDescription",
+    "value": "Hafa umsjón með sendingarmátum og gjöldum."
+  },
+  {
+    "key": "adminSettings.shippingName",
+    "value": "Heiti sendingarmáta"
+  },
+  {
+    "key": "adminSettings.shippingNameIs",
+    "value": "Heiti sendingarmáta er"
+  },
+  {
+    "key": "adminSettings.shippingNote1",
+    "value": "Athugasemd 1 fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingNote2",
+    "value": "Athugasemd 2 fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingNote3",
+    "value": "Athugasemd 3 fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingNotes",
+    "value": "Athugasemdir fyrir sendingu"
+  },
+  {
+    "key": "adminSettings.shippingType",
+    "value": "Tegund sendingar"
+  },
+  {
+    "key": "adminSettings.showBarcode",
+    "value": "Sýna strikamerki"
+  },
+  {
+    "key": "adminSettings.showQRCode",
+    "value": "Sýna QR kóða"
+  },
+  {
+    "key": "adminSettings.showVatBreakdown",
+    "value": "Sýna VSK sundurliðun"
+  },
+  {
+    "key": "adminSettings.showVatBreakdownDescription",
+    "value": "Sýna sundurliðun virðisaukaskatts á kvittunum."
+  },
+  {
+    "key": "adminSettings.showVatInAdmin",
+    "value": "Sýna VSK í stjórnborði"
+  },
+  {
+    "key": "adminSettings.showVatInAdminDescription",
+    "value": "Sýna verð með virðisaukaskatti í stjórnborðinu."
+  },
+  {
+    "key": "adminSettings.smtp",
+    "value": "SMTP"
+  },
+  {
+    "key": "adminSettings.smtp.authCredentials",
+    "value": "Auðkenningarskilríki"
+  },
+  {
+    "key": "adminSettings.smtp.commonProviders",
+    "value": "Algengar veitur"
+  },
+  {
+    "key": "adminSettings.smtp.connectionFailed",
+    "value": "Tenging mistókst"
+  },
+  {
+    "key": "adminSettings.smtp.connectionFailedMsg",
+    "value": "Ekki tókst að tengjast SMTP þjóninum. Vinsamlegast athugaðu stillingarnar og reynið aftur."
+  },
+  {
+    "key": "adminSettings.smtp.connectionSuccess",
+    "value": "Tenging tókst"
+  },
+  {
+    "key": "adminSettings.smtp.connectionSuccessMsg",
+    "value": "Tenging við SMTP þjóninn þinn tókst."
+  },
+  {
+    "key": "adminSettings.smtp.description",
+    "value": "Stilltu SMTP fyrir sendingu sjálfvirkra tölvupósta."
+  },
+  {
+    "key": "adminSettings.smtp.enableSmtp",
+    "value": "Virkja SMTP"
+  },
+  {
+    "key": "adminSettings.smtp.fromEmail",
+    "value": "Frá netfangi"
+  },
+  {
+    "key": "adminSettings.smtp.fromEmailHelp",
+    "value": "Netfangið sem birtist í 'Frá' reitnum."
+  },
+  {
+    "key": "adminSettings.smtp.fromNameEn",
+    "value": "Nafn sendanda (enska)"
+  },
+  {
+    "key": "adminSettings.smtp.fromNameIs",
+    "value": "Nafn sendanda (íslenska)"
+  },
+  {
+    "key": "adminSettings.smtp.gmailTip",
+    "value": "Fyrir Gmail gætirðu þurft að nota 'App lykilorð'."
+  },
+  {
+    "key": "adminSettings.smtp.host",
+    "value": "Vél"
+  },
+  {
+    "key": "adminSettings.smtp.hostHelp",
+    "value": "Veffang SMTP þjónsins (t.d. smtp.gmail.com)."
+  },
+  {
+    "key": "adminSettings.smtp.password",
+    "value": "Lykilorð"
+  },
+  {
+    "key": "adminSettings.smtp.passwordHelp",
+    "value": "Lykilorðið fyrir SMTP aðganginn þinn."
+  },
+  {
+    "key": "adminSettings.smtp.port",
+    "value": "Gátt"
+  },
+  {
+    "key": "adminSettings.smtp.portHelp",
+    "value": "Gáttin sem SMTP þjónninn þinn notar (t.d. 587 fyrir TLS)."
+  },
+  {
+    "key": "adminSettings.smtp.providerGmail",
+    "value": "Gmail"
+  },
+  {
+    "key": "adminSettings.smtp.providerMailgun",
+    "value": "Mailgun"
+  },
+  {
+    "key": "adminSettings.smtp.providerOutlook",
+    "value": "Outlook"
+  },
+  {
+    "key": "adminSettings.smtp.providerSendGrid",
+    "value": "SendGrid"
+  },
+  {
+    "key": "adminSettings.smtp.providerYahoo",
+    "value": "Yahoo"
+  },
+  {
+    "key": "adminSettings.smtp.saveSettings",
+    "value": "Vista stillingar"
+  },
+  {
+    "key": "adminSettings.smtp.secureHelp",
+    "value": "Notaðu SSL/TLS fyrir örugga tengingu."
+  },
+  {
+    "key": "adminSettings.smtp.senderInfo",
+    "value": "Upplýsingar um sendanda"
+  },
+  {
+    "key": "adminSettings.smtp.testConnection",
+    "value": "Prófa tengingu"
+  },
+  {
+    "key": "adminSettings.smtp.testingConnection",
+    "value": "Prófa tengingu..."
+  },
+  {
+    "key": "adminSettings.smtp.useSecure",
+    "value": "Nota örugga tengingu"
+  },
+  {
+    "key": "adminSettings.smtp.username",
+    "value": "Notandanafn"
+  },
+  {
+    "key": "adminSettings.smtpSettings",
+    "value": "SMTP stillingar"
+  },
+  {
+    "key": "adminSettings.solidColor",
+    "value": "Heill litur"
+  },
+  {
+    "key": "adminSettings.sortOrder",
+    "value": "Röðun"
+  },
+  {
+    "key": "adminSettings.storeAddress",
+    "value": "Heimilisfang verslunar"
+  },
+  {
+    "key": "adminSettings.storeDescription",
+    "value": "Lýsing á verslun"
+  },
+  {
+    "key": "adminSettings.storeEmail",
+    "value": "Netfang verslunar"
+  },
+  {
+    "key": "adminSettings.storeInformation",
+    "value": "Upplýsingar um verslun"
+  },
+  {
+    "key": "adminSettings.storeInformationDesc",
+    "value": "Hafðu umsjón með grunnupplýsingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.storeName",
+    "value": "Nafn verslunar"
+  },
+  {
+    "key": "adminSettings.storeNameAppears",
+    "value": "Þetta nafn birtist um alla verslunina þína."
+  },
+  {
+    "key": "adminSettings.storeSettings",
+    "value": "Stillingar verslunar"
+  },
+  {
+    "key": "adminSettings.storeSettingsDescription",
+    "value": "Hafðu umsjón með almennum stillingum verslunarinnar."
+  },
+  {
+    "key": "adminSettings.stripe",
+    "value": "Stripe"
+  },
+  {
+    "key": "adminSettings.sunday",
+    "value": "Sunnudagur"
+  },
+  {
+    "key": "adminSettings.supportedMethods",
+    "value": "Studdar aðferðir"
+  },
+  {
+    "key": "adminSettings.supportedPaymentMethods",
+    "value": "Studdar greiðslumáta"
+  },
+  {
+    "key": "adminSettings.syncData",
+    "value": "Samstilla gögn"
+  },
+  {
+    "key": "adminSettings.system",
+    "value": "Kerfi"
+  },
+  {
+    "key": "adminSettings.systemDescription",
+    "value": "Hafðu umsjón með kerfisstillingum."
+  },
+  {
+    "key": "adminSettings.taxId",
+    "value": "VSK númer"
+  },
+  {
+    "key": "adminSettings.templateLayout",
+    "value": "Sniðmátsskipulag"
+  },
+  {
+    "key": "adminSettings.templateStyle",
+    "value": "Stíll sniðmáts"
+  },
+  {
+    "key": "adminSettings.test",
+    "value": "Prófa"
+  },
+  {
+    "key": "adminSettings.testConnection",
+    "value": "Prófa tengingu"
+  },
+  {
+    "key": "adminSettings.testing",
+    "value": "Prófun"
+  },
+  {
+    "key": "adminSettings.teya",
+    "value": "Teya"
+  },
+  {
+    "key": "adminSettings.thursday",
+    "value": "Fimmtudagur"
+  },
+  {
+    "key": "adminSettings.timeFormat",
+    "value": "Tímasnið"
+  },
+  {
+    "key": "adminSettings.timeFormat12h",
+    "value": "12 klst."
+  },
+  {
+    "key": "adminSettings.timeFormat24h",
+    "value": "24 klst."
+  },
+  {
+    "key": "adminSettings.to",
+    "value": "Til"
+  },
+  {
+    "key": "adminSettings.totalHoursPerWeek",
+    "value": "Heildarstundafjöldi á viku"
+  },
+  {
+    "key": "adminSettings.tuesday",
+    "value": "Þriðjudagur"
+  },
+  {
+    "key": "adminSettings.type",
+    "value": "Tegund"
+  },
+  {
+    "key": "adminSettings.unsplashApiKey",
+    "value": "Unsplash API lykill"
+  },
+  {
+    "key": "adminSettings.unsplashDevelopers",
+    "value": "Unsplash þróunaraðilar"
+  },
+  {
+    "key": "adminSettings.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminSettings.updateGateway",
+    "value": "Uppfæra greiðslugátt"
+  },
+  {
+    "key": "adminSettings.uploadLogo",
+    "value": "Hlaða upp merki"
+  },
+  {
+    "key": "adminSettings.uploadLogoDescription",
+    "value": "Hladdu upp merki fyrirtækisins til að sérsníða útlit verslunarinnar."
+  },
+  {
+    "key": "adminSettings.uploadLogoFormats",
+    "value": "Studd skráarsnið: PNG, JPG, SVG"
+  },
+  {
+    "key": "adminSettings.valitor",
+    "value": "Valitor"
+  },
+  {
+    "key": "adminSettings.vat",
+    "value": "VSK"
+  },
+  {
+    "key": "adminSettings.vatConfiguration",
+    "value": "Uppsetning VSK"
+  },
+  {
+    "key": "adminSettings.vatDescription",
+    "value": "Hafðu umsjón með stillingum fyrir virðisaukaskatt."
+  },
+  {
+    "key": "adminSettings.vatDisplaySettings",
+    "value": "Sýnileikastillingar VSK"
+  },
+  {
+    "key": "adminSettings.vatEnabled",
+    "value": "VSK virkt"
+  },
+  {
+    "key": "adminSettings.vatInformation",
+    "value": "Upplýsingar um VSK"
+  },
+  {
+    "key": "adminSettings.vatInformationDescription",
+    "value": "Stjórnaðu því hvernig upplýsingar um VSK eru sýndar á síðunni."
+  },
+  {
+    "key": "adminSettings.vatProfiles",
+    "value": "VSK flokkar"
+  },
+  {
+    "key": "adminSettings.vatRate",
+    "value": "VSK hlutfall"
+  },
+  {
+    "key": "adminSettings.vatRateDescription",
+    "value": "Sjálfgefið VSK hlutfall fyrir nýjar vörur."
+  },
+  {
+    "key": "adminSettings.vatRateLabel",
+    "value": "Heiti VSK hlutfalls"
+  },
+  {
+    "key": "adminSettings.vatRatePercent",
+    "value": "VSK í prósentum"
+  },
+  {
+    "key": "adminSettings.vatSettings",
+    "value": "VSK stillingar"
+  },
+  {
+    "key": "adminSettings.website",
+    "value": "Vefsíða"
+  },
+  {
+    "key": "adminSettings.wednesday",
+    "value": "Miðvikudagur"
+  },
+  {
+    "key": "adminSettings.weeklySummary",
+    "value": "Vikuyfirlit"
+  },
+  {
+    "key": "adminSettings.years",
+    "value": "Ár"
+  },
+  {
+    "key": "adminSidebar.adminEmail",
+    "value": "Netfang stjórnanda"
+  },
+  {
+    "key": "adminSidebar.analytics",
+    "value": "Vefgreining"
+  },
+  {
+    "key": "adminSidebar.catalog",
+    "value": "Vörulisti"
+  },
+  {
+    "key": "adminSidebar.comprehensiveInsights",
+    "value": "Ítarleg innsýn"
+  },
+  {
+    "key": "adminSidebar.content",
+    "value": "Innihald"
+  },
+  {
+    "key": "adminSidebar.customersAndCommunication",
+    "value": "Viðskiptavinir og samskipti"
+  },
+  {
+    "key": "adminSidebar.overview",
+    "value": "Yfirlit"
+  },
+  {
+    "key": "adminSidebar.reportsAnalytics",
+    "value": "Skýrslur og vefgreining"
+  },
+  {
+    "key": "adminSidebar.sales",
+    "value": "Sala"
+  },
+  {
+    "key": "adminSidebar.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "adminSidebar.system",
+    "value": "Kerfisstillingar"
+  },
+  {
+    "key": "adminTranslations.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminTranslations.addTranslation",
+    "value": "Bæta við þýðingu"
+  },
+  {
+    "key": "adminTranslations.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminTranslations.complete",
+    "value": "Lokið"
+  },
+  {
+    "key": "adminTranslations.confirmDelete",
+    "value": "Staðfesta eyðslu"
+  },
+  {
+    "key": "adminTranslations.editTranslation",
+    "value": "Breyta þýðingu"
+  },
+  {
+    "key": "adminTranslations.english",
+    "value": "Enska"
+  },
+  {
+    "key": "adminTranslations.errorDeleting",
+    "value": "Villa við eyðslu"
+  },
+  {
+    "key": "adminTranslations.errorFetching",
+    "value": "Villa við að sækja gögn"
+  },
+  {
+    "key": "adminTranslations.errorSaving",
+    "value": "Villa við vistun"
+  },
+  {
+    "key": "adminTranslations.exportCSV",
+    "value": "Flytja út sem CSV"
+  },
+  {
+    "key": "adminTranslations.exportError",
+    "value": "Villa við útflutning"
+  },
+  {
+    "key": "adminTranslations.exportJSON",
+    "value": "Flytja út sem JSON"
+  },
+  {
+    "key": "adminTranslations.exportSuccess",
+    "value": "Útflutningur tókst"
+  },
+  {
+    "key": "adminTranslations.hideStats",
+    "value": "Fela tölfræði"
+  },
+  {
+    "key": "adminTranslations.icelandic",
+    "value": "Íslenska"
+  },
+  {
+    "key": "adminTranslations.import",
+    "value": "Flytja inn"
+  },
+  {
+    "key": "adminTranslations.importError",
+    "value": "Villa við innflutning"
+  },
+  {
+    "key": "adminTranslations.importSuccess",
+    "value": "Innflutningur tókst"
+  },
+  {
+    "key": "adminTranslations.key",
+    "value": "Lykill"
+  },
+  {
+    "key": "adminTranslations.missing",
+    "value": "Vantar"
+  },
+  {
+    "key": "adminTranslations.missingInEnglish",
+    "value": "Vantar á ensku"
+  },
+  {
+    "key": "adminTranslations.missingInIcelandic",
+    "value": "Vantar á íslensku"
+  },
+  {
+    "key": "adminTranslations.missingTranslations",
+    "value": "Þýðingar sem vantar"
+  },
+  {
+    "key": "adminTranslations.noTranslationsFound",
+    "value": "Engar þýðingar fundust"
+  },
+  {
+    "key": "adminTranslations.refresh",
+    "value": "Endurhlaða"
+  },
+  {
+    "key": "adminTranslations.save",
+    "value": "Vista"
+  },
+  {
+    "key": "adminTranslations.searchPlaceholder",
+    "value": "Leita..."
+  },
+  {
+    "key": "adminTranslations.showStats",
+    "value": "Sýna tölfræði"
+  },
+  {
+    "key": "adminTranslations.statistics",
+    "value": "Tölfræði"
+  },
+  {
+    "key": "adminTranslations.subtitle",
+    "value": "Hér getur þú stjórnað þýðingum fyrir vefsíðuna."
+  },
+  {
+    "key": "adminTranslations.title",
+    "value": "Þýðingar"
+  },
+  {
+    "key": "adminTranslations.totalEntries",
+    "value": "Samtals færslur"
+  },
+  {
+    "key": "adminTranslations.translationAdded",
+    "value": "Þýðing hefur verið bætt við"
+  },
+  {
+    "key": "adminTranslations.translationDeleted",
+    "value": "Þýðingu hefur verið eytt"
+  },
+  {
+    "key": "adminTranslations.translationUpdated",
+    "value": "Þýðing hefur verið uppfærð"
+  },
+  {
+    "key": "adminTranslations.uniqueKeys",
+    "value": "Einstakir lyklar"
+  },
+  {
+    "key": "adminTranslations.validation.keyRequired",
+    "value": "Lykill er nauðsynlegur"
+  },
+  {
+    "key": "adminTranslations.validation.valueRequired",
+    "value": "Gildi er nauðsynlegt"
+  },
+  {
+    "key": "adminTranslations.value",
+    "value": "Gildi"
+  },
+  {
+    "key": "ageVerification.title",
+    "value": "Aldurssannprófun"
+  },
+  {
+    "key": "aria.filterBy",
+    "value": "Sía eftir"
+  },
+  {
+    "key": "aria.homepage",
+    "value": "Forsíða"
+  },
+  {
+    "key": "aria.logo",
+    "value": "Merki"
+  },
+  {
+    "key": "aria.mainNavigation",
+    "value": "Aðalvalmynd"
+  },
+  {
+    "key": "aria.searchProducts",
+    "value": "Leita að vörum"
+  },
+  {
+    "key": "aria.toggleMobileMenu",
+    "value": "Opna/loka farsímavalmynd"
+  },
+  {
+    "key": "aria.userMenu",
+    "value": "Notendavalmynd"
+  },
+  {
+    "key": "atvrImport.alcoholContent",
+    "value": "Áfengismagn"
+  },
+  {
+    "key": "atvrImport.availability",
+    "value": "Framboð"
+  },
+  {
+    "key": "atvrImport.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "atvrImport.clearAll",
+    "value": "Hreinsa allt"
+  },
+  {
+    "key": "atvrImport.country",
+    "value": "Land"
+  },
+  {
+    "key": "atvrImport.distributor",
+    "value": "Dreifingaraðili"
+  },
+  {
+    "key": "atvrImport.enterSearchTerm",
+    "value": "Sláðu inn leitarorð"
+  },
+  {
+    "key": "atvrImport.failedToImport",
+    "value": "Mistókst að flytja inn"
+  },
+  {
+    "key": "atvrImport.foodPairings",
+    "value": "Pörun með mat"
+  },
+  {
+    "key": "atvrImport.icelandicLabel",
+    "value": "Íslenskur miði"
+  },
+  {
+    "key": "atvrImport.importProducts",
+    "value": "Flytja inn vörur"
+  },
+  {
+    "key": "atvrImport.importProductsButton",
+    "value": "Flytja inn vörur"
+  },
+  {
+    "key": "atvrImport.more",
+    "value": "Meira"
+  },
+  {
+    "key": "atvrImport.noImage",
+    "value": "Engin mynd"
+  },
+  {
+    "key": "atvrImport.noProductsFound",
+    "value": "Engar vörur fundust"
+  },
+  {
+    "key": "atvrImport.packaging",
+    "value": "Pökkun"
+  },
+  {
+    "key": "atvrImport.pleaseSelectOne",
+    "value": "Vinsamlegast veldu einn"
+  },
+  {
+    "key": "atvrImport.previewImport",
+    "value": "Forskoða innflutning"
+  },
+  {
+    "key": "atvrImport.previewImportTitle",
+    "value": "Forskoða innflutning"
+  },
+  {
+    "key": "atvrImport.producer",
+    "value": "Framleiðandi"
+  },
+  {
+    "key": "atvrImport.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "atvrImport.productsImported",
+    "value": "Vörur innfluttar"
+  },
+  {
+    "key": "atvrImport.search",
+    "value": "Leita"
+  },
+  {
+    "key": "atvrImport.searchATVRProducts",
+    "value": "Leita í vörum ÁTVR"
+  },
+  {
+    "key": "atvrImport.searchPlaceholderIs",
+    "value": "Leitarorð á íslensku"
+  },
+  {
+    "key": "atvrImport.searchResults",
+    "value": "Leitarniðurstöður"
+  },
+  {
+    "key": "atvrImport.selected",
+    "value": "Valið"
+  },
+  {
+    "key": "atvrImport.specialAttributes",
+    "value": "Sérstakir eiginleikar"
+  },
+  {
+    "key": "atvrImport.subtitle",
+    "value": "Undirtitill"
+  },
+  {
+    "key": "atvrImport.successfullyImported",
+    "value": "Tókst að flytja inn"
+  },
+  {
+    "key": "atvrImport.title",
+    "value": "Titill"
+  },
+  {
+    "key": "atvrImport.tryDifferentTerms",
+    "value": "Prófaðu önnur leitarorð"
+  },
+  {
+    "key": "atvrImport.viewOnATVR",
+    "value": "Skoða á ÁTVR"
+  },
+  {
+    "key": "atvrImport.volume",
+    "value": "Rúmmál"
+  },
+  {
+    "key": "auth.age",
+    "value": "Aldur"
+  },
+  {
+    "key": "auth.confirmPassword",
+    "value": "Staðfesta lykilorð"
+  },
+  {
+    "key": "auth.fullName",
+    "value": "Fullt nafn"
+  },
+  {
+    "key": "auth.login",
+    "value": "Innskráning"
+  },
+  {
+    "key": "auth.loginRequired",
+    "value": "Innskráning nauðsynleg"
+  },
+  {
+    "key": "auth.loginStaff",
+    "value": "Innskráning starfsmanna"
+  },
+  {
+    "key": "auth.logout",
+    "value": "Útskráning"
+  },
+  {
+    "key": "auth.password",
+    "value": "Lykilorð"
+  },
+  {
+    "key": "auth.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "auth.register",
+    "value": "Nýskráning"
+  },
+  {
+    "key": "auth.username",
+    "value": "Notandanafn"
+  },
+  {
+    "key": "authExtra.adminDeliveryLogin",
+    "value": "Innskráning fyrir stjórnendur og afhendingu"
+  },
+  {
+    "key": "authExtra.loginWithElectronicId",
+    "value": "Innskrá með rafrænum skilríkjum"
+  },
+  {
+    "key": "authExtra.loginWithElectronicIdDescription",
+    "value": "Skráðu þig inn á öruggan hátt með rafrænum skilríkjum."
+  },
+  {
+    "key": "authExtra.or",
+    "value": "eða"
+  },
+  {
+    "key": "authExtra.passwordMismatch",
+    "value": "Lykilorð stemma ekki"
+  },
+  {
+    "key": "authExtra.signInToYourAccount",
+    "value": "Skráðu þig inn á reikninginn þinn"
+  },
+  {
+    "key": "cart.addError",
+    "value": "Villa við að bæta í körfu"
+  },
+  {
+    "key": "cart.addToCart",
+    "value": "Bæta í körfu"
+  },
+  {
+    "key": "cart.failedToClearCart",
+    "value": "Mistókst að tæma körfu"
+  },
+  {
+    "key": "cart.itemAdded",
+    "value": "Vöru bætt í körfu"
+  },
+  {
+    "key": "cart.items",
+    "value": "Vörur"
+  },
+  {
+    "key": "cart.title",
+    "value": "Karfa"
+  },
+  {
+    "key": "cartPage.addItemsToStart",
+    "value": "Bættu vörum í körfuna til að byrja"
+  },
+  {
+    "key": "cartPage.cartDescription",
+    "value": "Hér getur þú séð vörurnar í körfunni þinni og gengið frá kaupum."
+  },
+  {
+    "key": "cartPage.cartItems",
+    "value": "Vörur í körfu"
+  },
+  {
+    "key": "cartPage.clearCart",
+    "value": "Hreinsa körfu"
+  },
+  {
+    "key": "cartPage.continueShopping",
+    "value": "Halda áfram að versla"
+  },
+  {
+    "key": "cartPage.each",
+    "value": "hver"
+  },
+  {
+    "key": "cartPage.emptyCart",
+    "value": "Karfan er tóm"
+  },
+  {
+    "key": "cartPage.login",
+    "value": "Innskráning"
+  },
+  {
+    "key": "cartPage.loginToViewCart",
+    "value": "Skráðu þig inn til að sjá körfuna þína"
+  },
+  {
+    "key": "cartPage.mustLoginToViewCart",
+    "value": "Þú verður að skrá þig inn til að sjá körfuna þína"
+  },
+  {
+    "key": "cartPage.noImage",
+    "value": "Engin mynd"
+  },
+  {
+    "key": "categories.BEER",
+    "value": "Bjór"
+  },
+  {
+    "key": "categories.BEERS",
+    "value": "Bjór"
+  },
+  {
+    "key": "categories.CIDER_RTD",
+    "value": "Síder & Tilbúnir Drykkir"
+  },
+  {
+    "key": "categories.NICOTINE",
+    "value": "Nikótín"
+  },
+  {
+    "key": "categories.NON_ALCOHOLIC",
+    "value": "Óáfengt"
+  },
+  {
+    "key": "categories.OFFERS",
+    "value": "Tilboð"
+  },
+  {
+    "key": "categories.SPIRITS",
+    "value": "Brennivín"
+  },
+  {
+    "key": "categories.WINE",
+    "value": "Vín"
+  },
+  {
+    "key": "category.fallbackDescription",
+    "value": "Engin lýsing í boði fyrir þennan flokk."
+  },
+  {
+    "key": "chat.customTopic",
+    "value": "Sérsniðið efni"
+  },
+  {
+    "key": "chat.customTopicPlaceholder",
+    "value": "Sláðu inn þitt eigið umræðuefni"
+  },
+  {
+    "key": "chat.initializing",
+    "value": "Undirbý spjall..."
+  },
+  {
+    "key": "chat.noOrders",
+    "value": "Engar pantanir fundust"
+  },
+  {
+    "key": "chat.selectOrder",
+    "value": "Veldu pöntun"
+  },
+  {
+    "key": "chat.selectTopic",
+    "value": "Veldu umræðuefni"
+  },
+  {
+    "key": "chat.selectTopicDesc",
+    "value": "Veldu umræðuefni til að hefja spjall."
+  },
+  {
+    "key": "chat.startChat",
+    "value": "Hefja spjall"
+  },
+  {
+    "key": "chat.title",
+    "value": "Spjall"
+  },
+  {
+    "key": "chat.topics.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "chat.topics.deliveryDesc",
+    "value": "Spurningar um afhendingu"
+  },
+  {
+    "key": "chat.topics.feedback",
+    "value": "Endurgjöf"
+  },
+  {
+    "key": "chat.topics.feedbackDesc",
+    "value": "Sendu okkur endurgjöf"
+  },
+  {
+    "key": "chat.topics.general",
+    "value": "Almennt"
+  },
+  {
+    "key": "chat.topics.generalDesc",
+    "value": "Almennar fyrirspurnir"
+  },
+  {
+    "key": "chat.topics.order",
+    "value": "Pöntun"
+  },
+  {
+    "key": "chat.topics.orderDesc",
+    "value": "Spurningar um pöntun"
+  },
+  {
+    "key": "chat.topics.payment",
+    "value": "Greiðsla"
+  },
+  {
+    "key": "chat.topics.paymentDesc",
+    "value": "Spurningar um greiðslur"
+  },
+  {
+    "key": "chat.topics.product",
+    "value": "Vara"
+  },
+  {
+    "key": "chat.topics.productDesc",
+    "value": "Spurningar um vöru"
+  },
+  {
+    "key": "chat.topics.topic",
+    "value": "Umræðuefni"
+  },
+  {
+    "key": "chat.typeMessage",
+    "value": "Sláðu inn skilaboð..."
+  },
+  {
+    "key": "checkout.shipping",
+    "value": "Sending"
+  },
+  {
+    "key": "checkout.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "checkout.vat",
+    "value": "VSK"
+  },
+  {
+    "key": "checkoutPage.cashOnDelivery",
+    "value": "Greiða við afhendingu"
+  },
+  {
+    "key": "checkoutPage.cashOnDeliveryDesc",
+    "value": "Greiðið með reiðufé þegar varan er afhent."
+  },
+  {
+    "key": "checkoutPage.checkout",
+    "value": "Greiðslusíða"
+  },
+  {
+    "key": "checkoutPage.contactAdmin",
+    "value": "Hafa samband við kerfisstjóra"
+  },
+  {
+    "key": "checkoutPage.creatingOrder",
+    "value": "Útbý pöntun..."
+  },
+  {
+    "key": "checkoutPage.days",
+    "value": "dagar"
+  },
+  {
+    "key": "checkoutPage.deliveryAddress",
+    "value": "Afhendingarheimili"
+  },
+  {
+    "key": "checkoutPage.estimatedDelivery",
+    "value": "Áætluð afhending"
+  },
+  {
+    "key": "checkoutPage.newAddress",
+    "value": "Nýtt heimilisfang"
+  },
+  {
+    "key": "checkoutPage.noPaymentMethodsAvailable",
+    "value": "Engir greiðslumátar í boði"
+  },
+  {
+    "key": "checkoutPage.noPickupTimes",
+    "value": "Engir afhendingartímar í boði"
+  },
+  {
+    "key": "checkoutPage.noShippingOptions",
+    "value": "Engir sendingarmöguleikar í boði"
+  },
+  {
+    "key": "checkoutPage.orderNotes",
+    "value": "Athugasemdir við pöntun"
+  },
+  {
+    "key": "checkoutPage.payOnPickup",
+    "value": "Greiða við sótt"
+  },
+  {
+    "key": "checkoutPage.payOnPickupDesc",
+    "value": "Greitt er fyrir pöntunina þegar hún er sótt."
+  },
+  {
+    "key": "checkoutPage.paymentMethod",
+    "value": "Greiðslumáti"
+  },
+  {
+    "key": "checkoutPage.pickupTime",
+    "value": "Afhendingartími"
+  },
+  {
+    "key": "checkoutPage.placeOrder",
+    "value": "Staðfesta pöntun"
+  },
+  {
+    "key": "checkoutPage.saveAddress",
+    "value": "Vista heimilisfang"
+  },
+  {
+    "key": "checkoutPage.selectDeliveryAddress",
+    "value": "Veldu afhendingarheimili"
+  },
+  {
+    "key": "checkoutPage.selectPickupTime",
+    "value": "Veldu afhendingartíma"
+  },
+  {
+    "key": "checkoutPage.selectPickupTimeHelp",
+    "value": "Veldu tíma til að sækja pöntunina þína"
+  },
+  {
+    "key": "checkoutPage.selectShippingOption",
+    "value": "Veldu sendingarmöguleika"
+  },
+  {
+    "key": "checkoutPage.shippingOptions",
+    "value": "Sendingarmöguleikar"
+  },
+  {
+    "key": "checkoutPage.storeLocation",
+    "value": "Staðsetning verslunar"
+  },
+  {
+    "key": "checkoutPage.storeLocationValue",
+    "value": "Verslun"
+  },
+  {
+    "key": "checkoutPage.subtotal",
+    "value": "Millisamantekt"
+  },
+  {
+    "key": "checkoutPage.teyaDesc",
+    "value": "Greiða með Teya"
+  },
+  {
+    "key": "checkoutPage.valitorDesc",
+    "value": "Greiða með Valitor"
+  },
+  {
+    "key": "checkoutPage.valitorPayment",
+    "value": "Valitor greiðsla"
+  },
+  {
+    "key": "common.active",
+    "value": "Virkt"
+  },
+  {
+    "key": "common.add",
+    "value": "Bæta við"
+  },
+  {
+    "key": "common.back",
+    "value": "Til baka"
+  },
+  {
+    "key": "common.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "common.close",
+    "value": "Loka"
+  },
+  {
+    "key": "common.create",
+    "value": "Búa til"
+  },
+  {
+    "key": "common.created",
+    "value": "Búið til"
+  },
+  {
+    "key": "common.currency",
+    "value": "Gjaldmiðill"
+  },
+  {
+    "key": "common.delete",
+    "value": "Eyða"
+  },
+  {
+    "key": "common.deleted",
+    "value": "Eytt"
+  },
+  {
+    "key": "common.edit",
+    "value": "Breyta"
+  },
+  {
+    "key": "common.error",
+    "value": "Villa"
+  },
+  {
+    "key": "common.free",
+    "value": "Ókeypis"
+  },
+  {
+    "key": "common.goToSlide",
+    "value": "Fara á næstu glæru"
+  },
+  {
+    "key": "common.inactive",
+    "value": "Óvirkt"
+  },
+  {
+    "key": "common.itemsLabel",
+    "value": "vörur"
+  },
+  {
+    "key": "common.language",
+    "value": "Tungumál"
+  },
+  {
+    "key": "common.loading",
+    "value": "Hleður..."
+  },
+  {
+    "key": "common.loginRequired",
+    "value": "Innskráningar krafist"
+  },
+  {
+    "key": "common.next",
+    "value": "Næsta"
+  },
+  {
+    "key": "common.no",
+    "value": "Nei"
+  },
+  {
+    "key": "common.noResults",
+    "value": "Engar niðurstöður"
+  },
+  {
+    "key": "common.of",
+    "value": "af"
+  },
+  {
+    "key": "common.previous",
+    "value": "Fyrri"
+  },
+  {
+    "key": "common.price",
+    "value": "Verð"
+  },
+  {
+    "key": "common.remove",
+    "value": "Fjarlægja"
+  },
+  {
+    "key": "common.results",
+    "value": "Niðurstöður"
+  },
+  {
+    "key": "common.retry",
+    "value": "Reyna aftur"
+  },
+  {
+    "key": "common.save",
+    "value": "Vista"
+  },
+  {
+    "key": "common.saving",
+    "value": "Vistar..."
+  },
+  {
+    "key": "common.search",
+    "value": "Leita"
+  },
+  {
+    "key": "common.sending",
+    "value": "Sendir..."
+  },
+  {
+    "key": "common.showing",
+    "value": "Sýnir"
+  },
+  {
+    "key": "common.success",
+    "value": "Tókst"
+  },
+  {
+    "key": "common.to",
+    "value": "til"
+  },
+  {
+    "key": "common.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "common.unknown",
+    "value": "Óþekkt"
+  },
+  {
+    "key": "common.unsavedChanges",
+    "value": "Óvistaðar breytingar"
+  },
+  {
+    "key": "common.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "common.updated",
+    "value": "Uppfært"
+  },
+  {
+    "key": "common.view",
+    "value": "Skoða"
+  },
+  {
+    "key": "common.viewAll",
+    "value": "Skoða allt"
+  },
+  {
+    "key": "common.yes",
+    "value": "Já"
+  },
+  {
+    "key": "delivery.title",
+    "value": "Afhending"
+  },
+  {
+    "key": "demoData.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "demoData.addressesDescription",
+    "value": "Bættu við sýnisgögnum fyrir heimilisföng viðskiptavina."
+  },
+  {
+    "key": "demoData.customersDescription",
+    "value": "Bættu við sýnisgögnum fyrir viðskiptavini."
+  },
+  {
+    "key": "demoData.description",
+    "value": "Þessi síða gerir þér kleift að bæta við og fjarlægja sýnisgögn úr gagnagrunninum þínum. Þetta er gagnlegt til að prófa virkni vefsíðunnar."
+  },
+  {
+    "key": "demoData.insertButton",
+    "value": "Setja inn sýnisgögn"
+  },
+  {
+    "key": "demoData.insertError",
+    "value": "Villa við innsetningu sýnisgagna"
+  },
+  {
+    "key": "demoData.insertNote",
+    "value": "Þessi aðgerð mun bæta sýnisgögnum við gagnagrunninn."
+  },
+  {
+    "key": "demoData.insertSuccess",
+    "value": "Sýnisgögnum hefur verið bætt við"
+  },
+  {
+    "key": "demoData.orderItemsDescription",
+    "value": "Bættu við sýnisgögnum fyrir pöntunaratriði."
+  },
+  {
+    "key": "demoData.ordersDescription",
+    "value": "Bættu við sýnisgögnum fyrir pantanir."
+  },
+  {
+    "key": "demoData.overview",
+    "value": "Yfirlit"
+  },
+  {
+    "key": "demoData.removeButton",
+    "value": "Fjarlægja sýnisgögn"
+  },
+  {
+    "key": "demoData.removeError",
+    "value": "Villa við að fjarlægja sýnisgögn"
+  },
+  {
+    "key": "demoData.removeNote",
+    "value": "Þessi aðgerð mun fjarlægja öll sýnisgögn úr gagnagrunninum."
+  },
+  {
+    "key": "demoData.removeSuccess",
+    "value": "Sýnisgögnum hefur verið eytt"
+  },
+  {
+    "key": "demoData.title",
+    "value": "Sýnisgögn"
+  },
+  {
+    "key": "demoData.warningMessage",
+    "value": "Þessi aðgerð er óafturkræf. Vinsamlegast farðu varlega."
+  },
+  {
+    "key": "demoData.warningTitle",
+    "value": "Aðvörun"
+  },
+  {
+    "key": "discounts.allCategories",
+    "value": "Allir flokkar"
+  },
+  {
+    "key": "discounts.allStatuses",
+    "value": "Allar stöður"
+  },
+  {
+    "key": "discounts.confirm.removeDiscount",
+    "value": "Ertu viss um að þú viljir fjarlægja þennan afslátt?"
+  },
+  {
+    "key": "discounts.createDiscount",
+    "value": "Stofna afslátt"
+  },
+  {
+    "key": "discounts.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "discounts.messages.extendedSuccessfully",
+    "value": "Afsláttur framlengdur"
+  },
+  {
+    "key": "discounts.messages.invalidDiscount",
+    "value": "Ógildur afsláttur"
+  },
+  {
+    "key": "discounts.messages.noDiscounts",
+    "value": "Engir afslættir fundust"
+  },
+  {
+    "key": "discounts.messages.noDiscountsDescription",
+    "value": "Engir afslættir eru í boði eins og er. Vinsamlegast reyndu aftur síðar."
+  },
+  {
+    "key": "discounts.messages.selectProduct",
+    "value": "Veldu vöru til að sjá upplýsingar um afslátt."
+  },
+  {
+    "key": "discounts.messages.startAfterEnd",
+    "value": "Upphafsdagsetning má ekki vera á eftir lokadagsetningu."
+  },
+  {
+    "key": "discounts.modal.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "discounts.modal.createTitle",
+    "value": "Stofna nýjan afslátt"
+  },
+  {
+    "key": "discounts.modal.discountEndDate",
+    "value": "Lokadagur afsláttar"
+  },
+  {
+    "key": "discounts.modal.discountPercentage",
+    "value": "Afsláttarprósenta"
+  },
+  {
+    "key": "discounts.modal.discountReason",
+    "value": "Ástæða afsláttar"
+  },
+  {
+    "key": "discounts.modal.discountReasonIs",
+    "value": "Ástæða afsláttar er"
+  },
+  {
+    "key": "discounts.modal.discountStartDate",
+    "value": "Upphafsdagur afsláttar"
+  },
+  {
+    "key": "discounts.modal.editTitle",
+    "value": "Breyta afslætti"
+  },
+  {
+    "key": "discounts.modal.loading",
+    "value": "Hleður..."
+  },
+  {
+    "key": "discounts.modal.originalPrice",
+    "value": "Upprunalegt verð"
+  },
+  {
+    "key": "discounts.modal.preview",
+    "value": "Forskoðun"
+  },
+  {
+    "key": "discounts.modal.previewDiscount",
+    "value": "Afsláttur"
+  },
+  {
+    "key": "discounts.modal.previewFinal",
+    "value": "Lokaverð"
+  },
+  {
+    "key": "discounts.modal.previewOriginal",
+    "value": "Upprunalegt"
+  },
+  {
+    "key": "discounts.modal.reasonCustom",
+    "value": "Sérsniðin ástæða"
+  },
+  {
+    "key": "discounts.modal.selectProduct",
+    "value": "Veldu vöru"
+  },
+  {
+    "key": "imageSearchModal.portrait",
+    "value": "Lóðrétt"
+  },
+  {
+    "key": "discounts.modal.selectProductPlaceholder",
+    "value": "Leitaðu að vöru eftir nafni eða vörunúmeri"
+  },
+  {
+    "key": "discounts.modal.selectReason",
+    "value": "Veldu ástæðu"
+  },
+  {
+    "key": "discounts.modal.submit",
+    "value": "Stofna afslátt"
+  },
+  {
+    "key": "discounts.modal.submitEdit",
+    "value": "Vista breytingar"
+  },
+  {
+    "key": "discounts.search",
+    "value": "Leita að afsláttum..."
+  },
+  {
+    "key": "discounts.statusActive",
+    "value": "Virkur"
+  },
+  {
+    "key": "discounts.statusExpired",
+    "value": "Útrunninn"
+  },
+  {
+    "key": "discounts.statusExpiringsoon",
+    "value": "Rennur út fljótlega"
+  },
+  {
+    "key": "discounts.statusScheduled",
+    "value": "Áætlaður"
+  },
+  {
+    "key": "discounts.summary.averageDiscount",
+    "value": "Meðalafsláttur"
+  },
+  {
+    "key": "discounts.summary.expiringCount",
+    "value": "Rennur út fljótlega"
+  },
+  {
+    "key": "discounts.summary.productsOnDiscount",
+    "value": "Vörur á afslætti"
+  },
+  {
+    "key": "discounts.summary.totalSaved",
+    "value": "Samtals sparað"
+  },
+  {
+    "key": "discounts.table.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "discounts.table.amountSaved",
+    "value": "Sparað"
+  },
+  {
+    "key": "discounts.table.category",
+    "value": "Flokkur"
+  },
+  {
+    "key": "discounts.table.currentPrice",
+    "value": "Núverandi verð"
+  },
+  {
+    "key": "discounts.table.discountPercent",
+    "value": "Afsláttur %"
+  },
+  {
+    "key": "discounts.table.originalPrice",
+    "value": "Upprunalegt verð"
+  },
+  {
+    "key": "discounts.table.product",
+    "value": "Vara"
+  },
+  {
+    "key": "discounts.table.status",
+    "value": "Staða"
+  },
+  {
+    "key": "discounts.title",
+    "value": "Afslættir"
+  },
+  {
+    "key": "footer.aboutUs",
+    "value": "Um okkur"
+  },
+  {
+    "key": "footer.contact",
+    "value": "Hafa samband"
+  },
+  {
+    "key": "footer.copyright",
+    "value": "© 2025 Ölföng. Allur réttur áskilinn."
+  },
+  {
+    "key": "footer.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "footer.legal",
+    "value": "Lagalegt"
+  },
+  {
+    "key": "footer.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "footer.quickLinks",
+    "value": "Hraðtenglar"
+  },
+  {
+    "key": "home.banner.alt",
+    "value": "Auglýsingaborði"
+  },
+  {
+    "key": "home.categories.subtitle",
+    "value": "Skoðaðu úrvalið okkar"
+  },
+  {
+    "key": "home.categories.title",
+    "value": "Skoða eftir flokkum"
+  },
+  {
+    "key": "home.discounted.subtitle",
+    "value": "Skoðaðu nýjustu tilboðin okkar og sértilboð."
+  },
+  {
+    "key": "home.discounted.title",
+    "value": "Afsláttarvörur"
+  },
+  {
+    "key": "home.features.ageVerificationDescription",
+    "value": "Við leggjum áherslu á ábyrga sölu. Aldursstaðfesting er skilyrði fyrir öllum kaupum."
+  },
+  {
+    "key": "home.features.ageVerificationTitle",
+    "value": "Aldursstaðfesting"
+  },
+  {
+    "key": "home.features.beerDescription",
+    "value": "Skoðaðu breitt úrval okkar af handverksbjór og innfluttum bjór."
+  },
+  {
+    "key": "home.features.beerTitle",
+    "value": "Heimur bjórsins"
+  },
+  {
+    "key": "home.features.deliveryDescription",
+    "value": "Hröð og áreiðanleg heimsending. Pantaðu í dag og njóttu."
+  },
+  {
+    "key": "home.features.deliveryTitle",
+    "value": "Þægileg heimsending"
+  },
+  {
+    "key": "home.features.wineDescription",
+    "value": "Allt frá fylltum rauðvínum til svalandi hvítvína, finndu hið fullkomna vín fyrir hvaða tilefni sem er."
+  },
+  {
+    "key": "home.features.wineTitle",
+    "value": "Úrvalsvín"
+  },
+  {
+    "key": "home.hero.startShopping",
+    "value": "Hefja kaup"
+  },
+  {
+    "key": "home.hero.subtitle",
+    "value": "Þinn áfangastaður fyrir bestu vínin, bjórana og sterku drykkina."
+  },
+  {
+    "key": "home.olfongLogoAlt",
+    "value": "Ölföng merki"
+  },
+  {
+    "key": "home.testimonials.review1",
+    "value": "Ótrúlegt úrval og hröð sending. Mitt fyrsta val fyrir gæðavín."
+  },
+  {
+    "key": "home.testimonials.review1Author",
+    "value": "Jón Jónsson"
+  },
+  {
+    "key": "home.testimonials.review1Location",
+    "value": "Reykjavík"
+  },
+  {
+    "key": "home.testimonials.review2",
+    "value": "Besta safn handverksbjóra sem ég hef fundið á netinu. Mæli eindregið með!"
+  },
+  {
+    "key": "home.testimonials.review2Author",
+    "value": "Guðrún Pálsdóttir"
+  },
+  {
+    "key": "home.testimonials.review2Location",
+    "value": "Akureyri"
+  },
+  {
+    "key": "home.testimonials.review3",
+    "value": "Frábær þjónusta og notendavænn vefur. Ég kem aftur."
+  },
+  {
+    "key": "home.testimonials.review3Author",
+    "value": "Bjarni Sigurðsson"
+  },
+  {
+    "key": "home.testimonials.review3Location",
+    "value": "Kópavogur"
+  },
+  {
+    "key": "home.testimonials.subtitle",
+    "value": "Það sem viðskiptavinir okkar segja"
+  },
+  {
+    "key": "home.testimonials.title",
+    "value": "Umsagnir viðskiptavina"
+  },
+  {
+    "key": "home.why.subtitle",
+    "value": "Við leggjum metnað okkar í að bjóða upp á vandlega valið úrval, sérfræðiþekkingu og framúrskarandi þjónustu."
+  },
+  {
+    "key": "home.why.title",
+    "value": "Af hverju að velja Ölföng?"
+  },
+  {
+    "key": "imageSearchModal.allColors",
+    "value": "Allir litir"
+  },
+  {
+    "key": "imageSearchModal.allOrientations",
+    "value": "Allar áttir"
+  },
+  {
+    "key": "imageSearchModal.black",
+    "value": "Svartur"
+  },
+  {
+    "key": "imageSearchModal.blue",
+    "value": "Blár"
+  },
+  {
+    "key": "imageSearchModal.green",
+    "value": "Grænn"
+  },
+  {
+    "key": "imageSearchModal.landscape",
+    "value": "Lárétt"
+  },
+  {
+    "key": "imageSearchModal.magenta",
+    "value": "Vínrauður"
+  },
+  {
+    "key": "imageSearchModal.orange",
+    "value": "Appelsínugulur"
+  },
+  {
+    "key": "imageSearchModal.purple",
+    "value": "Fjólublár"
+  },
+  {
+    "key": "imageSearchModal.recentSearches",
+    "value": "Nýlegar leitir"
+  },
+  {
+    "key": "imageSearchModal.red",
+    "value": "Rauður"
+  },
+  {
+    "key": "imageSearchModal.square",
+    "value": "Ferningslaga"
+  },
+  {
+    "key": "imageSearchModal.suggestions",
+    "value": "Tillögur"
+  },
+  {
+    "key": "imageSearchModal.teal",
+    "value": "Grænnblár"
+  },
+  {
+    "key": "imageSearchModal.white",
+    "value": "Hvítur"
+  },
+  {
+    "key": "imageSearchModal.yellow",
+    "value": "Gulur"
+  },
+  {
+    "key": "login.automatedTestLogin",
+    "value": "Sjálfvirk prófunarinnskráning"
+  },
+  {
+    "key": "login.dummyElectronicId",
+    "value": "Gervi rafræn skilríki"
+  },
+  {
+    "key": "login.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "login.emailPasswordTests",
+    "value": "Prófanir á netfangi/lykilorði"
+  },
+  {
+    "key": "login.enterEmailAddress",
+    "value": "Sláðu inn netfangið þitt"
+  },
+  {
+    "key": "login.enterPassword",
+    "value": "Sláðu inn lykilorðið þitt"
+  },
+  {
+    "key": "login.enterPhoneNumber",
+    "value": "Sláðu inn símanúmerið þitt"
+  },
+  {
+    "key": "login.insertPhoneNumber",
+    "value": "Sláðu inn símanúmer"
+  },
+  {
+    "key": "login.loggingIn",
+    "value": "Skrái inn"
+  },
+  {
+    "key": "login.loginWithEmail",
+    "value": "Innskrá með tölvupósti"
+  },
+  {
+    "key": "login.loginWithPhone",
+    "value": "Innskrá með símanúmeri"
+  },
+  {
+    "key": "login.password",
+    "value": "Lykilorð"
+  },
+  {
+    "key": "login.testLogin",
+    "value": "Prófa innskráningu"
+  },
+  {
+    "key": "navigation.admin",
+    "value": "Stjórnborð"
+  },
+  {
+    "key": "navigation.beer",
+    "value": "Bjór"
+  },
+  {
+    "key": "navigation.cart",
+    "value": "Karfa"
+  },
+  {
+    "key": "navigation.contactUs",
+    "value": "Hafa samband"
+  },
+  {
+    "key": "navigation.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "navigation.discoverCategories",
+    "value": "Skoða flokka"
+  },
+  {
+    "key": "navigation.home",
+    "value": "Heim"
+  },
+  {
+    "key": "navigation.language",
+    "value": "Tungumál"
+  },
+  {
+    "key": "navigation.login",
+    "value": "Innskráning"
+  },
+  {
+    "key": "navigation.logout",
+    "value": "Útskráning"
+  },
+  {
+    "key": "navigation.menu",
+    "value": "Valmynd"
+  },
+  {
+    "key": "navigation.needHelp",
+    "value": "Þarftu hjálp?"
+  },
+  {
+    "key": "navigation.nonAlcoholic",
+    "value": "Óáfengt"
+  },
+  {
+    "key": "navigation.products",
+    "value": "Vörur"
+  },
+  {
+    "key": "navigation.profile",
+    "value": "Mín síða"
+  },
+  {
+    "key": "navigation.shop",
+    "value": "Verslun"
+  },
+  {
+    "key": "navigation.spirits",
+    "value": "Brennivín"
+  },
+  {
+    "key": "navigation.viewAllProducts",
+    "value": "Skoða allar vörur"
+  },
+  {
+    "key": "navigation.wine",
+    "value": "Vín"
+  },
+  {
+    "key": "notifications.deliveryMethods",
+    "value": "Afhendingarmátar"
+  },
+  {
+    "key": "notifications.emailNotifications",
+    "value": "Tilkynningar í tölvupósti"
+  },
+  {
+    "key": "notifications.marketing",
+    "value": "Markaðsefni"
+  },
+  {
+    "key": "notifications.noNotifications",
+    "value": "Engar tilkynningar"
+  },
+  {
+    "key": "notifications.orderUpdates",
+    "value": "Pöntunaruppfærslur"
+  },
+  {
+    "key": "notifications.pushNotifications",
+    "value": "Push-tilkynningar"
+  },
+  {
+    "key": "notifications.securityAlerts",
+    "value": "Öryggisviðvaranir"
+  },
+  {
+    "key": "notifications.settings",
+    "value": "Stillingar"
+  },
+  {
+    "key": "notifications.smsNotifications",
+    "value": "SMS tilkynningar"
+  },
+  {
+    "key": "notifications.systemAlerts",
+    "value": "Kerfisviðvaranir"
+  },
+  {
+    "key": "notifications.types",
+    "value": "Tegundir"
+  },
+  {
+    "key": "order.orderNumber",
+    "value": "Pöntunarnúmer"
+  },
+  {
+    "key": "orderDetailPage.backToOrders",
+    "value": "Til baka í pantanir"
+  },
+  {
+    "key": "orderDetailPage.created",
+    "value": "Stofnuð"
+  },
+  {
+    "key": "orderDetailPage.deliveredAt",
+    "value": "Afhent"
+  },
+  {
+    "key": "orderDetailPage.deliveryAddress",
+    "value": "Afhendingarheimilisfang"
+  },
+  {
+    "key": "orderDetailPage.deliveryInfo",
+    "value": "Afhendingarupplýsingar"
+  },
+  {
+    "key": "orderDetailPage.deliveryMethod",
+    "value": "Afhendingarmáti"
+  },
+  {
+    "key": "orderDetailPage.deliveryPerson",
+    "value": "Sendill"
+  },
+  {
+    "key": "orderDetailPage.each",
+    "value": "hver"
+  },
+  {
+    "key": "orderDetailPage.estimatedDelivery",
+    "value": "Áætluð afhending"
+  },
+  {
+    "key": "orderDetailPage.homeDelivery",
+    "value": "Heimsending"
+  },
+  {
+    "key": "orderDetailPage.notes",
+    "value": "Athugasemdir"
+  },
+  {
+    "key": "orderDetailPage.order",
+    "value": "Pöntun"
+  },
+  {
+    "key": "orderDetailPage.orderItems",
+    "value": "Vörur í pöntun"
+  },
+  {
+    "key": "orderDetailPage.orderNotFound",
+    "value": "Pöntun fannst ekki"
+  },
+  {
+    "key": "orderDetailPage.orderNotFoundDesc",
+    "value": "Við fundum ekki pöntunina sem þú ert að leita að."
+  },
+  {
+    "key": "orderDetailPage.paymentInfo",
+    "value": "Greiðsluupplýsingar"
+  },
+  {
+    "key": "orderDetailPage.paymentMethod",
+    "value": "Greiðslumáti"
+  },
+  {
+    "key": "orderDetailPage.quantity",
+    "value": "Magn"
+  },
+  {
+    "key": "orderDetailPage.status",
+    "value": "Staða"
+  },
+  {
+    "key": "orderDetailPage.storePickup",
+    "value": "Sækja í verslun"
+  },
+  {
+    "key": "orders.reorder",
+    "value": "Endurpanta"
+  },
+  {
+    "key": "orders.statuses",
+    "value": "Stöður"
+  },
+  {
+    "key": "orders.statuses.CANCELLED",
+    "value": "Hætt við"
+  },
+  {
+    "key": "orders.statuses.CONFIRMED",
+    "value": "Staðfest"
+  },
+  {
+    "key": "orders.statuses.DELIVERED",
+    "value": "Afhent"
+  },
+  {
+    "key": "orders.statuses.OUT_FOR_DELIVERY",
+    "value": "Í afhendingu"
+  },
+  {
+    "key": "orders.statuses.PENDING",
+    "value": "Í bið"
+  },
+  {
+    "key": "orders.statuses.PREPARING",
+    "value": "Í undirbúningi"
+  },
+  {
+    "key": "orders.title",
+    "value": "Pantanir"
+  },
+  {
+    "key": "ordersPage.allOrders",
+    "value": "Allar pantanir"
+  },
+  {
+    "key": "ordersPage.confirmed",
+    "value": "Staðfest"
+  },
+  {
+    "key": "ordersPage.date",
+    "value": "Dagsetning"
+  },
+  {
+    "key": "ordersPage.delivered",
+    "value": "Afhent"
+  },
+  {
+    "key": "ordersPage.delivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "ordersPage.deliveryAddress",
+    "value": "Afhendingarheimilisfang"
+  },
+  {
+    "key": "ordersPage.homeDelivery",
+    "value": "Heimsending"
+  },
+  {
+    "key": "ordersPage.items",
+    "value": "Vörur"
+  },
+  {
+    "key": "ordersPage.loginToView",
+    "value": "Skráðu þig inn til að skoða pantanir þínar."
+  },
+  {
+    "key": "ordersPage.mustLogin",
+    "value": "Þú verður að vera skráður inn til að skoða pantanir."
+  },
+  {
+    "key": "ordersPage.next",
+    "value": "Næsta"
+  },
+  {
+    "key": "ordersPage.noOrders",
+    "value": "Engar pantanir"
+  },
+  {
+    "key": "ordersPage.noOrdersDesc",
+    "value": "Þú hefur engar pantanir ennþá."
+  },
+  {
+    "key": "ordersPage.notes",
+    "value": "Athugasemdir"
+  },
+  {
+    "key": "ordersPage.of",
+    "value": "af"
+  },
+  {
+    "key": "ordersPage.outForDelivery",
+    "value": "Í afhendingu"
+  },
+  {
+    "key": "ordersPage.page",
+    "value": "Síða"
+  },
+  {
+    "key": "ordersPage.pending",
+    "value": "Í bið"
+  },
+  {
+    "key": "ordersPage.pickup",
+    "value": "Sækja"
+  },
+  {
+    "key": "ordersPage.previous",
+    "value": "Fyrri"
+  },
+  {
+    "key": "ordersPage.reorder",
+    "value": "Endurpanta"
+  },
+  {
+    "key": "ordersPage.startShopping",
+    "value": "Byrja að versla"
+  },
+  {
+    "key": "ordersPage.time",
+    "value": "Tími"
+  },
+  {
+    "key": "ordersPage.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "ordersPage.view",
+    "value": "Skoða"
+  },
+  {
+    "key": "pos.allCategories",
+    "value": "Allir flokkar"
+  },
+  {
+    "key": "pos.cartItems",
+    "value": "Vörur í körfu"
+  },
+  {
+    "key": "pos.cartTitle",
+    "value": "Karfa"
+  },
+  {
+    "key": "pos.customer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "pos.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "pos.guestEmail",
+    "value": "Netfang gests"
+  },
+  {
+    "key": "pos.guestName",
+    "value": "Nafn gests"
+  },
+  {
+    "key": "pos.guestPhone",
+    "value": "Símanúmer gests"
+  },
+  {
+    "key": "pos.notes",
+    "value": "Athugasemdir"
+  },
+  {
+    "key": "pos.or",
+    "value": "eða"
+  },
+  {
+    "key": "pos.orderNotes",
+    "value": "Athugasemdir við pöntun"
+  },
+  {
+    "key": "pos.paymentMethod",
+    "value": "Greiðslumáti"
+  },
+  {
+    "key": "pos.processOrder",
+    "value": "Afgreiða pöntun"
+  },
+  {
+    "key": "pos.searchCustomers",
+    "value": "Leita að viðskiptavinum"
+  },
+  {
+    "key": "pos.searchProducts",
+    "value": "Leita að vörum"
+  },
+  {
+    "key": "pos.shipping",
+    "value": "Sending"
+  },
+  {
+    "key": "pos.shippingOption",
+    "value": "Sendingarmöguleiki"
+  },
+  {
+    "key": "pos.stock",
+    "value": "Lagerstaða"
+  },
+  {
+    "key": "pos.subtotal",
+    "value": "Millisamantekt"
+  },
+  {
+    "key": "pos.title",
+    "value": "Sölustaður"
+  },
+  {
+    "key": "pos.total",
+    "value": "Samtals"
+  },
+  {
+    "key": "product.abv",
+    "value": "Áfengismagn"
+  },
+  {
+    "key": "product.origin",
+    "value": "Upprunaland"
+  },
+  {
+    "key": "product.volume",
+    "value": "Magn"
+  },
+  {
+    "key": "productDetailPage.ageRestriction",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "productDetailPage.ageRestrictionDesc",
+    "value": "Þú verður að hafa náð löglegum aldri til að kaupa þessa vöru."
+  },
+  {
+    "key": "productDetailPage.alcoholContent",
+    "value": "Áfengisinnihald"
+  },
+  {
+    "key": "productDetailPage.available",
+    "value": "Til á lager"
+  },
+  {
+    "key": "productDetailPage.back",
+    "value": "Til baka"
+  },
+  {
+    "key": "productDetailPage.comingSoonDesc",
+    "value": "Þessi vara er væntanleg."
+  },
+  {
+    "key": "productDetailPage.country",
+    "value": "Land"
+  },
+  {
+    "key": "productDetailPage.createSubscription",
+    "value": "Stofna áskrift"
+  },
+  {
+    "key": "productDetailPage.deliveryFrequency",
+    "value": "Afhendingartíðni"
+  },
+  {
+    "key": "productDetailPage.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "productDetailPage.discontinuedDesc",
+    "value": "Þessi vara er hætt í sölu."
+  },
+  {
+    "key": "productDetailPage.loginHere",
+    "value": "Innskráning hér"
+  },
+  {
+    "key": "productDetailPage.loginToAdd",
+    "value": "Skráðu þig inn til að bæta í körfu"
+  },
+  {
+    "key": "productDetailPage.noDescription",
+    "value": "Engin lýsing í boði."
+  },
+  {
+    "key": "productDetailPage.notesOptional",
+    "value": "Athugasemdir (valfrjálst)"
+  },
+  {
+    "key": "productDetailPage.packaging",
+    "value": "Pökkun"
+  },
+  {
+    "key": "productDetailPage.preferredDayOptional",
+    "value": "Valinn dagur (valfrjálst)"
+  },
+  {
+    "key": "productDetailPage.preferredTimeOptional",
+    "value": "Valinn tími (valfrjálst)"
+  },
+  {
+    "key": "productDetailPage.priceBeforeVat",
+    "value": "Verð án VSK"
+  },
+  {
+    "key": "productDetailPage.producer",
+    "value": "Framleiðandi"
+  },
+  {
+    "key": "productDetailPage.quantity",
+    "value": "Fjöldi"
+  },
+  {
+    "key": "productDetailPage.specialOrderDesc",
+    "value": "Þetta er sérpöntunarvara."
+  },
+  {
+    "key": "productDetailPage.specifications",
+    "value": "Eiginleikar"
+  },
+  {
+    "key": "productDetailPage.subscribe",
+    "value": "Í áskrift"
+  },
+  {
+    "key": "productDetailPage.subscriptionCreated",
+    "value": "Áskrift stofnuð"
+  },
+  {
+    "key": "productDetailPage.totalPrice",
+    "value": "Heildarverð"
+  },
+  {
+    "key": "productDetailPage.vatAmount",
+    "value": "VSK upphæð"
+  },
+  {
+    "key": "productDetailPage.vatInformation",
+    "value": "VSK upplýsingar"
+  },
+  {
+    "key": "productDetailPage.vatProfile",
+    "value": "VSK snið"
+  },
+  {
+    "key": "productDetailPage.vatRate",
+    "value": "VSK prósenta"
+  },
+  {
+    "key": "productDetailPage.volume",
+    "value": "Magn"
+  },
+  {
+    "key": "productModal.buttons.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "productModal.buttons.createProduct",
+    "value": "Stofna vöru"
+  },
+  {
+    "key": "productModal.buttons.mediaLibrary",
+    "value": "Myndasafn"
+  },
+  {
+    "key": "productModal.buttons.searchOnline",
+    "value": "Leita á netinu"
+  },
+  {
+    "key": "productModal.buttons.updateProduct",
+    "value": "Uppfæra vöru"
+  },
+  {
+    "key": "productModal.discounts.discountPercentage",
+    "value": "Afsláttarprósenta"
+  },
+  {
+    "key": "productModal.discounts.emptyStateMessage",
+    "value": "Engir afslættir hafa verið skráðir fyrir þessa vöru ennþá."
+  },
+  {
+    "key": "productModal.discounts.enableDiscount",
+    "value": "Virkja afslátt"
+  },
+  {
+    "key": "productModal.discounts.endDate",
+    "value": "Lokadagsetning"
+  },
+  {
+    "key": "productModal.discounts.originalPrice",
+    "value": "Upprunalegt verð"
+  },
+  {
+    "key": "productModal.discounts.reasonEn",
+    "value": "Ástæða (enska)"
+  },
+  {
+    "key": "productModal.discounts.reasonIs",
+    "value": "Ástæða (íslenska)"
+  },
+  {
+    "key": "productModal.discounts.reasonIsPlaceholder",
+    "value": "Sláðu inn ástæðu á íslensku"
+  },
+  {
+    "key": "productModal.discounts.reasonPlaceholder",
+    "value": "Sláðu inn ástæðu á ensku"
+  },
+  {
+    "key": "productModal.discounts.startDate",
+    "value": "Upphafsdagsetning"
+  },
+  {
+    "key": "productModal.errors.categoryRequired",
+    "value": "Vöruflokkur er nauðsynlegur"
+  },
+  {
+    "key": "productModal.errors.priceRequired",
+    "value": "Verð er nauðsynlegt"
+  },
+  {
+    "key": "productModal.errors.stockRequired",
+    "value": "Lagerstaða er nauðsynleg"
+  },
+  {
+    "key": "productModal.fields.ageRestrictedProduct",
+    "value": "Aldurstakmörkuð vara"
+  },
+  {
+    "key": "productModal.fields.ageRestriction",
+    "value": "Aldurstakmark"
+  },
+  {
+    "key": "productModal.fields.category",
+    "value": "Vöruflokkur"
+  },
+  {
+    "key": "productModal.fields.descriptionEn",
+    "value": "Lýsing (enska)"
+  },
+  {
+    "key": "productModal.fields.descriptionIs",
+    "value": "Lýsing (íslenska)"
+  },
+  {
+    "key": "productModal.fields.imageUrl",
+    "value": "Slóð myndar"
+  },
+  {
+    "key": "productModal.fields.noImageSelected",
+    "value": "Engin mynd valin"
+  },
+  {
+    "key": "productModal.fields.price",
+    "value": "Verð"
+  },
+  {
+    "key": "productModal.fields.productImage",
+    "value": "Vörumynd"
+  },
+  {
+    "key": "productModal.fields.selectCategory",
+    "value": "Veldu vöruflokk"
+  },
+  {
+    "key": "productModal.fields.selectSubcategory",
+    "value": "Veldu undirflokk"
+  },
+  {
+    "key": "productModal.fields.stock",
+    "value": "Lagerstaða"
+  },
+  {
+    "key": "productModal.fields.subcategory",
+    "value": "Undirflokkur"
+  },
+  {
+    "key": "productModal.help.uploadImageHelp",
+    "value": "Hladdu upp mynd fyrir vöruna. Mælt með stærð: 800x800px."
+  },
+  {
+    "key": "productModal.tabs.basicInfo",
+    "value": "Grunnupplýsingar"
+  },
+  {
+    "key": "productModal.tabs.details",
+    "value": "Nánar"
+  },
+  {
+    "key": "productModal.tabs.discounts",
+    "value": "Afslættir"
+  },
+  {
+    "key": "productModal.tabs.images",
+    "value": "Myndir"
+  },
+  {
+    "key": "productModal.tabs.origin",
+    "value": "Uppruni"
+  },
+  {
+    "key": "productModal.tabs.pairingsAttributes",
+    "value": "Pörun og eiginleikar"
+  },
+  {
+    "key": "productModal.unsavedChanges",
+    "value": "Þú átt óvistaðar breytingar. Ertu viss um að þú viljir fara?"
+  },
+  {
+    "key": "products.addToCart",
+    "value": "Setja í körfu"
+  },
+  {
+    "key": "products.availability",
+    "value": "Framboð"
+  },
+  {
+    "key": "products.description",
+    "value": "Lýsing"
+  },
+  {
+    "key": "products.foodPairings",
+    "value": "Pörun með mat"
+  },
+  {
+    "key": "products.inStock",
+    "value": "Til á lager"
+  },
+  {
+    "key": "products.outOfStock",
+    "value": "Ekki til á lager"
+  },
+  {
+    "key": "products.specialAttributes",
+    "value": "Sérstakir eiginleikar"
+  },
+  {
+    "key": "products.stock",
+    "value": "Lagerstaða"
+  },
+  {
+    "key": "products.title",
+    "value": "Vörur"
+  },
+  {
+    "key": "productsPage.addToCart",
+    "value": "Setja í körfu"
+  },
+  {
+    "key": "productsPage.alcoholContent",
+    "value": "Áfengismagn"
+  },
+  {
+    "key": "productsPage.all",
+    "value": "Allt"
+  },
+  {
+    "key": "productsPage.category",
+    "value": "Vöruflokkur"
+  },
+  {
+    "key": "productsPage.clearFilters",
+    "value": "Hreinsa síur"
+  },
+  {
+    "key": "productsPage.filters",
+    "value": "Síur"
+  },
+  {
+    "key": "productsPage.noProducts",
+    "value": "Engar vörur fundust"
+  },
+  {
+    "key": "productsPage.outOfStock",
+    "value": "Uppselt"
+  },
+  {
+    "key": "productsPage.priceRange",
+    "value": "Verðbil"
+  },
+  {
+    "key": "productsPage.sortBy",
+    "value": "Raða eftir"
+  },
+  {
+    "key": "productsPage.sortOptions.nameAZ",
+    "value": "Nafn (A-Ö)"
+  },
+  {
+    "key": "productsPage.sortOptions.nameZA",
+    "value": "Nafn (Ö-A)"
+  },
+  {
+    "key": "productsPage.sortOptions.priceHighToLow",
+    "value": "Verð (hæst til lægst)"
+  },
+  {
+    "key": "productsPage.sortOptions.priceLowToHigh",
+    "value": "Verð (lægst til hæst)"
+  },
+  {
+    "key": "productsPage.subcategory",
+    "value": "Undirflokkur"
+  },
+  {
+    "key": "productsPage.title",
+    "value": "Vörur"
+  },
+  {
+    "key": "productsPage.tryAdjusting",
+    "value": "Prófaðu að breyta síuvalkostum"
+  },
+  {
+    "key": "profile.title",
+    "value": "Mín síða"
+  },
+  {
+    "key": "profile.updateError",
+    "value": "Villa við uppfærslu"
+  },
+  {
+    "key": "profile.updateSuccess",
+    "value": "Uppfærsla tókst"
+  },
+  {
+    "key": "profilePage.addressMissingWarning",
+    "value": "Vinsamlegast skráðu heimilisfang"
+  },
+  {
+    "key": "profilePage.addresses",
+    "value": "Heimilisföng"
+  },
+  {
+    "key": "profilePage.city",
+    "value": "Sveitarfélag"
+  },
+  {
+    "key": "profilePage.cityRequired",
+    "value": "Sveitarfélag er áskilið"
+  },
+  {
+    "key": "profilePage.country",
+    "value": "Land"
+  },
+  {
+    "key": "profilePage.default",
+    "value": "Sjálfgefið"
+  },
+  {
+    "key": "profilePage.editAddress",
+    "value": "Breyta heimilisfangi"
+  },
+  {
+    "key": "profilePage.email",
+    "value": "Netfang"
+  },
+  {
+    "key": "profilePage.emailMissingWarning",
+    "value": "Vinsamlegast skráðu netfang"
+  },
+  {
+    "key": "profilePage.fullName",
+    "value": "Fullt nafn"
+  },
+  {
+    "key": "profilePage.logout",
+    "value": "Útskrá"
+  },
+  {
+    "key": "profilePage.manageInfo",
+    "value": "Stjórna upplýsingum"
+  },
+  {
+    "key": "profilePage.name",
+    "value": "Nafn"
+  },
+  {
+    "key": "profilePage.newAddress",
+    "value": "Nýtt heimilisfang"
+  },
+  {
+    "key": "profilePage.newAddressTitle",
+    "value": "Skrá nýtt heimilisfang"
+  },
+  {
+    "key": "profilePage.noAddresses",
+    "value": "Engin heimilisföng skráð"
+  },
+  {
+    "key": "profilePage.notSpecified",
+    "value": "Ótilgreint"
+  },
+  {
+    "key": "profilePage.personalInformation",
+    "value": "Persónuupplýsingar"
+  },
+  {
+    "key": "profilePage.phone",
+    "value": "Símanúmer"
+  },
+  {
+    "key": "profilePage.postalCode",
+    "value": "Póstnúmer"
+  },
+  {
+    "key": "profilePage.postalCodeRequired",
+    "value": "Póstnúmer er áskilið"
+  },
+  {
+    "key": "profilePage.setAsDefaultAddress",
+    "value": "Setja sem sjálfgefið heimilisfang"
+  },
+  {
+    "key": "profilePage.street",
+    "value": "Heimilisfang"
+  },
+  {
+    "key": "profilePage.streetRequired",
+    "value": "Heimilisfang er áskilið"
+  },
+  {
+    "key": "receipts.configureInSettings",
+    "value": "Stilltu í stillingum"
+  },
+  {
+    "key": "receipts.downloadPdf",
+    "value": "Sækja PDF"
+  },
+  {
+    "key": "receipts.emailReceipt",
+    "value": "Senda kvittun í tölvupósti"
+  },
+  {
+    "key": "receipts.emailSendError",
+    "value": "Villa við sendingu tölvupósts"
+  },
+  {
+    "key": "receipts.emailSent",
+    "value": "Tölvupóstur sendur"
+  },
+  {
+    "key": "receipts.emailSentSuccess",
+    "value": "Kvittun hefur verið send í tölvupósti"
+  },
+  {
+    "key": "receipts.noEmailAddress",
+    "value": "Ekkert netfang skráð"
+  },
+  {
+    "key": "receipts.pdfDownloadError",
+    "value": "Villa við niðurhal á PDF"
+  },
+  {
+    "key": "receipts.print",
+    "value": "Prenta"
+  },
+  {
+    "key": "receipts.receipt",
+    "value": "Kvittun"
+  },
+  {
+    "key": "receipts.receiptForOrder",
+    "value": "Kvittun fyrir pöntun"
+  },
+  {
+    "key": "receipts.settingsNotFound",
+    "value": "Stillingar fundust ekki"
+  },
+  {
+    "key": "search.placeholder",
+    "value": "Leita að vörum..."
+  },
+  {
+    "key": "adminCustomers.customersCount",
+    "value": "{{filtered}} af {{total}} viðskiptavinum"
+  },
+  {
+    "key": "adminSettings.paymentGatewayEnabled",
+    "value": "Greiðslugatið virkjað"
+  },
+  {
+    "key": "adminSettings.paymentGatewayDisabled",
+    "value": "Greiðslugatið óvirkjað"
+  },
+  {
+    "key": "adminSettings.paymentGatewayTestFailed",
+    "value": "Prófun greiðslugats mistókst: {{message}}"
+  },
+  {
+    "key": "adminSettings.staffManagement",
+    "value": "Starfsfólk"
+  },
+  {
+    "key": "adminStaff.title",
+    "value": "Starfsfólk"
+  },
+  {
+    "key": "adminStaff.description",
+    "value": "Stýra kerfisstafi og úthluta hlutverkum"
+  },
+  {
+    "key": "adminStaff.createNew",
+    "value": "Búa til nýja starfsmann"
+  },
+  {
+    "key": "adminStaff.searchPlaceholder",
+    "value": "Leita eftir nafni, tölvupósti eða notendanafni..."
+  },
+  {
+    "key": "adminStaff.allRoles",
+    "value": "Öll hlutverk"
+  },
+  {
+    "key": "adminStaff.roleAdmin",
+    "value": "Kerfisstjóri"
+  },
+  {
+    "key": "adminStaff.roleDelivery",
+    "value": "Afhending"
+  },
+  {
+    "key": "adminStaff.roleCustomer",
+    "value": "Viðskiptavinur"
+  },
+  {
+    "key": "adminStaff.requiredFields",
+    "value": "Notendanafn og fullt nafn eru nauðsynleg"
+  },
+  {
+    "key": "adminStaff.errorSaving",
+    "value": "Villa við að vista starfsmann"
+  },
+  {
+    "key": "adminStaff.errorDeleting",
+    "value": "Villa við að eyða starfsmanni"
+  },
+  {
+    "key": "adminStaff.confirmDelete",
+    "value": "Ertu viss um að þú viljir eyða þessari starfsmanni?"
+  },
+  {
+    "key": "adminStaff.noStaffFound",
+    "value": "Engir starfsmenn fundust"
+  },
+  {
+    "key": "adminStaff.createFirstStaff",
+    "value": "Búðu til fyrsta starfsmanninn þinn til að hefjast handa"
+  },
+  {
+    "key": "adminStaff.username",
+    "value": "Notendanafn"
+  },
+  {
+    "key": "adminStaff.fullName",
+    "value": "Fullt nafn"
+  },
+  {
+    "key": "adminStaff.email",
+    "value": "Tölvupóstur"
+  },
+  {
+    "key": "adminStaff.phone",
+    "value": "Sími"
+  },
+  {
+    "key": "adminStaff.role",
+    "value": "Hlutverk"
+  },
+  {
+    "key": "adminStaff.actions",
+    "value": "Aðgerðir"
+  },
+  {
+    "key": "adminStaff.editStaff",
+    "value": "Breyta starfsmanni"
+  },
+  {
+    "key": "adminStaff.createStaff",
+    "value": "Búa til starfsmann"
+  },
+  {
+    "key": "adminStaff.cancel",
+    "value": "Hætta við"
+  },
+  {
+    "key": "adminStaff.create",
+    "value": "Búa til"
+  },
+  {
+    "key": "adminStaff.update",
+    "value": "Uppfæra"
+  },
+  {
+    "key": "adminSettings.currencies",
+    "value": "Gjaldmiðlar"
+  },
+  {
+    "key": "adminSettings.currencyManagement",
+    "value": "Gjaldmiðlastjórnun"
+  },
+  {
+    "key": "adminSettings.currencyManagementDesc",
+    "value": "Bættu við, fjarlægðu og stjórnaðu gjaldmiðlum sem eru í boði í versluninni þinni"
+  },
+  {
+    "key": "adminSettings.activeCurrency",
+    "value": "Virkur gjaldmiðill"
+  },
+  {
+    "key": "adminSettings.availableCurrencies",
+    "value": "Tiltækir gjaldmiðlar"
+  },
+  {
+    "key": "adminSettings.addNewCurrency",
+    "value": "Bæta við nýjum gjaldmiðli"
+  },
+  {
+    "key": "adminSettings.currencyCode",
+    "value": "Gjaldmiðilskóði"
+  },
+  {
+    "key": "adminSettings.currencySymbol",
+    "value": "Tákn"
+  },
+  {
+    "key": "adminSettings.currencyName",
+    "value": "Nafn"
+  },
+  {
+    "key": "adminSettings.setActive",
+    "value": "Gera virkan"
+  },
+  {
+    "key": "adminSettings.active",
+    "value": "Virkur"
+  },
+  {
+    "key": "adminSettings.currencyManagementGuide",
+    "value": "Leiðbeiningar um gjaldmiðlastjórnun"
+  },
+  {
+    "key": "adminSettings.onlyOneCurrency",
+    "value": "Aðeins einn gjaldmiðill getur verið virkur í einu"
+  },
+  {
+    "key": "adminSettings.currencySymbolDisplay",
+    "value": "Tákn virka gjaldmiðilsins birtist um alla verslunina"
+  },
+  {
+    "key": "adminSettings.cannotDeleteActive",
+    "value": "Þú getur ekki eytt gjaldmiðlinum sem er virkur"
+  },
+  {
+    "key": "adminSettings.currencyChangesSaved",
+    "value": "Allar breytingar á gjaldmiðlum eru vistaðar í gagnagrunninum"
+  },
+  {
+    "key": "adminSettings.currencyISK",
+    "value": "Íslensk króna"
+  }
+]

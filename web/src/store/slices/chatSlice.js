@@ -162,19 +162,23 @@ const chatSlice = createSlice({
     // Real-time updates
     handleNewMessage: (state, action) => {
       const { message, conversationId } = action.payload;
-      
-      // Add message to current conversation if it matches
+
+      // Add message to current conversation if it matches and not already present
       if (state.currentConversation?.id === conversationId) {
-        state.messages.push(message);
+        // Check if message already exists to prevent duplicates
+        const messageExists = state.messages.some(m => m.id === message.id);
+        if (!messageExists) {
+          state.messages.push(message);
+        }
       }
-      
+
       // Update conversation in list
       const conversationIndex = state.conversations.findIndex(conv => conv.id === conversationId);
       if (conversationIndex !== -1) {
         state.conversations[conversationIndex].lastMessageAt = message.createdAt;
         state.conversations[conversationIndex].messages = [message];
       }
-      
+
       // Update unread count if message is from another user
       if (message.senderId !== action.payload.currentUserId) {
         state.unreadCount += 1;
