@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2025-10-26T13:08:12.861Z",
+  "exportedAt": "2025-10-26T14:31:46.700276Z",
   "users": [
     {
       "id": 1,
@@ -38,7 +38,86 @@
       "updatedAt": "2025-10-26T13:09:14.371Z"
     }
   ],
-  "categories": [],
+  "categories": [
+    {
+      "id": 1,
+      "name": "BEERS",
+      "nameIs": "Bjór",
+      "description": "Beer products",
+      "descriptionIs": "Bjórvörur",
+      "slug": "bjor",
+      "imageUrl": null,
+      "isActive": true,
+      "sortOrder": 1,
+      "createdAt": "2025-10-26T14:26:53.602240Z",
+      "updatedAt": "2025-10-26T14:26:53.602240Z"
+    },
+    {
+      "id": 2,
+      "name": "LIGHT_WINE",
+      "nameIs": "Léttvín",
+      "description": "Light wine products",
+      "descriptionIs": "Létt vínvörur",
+      "slug": "light-wine",
+      "imageUrl": null,
+      "isActive": true,
+      "sortOrder": 2,
+      "createdAt": "2025-10-26T14:26:53.602240Z",
+      "updatedAt": "2025-10-26T14:26:53.602240Z"
+    },
+    {
+      "id": 3,
+      "name": "SPIRITS",
+      "nameIs": "Sterkt áfengi",
+      "description": "Spirits, liqueurs and strong alcoholic beverages",
+      "descriptionIs": "Sterkt áfengi, líkjör og önnur sterk áfengis drykkur",
+      "slug": "spirits",
+      "imageUrl": null,
+      "isActive": true,
+      "sortOrder": 3,
+      "createdAt": "2025-10-26T14:26:53.602240Z",
+      "updatedAt": "2025-10-26T14:26:53.602240Z"
+    },
+    {
+      "id": 4,
+      "name": "CIDER_RTD",
+      "nameIs": "Síder og tilbúnir drykkir",
+      "description": "Ciders and ready-to-drink beverages",
+      "descriptionIs": "Síder og tilbúnir drykkir",
+      "slug": "cider-rtd",
+      "imageUrl": null,
+      "isActive": true,
+      "sortOrder": 4,
+      "createdAt": "2025-10-26T14:26:53.602240Z",
+      "updatedAt": "2025-10-26T14:26:53.602240Z"
+    },
+    {
+      "id": 5,
+      "name": "NICOTINE_POUCHES",
+      "nameIs": "Nikótínpúðar",
+      "description": "Nicotine pouches",
+      "descriptionIs": "Nikótínpúðar",
+      "slug": "nicotine-pouches",
+      "imageUrl": null,
+      "isActive": true,
+      "sortOrder": 5,
+      "createdAt": "2025-10-26T14:29:05.435516Z",
+      "updatedAt": "2025-10-26T14:29:05.435516Z"
+    },
+    {
+      "id": 6,
+      "name": "OTHER_PRODUCTS",
+      "nameIs": "Aðrar vörur",
+      "description": "Other products",
+      "descriptionIs": "Aðrar vörur",
+      "slug": "other-products",
+      "imageUrl": null,
+      "isActive": true,
+      "sortOrder": 6,
+      "createdAt": "2025-10-26T14:29:05.435516Z",
+      "updatedAt": "2025-10-26T14:29:05.435516Z"
+    }
+  ],
   "subcategories": [],
   "products": [],
   "productImages": [],
@@ -8810,6 +8889,90 @@
       "key": "adminCustomers.customersCount",
       "locale": "is",
       "value": "{{filtered}} af {{total}} viðskiptavinum"
+    },
+    {
+      "id": "e9bf4a59-5b08-4cc1-aba1-7bbd874961e2",
+      "key": "adminSettings.paymentGatewayEnabled",
+      "locale": "en",
+      "value": "Payment gateway enabled"
+    },
+    {
+      "id": "649ac032-7048-4dd3-a973-ba6089946647",
+      "key": "adminSettings.paymentGatewayEnabled",
+      "locale": "is",
+      "value": "Greiðslugatið virkjað"
+    },
+    {
+      "id": "5eb9a8a7-08b1-478d-8d9a-4b982e7d3f09",
+      "key": "adminSettings.paymentGatewayDisabled",
+      "locale": "en",
+      "value": "Payment gateway disabled"
+    },
+    {
+      "id": "f18a815e-67ba-4e86-ab87-ad8586077335",
+      "key": "adminSettings.paymentGatewayDisabled",
+      "locale": "is",
+      "value": "Greiðslugatið óvirkjað"
+    },
+    {
+      "id": "6ce4be9d-6d3b-44f5-b443-9f79cc2cc107",
+      "key": "adminSettings.errorLoadingPaymentGateways",
+      "locale": "en",
+      "value": "Error loading payment gateways"
+    },
+    {
+      "id": "e1257bec-7a32-4e52-a542-9401e54ed911",
+      "key": "adminSettings.errorTogglingPaymentGateway",
+      "locale": "en",
+      "value": "Error toggling payment gateway"
+    },
+    {
+      "id": "7b0eacf6-9725-4ffa-8593-cc3de9b0a482",
+      "key": "adminSettings.paymentGatewayTestFailed",
+      "locale": "en",
+      "value": "Payment gateway test failed: {{message}}"
+    },
+    {
+      "id": "1c2166fe-ca72-49ae-90ed-849e1f0581f4",
+      "key": "adminSettings.paymentGatewayTestFailed",
+      "locale": "is",
+      "value": "Prófun greiðslugats mistókst: {{message}}"
+    },
+    {
+      "id": "e5775d86-8edd-41f9-b17f-1de39b205a20",
+      "key": "adminSettings.errorTestingPaymentGateway",
+      "locale": "en",
+      "value": "Error testing payment gateway"
+    },
+    {
+      "id": "119716a7-7833-4bb2-a093-0b3a4efc7425",
+      "key": "adminSettings.errorSavingPaymentGateway",
+      "locale": "en",
+      "value": "Error saving payment gateway"
+    },
+    {
+      "id": "d1d2bdf6-34ea-4ebc-ac2f-03682d12e92a",
+      "key": "adminSettings.pleaseSelectProvider",
+      "locale": "en",
+      "value": "Please select a provider"
+    },
+    {
+      "id": "26b0b6d4-5055-4da8-a3c7-7af00c38216a",
+      "key": "adminSettings.connectionTestSuccessful",
+      "locale": "en",
+      "value": "Connection test successful"
+    },
+    {
+      "id": "2435d1d9-264a-497c-8cab-e9d3bc88d4e9",
+      "key": "adminSettings.connectionTestFailed",
+      "locale": "en",
+      "value": "Connection test failed"
+    },
+    {
+      "id": "97e2fc63-aca7-4ffd-89b0-2894c35135e5",
+      "key": "adminSettings.errorUpdatingPaymentGateway",
+      "locale": "en",
+      "value": "Error updating payment gateway"
     }
   ],
   "shippingMethods": [],
@@ -8829,7 +8992,7 @@
       "provider": "teya",
       "isEnabled": true,
       "isActive": true,
-      "sortOrder": 8,
+      "sortOrder": 1,
       "config": null,
       "merchantId": null,
       "apiKey": null,
@@ -8885,13 +9048,300 @@
       "logoUrl": "https://www.teya.com/wp-content/themes/teya/assets/images/teya-logo.svg",
       "website": null,
       "documentation": null,
-      "createdAt": "2025-10-26T13:05:35.015Z",
-      "updatedAt": "2025-10-26T13:05:35.015Z"
+      "createdAt": "2025-10-26T14:15:44.593040Z",
+      "updatedAt": "2025-10-26T14:15:44.593040Z"
+    },
+    {
+      "id": 2,
+      "name": "Valitor",
+      "displayName": "Valitor Payment Gateway",
+      "displayNameEn": "Valitor Payment Gateway",
+      "displayNameIs": "Valitor Greiðslugátt",
+      "provider": "valitor",
+      "isEnabled": false,
+      "isActive": true,
+      "sortOrder": 2,
+      "config": null,
+      "merchantId": null,
+      "apiKey": null,
+      "secretKey": null,
+      "webhookSecret": null,
+      "environment": "sandbox",
+      "supportedCurrencies": [
+        "ISK",
+        "EUR",
+        "USD",
+        "GBP",
+        "DKK",
+        "NOK",
+        "SEK"
+      ],
+      "supportedCountries": [
+        "IS",
+        "DK",
+        "NO",
+        "SE",
+        "FI",
+        "DE",
+        "FR",
+        "GB",
+        "US"
+      ],
+      "supportedMethods": [
+        "card",
+        "visa",
+        "mastercard",
+        "amex",
+        "diners",
+        "jcb"
+      ],
+      "supportsSubscriptions": false,
+      "description": "Icelandic payment gateway for card payments and bank transfers",
+      "logoUrl": null,
+      "website": null,
+      "documentation": null,
+      "createdAt": "2025-10-26T14:15:44.593040Z",
+      "updatedAt": "2025-10-26T14:15:44.593040Z"
+    },
+    {
+      "id": 3,
+      "name": "Rapyd",
+      "displayName": "Rapyd Payment Gateway",
+      "displayNameEn": "Rapyd Payment Gateway",
+      "displayNameIs": "Rapyd Greiðslugátt",
+      "provider": "rapyd",
+      "isEnabled": false,
+      "isActive": true,
+      "sortOrder": 3,
+      "config": null,
+      "merchantId": null,
+      "apiKey": null,
+      "secretKey": null,
+      "webhookSecret": null,
+      "environment": "sandbox",
+      "supportedCurrencies": [
+        "ISK",
+        "EUR",
+        "USD",
+        "GBP"
+      ],
+      "supportedCountries": [
+        "IS",
+        "DK",
+        "NO",
+        "SE",
+        "FI",
+        "DE",
+        "FR",
+        "GB",
+        "US"
+      ],
+      "supportedMethods": [
+        "card",
+        "wallet",
+        "bank_transfer"
+      ],
+      "supportsSubscriptions": false,
+      "description": "Global payment gateway supporting multiple payment methods",
+      "logoUrl": null,
+      "website": null,
+      "documentation": null,
+      "createdAt": "2025-10-26T14:15:44.593040Z",
+      "updatedAt": "2025-10-26T14:15:44.593040Z"
+    },
+    {
+      "id": 4,
+      "name": "Netgíró",
+      "displayName": "Netgíró Payment Gateway",
+      "displayNameEn": "Netgíró Payment Gateway",
+      "displayNameIs": "Netgíró Greiðslugátt",
+      "provider": "netgiro",
+      "isEnabled": false,
+      "isActive": true,
+      "sortOrder": 4,
+      "config": null,
+      "merchantId": null,
+      "apiKey": null,
+      "secretKey": null,
+      "webhookSecret": null,
+      "environment": "sandbox",
+      "supportedCurrencies": [
+        "ISK"
+      ],
+      "supportedCountries": [
+        "IS"
+      ],
+      "supportedMethods": [
+        "card",
+        "bank_transfer"
+      ],
+      "supportsSubscriptions": false,
+      "description": "Icelandic bank payment gateway",
+      "logoUrl": null,
+      "website": null,
+      "documentation": null,
+      "createdAt": "2025-10-26T14:15:44.593040Z",
+      "updatedAt": "2025-10-26T14:15:44.593040Z"
+    },
+    {
+      "id": 5,
+      "name": "Cash on Delivery",
+      "displayName": "Cash on Delivery",
+      "displayNameEn": "Cash on Delivery",
+      "displayNameIs": "Póstkrafa",
+      "provider": "cash_on_delivery",
+      "isEnabled": true,
+      "isActive": true,
+      "sortOrder": 5,
+      "config": null,
+      "merchantId": null,
+      "apiKey": null,
+      "secretKey": null,
+      "webhookSecret": null,
+      "environment": "production",
+      "supportedCurrencies": [
+        "ISK"
+      ],
+      "supportedCountries": [
+        "IS"
+      ],
+      "supportedMethods": [
+        "cash"
+      ],
+      "supportsSubscriptions": false,
+      "description": "Pay with cash when your order is delivered",
+      "logoUrl": null,
+      "website": null,
+      "documentation": null,
+      "createdAt": "2025-10-26T14:15:44.593040Z",
+      "updatedAt": "2025-10-26T14:15:44.593040Z"
+    },
+    {
+      "id": 6,
+      "name": "Pay on Pickup",
+      "displayName": "Pay on Pickup",
+      "displayNameEn": "Pay on Pickup",
+      "displayNameIs": "Greiðsla við sókn",
+      "provider": "pay_on_pickup",
+      "isEnabled": true,
+      "isActive": true,
+      "sortOrder": 6,
+      "config": null,
+      "merchantId": null,
+      "apiKey": null,
+      "secretKey": null,
+      "webhookSecret": null,
+      "environment": "production",
+      "supportedCurrencies": [
+        "ISK"
+      ],
+      "supportedCountries": [
+        "IS"
+      ],
+      "supportedMethods": [
+        "cash"
+      ],
+      "supportsSubscriptions": false,
+      "description": "Pay with cash when you pick up your order",
+      "logoUrl": null,
+      "website": null,
+      "documentation": null,
+      "createdAt": "2025-10-26T14:15:44.593040Z",
+      "updatedAt": "2025-10-26T14:15:44.593040Z"
     }
   ],
-  "vatProfiles": [],
+  "vatProfiles": [
+    {
+      "id": 1,
+      "name": "Standard Rate",
+      "nameIs": "Venjuleg VSK",
+      "description": "Standard VAT rate - 24%",
+      "descriptionIs": "Venjuleg VSK - 24%",
+      "vatRate": 24,
+      "isActive": true,
+      "isDefault": true,
+      "sortOrder": 1,
+      "createdAt": "2025-10-26T14:31:46.700276Z",
+      "updatedAt": "2025-10-26T14:31:46.700276Z"
+    },
+    {
+      "id": 2,
+      "name": "Reduced Rate",
+      "nameIs": "Lækkuð VSK",
+      "description": "Reduced VAT rate - 11%",
+      "descriptionIs": "Lækkuð VSK - 11%",
+      "vatRate": 11,
+      "isActive": true,
+      "isDefault": false,
+      "sortOrder": 2,
+      "createdAt": "2025-10-26T14:31:46.700276Z",
+      "updatedAt": "2025-10-26T14:31:46.700276Z"
+    }
+  ],
   "discounts": [],
   "notifications": [],
   "conversations": [],
-  "chatMessages": []
+  "chatMessages": [],
+  "shippingOptions": [
+    {
+      "id": 1,
+      "name": "Standard Home Delivery",
+      "nameIs": "Venjuleg heimsending",
+      "description": "Delivery to your home address within 2-3 business days",
+      "descriptionIs": "Sending á heimili þitt innan 2-3 virkra daga",
+      "type": "DELIVERY",
+      "fee": 1990,
+      "isActive": true,
+      "sortOrder": 1,
+      "estimatedDays": 3,
+      "cutoffTime": "14:00",
+      "createdAt": "2025-10-26T14:18:06.828928Z",
+      "updatedAt": "2025-10-26T14:18:06.828928Z"
+    },
+    {
+      "id": 2,
+      "name": "Express Delivery",
+      "nameIs": "Flýtisending",
+      "description": "Next-day delivery to your home address",
+      "descriptionIs": "Sending á morgun til heimilis þíns",
+      "type": "DELIVERY",
+      "fee": 4990,
+      "isActive": true,
+      "sortOrder": 2,
+      "estimatedDays": 1,
+      "cutoffTime": "11:00",
+      "createdAt": "2025-10-26T14:18:06.828928Z",
+      "updatedAt": "2025-10-26T14:18:06.828928Z"
+    },
+    {
+      "id": 3,
+      "name": "In-Store Pickup",
+      "nameIs": "Afhending í verslun",
+      "description": "Free pickup from our store location",
+      "descriptionIs": "Ókeypis sóun frá verslun okkar",
+      "type": "PICKUP",
+      "fee": 0,
+      "isActive": true,
+      "sortOrder": 3,
+      "estimatedDays": 0,
+      "cutoffTime": null,
+      "createdAt": "2025-10-26T14:18:06.828928Z",
+      "updatedAt": "2025-10-26T14:18:06.828928Z"
+    },
+    {
+      "id": 4,
+      "name": "International Delivery",
+      "nameIs": "Alþjóðleg sending",
+      "description": "Delivery to international addresses (5-10 business days)",
+      "descriptionIs": "Sending á erlendum stöðum (5-10 virkir dagar)",
+      "type": "DELIVERY",
+      "fee": 9990,
+      "isActive": false,
+      "sortOrder": 4,
+      "estimatedDays": 10,
+      "cutoffTime": null,
+      "createdAt": "2025-10-26T14:18:06.828928Z",
+      "updatedAt": "2025-10-26T14:18:06.828928Z"
+    }
+  ]
 }
