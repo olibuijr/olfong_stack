@@ -45,59 +45,76 @@ Always attempt to use Playwright for browser automation tasks, but **never run i
 
 Always create translation strings via the translation system when creating new strings not already available. Do not hardcode text strings in the application - they must be registered to support multi-language functionality.
 
+**IMPORTANT**: All translations MUST be added to the seed file (`backend/prisma/database-export.json`) to ensure they persist across database resets and are available in all environments.
+
 ### When Adding New Translation Keys
 
 1. **Use translation keys in UI**: Always reference translations via `t('key.name')` in components, never hardcode text.
 
-2. **Create translation script**: When adding new translation keys, create a script in `backend/scripts/add-[feature]-translations.js`:
-   ```javascript
-   const { PrismaClient } = require('@prisma/client');
-   const prisma = new PrismaClient();
+2. **Use correct key format**: Follow the naming convention `section.key` (e.g., `adminSettings.logoColorMode`, `forms.submit`, `errors.validation`).
 
-   const translations = [
-     { key: 'feature.key', en: 'English text', is: 'Icelandic text' },
-     // Add all keys needed
-   ];
+3. **Always provide both languages**: Every translation key must have both English (`en`) and Icelandic (`is`) translations.
 
-   async function addTranslations() {
-     console.log('Adding translations...\n');
-     try {
-       for (const { key, en, is } of translations) {
-         // Add English translation
-         await prisma.lang.upsert({
-           where: { key_locale: { key, locale: 'en' } },
-           update: { value: en },
-           create: { key, locale: 'en', value: en }
-         });
+### Adding Translations - Complete Workflow
 
-         // Add Icelandic translation
-         await prisma.lang.upsert({
-           where: { key_locale: { key, locale: 'is' } },
-           update: { value: is },
-           create: { key, locale: 'is', value: is }
-         });
+#### Step 1: Add Keys to Seed File
 
-         console.log(`✓ Added/Updated: ${key}`);
-       }
-       console.log('\n✓ All translations added successfully!');
-     } catch (error) {
-       console.error('Error adding translations:', error);
-       throw error;
-     } finally {
-       await prisma.$disconnect();
-     }
-   }
+**REQUIRED**: Add translations directly to `/backend/prisma/database-export.json`:
 
-   addTranslations();
-   ```
+```json
+{
+  "langs": [
+    {
+      "id": "unique-uuid-here",
+      "key": "feature.key",
+      "locale": "en",
+      "value": "English text"
+    },
+    {
+      "id": "unique-uuid-here",
+      "key": "feature.key",
+      "locale": "is",
+      "value": "Icelandic text"
+    }
+  ]
+}
+```
 
-3. **Run the translation script**: Execute `node scripts/add-[feature]-translations.js` from the backend directory to add translations to the database.
+Generate UUIDs using this pattern: `xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx` where `x` = random hex digit, `y` = hex digit 8-b.
 
-4. **Use correct key format**: Follow the naming convention `section.key` (e.g., `adminSettings.logoColorMode`, `forms.submit`, `errors.validation`).
+#### Step 2: Use icelandic-text-generator for Icelandic Text
 
-5. **Always provide both languages**: Every translation key must have both English (`en`) and Icelandic (`is`) translations.
+For Icelandic translations, **ALWAYS use the `icelandic-text-generator` agent** to generate professional, contextually appropriate text:
+- Use the agent to translate English strings to Icelandic
+- Maintain professional tone appropriate for e-commerce
+- Preserve original intent and meaning
 
-6. **Commit together**: Commit the translation script along with the component changes that use the new keys.
+#### Step 3: Reseed the Database
+
+After adding to the seed file, run the seed script to populate the database:
+
+```bash
+npm run seed
+# OR
+node prisma/seed.js
+```
+
+Expected output:
+```
+✅ Seeded 1457 translations (or higher if new ones were added)
+```
+
+#### Step 4: Verify in UI
+
+Test the UI to ensure translations appear correctly in both English and Icelandic.
+
+#### Step 5: Commit Together
+
+Commit the changes to the seed file along with the component changes:
+```bash
+git add web/src/pages/... backend/prisma/database-export.json
+git commit -m "Add feature translations to UI and seed file"
+```
 
 ### Translation Key Naming Conventions
 
@@ -108,14 +125,35 @@ Always create translation strings via the translation system when creating new s
 - `buttons.*` - Button labels
 - `labels.*` - General labels
 - `messages.*` - General messages and status text
+- `adminMedia.*` - Media management
+- `adminAnalytics.*` - Analytics dashboard
+- `checkout.*` - Checkout page elements
+- `chat.*` - Chat system messages
+- `categories.*` - Product category names
+- `subscriptions.*` - Subscription management
 
 ### Example Workflow
 
-1. Add translation key to component: `{t('adminSettings.newFeature')}`
-2. Create `backend/scripts/add-new-feature-translations.js` with both English and Icelandic text
-3. Run the script: `node scripts/add-new-feature-translations.js`
-4. Verify translations appear in the UI
-5. Commit all changes together
+1. **Component**: Add translation key `{t('adminSettings.newFeature')}`
+2. **Seed File**: Add both English and Icelandic entries to `database-export.json`:
+   ```json
+   { "id": "uuid1", "key": "adminSettings.newFeature", "locale": "en", "value": "New Feature Label" },
+   { "id": "uuid2", "key": "adminSettings.newFeature", "locale": "is", "value": "Ný aðgerð merkimiði" }
+   ```
+3. **Database**: Run `npm run seed` to load into database
+4. **Verify**: Check UI displays correct text
+5. **Commit**: Commit component changes + seed file updates together
+
+### Seed File is Source of Truth
+
+The `backend/prisma/database-export.json` file is the **permanent source of truth** for all translations:
+- ✅ Version controlled (backed up in git)
+- ✅ Reproducible across all environments (dev, staging, production)
+- ✅ Safe for database resets (seed file protects data)
+- ✅ New databases automatically get all 1,457+ translations when seeded
+- ✅ No manual work needed - all translations persist automatically
+
+**Never rely on database-only translations. Always add to the seed file first.**
 
 ## Code Cleanup
 
@@ -151,6 +189,35 @@ Always use the PostgreSQL MCP server for database operations on this project. Us
 - Better integration with Claude Code workflows
 
 When you need to query the database, use the MCP tool rather than `psql` or other CLI tools.
+
+### CRITICAL: NEVER RESET THE DATABASE
+
+**NEVER EVER run `prisma migrate reset` or `prisma db push --force` or any command that wipes the database.** This will destroy all data including:
+- All translations
+- All products and product data
+- All orders and customer data
+- All settings and configurations
+- All uploaded media
+
+If you need to apply schema changes, use `npx prisma migrate create` followed by `npx prisma migrate deploy` to create and apply migrations without data loss. Always create proper migrations for schema changes.
+
+### Database Backup Strategy
+
+**BEFORE making ANY database changes or migrations:**
+
+1. **Export current state**: Run `node scripts/export-db-state.js` to create a timestamped backup in `backups/db-exports/`
+2. **Save to seed.js**: Copy the exported data to `prisma/database-export.json` so it becomes part of the seed data
+3. **Commit backup**: Add the database-export.json to git so you can revert if needed
+
+**AFTER successful changes:**
+
+1. Keep the backup in the backups folder
+2. Update the seed.js to include new translations and data
+3. Never delete backup files - they're your safety net
+
+**IF disaster happens:**
+
+Use `node scripts/restore-db-from-backup.js backup-name.json` to restore from a backup file
 
 ## Frontend Pages Reference
 
