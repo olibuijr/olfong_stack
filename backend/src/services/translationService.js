@@ -441,6 +441,220 @@ class TranslationService {
       throw error;
     }
   }
+
+  /**
+   * Generate translations using Gemini Flash 2.5 model
+   */
+  async generateTranslations(sourceLocale, targetLocale, keysToTranslate, onProgress = null) {
+    try {
+      const { execSync } = require('child_process');
+      const fs = require('fs');
+      const path = require('path');
+
+      // Get source translations
+      let sourceTranslations;
+      if (keysToTranslate && keysToTranslate.length > 0) {
+        sourceTranslations = await prisma.lang.findMany({
+          where: {
+            locale: sourceLocale,
+            key: { in: keysToTranslate }
+          }
+        });
+      } else {
+        sourceTranslations = await prisma.lang.findMany({
+          where: { locale: sourceLocale }
+        });
+      }
+
+      if (sourceTranslations.length === 0) {
+        return {
+          generated: 0,
+          translations: [],
+          message: 'No source translations found'
+        };
+      }
+
+      // Check if target translations already exist and skip them
+      const existingTargets = await prisma.lang.findMany({
+        where: {
+          locale: targetLocale,
+          key: { in: sourceTranslations.map(t => t.key) }
+        },
+        select: { key: true }
+      });
+
+      const existingKeys = new Set(existingTargets.map(t => t.key));
+      const toTranslate = sourceTranslations.filter(t => !existingKeys.has(t.key));
+
+      if (toTranslate.length === 0) {
+        return {
+          generated: 0,
+          translations: [],
+          message: 'All translations already exist'
+        };
+      }
+
+      // Process items one at a time
+      const translationResults = [];
+      let totalWords = 0;
+      const sourceLabel = sourceLocale === 'is' ? 'Icelandic' : 'English';
+      const targetLabel = targetLocale === 'is' ? 'Icelandic' : 'English';
+
+      const startMsg = `Processing ${toTranslate.length} items one at a time`;
+      console.log(startMsg);
+      if (onProgress) onProgress({ type: 'log', message: startMsg });
+
+      for (let idx = 0; idx < toTranslate.length; idx++) {
+        const item = toTranslate[idx];
+
+        try {
+          const prompt = `You are a professional UI translation expert. Translate this single ${sourceLabel} UI text to ${targetLabel}. Return ONLY the translated text, nothing else. Do not include quotes.
+
+"${item.key}": "${item.value}"`;
+
+          // Write prompt to temporary file
+          const tempPromptFile = path.join('/tmp', `gemini-item-${Date.now()}-${idx}.txt`);
+          fs.writeFileSync(tempPromptFile, prompt);
+
+          try {
+            // Call Gemini Flash 2.5
+            const result = execSync(`gemini --model flash-2.5 -p "$(cat ${tempPromptFile})"`, {
+              encoding: 'utf8',
+              maxBuffer: 10 * 1024 * 1024,
+              shell: '/bin/bash',
+              timeout: 30000
+            });
+
+            // Clean up temp file
+            fs.unlinkSync(tempPromptFile);
+
+            const translatedValue = result.trim();
+
+            if (translatedValue && translatedValue.length > 0) {
+              translationResults.push({
+                key: item.key,
+                locale: targetLocale,
+                value: translatedValue
+              });
+
+              // Count words
+              const wordCount = translatedValue.split(/\s+/).length;
+              totalWords += wordCount;
+
+              const progressMsg = `[${idx + 1}/${toTranslate.length}] Translated "${item.key}" (${wordCount} words, total: ${totalWords})`;
+              console.log(progressMsg);
+              if (onProgress) onProgress({ type: 'log', message: progressMsg });
+            }
+          } catch (error) {
+            // Clean up temp file if it still exists
+            if (fs.existsSync(tempPromptFile)) {
+              fs.unlinkSync(tempPromptFile);
+            }
+            const errorMsg = `Error translating item ${idx + 1} (${item.key}): ${error.message}`;
+            console.error(errorMsg);
+            if (onProgress) onProgress({ type: 'error', message: errorMsg });
+          }
+
+          // Add delay between items to avoid rate limiting
+          if (idx < toTranslate.length - 1) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+          }
+        } catch (error) {
+          const errorMsg = `Error processing item ${idx + 1}: ${error.message}`;
+          console.error(errorMsg);
+          if (onProgress) onProgress({ type: 'error', message: errorMsg });
+        }
+      }
+
+      // Upsert all translated entries into database
+      const upsertResults = await this.batchUpsertTranslations(translationResults);
+
+      const finalMsg = `Generated ${upsertResults.length} translations from ${toTranslate.length} source entries`;
+      console.log(finalMsg);
+      if (onProgress) onProgress({ type: 'log', message: finalMsg });
+
+      return {
+        generated: upsertResults.length,
+        translations: upsertResults,
+        message: finalMsg
+      };
+    } catch (error) {
+      console.error('Error generating translations:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Translate a single item using Gemini Flash 2.5
+   */
+  async translateItem(key, sourceLocale, targetLocale, value, onProgress = null) {
+    try {
+      const { execSync } = require('child_process');
+      const fs = require('fs');
+      const path = require('path');
+
+      const sourceLabel = sourceLocale === 'is' ? 'Icelandic' : 'English';
+      const targetLabel = targetLocale === 'is' ? 'Icelandic' : 'English';
+
+      const startMsg = `Translating "${key}" from ${sourceLabel} to ${targetLabel}...`;
+      console.log(startMsg);
+      if (onProgress) onProgress({ type: 'log', message: startMsg });
+
+      const prompt = `You are a professional UI translation expert. Translate this single ${sourceLabel} UI text to ${targetLabel}. Return ONLY the translated text, nothing else.
+
+"${key}": "${value}"`;
+
+      // Write prompt to temporary file
+      const tempPromptFile = path.join('/tmp', `gemini-item-${Date.now()}.txt`);
+      fs.writeFileSync(tempPromptFile, prompt);
+
+      try {
+        // Call Gemini Flash 2.5
+        const result = execSync(`gemini --model flash-2.5 -p "$(cat ${tempPromptFile})"`, {
+          encoding: 'utf8',
+          maxBuffer: 10 * 1024 * 1024,
+          shell: '/bin/bash',
+          timeout: 30000
+        });
+
+        // Clean up temp file
+        fs.unlinkSync(tempPromptFile);
+
+        const translatedValue = result.trim();
+        const wordCount = translatedValue.split(/\s+/).length;
+
+        const progressMsg = `Translated "${key}" (${wordCount} words)`;
+        console.log(progressMsg);
+        if (onProgress) onProgress({ type: 'log', message: progressMsg });
+
+        // Upsert the translation
+        const upserted = await this.upsertTranslation(key, translatedValue, targetLocale);
+
+        const successMsg = `Successfully saved translation for "${key}"`;
+        console.log(successMsg);
+        if (onProgress) onProgress({ type: 'log', message: successMsg });
+
+        return {
+          key,
+          locale: targetLocale,
+          value: translatedValue,
+          translation: upserted
+        };
+      } catch (error) {
+        // Clean up temp file if it still exists
+        if (fs.existsSync(tempPromptFile)) {
+          fs.unlinkSync(tempPromptFile);
+        }
+        const errorMsg = `Error translating "${key}": ${error.message}`;
+        console.error(errorMsg);
+        if (onProgress) onProgress({ type: 'error', message: errorMsg });
+        throw error;
+      }
+    } catch (error) {
+      console.error('Error translating item:', error);
+      throw error;
+    }
+  }
 }
 
 module.exports = new TranslationService();

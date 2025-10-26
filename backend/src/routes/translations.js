@@ -45,6 +45,22 @@ router.post('/batch', authenticate, authorize(), translationController.batchUpse
 // Body: { data, format: 'json'|'csv' }
 router.post('/import', authenticate, authorize(), translationController.importTranslations);
 
+// POST /api/translations/generate - Generate translations using Gemini
+// Body: { sourceLocale: 'is'|'en', targetLocale: 'is'|'en', keys?: string[] }
+router.post('/generate', authenticate, authorize(), translationController.generateTranslations);
+
+// POST /api/translations/generate-stream - Generate translations with streaming progress (SSE)
+// Body: { sourceLocale: 'is'|'en', targetLocale: 'is'|'en', keys?: string[] }
+router.post('/generate-stream', authenticate, authorize(), translationController.generateTranslationsStream);
+
+// POST /api/translations/translate-item - Translate a single item using Gemini
+// Body: { key: string, sourceLocale: 'is'|'en', targetLocale: 'is'|'en', value: string }
+router.post('/translate-item', authenticate, authorize(), translationController.translateItem);
+
+// POST /api/translations/translate-item-stream - Translate single item with streaming progress (SSE)
+// Body: { key: string, sourceLocale: 'is'|'en', targetLocale: 'is'|'en', value: string }
+router.post('/translate-item-stream', authenticate, authorize(), translationController.translateItemStream);
+
 // PUT /api/translations/:id - Update translation by ID
 // Body: { value }
 router.put('/:id', authenticate, authorize(), translationController.updateTranslation);

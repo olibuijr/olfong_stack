@@ -1,0 +1,10 @@
+[
+  {
+    "key": "checkoutPage.teyaPayment",
+    "englishValue": "Teya Payment Gateway"
+  },
+  {
+    "key": "adminSettings.paymentMethod",
+    "englishValue": "Payment method"
+  }
+]

@@ -94,20 +94,20 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7997,
+                      "duration": 7672,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2025-10-26T18:50:33.215Z] Starting admin-customer chat test \n"
+                          "text": "[2025-10-26T18:57:49.089Z] Starting admin-customer chat test \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:34.548Z] Admin logging in \n"
+                          "text": "[2025-10-26T18:57:50.125Z] Admin logging in \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:36.818Z] Admin navigating to chat \n"
+                          "text": "[2025-10-26T18:57:52.482Z] Admin navigating to chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.295Z] Customer logging in \n"
+                          "text": "[2025-10-26T18:57:53.895Z] Customer logging in \n"
                         },
                         {
                           "text": "Attempting test login...\n"
@@ -122,18 +122,18 @@
                           "text": "Login attempt completed\n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:41.033Z] Checking for chat widget availability \n"
+                          "text": "[2025-10-26T18:57:56.536Z] Checking for chat widget availability \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:41.052Z] Chat widget not available in test environment - this is expected \n"
+                          "text": "[2025-10-26T18:57:56.548Z] Chat widget not available in test environment - this is expected \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:41.203Z] Chat test completed \n"
+                          "text": "[2025-10-26T18:57:56.754Z] Chat test completed \n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-26T18:50:32.488Z",
+                      "startTime": "2025-10-26T18:57:48.606Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -162,37 +162,37 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 4632,
+                      "duration": 4683,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2025-10-26T18:50:34.695Z] Starting conversation list test \n"
+                          "text": "[2025-10-26T18:57:50.106Z] Starting conversation list test \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:36.857Z] Navigating to admin chat \n"
+                          "text": "[2025-10-26T18:57:52.434Z] Navigating to admin chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.266Z] Checking chat management page \n"
+                          "text": "[2025-10-26T18:57:53.838Z] Checking chat management page \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.300Z] Checking description text \n"
+                          "text": "[2025-10-26T18:57:53.900Z] Checking description text \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.337Z] Checking search functionality \n"
+                          "text": "[2025-10-26T18:57:53.939Z] Checking search functionality \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.362Z] Checking for empty state or instructions \n"
+                          "text": "[2025-10-26T18:57:53.964Z] Checking for empty state or instructions \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.426Z] Chat management page verified - no active conversations in test environment \n"
+                          "text": "[2025-10-26T18:57:54.039Z] Chat management page verified - no active conversations in test environment \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:38.426Z] Conversation list test completed \n"
+                          "text": "[2025-10-26T18:57:54.040Z] Conversation list test completed \n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-26T18:50:32.491Z",
+                      "startTime": "2025-10-26T18:57:48.694Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -221,76 +221,76 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 11695,
+                      "duration": 10997,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2025-10-26T18:50:38.539Z] Starting message exchange test \n"
+                          "text": "[2025-10-26T18:57:54.214Z] Starting message exchange test \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:39.012Z] Admin logging in \n"
+                          "text": "[2025-10-26T18:57:54.608Z] Admin logging in \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:41.222Z] Admin navigating to chat \n"
+                          "text": "[2025-10-26T18:57:56.513Z] Admin navigating to chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:42.861Z] Customer logging in via API \n"
+                          "text": "[2025-10-26T18:57:57.997Z] Customer logging in via API \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:43.308Z] Customer logged in successfully with token \n"
+                          "text": "[2025-10-26T18:57:58.399Z] Customer logged in successfully with token \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:43.308Z] Customer creating conversation via API \n"
+                          "text": "[2025-10-26T18:57:58.399Z] Customer creating conversation via API \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:43.343Z] Conversation created: 1 \n"
+                          "text": "[2025-10-26T18:57:58.424Z] Conversation created: 1 \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:43.344Z] Customer sending message \n"
+                          "text": "[2025-10-26T18:57:58.425Z] Customer sending message \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:43.409Z] Customer message sent: Test message from customer at 2025-10-26T18:50:43.344Z \n"
+                          "text": "[2025-10-26T18:57:58.487Z] Customer message sent: Test message from customer at 2025-10-26T18:57:58.425Z \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:43.409Z] Admin waiting for conversation to appear \n"
+                          "text": "[2025-10-26T18:57:58.488Z] Admin waiting for conversation to appear \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:47.012Z] Admin sees conversation in list \n"
+                          "text": "[2025-10-26T18:58:01.869Z] Admin sees conversation in list \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:47.116Z] Checking customer message in admin chat \n"
+                          "text": "[2025-10-26T18:58:01.974Z] Checking customer message in admin chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:47.199Z] ✓ Customer message visible (count: 2) \n"
+                          "text": "[2025-10-26T18:58:02.074Z] ✓ Customer message visible (count: 4) \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:47.200Z] Admin sending reply message \n"
+                          "text": "[2025-10-26T18:58:02.075Z] Admin sending reply message \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:47.257Z] ✓ Admin reply sent: Admin reply at 2025-10-26T18:50:47.200Z \n"
+                          "text": "[2025-10-26T18:58:02.145Z] ✓ Admin reply sent: Admin reply at 2025-10-26T18:58:02.075Z \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.905Z] Verifying admin reply in admin chat \n"
+                          "text": "[2025-10-26T18:58:04.658Z] Verifying admin reply in admin chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.987Z] ✓ Admin reply visible in admin chat \n"
+                          "text": "[2025-10-26T18:58:04.772Z] ✓ Admin reply visible in admin chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.987Z] Customer checking for admin reply via API \n"
+                          "text": "[2025-10-26T18:58:04.772Z] Customer checking for admin reply via API \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:50.023Z] ⚠ Admin reply not yet visible, but message delivery is working \n"
+                          "text": "[2025-10-26T18:58:04.803Z] ⚠ Admin reply not yet visible, but message delivery is working \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:50.023Z] ✅ Message exchange test completed successfully! \n"
+                          "text": "[2025-10-26T18:58:04.803Z] ✅ Message exchange test completed successfully! \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:50.023Z] ✅ Bidirectional message delivery verified! \n"
+                          "text": "[2025-10-26T18:58:04.803Z] ✅ Bidirectional message delivery verified! \n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-26T18:50:38.513Z",
+                      "startTime": "2025-10-26T18:57:54.181Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -319,73 +319,73 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 11433,
+                      "duration": 10196,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2025-10-26T18:50:41.250Z] Starting dummy electronic ID authentication and message exchange test \n"
+                          "text": "[2025-10-26T18:57:56.830Z] Starting dummy electronic ID authentication and message exchange test \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:42.004Z] Admin logging in \n"
+                          "text": "[2025-10-26T18:57:57.203Z] Admin logging in \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:44.443Z] Admin navigating to chat \n"
+                          "text": "[2025-10-26T18:57:58.948Z] Admin navigating to chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:45.794Z] Dummy user authenticating via phone number 8430854 \n"
+                          "text": "[2025-10-26T18:58:00.124Z] Dummy user authenticating via phone number 8430854 \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:46.159Z] ✓ Dummy user authenticated successfully (phone: 8430854) \n"
+                          "text": "[2025-10-26T18:58:00.482Z] ✓ Dummy user authenticated successfully (phone: 8430854) \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:46.159Z] Dummy user creating conversation via API \n"
+                          "text": "[2025-10-26T18:58:00.482Z] Dummy user creating conversation via API \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:46.175Z] ✓ Conversation created: 2 \n"
+                          "text": "[2025-10-26T18:58:00.498Z] ✓ Conversation created: 2 \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:46.175Z] Dummy user sending initial message \n"
+                          "text": "[2025-10-26T18:58:00.498Z] Dummy user sending initial message \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:46.217Z] ✓ Dummy user message sent: Message from dummy user with phone 8430854 at 2025-10-26T18:50:46.175Z \n"
+                          "text": "[2025-10-26T18:58:00.584Z] ✓ Dummy user message sent: Message from dummy user with phone 8430854 at 2025-10-26T18:58:00.498Z \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:46.217Z] Admin waiting for dummy user conversation to appear \n"
+                          "text": "[2025-10-26T18:58:00.585Z] Admin waiting for dummy user conversation to appear \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.679Z] ✓ Admin sees dummy user conversation in list \n"
+                          "text": "[2025-10-26T18:58:03.920Z] ✓ Admin sees dummy user conversation in list \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.791Z] Admin checking dummy user message \n"
+                          "text": "[2025-10-26T18:58:04.032Z] Admin checking dummy user message \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.844Z] ✓ Admin received dummy user message \n"
+                          "text": "[2025-10-26T18:58:04.115Z] ✓ Admin received dummy user message \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.844Z] Admin sending reply to dummy user \n"
+                          "text": "[2025-10-26T18:58:04.115Z] Admin sending reply to dummy user \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:49.896Z] ✓ Admin reply sent to dummy user \n"
+                          "text": "[2025-10-26T18:58:04.175Z] ✓ Admin reply sent to dummy user \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:52.477Z] ✓ Admin reply visible in admin chat \n"
+                          "text": "[2025-10-26T18:58:06.629Z] ✓ Admin reply visible in admin chat \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:52.477Z] Dummy user checking for admin reply via API \n"
+                          "text": "[2025-10-26T18:58:06.629Z] Dummy user checking for admin reply via API \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:52.504Z] ⚠ Admin reply not yet visible, but message delivery is working \n"
+                          "text": "[2025-10-26T18:58:06.658Z] ⚠ Admin reply not yet visible, but message delivery is working \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:52.504Z] ✅ Dummy electronic ID authentication test completed successfully! \n"
+                          "text": "[2025-10-26T18:58:06.658Z] ✅ Dummy electronic ID authentication test completed successfully! \n"
                         },
                         {
-                          "text": "[2025-10-26T18:50:52.504Z] ✅ Message exchange with dummy user verified! \n"
+                          "text": "[2025-10-26T18:58:06.658Z] ✅ Message exchange with dummy user verified! \n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-26T18:50:41.232Z",
+                      "startTime": "2025-10-26T18:57:56.797Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -405,8 +405,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-10-26T18:50:31.700Z",
-    "duration": 21491.254,
+    "startTime": "2025-10-26T18:57:47.911Z",
+    "duration": 19635.313,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

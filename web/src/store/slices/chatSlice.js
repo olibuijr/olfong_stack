@@ -119,7 +119,8 @@ const chatSlice = createSlice({
     // Conversation actions
     setCurrentConversation: (state, action) => {
       state.currentConversation = action.payload;
-      state.messages = [];
+      // Use messages from conversation if available, otherwise empty array
+      state.messages = action.payload?.messages || [];
     },
     
     // Message actions
@@ -265,7 +266,8 @@ const chatSlice = createSlice({
       })
       .addCase(fetchMessages.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.messages = action.payload.messages;
+        // Handle both array payload and object with data property
+        state.messages = Array.isArray(action.payload) ? action.payload : (action.payload.messages || action.payload.data || []);
       })
       .addCase(fetchMessages.rejected, (state, action) => {
         state.isLoading = false;

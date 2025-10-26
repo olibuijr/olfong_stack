@@ -22,6 +22,7 @@ import {
 
 import AdminLayout from '../../components/admin/AdminLayout';
 import PageHeader from '../../components/admin/PageHeader';
+import TranslationProgressModal from '../../components/admin/TranslationProgressModal';
 import translationService from '../../services/translationService';
 
 const Translations = () => {
@@ -46,6 +47,9 @@ const Translations = () => {
   const [generateLoading, setGenerateLoading] = useState(false);
   const [generateConfig, setGenerateConfig] = useState({ sourceLocale: 'is', targetLocale: 'en' });
   const [translatingKey, setTranslatingKey] = useState(null);
+  const [showProgressModal, setShowProgressModal] = useState(false);
+  const [progressModalType, setProgressModalType] = useState(null); // 'batch' or 'single'
+  const [progressModalData, setProgressModalData] = useState({}); // { itemKey, itemValue } for single
 
   const itemsPerPage = 20;
 
@@ -292,36 +296,10 @@ const Translations = () => {
       return;
     }
 
-    setGenerateLoading(true);
-    try {
-      const response = await fetch('/api/translations/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          sourceLocale: generateConfig.sourceLocale,
-          targetLocale: generateConfig.targetLocale
-        })
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.details || 'Generation failed');
-      }
-
-      const result = await response.json();
-      toast.success(`Generated ${result.data.generated} translations`);
-      setShowGenerateModal(false);
-      fetchTranslations();
-      fetchStats();
-    } catch (err) {
-      console.error('Error generating translations:', err);
-      toast.error(err.message || 'Failed to generate translations');
-    } finally {
-      setGenerateLoading(false);
-    }
+    setShowGenerateModal(false);
+    setProgressModalType('batch');
+    setProgressModalData({});
+    setShowProgressModal(true);
   };
 
   // Translate a single item
@@ -331,37 +309,12 @@ const Translations = () => {
       return;
     }
 
-    setTranslatingKey(translation.key);
-    try {
-      const response = await fetch('/api/translations/translate-item', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({
-          key: translation.key,
-          sourceLocale,
-          targetLocale,
-          value: translation[sourceLocale === 'is' ? 'is' : 'en']
-        })
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.details || 'Translation failed');
-      }
-
-      const result = await response.json();
-      toast.success(`Translated to ${targetLocale === 'is' ? 'Icelandic' : 'English'}`);
-      fetchTranslations();
-      fetchStats();
-    } catch (err) {
-      console.error('Error translating item:', err);
-      toast.error(err.message || 'Failed to translate item');
-    } finally {
-      setTranslatingKey(null);
-    }
+    setProgressModalType('single');
+    setProgressModalData({
+      itemKey: translation.key,
+      itemValue: translation[sourceLocale === 'is' ? 'is' : 'en']
+    });
+    setShowProgressModal(true);
   };
 
   if (loading) {
@@ -875,6 +828,23 @@ const Translations = () => {
             </div>
           </div>
         )}
+
+        {/* Translation Progress Modal */}
+        <TranslationProgressModal
+          isOpen={showProgressModal}
+          type={progressModalType}
+          title={progressModalType === 'batch' ? 'Generating Translations' : `Translating "${progressModalData.itemKey}"`}
+          onClose={() => {
+            setShowProgressModal(false);
+            fetchTranslations();
+            fetchStats();
+          }}
+          sourceLocale={generateConfig.sourceLocale}
+          targetLocale={generateConfig.targetLocale}
+          itemKey={progressModalData.itemKey}
+          itemValue={progressModalData.itemValue}
+          translatingKey={translatingKey}
+        />
       </div>
     </AdminLayout>
   );

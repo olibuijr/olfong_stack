@@ -7,7 +7,8 @@ import {
   X,
   Send,
   Minimize2,
-  Maximize2
+  Maximize2,
+  ArrowLeft
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import socketService from '../../services/socket';
@@ -24,7 +25,9 @@ const ChatWidget = () => {
   // Widget state
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [showConversationList, setShowConversationList] = useState(false);
   // Chat state
+  const [conversations, setConversations] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
   const [otherUserTyping, setOtherUserTyping] = useState(false);
   const [selectedTopic] = useState(null);
@@ -41,31 +44,57 @@ const ChatWidget = () => {
   // Initialize chat
   const initializeChat = async () => {
     if (!isAuthenticated) return;
-    
+
     try {
       setIsLoading(true);
       const response = await api.get('/chat/conversations');
-      
+
+      // Handle different response formats
+      const conversationList = Array.isArray(response.data)
+        ? response.data
+        : (response.data?.conversations || response.data?.data || []);
+
+      // Store all conversations
+      setConversations(conversationList);
+
       // Set first conversation as current if available
-      if (response.data.length > 0) {
-        setCurrentConversation(response.data[0]);
-        await loadMessages(response.data[0].id);
+      if (conversationList.length > 0) {
+        setCurrentConversation(conversationList[0]);
+        setShowConversationList(false);
+        await loadMessages(conversationList[0].id);
+      } else {
+        setShowConversationList(true);
       }
     } catch (error) {
       console.error('Failed to initialize chat:', error);
+      setConversations([]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Handle conversation selection
+  const handleSelectConversation = async (conversation) => {
+    setCurrentConversation(conversation);
+    setShowConversationList(false);
+    await loadMessages(conversation.id);
   };
 
   // Load messages for a conversation
   const loadMessages = async (conversationId) => {
     try {
       const response = await api.get(`/chat/conversations/${conversationId}/messages`);
-      setMessages(response.data);
+
+      // Handle different response formats
+      const messageList = Array.isArray(response.data)
+        ? response.data
+        : (response.data?.messages || response.data?.data || []);
+
+      setMessages(messageList);
       scrollToBottom();
     } catch (error) {
       console.error('Failed to load messages:', error);
+      setMessages([]);
     }
   };
 
@@ -116,9 +145,11 @@ const ChatWidget = () => {
 
   // Effects
   useEffect(() => {
-    initializeChat();
+    if (isAuthenticated && isOpen) {
+      initializeChat();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+  }, [isAuthenticated, isOpen]);
 
   useEffect(() => {
     scrollToBottom();
@@ -140,6 +171,14 @@ const ChatWidget = () => {
       if (message.conversationId === currentConversation?.id) {
         setMessages(prev => [...prev, message]);
       }
+
+      // Update conversations list with new message
+      setConversations(prev => prev.map(conv =>
+        conv.id === message.conversationId
+          ? { ...conv, lastMessageAt: message.createdAt, messages: [message] }
+          : conv
+      ));
+
       setUnreadCount(prev => prev + 1);
     };
 
@@ -198,10 +237,21 @@ const ChatWidget = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 text-white p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2">
+              {currentConversation && !showConversationList && (
+                <button
+                  onClick={() => setShowConversationList(true)}
+                  className="text-white hover:bg-white/20 p-1.5 rounded-lg transition-colors"
+                  aria-label="Back to conversations"
+                >
+                  <ArrowLeft size={18} />
+                </button>
+              )}
               <div className="p-1.5 bg-white/20 rounded-lg">
                 <MessageCircle size={18} />
               </div>
-              <h3 className="font-semibold text-lg">{t('chat.title')}</h3>
+              <h3 className="font-semibold text-lg">
+                {showConversationList ? t('chat.conversations') || 'Conversations' : currentConversation?.subject || t('chat.title')}
+              </h3>
             </div>
             <div className="flex items-center space-x-1">
               <button
@@ -223,81 +273,133 @@ const ChatWidget = () => {
 
           {!isMinimized && (
             <>
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-900/50">
-                {isLoading ? (
-                  <div className="flex items-center justify-center h-full">
-                    <div className="text-center">
-                      <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent mx-auto mb-2"></div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</p>
-                    </div>
-                  </div>
-                ) : messages.length === 0 ? (
-                  <div className="flex items-center justify-center h-full">
-                    <p className="text-center text-sm text-gray-500 dark:text-gray-400">No messages yet. Start a conversation!</p>
-                  </div>
-                ) : (
-                  messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex ${message.senderId === user?.id ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <div
-                        className={`max-w-xs px-4 py-2 rounded-xl text-sm transition-all duration-200 ${
-                          message.senderId === user?.id
-                            ? 'bg-primary-600 dark:bg-primary-700 text-white rounded-br-none shadow-sm'
-                            : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-bl-none shadow-sm border border-gray-200 dark:border-gray-600'
-                        }`}
-                      >
-                        <p className="break-words">{message.content}</p>
-                        <p className={`text-xs mt-1 opacity-70 ${
-                          message.senderId === user?.id ? 'text-white' : 'text-gray-600 dark:text-gray-400'
-                        }`}>
-                          {new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </p>
+              {showConversationList ? (
+                // Conversation List View
+                <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900/50">
+                  {isLoading ? (
+                    <div className="flex items-center justify-center h-full">
+                      <div className="text-center">
+                        <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent mx-auto mb-2"></div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</p>
                       </div>
                     </div>
-                  ))
-                )}
-                {otherUserTyping && (
-                  <div className="flex justify-start">
-                    <div className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 rounded-xl rounded-bl-none shadow-sm border border-gray-200 dark:border-gray-600">
-                      <div className="flex space-x-1.5">
-                        <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                      </div>
+                  ) : conversations.length === 0 ? (
+                    <div className="flex items-center justify-center h-full p-4">
+                      <p className="text-center text-sm text-gray-500 dark:text-gray-400">No conversations yet. Start chatting with support!</p>
                     </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
-              </div>
-
-              {/* Input */}
-              <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex-shrink-0">
-                <div className="flex space-x-2">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={newMessage}
-                    onChange={(e) => {
-                      setNewMessage(e.target.value);
-                      handleTyping();
-                    }}
-                    onKeyPress={handleKeyPress}
-                    placeholder={t('chat.typeMessage')}
-                    className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
-                  />
-                  <button
-                    onClick={sendMessage}
-                    disabled={!newMessage.trim()}
-                    className="bg-primary-600 dark:bg-primary-700 hover:bg-primary-700 dark:hover:bg-primary-800 disabled:opacity-50 disabled:cursor-not-allowed text-white p-2.5 rounded-lg transition-all duration-200 active:scale-95"
-                    aria-label="Send message"
-                  >
-                    <Send size={18} />
-                  </button>
+                  ) : (
+                    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                      {conversations.map((conversation) => (
+                        <button
+                          key={conversation.id}
+                          onClick={() => handleSelectConversation(conversation)}
+                          className="w-full text-left p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-medium text-gray-900 dark:text-white truncate">
+                                {conversation.subject || 'No subject'}
+                              </h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 truncate mt-1">
+                                {conversation.messages?.[0]?.content || 'No messages'}
+                              </p>
+                              <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                {conversation.lastMessageAt
+                                  ? new Date(conversation.lastMessageAt).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+                                  : 'No messages'}
+                              </p>
+                            </div>
+                            {conversation.unreadCount > 0 && (
+                              <span className="ml-2 inline-flex items-center justify-center h-5 w-5 rounded-full bg-red-500 text-white text-xs font-semibold flex-shrink-0">
+                                {conversation.unreadCount}
+                              </span>
+                            )}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
+              ) : (
+                // Messages View
+                <>
+                  {/* Messages */}
+                  <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-900/50">
+                    {isLoading ? (
+                      <div className="flex items-center justify-center h-full">
+                        <div className="text-center">
+                          <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent mx-auto mb-2"></div>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</p>
+                        </div>
+                      </div>
+                    ) : messages.length === 0 ? (
+                      <div className="flex items-center justify-center h-full">
+                        <p className="text-center text-sm text-gray-500 dark:text-gray-400">No messages yet. Start a conversation!</p>
+                      </div>
+                    ) : (
+                      messages.map((message) => (
+                        <div
+                          key={message.id}
+                          className={`flex ${message.senderId === user?.id ? 'justify-end' : 'justify-start'}`}
+                        >
+                          <div
+                            className={`max-w-xs px-4 py-2 rounded-xl text-sm transition-all duration-200 ${
+                              message.senderId === user?.id
+                                ? 'bg-primary-600 dark:bg-primary-700 text-white rounded-br-none shadow-sm'
+                                : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-bl-none shadow-sm border border-gray-200 dark:border-gray-600'
+                            }`}
+                          >
+                            <p className="break-words">{message.content}</p>
+                            <p className={`text-xs mt-1 opacity-70 ${
+                              message.senderId === user?.id ? 'text-white' : 'text-gray-600 dark:text-gray-400'
+                            }`}>
+                              {new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </p>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                    {otherUserTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 rounded-xl rounded-bl-none shadow-sm border border-gray-200 dark:border-gray-600">
+                          <div className="flex space-x-1.5">
+                            <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
+
+                  {/* Input */}
+                  <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex-shrink-0">
+                    <div className="flex space-x-2">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        value={newMessage}
+                        onChange={(e) => {
+                          setNewMessage(e.target.value);
+                          handleTyping();
+                        }}
+                        onKeyPress={handleKeyPress}
+                        placeholder={t('chat.typeMessage')}
+                        className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                      />
+                      <button
+                        onClick={sendMessage}
+                        disabled={!newMessage.trim()}
+                        className="bg-primary-600 dark:bg-primary-700 hover:bg-primary-700 dark:hover:bg-primary-800 disabled:opacity-50 disabled:cursor-not-allowed text-white p-2.5 rounded-lg transition-all duration-200 active:scale-95"
+                        aria-label="Send message"
+                      >
+                        <Send size={18} />
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>

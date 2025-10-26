@@ -466,6 +466,210 @@ class TranslationController {
       });
     }
   }
+
+  /**
+   * POST /api/translations/generate - Generate translations using Gemini
+   * Body: { sourceLocale: 'is'|'en', targetLocale: 'is'|'en', keys?: string[] }
+   */
+  async generateTranslations(req, res) {
+    try {
+      const { sourceLocale, targetLocale, keys } = req.body;
+
+      // Validate required fields
+      if (!sourceLocale || !targetLocale) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing required fields: sourceLocale, targetLocale'
+        });
+      }
+
+      // Validate locales
+      if (!['is', 'en'].includes(sourceLocale) || !['is', 'en'].includes(targetLocale)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid locale. Must be "is" or "en"'
+        });
+      }
+
+      const result = await translationService.generateTranslations(sourceLocale, targetLocale, keys);
+
+      res.json({
+        success: true,
+        data: result,
+        message: `Generated ${result.generated} translations`
+      });
+    } catch (error) {
+      console.error('Error in generateTranslations:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to generate translations',
+        details: error.message
+      });
+    }
+  }
+
+  /**
+   * POST /api/translations/translate-item - Translate a single item using Gemini
+   * Body: { key: string, sourceLocale: 'is'|'en', targetLocale: 'is'|'en', value: string }
+   */
+  async translateItem(req, res) {
+    try {
+      const { key, sourceLocale, targetLocale, value } = req.body;
+
+      // Validate required fields
+      if (!key || !sourceLocale || !targetLocale || !value) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing required fields: key, sourceLocale, targetLocale, value'
+        });
+      }
+
+      // Validate locales
+      if (!['is', 'en'].includes(sourceLocale) || !['is', 'en'].includes(targetLocale)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid locale. Must be "is" or "en"'
+        });
+      }
+
+      const result = await translationService.translateItem(key, sourceLocale, targetLocale, value);
+
+      res.json({
+        success: true,
+        data: result,
+        message: 'Translation generated successfully'
+      });
+    } catch (error) {
+      console.error('Error in translateItem:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to translate item',
+        details: error.message
+      });
+    }
+  }
+
+  /**
+   * POST /api/translations/generate-stream - Generate translations with streaming progress
+   * Body: { sourceLocale: 'is'|'en', targetLocale: 'is'|'en', keys?: string[] }
+   * Returns: Server-Sent Events stream
+   */
+  async generateTranslationsStream(req, res) {
+    try {
+      const { sourceLocale, targetLocale, keys } = req.body;
+
+      // Validate required fields
+      if (!sourceLocale || !targetLocale) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing required fields: sourceLocale, targetLocale'
+        });
+      }
+
+      // Validate locales
+      if (!['is', 'en'].includes(sourceLocale) || !['is', 'en'].includes(targetLocale)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid locale. Must be "is" or "en"'
+        });
+      }
+
+      // Set up SSE headers
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+
+      // Send initial message
+      res.write(`data: ${JSON.stringify({ type: 'start', message: 'Starting translation process...' })}\n\n`);
+
+      // Progress callback
+      const onProgress = (progress) => {
+        res.write(`data: ${JSON.stringify(progress)}\n\n`);
+      };
+
+      try {
+        // Start translation
+        const result = await translationService.generateTranslations(sourceLocale, targetLocale, keys, onProgress);
+
+        // Send completion message
+        res.write(`data: ${JSON.stringify({ type: 'complete', data: result })}\n\n`);
+      } catch (error) {
+        console.error('Error in generateTranslationsStream:', error);
+        res.write(`data: ${JSON.stringify({ type: 'error', message: error.message })}\n\n`);
+      } finally {
+        res.end();
+      }
+    } catch (error) {
+      console.error('Error in generateTranslationsStream setup:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to start translation stream',
+        details: error.message
+      });
+    }
+  }
+
+  /**
+   * POST /api/translations/translate-item-stream - Translate single item with streaming progress
+   * Body: { key: string, sourceLocale: 'is'|'en', targetLocale: 'is'|'en', value: string }
+   * Returns: Server-Sent Events stream
+   */
+  async translateItemStream(req, res) {
+    try {
+      const { key, sourceLocale, targetLocale, value } = req.body;
+
+      // Validate required fields
+      if (!key || !sourceLocale || !targetLocale || !value) {
+        return res.status(400).json({
+          success: false,
+          error: 'Missing required fields: key, sourceLocale, targetLocale, value'
+        });
+      }
+
+      // Validate locales
+      if (!['is', 'en'].includes(sourceLocale) || !['is', 'en'].includes(targetLocale)) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid locale. Must be "is" or "en"'
+        });
+      }
+
+      // Set up SSE headers
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+
+      // Send initial message
+      res.write(`data: ${JSON.stringify({ type: 'start', message: `Starting translation for "${key}"...` })}\n\n`);
+
+      // Progress callback
+      const onProgress = (progress) => {
+        res.write(`data: ${JSON.stringify(progress)}\n\n`);
+      };
+
+      try {
+        // Start translation
+        const result = await translationService.translateItem(key, sourceLocale, targetLocale, value, onProgress);
+
+        // Send completion message
+        res.write(`data: ${JSON.stringify({ type: 'complete', data: result })}\n\n`);
+      } catch (error) {
+        console.error('Error in translateItemStream:', error);
+        res.write(`data: ${JSON.stringify({ type: 'error', message: error.message })}\n\n`);
+      } finally {
+        res.end();
+      }
+    } catch (error) {
+      console.error('Error in translateItemStream setup:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Failed to start translation stream',
+        details: error.message
+      });
+    }
+  }
 }
 
 module.exports = new TranslationController();

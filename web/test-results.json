@@ -10,9 +10,7 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {
-      "actualWorkers": 2
-    },
+    "metadata": {},
     "preserveOutput": "always",
     "reporter": [
       [
@@ -36,9 +34,7 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "chromium",
         "name": "chromium",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web",
@@ -52,9 +48,7 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "firefox",
         "name": "firefox",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web",
@@ -68,9 +62,7 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "webkit",
         "name": "webkit",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web",
@@ -84,9 +76,7 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web",
@@ -100,9 +90,7 @@
         "outputDir": "/home/olibuijr/Projects/olfong_stack/web/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "Mobile Safari",
         "name": "Mobile Safari",
         "testDir": "/home/olibuijr/Projects/olfong_stack/web",
@@ -120,89 +108,17 @@
     "workers": 6,
     "webServer": null
   },
-  "suites": [
+  "suites": [],
+  "errors": [
     {
-      "title": "basic-health-test.spec.ts",
-      "file": "basic-health-test.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "basic health check",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 253,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-10-19T18:47:21.549Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "1613ac35c267c1d8bdb4-6d07bfe0ba371f8fd512",
-          "file": "basic-health-test.spec.ts",
-          "line": 3,
-          "column": 5
-        },
-        {
-          "title": "frontend loads",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 589,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-10-19T18:47:21.726Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "1613ac35c267c1d8bdb4-f1c78d21b1b370034f4a",
-          "file": "basic-health-test.spec.ts",
-          "line": 13,
-          "column": 5
-        }
-      ]
+      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
+      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
     }
   ],
-  "errors": [],
   "stats": {
-    "startTime": "2025-10-19T18:47:20.496Z",
-    "duration": 1978.884,
-    "expected": 2,
+    "startTime": "2025-10-26T18:57:24.360Z",
+    "duration": 27.61500000000001,
+    "expected": 0,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

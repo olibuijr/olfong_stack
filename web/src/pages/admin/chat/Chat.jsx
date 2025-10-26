@@ -9,7 +9,9 @@ import {
   sendMessage,
   updateConversationStatus,
   markMessagesAsRead,
-  setOtherUserTyping
+  setOtherUserTyping,
+  handleNewMessage,
+  handleConversationUpdate
 } from '../../../store/slices/chatSlice';
 import socketService from '../../../services/socket';
 import ConversationSidebar from './components/ConversationSidebar';
@@ -56,30 +58,32 @@ const Chat = () => {
   useEffect(() => {
     if (!user) return;
 
-    const handleNewMessage = (data) => {
+    const onNewMessage = (data) => {
       dispatch(handleNewMessage({
         message: data,
+        conversationId: data.conversationId,
         currentUserId: user.id
       }));
     };
 
-    const handleMessageRead = (data) => {
+    const onMessageRead = (data) => {
       dispatch(handleNewMessage({
         message: {
           ...data,
           isRead: true,
           readAt: data.readAt
         },
+        conversationId: data.conversationId,
         currentUserId: user.id
       }));
     };
 
-    socketService.on('new-message', handleNewMessage);
-    socketService.on('message-read', handleMessageRead);
+    socketService.on('new-message', onNewMessage);
+    socketService.on('message-read', onMessageRead);
 
     return () => {
-      socketService.removeListener('new-message', handleNewMessage);
-      socketService.removeListener('message-read', handleMessageRead);
+      socketService.removeListener('new-message', onNewMessage);
+      socketService.removeListener('message-read', onMessageRead);
     };
   }, [dispatch, user]);
 
