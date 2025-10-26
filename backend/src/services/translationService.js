@@ -621,6 +621,15 @@ class TranslationService {
         fs.unlinkSync(tempPromptFile);
 
         const translatedValue = result.trim();
+
+        // Check if translation is empty
+        if (!translatedValue || translatedValue.length === 0) {
+          const emptyMsg = `Error: Gemini returned empty translation for "${key}"`;
+          console.error(emptyMsg);
+          if (onProgress) onProgress({ type: 'error', message: emptyMsg });
+          throw new Error(emptyMsg);
+        }
+
         const wordCount = translatedValue.split(/\s+/).length;
 
         const progressMsg = `Translated "${key}" (${wordCount} words)`;

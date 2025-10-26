@@ -6,6 +6,7 @@ import { Filter, X, Search, ArrowUpDown } from 'lucide-react';
 import { FaFish, FaDrumstickBite, FaCheese, FaCarrot, FaBirthdayCake, FaUtensils, FaPizzaSlice, FaLeaf, FaHamburger } from 'react-icons/fa';
 import { GiCow } from 'react-icons/gi';
 import { fetchProducts, fetchCategories, setFilters } from '../store/slices/productSlice';
+import useCurrency from '../hooks/useCurrency';
 
 import ProductImage from '../components/common/ProductImage';
 import SkeletonLoader from '../components/common/SkeletonLoader';
@@ -38,6 +39,7 @@ const getFoodIcon = (food) => {
 
 const Products = () => {
   const { t, currentLanguage, isLoading: translationsLoading } = useLanguage();
+  const { currencySymbol } = useCurrency();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -532,7 +534,7 @@ const Products = () => {
                         
                         <div className="flex items-center justify-between mb-6">
                           <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                            {product.price.toLocaleString()} {t('common.currency')}
+                            {product.price.toLocaleString()} {currencySymbol}
                           </span>
                         </div>
                         

@@ -8,6 +8,7 @@ import { FaFish, FaDrumstickBite, FaCheese, FaCarrot, FaBirthdayCake, FaUtensils
 import { GiCow } from 'react-icons/gi';
 import { fetchProduct, clearCurrentProduct, updateProduct } from '../store/slices/productSlice';
 import { addToCart } from '../store/slices/cartSlice';
+import useCurrency from '../hooks/useCurrency';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import toast from 'react-hot-toast';
 import { 
@@ -41,6 +42,7 @@ const getFoodIcon = (food) => {
 
 const ProductDetail = () => {
   const { t, currentLanguage } = useLanguage();
+  const { currencySymbol } = useCurrency();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -416,7 +418,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="flex items-center space-x-4 mb-4">
                   <span className="text-3xl font-bold text-primary-600">
-                    {currentProduct.price.toLocaleString()} {t('common.currency')}
+                    {currentProduct.price.toLocaleString()} {currencySymbol}
                   </span>
                   <div className="flex flex-wrap gap-2">
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
@@ -476,7 +478,7 @@ const ProductDetail = () => {
                             {t('productDetailPage.priceBeforeVat') || 'Price before VAT'}:
                           </dt>
                           <dd className="text-sm text-gray-900 dark:text-white">
-                            {priceBeforeVat.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {t('common.currency')}
+                            {priceBeforeVat.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {currencySymbol}
                           </dd>
                         </div>
                         <div className="flex justify-between items-center mb-2">
@@ -484,7 +486,7 @@ const ProductDetail = () => {
                             {t('productDetailPage.vatAmount') || 'VAT Amount'}:
                           </dt>
                           <dd className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                            {vatAmount.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {t('common.currency')}
+                            {vatAmount.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {currencySymbol}
                           </dd>
                         </div>
                         <div className="flex justify-between items-center pt-2 border-t border-blue-100 dark:border-blue-900">
@@ -492,7 +494,7 @@ const ProductDetail = () => {
                             {t('productDetailPage.totalPrice') || 'Total Price (incl. VAT)'}:
                           </dt>
                           <dd className="text-sm font-bold text-blue-600 dark:text-blue-400">
-                            {totalPrice.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {t('common.currency')}
+                            {totalPrice.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {currencySymbol}
                           </dd>
                         </div>
                       </div>
@@ -734,7 +736,7 @@ const ProductDetail = () => {
                 <h4 className="font-medium text-gray-900 dark:text-white">
                   {currentProduct.nameIs || currentProduct.name}
                 </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{currentProduct.price.toLocaleString()} {t('common.currency')} {t('cartPage.each')}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{currentProduct.price.toLocaleString()} {currencySymbol} {t('cartPage.each')}</p>
               </div>
 
               {/* Quantity */}
@@ -931,7 +933,7 @@ const ProductDetail = () => {
                 {/* Price */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('common.price')} * ({t('common.currency')})
+                    {t('common.price')} * ({currencySymbol})
                   </label>
                   <input
                     type="number"

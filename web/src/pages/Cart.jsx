@@ -12,9 +12,11 @@ import { getProductName } from '../utils/languageUtils';
 import { useForm } from 'react-hook-form';
 import api from '../services/api';
 import { OPENING_HOURS } from '../utils/openingHours';
+import useCurrency from '../hooks/useCurrency';
 
 const Cart = () => {
   const { t, currentLanguage } = useLanguage();
+  const { currencySymbol } = useCurrency();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -449,7 +451,7 @@ const Cart = () => {
                               {getProductName(currentLanguage, item.product)}
                             </h3>
                             <p className="text-sm sm:text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-                              {item.product.price.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')} {t('cartPage.each')}
+                              {item.product.price.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol} {t('cartPage.each')}
                             </p>
                           </div>
 
@@ -485,7 +487,7 @@ const Cart = () => {
                         {/* Total Price */}
                         <div className="flex-shrink-0 text-right flex flex-col justify-between">
                           <div className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
-                            {(item.product.price * item.quantity).toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                            {(item.product.price * item.quantity).toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol}
                           </div>
                         </div>
                       </div>
@@ -539,7 +541,7 @@ const Cart = () => {
                                 {currentLanguage === 'is' ? (option.nameIs || option.name) : (option.name || option.nameEn)}
                               </div>
                               <div className="text-sm font-semibold text-primary-600">
-                                {option.fee === 0 ? t('common.free') : `${option.fee.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ${t('common.currency')}`}
+                                {option.fee === 0 ? t('common.free') : `${option.fee.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ${currencySymbol}`}
                               </div>
                             </div>
                             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -838,7 +840,7 @@ const Cart = () => {
                           <p className="text-xs text-gray-500 dark:text-gray-500">x{item.quantity}</p>
                         </div>
                         <p className="text-gray-900 dark:text-white font-medium ml-2 flex-shrink-0">
-                          {(item.product.price * item.quantity).toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                          {(item.product.price * item.quantity).toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol}
                         </p>
                       </div>
                     ))}
@@ -848,7 +850,7 @@ const Cart = () => {
                     <div className="flex justify-between">
                       <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage.subtotal')}</span>
                       <span className="font-medium text-gray-900 dark:text-white">
-                        {subtotal.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                        {subtotal.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol}
                       </span>
                     </div>
 
@@ -857,7 +859,7 @@ const Cart = () => {
                       <div className="flex justify-between text-gray-600 dark:text-gray-400">
                         <span>{t('checkout.vat')} ({vatRate}%)</span>
                         <span>
-                          {vatAmount.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                          {vatAmount.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol}
                         </span>
                       </div>
                     )}
@@ -867,7 +869,7 @@ const Cart = () => {
                       <div className="flex justify-between text-gray-600 dark:text-gray-400">
                         <span>{t('checkout.shipping')}</span>
                         <span>
-                          {shippingCost.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                          {shippingCost.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol}
                         </span>
                       </div>
                     )}
@@ -879,7 +881,7 @@ const Cart = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('checkout.total')}</span>
                     <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                      {totalPrice.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                      {totalPrice.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {currencySymbol}
                     </span>
                   </div>
                 </div>
