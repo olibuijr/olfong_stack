@@ -1,0 +1,623 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation "Aðal leiðarkerfi" [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Forsíða" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img "Ölföng merki" [ref=e9]
+        - generic [ref=e10]:
+          - button "Switch to dark mode" [ref=e11] [cursor=pointer]:
+            - img [ref=e12]
+          - button "Stjórnborð" [ref=e15] [cursor=pointer]:
+            - img [ref=e16]
+          - link "Notifications with 0 unread" [ref=e19] [cursor=pointer]:
+            - /url: /admin/notifications
+            - img [ref=e20]
+          - link "Shopping cart with 0 items" [ref=e23] [cursor=pointer]:
+            - /url: /cart
+            - img [ref=e24]
+          - button "Notendavalmynd" [ref=e29] [cursor=pointer]:
+            - img [ref=e30]
+          - button "Opna/loka farsímavalmynd" [ref=e33] [cursor=pointer]:
+            - img [ref=e34]
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - heading "Valmynd" [level=2] [ref=e41]
+          - button [ref=e42] [cursor=pointer]:
+            - img [ref=e43]
+        - generic [ref=e46]:
+          - generic [ref=e48]:
+            - textbox "Leita að vörum..." [ref=e49]
+            - button [ref=e50] [cursor=pointer]:
+              - img [ref=e51]
+          - generic [ref=e54]:
+            - link "Allar vörur" [ref=e55] [cursor=pointer]:
+              - /url: /products
+            - link "Léttvín" [ref=e56] [cursor=pointer]:
+              - /url: /products?category=LIGHT WINES
+            - link "Bjór" [ref=e57] [cursor=pointer]:
+              - /url: /products?category=BEER
+            - link "Síder & RTD" [ref=e58] [cursor=pointer]:
+              - /url: /products?category=CIDER_RTD
+            - link "Sterkt áfengi" [ref=e59] [cursor=pointer]:
+              - /url: /products?category=SPIRITS
+            - link "Nikótínvörur" [ref=e60] [cursor=pointer]:
+              - /url: /products?category=NICOTINE
+            - link "Óáfengir drykkir" [ref=e61] [cursor=pointer]:
+              - /url: /products?category=NON_ALCOHOLIC
+            - link "Tilboðin" [ref=e62] [cursor=pointer]:
+              - /url: /products?category=OFFERS
+            - link "Prófíll" [ref=e63] [cursor=pointer]:
+              - /url: /profile
+            - link "Stjórnborð" [ref=e64] [cursor=pointer]:
+              - /url: /admin
+            - button "Útskrá" [ref=e65] [cursor=pointer]
+  - main [ref=e66]:
+    - main [ref=e69]:
+      - generic [ref=e72]:
+        - generic [ref=e74]:
+          - heading "Flokkar" [level=1] [ref=e75]:
+            - img [ref=e76]
+            - generic [ref=e78]: Flokkar
+          - paragraph [ref=e79]: Stjórna flokkum
+        - button "Nýr flokkur" [ref=e81] [cursor=pointer]:
+          - img [ref=e82]
+          - text: Nýr flokkur
+      - textbox "Search categories by name..." [ref=e87]
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - img "Léttvín" [ref=e95]
+              - generic [ref=e96]:
+                - generic [ref=e97]:
+                  - heading "Léttvín" [level=3] [ref=e98]
+                  - generic [ref=e99]: vin
+                - paragraph [ref=e100]: Úrvalið okkar af léttvínum býður upp á frískandi og glæsilega upplifun. Þessi vín eru fullkomin fyrir hvaða tilefni sem er og einkennast af stökkri sýru, fíngerðum ilmi og lægra áfengisinnihaldi. Skoðaðu úrvalið okkar af hvítum, rósavínum og rauðum léttvínum, hvert með sinn einstaka sjarma og bragðsnið. Hvort sem þú ert að njóta létts matar, sólríks síðdegis eða afslappaðs samveru, munu léttvínin okkar örugglega gleðja.
+                - generic [ref=e101]:
+                  - generic [ref=e102]: "Fjöldi vara: 2"
+                  - generic [ref=e103]: "Undirflokkar: 6"
+                  - generic [ref=e104]: "Röð: 1"
+            - generic [ref=e105]:
+              - button "Breyta" [ref=e106] [cursor=pointer]:
+                - img [ref=e107]
+                - generic [ref=e110]: Breyta
+              - button "Ekki hægt að eyða flokki með vörum." [disabled] [ref=e111]:
+                - img [ref=e112]
+          - generic [ref=e118]:
+            - heading "Undirflokkar" [level=4] [ref=e120]
+            - generic [ref=e121]:
+              - generic [ref=e123]:
+                - generic [ref=e124]:
+                  - generic [ref=e126]: 🥂
+                  - generic [ref=e127]:
+                    - generic [ref=e128]:
+                      - heading "Hvítvín" [level=4] [ref=e129]
+                      - generic [ref=e130]: hvitvin
+                    - paragraph [ref=e131]: Kannaðu úrvalið okkar af stökkum og frískandi hvítvínum. Allt frá léttum og líflegum Sauvignon Blancs til ríkulegra og smjörkenndra Chardonnays, bjóða hvítvínin okkar upp á glæsileg bragð og ilmríka flækju. Fullkomin með sjávarréttum, alifuglakjöti eða til að njóta á hlýjum degi.
+                    - generic [ref=e132]:
+                      - generic [ref=e133]: "Fjöldi vara: 0"
+                      - generic [ref=e134]: "Röð: 1"
+                - generic [ref=e135]:
+                  - button "Breyta" [ref=e136] [cursor=pointer]:
+                    - img [ref=e137]
+                    - generic [ref=e140]: Breyta
+                  - button [ref=e141] [cursor=pointer]:
+                    - img [ref=e142]
+              - generic [ref=e149]:
+                - generic [ref=e150]:
+                  - generic [ref=e152]: 🍷
+                  - generic [ref=e153]:
+                    - generic [ref=e154]:
+                      - heading "Rauðvín" [level=4] [ref=e155]
+                      - generic [ref=e156]: raudvin
+                    - paragraph [ref=e157]: Uppgötvaðu safnið okkar af djörfum og fágaðum rauðvínum. Allt frá mjúkum Merlots og glæsilegum Pinot Noirs til kraftmikilla Cabernet Sauvignons og kryddaðra Shirazes, bjóða rauðvínin okkar upp á dýpt, karakter og ríkuleg ávaxtabragð. Tilvalin með rauðu kjöti, matarmiklum réttum eða fyrir notalegar kvöldstundir.
+                    - generic [ref=e158]:
+                      - generic [ref=e159]: "Fjöldi vara: 0"
+                      - generic [ref=e160]: "Röð: 2"
+                - generic [ref=e161]:
+                  - button "Breyta" [ref=e162] [cursor=pointer]:
+                    - img [ref=e163]
+                    - generic [ref=e166]: Breyta
+                  - button [ref=e167] [cursor=pointer]:
+                    - img [ref=e168]
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - generic [ref=e178]: 🍾
+                  - generic [ref=e179]:
+                    - generic [ref=e180]:
+                      - heading "Freyðivín" [level=4] [ref=e181]
+                      - generic [ref=e182]: freydivin
+                    - paragraph [ref=e183]: Fagnaðu með freyðivínunum okkar. Þessi líflegu, freyðandi vín færa gleði við öll tækifæri með stökkri sýru og frískandi loftbólum. Fullkomin fyrir skálir, hátíðahöld eða til að bæta neista í hversdagslegar stundir.
+                    - generic [ref=e184]:
+                      - generic [ref=e185]: "Fjöldi vara: 0"
+                      - generic [ref=e186]: "Röð: 3"
+                - generic [ref=e187]:
+                  - button "Breyta" [ref=e188] [cursor=pointer]:
+                    - img [ref=e189]
+                    - generic [ref=e192]: Breyta
+                  - button [ref=e193] [cursor=pointer]:
+                    - img [ref=e194]
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - generic [ref=e204]: 🥂
+                  - generic [ref=e205]:
+                    - generic [ref=e206]:
+                      - heading "Kampavín" [level=4] [ref=e207]
+                      - generic [ref=e208]: kampavin
+                    - paragraph [ref=e209]: Leyfðu þér að njóta lúxus ósvikins kampavíns frá hinu virta svæði í Frakklandi. Þessi úrvals freyðivín eru framleidd með hefðbundnum aðferðum og bjóða upp á fágaða glæsileika, flókin bragð og þrálátar loftbólur. Eingöngu fyrir sérstökustu hátíðarstundir lífsins.
+                    - generic [ref=e210]:
+                      - generic [ref=e211]: "Fjöldi vara: 0"
+                      - generic [ref=e212]: "Röð: 4"
+                - generic [ref=e213]:
+                  - button "Breyta" [ref=e214] [cursor=pointer]:
+                    - img [ref=e215]
+                    - generic [ref=e218]: Breyta
+                  - button [ref=e219] [cursor=pointer]:
+                    - img [ref=e220]
+              - generic [ref=e227]:
+                - generic [ref=e228]:
+                  - generic [ref=e230]: 🍷
+                  - generic [ref=e231]:
+                    - generic [ref=e232]:
+                      - heading "Gulvín" [level=4] [ref=e233]
+                      - generic [ref=e234]: gulvin
+                    - paragraph [ref=e235]: Upplifðu einstakan karakter gulra vína. Þessi sjaldgæfu og sérstæðu vín gangast undir sérstaka öldrunarferla sem þróa hnetukennd, oxandi bragð og gyllta tóna. Val sælkerans til að para saman við bragðmikla osta og flókna rétti.
+                    - generic [ref=e236]:
+                      - generic [ref=e237]: "Fjöldi vara: 0"
+                      - generic [ref=e238]: "Röð: 5"
+                - generic [ref=e239]:
+                  - button "Breyta" [ref=e240] [cursor=pointer]:
+                    - img [ref=e241]
+                    - generic [ref=e244]: Breyta
+                  - button [ref=e245] [cursor=pointer]:
+                    - img [ref=e246]
+              - generic [ref=e253]:
+                - generic [ref=e254]:
+                  - generic [ref=e256]: 🍷
+                  - generic [ref=e257]:
+                    - generic [ref=e258]:
+                      - heading "Rósavín" [level=4] [ref=e259]
+                      - generic [ref=e260]: rosavin
+                    - paragraph [ref=e261]: Njóttu viðkvæms þokka rósavína. Með sínum fallegu bleiku litbrigðum og frískandi ávaxtabragði ná þessi fjölhæfu vín fullkomnu jafnvægi milli rauðs og hvíts. Tilvalin fyrir sumarsamkomur, léttar máltíðir eða sem fordrykkur.
+                    - generic [ref=e262]:
+                      - generic [ref=e263]: "Fjöldi vara: 0"
+                      - generic [ref=e264]: "Röð: 6"
+                - generic [ref=e265]:
+                  - button "Breyta" [ref=e266] [cursor=pointer]:
+                    - img [ref=e267]
+                    - generic [ref=e270]: Breyta
+                  - button [ref=e271] [cursor=pointer]:
+                    - img [ref=e272]
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - img "Bjór" [ref=e283]
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - heading "Bjór" [level=3] [ref=e286]
+                - generic [ref=e287]: bjor
+              - paragraph [ref=e288]: Uppgötvaðu sérvalda bjóra okkar frá öllum heimshornum. Allt frá stökkum lagerbjór og humlaríkum IPA til ríkulegra stout-bjóra og frískandi hveitibjóra, úrvalið okkar höfðar til allra smekkja og tilefna. Hvort sem þú ert að leita að klassískum pilsner með matnum, handverks-IPA fyrir helgina eða mjúkum porter fyrir notalegt kvöld, þá finnur þú hjá okkur gæðabjóra sem bjóða upp á einstakt bragð og karakter.
+              - generic [ref=e289]:
+                - generic [ref=e290]: "Fjöldi vara: 1"
+                - generic [ref=e291]: "Undirflokkar: 0"
+                - generic [ref=e292]: "Röð: 2"
+          - generic [ref=e293]:
+            - button "Breyta" [ref=e294] [cursor=pointer]:
+              - img [ref=e295]
+              - generic [ref=e298]: Breyta
+            - button "Ekki hægt að eyða flokki með vörum." [disabled] [ref=e299]:
+              - img [ref=e300]
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - generic [ref=e311]: 🍻
+            - generic [ref=e312]:
+              - generic [ref=e313]:
+                - heading "Síder & RTD" [level=3] [ref=e314]
+                - generic [ref=e315]: sider-rtd
+              - paragraph [ref=e316]: Skoðaðu okkar fjölbreytta úrval af síder og tilbúnum drykkjum. Síderarnir okkar eru allt frá hefðbundnum eplasíderum yfir í nýstárlega valkosti með ávöxtum, sem bjóða upp á fullkomið jafnvægi milli sætu og frískleika. Tilbúnu kokteilarnir okkar eru þægilegir, hágæða blandaðir drykkir fyrir hvaða tilefni sem er. Fullkomnir fyrir útisamkomur, óformleg fagnaðarlæti, eða einfaldlega til að njóta svalandi drykkjar án fyrirhafnar.
+              - generic [ref=e317]:
+                - generic [ref=e318]: "Fjöldi vara: 0"
+                - generic [ref=e319]: "Undirflokkar: 0"
+                - generic [ref=e320]: "Röð: 3"
+          - generic [ref=e321]:
+            - button "Breyta" [ref=e322] [cursor=pointer]:
+              - img [ref=e323]
+              - generic [ref=e326]: Breyta
+            - button [ref=e327] [cursor=pointer]:
+              - img [ref=e328]
+        - generic [ref=e334]:
+          - generic [ref=e336]:
+            - generic [ref=e337]:
+              - generic [ref=e339]: 🥃
+              - generic [ref=e340]:
+                - generic [ref=e341]:
+                  - heading "Sterkt áfengi" [level=3] [ref=e342]
+                  - generic [ref=e343]: sterkt-afengi
+                - paragraph [ref=e344]: Sökkvu þér niður í úrvals safn okkar af sterkum drykkjum, þar á meðal vodka, viskí, romm, gin, tequila og fleira. Hvort sem þú ert sælkeri í leit að sjaldgæfum single malt viskíum, barþjónn í leit að hinu fullkomna kokteil hráefni eða einfaldlega að kanna heim sterkra drykkja, þá býður úrvalið okkar upp á framúrskarandi gæði og fjölbreytni. Allt frá mjúkum drykkjum til fjölhæfra blöndunar nauðsynja, uppgötvaðu flöskur sem fegra hvert tilefni.
+                - generic [ref=e345]:
+                  - generic [ref=e346]: "Fjöldi vara: 0"
+                  - generic [ref=e347]: "Undirflokkar: 7"
+                  - generic [ref=e348]: "Röð: 4"
+            - generic [ref=e349]:
+              - button "Breyta" [ref=e350] [cursor=pointer]:
+                - img [ref=e351]
+                - generic [ref=e354]: Breyta
+              - button [ref=e355] [cursor=pointer]:
+                - img [ref=e356]
+          - generic [ref=e362]:
+            - heading "Undirflokkar" [level=4] [ref=e364]
+            - generic [ref=e365]:
+              - generic [ref=e367]:
+                - generic [ref=e368]:
+                  - generic [ref=e370]: 🥃
+                  - generic [ref=e371]:
+                    - generic [ref=e372]:
+                      - heading "Gin" [level=4] [ref=e373]
+                      - generic [ref=e374]: gin
+                    - paragraph [ref=e375]: Uppgötvaðu úrvalið okkar af gini með áherslu á jurtir. Allt frá klassískum London Dry til nútímalegra handverksgina, býður hver flaska upp á einstök bragðsnið sem eru fullkomin í kokteila eða til að njóta með tóník.
+                    - generic [ref=e376]:
+                      - generic [ref=e377]: "Fjöldi vara: 0"
+                      - generic [ref=e378]: "Röð: 1"
+                - generic [ref=e379]:
+                  - button "Breyta" [ref=e380] [cursor=pointer]:
+                    - img [ref=e381]
+                    - generic [ref=e384]: Breyta
+                  - button [ref=e385] [cursor=pointer]:
+                    - img [ref=e386]
+              - generic [ref=e393]:
+                - generic [ref=e394]:
+                  - generic [ref=e396]: 🥃
+                  - generic [ref=e397]:
+                    - generic [ref=e398]:
+                      - heading "Koniak" [level=4] [ref=e399]
+                      - generic [ref=e400]: koniak
+                    - paragraph [ref=e401]: Njóttu fágaðrar glæsileika franska koníaksins. Þessi virtu brandí eru fullkomnuð með öldrun og bjóða upp á ríkuleg, flókin bragð af ávöxtum, eik og kryddi. Fágaður kostur til að sötra við sérstök tækifæri.
+                    - generic [ref=e402]:
+                      - generic [ref=e403]: "Fjöldi vara: 0"
+                      - generic [ref=e404]: "Röð: 2"
+                - generic [ref=e405]:
+                  - button "Breyta" [ref=e406] [cursor=pointer]:
+                    - img [ref=e407]
+                    - generic [ref=e410]: Breyta
+                  - button [ref=e411] [cursor=pointer]:
+                    - img [ref=e412]
+              - generic [ref=e419]:
+                - generic [ref=e420]:
+                  - generic [ref=e422]: 🥃
+                  - generic [ref=e423]:
+                    - generic [ref=e424]:
+                      - heading "Romm" [level=4] [ref=e425]
+                      - generic [ref=e426]: romm
+                    - paragraph [ref=e427]: Kannaðu rommúrvalið okkar frá Karíbahafseyjum og víðar. Allt frá léttum og blöndunarvænum hvítum rommum til ríkulegra, þroskaðra dökkra romma og kryddaðra afbrigða, uppgötvaðu fjölbreyttan heim þessa sykurreyrsanda.
+                    - generic [ref=e428]:
+                      - generic [ref=e429]: "Fjöldi vara: 0"
+                      - generic [ref=e430]: "Röð: 3"
+                - generic [ref=e431]:
+                  - button "Breyta" [ref=e432] [cursor=pointer]:
+                    - img [ref=e433]
+                    - generic [ref=e436]: Breyta
+                  - button [ref=e437] [cursor=pointer]:
+                    - img [ref=e438]
+              - generic [ref=e445]:
+                - generic [ref=e446]:
+                  - generic [ref=e448]: 🥃
+                  - generic [ref=e449]:
+                    - generic [ref=e450]:
+                      - heading "Líkjörar & Skot" [level=4] [ref=e451]
+                      - generic [ref=e452]: likjorar-skot
+                    - paragraph [ref=e453]: Skoðaðu úrvalið okkar af líkjörum og skotum fyrir hvern smekk. Allt frá sætum og rjómalöguðum til djarfra og eldheitra, þessir drykkir bæta bragði við kokteila eða bjóða upp á fljótleg og ánægjuleg skot fyrir hátíðahöld.
+                    - generic [ref=e454]:
+                      - generic [ref=e455]: "Fjöldi vara: 0"
+                      - generic [ref=e456]: "Röð: 4"
+                - generic [ref=e457]:
+                  - button "Breyta" [ref=e458] [cursor=pointer]:
+                    - img [ref=e459]
+                    - generic [ref=e462]: Breyta
+                  - button [ref=e463] [cursor=pointer]:
+                    - img [ref=e464]
+              - generic [ref=e471]:
+                - generic [ref=e472]:
+                  - generic [ref=e474]: 🥃
+                  - generic [ref=e475]:
+                    - generic [ref=e476]:
+                      - heading "Tequila" [level=4] [ref=e477]
+                      - generic [ref=e478]: tequila
+                    - paragraph [ref=e479]: Upplifðu ósvikið tequila frá agave-hjartalandi Mexíkó. Allt frá mjúkum blancos til flókinna añejos, býður tequila-úrvalið okkar upp á úrvalsgæði til að sötra eða blanda í margarítur og kokteila.
+                    - generic [ref=e480]:
+                      - generic [ref=e481]: "Fjöldi vara: 0"
+                      - generic [ref=e482]: "Röð: 5"
+                - generic [ref=e483]:
+                  - button "Breyta" [ref=e484] [cursor=pointer]:
+                    - img [ref=e485]
+                    - generic [ref=e488]: Breyta
+                  - button [ref=e489] [cursor=pointer]:
+                    - img [ref=e490]
+              - generic [ref=e497]:
+                - generic [ref=e498]:
+                  - generic [ref=e500]: 🥃
+                  - generic [ref=e501]:
+                    - generic [ref=e502]:
+                      - heading "Vodka" [level=4] [ref=e503]
+                      - generic [ref=e504]: vodka
+                    - paragraph [ref=e505]: Kannaðu vodka-safnið okkar með hreinum og tærum drykkjum. Allt frá klassískum hlutlausum vodkum til bragðbættra afbrigða, þessir fjölhæfu drykkir eru ómissandi í ótal kokteila og blandaða drykki.
+                    - generic [ref=e506]:
+                      - generic [ref=e507]: "Fjöldi vara: 0"
+                      - generic [ref=e508]: "Röð: 6"
+                - generic [ref=e509]:
+                  - button "Breyta" [ref=e510] [cursor=pointer]:
+                    - img [ref=e511]
+                    - generic [ref=e514]: Breyta
+                  - button [ref=e515] [cursor=pointer]:
+                    - img [ref=e516]
+              - generic [ref=e523]:
+                - generic [ref=e524]:
+                  - generic [ref=e526]: 🥃
+                  - generic [ref=e527]:
+                    - generic [ref=e528]:
+                      - heading "Viski" [level=4] [ref=e529]
+                      - generic [ref=e530]: viski
+                    - paragraph [ref=e531]: Uppgötvaðu viskíúrvalið okkar sem spannar allan heiminn. Allt frá mjúkum bourbons og krydduðum ryes til mókenndra skoskra og írskra viskía, hver flaska segir sögu af handverki og hefð.
+                    - generic [ref=e532]:
+                      - generic [ref=e533]: "Fjöldi vara: 0"
+                      - generic [ref=e534]: "Röð: 7"
+                - generic [ref=e535]:
+                  - button "Breyta" [ref=e536] [cursor=pointer]:
+                    - img [ref=e537]
+                    - generic [ref=e540]: Breyta
+                  - button [ref=e541] [cursor=pointer]:
+                    - img [ref=e542]
+        - generic [ref=e548]:
+          - generic [ref=e550]:
+            - generic [ref=e551]:
+              - generic [ref=e553]: 🚭
+              - generic [ref=e554]:
+                - generic [ref=e555]:
+                  - heading "Nikótínvörur" [level=3] [ref=e556]
+                  - generic [ref=e557]: nikotinvorur
+                - paragraph [ref=e558]: Kynntu þér úrvalið okkar af nikótínvörum, hannað fyrir fullorðna. Úrvalið okkar býður upp á nútímalega nikótínpúða og aðra valkosti sem veita reyklausa upplifun. Allar vörur uppfylla strangar gæðakröfur og eru einungis ætlaðar til ábyrgrar notkunar af fullorðnum. Aldursstaðfesting er skilyrði við kaup.
+                - generic [ref=e559]:
+                  - generic [ref=e560]: "Fjöldi vara: 0"
+                  - generic [ref=e561]: "Undirflokkar: 2"
+                  - generic [ref=e562]: "Röð: 5"
+            - generic [ref=e563]:
+              - button "Breyta" [ref=e564] [cursor=pointer]:
+                - img [ref=e565]
+                - generic [ref=e568]: Breyta
+              - button [ref=e569] [cursor=pointer]:
+                - img [ref=e570]
+          - generic [ref=e576]:
+            - heading "Undirflokkar" [level=4] [ref=e578]
+            - generic [ref=e579]:
+              - generic [ref=e581]:
+                - generic [ref=e582]:
+                  - generic [ref=e584]: 💨
+                  - generic [ref=e585]:
+                    - generic [ref=e586]:
+                      - heading "Veip" [level=4] [ref=e587]
+                      - generic [ref=e588]: veip
+                    - paragraph [ref=e589]: Skoðaðu úrvalið okkar af vape-vörum sem eru hannaðar fyrir fullorðna notendur. Úrvalið okkar inniheldur nútímaleg vape-tæki og fylgihluti sem bjóða upp á valkosti við hefðbundnar reykingar. Aldursstaðfesting er áskilin.
+                    - generic [ref=e590]:
+                      - generic [ref=e591]: "Fjöldi vara: 0"
+                      - generic [ref=e592]: "Röð: 1"
+                - generic [ref=e593]:
+                  - button "Breyta" [ref=e594] [cursor=pointer]:
+                    - img [ref=e595]
+                    - generic [ref=e598]: Breyta
+                  - button [ref=e599] [cursor=pointer]:
+                    - img [ref=e600]
+              - generic [ref=e607]:
+                - generic [ref=e608]:
+                  - generic [ref=e610]: 🚭
+                  - generic [ref=e611]:
+                    - generic [ref=e612]:
+                      - heading "Nikótínpúðar" [level=4] [ref=e613]
+                      - generic [ref=e614]: nikotinpudar
+                    - paragraph [ref=e615]: Kannaðu úrvalið okkar af nikótínpúðum sem bjóða upp á næðislega, reyklausa nikótínafgjöf. Þessar nútímalegu vörur bjóða upp á þægilegan valkost fyrir fullorðna nikótínneytendur. Aldursstaðfesting er áskilin.
+                    - generic [ref=e616]:
+                      - generic [ref=e617]: "Fjöldi vara: 0"
+                      - generic [ref=e618]: "Röð: 2"
+                - generic [ref=e619]:
+                  - button "Breyta" [ref=e620] [cursor=pointer]:
+                    - img [ref=e621]
+                    - generic [ref=e624]: Breyta
+                  - button [ref=e625] [cursor=pointer]:
+                    - img [ref=e626]
+        - generic [ref=e632]:
+          - generic [ref=e634]:
+            - generic [ref=e635]:
+              - generic [ref=e637]: 🥤
+              - generic [ref=e638]:
+                - generic [ref=e639]:
+                  - heading "Óáfengir drykkir" [level=3] [ref=e640]
+                  - generic [ref=e641]: oafengt
+                - paragraph [ref=e642]: Njótið fjölbreytts úrvals okkar af óáfengum drykkjum sem gefa ekkert eftir þegar kemur að bragði eða gæðum. Allt frá óáfengum bjór og vínum til fágaðra hráefna í mockteila og úrvals gosdrykkja, gefur úrvalið okkar öllum tækifæri til að njóta bragðgóðra drykkja. Fullkomið fyrir þá sem eru á bíl, þá sem taka sér hvíld frá áfengi eða fyrir hvern þann sem leitar að ljúffengum óáfengum valkostum fyrir hvaða tilefni sem er.
+                - generic [ref=e643]:
+                  - generic [ref=e644]: "Fjöldi vara: 0"
+                  - generic [ref=e645]: "Undirflokkar: 3"
+                  - generic [ref=e646]: "Röð: 6"
+            - generic [ref=e647]:
+              - button "Breyta" [ref=e648] [cursor=pointer]:
+                - img [ref=e649]
+                - generic [ref=e652]: Breyta
+              - button [ref=e653] [cursor=pointer]:
+                - img [ref=e654]
+          - generic [ref=e660]:
+            - heading "Undirflokkar" [level=4] [ref=e662]
+            - generic [ref=e663]:
+              - generic [ref=e665]:
+                - generic [ref=e666]:
+                  - generic [ref=e668]: 🥤
+                  - generic [ref=e669]:
+                    - generic [ref=e670]:
+                      - heading "Gos" [level=4] [ref=e671]
+                      - generic [ref=e672]: gos
+                    - paragraph [ref=e673]: Frískaðu þig við með gosdrykkjaúrvalinu okkar. Allt frá klassískum kókdrykkjum til ávaxtabragða og handverksgoss, njóttu freyðandi svaladrykkja fyrir öll tækifæri.
+                    - generic [ref=e674]:
+                      - generic [ref=e675]: "Fjöldi vara: 0"
+                      - generic [ref=e676]: "Röð: 1"
+                - generic [ref=e677]:
+                  - button "Breyta" [ref=e678] [cursor=pointer]:
+                    - img [ref=e679]
+                    - generic [ref=e682]: Breyta
+                  - button [ref=e683] [cursor=pointer]:
+                    - img [ref=e684]
+              - generic [ref=e691]:
+                - generic [ref=e692]:
+                  - generic [ref=e694]: 🥤
+                  - generic [ref=e695]:
+                    - generic [ref=e696]:
+                      - heading "Sódavatn" [level=4] [ref=e697]
+                      - generic [ref=e698]: sodavatn
+                    - paragraph [ref=e699]: Uppgötvaðu úrvalið okkar af gosdrykkjum, þar á meðal freyðivatni, bragðbættum drykkjum og úrvals blöndunarefnum. Fullkomið til vökvunar, blöndunar í kokteila eða til að njóta eins og þeir eru.
+                    - generic [ref=e700]:
+                      - generic [ref=e701]: "Fjöldi vara: 0"
+                      - generic [ref=e702]: "Röð: 2"
+                - generic [ref=e703]:
+                  - button "Breyta" [ref=e704] [cursor=pointer]:
+                    - img [ref=e705]
+                    - generic [ref=e708]: Breyta
+                  - button [ref=e709] [cursor=pointer]:
+                    - img [ref=e710]
+              - generic [ref=e717]:
+                - generic [ref=e718]:
+                  - generic [ref=e720]: ⚡
+                  - generic [ref=e721]:
+                    - generic [ref=e722]:
+                      - heading "Orkudrykkir" [level=4] [ref=e723]
+                      - generic [ref=e724]: orkudrykkir
+                    - paragraph [ref=e725]: Fáðu orku með orkudrykkjaúrvalinu okkar. Þessir koffíndrykkir veita aukakraft þegar þú þarft á honum að halda, með ýmsum bragðtegundum og samsetningum til að halda þér orkumiklum.
+                    - generic [ref=e726]:
+                      - generic [ref=e727]: "Fjöldi vara: 0"
+                      - generic [ref=e728]: "Röð: 3"
+                - generic [ref=e729]:
+                  - button "Breyta" [ref=e730] [cursor=pointer]:
+                    - img [ref=e731]
+                    - generic [ref=e734]: Breyta
+                  - button [ref=e735] [cursor=pointer]:
+                    - img [ref=e736]
+        - generic [ref=e744]:
+          - generic [ref=e745]:
+            - generic [ref=e747]: 🏷️
+            - generic [ref=e748]:
+              - generic [ref=e749]:
+                - heading "Tilboðin" [level=3] [ref=e750]
+                - generic [ref=e751]: tilbodin
+              - paragraph [ref=e752]: Kynntu þér nýjustu sértilboðin okkar og einstök tilboð á gæðavörum. Allt frá árstíðabundnum kynningum til útsöluvara og tímabundinna afslátta, hér finnur þú vandlega valdar vörur á frábæru verði. Kíktu við reglulega til að finna ný tækifæri til að spara á uppáhalds vínunum þínum, bjórum, sterkum drykkjum og fleiru. Ekki missa af þessum frábæru tilboðum.
+              - generic [ref=e753]:
+                - generic [ref=e754]: "Fjöldi vara: 0"
+                - generic [ref=e755]: "Undirflokkar: 0"
+                - generic [ref=e756]: "Röð: 7"
+          - button "Breyta" [ref=e758] [cursor=pointer]:
+            - img [ref=e759]
+            - generic [ref=e762]: Breyta
+  - generic [ref=e764]:
+    - generic [ref=e765]:
+      - heading "Valmynd" [level=2] [ref=e766]
+      - button "Close sidebar" [ref=e767] [cursor=pointer]:
+        - img [ref=e768]
+    - generic [ref=e773]:
+      - navigation [ref=e774]:
+        - generic [ref=e775]:
+          - heading "Mælaborð" [level=3] [ref=e777]
+          - link "Mælaborð" [ref=e779] [cursor=pointer]:
+            - /url: /admin
+            - img [ref=e780]
+            - generic [ref=e786]: Mælaborð
+        - generic [ref=e789]:
+          - heading "Sala" [level=3] [ref=e791]
+          - generic [ref=e792]:
+            - link "Pantanir" [ref=e793] [cursor=pointer]:
+              - /url: /admin/orders
+              - img [ref=e794]
+              - generic [ref=e799]: Pantanir
+            - link "POS" [ref=e800] [cursor=pointer]:
+              - /url: /admin/pos
+              - img [ref=e801]
+              - generic [ref=e813]: POS
+            - link "Afhending" [ref=e814] [cursor=pointer]:
+              - /url: /delivery
+              - img [ref=e815]
+              - generic [ref=e822]: Afhending
+        - generic [ref=e825]:
+          - heading "Vörulisti" [level=3] [ref=e827]
+          - generic [ref=e828]:
+            - link "Vörur" [ref=e829] [cursor=pointer]:
+              - /url: /admin/products
+              - img [ref=e830]
+              - generic [ref=e836]: Vörur
+            - link "Afslættir" [ref=e837] [cursor=pointer]:
+              - /url: /admin/discounts
+              - img [ref=e838]
+              - generic [ref=e842]: Afslættir
+            - link "Flokkar" [ref=e843] [cursor=pointer]:
+              - /url: /admin/categories
+              - img [ref=e844]
+              - generic [ref=e847]: Flokkar
+        - generic [ref=e850]:
+          - heading "Efni" [level=3] [ref=e852]
+          - generic [ref=e853]:
+            - link "Miðlar" [ref=e854] [cursor=pointer]:
+              - /url: /admin/media
+              - img [ref=e855]
+              - generic [ref=e861]: Miðlar
+            - link "Borðar" [ref=e862] [cursor=pointer]:
+              - /url: /admin/banners
+              - img [ref=e863]
+              - generic [ref=e868]: Borðar
+        - generic [ref=e871]:
+          - heading "Viðskiptavinir & Samskipti" [level=3] [ref=e873]
+          - generic [ref=e874]:
+            - link "Viðskiptavinir" [ref=e875] [cursor=pointer]:
+              - /url: /admin/customers
+              - img [ref=e876]
+              - generic [ref=e882]: Viðskiptavinir
+            - link "Spjall" [ref=e883] [cursor=pointer]:
+              - /url: /admin/chat
+              - img [ref=e884]
+              - generic [ref=e887]: Spjall
+            - link "Tilkynningar" [ref=e888] [cursor=pointer]:
+              - /url: /admin/notifications
+              - img [ref=e889]
+              - generic [ref=e893]: Tilkynningar
+        - generic [ref=e896]:
+          - heading "Greining" [level=3] [ref=e898]
+          - generic [ref=e899]:
+            - link "Greining" [ref=e900] [cursor=pointer]:
+              - /url: /admin/analytics
+              - img [ref=e901]
+              - generic [ref=e907]: Greining
+            - link "Skýrslur" [ref=e908] [cursor=pointer]:
+              - /url: /admin/reports
+              - img [ref=e909]
+              - generic [ref=e916]: Skýrslur
+        - generic [ref=e919]:
+          - heading "Stillingar" [level=3] [ref=e921]
+          - button "Stillingar" [ref=e923] [cursor=pointer]:
+            - img [ref=e924]
+            - generic [ref=e927]:
+              - generic [ref=e928]: Stillingar
+              - img [ref=e929]
+        - generic [ref=e933]:
+          - heading "Kerfi" [level=3] [ref=e935]
+          - generic [ref=e936]:
+            - link "Þýðingar" [ref=e937] [cursor=pointer]:
+              - /url: /admin/translations
+              - img [ref=e938]
+              - generic [ref=e946]: Þýðingar
+            - link "Sýnigögn" [ref=e947] [cursor=pointer]:
+              - /url: /admin/demo-data
+              - img [ref=e948]
+              - generic [ref=e951]: Sýnigögn
+      - generic [ref=e952]:
+        - generic [ref=e953]:
+          - generic [ref=e955]: A
+          - generic [ref=e956]:
+            - paragraph [ref=e957]: Stjórnandi
+            - paragraph [ref=e958]: Stjórnandatölvupóstur
+        - button "Útskráning" [ref=e959] [cursor=pointer]:
+          - img [ref=e960]
+          - generic [ref=e964]: Útskráning
+```

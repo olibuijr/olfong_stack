@@ -16,10 +16,12 @@ import {
   Loader2,
   CheckCircle,
   AlertCircle,
-  Globe
+  Globe,
+  Languages
 } from 'lucide-react';
 
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import translationService from '../../services/translationService';
 
 const Translations = () => {
@@ -294,69 +296,64 @@ const Translations = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminTranslations.title')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminTranslations.subtitle')}</p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={() => setShowStatsPanel(!showStatsPanel)}
-                  className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                >
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  <span>{showStatsPanel ? t('adminTranslations.hideStats') : t('adminTranslations.showStats')}</span>
-                </button>
-                <button
-                  onClick={fetchTranslations}
-                  className="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-colors"
-                >
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  <span>{t('adminTranslations.refresh')}</span>
-                </button>
-                <div className="relative">
-                  <button
-                    onClick={() => handleExport('json')}
-                    className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-                  >
-                    <FileJson className="w-4 h-4 mr-2" />
-                    <span>{t('adminTranslations.exportJSON')}</span>
-                  </button>
-                </div>
-                <button
-                  onClick={() => handleExport('csv')}
-                  className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
-                >
-                  <FileSpreadsheet className="w-4 h-4 mr-2" />
-                  <span>{t('adminTranslations.exportCSV')}</span>
-                </button>
-                <label className="flex items-center px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 cursor-pointer transition-colors">
-                  <Upload className="w-4 h-4 mr-2" />
-                  <span>{t('adminTranslations.import')}</span>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".json,.csv"
-                    onChange={handleImport}
-                    className="hidden"
-                  />
-                </label>
-                <button
-                  onClick={() => {
-                    setShowAddModal(true);
-                    setEditFormData({ key: '', is: '', en: '' });
-                  }}
-                  className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  <span>{t('adminTranslations.addTranslation')}</span>
-                </button>
-              </div>
+        <PageHeader
+          icon={Languages}
+          title={t('adminTranslations.title')}
+          description={t('adminTranslations.subtitle')}
+          actions={
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={() => setShowStatsPanel(!showStatsPanel)}
+                className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                <span>{showStatsPanel ? t('adminTranslations.hideStats') : t('adminTranslations.showStats')}</span>
+              </button>
+              <button
+                onClick={fetchTranslations}
+                className="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-colors"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" />
+                <span>{t('adminTranslations.refresh')}</span>
+              </button>
+              <button
+                onClick={() => handleExport('json')}
+                className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+              >
+                <FileJson className="w-4 h-4 mr-2" />
+                <span>{t('adminTranslations.exportJSON')}</span>
+              </button>
+              <button
+                onClick={() => handleExport('csv')}
+                className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+              >
+                <FileSpreadsheet className="w-4 h-4 mr-2" />
+                <span>{t('adminTranslations.exportCSV')}</span>
+              </button>
+              <label className="flex items-center px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 cursor-pointer transition-colors">
+                <Upload className="w-4 h-4 mr-2" />
+                <span>{t('adminTranslations.import')}</span>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".json,.csv"
+                  onChange={handleImport}
+                  className="hidden"
+                />
+              </label>
+              <button
+                onClick={() => {
+                  setShowAddModal(true);
+                  setEditFormData({ key: '', is: '', en: '' });
+                }}
+                className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                <span>{t('adminTranslations.addTranslation')}</span>
+              </button>
             </div>
-          </div>
-        </div>
+          }
+        />
 
         {/* Statistics Panel */}
         {showStatsPanel && stats && (

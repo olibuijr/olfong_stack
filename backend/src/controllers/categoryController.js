@@ -72,7 +72,26 @@ const getCategory = async (req, res) => {
  */
 const createCategory = async (req, res) => {
   try {
-    const { name, nameIs, slug, description, descriptionIs, icon, sortOrder, imageUrl } = req.body;
+    const {
+      name,
+      nameIs,
+      slug,
+      description,
+      descriptionIs,
+      icon,
+      sortOrder,
+      imageUrl,
+      metaTitle,
+      metaTitleIs,
+      metaDescription,
+      metaDescriptionIs,
+      hasDiscount,
+      discountPercentage,
+      discountStartDate,
+      discountEndDate,
+      discountReason,
+      discountReasonIs,
+    } = req.body;
 
     const categoryData = {
       name: name.toUpperCase(),
@@ -82,6 +101,18 @@ const createCategory = async (req, res) => {
       descriptionIs,
       icon,
       sortOrder: sortOrder ? parseInt(sortOrder) : 0,
+      // SEO fields
+      metaTitle,
+      metaTitleIs,
+      metaDescription,
+      metaDescriptionIs,
+      // Discount fields
+      hasDiscount: hasDiscount === true || hasDiscount === 'true',
+      discountPercentage: discountPercentage ? parseFloat(discountPercentage) : null,
+      discountStartDate: discountStartDate ? new Date(discountStartDate) : null,
+      discountEndDate: discountEndDate ? new Date(discountEndDate) : null,
+      discountReason,
+      discountReasonIs,
     };
 
     // Add image URL if file was uploaded or if imageUrl was provided in request body
@@ -118,6 +149,24 @@ const updateCategory = async (req, res) => {
     }
     if (updateData.sortOrder) {
       updateData.sortOrder = parseInt(updateData.sortOrder);
+    }
+
+    // Handle discount percentage
+    if (updateData.discountPercentage !== undefined) {
+      updateData.discountPercentage = updateData.discountPercentage ? parseFloat(updateData.discountPercentage) : null;
+    }
+
+    // Handle discount dates
+    if (updateData.discountStartDate !== undefined) {
+      updateData.discountStartDate = updateData.discountStartDate ? new Date(updateData.discountStartDate) : null;
+    }
+    if (updateData.discountEndDate !== undefined) {
+      updateData.discountEndDate = updateData.discountEndDate ? new Date(updateData.discountEndDate) : null;
+    }
+
+    // Handle hasDiscount boolean
+    if (updateData.hasDiscount !== undefined) {
+      updateData.hasDiscount = updateData.hasDiscount === true || updateData.hasDiscount === 'true';
     }
 
     // Add image URL if file was uploaded or if imageUrl was provided in request body

@@ -30,6 +30,7 @@ const Navbar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
 
   // Opening hours state
   const [openingHours, setOpeningHours] = useState(null);
@@ -42,6 +43,9 @@ const Navbar = () => {
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  // Notifications state
+  const [unreadNotificationsCount, setUnreadNotificationsCount] = useState(0);
+
   // Refs
   const searchInputRef = useRef(null);
   const searchDropdownRef = useRef(null);
@@ -49,6 +53,7 @@ const Navbar = () => {
   const shopMenuRef = useRef(null);
   const userMenuRef = useRef(null);
   const languageMenuRef = useRef(null);
+  const adminMenuRef = useRef(null);
 
   const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
 
@@ -56,6 +61,16 @@ const Navbar = () => {
     dispatch(fetchCategories());
     fetchOpeningHours();
   }, [dispatch]);
+
+  // Fetch unread notifications count for admin users
+  useEffect(() => {
+    if (isAuthenticated && user?.role === 'ADMIN') {
+      fetchUnreadNotificationsCount();
+      // Refresh every 30 seconds
+      const interval = setInterval(fetchUnreadNotificationsCount, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [isAuthenticated, user?.role]);
 
   // Handle window resize to detect mobile/desktop
   useEffect(() => {
@@ -84,6 +99,29 @@ const Navbar = () => {
       console.error('Error fetching opening hours:', error);
       // Fallback to hardcoded values
       setOpeningHours(getTodayHours());
+    }
+  };
+
+  // Fetch unread notifications count for admin users
+  const fetchUnreadNotificationsCount = async () => {
+    try {
+      const response = await api.get('/notifications?limit=1&offset=0');
+      let notifications = [];
+
+      // Handle various response structures
+      if (Array.isArray(response)) {
+        notifications = response;
+      } else if (Array.isArray(response.data)) {
+        notifications = response.data;
+      } else if (response.data && Array.isArray(response.data.notifications)) {
+        notifications = response.data.notifications;
+      }
+
+      // Count unread notifications (excluding archived)
+      const unreadCount = notifications.filter(n => !n.isRead && !n.isArchived).length;
+      setUnreadNotificationsCount(unreadCount);
+    } catch (error) {
+      console.error('Error fetching unread notifications count:', error);
     }
   };
 
@@ -306,6 +344,24 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isShopMenuOpen]);
 
+  // Close admin menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        adminMenuRef.current &&
+        !adminMenuRef.current.contains(event.target) &&
+        !event.target.closest('[data-admin-menu-trigger]')
+      ) {
+        setIsAdminMenuOpen(false);
+      }
+    };
+
+    if (isAdminMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isAdminMenuOpen]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -703,18 +759,307 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* Admin Menu - Sidebar Toggle */}
+            {/* Admin Menu - Desktop Mega Menu / Mobile Sidebar Toggle */}
             {isAuthenticated && isAdmin && (
-              <button
-                onClick={() => setSidebarOpen(true)}
-                className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-                aria-label={t('navigation.admin')}
-              >
-                <Settings className="w-5 h-5" />
-              </button>
+              <div className="relative" ref={adminMenuRef}>
+                {/* Desktop: Show as button with hover menu */}
+                <button
+                  data-admin-menu-trigger
+                  onClick={() => setIsAdminMenuOpen(!isAdminMenuOpen)}
+                  onMouseEnter={() => setIsAdminMenuOpen(true)}
+                  onMouseLeave={() => setIsAdminMenuOpen(false)}
+                  className="hidden md:flex p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                  aria-label={t('navigation.admin')}
+                >
+                  <Settings className="w-5 h-5" />
+                </button>
+
+                {/* Mobile: Show as button with sidebar toggle */}
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                  aria-label={t('navigation.admin')}
+                >
+                  <Settings className="w-5 h-5" />
+                </button>
+
+                {/* Desktop Admin Mega Menu */}
+                <div
+                  onMouseEnter={() => setIsAdminMenuOpen(true)}
+                  onMouseLeave={() => setIsAdminMenuOpen(false)}
+                  className={`hidden md:block fixed top-[4rem] left-1/2 transform -translate-x-1/2 mt-2 w-[1100px] max-w-[90vw] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-[999] transition-all duration-300 overflow-hidden ${
+                    isAdminMenuOpen ? 'opacity-100 visible scale-100' : 'opacity-0 invisible scale-95'
+                  }`}
+                >
+                  {/* Header */}
+                  <div className="px-8 py-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                          {t('navigation.admin')}
+                        </h3>
+                        <p className="text-base text-gray-600 dark:text-gray-400">
+                          {t('adminMenu.manageBusinessSettings')}
+                        </p>
+                      </div>
+                      <Link
+                        to="/admin"
+                        onClick={() => setIsAdminMenuOpen(false)}
+                        className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-semibold text-base"
+                      >
+                        {t('adminMenu.dashboard')}
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Content Grid */}
+                  <div className="p-6">
+                    <div className="grid grid-cols-3 gap-4">
+                      {/* Sales */}
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <ShoppingCart className="w-4 h-4 text-blue-600" />
+                          {t('adminMenu.sales')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <Link
+                              to="/admin/orders"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.orders')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/pos"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.pointOfSale')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/delivery"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.deliveries')}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Catalog */}
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <Package className="w-4 h-4 text-blue-600" />
+                          {t('adminMenu.catalog')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <Link
+                              to="/admin/products"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.products')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/categories"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.categories')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/media"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.media')}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Analytics */}
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <BarChart3 className="w-4 h-4 text-blue-600" />
+                          {t('adminMenu.analytics')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <Link
+                              to="/admin/customers"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.customers')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/analytics"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.analyticsLink')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/reports"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.reports')}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Second Row */}
+                    <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                      {/* Content */}
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <FileImage className="w-4 h-4 text-blue-600" />
+                          {t('adminMenu.content')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <Link
+                              to="/admin/banners"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.banners')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/chat"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.messages')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/notifications"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.notifications')}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Settings */}
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <Settings className="w-4 h-4 text-blue-600" />
+                          {t('adminMenu.settingsSection')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <Link
+                              to="/admin/settings/general"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.general')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/settings/payment-gateways"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.payment')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/settings/receipts"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.receipts')}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* System */}
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                          <Languages className="w-4 h-4 text-blue-600" />
+                          {t('adminMenu.system')}
+                        </h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <Link
+                              to="/admin/translations"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.translations')}
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/admin/demo-data"
+                              onClick={() => setIsAdminMenuOpen(false)}
+                              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm"
+                            >
+                              {t('adminMenu.demoData')}
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="px-8 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-700">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {t('adminMenu.helpText')} <a href="/contact" className="text-primary-600 dark:text-primary-400 hover:underline font-semibold">{t('adminMenu.supportCenter')}</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
             )}
 
 
+
+            {/* Notifications (Admin Only) */}
+            {isAuthenticated && user?.role === 'ADMIN' && (
+              <Link
+                to="/admin/notifications"
+                className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                aria-label={`Notifications with ${unreadNotificationsCount} unread`}
+              >
+                <Bell className="w-5 h-5" aria-hidden="true" />
+                {unreadNotificationsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" aria-label={`${unreadNotificationsCount} unread notifications`}>
+                    {unreadNotificationsCount}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Cart */}
             {isAuthenticated && (

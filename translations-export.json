@@ -1,0 +1,8866 @@
+{
+  ",": {
+    "en": ",",
+    "is": ""
+  },
+  "-": {
+    "en": "-",
+    "is": ""
+  },
+  "/": {
+    "en": "/",
+    "is": ""
+  },
+  "a": {
+    "en": "A",
+    "is": ""
+  },
+  "/addresses": {
+    "en": "/Addresses",
+    "is": ""
+  },
+  "addresses.add": {
+    "en": "Address added",
+    "is": ""
+  },
+  "addresses.addAddress": {
+    "en": "Bæta við heimilisfang",
+    "is": ""
+  },
+  "addresses.city": {
+    "en": "City",
+    "is": ""
+  },
+  "addresses.country": {
+    "en": "Country",
+    "is": ""
+  },
+  "addresses.delete": {
+    "en": "Delete address",
+    "is": ""
+  },
+  "addresses.edit": {
+    "en": "Address updated",
+    "is": ""
+  },
+  "addresses.postalCode": {
+    "en": "Postal Code",
+    "is": ""
+  },
+  "addresses.street": {
+    "en": "Street",
+    "is": ""
+  },
+  "admin.accessDenied": {
+    "en": "Access Denied",
+    "is": ""
+  },
+  "admin.accessDeniedMessage": {
+    "en": "You do not have permission to view this page.",
+    "is": ""
+  },
+  "admin.administrator": {
+    "en": "Stjórnandi",
+    "is": ""
+  },
+  "admin.administratorEmail": {
+    "en": "Stjórnandatölvupóstur",
+    "is": ""
+  },
+  "admin.allSaved": {
+    "en": "All Saved",
+    "is": ""
+  },
+  "admin.analytics": {
+    "en": "Analytics",
+    "is": ""
+  },
+  "adminAnalytics.acrossAllOrders": {
+    "en": "across all orders",
+    "is": ""
+  },
+  "adminAnalytics.analyticsDashboard": {
+    "en": "Analytics Dashboard",
+    "is": ""
+  },
+  "adminAnalytics.averageVatRate": {
+    "en": "Average VAT Rate",
+    "is": ""
+  },
+  "adminAnalytics.businessInsights": {
+    "en": "Business Insights",
+    "is": ""
+  },
+  "adminAnalytics.cancelled": {
+    "en": "Cancelled",
+    "is": ""
+  },
+  "adminAnalytics.category": {
+    "en": "Category",
+    "is": ""
+  },
+  "adminAnalytics.chartIntegrationNote": {
+    "en": "Chart integration note",
+    "is": ""
+  },
+  "adminAnalytics.delivered": {
+    "en": "Delivered",
+    "is": ""
+  },
+  "adminAnalytics.export": {
+    "en": "Export",
+    "is": ""
+  },
+  "adminAnalytics.growth": {
+    "en": "Growth",
+    "is": ""
+  },
+  "adminAnalytics.last30Days": {
+    "en": "Last 30 Days",
+    "is": ""
+  },
+  "adminAnalytics.last7Days": {
+    "en": "Last 7 Days",
+    "is": ""
+  },
+  "adminAnalytics.last90Days": {
+    "en": "Last 90 Days",
+    "is": ""
+  },
+  "adminAnalytics.lastYear": {
+    "en": "Last Year",
+    "is": ""
+  },
+  "adminAnalytics.loading": {
+    "en": "Loading",
+    "is": ""
+  },
+  "adminAnalytics.netRevenue": {
+    "en": "Net revenue",
+    "is": ""
+  },
+  "adminAnalytics.noData": {
+    "en": "No Data",
+    "is": ""
+  },
+  "adminAnalytics.noProducts": {
+    "en": "No Products",
+    "is": ""
+  },
+  "adminAnalytics.noRevenueData": {
+    "en": "AdminAnalytics NoRevenueData",
+    "is": ""
+  },
+  "adminAnalytics.ofRevenue": {
+    "en": "of revenue",
+    "is": ""
+  },
+  "adminAnalytics.ofVat": {
+    "en": "of VAT",
+    "is": ""
+  },
+  "adminAnalytics.orders": {
+    "en": "AdminAnalytics Orders",
+    "is": ""
+  },
+  "adminAnalytics.orderStatusDistribution": {
+    "en": "Order Status Distribution",
+    "is": ""
+  },
+  "adminAnalytics.pending": {
+    "en": "Pending",
+    "is": ""
+  },
+  "adminAnalytics.processing": {
+    "en": "Processing",
+    "is": ""
+  },
+  "adminAnalytics.product": {
+    "en": "Product",
+    "is": ""
+  },
+  "adminAnalytics.revenue": {
+    "en": "Revenue",
+    "is": ""
+  },
+  "adminAnalytics.revenueBeforeVat": {
+    "en": "Revenue (before VAT)",
+    "is": ""
+  },
+  "adminAnalytics.revenueChartPlaceholder": {
+    "en": "Revenue chart placeholder",
+    "is": ""
+  },
+  "adminAnalytics.revenueTrend": {
+    "en": "Revenue Trend",
+    "is": ""
+  },
+  "adminAnalytics.sales": {
+    "en": "Sales",
+    "is": ""
+  },
+  "adminAnalytics.shipped": {
+    "en": "Shipped",
+    "is": ""
+  },
+  "adminAnalytics.topPerformer": {
+    "en": "Top Performer",
+    "is": ""
+  },
+  "adminAnalytics.topPerformingProducts": {
+    "en": "Top Performing Products",
+    "is": ""
+  },
+  "adminAnalytics.totalCustomers": {
+    "en": "Total Customers",
+    "is": ""
+  },
+  "adminAnalytics.totalOrders": {
+    "en": "Total Orders",
+    "is": ""
+  },
+  "adminAnalytics.totalProducts": {
+    "en": "Total Products",
+    "is": ""
+  },
+  "adminAnalytics.totalRevenue": {
+    "en": "Total Revenue",
+    "is": ""
+  },
+  "adminAnalytics.totalVat": {
+    "en": "Total VAT",
+    "is": ""
+  },
+  "adminAnalytics.unknownCategory": {
+    "en": "Unknown Category",
+    "is": ""
+  },
+  "adminAnalytics.unknownProduct": {
+    "en": "Unknown Product",
+    "is": ""
+  },
+  "adminAnalytics.vsPreviousPeriod": {
+    "en": "vs Previous Period",
+    "is": ""
+  },
+  "admin.banners.activate": {
+    "en": "Activate",
+    "is": ""
+  },
+  "admin.banners.addBanner": {
+    "en": "Add Banner",
+    "is": ""
+  },
+  "admin.banners.addFirstBanner": {
+    "en": "Add First Banner",
+    "is": ""
+  },
+  "admin.banners.addToFeatured": {
+    "en": "Add to Featured",
+    "is": ""
+  },
+  "admin.banners.altPlaceholder": {
+    "en": "Image description for accessibility",
+    "is": ""
+  },
+  "admin.banners.altText": {
+    "en": "Alt Text",
+    "is": ""
+  },
+  "admin.banners.category": {
+    "en": "Category",
+    "is": ""
+  },
+  "admin.banners.confirmDelete": {
+    "en": "Are you sure you want to delete this banner?",
+    "is": ""
+  },
+  "admin.banners.deactivate": {
+    "en": "Deactivate",
+    "is": ""
+  },
+  "admin.banners.descriptionEn": {
+    "en": "Description (English)",
+    "is": ""
+  },
+  "admin.banners.descriptionIs": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "admin.banners.descriptionPlaceholder": {
+    "en": "Enter description in English",
+    "is": ""
+  },
+  "admin.banners.descriptionPlaceholderIs": {
+    "en": "Enter description in Icelandic",
+    "is": ""
+  },
+  "admin.banners.editBanner": {
+    "en": "Edit Banner",
+    "is": ""
+  },
+  "admin.banners.featured": {
+    "en": "Featured",
+    "is": ""
+  },
+  "admin.banners.featuredBanner": {
+    "en": "Featured Banner",
+    "is": ""
+  },
+  "admin.banners.featuredBannerHelp": {
+    "en": "Featured banners appear at the top of the homepage",
+    "is": ""
+  },
+  "admin.banners.featuredOrder": {
+    "en": "Featured Order",
+    "is": ""
+  },
+  "admin.banners.imageHelpText": {
+    "en": "Recommended: 1200x300px, PNG or JPG",
+    "is": ""
+  },
+  "admin.banners.imageUrl": {
+    "en": "Image URL",
+    "is": ""
+  },
+  "admin.banners.link": {
+    "en": "Link",
+    "is": ""
+  },
+  "admin.banners.manageImages": {
+    "en": "Manage Images",
+    "is": ""
+  },
+  "admin.banners.noBanners": {
+    "en": "No Banners",
+    "is": ""
+  },
+  "admin.banners.noBannersDescription": {
+    "en": "Start creating banners for your homepage",
+    "is": ""
+  },
+  "admin.banners.noDescription": {
+    "en": "No Description",
+    "is": ""
+  },
+  "admin.banners.position": {
+    "en": "Position",
+    "is": ""
+  },
+  "admin.banners.product": {
+    "en": "Product",
+    "is": ""
+  },
+  "admin.banners.removeFromFeatured": {
+    "en": "Remove from Featured",
+    "is": ""
+  },
+  "admin.banners.selectLink": {
+    "en": "Select Link",
+    "is": ""
+  },
+  "admin.banners.selectPosition": {
+    "en": "Select Position",
+    "is": ""
+  },
+  "admin.banners.sortOrder": {
+    "en": "Sort Order",
+    "is": ""
+  },
+  "admin.banners.subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "admin.banners.subtitle": {
+    "en": "Manage banners for your homepage",
+    "is": ""
+  },
+  "admin.banners.title": {
+    "en": "Banners",
+    "is": ""
+  },
+  "admin.banners.titleEn": {
+    "en": "Title (English)",
+    "is": ""
+  },
+  "admin.banners.titleIs": {
+    "en": "Title (Icelandic)",
+    "is": ""
+  },
+  "admin.banners.titlePlaceholder": {
+    "en": "Enter title in English",
+    "is": ""
+  },
+  "admin.banners.titlePlaceholderIs": {
+    "en": "Enter title in Icelandic",
+    "is": ""
+  },
+  "admin.banners.untitled": {
+    "en": "Untitled",
+    "is": ""
+  },
+  "adminCategories.active": {
+    "en": "Active Category",
+    "is": ""
+  },
+  "adminCategories.addSubcategory": {
+    "en": "Add subcategory",
+    "is": ""
+  },
+  "adminCategories.basicInfo": {
+    "en": "Basic Info",
+    "is": ""
+  },
+  "adminCategories.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "adminCategories.cannotDeleteWithProducts": {
+    "en": "Cannot delete category with products",
+    "is": ""
+  },
+  "adminCategories.categoryImage": {
+    "en": "Category Image",
+    "is": ""
+  },
+  "adminCategories.categoryImageFromProduct": {
+    "en": "Category Image (from Product)",
+    "is": ""
+  },
+  "adminCategories.changeImage": {
+    "en": "Change Image",
+    "is": ""
+  },
+  "adminCategories.charCount": {
+    "en": "Characters: {count}/{max}",
+    "is": ""
+  },
+  "adminCategories.confirmDelete": {
+    "en": "Confirm Delete",
+    "is": ""
+  },
+  "adminCategories.createFirstCategory": {
+    "en": "Create your first category",
+    "is": ""
+  },
+  "adminCategories.deleteSubcategory": {
+    "en": "Delete subcategory",
+    "is": ""
+  },
+  "adminCategories.descEn": {
+    "en": "Description (English)",
+    "is": ""
+  },
+  "adminCategories.descIs": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "adminCategories.descriptionEn": {
+    "en": "Description (EN)",
+    "is": ""
+  },
+  "adminCategories.descriptionIs": {
+    "en": "Description (IS)",
+    "is": ""
+  },
+  "adminCategories.discountEndDate": {
+    "en": "Discount End Date",
+    "is": ""
+  },
+  "adminCategories.discountHelp": {
+    "en": "Configure category-wide discount settings",
+    "is": ""
+  },
+  "adminCategories.discountPercentage": {
+    "en": "Discount Percentage (%) *",
+    "is": ""
+  },
+  "adminCategories.discountReasonEn": {
+    "en": "Discount Reason (EN)",
+    "is": ""
+  },
+  "adminCategories.discountReasonIs": {
+    "en": "Discount Reason (IS)",
+    "is": ""
+  },
+  "adminCategories.discounts": {
+    "en": "Discounts",
+    "is": ""
+  },
+  "adminCategories.discountStartDate": {
+    "en": "Discount Start Date",
+    "is": ""
+  },
+  "adminCategories.editCategory": {
+    "en": "Edit Category",
+    "is": ""
+  },
+  "adminCategories.editSubcategory": {
+    "en": "Edit subcategory",
+    "is": ""
+  },
+  "adminCategories.enableCategoryDiscount": {
+    "en": "Enable Discount for this Category",
+    "is": ""
+  },
+  "adminCategories.enableDiscountMessage": {
+    "en": "Enable discount to configure discount settings for this category",
+    "is": ""
+  },
+  "adminCategories.icon": {
+    "en": "Icon",
+    "is": ""
+  },
+  "adminCategories.iconHelp": {
+    "en": "Icon help text",
+    "is": ""
+  },
+  "adminCategories.images": {
+    "en": "Images",
+    "is": ""
+  },
+  "adminCategories.imagesHelp": {
+    "en": "Add images for this category",
+    "is": ""
+  },
+  "adminCategories.inactive": {
+    "en": "Inactive",
+    "is": ""
+  },
+  "adminCategories.manageCategories": {
+    "en": "Manage Categories",
+    "is": ""
+  },
+  "adminCategories.metaDescEn": {
+    "en": "Meta Description (EN)",
+    "is": ""
+  },
+  "adminCategories.metaDescIs": {
+    "en": "Meta Description (IS)",
+    "is": ""
+  },
+  "adminCategories.metaTitleEn": {
+    "en": "Meta Title (EN)",
+    "is": ""
+  },
+  "adminCategories.metaTitleIs": {
+    "en": "Meta Title (IS)",
+    "is": ""
+  },
+  "adminCategories.nameEn": {
+    "en": "Name (EN) *",
+    "is": ""
+  },
+  "adminCategories.nameIs": {
+    "en": "Name (IS) *",
+    "is": ""
+  },
+  "adminCategories.nameRequired": {
+    "en": "Name is required",
+    "is": ""
+  },
+  "adminCategories.newCategory": {
+    "en": "New Category",
+    "is": ""
+  },
+  "adminCategories.noCategories": {
+    "en": "No categories found",
+    "is": ""
+  },
+  "adminCategories.noDescription": {
+    "en": "No description",
+    "is": ""
+  },
+  "adminCategories.noImages": {
+    "en": "No images selected",
+    "is": ""
+  },
+  "adminCategories.productCount": {
+    "en": "Product Count",
+    "is": ""
+  },
+  "adminCategories.removeImage": {
+    "en": "Remove",
+    "is": ""
+  },
+  "adminCategories.save": {
+    "en": "Save Category",
+    "is": ""
+  },
+  "adminCategories.saveError": {
+    "en": "Error saving category",
+    "is": ""
+  },
+  "adminCategories.saveSuccess": {
+    "en": "Category saved successfully",
+    "is": ""
+  },
+  "adminCategories.selectFromMedia": {
+    "en": "Select from Media",
+    "is": ""
+  },
+  "adminCategories.selectImages": {
+    "en": "Select Images",
+    "is": ""
+  },
+  "adminCategories.seo": {
+    "en": "SEO",
+    "is": ""
+  },
+  "adminCategories.seoHelp": {
+    "en": "Configure SEO data for better search engine visibility",
+    "is": ""
+  },
+  "adminCategories.slug": {
+    "en": "Slug (URL) *",
+    "is": ""
+  },
+  "adminCategories.slugHelp": {
+    "en": "Slug help text",
+    "is": ""
+  },
+  "adminCategories.sortOrder": {
+    "en": "Sort Order",
+    "is": ""
+  },
+  "adminCategories.sortOrderHelp": {
+    "en": "Sort order help text",
+    "is": ""
+  },
+  "adminCategories.subcategories": {
+    "en": "Subcategories",
+    "is": ""
+  },
+  "adminCategories.subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "adminCategories.title": {
+    "en": "Categories",
+    "is": ""
+  },
+  "adminCategories.unsavedChanges": {
+    "en": "You have unsaved changes",
+    "is": ""
+  },
+  "adminChat.accessDenied": {
+    "en": "Access Denied",
+    "is": ""
+  },
+  "adminChat.accessDeniedMessage": {
+    "en": "Access denied message",
+    "is": ""
+  },
+  "adminChat.active": {
+    "en": "Active",
+    "is": ""
+  },
+  "adminChat.allPriorities": {
+    "en": "All Priorities",
+    "is": ""
+  },
+  "adminChat.allStatuses": {
+    "en": "All Statuses",
+    "is": ""
+  },
+  "adminChat.archived": {
+    "en": "Archived",
+    "is": ""
+  },
+  "adminChat.customerTyping": {
+    "en": "Customer is typing",
+    "is": ""
+  },
+  "adminChat.enterFullscreen": {
+    "en": "Enter Fullscreen",
+    "is": ""
+  },
+  "adminChat.high": {
+    "en": "High",
+    "is": ""
+  },
+  "adminChat.joinConversationError": {
+    "en": "Join conversation error",
+    "is": ""
+  },
+  "adminChat.justNow": {
+    "en": "Just Now",
+    "is": ""
+  },
+  "adminChat.loadConversationsError": {
+    "en": "Load conversations error",
+    "is": ""
+  },
+  "adminChat.low": {
+    "en": "Low",
+    "is": ""
+  },
+  "adminChat.newCustomerMessage": {
+    "en": "New customer message",
+    "is": ""
+  },
+  "adminChat.noConversations": {
+    "en": "No conversations",
+    "is": ""
+  },
+  "adminChat.noMessages": {
+    "en": "No messages",
+    "is": ""
+  },
+  "adminChat.normal": {
+    "en": "Normal",
+    "is": ""
+  },
+  "adminChat.orderDetails": {
+    "en": "AdminChat OrderDetails",
+    "is": ""
+  },
+  "adminChat.priorityUpdated": {
+    "en": "Priority updated",
+    "is": ""
+  },
+  "adminChat.resolved": {
+    "en": "Resolved",
+    "is": ""
+  },
+  "adminChat.searchConversations": {
+    "en": "Search conversations",
+    "is": ""
+  },
+  "adminChat.selectConversation": {
+    "en": "Select Conversation",
+    "is": ""
+  },
+  "adminChat.selectConversationMessage": {
+    "en": "Select conversation message",
+    "is": ""
+  },
+  "adminChat.sendMessageError": {
+    "en": "Send message error",
+    "is": ""
+  },
+  "adminChat.statusUpdated": {
+    "en": "Status updated",
+    "is": ""
+  },
+  "adminChat.subtitle": {
+    "en": "Chat Management",
+    "is": ""
+  },
+  "adminChat.title": {
+    "en": "Admin Chat",
+    "is": ""
+  },
+  "adminChat.typeMessage": {
+    "en": "Type a message",
+    "is": ""
+  },
+  "adminChat.unknownCustomer": {
+    "en": "Unknown Customer",
+    "is": ""
+  },
+  "adminChat.updatePriorityError": {
+    "en": "Update priority error",
+    "is": ""
+  },
+  "adminChat.updateStatusError": {
+    "en": "Update status error",
+    "is": ""
+  },
+  "adminChat.urgent": {
+    "en": "Urgent",
+    "is": ""
+  },
+  "adminCustomers.actions": {
+    "en": "Actions",
+    "is": ""
+  },
+  "adminCustomers.active": {
+    "en": "Active",
+    "is": ""
+  },
+  "adminCustomers.adjustSearchCriteria": {
+    "en": "Try adjusting your search criteria",
+    "is": ""
+  },
+  "adminCustomers.allStatus": {
+    "en": "All Status",
+    "is": ""
+  },
+  "adminCustomers.close": {
+    "en": "Close",
+    "is": ""
+  },
+  "adminCustomers.contact": {
+    "en": "Contact",
+    "is": ""
+  },
+  "adminCustomers.contactInformation": {
+    "en": "Contact Information",
+    "is": ""
+  },
+  "adminCustomers.customer": {
+    "en": "Customer",
+    "is": ""
+  },
+  "adminCustomers.customerDetails": {
+    "en": "Customer Details",
+    "is": ""
+  },
+  "adminCustomers.customerList": {
+    "en": "Customer List",
+    "is": ""
+  },
+  "adminCustomers.customerManagement": {
+    "en": "Customer Management",
+    "is": ""
+  },
+  "adminCustomers.customersCount": {
+    "en": "{filtered} of {total} customers",
+    "is": ""
+  },
+  "adminCustomers.customerSince": {
+    "en": "Customer since {date}",
+    "is": ""
+  },
+  "adminCustomers.export": {
+    "en": "Export",
+    "is": ""
+  },
+  "adminCustomers.idLabel": {
+    "en": "ID:",
+    "is": ""
+  },
+  "adminCustomers.inactive": {
+    "en": "Inactive",
+    "is": ""
+  },
+  "adminCustomers.lastOrder": {
+    "en": "Last Order",
+    "is": ""
+  },
+  "adminCustomers.manageCustomerInfo": {
+    "en": "Manage customer information",
+    "is": ""
+  },
+  "adminCustomers.new": {
+    "en": "New",
+    "is": ""
+  },
+  "adminCustomers.noCustomersFound": {
+    "en": "No customers found",
+    "is": ""
+  },
+  "adminCustomers.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "adminCustomers.orderStatistics": {
+    "en": "Order Statistics",
+    "is": ""
+  },
+  "adminCustomers.searchCustomers": {
+    "en": "Search customers...",
+    "is": ""
+  },
+  "adminCustomers.status": {
+    "en": "Status",
+    "is": ""
+  },
+  "adminCustomers.statusActive": {
+    "en": "ACTIVE",
+    "is": ""
+  },
+  "adminCustomers.statusInactive": {
+    "en": "INACTIVE",
+    "is": ""
+  },
+  "adminCustomers.statusNew": {
+    "en": "NEW",
+    "is": ""
+  },
+  "adminCustomers.statusVip": {
+    "en": "VIP",
+    "is": ""
+  },
+  "adminCustomers.totalOrders": {
+    "en": "Total Orders",
+    "is": ""
+  },
+  "adminCustomers.totalSpent": {
+    "en": "Total Spent",
+    "is": ""
+  },
+  "adminCustomers.vip": {
+    "en": "VIP",
+    "is": ""
+  },
+  "adminDashboard.addProduct": {
+    "en": "Add Product",
+    "is": ""
+  },
+  "adminDashboard.amount": {
+    "en": "Amount",
+    "is": ""
+  },
+  "adminDashboard.analyticsReports": {
+    "en": "Analytics & Reports",
+    "is": ""
+  },
+  "adminDashboard.banners": {
+    "en": "Banners",
+    "is": ""
+  },
+  "adminDashboard.coreManagement": {
+    "en": "Core management",
+    "is": ""
+  },
+  "adminDashboard.customer": {
+    "en": "Customer",
+    "is": ""
+  },
+  "adminDashboard.dashboard": {
+    "en": "Dashboard",
+    "is": ""
+  },
+  "adminDashboard.dashboardOverview": {
+    "en": "Dashboard Overview",
+    "is": ""
+  },
+  "adminDashboard.date": {
+    "en": "Date",
+    "is": ""
+  },
+  "adminDashboard.demoData": {
+    "en": "Demo data",
+    "is": ""
+  },
+  "adminDashboard.export": {
+    "en": "Export",
+    "is": ""
+  },
+  "adminDashboard.generateReports": {
+    "en": "Generate reports",
+    "is": ""
+  },
+  "adminDashboard.manageBanners": {
+    "en": "Manage banners",
+    "is": ""
+  },
+  "adminDashboard.manageCategories": {
+    "en": "Manage categories",
+    "is": ""
+  },
+  "adminDashboard.manageChat": {
+    "en": "Manage chat",
+    "is": ""
+  },
+  "adminDashboard.manageCustomers": {
+    "en": "Manage customers",
+    "is": ""
+  },
+  "adminDashboard.manageDemoData": {
+    "en": "Manage demo data",
+    "is": ""
+  },
+  "adminDashboard.manageNotifications": {
+    "en": "Manage notifications",
+    "is": ""
+  },
+  "adminDashboard.manageOrders": {
+    "en": "Manage orders",
+    "is": ""
+  },
+  "adminDashboard.manageProducts": {
+    "en": "Manage products",
+    "is": ""
+  },
+  "adminDashboard.manageTranslations": {
+    "en": "Manage translations",
+    "is": ""
+  },
+  "adminDashboard.manageUsers": {
+    "en": "Manage Users",
+    "is": ""
+  },
+  "adminDashboard.manageYourStore": {
+    "en": "Manage your store",
+    "is": ""
+  },
+  "adminDashboard.newOrder": {
+    "en": "New Order",
+    "is": ""
+  },
+  "adminDashboard.notifications": {
+    "en": "Notifications",
+    "is": ""
+  },
+  "adminDashboard.orderId": {
+    "en": "Order ID",
+    "is": ""
+  },
+  "adminDashboard.orderStatus": {
+    "en": "Order Status",
+    "is": ""
+  },
+  "adminDashboard.outForDelivery": {
+    "en": "Úti í afhendingu",
+    "is": ""
+  },
+  "adminDashboard.overview": {
+    "en": "Mælaborðsyfirlit",
+    "is": ""
+  },
+  "adminDashboard.preparing": {
+    "en": "Undirbýr",
+    "is": ""
+  },
+  "adminDashboard.quickAccess": {
+    "en": "Quick access to",
+    "is": ""
+  },
+  "adminDashboard.recentOrders": {
+    "en": "Recent Orders",
+    "is": ""
+  },
+  "adminDashboard.reports": {
+    "en": "Reports",
+    "is": ""
+  },
+  "adminDashboard.sales": {
+    "en": "Sales",
+    "is": ""
+  },
+  "adminDashboard.settingsTools": {
+    "en": "Settings & Tools",
+    "is": ""
+  },
+  "adminDashboard.status": {
+    "en": "Status",
+    "is": ""
+  },
+  "adminDashboard.systemSettings": {
+    "en": "System settings",
+    "is": ""
+  },
+  "adminDashboard.topProducts": {
+    "en": "Top Products",
+    "is": ""
+  },
+  "adminDashboard.totalCustomers": {
+    "en": "Total Customers",
+    "is": ""
+  },
+  "adminDashboard.totalOrders": {
+    "en": "Total Orders",
+    "is": ""
+  },
+  "adminDashboard.totalProducts": {
+    "en": "Total Products",
+    "is": ""
+  },
+  "adminDashboard.totalRevenue": {
+    "en": "Total Revenue",
+    "is": ""
+  },
+  "adminDashboard.translations": {
+    "en": "Translations",
+    "is": ""
+  },
+  "adminDashboard.viewAnalytics": {
+    "en": "View analytics",
+    "is": ""
+  },
+  "adminDashboard.vsLastMonth": {
+    "en": "vs Last Month",
+    "is": ""
+  },
+  "adminDashboard.vsLastMonthShort": {
+    "en": "AdminDashboard VsLastMonthShort",
+    "is": ""
+  },
+  "adminDashboard.welcomeBack": {
+    "en": "Welcome Back",
+    "is": ""
+  },
+  "adminDashboard.welcomeMessage": {
+    "en": "Velkomin aftur System Administrator",
+    "is": ""
+  },
+  "adminLabels.accessDenied": {
+    "en": "Access Denied",
+    "is": ""
+  },
+  "adminLabels.activeUsers": {
+    "en": "Active Users",
+    "is": ""
+  },
+  "adminLabels.addToFavorites": {
+    "en": "Add to Favorites",
+    "is": ""
+  },
+  "adminLabels.apiCredentials": {
+    "en": "API Credentials",
+    "is": ""
+  },
+  "adminLabels.basicConfiguration": {
+    "en": "Basic Configuration",
+    "is": ""
+  },
+  "adminLabels.databaseSize": {
+    "en": "Database Size",
+    "is": ""
+  },
+  "adminLabels.filters": {
+    "en": "Filters",
+    "is": ""
+  },
+  "adminLabels.gridView": {
+    "en": "Grid View",
+    "is": ""
+  },
+  "adminLabels.listView": {
+    "en": "List View",
+    "is": ""
+  },
+  "adminLabels.maintenanceSettings": {
+    "en": "Maintenance Settings",
+    "is": ""
+  },
+  "adminLabels.memoryUsage": {
+    "en": "Memory Usage",
+    "is": ""
+  },
+  "adminLabels.notificationSettings": {
+    "en": "Notification Settings",
+    "is": ""
+  },
+  "adminLabels.preview": {
+    "en": "Preview",
+    "is": ""
+  },
+  "adminLabels.searchOnline": {
+    "en": "Search Online",
+    "is": ""
+  },
+  "adminLabels.selectImage": {
+    "en": "Select Image",
+    "is": ""
+  },
+  "adminLabels.supportedFeatures": {
+    "en": "Supported Features",
+    "is": ""
+  },
+  "adminLabels.systemInformation": {
+    "en": "System Information",
+    "is": ""
+  },
+  "adminLabels.systemVersion": {
+    "en": "System Version",
+    "is": ""
+  },
+  "adminLabels.totalProducts": {
+    "en": "Total Products",
+    "is": ""
+  },
+  "adminLabels.uptime": {
+    "en": "Uptime",
+    "is": ""
+  },
+  "adminLabels.viewOriginal": {
+    "en": "View Original",
+    "is": ""
+  },
+  "adminLayout.openSidebar": {
+    "en": "Open Sidebar",
+    "is": ""
+  },
+  "adminMedia.actions": {
+    "en": "Actions",
+    "is": ""
+  },
+  "adminMedia.altText": {
+    "en": "Alt Text",
+    "is": ""
+  },
+  "adminMedia.altTextDescription": {
+    "en": "Description shown if image fails to load",
+    "is": ""
+  },
+  "adminMedia.altTextPlaceholder": {
+    "en": "Image description for accessibility",
+    "is": ""
+  },
+  "adminMedia.altTextRecommendation": {
+    "en": "Recommended for accessibility",
+    "is": ""
+  },
+  "adminMedia.automaticOptimization": {
+    "en": "Automatic Optimization",
+    "is": ""
+  },
+  "adminMedia.banners": {
+    "en": "Banners",
+    "is": ""
+  },
+  "adminMedia.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "adminMedia.caption": {
+    "en": "Caption",
+    "is": ""
+  },
+  "adminMedia.captionDescription": {
+    "en": "Short text displayed with the image",
+    "is": ""
+  },
+  "adminMedia.captionPlaceholder": {
+    "en": "Enter image caption",
+    "is": ""
+  },
+  "adminMedia.categories": {
+    "en": "Categories",
+    "is": ""
+  },
+  "adminMedia.confirmDelete": {
+    "en": "Are you sure you want to delete this file?",
+    "is": ""
+  },
+  "adminMedia.delete": {
+    "en": "Delete",
+    "is": ""
+  },
+  "adminMedia.deleteSelected": {
+    "en": "Delete Selected",
+    "is": ""
+  },
+  "adminMedia.description": {
+    "en": "Description",
+    "is": ""
+  },
+  "adminMedia.descriptionDescription": {
+    "en": "Detailed description of image content",
+    "is": ""
+  },
+  "adminMedia.descriptionPlaceholder": {
+    "en": "Enter detailed description",
+    "is": ""
+  },
+  "adminMedia.documents": {
+    "en": "Documents",
+    "is": ""
+  },
+  "adminMedia.dragDropFiles": {
+    "en": "Drag files here",
+    "is": ""
+  },
+  "adminMedia.edit": {
+    "en": "Edit",
+    "is": ""
+  },
+  "adminMedia.editMedia": {
+    "en": "Edit Media",
+    "is": ""
+  },
+  "adminMedia.itemSelected": {
+    "en": "item selected",
+    "is": ""
+  },
+  "adminMedia.itemsSelected": {
+    "en": "items selected",
+    "is": ""
+  },
+  "adminMedia.manageMediaDescription": {
+    "en": "Manage images, videos, and documents",
+    "is": ""
+  },
+  "adminMedia.maxFileSize": {
+    "en": "Max File Size",
+    "is": ""
+  },
+  "adminMedia.name": {
+    "en": "Name",
+    "is": ""
+  },
+  "adminMedia.next": {
+    "en": "Next",
+    "is": ""
+  },
+  "adminMedia.noMediaDescription": {
+    "en": "Start by uploading your first media file",
+    "is": ""
+  },
+  "adminMedia.noMediaFound": {
+    "en": "No Media Found",
+    "is": ""
+  },
+  "adminMedia.noMediaInCollection": {
+    "en": "No media in this collection",
+    "is": ""
+  },
+  "adminMedia.of": {
+    "en": "of",
+    "is": ""
+  },
+  "adminMedia.orClickToSelect": {
+    "en": "or click to select",
+    "is": ""
+  },
+  "adminMedia.preview": {
+    "en": "Preview",
+    "is": ""
+  },
+  "adminMedia.previous": {
+    "en": "Previous",
+    "is": ""
+  },
+  "adminMedia.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "adminMedia.profile": {
+    "en": "Profile",
+    "is": ""
+  },
+  "adminMedia.results": {
+    "en": "results",
+    "is": ""
+  },
+  "adminMedia.save": {
+    "en": "Save",
+    "is": ""
+  },
+  "adminMedia.saving": {
+    "en": "Saving...",
+    "is": ""
+  },
+  "adminMedia.searchMedia": {
+    "en": "Search Media",
+    "is": ""
+  },
+  "adminMedia.select": {
+    "en": "Select",
+    "is": ""
+  },
+  "adminMedia.selectCollection": {
+    "en": "Select Collection",
+    "is": ""
+  },
+  "adminMedia.selectedFiles": {
+    "en": "Selected Files",
+    "is": ""
+  },
+  "adminMedia.selectFiles": {
+    "en": "Select Files",
+    "is": ""
+  },
+  "adminMedia.selectFromMedia": {
+    "en": "Select from Media Library",
+    "is": ""
+  },
+  "adminMedia.selectItem": {
+    "en": "Select Item",
+    "is": ""
+  },
+  "adminMedia.selectItems": {
+    "en": "Select Items",
+    "is": ""
+  },
+  "adminMedia.selectMedia": {
+    "en": "Select Media",
+    "is": ""
+  },
+  "adminMedia.selectMultipleMedia": {
+    "en": "Select Multiple Media",
+    "is": ""
+  },
+  "adminMedia.selectSingleMedia": {
+    "en": "Select Single Media",
+    "is": ""
+  },
+  "adminMedia.showing": {
+    "en": "Showing",
+    "is": ""
+  },
+  "adminMedia.showingResults": {
+    "en": "Sýni {start} til {end} af {total} niðurstöðum",
+    "is": ""
+  },
+  "adminMedia.size": {
+    "en": "Size",
+    "is": ""
+  },
+  "adminMedia.supportedFormats": {
+    "en": "Supported Formats",
+    "is": ""
+  },
+  "adminMedia.to": {
+    "en": "to",
+    "is": ""
+  },
+  "adminMedia.type": {
+    "en": "Type",
+    "is": ""
+  },
+  "adminMedia.upload": {
+    "en": "Upload",
+    "is": ""
+  },
+  "adminMedia.uploaded": {
+    "en": "Uploaded",
+    "is": ""
+  },
+  "adminMedia.uploadFiles": {
+    "en": "Upload Files",
+    "is": ""
+  },
+  "adminMedia.uploadFirstMedia": {
+    "en": "Upload First Media",
+    "is": ""
+  },
+  "adminMedia.uploadGuidelines": {
+    "en": "Upload Guidelines",
+    "is": ""
+  },
+  "adminMedia.uploading": {
+    "en": "Uploading...",
+    "is": ""
+  },
+  "adminMedia.uploadMedia": {
+    "en": "Upload Media",
+    "is": ""
+  },
+  "adminMedia.uploadMediaDescription": {
+    "en": "Upload images, videos, and documents",
+    "is": ""
+  },
+  "adminMedia.videos": {
+    "en": "Videos",
+    "is": ""
+  },
+  "adminMenu.analytics": {
+    "en": "Analytics",
+    "is": ""
+  },
+  "adminMenu.analyticsLink": {
+    "en": "Analytics",
+    "is": ""
+  },
+  "adminMenu.banners": {
+    "en": "Banners",
+    "is": ""
+  },
+  "adminMenu.catalog": {
+    "en": "Catalog",
+    "is": ""
+  },
+  "adminMenu.categories": {
+    "en": "Categories",
+    "is": ""
+  },
+  "adminMenu.content": {
+    "en": "Content",
+    "is": ""
+  },
+  "adminMenu.customers": {
+    "en": "Customers",
+    "is": ""
+  },
+  "adminMenu.dashboard": {
+    "en": "Dashboard",
+    "is": ""
+  },
+  "adminMenu.deliveries": {
+    "en": "Deliveries",
+    "is": ""
+  },
+  "adminMenu.demoData": {
+    "en": "Demo Data",
+    "is": ""
+  },
+  "adminMenu.general": {
+    "en": "General",
+    "is": ""
+  },
+  "adminMenu.helpText": {
+    "en": "Need help? Check the",
+    "is": ""
+  },
+  "adminMenu.manageBusinessSettings": {
+    "en": "Manage your business and settings",
+    "is": ""
+  },
+  "adminMenu.media": {
+    "en": "Media",
+    "is": ""
+  },
+  "adminMenu.messages": {
+    "en": "Messages",
+    "is": ""
+  },
+  "adminMenu.notifications": {
+    "en": "Notifications",
+    "is": ""
+  },
+  "adminMenu.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "adminMenu.payment": {
+    "en": "Payment",
+    "is": ""
+  },
+  "adminMenu.pointOfSale": {
+    "en": "Point of Sale",
+    "is": ""
+  },
+  "adminMenu.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "adminMenu.receipts": {
+    "en": "Receipts",
+    "is": ""
+  },
+  "adminMenu.reports": {
+    "en": "Reports",
+    "is": ""
+  },
+  "adminMenu.sales": {
+    "en": "Sales",
+    "is": ""
+  },
+  "adminMenu.settingsSection": {
+    "en": "Settings",
+    "is": ""
+  },
+  "adminMenu.supportCenter": {
+    "en": "support center",
+    "is": ""
+  },
+  "adminMenu.system": {
+    "en": "System",
+    "is": ""
+  },
+  "adminMenu.translations": {
+    "en": "Translations",
+    "is": ""
+  },
+  "adminNavigation.adminUser": {
+    "en": "Admin User",
+    "is": ""
+  },
+  "adminNavigation.analytics": {
+    "en": "Analytics",
+    "is": ""
+  },
+  "adminNavigation.banners": {
+    "en": "Borðar",
+    "is": ""
+  },
+  "adminNavigation.categories": {
+    "en": "Categories",
+    "is": ""
+  },
+  "adminNavigation.chat": {
+    "en": "Chat",
+    "is": ""
+  },
+  "adminNavigation.customers": {
+    "en": "Customers",
+    "is": ""
+  },
+  "adminNavigation.dashboard": {
+    "en": "Dashboard",
+    "is": ""
+  },
+  "adminNavigation.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "adminNavigation.demoData": {
+    "en": "Sýnigögn",
+    "is": ""
+  },
+  "adminNavigation.discounts": {
+    "en": "Discounts",
+    "is": ""
+  },
+  "adminNavigation.logout": {
+    "en": "Logout",
+    "is": ""
+  },
+  "adminNavigation.media": {
+    "en": "Miðlar",
+    "is": ""
+  },
+  "adminNavigation.notifications": {
+    "en": "Notifications",
+    "is": ""
+  },
+  "adminNavigation.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "adminNavigation.pos": {
+    "en": "POS",
+    "is": ""
+  },
+  "adminNavigation.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "adminNavigation.reports": {
+    "en": "Reports",
+    "is": ""
+  },
+  "adminNavigation.settings": {
+    "en": "Settings",
+    "is": ""
+  },
+  "adminNavigation.translations": {
+    "en": "Þýðingar",
+    "is": ""
+  },
+  "adminNotifications.allStatus": {
+    "en": "All Status",
+    "is": ""
+  },
+  "adminNotifications.allTypes": {
+    "en": "All Types",
+    "is": ""
+  },
+  "adminNotifications.archive": {
+    "en": "Archive",
+    "is": ""
+  },
+  "adminNotifications.archived": {
+    "en": "Archived",
+    "is": ""
+  },
+  "adminNotifications.archivedCount": {
+    "en": "{{count}} Archived",
+    "is": ""
+  },
+  "adminNotifications.bulkArchived": {
+    "en": "Bulk Archived",
+    "is": ""
+  },
+  "adminNotifications.bulkDeleted": {
+    "en": "Bulk Deleted",
+    "is": ""
+  },
+  "adminNotifications.bulkMarkedRead": {
+    "en": "Bulk Marked Read",
+    "is": ""
+  },
+  "adminNotifications.bulkMarkedUnread": {
+    "en": "Bulk Marked Unread",
+    "is": ""
+  },
+  "adminNotifications.delete": {
+    "en": "Delete",
+    "is": ""
+  },
+  "adminNotifications.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "adminNotifications.markAllRead": {
+    "en": "Mark All Read",
+    "is": ""
+  },
+  "adminNotifications.marketing": {
+    "en": "Marketing",
+    "is": ""
+  },
+  "adminNotifications.markRead": {
+    "en": "Mark Read",
+    "is": ""
+  },
+  "adminNotifications.markUnread": {
+    "en": "Mark Unread",
+    "is": ""
+  },
+  "adminNotifications.notificationArchived": {
+    "en": "Notification archived",
+    "is": ""
+  },
+  "adminNotifications.notificationDeleted": {
+    "en": "Notification deleted",
+    "is": ""
+  },
+  "adminNotifications.notificationMarkedRead": {
+    "en": "Notification marked read",
+    "is": ""
+  },
+  "adminNotifications.notificationMarkedUnread": {
+    "en": "Notification marked unread",
+    "is": ""
+  },
+  "adminNotifications.notificationUnarchived": {
+    "en": "Notification unarchived",
+    "is": ""
+  },
+  "adminNotifications.order": {
+    "en": "Order",
+    "is": ""
+  },
+  "adminNotifications.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "adminNotifications.payment": {
+    "en": "Payment",
+    "is": ""
+  },
+  "adminNotifications.payments": {
+    "en": "Payments",
+    "is": ""
+  },
+  "adminNotifications.read": {
+    "en": "Read",
+    "is": ""
+  },
+  "adminNotifications.searchNotifications": {
+    "en": "Search notifications",
+    "is": ""
+  },
+  "adminNotifications.security": {
+    "en": "Security",
+    "is": ""
+  },
+  "adminNotifications.selectAll": {
+    "en": "Select All",
+    "is": ""
+  },
+  "adminNotifications.selected": {
+    "en": "Selected",
+    "is": ""
+  },
+  "adminNotifications.selectNotificationsFirst": {
+    "en": "Select notifications first",
+    "is": ""
+  },
+  "adminNotifications.settings": {
+    "en": "Settings",
+    "is": ""
+  },
+  "adminNotifications.system": {
+    "en": "System",
+    "is": ""
+  },
+  "adminNotifications.title": {
+    "en": "Notifications",
+    "is": ""
+  },
+  "adminNotifications.totalCount": {
+    "en": "Total Count",
+    "is": ""
+  },
+  "adminNotifications.unread": {
+    "en": "Unread",
+    "is": ""
+  },
+  "adminNotifications.unreadCount": {
+    "en": "{{count}} Unread",
+    "is": ""
+  },
+  "admin.overview": {
+    "en": "Overview",
+    "is": ""
+  },
+  "adminPage.accessDenied": {
+    "en": "Access Denied",
+    "is": ""
+  },
+  "adminPage.actions": {
+    "en": "Actions",
+    "is": ""
+  },
+  "adminPage.adjustSearchCriteria": {
+    "en": "Adjust search criteria",
+    "is": ""
+  },
+  "adminPage.allDeliveryMethods": {
+    "en": "All Delivery Methods",
+    "is": ""
+  },
+  "adminPage.allStatuses": {
+    "en": "All Statuses",
+    "is": ""
+  },
+  "adminPage.amount": {
+    "en": "Amount",
+    "is": ""
+  },
+  "adminPage.assign": {
+    "en": "Assign",
+    "is": ""
+  },
+  "adminPage.assignDeliveryPerson": {
+    "en": "Assign Delivery Person",
+    "is": ""
+  },
+  "adminPage.customer": {
+    "en": "Customer",
+    "is": ""
+  },
+  "adminPage.date": {
+    "en": "Date",
+    "is": ""
+  },
+  "adminPage.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "adminPage.deliveryAssigned": {
+    "en": "Delivery Assigned",
+    "is": ""
+  },
+  "adminPage.deliveryPerson": {
+    "en": "Delivery Person",
+    "is": ""
+  },
+  "adminPage.errorOccurred": {
+    "en": "Error occurred",
+    "is": ""
+  },
+  "adminPage.homeDelivery": {
+    "en": "Home Delivery",
+    "is": ""
+  },
+  "adminPage.manageOrders": {
+    "en": "Manage Orders",
+    "is": ""
+  },
+  "adminPage.newStatus": {
+    "en": "New Status",
+    "is": ""
+  },
+  "adminPage.noOrdersFound": {
+    "en": "No orders found",
+    "is": ""
+  },
+  "adminPage.noPermission": {
+    "en": "No permission",
+    "is": ""
+  },
+  "adminPage.order": {
+    "en": "Order",
+    "is": ""
+  },
+  "adminPage.orderManagement": {
+    "en": "Order Management",
+    "is": ""
+  },
+  "adminPage.results": {
+    "en": "Results",
+    "is": ""
+  },
+  "adminPage.searchOrders": {
+    "en": "Search orders",
+    "is": ""
+  },
+  "adminPage.selectDeliveryPerson": {
+    "en": "Select Delivery Person",
+    "is": ""
+  },
+  "adminPage.status": {
+    "en": "Status",
+    "is": ""
+  },
+  "adminPage.statusUpdated": {
+    "en": "Status updated",
+    "is": ""
+  },
+  "adminPage.storePickup": {
+    "en": "Store Pickup",
+    "is": ""
+  },
+  "adminPage.update": {
+    "en": "Update",
+    "is": ""
+  },
+  "adminPage.updateOrder": {
+    "en": "Update Order",
+    "is": ""
+  },
+  "adminPlaceholders.enterApiKey": {
+    "en": "Enter API Key",
+    "is": ""
+  },
+  "adminPlaceholders.enterCompanyId": {
+    "en": "Enter Company ID",
+    "is": ""
+  },
+  "adminPlaceholders.enterDescriptionEn": {
+    "en": "Enter description in English",
+    "is": ""
+  },
+  "adminPlaceholders.enterDescriptionIs": {
+    "en": "Enter description in Icelandic",
+    "is": ""
+  },
+  "adminPlaceholders.enterIcon": {
+    "en": "Enter an emoji or icon",
+    "is": ""
+  },
+  "adminPlaceholders.enterImageUrl": {
+    "en": "Enter image URL",
+    "is": ""
+  },
+  "adminPlaceholders.enterMerchantId": {
+    "en": "Enter Merchant ID",
+    "is": ""
+  },
+  "adminPlaceholders.enterNameEn": {
+    "en": "Enter category name in English",
+    "is": ""
+  },
+  "adminPlaceholders.enterNameIs": {
+    "en": "Enter category name in Icelandic",
+    "is": ""
+  },
+  "adminPlaceholders.enterPassword": {
+    "en": "Enter password",
+    "is": ""
+  },
+  "adminPlaceholders.enterSecretKey": {
+    "en": "Enter Secret Key",
+    "is": ""
+  },
+  "adminPlaceholders.enterSlug": {
+    "en": "Enter slug",
+    "is": ""
+  },
+  "adminPlaceholders.enterSlugEn": {
+    "en": "Enter slug (lowercase, no spaces)",
+    "is": ""
+  },
+  "adminPlaceholders.enterSlugIs": {
+    "en": "Enter slug (Icelandic)",
+    "is": ""
+  },
+  "adminPlaceholders.enterSortOrder": {
+    "en": "Enter sort order (number)",
+    "is": ""
+  },
+  "adminPlaceholders.enterUsername": {
+    "en": "Enter username",
+    "is": ""
+  },
+  "adminPlaceholders.enterWebhookSecret": {
+    "en": "Enter webhook secret",
+    "is": ""
+  },
+  "adminPlaceholders.enterWebsiteUrl": {
+    "en": "Enter website URL",
+    "is": ""
+  },
+  "adminPlaceholders.searchForImages": {
+    "en": "Search for images",
+    "is": ""
+  },
+  "adminProductModal.agePlaceholder": {
+    "en": "18",
+    "is": ""
+  },
+  "adminProductModal.ageRestriction": {
+    "en": "Age Restriction",
+    "is": ""
+  },
+  "adminProductModal.alcoholContent": {
+    "en": "Alcohol Content (%)",
+    "is": ""
+  },
+  "adminProductModal.alcoholPlaceholder": {
+    "en": "e.g., 5.0, 12.5",
+    "is": ""
+  },
+  "adminProductModal.atvrImageUrl": {
+    "en": "ATVR Image URL",
+    "is": ""
+  },
+  "adminProductModal.atvrImageUrlPlaceholder": {
+    "en": "ATVR product image URL",
+    "is": ""
+  },
+  "adminProductModal.atvrInformation": {
+    "en": "ATVR Information",
+    "is": ""
+  },
+  "adminProductModal.atvrProductId": {
+    "en": "ATVR Product ID",
+    "is": ""
+  },
+  "adminProductModal.atvrProductIdPlaceholder": {
+    "en": "e.g., 01448",
+    "is": ""
+  },
+  "adminProductModal.atvrUrl": {
+    "en": "ATVR URL",
+    "is": ""
+  },
+  "adminProductModal.atvrUrlPlaceholder": {
+    "en": "ATVR product page URL",
+    "is": ""
+  },
+  "adminProductModal.availabilityAvailable": {
+    "en": "Available",
+    "is": ""
+  },
+  "adminProductModal.availabilityComingSoon": {
+    "en": "Coming Soon",
+    "is": ""
+  },
+  "adminProductModal.availabilityEn": {
+    "en": "Availability (EN)",
+    "is": ""
+  },
+  "adminProductModal.availabilityIs": {
+    "en": "Availability (IS)",
+    "is": ""
+  },
+  "adminProductModal.availabilityOutOfStock": {
+    "en": "Out of Stock",
+    "is": ""
+  },
+  "adminProductModal.availabilityPlaceholderIs": {
+    "en": "t.d., Til ráðstöfunar",
+    "is": ""
+  },
+  "adminProductModal.availabilitySpecialOrder": {
+    "en": "Special Order",
+    "is": ""
+  },
+  "adminProductModal.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "adminProductModal.category": {
+    "en": "Category",
+    "is": ""
+  },
+  "adminProductModal.categoryRequired": {
+    "en": "Category is required",
+    "is": ""
+  },
+  "adminProductModal.certificationsEn": {
+    "en": "Certifications (EN)",
+    "is": ""
+  },
+  "adminProductModal.certificationsHelp": {
+    "en": "Enter certifications separated by commas",
+    "is": ""
+  },
+  "adminProductModal.certificationsIs": {
+    "en": "Certifications (IS)",
+    "is": ""
+  },
+  "adminProductModal.certificationsPlaceholderEn": {
+    "en": "Comma-separated, e.g., Fair Trade, Kosher",
+    "is": ""
+  },
+  "adminProductModal.certificationsPlaceholderIs": {
+    "en": "Aðskilið með kommum",
+    "is": ""
+  },
+  "adminProductModal.countryEn": {
+    "en": "Country (EN)",
+    "is": ""
+  },
+  "adminProductModal.countryIs": {
+    "en": "Country (IS)",
+    "is": ""
+  },
+  "adminProductModal.countryPlaceholderEn": {
+    "en": "e.g., Iceland, France",
+    "is": ""
+  },
+  "adminProductModal.countryPlaceholderIs": {
+    "en": "t.d., Ísland, Frakkland",
+    "is": ""
+  },
+  "adminProductModal.createProduct": {
+    "en": "Create Product",
+    "is": ""
+  },
+  "adminProductModal.descPlaceholderEn": {
+    "en": "Product description in English",
+    "is": ""
+  },
+  "adminProductModal.descPlaceholderIs": {
+    "en": "Vörulýsing á íslensku",
+    "is": ""
+  },
+  "adminProductModal.descriptionEn": {
+    "en": "Description (English)",
+    "is": ""
+  },
+  "adminProductModal.descriptionIs": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "adminProductModal.discountEndDate": {
+    "en": "Discount End Date",
+    "is": ""
+  },
+  "adminProductModal.discountPercentage": {
+    "en": "Discount Percentage (%)",
+    "is": ""
+  },
+  "adminProductModal.discountReasonEn": {
+    "en": "Discount Reason (EN)",
+    "is": ""
+  },
+  "adminProductModal.discountReasonIs": {
+    "en": "Discount Reason (IS)",
+    "is": ""
+  },
+  "adminProductModal.discountReasonPlaceholderEn": {
+    "en": "e.g., Seasonal Sale, Clearance",
+    "is": ""
+  },
+  "adminProductModal.discountReasonPlaceholderIs": {
+    "en": "t.d., Árstíðabundin útsala",
+    "is": ""
+  },
+  "adminProductModal.discountStartDate": {
+    "en": "Discount Start Date",
+    "is": ""
+  },
+  "adminProductModal.distributorEn": {
+    "en": "Distributor (EN)",
+    "is": ""
+  },
+  "adminProductModal.distributorIs": {
+    "en": "Distributor (IS)",
+    "is": ""
+  },
+  "adminProductModal.distributorPlaceholderEn": {
+    "en": "Distributor name",
+    "is": ""
+  },
+  "adminProductModal.distributorPlaceholderIs": {
+    "en": "Dreifingaraðili",
+    "is": ""
+  },
+  "adminProductModal.enableDiscountForProduct": {
+    "en": "Enable Discount for this Product",
+    "is": ""
+  },
+  "adminProductModal.enableDiscountMessage": {
+    "en": "Enable discount to configure discount settings for this product",
+    "is": ""
+  },
+  "adminProductModal.foodPairingsEn": {
+    "en": "Food Pairings (EN)",
+    "is": ""
+  },
+  "adminProductModal.foodPairingsHelp": {
+    "en": "Enter food pairings separated by commas",
+    "is": ""
+  },
+  "adminProductModal.foodPairingsIs": {
+    "en": "Food Pairings (IS)",
+    "is": ""
+  },
+  "adminProductModal.foodPairingsPlaceholderEn": {
+    "en": "Comma-separated, e.g., Fish, Fowl, Beef",
+    "is": ""
+  },
+  "adminProductModal.foodPairingsPlaceholderIs": {
+    "en": "Aðskilið með kommum, t.d., Fiskur, Alifuglar, Nautakjöt",
+    "is": ""
+  },
+  "adminProductModal.grapeVarietyEn": {
+    "en": "Grape Variety (EN)",
+    "is": ""
+  },
+  "adminProductModal.grapeVarietyIs": {
+    "en": "Grape Variety (IS)",
+    "is": ""
+  },
+  "adminProductModal.grapeVarietyPlaceholderEn": {
+    "en": "e.g., Cabernet Sauvignon",
+    "is": ""
+  },
+  "adminProductModal.grapeVarietyPlaceholderIs": {
+    "en": "Þrúgutegund",
+    "is": ""
+  },
+  "adminProductModal.imageUploadHelp": {
+    "en": "Upload an image, search online, or select from media library",
+    "is": ""
+  },
+  "adminProductModal.imageUrlIfNotUploading": {
+    "en": "Image URL (if not uploading)",
+    "is": ""
+  },
+  "adminProductModal.imageUrlPlaceholder": {
+    "en": "https://example.com/image.jpg",
+    "is": ""
+  },
+  "adminProductModal.isAgeRestricted": {
+    "en": "Age Restricted Product",
+    "is": ""
+  },
+  "adminProductModal.mediaLibrary": {
+    "en": "Media Library",
+    "is": ""
+  },
+  "adminProductModal.nameIsRequired": {
+    "en": "Icelandic name is required",
+    "is": ""
+  },
+  "adminProductModal.namePlaceholderEn": {
+    "en": "Product name in English",
+    "is": ""
+  },
+  "adminProductModal.namePlaceholderIs": {
+    "en": "Vöruheiti á íslensku",
+    "is": ""
+  },
+  "adminProductModal.nameRequired": {
+    "en": "Name is required",
+    "is": ""
+  },
+  "adminProductModal.noImageSelected": {
+    "en": "No image selected",
+    "is": ""
+  },
+  "adminProductModal.originalPrice": {
+    "en": "Original Price (kr)",
+    "is": ""
+  },
+  "adminProductModal.originEn": {
+    "en": "Origin (EN)",
+    "is": ""
+  },
+  "adminProductModal.originIs": {
+    "en": "Origin (IS)",
+    "is": ""
+  },
+  "adminProductModal.originPlaceholderEn": {
+    "en": "Specific origin details",
+    "is": ""
+  },
+  "adminProductModal.originPlaceholderIs": {
+    "en": "Uppruni",
+    "is": ""
+  },
+  "adminProductModal.packagingEn": {
+    "en": "Packaging (EN)",
+    "is": ""
+  },
+  "adminProductModal.packagingIs": {
+    "en": "Packaging (IS)",
+    "is": ""
+  },
+  "adminProductModal.packagingPlaceholderEn": {
+    "en": "e.g., Bottle, Can, Box",
+    "is": ""
+  },
+  "adminProductModal.packagingPlaceholderIs": {
+    "en": "t.d., Flaska, Dós, Kassi",
+    "is": ""
+  },
+  "adminProductModal.price": {
+    "en": "Price (kr)",
+    "is": ""
+  },
+  "adminProductModal.pricePerLiterEn": {
+    "en": "Price Per Liter (EN)",
+    "is": ""
+  },
+  "adminProductModal.pricePerLiterIs": {
+    "en": "Price Per Liter (IS)",
+    "is": ""
+  },
+  "adminProductModal.pricePerLiterPlaceholderEn": {
+    "en": "e.g., 2,500 kr/L",
+    "is": ""
+  },
+  "adminProductModal.pricePerLiterPlaceholderIs": {
+    "en": "t.d., 2.500 kr/L",
+    "is": ""
+  },
+  "adminProductModal.priceRequired": {
+    "en": "Price is required",
+    "is": ""
+  },
+  "adminProductModal.producerEn": {
+    "en": "Producer (EN)",
+    "is": ""
+  },
+  "adminProductModal.producerIs": {
+    "en": "Producer (IS)",
+    "is": ""
+  },
+  "adminProductModal.producerPlaceholderEn": {
+    "en": "Producer name",
+    "is": ""
+  },
+  "adminProductModal.producerPlaceholderIs": {
+    "en": "Framleiðandi",
+    "is": ""
+  },
+  "adminProductModal.productImage": {
+    "en": "Product Image",
+    "is": ""
+  },
+  "adminProductModal.regionEn": {
+    "en": "Region (EN)",
+    "is": ""
+  },
+  "adminProductModal.regionIs": {
+    "en": "Region (IS)",
+    "is": ""
+  },
+  "adminProductModal.regionPlaceholderEn": {
+    "en": "e.g., Bordeaux, Tuscany",
+    "is": ""
+  },
+  "adminProductModal.regionPlaceholderIs": {
+    "en": "Svæði",
+    "is": ""
+  },
+  "adminProductModal.searchOnline": {
+    "en": "Search Online",
+    "is": ""
+  },
+  "adminProductModal.selectCategory": {
+    "en": "Select a category",
+    "is": ""
+  },
+  "adminProductModal.selectSubcategory": {
+    "en": "Select a subcategory",
+    "is": ""
+  },
+  "adminProductModal.specialAttributesEn": {
+    "en": "Special Attributes (EN)",
+    "is": ""
+  },
+  "adminProductModal.specialAttributesHelp": {
+    "en": "Enter special attributes separated by commas",
+    "is": ""
+  },
+  "adminProductModal.specialAttributesIs": {
+    "en": "Special Attributes (IS)",
+    "is": ""
+  },
+  "adminProductModal.specialAttributesPlaceholderEn": {
+    "en": "Comma-separated, e.g., Organic, Vegan, Premium",
+    "is": ""
+  },
+  "adminProductModal.specialAttributesPlaceholderIs": {
+    "en": "Aðskilið með kommum, t.d., Lífrænt, Vegan, Premium",
+    "is": ""
+  },
+  "adminProductModal.stock": {
+    "en": "Stock",
+    "is": ""
+  },
+  "adminProductModal.stockRequired": {
+    "en": "Stock is required",
+    "is": ""
+  },
+  "adminProductModal.subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "adminProductModal.tabBasicInfo": {
+    "en": "Basic Info",
+    "is": ""
+  },
+  "adminProductModal.tabDetails": {
+    "en": "Details",
+    "is": ""
+  },
+  "adminProductModal.tabDiscounts": {
+    "en": "Discounts",
+    "is": ""
+  },
+  "adminProductModal.tabImages": {
+    "en": "Images",
+    "is": ""
+  },
+  "adminProductModal.tabOrigin": {
+    "en": "Origin",
+    "is": ""
+  },
+  "adminProductModal.tabPairings": {
+    "en": "Pairings & Attributes",
+    "is": ""
+  },
+  "adminProductModal.unsavedChanges": {
+    "en": "You have unsaved changes. Are you sure you want to close without saving?",
+    "is": ""
+  },
+  "adminProductModal.updateProduct": {
+    "en": "Update Product",
+    "is": ""
+  },
+  "adminProductModal.vintage": {
+    "en": "Vintage (Year)",
+    "is": ""
+  },
+  "adminProductModal.vintagePlaceholder": {
+    "en": "e.g., 2020",
+    "is": ""
+  },
+  "adminProductModal.volumeEn": {
+    "en": "Volume (EN)",
+    "is": ""
+  },
+  "adminProductModal.volumeIs": {
+    "en": "Volume (IS)",
+    "is": ""
+  },
+  "adminProductModal.volumePlaceholderEn": {
+    "en": "e.g., 500 ml, 750 ml",
+    "is": ""
+  },
+  "adminProductModal.volumePlaceholderIs": {
+    "en": "t.d., 500 ml, 750 ml",
+    "is": ""
+  },
+  "adminProductModal.wineStyleEn": {
+    "en": "Wine Style (EN)",
+    "is": ""
+  },
+  "adminProductModal.wineStyleIs": {
+    "en": "Wine Style (IS)",
+    "is": ""
+  },
+  "adminProductModal.wineStylePlaceholderEn": {
+    "en": "e.g., Dry, Sweet, Sparkling",
+    "is": ""
+  },
+  "adminProductModal.wineStylePlaceholderIs": {
+    "en": "Vínstíll",
+    "is": ""
+  },
+  "adminProducts.importFromATVR": {
+    "en": "Import from ATVR",
+    "is": ""
+  },
+  "adminProductsPage.adjustSearchOrAdd": {
+    "en": "Adjust search or add",
+    "is": ""
+  },
+  "adminProductsPage.ageRestricted": {
+    "en": "Age Restricted",
+    "is": ""
+  },
+  "adminProductsPage.allCategories": {
+    "en": "All Categories",
+    "is": ""
+  },
+  "adminProductsPage.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "adminProductsPage.create": {
+    "en": "Create",
+    "is": ""
+  },
+  "adminProductsPage.descEn": {
+    "en": "Description (English)",
+    "is": ""
+  },
+  "adminProductsPage.descIs": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "adminProductsPage.descriptionIs": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "adminProductsPage.discountEndDate": {
+    "en": "Discount End Date",
+    "is": ""
+  },
+  "adminProductsPage.discountPercentage": {
+    "en": "Discount Percentage",
+    "is": ""
+  },
+  "adminProductsPage.discountReason": {
+    "en": "Discount Reason",
+    "is": ""
+  },
+  "adminProductsPage.discountReasonIs": {
+    "en": "Discount Reason (Icelandic)",
+    "is": ""
+  },
+  "adminProductsPage.discountReasonPlaceholder": {
+    "en": "Discount reason placeholder",
+    "is": ""
+  },
+  "adminProductsPage.discountSettings": {
+    "en": "Discount Settings",
+    "is": ""
+  },
+  "adminProductsPage.discountStartDate": {
+    "en": "Discount Start Date",
+    "is": ""
+  },
+  "adminProductsPage.editProduct": {
+    "en": "Edit Product",
+    "is": ""
+  },
+  "adminProductsPage.enableDiscount": {
+    "en": "Enable Discount",
+    "is": ""
+  },
+  "adminProductsPage.enhancedInfo": {
+    "en": "Enhanced Info",
+    "is": ""
+  },
+  "adminProductsPage.hasDiscount": {
+    "en": "Has Discount",
+    "is": ""
+  },
+  "adminProductsPage.image": {
+    "en": "Image",
+    "is": ""
+  },
+  "adminProductsPage.imageUrl": {
+    "en": "Image URL",
+    "is": ""
+  },
+  "adminProductsPage.inStock": {
+    "en": "In Stock",
+    "is": ""
+  },
+  "adminProductsPage.manageProducts": {
+    "en": "Manage Products",
+    "is": ""
+  },
+  "adminProductsPage.nameEn": {
+    "en": "Name (English)",
+    "is": ""
+  },
+  "adminProductsPage.nameIs": {
+    "en": "Name (Icelandic)",
+    "is": ""
+  },
+  "adminProductsPage.nameRequired": {
+    "en": "Name is required",
+    "is": ""
+  },
+  "adminProductsPage.newProduct": {
+    "en": "New Product",
+    "is": ""
+  },
+  "adminProductsPage.newProductTitle": {
+    "en": "New Product Title",
+    "is": ""
+  },
+  "adminProductsPage.noProductsFound": {
+    "en": "No products found",
+    "is": ""
+  },
+  "adminProductsPage.originalPrice": {
+    "en": "Original Price",
+    "is": ""
+  },
+  "adminProductsPage.priceRequired": {
+    "en": "Price is required",
+    "is": ""
+  },
+  "adminProductsPage.productImages": {
+    "en": "Product Images",
+    "is": ""
+  },
+  "adminProductsPage.productManagement": {
+    "en": "Product Management",
+    "is": ""
+  },
+  "adminProductsPage.searchProducts": {
+    "en": "Search products",
+    "is": ""
+  },
+  "adminProductsPage.selectSubcategory": {
+    "en": "Select Subcategory",
+    "is": ""
+  },
+  "adminProductsPage.showOnlyAgeRestricted": {
+    "en": "Show only age restricted",
+    "is": ""
+  },
+  "adminProductsPage.stockRequired": {
+    "en": "Stock is required",
+    "is": ""
+  },
+  "adminProductsPage.subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "adminProductsPage.update": {
+    "en": "AdminProductsPage Update",
+    "is": ""
+  },
+  "admin.recentActivity": {
+    "en": "Recent activity",
+    "is": ""
+  },
+  "adminReports.activeProducts": {
+    "en": "Active Products",
+    "is": ""
+  },
+  "adminReports.averageOrderValue": {
+    "en": "Average Order Value",
+    "is": ""
+  },
+  "adminReports.avgOrderFrequency": {
+    "en": "Average Order Frequency",
+    "is": ""
+  },
+  "adminReports.avgProcessingTime": {
+    "en": "Average Processing Time",
+    "is": ""
+  },
+  "adminReports.completedOrders": {
+    "en": "Completed Orders",
+    "is": ""
+  },
+  "adminReports.completionRate": {
+    "en": "Completion Rate",
+    "is": ""
+  },
+  "adminReports.customerSegmentation": {
+    "en": "Customer Segmentation",
+    "is": ""
+  },
+  "adminReports.customersReport": {
+    "en": "Customers Report",
+    "is": ""
+  },
+  "adminReports.customRange": {
+    "en": "Custom Range",
+    "is": ""
+  },
+  "adminReports.dailySalesTrend": {
+    "en": "Daily Sales Trend",
+    "is": ""
+  },
+  "adminReports.days": {
+    "en": "Days",
+    "is": ""
+  },
+  "adminReports.endDate": {
+    "en": "End Date",
+    "is": ""
+  },
+  "adminReports.exportCSV": {
+    "en": "Export CSV",
+    "is": ""
+  },
+  "adminReports.exportPDF": {
+    "en": "Export PDF",
+    "is": ""
+  },
+  "adminReports.growthRate": {
+    "en": "Growth Rate",
+    "is": ""
+  },
+  "adminReports.last": {
+    "en": "Last",
+    "is": ""
+  },
+  "adminReports.last30Days": {
+    "en": "Last 30 Days",
+    "is": ""
+  },
+  "adminReports.last7Days": {
+    "en": "Last 7 Days",
+    "is": ""
+  },
+  "adminReports.last90Days": {
+    "en": "Last 90 Days",
+    "is": ""
+  },
+  "adminReports.lastYear": {
+    "en": "Last Year",
+    "is": ""
+  },
+  "adminReports.newCustomers": {
+    "en": "New Customers",
+    "is": ""
+  },
+  "adminReports.noData": {
+    "en": "No Data",
+    "is": ""
+  },
+  "adminReports.ofTotal": {
+    "en": "of Total",
+    "is": ""
+  },
+  "adminReports.ofTotalOrders": {
+    "en": "of Total Orders",
+    "is": ""
+  },
+  "adminReports.orderDistributionByDeliveryMethod": {
+    "en": "Order Distribution by Delivery Method",
+    "is": ""
+  },
+  "adminReports.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "adminReports.ordersPerCustomer": {
+    "en": "Orders per Customer",
+    "is": ""
+  },
+  "adminReports.ordersReport": {
+    "en": "Orders Report",
+    "is": ""
+  },
+  "adminReports.orderStatusDistribution": {
+    "en": "Order Status Distribution",
+    "is": ""
+  },
+  "adminReports.outOfStock": {
+    "en": "Out of Stock",
+    "is": ""
+  },
+  "adminReports.pendingOrders": {
+    "en": "Pending Orders",
+    "is": ""
+  },
+  "adminReports.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "adminReports.productsReport": {
+    "en": "Products Report",
+    "is": ""
+  },
+  "adminReports.refreshData": {
+    "en": "Refresh Data",
+    "is": ""
+  },
+  "adminReports.reportType": {
+    "en": "Report Type",
+    "is": ""
+  },
+  "adminReports.revenue": {
+    "en": "AdminReports Revenue",
+    "is": ""
+  },
+  "adminReports.revenueByCategory": {
+    "en": "Revenue by Category",
+    "is": ""
+  },
+  "adminReports.salesReport": {
+    "en": "Sales Report",
+    "is": ""
+  },
+  "adminReports.startDate": {
+    "en": "Start Date",
+    "is": ""
+  },
+  "adminReports.thisPeriod": {
+    "en": "This Period",
+    "is": ""
+  },
+  "adminReports.timePeriod": {
+    "en": "Time Period",
+    "is": ""
+  },
+  "adminReports.topCustomersByRevenue": {
+    "en": "Top Customers by Revenue",
+    "is": ""
+  },
+  "adminReports.topSellingProducts": {
+    "en": "Top Selling Products",
+    "is": ""
+  },
+  "adminReports.totalCustomers": {
+    "en": "Total Customers",
+    "is": ""
+  },
+  "adminReports.totalOrders": {
+    "en": "Total Orders",
+    "is": ""
+  },
+  "adminReports.totalProducts": {
+    "en": "Total Products",
+    "is": ""
+  },
+  "adminReports.totalRevenue": {
+    "en": "Total Revenue",
+    "is": ""
+  },
+  "adminReports.vsPreviousPeriod": {
+    "en": "vs Previous Period",
+    "is": ""
+  },
+  "adminSettings.${day}": {
+    "en": "AdminSettings ${Day}",
+    "is": ""
+  },
+  "adminSettings.${formData.provider}": {
+    "en": "AdminSettings ${FormData Provider}",
+    "is": ""
+  },
+  "adminSettings.accentColor": {
+    "en": "Accent Color",
+    "is": ""
+  },
+  "adminSettings.accessDenied": {
+    "en": "Access Denied",
+    "is": ""
+  },
+  "adminSettings.accessKey": {
+    "en": "Access Key",
+    "is": ""
+  },
+  "adminSettings.accountSecurity": {
+    "en": "Account Security",
+    "is": ""
+  },
+  "adminSettings.addFirstIntegration": {
+    "en": "Add First Integration",
+    "is": ""
+  },
+  "adminSettings.addFirstPaymentGateway": {
+    "en": "Add First Payment Gateway",
+    "is": ""
+  },
+  "adminSettings.addFirstShippingOption": {
+    "en": "Add First Shipping Option",
+    "is": ""
+  },
+  "adminSettings.addIntegration": {
+    "en": "Add Integration",
+    "is": ""
+  },
+  "adminSettings.addPaymentGateway": {
+    "en": "Add Payment Gateway",
+    "is": ""
+  },
+  "adminSettings.addProfile": {
+    "en": "Add Profile",
+    "is": ""
+  },
+  "adminSettings.addressEn": {
+    "en": "Heimilisfang (enska)",
+    "is": ""
+  },
+  "adminSettings.addressEnglish": {
+    "en": "Address (English)",
+    "is": ""
+  },
+  "adminSettings.addressIcelandic": {
+    "en": "Address (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.addressIs": {
+    "en": "Heimilisfang (íslenska)",
+    "is": ""
+  },
+  "adminSettings.addShippingOption": {
+    "en": "Add Shipping Option",
+    "is": ""
+  },
+  "adminSettings.ageRestriction": {
+    "en": "Age Restriction",
+    "is": ""
+  },
+  "adminSettings.ageRestrictionDescription": {
+    "en": "Settings for age verification",
+    "is": ""
+  },
+  "adminSettings.ageRestrictionNotice": {
+    "en": "Age verification required for these products",
+    "is": ""
+  },
+  "adminSettings.ageRestrictions": {
+    "en": "Age Restrictions",
+    "is": ""
+  },
+  "adminSettings.alcoholNicotineAgeDescription": {
+    "en": "Age requirements for alcohol and nicotine",
+    "is": ""
+  },
+  "adminSettings.alcoholNicotineProducts": {
+    "en": "Alcohol and Nicotine Products",
+    "is": ""
+  },
+  "adminSettings.apiCredentials": {
+    "en": "API Credentials",
+    "is": ""
+  },
+  "adminSettings.apiKey": {
+    "en": "API Key",
+    "is": ""
+  },
+  "adminSettings.apiKeys": {
+    "en": "API Keys",
+    "is": ""
+  },
+  "adminSettings.apiKeysConfiguration": {
+    "en": "API Keys Configuration",
+    "is": ""
+  },
+  "adminSettings.apiKeysDescription": {
+    "en": "Manage API keys for external integrations",
+    "is": ""
+  },
+  "adminSettings.apiKeysImportantNote1": {
+    "en": "Store the API key in a secure location",
+    "is": ""
+  },
+  "adminSettings.apiKeysImportantNote2": {
+    "en": "Never share the API key publicly",
+    "is": ""
+  },
+  "adminSettings.apiKeysImportantNote3": {
+    "en": "Rotate keys regularly",
+    "is": ""
+  },
+  "adminSettings.apiKeysImportantNote4": {
+    "en": "Revoke keys immediately if compromised",
+    "is": ""
+  },
+  "adminSettings.applicationId": {
+    "en": "Application ID",
+    "is": ""
+  },
+  "adminSettings.assignCategories": {
+    "en": "Assign Categories",
+    "is": ""
+  },
+  "adminSettings.authentication": {
+    "en": "Auðkenning",
+    "is": ""
+  },
+  "adminSettings.averageHoursPerDay": {
+    "en": "Average Hours/Day:",
+    "is": ""
+  },
+  "adminSettings.avgHoursPerDay": {
+    "en": "Avg Hours/Day:",
+    "is": ""
+  },
+  "adminSettings.backup": {
+    "en": "Backup",
+    "is": ""
+  },
+  "adminSettings.backupCompleted": {
+    "en": "Backup Completed",
+    "is": ""
+  },
+  "adminSettings.backupSettings": {
+    "en": "Backup Settings",
+    "is": ""
+  },
+  "adminSettings.baseUrl": {
+    "en": "Base URL",
+    "is": ""
+  },
+  "adminSettings.basicConfiguration": {
+    "en": "Basic Configuration",
+    "is": ""
+  },
+  "adminSettings.business": {
+    "en": "Business",
+    "is": ""
+  },
+  "adminSettings.businessDescription": {
+    "en": "Manage business information",
+    "is": ""
+  },
+  "adminSettings.businessSettings": {
+    "en": "Business Settings",
+    "is": ""
+  },
+  "adminSettings.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "adminSettings.categories": {
+    "en": "Categories:",
+    "is": ""
+  },
+  "adminSettings.changePassword": {
+    "en": "Change Password",
+    "is": ""
+  },
+  "adminSettings.classic": {
+    "en": "Klassískt",
+    "is": ""
+  },
+  "adminSettings.clientId": {
+    "en": "Client ID",
+    "is": ""
+  },
+  "adminSettings.clientSecret": {
+    "en": "Client Secret",
+    "is": ""
+  },
+  "adminSettings.closed": {
+    "en": "Closed",
+    "is": ""
+  },
+  "adminSettings.closingTime": {
+    "en": "Closing Time",
+    "is": ""
+  },
+  "adminSettings.commonSmtpSettings": {
+    "en": "Algengar SMTP stillingar",
+    "is": ""
+  },
+  "adminSettings.companyId": {
+    "en": "Company ID",
+    "is": ""
+  },
+  "adminSettings.companyInformation": {
+    "en": "Company Information",
+    "is": ""
+  },
+  "adminSettings.companyNameEn": {
+    "en": "Nafn fyrirtækis (enska)",
+    "is": ""
+  },
+  "adminSettings.companyNameEnglish": {
+    "en": "Company Name (English)",
+    "is": ""
+  },
+  "adminSettings.companyNameIcelandic": {
+    "en": "Company Name (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.companyNameIs": {
+    "en": "Nafn fyrirtækis (íslenska)",
+    "is": ""
+  },
+  "adminSettings.configuration": {
+    "en": "Configuration",
+    "is": ""
+  },
+  "adminSettings.configure": {
+    "en": "Configure",
+    "is": ""
+  },
+  "adminSettings.configureGeneral": {
+    "en": "Configure general settings",
+    "is": ""
+  },
+  "adminSettings.configureIntegration": {
+    "en": "Configure Integration",
+    "is": ""
+  },
+  "adminSettings.configureWebhooks": {
+    "en": "Configure Webhooks",
+    "is": ""
+  },
+  "adminSettings.confirmDeleteGateway": {
+    "en": "Are you sure you want to delete this payment gateway?",
+    "is": ""
+  },
+  "adminSettings.confirmDeleteIntegration": {
+    "en": "Are you sure you want to delete this integration?",
+    "is": ""
+  },
+  "adminSettings.confirmDeleteLogo": {
+    "en": "Are you sure you want to delete the logo?",
+    "is": ""
+  },
+  "adminSettings.confirmDeleteShipping": {
+    "en": "Are you sure you want to delete this shipping option?",
+    "is": ""
+  },
+  "adminSettings.confirmReset": {
+    "en": "Are you sure you want to reset to default settings?",
+    "is": ""
+  },
+  "adminSettings.connectionTestFailed": {
+    "en": "Connection test failed",
+    "is": ""
+  },
+  "adminSettings.connectionTestSuccessful": {
+    "en": "Connection test successful",
+    "is": ""
+  },
+  "adminSettings.contentType": {
+    "en": "Content Type",
+    "is": ""
+  },
+  "adminSettings.copiedHoursToAllDays": {
+    "en": "Copied {day} hours to all days",
+    "is": ""
+  },
+  "adminSettings.copy": {
+    "en": "Copy",
+    "is": ""
+  },
+  "adminSettings.copyHours": {
+    "en": "Copy Hours",
+    "is": ""
+  },
+  "adminSettings.coreSettings": {
+    "en": "Core Settings",
+    "is": ""
+  },
+  "adminSettings.coreSettingsDesc": {
+    "en": "Configure core settings",
+    "is": ""
+  },
+  "adminSettings.country": {
+    "en": "Country",
+    "is": ""
+  },
+  "adminSettings.create": {
+    "en": "Create",
+    "is": ""
+  },
+  "adminSettings.createGateway": {
+    "en": "Create Gateway",
+    "is": ""
+  },
+  "adminSettings.createNewVatProfile": {
+    "en": "Create New VAT Profile",
+    "is": ""
+  },
+  "adminSettings.currency": {
+    "en": "Currency",
+    "is": ""
+  },
+  "adminSettings.currencyAffects": {
+    "en": "Currency affects all pricing displays",
+    "is": ""
+  },
+  "adminSettings.currencyEUR": {
+    "en": "Euro (EUR)",
+    "is": ""
+  },
+  "adminSettings.currencyISK": {
+    "en": "Icelandic Króna (ISK)",
+    "is": ""
+  },
+  "adminSettings.currencyUSD": {
+    "en": "US Dollar (USD)",
+    "is": ""
+  },
+  "adminSettings.currentLogo": {
+    "en": "Current logo",
+    "is": ""
+  },
+  "adminSettings.customGradient": {
+    "en": "Custom Gradient",
+    "is": ""
+  },
+  "adminSettings.cutoffTime": {
+    "en": "Cutoff Time",
+    "is": ""
+  },
+  "adminSettings.dateFormat": {
+    "en": "Date Format",
+    "is": ""
+  },
+  "adminSettings.dateFormatDDMMYYYY": {
+    "en": "DD/MM/YYYY",
+    "is": ""
+  },
+  "adminSettings.dateFormatMMDDYYYY": {
+    "en": "MM/DD/YYYY",
+    "is": ""
+  },
+  "adminSettings.dateFormatYYYYMMDD": {
+    "en": "YYYY-MM-DD",
+    "is": ""
+  },
+  "adminSettings.dateTimeFormats": {
+    "en": "Date/time formats affect order displays",
+    "is": ""
+  },
+  "adminSettings.delete": {
+    "en": "Delete",
+    "is": ""
+  },
+  "adminSettings.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "adminSettings.deliveryFee": {
+    "en": "Delivery Fee",
+    "is": ""
+  },
+  "adminSettings.deliveryRadius": {
+    "en": "Delivery Radius",
+    "is": ""
+  },
+  "adminSettings.deliverySettings": {
+    "en": "Delivery Settings",
+    "is": ""
+  },
+  "adminSettings.description": {
+    "en": "Description",
+    "is": ""
+  },
+  "adminSettings.descriptionEnglish": {
+    "en": "Description (English)",
+    "is": ""
+  },
+  "adminSettings.descriptionIcelandic": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.descriptionIs": {
+    "en": "Description (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.designColors": {
+    "en": "Design & Colors",
+    "is": ""
+  },
+  "adminSettings.disabled": {
+    "en": "Disabled",
+    "is": ""
+  },
+  "adminSettings.displayName": {
+    "en": "Display Name",
+    "is": ""
+  },
+  "adminSettings.edit": {
+    "en": "Edit",
+    "is": ""
+  },
+  "adminSettings.editIntegration": {
+    "en": "Edit Integration",
+    "is": ""
+  },
+  "adminSettings.editPaymentGateway": {
+    "en": "Edit Payment Gateway",
+    "is": ""
+  },
+  "adminSettings.editSettings": {
+    "en": "Edit Settings",
+    "is": ""
+  },
+  "adminSettings.editShippingOption": {
+    "en": "Edit Shipping Option",
+    "is": ""
+  },
+  "adminSettings.editVatProfile": {
+    "en": "Edit VAT Profile",
+    "is": ""
+  },
+  "adminSettings.email": {
+    "en": "Email",
+    "is": ""
+  },
+  "adminSettings.emailSettings": {
+    "en": "Tölvupóststillingar",
+    "is": ""
+  },
+  "adminSettings.emailSettingsDescription": {
+    "en": "Stilla SMTP stillingar fyrir sendingu kvittunarpósta",
+    "is": ""
+  },
+  "adminSettings.enableAgeRestriction": {
+    "en": "Enable Age Restriction",
+    "is": ""
+  },
+  "adminSettings.enabled": {
+    "en": "Enabled",
+    "is": ""
+  },
+  "adminSettings.enableDelivery": {
+    "en": "Enable Delivery",
+    "is": ""
+  },
+  "adminSettings.enableEmailSending": {
+    "en": "Virkja sendingu tölvupósts",
+    "is": ""
+  },
+  "adminSettings.enableEmailSendingDescription": {
+    "en": "Þegar virkjað, verða kvittunarpóstar sendir til viðskiptavina",
+    "is": ""
+  },
+  "adminSettings.enableRestrictions": {
+    "en": "Enable Restrictions",
+    "is": ""
+  },
+  "adminSettings.enableTwoFactorAuth": {
+    "en": "Enable Two Factor Auth",
+    "is": ""
+  },
+  "adminSettings.enableVat": {
+    "en": "Enable VAT",
+    "is": ""
+  },
+  "adminSettings.enterAccessKey": {
+    "en": "Enter access key",
+    "is": ""
+  },
+  "adminSettings.enterApiKey": {
+    "en": "Enter API key",
+    "is": ""
+  },
+  "adminSettings.enterApplicationId": {
+    "en": "Enter application ID",
+    "is": ""
+  },
+  "adminSettings.enterClientId": {
+    "en": "Enter client ID",
+    "is": ""
+  },
+  "adminSettings.enterClientSecret": {
+    "en": "Enter client secret",
+    "is": ""
+  },
+  "adminSettings.enterGoogleApiKey": {
+    "en": "Enter Google API Key",
+    "is": ""
+  },
+  "adminSettings.enterGoogleSearchEngineId": {
+    "en": "Enter Google Search Engine ID",
+    "is": ""
+  },
+  "adminSettings.enterMerchantId": {
+    "en": "Enter merchant ID",
+    "is": ""
+  },
+  "adminSettings.enterPaymentGatewayId": {
+    "en": "Enter payment gateway ID",
+    "is": ""
+  },
+  "adminSettings.enterPexelsApiKey": {
+    "en": "Enter Pexels API Key",
+    "is": ""
+  },
+  "adminSettings.enterPixabayApiKey": {
+    "en": "Enter Pixabay API Key",
+    "is": ""
+  },
+  "adminSettings.enterPrivateKey": {
+    "en": "Enter private key",
+    "is": ""
+  },
+  "adminSettings.enterPublicKey": {
+    "en": "Enter public key",
+    "is": ""
+  },
+  "adminSettings.enterPublishableKey": {
+    "en": "Enter publishable key",
+    "is": ""
+  },
+  "adminSettings.enterSecretKey": {
+    "en": "Enter secret key",
+    "is": ""
+  },
+  "adminSettings.enterUnsplashApiKey": {
+    "en": "Enter Unsplash API Key",
+    "is": ""
+  },
+  "adminSettings.enterWebhookSecret": {
+    "en": "Enter webhook secret",
+    "is": ""
+  },
+  "adminSettings.environment": {
+    "en": "Environment",
+    "is": ""
+  },
+  "adminSettings.errorLoadingPaymentGateways": {
+    "en": "Error loading payment gateways",
+    "is": ""
+  },
+  "adminSettings.errorSavingPaymentGateway": {
+    "en": "Error saving payment gateway",
+    "is": ""
+  },
+  "adminSettings.errorTestingPaymentGateway": {
+    "en": "Error testing payment gateway",
+    "is": ""
+  },
+  "adminSettings.errorTogglingPaymentGateway": {
+    "en": "Error toggling payment gateway",
+    "is": ""
+  },
+  "adminSettings.errorUpdatingPaymentGateway": {
+    "en": "Error updating payment gateway",
+    "is": ""
+  },
+  "adminSettings.estimatedDays": {
+    "en": "Estimated Days",
+    "is": ""
+  },
+  "adminSettings.euCountries": {
+    "en": "EU Countries",
+    "is": ""
+  },
+  "adminSettings.failedLoginAttempts": {
+    "en": "Failed Login Attempts",
+    "is": ""
+  },
+  "adminSettings.failedToSaveSettings": {
+    "en": "Failed to save settings",
+    "is": ""
+  },
+  "adminSettings.fee": {
+    "en": "Fee",
+    "is": ""
+  },
+  "adminSettings.fileSizeTooLarge": {
+    "en": "File size must be less than 5MB",
+    "is": ""
+  },
+  "adminSettings.fontFamily": {
+    "en": "Font Family",
+    "is": ""
+  },
+  "adminSettings.fontSize": {
+    "en": "Font Size",
+    "is": ""
+  },
+  "adminSettings.footerMessages": {
+    "en": "Footer Messages",
+    "is": ""
+  },
+  "adminSettings.footerTextEn": {
+    "en": "Fóttexti (enska)",
+    "is": ""
+  },
+  "adminSettings.footerTextEnglish": {
+    "en": "Footer Text (English)",
+    "is": ""
+  },
+  "adminSettings.footerTextEnPlaceholder": {
+    "en": "Thank you for your business!",
+    "is": ""
+  },
+  "adminSettings.footerTextIcelandic": {
+    "en": "Footer Text (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.footerTextIs": {
+    "en": "Fóttexti (íslenska)",
+    "is": ""
+  },
+  "adminSettings.footerTextIsPlaceholder": {
+    "en": "Takk fyrir viðskiptin!",
+    "is": ""
+  },
+  "adminSettings.freeDeliveryThreshold": {
+    "en": "Free Delivery Threshold",
+    "is": ""
+  },
+  "adminSettings.friday": {
+    "en": "Friday",
+    "is": ""
+  },
+  "adminSettings.fromEmailAddress": {
+    "en": "Frá netfangi",
+    "is": ""
+  },
+  "adminSettings.fromNameEn": {
+    "en": "Frá nafni (enska)",
+    "is": ""
+  },
+  "adminSettings.fromNameIs": {
+    "en": "Frá nafni (íslenska)",
+    "is": ""
+  },
+  "adminSettings.gatewayName": {
+    "en": "Gateway Name",
+    "is": ""
+  },
+  "adminSettings.general": {
+    "en": "General",
+    "is": ""
+  },
+  "adminSettings.generalDescription": {
+    "en": "General system settings",
+    "is": ""
+  },
+  "adminSettings.generalProducts": {
+    "en": "General Products",
+    "is": ""
+  },
+  "adminSettings.generalProductsDescription": {
+    "en": "Products without special age requirements",
+    "is": ""
+  },
+  "adminSettings.generalSettings": {
+    "en": "General Settings",
+    "is": ""
+  },
+  "adminSettings.gmail": {
+    "en": "Gmail",
+    "is": ""
+  },
+  "adminSettings.gmailAppPasswordNote": {
+    "en": "Fyrir Gmail, notaðu app lykilorð í stað venjulegs lykilorðs",
+    "is": ""
+  },
+  "adminSettings.googleApiKey": {
+    "en": "Google API Key",
+    "is": ""
+  },
+  "adminSettings.googleCloudConsole": {
+    "en": "Google Cloud Console",
+    "is": ""
+  },
+  "adminSettings.googleCustomSearch": {
+    "en": "Google Custom Search",
+    "is": ""
+  },
+  "adminSettings.googleSearchEngineId": {
+    "en": "Google Search Engine ID",
+    "is": ""
+  },
+  "adminSettings.gradientColor": {
+    "en": "Gradient",
+    "is": ""
+  },
+  "adminSettings.gradientHelpText": {
+    "en": "Example: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)",
+    "is": ""
+  },
+  "adminSettings.headerColor": {
+    "en": "Header Color",
+    "is": ""
+  },
+  "adminSettings.host": {
+    "en": "Host",
+    "is": ""
+  },
+  "adminSettings.iceland": {
+    "en": "Iceland",
+    "is": ""
+  },
+  "adminSettings.importantNotes": {
+    "en": "Important Notes",
+    "is": ""
+  },
+  "adminSettings.includeVatInCustomerPrice": {
+    "en": "Include VAT in customer price",
+    "is": ""
+  },
+  "adminSettings.includeVatInCustomerPriceDescription": {
+    "en": "When enabled, customers see prices including VAT",
+    "is": ""
+  },
+  "adminSettings.includeVatInPrices": {
+    "en": "Include VAT in Prices",
+    "is": ""
+  },
+  "adminSettings.integrationConfiguration": {
+    "en": "Integration Configuration",
+    "is": ""
+  },
+  "adminSettings.integrationDescription": {
+    "en": "Integration Description",
+    "is": ""
+  },
+  "adminSettings.integrationKeysEncrypted": {
+    "en": "Integration keys encrypted",
+    "is": ""
+  },
+  "adminSettings.integrationName": {
+    "en": "Integration Name",
+    "is": ""
+  },
+  "adminSettings.integrationNote1": {
+    "en": "Integration Note 1",
+    "is": ""
+  },
+  "adminSettings.integrationNote2": {
+    "en": "Integration Note 2",
+    "is": ""
+  },
+  "adminSettings.integrationNote3": {
+    "en": "Integration Note 3",
+    "is": ""
+  },
+  "adminSettings.integrationNote4": {
+    "en": "Integration Note 4",
+    "is": ""
+  },
+  "adminSettings.integrationNotes": {
+    "en": "Integration Notes",
+    "is": ""
+  },
+  "adminSettings.integrations": {
+    "en": "Integrations",
+    "is": ""
+  },
+  "adminSettings.integrationsDescription": {
+    "en": "Connect external services and applications",
+    "is": ""
+  },
+  "adminSettings.invalidFileType": {
+    "en": "Please upload a valid image file",
+    "is": ""
+  },
+  "adminSettings.language": {
+    "en": "Language",
+    "is": ""
+  },
+  "adminSettings.languageEnglish": {
+    "en": "English",
+    "is": ""
+  },
+  "adminSettings.languageIcelandic": {
+    "en": "Icelandic",
+    "is": ""
+  },
+  "adminSettings.languageSets": {
+    "en": "Language sets the default for new users",
+    "is": ""
+  },
+  "adminSettings.lastError": {
+    "en": "Last Error",
+    "is": ""
+  },
+  "adminSettings.lastSync": {
+    "en": "Last Sync",
+    "is": ""
+  },
+  "adminSettings.livePreview": {
+    "en": "Live Preview",
+    "is": ""
+  },
+  "adminSettings.logo": {
+    "en": "Logo",
+    "is": ""
+  },
+  "adminSettings.logoAlwaysInvert": {
+    "en": "Always invert",
+    "is": ""
+  },
+  "adminSettings.logoColorMode": {
+    "en": "Logo Color Mode",
+    "is": ""
+  },
+  "adminSettings.logoFileTypes": {
+    "en": "PNG, JPG, GIF allt að 5MB",
+    "is": ""
+  },
+  "adminSettings.logoNoInversion": {
+    "en": "No inversion",
+    "is": ""
+  },
+  "adminSettings.logoThemeAware": {
+    "en": "Invert on dark theme",
+    "is": ""
+  },
+  "adminSettings.logoUploadedSuccessfully": {
+    "en": "Logo uploaded successfully",
+    "is": ""
+  },
+  "adminSettings.logoUploadFailed": {
+    "en": "Failed to upload logo",
+    "is": ""
+  },
+  "adminSettings.maintenance": {
+    "en": "Maintenance",
+    "is": ""
+  },
+  "adminSettings.maintenanceComingSoon": {
+    "en": "Maintenance features coming soon",
+    "is": ""
+  },
+  "adminSettings.maintenanceDescription": {
+    "en": "Maintenance schedules and system status",
+    "is": ""
+  },
+  "adminSettings.manageConfiguration": {
+    "en": "Manage Configuration",
+    "is": ""
+  },
+  "adminSettings.manageSystemSettings": {
+    "en": "Manage system settings",
+    "is": ""
+  },
+  "adminSettings.merchantId": {
+    "en": "Merchant ID",
+    "is": ""
+  },
+  "adminSettings.minimal": {
+    "en": "Lágmarks",
+    "is": ""
+  },
+  "adminSettings.minimumLength": {
+    "en": "Minimum Length",
+    "is": ""
+  },
+  "adminSettings.modern": {
+    "en": "Nútímalegt",
+    "is": ""
+  },
+  "adminSettings.monday": {
+    "en": "Monday",
+    "is": ""
+  },
+  "adminSettings.nameEnglish": {
+    "en": "Name (English)",
+    "is": ""
+  },
+  "adminSettings.nameIcelandic": {
+    "en": "Name (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.needHelp": {
+    "en": "Need Help?",
+    "is": ""
+  },
+  "adminSettings.netgiro": {
+    "en": "Netgiro",
+    "is": ""
+  },
+  "adminSettings.nicotineAgeDescription": {
+    "en": "Age requirements for nicotine products",
+    "is": ""
+  },
+  "adminSettings.nicotineProducts": {
+    "en": "Nicotine Products",
+    "is": ""
+  },
+  "adminSettings.noCategoriesAvailable": {
+    "en": "No categories available",
+    "is": ""
+  },
+  "adminSettings.noFileChosen": {
+    "en": "Engin skrá valin",
+    "is": ""
+  },
+  "adminSettings.noIntegrations": {
+    "en": "No Integrations",
+    "is": ""
+  },
+  "adminSettings.noIntegrationsDescription": {
+    "en": "You have not set up any integrations yet",
+    "is": ""
+  },
+  "adminSettings.noLogoUploaded": {
+    "en": "No logo uploaded",
+    "is": ""
+  },
+  "adminSettings.noPaymentGateways": {
+    "en": "No Payment Gateways",
+    "is": ""
+  },
+  "adminSettings.noPaymentGatewaysDescription": {
+    "en": "You have not set up any payment gateways yet",
+    "is": ""
+  },
+  "adminSettings.noPermissionMessage": {
+    "en": "You do not have permission to view this page",
+    "is": ""
+  },
+  "adminSettings.noShippingOptions": {
+    "en": "No Shipping Options",
+    "is": ""
+  },
+  "adminSettings.noShippingOptionsDescription": {
+    "en": "You have not set up any shipping options yet",
+    "is": ""
+  },
+  "adminSettings.notifications": {
+    "en": "Notifications",
+    "is": ""
+  },
+  "adminSettings.notificationsComingSoon": {
+    "en": "Notification features coming soon",
+    "is": ""
+  },
+  "adminSettings.notificationsDescription": {
+    "en": "Manage notifications and alerts",
+    "is": ""
+  },
+  "adminSettings.noVatProfilesCreated": {
+    "en": "No VAT profiles created yet",
+    "is": ""
+  },
+  "adminSettings.onlyEnabledAvailable": {
+    "en": "Only enabled available",
+    "is": ""
+  },
+  "adminSettings.openDays": {
+    "en": "Open Days:",
+    "is": ""
+  },
+  "adminSettings.openingHours": {
+    "en": "Opening Hours",
+    "is": ""
+  },
+  "adminSettings.openingTime": {
+    "en": "Opening Time",
+    "is": ""
+  },
+  "adminSettings.operation24h": {
+    "en": "24/7 Operation",
+    "is": ""
+  },
+  "adminSettings.otherCountries": {
+    "en": "Other Countries",
+    "is": ""
+  },
+  "adminSettings.outlookHotmail": {
+    "en": "Outlook/Hotmail",
+    "is": ""
+  },
+  "adminSettings.paperSize": {
+    "en": "Paper Size",
+    "is": ""
+  },
+  "adminSettings.password": {
+    "en": "Password",
+    "is": ""
+  },
+  "adminSettings.passwordChanged": {
+    "en": "Password Changed",
+    "is": ""
+  },
+  "adminSettings.passwordPolicy": {
+    "en": "Password Policy",
+    "is": ""
+  },
+  "adminSettings.passwordsDoNotMatch": {
+    "en": "Passwords do not match",
+    "is": ""
+  },
+  "adminSettings.passwordTooShort": {
+    "en": "Password too short",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayConfiguration": {
+    "en": "Payment Gateway Configuration",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayDescription": {
+    "en": "Payment Gateway Description",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayDisabled": {
+    "en": "Payment gateway disabled successfully",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayEnabled": {
+    "en": "Payment gateway enabled successfully",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayId": {
+    "en": "Payment Gateway ID",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayNote1": {
+    "en": "Payment Gateway Note 1",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayNote2": {
+    "en": "Payment Gateway Note 2",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayNote3": {
+    "en": "Payment Gateway Note 3",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayNote4": {
+    "en": "Payment Gateway Note 4",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayNotes": {
+    "en": "Payment Gateway Notes",
+    "is": ""
+  },
+  "adminSettings.paymentGateways": {
+    "en": "Payment Gateways",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayTestSuccessful": {
+    "en": "Payment gateway test successful",
+    "is": ""
+  },
+  "adminSettings.paymentGatewayUpdatedSuccessfully": {
+    "en": "Payment gateway updated successfully",
+    "is": ""
+  },
+  "adminSettings.paymentMethods": {
+    "en": "Payment Methods",
+    "is": ""
+  },
+  "adminSettings.paypal": {
+    "en": "PayPal",
+    "is": ""
+  },
+  "adminSettings.pexelsApi": {
+    "en": "Pexels API",
+    "is": ""
+  },
+  "adminSettings.pexelsApiKey": {
+    "en": "Pexels API Key",
+    "is": ""
+  },
+  "adminSettings.phone": {
+    "en": "Phone",
+    "is": ""
+  },
+  "adminSettings.phoneNumber": {
+    "en": "Phone Number",
+    "is": ""
+  },
+  "adminSettings.pickup": {
+    "en": "Pickup",
+    "is": ""
+  },
+  "adminSettings.pixabayApi": {
+    "en": "Pixabay API",
+    "is": ""
+  },
+  "adminSettings.pixabayApiKey": {
+    "en": "Pixabay API Key",
+    "is": ""
+  },
+  "adminSettings.pleaseSelectProvider": {
+    "en": "Please select a provider",
+    "is": ""
+  },
+  "adminSettings.port": {
+    "en": "Port",
+    "is": ""
+  },
+  "adminSettings.preferences": {
+    "en": "Preferences",
+    "is": ""
+  },
+  "adminSettings.preferencesDesc": {
+    "en": "Configure general preferences and settings",
+    "is": ""
+  },
+  "adminSettings.price": {
+    "en": "Price",
+    "is": ""
+  },
+  "adminSettings.printView": {
+    "en": "Print View",
+    "is": ""
+  },
+  "adminSettings.privateKey": {
+    "en": "Private Key",
+    "is": ""
+  },
+  "adminSettings.production": {
+    "en": "Production",
+    "is": ""
+  },
+  "adminSettings.provider": {
+    "en": "Provider",
+    "is": ""
+  },
+  "adminSettings.publicKey": {
+    "en": "Public Key",
+    "is": ""
+  },
+  "adminSettings.publishableKey": {
+    "en": "Publishable Key",
+    "is": ""
+  },
+  "adminSettings.quickActions": {
+    "en": "Quick Actions",
+    "is": ""
+  },
+  "adminSettings.rapyd": {
+    "en": "Rapyd",
+    "is": ""
+  },
+  "adminSettings.receipts": {
+    "en": "Kvittanir",
+    "is": ""
+  },
+  "adminSettings.receiptSettings": {
+    "en": "Receipt Settings",
+    "is": ""
+  },
+  "adminSettings.receiptSettingsDescription": {
+    "en": "Customize your receipt appearance and branding",
+    "is": ""
+  },
+  "adminSettings.receiptSettingsSaved": {
+    "en": "Receipt settings saved successfully!",
+    "is": ""
+  },
+  "adminSettings.remove": {
+    "en": "Remove",
+    "is": ""
+  },
+  "adminSettings.requireLowercase": {
+    "en": "Require Lowercase",
+    "is": ""
+  },
+  "adminSettings.requireNumbers": {
+    "en": "Require Numbers",
+    "is": ""
+  },
+  "adminSettings.requireSpecialChars": {
+    "en": "Require Special Characters",
+    "is": ""
+  },
+  "adminSettings.requireUppercase": {
+    "en": "Require Uppercase",
+    "is": ""
+  },
+  "adminSettings.reset": {
+    "en": "Reset",
+    "is": ""
+  },
+  "adminSettings.resetToDefaults": {
+    "en": "Reset to Defaults",
+    "is": ""
+  },
+  "adminSettings.sandbox": {
+    "en": "Sandbox",
+    "is": ""
+  },
+  "adminSettings.saturday": {
+    "en": "Saturday",
+    "is": ""
+  },
+  "adminSettings.save": {
+    "en": "Save",
+    "is": ""
+  },
+  "adminSettings.saveChanges": {
+    "en": "Save Changes",
+    "is": ""
+  },
+  "adminSettings.saveProfile": {
+    "en": "Save Profile",
+    "is": ""
+  },
+  "adminSettings.saveSettings": {
+    "en": "Save Settings",
+    "is": ""
+  },
+  "adminSettings.saving": {
+    "en": "Saving...",
+    "is": ""
+  },
+  "adminSettings.screenView": {
+    "en": "Screen View",
+    "is": ""
+  },
+  "adminSettings.secretKey": {
+    "en": "Secret Key",
+    "is": ""
+  },
+  "adminSettings.security": {
+    "en": "Security",
+    "is": ""
+  },
+  "adminSettings.securityAndAccess": {
+    "en": "Security and Access",
+    "is": ""
+  },
+  "adminSettings.securityAndAccessDescription": {
+    "en": "Manage security settings and access permissions",
+    "is": ""
+  },
+  "adminSettings.securityComingSoon": {
+    "en": "Security features coming soon",
+    "is": ""
+  },
+  "adminSettings.securityDescription": {
+    "en": "Manage security and access settings",
+    "is": ""
+  },
+  "adminSettings.selectPaymentProvider": {
+    "en": "Select Payment Provider",
+    "is": ""
+  },
+  "adminSettings.senderInformation": {
+    "en": "Upplýsingar sendanda",
+    "is": ""
+  },
+  "adminSettings.sessionSecurity": {
+    "en": "Session Security",
+    "is": ""
+  },
+  "adminSettings.sessionTimeout": {
+    "en": "Session Timeout",
+    "is": ""
+  },
+  "adminSettings.set247": {
+    "en": "24/7 Operation",
+    "is": ""
+  },
+  "adminSettings.set24hSuccess": {
+    "en": "Set 24-hour operation",
+    "is": ""
+  },
+  "adminSettings.setAsDefault": {
+    "en": "Set as Default",
+    "is": ""
+  },
+  "adminSettings.settings": {
+    "en": "Settings",
+    "is": ""
+  },
+  "adminSettings.settingsControlDesc": {
+    "en": "These settings control how your store appears to customers and how the system behaves.",
+    "is": ""
+  },
+  "adminSettings.settingsReset": {
+    "en": "Settings Reset",
+    "is": ""
+  },
+  "adminSettings.settingsSaved": {
+    "en": "Settings saved",
+    "is": ""
+  },
+  "adminSettings.setWeekdayHours": {
+    "en": "Set Weekday Hours",
+    "is": ""
+  },
+  "adminSettings.setWeekdayHoursSuccess": {
+    "en": "Set standard weekday hours (10:00 - 22:00)",
+    "is": ""
+  },
+  "adminSettings.setWeekendHours": {
+    "en": "Set Weekend Hours",
+    "is": ""
+  },
+  "adminSettings.setWeekendHoursSuccess": {
+    "en": "Set standard weekend hours (12:00 - 24:00)",
+    "is": ""
+  },
+  "adminSettings.shipping": {
+    "en": "Shipping",
+    "is": ""
+  },
+  "adminSettings.shippingConfiguration": {
+    "en": "Shipping Configuration",
+    "is": ""
+  },
+  "adminSettings.shippingDescription": {
+    "en": "Manage shipping options and configurations",
+    "is": ""
+  },
+  "adminSettings.shippingName": {
+    "en": "Shipping Name",
+    "is": ""
+  },
+  "adminSettings.shippingNameIs": {
+    "en": "Shipping Name (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.shippingNote1": {
+    "en": "Shipping cost is calculated at checkout",
+    "is": ""
+  },
+  "adminSettings.shippingNote2": {
+    "en": "Free shipping for orders over 10,000 ISK",
+    "is": ""
+  },
+  "adminSettings.shippingNote3": {
+    "en": "Estimated delivery time is 1-3 days",
+    "is": ""
+  },
+  "adminSettings.shippingNotes": {
+    "en": "Shipping Notes",
+    "is": ""
+  },
+  "adminSettings.shippingType": {
+    "en": "Shipping Type",
+    "is": ""
+  },
+  "adminSettings.showBarcode": {
+    "en": "Show Barcode",
+    "is": ""
+  },
+  "adminSettings.showQrCode": {
+    "en": "Sýna QR kóða",
+    "is": ""
+  },
+  "adminSettings.showQRCode": {
+    "en": "Show QR Code",
+    "is": ""
+  },
+  "adminSettings.showVatBreakdown": {
+    "en": "Show VAT Breakdown",
+    "is": ""
+  },
+  "adminSettings.showVatBreakdownDescription": {
+    "en": "Display VAT breakdown in receipts and invoices",
+    "is": ""
+  },
+  "adminSettings.showVatInAdmin": {
+    "en": "Show VAT in Admin",
+    "is": ""
+  },
+  "adminSettings.showVatInAdminDescription": {
+    "en": "Display VAT information in admin interface",
+    "is": ""
+  },
+  "adminSettings.smtp": {
+    "en": "SMTP",
+    "is": ""
+  },
+  "adminSettings.smtp.authCredentials": {
+    "en": "Authentication Credentials",
+    "is": ""
+  },
+  "adminSettings.smtp.commonProviders": {
+    "en": "Common SMTP Providers",
+    "is": ""
+  },
+  "adminSettings.smtpConfiguration": {
+    "en": "SMTP stillingar",
+    "is": ""
+  },
+  "adminSettings.smtp.connectionFailed": {
+    "en": "Connection Failed",
+    "is": ""
+  },
+  "adminSettings.smtp.connectionFailedMsg": {
+    "en": "Unable to connect to SMTP server. Please check your settings.",
+    "is": ""
+  },
+  "adminSettings.smtp.connectionSuccess": {
+    "en": "Connection Successful!",
+    "is": ""
+  },
+  "adminSettings.smtp.connectionSuccessMsg": {
+    "en": "SMTP settings are configured correctly. Test email sent successfully.",
+    "is": ""
+  },
+  "adminSettings.smtp.description": {
+    "en": "Configure email server settings for transactional emails",
+    "is": ""
+  },
+  "adminSettings.smtp.enableSmtp": {
+    "en": "Enable SMTP",
+    "is": ""
+  },
+  "adminSettings.smtp.fromEmail": {
+    "en": "From Email",
+    "is": ""
+  },
+  "adminSettings.smtp.fromEmailHelp": {
+    "en": "Email address that appears as sender",
+    "is": ""
+  },
+  "adminSettings.smtp.fromNameEn": {
+    "en": "From Name (English)",
+    "is": ""
+  },
+  "adminSettings.smtp.fromNameIs": {
+    "en": "From Name (Icelandic)",
+    "is": ""
+  },
+  "adminSettings.smtp.gmailTip": {
+    "en": "💡 Tip: For Gmail, you need to enable 2-factor authentication and create an App Password in your Google Account settings.",
+    "is": ""
+  },
+  "adminSettings.smtp.host": {
+    "en": "SMTP Host",
+    "is": ""
+  },
+  "adminSettings.smtpHost": {
+    "en": "SMTP hýsingarþjónn",
+    "is": ""
+  },
+  "adminSettings.smtp.hostHelp": {
+    "en": "Your email provider's SMTP server address",
+    "is": ""
+  },
+  "adminSettings.smtp.password": {
+    "en": "Password / App Password",
+    "is": ""
+  },
+  "adminSettings.smtp.passwordHelp": {
+    "en": "For Gmail, use an App Password instead of your regular password",
+    "is": ""
+  },
+  "adminSettings.smtp.port": {
+    "en": "SMTP Port",
+    "is": ""
+  },
+  "adminSettings.smtp.portHelp": {
+    "en": "Common ports: 587 (TLS), 465 (SSL), 25 (unsecured)",
+    "is": ""
+  },
+  "adminSettings.smtp.providerGmail": {
+    "en": "smtp.gmail.com, Port 587, Use App Password",
+    "is": ""
+  },
+  "adminSettings.smtp.providerMailgun": {
+    "en": "smtp.mailgun.org, Port 587",
+    "is": ""
+  },
+  "adminSettings.smtp.providerOutlook": {
+    "en": "smtp.office365.com, Port 587",
+    "is": ""
+  },
+  "adminSettings.smtp.providerSendGrid": {
+    "en": "smtp.sendgrid.net, Port 587",
+    "is": ""
+  },
+  "adminSettings.smtp.providerYahoo": {
+    "en": "smtp.mail.yahoo.com, Port 587",
+    "is": ""
+  },
+  "adminSettings.smtp.saveSettings": {
+    "en": "Save SMTP Settings",
+    "is": ""
+  },
+  "adminSettings.smtp.secureHelp": {
+    "en": "Enable for port 465, disable for port 587 (uses STARTTLS)",
+    "is": ""
+  },
+  "adminSettings.smtp.senderInfo": {
+    "en": "Sender Information",
+    "is": ""
+  },
+  "adminSettings.smtpSettings": {
+    "en": "SMTP Settings",
+    "is": ""
+  },
+  "adminSettings.smtp.testConnection": {
+    "en": "Test Connection",
+    "is": ""
+  },
+  "adminSettings.smtp.testingConnection": {
+    "en": "Testing Connection...",
+    "is": ""
+  },
+  "adminSettings.smtp.username": {
+    "en": "Username / Email",
+    "is": ""
+  },
+  "adminSettings.smtp.useSecure": {
+    "en": "Use SSL/TLS (Secure Connection)",
+    "is": ""
+  },
+  "adminSettings.solidColor": {
+    "en": "Solid Color",
+    "is": ""
+  },
+  "adminSettings.sortOrder": {
+    "en": "Sort Order",
+    "is": ""
+  },
+  "adminSettings.storeAddress": {
+    "en": "Store Address",
+    "is": ""
+  },
+  "adminSettings.storeDescription": {
+    "en": "Store Description",
+    "is": ""
+  },
+  "adminSettings.storeEmail": {
+    "en": "Store Email",
+    "is": ""
+  },
+  "adminSettings.storeInformation": {
+    "en": "Store Information",
+    "is": ""
+  },
+  "adminSettings.storeInformationDesc": {
+    "en": "Basic information about your store",
+    "is": ""
+  },
+  "adminSettings.storeName": {
+    "en": "Store Name",
+    "is": ""
+  },
+  "adminSettings.storeNameAppears": {
+    "en": "Store name appears in emails and receipts",
+    "is": ""
+  },
+  "adminSettings.storePhone": {
+    "en": "Phone Number",
+    "is": ""
+  },
+  "adminSettings.storeSettings": {
+    "en": "Store Settings",
+    "is": ""
+  },
+  "adminSettings.storeSettingsDescription": {
+    "en": "Manage store information and settings",
+    "is": ""
+  },
+  "adminSettings.stripe": {
+    "en": "Stripe",
+    "is": ""
+  },
+  "adminSettings.sunday": {
+    "en": "Sunday",
+    "is": ""
+  },
+  "adminSettings.supportedCountries": {
+    "en": "Supported Countries",
+    "is": ""
+  },
+  "adminSettings.supportedCurrencies": {
+    "en": "Supported Currencies",
+    "is": ""
+  },
+  "adminSettings.supportedMethods": {
+    "en": "Supported Methods",
+    "is": ""
+  },
+  "adminSettings.supportedPaymentMethods": {
+    "en": "Supported Payment Methods",
+    "is": ""
+  },
+  "adminSettings.syncData": {
+    "en": "Sync Data",
+    "is": ""
+  },
+  "adminSettings.system": {
+    "en": "System",
+    "is": ""
+  },
+  "adminSettings.systemDescription": {
+    "en": "Manage system settings and configuration",
+    "is": ""
+  },
+  "adminSettings.taxId": {
+    "en": "Tax ID",
+    "is": ""
+  },
+  "adminSettings.taxSettings": {
+    "en": "Tax Settings",
+    "is": ""
+  },
+  "adminSettings.templateLayout": {
+    "en": "Template & Layout",
+    "is": ""
+  },
+  "adminSettings.templateStyle": {
+    "en": "Template Style",
+    "is": ""
+  },
+  "adminSettings.test": {
+    "en": "Test",
+    "is": ""
+  },
+  "adminSettings.testBeforeEnabling": {
+    "en": "Test Before Enabling",
+    "is": ""
+  },
+  "adminSettings.testConnection": {
+    "en": "Test Connection",
+    "is": ""
+  },
+  "adminSettings.testing": {
+    "en": "Testing",
+    "is": ""
+  },
+  "adminSettings.teya": {
+    "en": "Teya",
+    "is": ""
+  },
+  "adminSettings.thursday": {
+    "en": "Thursday",
+    "is": ""
+  },
+  "adminSettings.timeFormat": {
+    "en": "Time Format",
+    "is": ""
+  },
+  "adminSettings.timeFormat12h": {
+    "en": "12-hour",
+    "is": ""
+  },
+  "adminSettings.timeFormat24h": {
+    "en": "24-hour",
+    "is": ""
+  },
+  "adminSettings.timezone": {
+    "en": "Timezone",
+    "is": ""
+  },
+  "adminSettings.timezoneAtlantic": {
+    "en": "Atlantic (Reykjavik)",
+    "is": ""
+  },
+  "adminSettings.timezonePacific": {
+    "en": "Pacific",
+    "is": ""
+  },
+  "adminSettings.timezoneUTC": {
+    "en": "UTC",
+    "is": ""
+  },
+  "adminSettings.title": {
+    "en": "Settings",
+    "is": ""
+  },
+  "adminSettings.to": {
+    "en": "To",
+    "is": ""
+  },
+  "adminSettings.totalHoursPerWeek": {
+    "en": "Total Hours/Week:",
+    "is": ""
+  },
+  "adminSettings.tuesday": {
+    "en": "Tuesday",
+    "is": ""
+  },
+  "adminSettings.type": {
+    "en": "Type",
+    "is": ""
+  },
+  "adminSettings.unsplashApiKey": {
+    "en": "Unsplash API Key",
+    "is": ""
+  },
+  "adminSettings.unsplashDevelopers": {
+    "en": "Unsplash Developers",
+    "is": ""
+  },
+  "adminSettings.update": {
+    "en": "Update",
+    "is": ""
+  },
+  "adminSettings.updateGateway": {
+    "en": "Update Gateway",
+    "is": ""
+  },
+  "adminSettings.uploadLogo": {
+    "en": "Upload Logo",
+    "is": ""
+  },
+  "adminSettings.uploadLogoDescription": {
+    "en": "Upload a logo to appear on receipts",
+    "is": ""
+  },
+  "adminSettings.uploadLogoFormats": {
+    "en": "PNG, JPG, GIF up to 5MB",
+    "is": ""
+  },
+  "adminSettings.useAppPasswordNote": {
+    "en": "Nota app lykilorð (ekki venjulegt lykilorð)",
+    "is": ""
+  },
+  "adminSettings.username": {
+    "en": "Username",
+    "is": ""
+  },
+  "adminSettings.useTlsSsl": {
+    "en": "Nota TLS/SSL (mælt með fyrir port 587/465)",
+    "is": ""
+  },
+  "adminSettings.valitor": {
+    "en": "Valitor",
+    "is": ""
+  },
+  "adminSettings.vat": {
+    "en": "VAT",
+    "is": ""
+  },
+  "adminSettings.vatConfiguration": {
+    "en": "VAT Configuration",
+    "is": ""
+  },
+  "adminSettings.vatDescription": {
+    "en": "Value Added Tax settings",
+    "is": ""
+  },
+  "adminSettings.vatDisplaySettings": {
+    "en": "VAT Display Settings",
+    "is": ""
+  },
+  "adminSettings.vatEnabled": {
+    "en": "VAT Enabled",
+    "is": ""
+  },
+  "adminSettings.vatInformation": {
+    "en": "VAT Information",
+    "is": ""
+  },
+  "adminSettings.vatInformationDescription": {
+    "en": "Manage value added tax settings",
+    "is": ""
+  },
+  "adminSettings.vatProfiles": {
+    "en": "VAT Profiles & Categories",
+    "is": ""
+  },
+  "adminSettings.vatRate": {
+    "en": "VAT Rate",
+    "is": ""
+  },
+  "adminSettings.vatRateLabel": {
+    "en": "VAT Rate:",
+    "is": ""
+  },
+  "adminSettings.vatRatePercent": {
+    "en": "VAT Rate (%)",
+    "is": ""
+  },
+  "adminSettings.vatSettings": {
+    "en": "VAT Settings",
+    "is": ""
+  },
+  "adminSettings.webhookSecret": {
+    "en": "Webhook Secret",
+    "is": ""
+  },
+  "adminSettings.website": {
+    "en": "Website",
+    "is": ""
+  },
+  "adminSettings.wednesday": {
+    "en": "Wednesday",
+    "is": ""
+  },
+  "adminSettings.weeklySummary": {
+    "en": "Weekly Summary",
+    "is": ""
+  },
+  "adminSettings.yahoo": {
+    "en": "Yahoo",
+    "is": ""
+  },
+  "adminSettings.years": {
+    "en": "years",
+    "is": ""
+  },
+  "adminSidebar.adminEmail": {
+    "en": "Admin Email",
+    "is": ""
+  },
+  "adminSidebar.analytics": {
+    "en": "Analytics",
+    "is": ""
+  },
+  "adminSidebar.analyticsReports": {
+    "en": "Greining og skýrslur",
+    "is": ""
+  },
+  "adminSidebar.catalog": {
+    "en": "Catalog",
+    "is": ""
+  },
+  "adminSidebar.categories": {
+    "en": "Flokkar",
+    "is": ""
+  },
+  "adminSidebar.chat": {
+    "en": "Spjall",
+    "is": ""
+  },
+  "adminSidebar.communication": {
+    "en": "Samskipti",
+    "is": ""
+  },
+  "adminSidebar.comprehensiveInsights": {
+    "en": "Comprehensive Insights",
+    "is": ""
+  },
+  "adminSidebar.content": {
+    "en": "Content",
+    "is": ""
+  },
+  "adminSidebar.customers": {
+    "en": "Viðskiptavinir",
+    "is": ""
+  },
+  "adminSidebar.customersAndCommunication": {
+    "en": "Customers & Communication",
+    "is": ""
+  },
+  "adminSidebar.dashboard": {
+    "en": "Mælaborð",
+    "is": ""
+  },
+  "adminSidebar.orderManagement": {
+    "en": "Pöntunarstjórnun",
+    "is": ""
+  },
+  "adminSidebar.orders": {
+    "en": "Pantanir",
+    "is": ""
+  },
+  "adminSidebar.overview": {
+    "en": "Mælaborð",
+    "is": ""
+  },
+  "adminSidebar.productManagement": {
+    "en": "Vörustjórnun",
+    "is": ""
+  },
+  "adminSidebar.products": {
+    "en": "Vörur",
+    "is": ""
+  },
+  "adminSidebar.reports": {
+    "en": "Skýrslur",
+    "is": ""
+  },
+  "adminSidebar.reportsAnalytics": {
+    "en": "Reports & Analytics",
+    "is": ""
+  },
+  "adminSidebar.sales": {
+    "en": "Sales",
+    "is": ""
+  },
+  "adminSidebar.settings": {
+    "en": "Settings",
+    "is": ""
+  },
+  "adminSidebar.system": {
+    "en": "Kerfi",
+    "is": ""
+  },
+  "admin.statistics": {
+    "en": "Statistics",
+    "is": ""
+  },
+  "admin.system": {
+    "en": "System",
+    "is": ""
+  },
+  "adminTranslations.actions": {
+    "en": "Aðgerðir",
+    "is": ""
+  },
+  "adminTranslations.addTranslation": {
+    "en": "Bæta við þýðingu",
+    "is": ""
+  },
+  "adminTranslations.allLanguages": {
+    "en": "Öll tungumál",
+    "is": ""
+  },
+  "adminTranslations.allSections": {
+    "en": "Allir hlutar",
+    "is": ""
+  },
+  "adminTranslations.allStatus": {
+    "en": "Öll staða",
+    "is": ""
+  },
+  "adminTranslations.bulkDelete": {
+    "en": "AdminTranslations BulkDelete",
+    "is": ""
+  },
+  "adminTranslations.bulkDeleteSuccess": {
+    "en": "AdminTranslations BulkDeleteSuccess",
+    "is": ""
+  },
+  "adminTranslations.cancel": {
+    "en": "AdminTranslations Cancel",
+    "is": ""
+  },
+  "adminTranslations.complete": {
+    "en": "complete",
+    "is": ""
+  },
+  "adminTranslations.confirmBulkDelete": {
+    "en": "AdminTranslations ConfirmBulkDelete",
+    "is": ""
+  },
+  "adminTranslations.confirmDelete": {
+    "en": "AdminTranslations ConfirmDelete",
+    "is": ""
+  },
+  "adminTranslations.coverage": {
+    "en": "Umfjöllun",
+    "is": ""
+  },
+  "adminTranslations.description": {
+    "en": "AdminTranslations Description",
+    "is": ""
+  },
+  "adminTranslations.editTranslation": {
+    "en": "AdminTranslations EditTranslation",
+    "is": ""
+  },
+  "adminTranslations.english": {
+    "en": "Enska",
+    "is": ""
+  },
+  "adminTranslations.englishKeys": {
+    "en": "Enskir lyklar",
+    "is": ""
+  },
+  "adminTranslations.error": {
+    "en": "AdminTranslations Error",
+    "is": ""
+  },
+  "adminTranslations.errorDeleting": {
+    "en": "Error deleting translation",
+    "is": ""
+  },
+  "adminTranslations.errorFetching": {
+    "en": "Error fetching translations",
+    "is": ""
+  },
+  "adminTranslations.errorSaving": {
+    "en": "Error saving translation",
+    "is": ""
+  },
+  "adminTranslations.exportAll": {
+    "en": "Flytja út allt",
+    "is": ""
+  },
+  "adminTranslations.exportCSV": {
+    "en": "Export CSV",
+    "is": ""
+  },
+  "adminTranslations.exportError": {
+    "en": "Export error",
+    "is": ""
+  },
+  "adminTranslations.exportJSON": {
+    "en": "Export JSON",
+    "is": ""
+  },
+  "adminTranslations.exportSuccess": {
+    "en": "AdminTranslations ExportSuccess",
+    "is": ""
+  },
+  "adminTranslations.hideStats": {
+    "en": "Hide Stats",
+    "is": ""
+  },
+  "adminTranslations.icelandic": {
+    "en": "Íslenska",
+    "is": ""
+  },
+  "adminTranslations.icelandicKeys": {
+    "en": "Íslenskir lyklar",
+    "is": ""
+  },
+  "adminTranslations.import": {
+    "en": "Import",
+    "is": ""
+  },
+  "adminTranslations.importError": {
+    "en": "Import error",
+    "is": ""
+  },
+  "adminTranslations.importSuccess": {
+    "en": "AdminTranslations ImportSuccess",
+    "is": ""
+  },
+  "adminTranslations.importTranslations": {
+    "en": "Flytja inn þýðingar",
+    "is": ""
+  },
+  "adminTranslations.key": {
+    "en": "Lykill",
+    "is": ""
+  },
+  "adminTranslations.loading": {
+    "en": "AdminTranslations Loading",
+    "is": ""
+  },
+  "adminTranslations.missing": {
+    "en": "missing",
+    "is": ""
+  },
+  "adminTranslations.missingInEnglish": {
+    "en": "Missing in English",
+    "is": ""
+  },
+  "adminTranslations.missingInIcelandic": {
+    "en": "Missing in Icelandic",
+    "is": ""
+  },
+  "adminTranslations.missingTranslations": {
+    "en": "{count} þýðingarlyklar vantar í annað hvort eða bæði tungumálin.",
+    "is": ""
+  },
+  "adminTranslations.moreSections": {
+    "en": "Og {count} fleiri hlutar...",
+    "is": ""
+  },
+  "adminTranslations.next": {
+    "en": "Næsta",
+    "is": ""
+  },
+  "adminTranslations.noTranslationsFound": {
+    "en": "No translations found",
+    "is": ""
+  },
+  "adminTranslations.pageOf": {
+    "en": "Síða {current} af {total}",
+    "is": ""
+  },
+  "adminTranslations.previous": {
+    "en": "Fyrri",
+    "is": ""
+  },
+  "adminTranslations.recentChanges": {
+    "en": "AdminTranslations RecentChanges",
+    "is": ""
+  },
+  "adminTranslations.refresh": {
+    "en": "Endurnýja",
+    "is": ""
+  },
+  "adminTranslations.retry": {
+    "en": "AdminTranslations Retry",
+    "is": ""
+  },
+  "adminTranslations.save": {
+    "en": "AdminTranslations Save",
+    "is": ""
+  },
+  "adminTranslations.searchPlaceholder": {
+    "en": "Leita...",
+    "is": ""
+  },
+  "adminTranslations.section": {
+    "en": "Hluti",
+    "is": ""
+  },
+  "adminTranslations.sectionsOverview": {
+    "en": "Yfirlit yfir hluta",
+    "is": ""
+  },
+  "adminTranslations.seedFromFiles": {
+    "en": "Sá frá skrám",
+    "is": ""
+  },
+  "adminTranslations.selectAll": {
+    "en": "Velja allt",
+    "is": ""
+  },
+  "adminTranslations.showingResults": {
+    "en": "Sýni {start} til {end} af {total} niðurstöðum",
+    "is": ""
+  },
+  "adminTranslations.showStats": {
+    "en": "Show Stats",
+    "is": ""
+  },
+  "adminTranslations.statistics": {
+    "en": "Statistics",
+    "is": ""
+  },
+  "adminTranslations.subtitle": {
+    "en": "Stjórna þýðingum",
+    "is": ""
+  },
+  "adminTranslations.title": {
+    "en": "Þýðingar",
+    "is": ""
+  },
+  "adminTranslations.totalEntries": {
+    "en": "Total Entries",
+    "is": ""
+  },
+  "adminTranslations.totalKeys": {
+    "en": "Heildarfjöldi lykla",
+    "is": ""
+  },
+  "adminTranslations.translationAdded": {
+    "en": "AdminTranslations TranslationAdded",
+    "is": ""
+  },
+  "adminTranslations.translationDeleted": {
+    "en": "AdminTranslations TranslationDeleted",
+    "is": ""
+  },
+  "adminTranslations.translationUpdated": {
+    "en": "AdminTranslations TranslationUpdated",
+    "is": ""
+  },
+  "adminTranslations.uniqueKeys": {
+    "en": "Unique Keys",
+    "is": ""
+  },
+  "adminTranslations.validation.keyFormat": {
+    "en": "AdminTranslations Validation KeyFormat",
+    "is": ""
+  },
+  "adminTranslations.validation.keyRequired": {
+    "en": "AdminTranslations Validation KeyRequired",
+    "is": ""
+  },
+  "adminTranslations.validation.languageRequired": {
+    "en": "AdminTranslations Validation LanguageRequired",
+    "is": ""
+  },
+  "adminTranslations.validation.sectionRequired": {
+    "en": "AdminTranslations Validation SectionRequired",
+    "is": ""
+  },
+  "adminTranslations.validation.valueRequired": {
+    "en": "AdminTranslations Validation ValueRequired",
+    "is": ""
+  },
+  "adminTranslations.viewHistory": {
+    "en": "AdminTranslations ViewHistory",
+    "is": ""
+  },
+  "admin.unsavedChanges": {
+    "en": "Unsaved Changes",
+    "is": ""
+  },
+  "ageRestriction.notice": {
+    "en": "Aldurstakmarkanir tilkynning",
+    "is": ""
+  },
+  "ageVerification.title": {
+    "en": "AgeVerification Title",
+    "is": ""
+  },
+  "/analytics/revenue-trend?timeRange=${timeRange}": {
+    "en": "/Analytics/Revenue-Trend?TimeRange=${TimeRange}",
+    "is": ""
+  },
+  "/analytics?timeRange=${timeRange}": {
+    "en": "/Analytics?TimeRange=${TimeRange}",
+    "is": ""
+  },
+  "aria.addToCart": {
+    "en": "Add to cart",
+    "is": ""
+  },
+  "aria.changeLanguage": {
+    "en": "Change Language",
+    "is": ""
+  },
+  "aria.closeModal": {
+    "en": "Close modal",
+    "is": ""
+  },
+  "aria.filterBy": {
+    "en": "Filter by",
+    "is": ""
+  },
+  "aria.homepage": {
+    "en": "Homepage",
+    "is": ""
+  },
+  "aria.logo": {
+    "en": "Ölföng logo",
+    "is": ""
+  },
+  "aria.mainNavigation": {
+    "en": "Main navigation",
+    "is": ""
+  },
+  "aria.nextPage": {
+    "en": "Next page",
+    "is": ""
+  },
+  "aria.previousPage": {
+    "en": "Previous page",
+    "is": ""
+  },
+  "aria.removeFromCart": {
+    "en": "Remove from cart",
+    "is": ""
+  },
+  "aria.searchProducts": {
+    "en": "Search Products",
+    "is": ""
+  },
+  "aria.sortBy": {
+    "en": "Sort by",
+    "is": ""
+  },
+  "aria.toggleMobileMenu": {
+    "en": "Toggle mobile menu",
+    "is": ""
+  },
+  "aria.userMenu": {
+    "en": "User menu",
+    "is": ""
+  },
+  "atvrImport.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "atvrImport.clearAll": {
+    "en": "Clear All",
+    "is": ""
+  },
+  "atvrImport.country": {
+    "en": "Country",
+    "is": ""
+  },
+  "atvrImport.enterSearchTerm": {
+    "en": "Enter search term",
+    "is": ""
+  },
+  "atvrImport.failedToImport": {
+    "en": "Failed to import",
+    "is": ""
+  },
+  "atvrImport.foodPairings": {
+    "en": "Food Pairings",
+    "is": ""
+  },
+  "atvrImport.icelandicLabel": {
+    "en": "Icelandic Label",
+    "is": ""
+  },
+  "atvrImport.importProducts": {
+    "en": "Import Products",
+    "is": ""
+  },
+  "atvrImport.importProductsButton": {
+    "en": "Import Products Button",
+    "is": ""
+  },
+  "atvrImport.more": {
+    "en": "More",
+    "is": ""
+  },
+  "atvrImport.noImage": {
+    "en": "No Image",
+    "is": ""
+  },
+  "atvrImport.noProductsFound": {
+    "en": "No products found",
+    "is": ""
+  },
+  "atvrImport.pleaseSelectOne": {
+    "en": "Please select one",
+    "is": ""
+  },
+  "atvrImport.previewImport": {
+    "en": "Preview Import",
+    "is": ""
+  },
+  "atvrImport.previewImportTitle": {
+    "en": "AtvrImport PreviewImportTitle",
+    "is": ""
+  },
+  "atvrImport.producer": {
+    "en": "Producer",
+    "is": ""
+  },
+  "atvrImport.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "atvrImport.productsImported": {
+    "en": "Products imported",
+    "is": ""
+  },
+  "atvrImport.search": {
+    "en": "Search",
+    "is": ""
+  },
+  "atvrImport.searchATVRProducts": {
+    "en": "Search ATVR Products",
+    "is": ""
+  },
+  "atvrImport.searchPlaceholderIs": {
+    "en": "Search placeholder (Icelandic)",
+    "is": ""
+  },
+  "atvrImport.searchResults": {
+    "en": "Search Results",
+    "is": ""
+  },
+  "atvrImport.selected": {
+    "en": "Selected",
+    "is": ""
+  },
+  "atvrImport.subtitle": {
+    "en": "Import Subtitle",
+    "is": ""
+  },
+  "atvrImport.successfullyImported": {
+    "en": "AtvrImport SuccessfullyImported",
+    "is": ""
+  },
+  "atvrImport.title": {
+    "en": "ATVR Import",
+    "is": ""
+  },
+  "atvrImport.tryDifferentTerms": {
+    "en": "Try different terms",
+    "is": ""
+  },
+  "atvrImport.volume": {
+    "en": "Volume",
+    "is": ""
+  },
+  "auth.adminDeliveryLogin": {
+    "en": "Stjórnandi/Afhending innskráning",
+    "is": ""
+  },
+  "auth.age": {
+    "en": "Auth Age",
+    "is": ""
+  },
+  "auth.automatedTestLogin": {
+    "en": "Automated Test Login",
+    "is": ""
+  },
+  "auth.confirmPassword": {
+    "en": "Auth ConfirmPassword",
+    "is": ""
+  },
+  "auth.dummyLogin": {
+    "en": "Dummy Electronic ID (Testing)",
+    "is": ""
+  },
+  "auth.email": {
+    "en": "Email",
+    "is": ""
+  },
+  "authExtra.adminDeliveryLogin": {
+    "en": "Admin/Delivery Login",
+    "is": ""
+  },
+  "authExtra.loginWithElectronicId": {
+    "en": "Login with Electronic ID",
+    "is": ""
+  },
+  "authExtra.loginWithElectronicIdDescription": {
+    "en": "Login with electronic ID description",
+    "is": ""
+  },
+  "authExtra.or": {
+    "en": "Or",
+    "is": ""
+  },
+  "authExtra.passwordMismatch": {
+    "en": "Password mismatch",
+    "is": ""
+  },
+  "authExtra.signInToYourAccount": {
+    "en": "Sign in to your account",
+    "is": ""
+  },
+  "auth.forgotPassword": {
+    "en": "Forgot password?",
+    "is": ""
+  },
+  "auth.fullName": {
+    "en": "Auth FullName",
+    "is": ""
+  },
+  "auth.loggedIn": {
+    "en": "Skráðir inn",
+    "is": ""
+  },
+  "auth.login": {
+    "en": "Login",
+    "is": ""
+  },
+  "auth.loginRequired": {
+    "en": "Auth LoginRequired",
+    "is": ""
+  },
+  "auth.loginStaff": {
+    "en": "Innskráning Starfsfólks",
+    "is": ""
+  },
+  "auth.logout": {
+    "en": "Logout",
+    "is": ""
+  },
+  "auth.password": {
+    "en": "Password",
+    "is": ""
+  },
+  "auth.phone": {
+    "en": "Auth Phone",
+    "is": ""
+  },
+  "/auth/profile": {
+    "en": "/Auth/Profile",
+    "is": ""
+  },
+  "auth.register": {
+    "en": "Register",
+    "is": ""
+  },
+  "auth.testLogin": {
+    "en": "Test Login",
+    "is": ""
+  },
+  "auth.username": {
+    "en": "Username",
+    "is": ""
+  },
+  "/banners/${id}": {
+    "en": "/Banners/${Id}",
+    "is": ""
+  },
+  "/banners?${queryParams.toString()}": {
+    "en": "/Banners?${QueryParams ToString()}",
+    "is": ""
+  },
+  "/banners/featured": {
+    "en": "/Banners/Featured",
+    "is": ""
+  },
+  "/cart": {
+    "en": "/Cart",
+    "is": ""
+  },
+  "cart.addError": {
+    "en": "Failed to add item to cart",
+    "is": ""
+  },
+  "cart.addToCart": {
+    "en": "Add to Cart",
+    "is": ""
+  },
+  "cart.checkout": {
+    "en": "Checkout",
+    "is": ""
+  },
+  "cart.empty": {
+    "en": "Cart is empty",
+    "is": ""
+  },
+  "cart.failedToClearCart": {
+    "en": "Cart FailedToClearCart",
+    "is": ""
+  },
+  "cart.itemAdded": {
+    "en": "Item added to cart",
+    "is": ""
+  },
+  "cart.items": {
+    "en": "Items",
+    "is": ""
+  },
+  "cartPage.addItemsToStart": {
+    "en": "Add items to start shopping",
+    "is": ""
+  },
+  "cartPage.cartDescription": {
+    "en": "Review items in your cart",
+    "is": ""
+  },
+  "cartPage.cartItems": {
+    "en": "Cart Items",
+    "is": ""
+  },
+  "cartPage.clearCart": {
+    "en": "Clear Cart",
+    "is": ""
+  },
+  "cartPage.continueShopping": {
+    "en": "Continue Shopping",
+    "is": ""
+  },
+  "cartPage.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "cartPage.each": {
+    "en": "each",
+    "is": ""
+  },
+  "cartPage.emptyCart": {
+    "en": "Your cart is empty",
+    "is": ""
+  },
+  "cartPage.items": {
+    "en": "Items",
+    "is": ""
+  },
+  "cartPage.login": {
+    "en": "Login",
+    "is": ""
+  },
+  "cartPage.loginToViewCart": {
+    "en": "Login to view cart",
+    "is": ""
+  },
+  "cartPage.mustLoginToViewCart": {
+    "en": "You must login to view your cart",
+    "is": ""
+  },
+  "cartPage.noImage": {
+    "en": "No image",
+    "is": ""
+  },
+  "cartPage.orderSummary": {
+    "en": "Order Summary",
+    "is": ""
+  },
+  "cartPage.proceedToCheckout": {
+    "en": "Proceed to Checkout",
+    "is": ""
+  },
+  "cart.quantity": {
+    "en": "Quantity",
+    "is": ""
+  },
+  "cart.removeItem": {
+    "en": "Remove",
+    "is": ""
+  },
+  "cart.title": {
+    "en": "Shopping Cart",
+    "is": ""
+  },
+  "cart.total": {
+    "en": "Total",
+    "is": ""
+  },
+  "/categories": {
+    "en": "/Categories",
+    "is": ""
+  },
+  "/categories/${id}": {
+    "en": "/Categories/${Id}",
+    "is": ""
+  },
+  "/categories?${queryParams.toString()}": {
+    "en": "/Categories?${QueryParams ToString()}",
+    "is": ""
+  },
+  "categories.BEER": {
+    "en": "Beer",
+    "is": ""
+  },
+  "categories.BEERS": {
+    "en": "Beers",
+    "is": ""
+  },
+  "categories.CIDER_RTD": {
+    "en": "Cider & RTD",
+    "is": ""
+  },
+  "categories.NICOTINE": {
+    "en": "Nicotine",
+    "is": ""
+  },
+  "categories.NON_ALCOHOLIC": {
+    "en": "Non-alcoholic",
+    "is": ""
+  },
+  "categories.OFFERS": {
+    "en": "Offers",
+    "is": ""
+  },
+  "categories.SPIRITS": {
+    "en": "Spirits",
+    "is": ""
+  },
+  "categories.WINE": {
+    "en": "Wine",
+    "is": ""
+  },
+  "category.empty": {
+    "en": "No categories found",
+    "is": ""
+  },
+  "category.fallbackDescription": {
+    "en": "Browse our selection",
+    "is": ""
+  },
+  "category.viewAll": {
+    "en": "View all",
+    "is": ""
+  },
+  "chat.attachFile": {
+    "en": "Attach File",
+    "is": ""
+  },
+  "chat.close": {
+    "en": "Close",
+    "is": ""
+  },
+  "/chat/conversations": {
+    "en": "/Chat/Conversations",
+    "is": ""
+  },
+  "/chat/conversations/${conversationId}/join": {
+    "en": "/Chat/Conversations/${ConversationId}/Join",
+    "is": ""
+  },
+  "/chat/conversations/${conversationId}/messages": {
+    "en": "/Chat/Conversations/${ConversationId}/Messages",
+    "is": ""
+  },
+  "/chat/conversations/${conversationId}/messages/read": {
+    "en": "/Chat/Conversations/${ConversationId}/Messages/Read",
+    "is": ""
+  },
+  "chat.createConversationError": {
+    "en": "Create conversation error",
+    "is": ""
+  },
+  "chat.customTopic": {
+    "en": "Chat CustomTopic",
+    "is": ""
+  },
+  "chat.customTopicPlaceholder": {
+    "en": "Chat CustomTopicPlaceholder",
+    "is": ""
+  },
+  "chat.emoji": {
+    "en": "Emoji",
+    "is": ""
+  },
+  "chat.initializationError": {
+    "en": "Initialization error",
+    "is": ""
+  },
+  "chat.initializing": {
+    "en": "Initializing",
+    "is": ""
+  },
+  "chat.loading": {
+    "en": "Loading",
+    "is": ""
+  },
+  "chat.loadMessagesError": {
+    "en": "Load messages error",
+    "is": ""
+  },
+  "chat.minimize": {
+    "en": "Minimize",
+    "is": ""
+  },
+  "chat.newMessage": {
+    "en": "New message",
+    "is": ""
+  },
+  "chat.noOrders": {
+    "en": "Chat NoOrders",
+    "is": ""
+  },
+  "chat.offline": {
+    "en": "Offline",
+    "is": ""
+  },
+  "chat.online": {
+    "en": "Online",
+    "is": ""
+  },
+  "chat.openChat": {
+    "en": "Open Chat",
+    "is": ""
+  },
+  "chat.selectOrder": {
+    "en": "Chat SelectOrder",
+    "is": ""
+  },
+  "chat.selectTopic": {
+    "en": "Chat SelectTopic",
+    "is": ""
+  },
+  "chat.selectTopicDesc": {
+    "en": "Chat SelectTopicDesc",
+    "is": ""
+  },
+  "chat.send": {
+    "en": "Send",
+    "is": ""
+  },
+  "chat.sendMessageError": {
+    "en": "Send message error",
+    "is": ""
+  },
+  "chat.startChat": {
+    "en": "Chat StartChat",
+    "is": ""
+  },
+  "chat.startConversation": {
+    "en": "Start conversation",
+    "is": ""
+  },
+  "chat.support": {
+    "en": "Support",
+    "is": ""
+  },
+  "chat.supportChat": {
+    "en": "Support Chat",
+    "is": ""
+  },
+  "chat.title": {
+    "en": "Chat",
+    "is": ""
+  },
+  "chat.today": {
+    "en": "Today",
+    "is": ""
+  },
+  "chat.topics.delivery": {
+    "en": "Chat Topics Delivery",
+    "is": ""
+  },
+  "chat.topics.deliveryDesc": {
+    "en": "Chat Topics DeliveryDesc",
+    "is": ""
+  },
+  "chat.topics.feedback": {
+    "en": "Chat Topics Feedback",
+    "is": ""
+  },
+  "chat.topics.feedbackDesc": {
+    "en": "Chat Topics FeedbackDesc",
+    "is": ""
+  },
+  "chat.topics.general": {
+    "en": "Chat Topics General",
+    "is": ""
+  },
+  "chat.topics.generalDesc": {
+    "en": "Chat Topics GeneralDesc",
+    "is": ""
+  },
+  "chat.topics.order": {
+    "en": "Chat Topics Order",
+    "is": ""
+  },
+  "chat.topics.orderDesc": {
+    "en": "Chat Topics OrderDesc",
+    "is": ""
+  },
+  "chat.topics.payment": {
+    "en": "Chat Topics Payment",
+    "is": ""
+  },
+  "chat.topics.paymentDesc": {
+    "en": "Chat Topics PaymentDesc",
+    "is": ""
+  },
+  "chat.topics.product": {
+    "en": "Chat Topics Product",
+    "is": ""
+  },
+  "chat.topics.productDesc": {
+    "en": "Chat Topics ProductDesc",
+    "is": ""
+  },
+  "chat.topics.topic": {
+    "en": "Chat Topics Topic",
+    "is": ""
+  },
+  "chat.typeMessage": {
+    "en": "Type a message...",
+    "is": ""
+  },
+  "chat.typing": {
+    "en": "Typing",
+    "is": ""
+  },
+  "/chat/unread-count": {
+    "en": "/Chat/Unread-Count",
+    "is": ""
+  },
+  "chat.yesterday": {
+    "en": "Yesterday",
+    "is": ""
+  },
+  "checkoutPage.cashOnDelivery": {
+    "en": "Cash on Delivery",
+    "is": ""
+  },
+  "checkoutPage.cashOnDeliveryDesc": {
+    "en": "Cash on delivery description",
+    "is": ""
+  },
+  "checkoutPage.checkout": {
+    "en": "Checkout",
+    "is": ""
+  },
+  "checkoutPage.contactAdmin": {
+    "en": "Contact Admin",
+    "is": ""
+  },
+  "checkoutPage.creatingOrder": {
+    "en": "Creating order...",
+    "is": ""
+  },
+  "checkoutPage.days": {
+    "en": "days",
+    "is": ""
+  },
+  "checkoutPage.deliveryAddress": {
+    "en": "Delivery Address",
+    "is": ""
+  },
+  "checkoutPage.deliveryOption": {
+    "en": "Delivery Option",
+    "is": ""
+  },
+  "checkoutPage.deliveryToAddress": {
+    "en": "Delivery to Address",
+    "is": ""
+  },
+  "checkoutPage.estimatedDelivery": {
+    "en": "Estimated delivery",
+    "is": ""
+  },
+  "checkoutPage.homeDelivery": {
+    "en": "Home Delivery",
+    "is": ""
+  },
+  "checkoutPage.items": {
+    "en": "Items",
+    "is": ""
+  },
+  "checkoutPage.newAddress": {
+    "en": "New Address",
+    "is": ""
+  },
+  "checkoutPage.noPaymentMethodsAvailable": {
+    "en": "No payment methods available",
+    "is": ""
+  },
+  "checkoutPage.noPickupTimes": {
+    "en": "No pickup times",
+    "is": ""
+  },
+  "checkoutPage.noShippingOptions": {
+    "en": "No shipping options available",
+    "is": ""
+  },
+  "checkoutPage.orderNotes": {
+    "en": "Order Notes",
+    "is": ""
+  },
+  "checkoutPage.orderSummary": {
+    "en": "Order Summary",
+    "is": ""
+  },
+  "checkoutPage.paymentMethod": {
+    "en": "Payment Method",
+    "is": ""
+  },
+  "checkoutPage.payOnPickup": {
+    "en": "Pay on Pickup",
+    "is": ""
+  },
+  "checkoutPage.payOnPickupDesc": {
+    "en": "Pay on pickup description",
+    "is": ""
+  },
+  "checkoutPage.pickupAtStore": {
+    "en": "Pickup at Store",
+    "is": ""
+  },
+  "checkoutPage.pickupTime": {
+    "en": "Pickup Time",
+    "is": ""
+  },
+  "checkoutPage.placeOrder": {
+    "en": "Place Order",
+    "is": ""
+  },
+  "checkoutPage.saveAddress": {
+    "en": "Save Address",
+    "is": ""
+  },
+  "checkoutPage.selectDeliveryAddress": {
+    "en": "Select delivery address",
+    "is": ""
+  },
+  "checkoutPage.selectPickupTime": {
+    "en": "Select Pickup Time",
+    "is": ""
+  },
+  "checkoutPage.selectPickupTimeHelp": {
+    "en": "Select pickup time help",
+    "is": ""
+  },
+  "checkoutPage.selectShippingOption": {
+    "en": "Please select a shipping option",
+    "is": ""
+  },
+  "checkoutPage.shipping": {
+    "en": "Shipping",
+    "is": ""
+  },
+  "checkoutPage.shippingOptions": {
+    "en": "Shipping Options",
+    "is": ""
+  },
+  "checkoutPage.storeLocation": {
+    "en": "Store Location",
+    "is": ""
+  },
+  "checkoutPage.storeLocationValue": {
+    "en": "Store location value",
+    "is": ""
+  },
+  "checkoutPage.storePickup": {
+    "en": "Store Pickup",
+    "is": ""
+  },
+  "checkoutPage.subtotal": {
+    "en": "Subtotal",
+    "is": ""
+  },
+  "checkoutPage.test1": {
+    "en": "Test 1",
+    "is": ""
+  },
+  "checkoutPage.test2": {
+    "en": "Test 2",
+    "is": ""
+  },
+  "checkoutPage.valitorDesc": {
+    "en": "Valitor description",
+    "is": ""
+  },
+  "checkoutPage.valitorPayment": {
+    "en": "Valitor Payment",
+    "is": ""
+  },
+  "checkout.shipping": {
+    "en": "Shipping",
+    "is": ""
+  },
+  "checkout.subtotal": {
+    "en": "Subtotal",
+    "is": ""
+  },
+  "checkout.total": {
+    "en": "Total",
+    "is": ""
+  },
+  "checkout.totalWithVat": {
+    "en": "Total (including VAT)",
+    "is": ""
+  },
+  "checkout.vat": {
+    "en": "VAT",
+    "is": ""
+  },
+  "common.active": {
+    "en": "Common Active",
+    "is": ""
+  },
+  "common.add": {
+    "en": "Add",
+    "is": ""
+  },
+  "common.all": {
+    "en": "All",
+    "is": ""
+  },
+  "common.and": {
+    "en": "and",
+    "is": ""
+  },
+  "common.at": {
+    "en": "at",
+    "is": ""
+  },
+  "common.back": {
+    "en": "Back",
+    "is": ""
+  },
+  "common.by": {
+    "en": "by",
+    "is": ""
+  },
+  "common.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "common.clearSearch": {
+    "en": "Clear Search",
+    "is": ""
+  },
+  "common.close": {
+    "en": "Close",
+    "is": ""
+  },
+  "common.confirm": {
+    "en": "Confirm",
+    "is": ""
+  },
+  "common.create": {
+    "en": "Create",
+    "is": ""
+  },
+  "common.currency": {
+    "en": "ISK",
+    "is": ""
+  },
+  "common.delete": {
+    "en": "Delete",
+    "is": ""
+  },
+  "common.download": {
+    "en": "Download",
+    "is": ""
+  },
+  "common.edit": {
+    "en": "Edit",
+    "is": ""
+  },
+  "common.email": {
+    "en": "Email",
+    "is": ""
+  },
+  "common.error": {
+    "en": "Error",
+    "is": ""
+  },
+  "common.filter": {
+    "en": "Filter",
+    "is": ""
+  },
+  "common.for": {
+    "en": "for",
+    "is": ""
+  },
+  "common.free": {
+    "en": "Free",
+    "is": ""
+  },
+  "common.from": {
+    "en": "from",
+    "is": ""
+  },
+  "common.goToSlide": {
+    "en": "Go to Slide",
+    "is": ""
+  },
+  "common.in": {
+    "en": "in",
+    "is": ""
+  },
+  "common.inactive": {
+    "en": "Inactive",
+    "is": ""
+  },
+  "common.info": {
+    "en": "Information",
+    "is": ""
+  },
+  "common.item": {
+    "en": "item",
+    "is": ""
+  },
+  "common.itemsLabel": {
+    "en": "items",
+    "is": ""
+  },
+  "common.language": {
+    "en": "Common Language",
+    "is": ""
+  },
+  "common.loading": {
+    "en": "Loading...",
+    "is": ""
+  },
+  "common.loginRequired": {
+    "en": "Common LoginRequired",
+    "is": ""
+  },
+  "common.next": {
+    "en": "Next",
+    "is": ""
+  },
+  "common.no": {
+    "en": "No",
+    "is": ""
+  },
+  "common.none": {
+    "en": "None",
+    "is": ""
+  },
+  "common.of": {
+    "en": "of",
+    "is": ""
+  },
+  "common.on": {
+    "en": "on",
+    "is": ""
+  },
+  "common.or": {
+    "en": "or",
+    "is": ""
+  },
+  "common.password": {
+    "en": "Password",
+    "is": ""
+  },
+  "common.phone": {
+    "en": "Phone number",
+    "is": ""
+  },
+  "common.previous": {
+    "en": "Previous",
+    "is": ""
+  },
+  "common.price": {
+    "en": "Common Price",
+    "is": ""
+  },
+  "common.proceed": {
+    "en": "Proceed",
+    "is": ""
+  },
+  "common.remove": {
+    "en": "Remove",
+    "is": ""
+  },
+  "common.results": {
+    "en": "results",
+    "is": ""
+  },
+  "common.retry": {
+    "en": "Retry",
+    "is": ""
+  },
+  "common.save": {
+    "en": "Save",
+    "is": ""
+  },
+  "common.search": {
+    "en": "Search",
+    "is": ""
+  },
+  "common.select": {
+    "en": "Select",
+    "is": ""
+  },
+  "common.sending": {
+    "en": "Common Sending",
+    "is": ""
+  },
+  "common.shop": {
+    "en": "Verslun",
+    "is": ""
+  },
+  "common.showing": {
+    "en": "Showing",
+    "is": ""
+  },
+  "common.sort": {
+    "en": "Sort",
+    "is": ""
+  },
+  "common.submit": {
+    "en": "Submit",
+    "is": ""
+  },
+  "common.success": {
+    "en": "Success",
+    "is": ""
+  },
+  "common.to": {
+    "en": "to",
+    "is": ""
+  },
+  "common.total": {
+    "en": "Total",
+    "is": ""
+  },
+  "common.unknown": {
+    "en": "Unknown",
+    "is": ""
+  },
+  "common.update": {
+    "en": "Update",
+    "is": ""
+  },
+  "common.upload": {
+    "en": "Upload",
+    "is": ""
+  },
+  "common.username": {
+    "en": "Username",
+    "is": ""
+  },
+  "common.view": {
+    "en": "View",
+    "is": ""
+  },
+  "common.viewAll": {
+    "en": "View All",
+    "is": ""
+  },
+  "common.warning": {
+    "en": "Warning",
+    "is": ""
+  },
+  "common.with": {
+    "en": "with",
+    "is": ""
+  },
+  "common.yes": {
+    "en": "Yes",
+    "is": ""
+  },
+  "csv": {
+    "en": "CSV",
+    "is": ""
+  },
+  "/customers?${params.toString()}": {
+    "en": "/Customers?${Params ToString()}",
+    "is": ""
+  },
+  "/customers?search=${query}&limit=10": {
+    "en": "/Customers?Search=${Query}&Limit=10",
+    "is": ""
+  },
+  "/dashboard/stats": {
+    "en": "/Dashboard/Stats",
+    "is": ""
+  },
+  "[data-shop-menu-trigger]": {
+    "en": "[Data-Shop-Menu-Trigger]",
+    "is": ""
+  },
+  "delivery.deliveryPerson": {
+    "en": "Delivery Person",
+    "is": ""
+  },
+  "delivery.title": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "demoData.${item.type}": {
+    "en": "DemoData ${Item Type}",
+    "is": ""
+  },
+  "demoData.actions": {
+    "en": "DemoData Actions",
+    "is": ""
+  },
+  "demoData.addressesDescription": {
+    "en": "DemoData AddressesDescription",
+    "is": ""
+  },
+  "demoData.customersDescription": {
+    "en": "DemoData CustomersDescription",
+    "is": ""
+  },
+  "demoData.description": {
+    "en": "DemoData Description",
+    "is": ""
+  },
+  "demoData.insertButton": {
+    "en": "DemoData InsertButton",
+    "is": ""
+  },
+  "demoData.insertError": {
+    "en": "DemoData InsertError",
+    "is": ""
+  },
+  "demoData.insertNote": {
+    "en": "DemoData InsertNote",
+    "is": ""
+  },
+  "demoData.insertSuccess": {
+    "en": "DemoData InsertSuccess",
+    "is": ""
+  },
+  "demoData.orderItemsDescription": {
+    "en": "DemoData OrderItemsDescription",
+    "is": ""
+  },
+  "demoData.ordersDescription": {
+    "en": "DemoData OrdersDescription",
+    "is": ""
+  },
+  "demoData.overview": {
+    "en": "DemoData Overview",
+    "is": ""
+  },
+  "demoData.removeButton": {
+    "en": "DemoData RemoveButton",
+    "is": ""
+  },
+  "demoData.removeError": {
+    "en": "DemoData RemoveError",
+    "is": ""
+  },
+  "demoData.removeNote": {
+    "en": "DemoData RemoveNote",
+    "is": ""
+  },
+  "demoData.removeSuccess": {
+    "en": "DemoData RemoveSuccess",
+    "is": ""
+  },
+  "demoData.title": {
+    "en": "DemoData Title",
+    "is": ""
+  },
+  "demoData.warningMessage": {
+    "en": "DemoData WarningMessage",
+    "is": ""
+  },
+  "demoData.warningTitle": {
+    "en": "DemoData WarningTitle",
+    "is": ""
+  },
+  "demo.name1": {
+    "en": "Jón Jónsson",
+    "is": ""
+  },
+  "demo.name2": {
+    "en": "Anna Sigurðardóttir",
+    "is": ""
+  },
+  "demo.name3": {
+    "en": "Magnús Magnússon",
+    "is": ""
+  },
+  "discounts.actions.bulkExtend7": {
+    "en": "Extend All +7 Days",
+    "is": ""
+  },
+  "discounts.actions.bulkRemoveAll": {
+    "en": "Remove All Selected",
+    "is": ""
+  },
+  "discounts.actions.clearSelection": {
+    "en": "Clear Selection",
+    "is": ""
+  },
+  "discounts.actions.editDetails": {
+    "en": "Edit Details",
+    "is": ""
+  },
+  "discounts.actions.extend": {
+    "en": "Extend",
+    "is": ""
+  },
+  "discounts.actions.extend14": {
+    "en": "+ 14 Days",
+    "is": ""
+  },
+  "discounts.actions.extend30": {
+    "en": "+ 30 Days",
+    "is": ""
+  },
+  "discounts.actions.extend7": {
+    "en": "+ 7 Days",
+    "is": ""
+  },
+  "discounts.actions.extendAll": {
+    "en": "Extend All",
+    "is": ""
+  },
+  "discounts.actions.remove": {
+    "en": "Remove",
+    "is": ""
+  },
+  "discounts.actions.removeAll": {
+    "en": "Remove All",
+    "is": ""
+  },
+  "discounts.actions.viewProduct": {
+    "en": "View Product",
+    "is": ""
+  },
+  "discounts.alerts.expiredDiscounts": {
+    "en": "You have {{count}} expired discounts. [Clean Up Expired]",
+    "is": ""
+  },
+  "discounts.alerts.expiringDiscounts": {
+    "en": "{{count}} discounts expiring in the next 7 days. [Extend All]",
+    "is": ""
+  },
+  "discounts.allCategories": {
+    "en": "All Categories",
+    "is": ""
+  },
+  "discounts.allStatuses": {
+    "en": "All Statuses",
+    "is": ""
+  },
+  "discounts.badges.active": {
+    "en": "Active",
+    "is": ""
+  },
+  "discounts.badges.expired": {
+    "en": "Expired",
+    "is": ""
+  },
+  "discounts.badges.expiring": {
+    "en": "Expiring",
+    "is": ""
+  },
+  "discounts.badges.scheduled": {
+    "en": "Scheduled",
+    "is": ""
+  },
+  "discounts.confirm.removeBulk": {
+    "en": "Are you sure you want to remove discounts from {{count}} products?",
+    "is": ""
+  },
+  "discounts.confirm.removeDiscount": {
+    "en": "Are you sure you want to remove this discount? This cannot be undone.",
+    "is": ""
+  },
+  "discounts.createDiscount": {
+    "en": "Create Discount",
+    "is": ""
+  },
+  "discounts.description": {
+    "en": "Manage product discounts and special offers",
+    "is": ""
+  },
+  "discounts.export": {
+    "en": "Export CSV",
+    "is": ""
+  },
+  "discounts.filterByCategory": {
+    "en": "Filter by Category",
+    "is": ""
+  },
+  "discounts.filterByStatus": {
+    "en": "Filter by Status",
+    "is": ""
+  },
+  "discounts.import": {
+    "en": "Import CSV",
+    "is": ""
+  },
+  "discounts.importError": {
+    "en": "Failed to import discounts: {{error}}",
+    "is": ""
+  },
+  "discounts.importSuccess": {
+    "en": "Successfully imported {{count}} discounts",
+    "is": ""
+  },
+  "discounts.messages.extendedSuccessfully": {
+    "en": "Discount extended successfully",
+    "is": ""
+  },
+  "discounts.messages.invalidDiscount": {
+    "en": "Discount must be between 0-100%",
+    "is": ""
+  },
+  "discounts.messages.noDiscounts": {
+    "en": "No discounts yet",
+    "is": ""
+  },
+  "discounts.messages.noDiscountsDescription": {
+    "en": "Create your first discount to offer special prices to customers",
+    "is": ""
+  },
+  "discounts.messages.selectProduct": {
+    "en": "Please select a product",
+    "is": ""
+  },
+  "discounts.messages.startAfterEnd": {
+    "en": "Start date cannot be after end date",
+    "is": ""
+  },
+  "discounts.modal.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "discounts.modal.createTitle": {
+    "en": "Create Discount",
+    "is": ""
+  },
+  "discounts.modal.discountEndDate": {
+    "en": "End Date (Optional)",
+    "is": ""
+  },
+  "discounts.modal.discountPercent": {
+    "en": "Discount %",
+    "is": ""
+  },
+  "discounts.modal.discountPercentage": {
+    "en": "Discount Percentage",
+    "is": ""
+  },
+  "discounts.modal.discountReason": {
+    "en": "Reason - English (Optional)",
+    "is": ""
+  },
+  "discounts.modal.discountReasonIs": {
+    "en": "Reason - Icelandic (Optional)",
+    "is": ""
+  },
+  "discounts.modal.discountStartDate": {
+    "en": "Start Date (Optional)",
+    "is": ""
+  },
+  "discounts.modal.editTitle": {
+    "en": "Edit Discount",
+    "is": ""
+  },
+  "discounts.modal.loading": {
+    "en": "Saving...",
+    "is": ""
+  },
+  "discounts.modal.optional": {
+    "en": "Optional",
+    "is": ""
+  },
+  "discounts.modal.originalPrice": {
+    "en": "Original Price",
+    "is": ""
+  },
+  "discounts.modal.preview": {
+    "en": "Price Preview",
+    "is": ""
+  },
+  "discounts.modal.previewDiscount": {
+    "en": "Discount",
+    "is": ""
+  },
+  "discounts.modal.previewFinal": {
+    "en": "Final Price",
+    "is": ""
+  },
+  "discounts.modal.previewOriginal": {
+    "en": "Original Price",
+    "is": ""
+  },
+  "discounts.modal.reasonCustom": {
+    "en": "Custom...",
+    "is": ""
+  },
+  "discounts.modal.required": {
+    "en": "Required",
+    "is": ""
+  },
+  "discounts.modal.selectProduct": {
+    "en": "Select Product",
+    "is": ""
+  },
+  "discounts.modal.selectProductPlaceholder": {
+    "en": "Choose a product...",
+    "is": ""
+  },
+  "discounts.modal.selectReason": {
+    "en": "Select a reason...",
+    "is": ""
+  },
+  "discounts.modal.submit": {
+    "en": "Create Discount",
+    "is": ""
+  },
+  "discounts.modal.submitEdit": {
+    "en": "Update Discount",
+    "is": ""
+  },
+  "discounts.newDiscount": {
+    "en": "+ New Discount",
+    "is": ""
+  },
+  "discounts.reasons.bundleDeal": {
+    "en": "Bundle Deal",
+    "is": ""
+  },
+  "discounts.reasons.clearance": {
+    "en": "Clearance",
+    "is": ""
+  },
+  "discounts.reasons.customerLoyalty": {
+    "en": "Customer Loyalty",
+    "is": ""
+  },
+  "discounts.reasons.newItemLaunch": {
+    "en": "New Item Launch",
+    "is": ""
+  },
+  "discounts.reasons.seasonalSale": {
+    "en": "Seasonal Sale",
+    "is": ""
+  },
+  "discounts.reasons.stockReduction": {
+    "en": "Stock Reduction",
+    "is": ""
+  },
+  "discounts.results": {
+    "en": "{{count}} results",
+    "is": ""
+  },
+  "discounts.search": {
+    "en": "Search products...",
+    "is": ""
+  },
+  "discounts.statusActive": {
+    "en": "Active Now",
+    "is": ""
+  },
+  "discounts.statusExpired": {
+    "en": "Expired",
+    "is": ""
+  },
+  "discounts.statusExpiringsoon": {
+    "en": "Expiring Soon",
+    "is": ""
+  },
+  "discounts.statusScheduled": {
+    "en": "Scheduled",
+    "is": ""
+  },
+  "discounts.summary.averageDiscount": {
+    "en": "Average Discount",
+    "is": ""
+  },
+  "discounts.summary.expiringCount": {
+    "en": "Discounts Expiring Soon",
+    "is": ""
+  },
+  "discounts.summary.productsOnDiscount": {
+    "en": "Products on Discount",
+    "is": ""
+  },
+  "discounts.summary.totalSaved": {
+    "en": "Total Saved",
+    "is": ""
+  },
+  "discounts.table.actions": {
+    "en": "Actions",
+    "is": ""
+  },
+  "discounts.table.amountSaved": {
+    "en": "Amount Saved",
+    "is": ""
+  },
+  "discounts.table.category": {
+    "en": "Category",
+    "is": ""
+  },
+  "discounts.table.currentPrice": {
+    "en": "Current Price",
+    "is": ""
+  },
+  "discounts.table.daysRemaining": {
+    "en": "Days Remaining",
+    "is": ""
+  },
+  "discounts.table.discountPercent": {
+    "en": "Discount %",
+    "is": ""
+  },
+  "discounts.table.originalPrice": {
+    "en": "Original Price",
+    "is": ""
+  },
+  "discounts.table.product": {
+    "en": "Product",
+    "is": ""
+  },
+  "discounts.table.status": {
+    "en": "Status",
+    "is": ""
+  },
+  "discounts.title": {
+    "en": "Discounts",
+    "is": ""
+  },
+  "Enter email address:": {
+    "en": "Enter Email Address:",
+    "is": ""
+  },
+  "error": {
+    "en": "Error",
+    "is": ""
+  },
+  "error_description": {
+    "en": "Error_description",
+    "is": ""
+  },
+  "footer.aboutUs": {
+    "en": "About us",
+    "is": ""
+  },
+  "footer.ageLimitNotice": {
+    "en": "Age Limit Notice",
+    "is": ""
+  },
+  "footer.alcoholic": {
+    "en": "Áfengi",
+    "is": ""
+  },
+  "footer.beer": {
+    "en": "Bjór",
+    "is": ""
+  },
+  "footer.blog": {
+    "en": "Blog",
+    "is": ""
+  },
+  "footer.careers": {
+    "en": "Careers",
+    "is": ""
+  },
+  "footer.company": {
+    "en": "Company",
+    "is": ""
+  },
+  "footer.contact": {
+    "en": "Contact",
+    "is": ""
+  },
+  "footer.copyright": {
+    "en": "All rights reserved",
+    "is": ""
+  },
+  "footer.customerService": {
+    "en": "Customer service",
+    "is": ""
+  },
+  "footer.description": {
+    "en": "Description",
+    "is": ""
+  },
+  "footer.email": {
+    "en": "✉️ info@olfong.is",
+    "is": ""
+  },
+  "footer.faq": {
+    "en": "FAQ",
+    "is": ""
+  },
+  "footer.followUs": {
+    "en": "Follow us",
+    "is": ""
+  },
+  "footer.help": {
+    "en": "Help",
+    "is": ""
+  },
+  "footer.legal": {
+    "en": "Legal",
+    "is": ""
+  },
+  "footer.madeWith": {
+    "en": "Made with",
+    "is": ""
+  },
+  "footer.newsletter": {
+    "en": "Newsletter",
+    "is": ""
+  },
+  "footer.nonAlcoholic": {
+    "en": "Áfengislaus",
+    "is": ""
+  },
+  "footer.openingHours": {
+    "en": "Opnunartími",
+    "is": ""
+  },
+  "footer.openingHoursLabel": {
+    "en": "Opening Hours",
+    "is": ""
+  },
+  "footer.openingHoursValue": {
+    "en": "Opening hours value",
+    "is": ""
+  },
+  "footer.orders": {
+    "en": "Pantanir",
+    "is": ""
+  },
+  "footer.paymentMethods": {
+    "en": "Payment methods",
+    "is": ""
+  },
+  "footer.phone": {
+    "en": "📞 +354 555 1234",
+    "is": ""
+  },
+  "footer.privacy": {
+    "en": "Privacy",
+    "is": ""
+  },
+  "footer.products": {
+    "en": "Vörur",
+    "is": ""
+  },
+  "footer.quickLinks": {
+    "en": "Quick links",
+    "is": ""
+  },
+  "footer.returns": {
+    "en": "Returns",
+    "is": ""
+  },
+  "footer.rightsReserved": {
+    "en": "All rights reserved",
+    "is": ""
+  },
+  "footer.securePayment": {
+    "en": "Secure payment",
+    "is": ""
+  },
+  "footer.shipping": {
+    "en": "Shipping",
+    "is": ""
+  },
+  "footer.shortcuts": {
+    "en": "Flýtileiðir",
+    "is": ""
+  },
+  "footer.subscribe": {
+    "en": "Subscribe",
+    "is": ""
+  },
+  "footer.support": {
+    "en": "Support",
+    "is": ""
+  },
+  "footer.terms": {
+    "en": "Terms",
+    "is": ""
+  },
+  "footer.wine": {
+    "en": "Vín",
+    "is": ""
+  },
+  "fulfillment.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "fulfillment.pickup": {
+    "en": "Pickup",
+    "is": ""
+  },
+  "hero.cta": {
+    "en": "Byrja að versla",
+    "is": ""
+  },
+  "hero.subtitle": {
+    "en": "Hetja undirtitill",
+    "is": ""
+  },
+  "home.banner.alt": {
+    "en": "Banner alt text",
+    "is": ""
+  },
+  "home.banner.description1": {
+    "en": "Banner description 1",
+    "is": ""
+  },
+  "home.banner.description2": {
+    "en": "Banner description 2",
+    "is": ""
+  },
+  "home.banner.description3": {
+    "en": "Banner description 3",
+    "is": ""
+  },
+  "home.banner.description4": {
+    "en": "Banner description 4",
+    "is": ""
+  },
+  "home.banners.fallback1.alt": {
+    "en": "Ölföng Banner 1",
+    "is": ""
+  },
+  "home.banners.fallback1.description": {
+    "en": "Discover our curated collection of fine wines",
+    "is": ""
+  },
+  "home.banners.fallback1.title": {
+    "en": "Premium Wine Selection",
+    "is": ""
+  },
+  "home.banners.fallback2.alt": {
+    "en": "Ölföng Banner 2",
+    "is": ""
+  },
+  "home.banners.fallback2.description": {
+    "en": "Explore our wide range of craft and premium beers",
+    "is": ""
+  },
+  "home.banners.fallback2.title": {
+    "en": "Quality Beer Collection",
+    "is": ""
+  },
+  "home.banners.fallback3.alt": {
+    "en": "Ölföng Banner 3",
+    "is": ""
+  },
+  "home.banners.fallback3.description": {
+    "en": "Don't miss out on our exclusive deals and discounts",
+    "is": ""
+  },
+  "home.banners.fallback3.title": {
+    "en": "Special Offers",
+    "is": ""
+  },
+  "home.banners.fallback4.alt": {
+    "en": "Ölföng Banner 4",
+    "is": ""
+  },
+  "home.banners.fallback4.description": {
+    "en": "Quick and reliable delivery to your doorstep",
+    "is": ""
+  },
+  "home.banners.fallback4.title": {
+    "en": "Fast Delivery",
+    "is": ""
+  },
+  "home.banner.title1": {
+    "en": "Banner title 1",
+    "is": ""
+  },
+  "home.banner.title2": {
+    "en": "Banner title 2",
+    "is": ""
+  },
+  "home.banner.title3": {
+    "en": "Banner title 3",
+    "is": ""
+  },
+  "home.banner.title4": {
+    "en": "Banner title 4",
+    "is": ""
+  },
+  "home.categories.subtitle": {
+    "en": "Browse our selection by category",
+    "is": ""
+  },
+  "home.categories.title": {
+    "en": "Product Categories",
+    "is": ""
+  },
+  "home.discounted.subtitle": {
+    "en": "Check out our amazing deals",
+    "is": ""
+  },
+  "home.discounted.title": {
+    "en": "Special Offers",
+    "is": ""
+  },
+  "home.features.ageVerificationDescription": {
+    "en": "Safe and responsible sales with age verification",
+    "is": ""
+  },
+  "home.features.ageVerificationTitle": {
+    "en": "Age Verification",
+    "is": ""
+  },
+  "home.features.beerDescription": {
+    "en": "Wide variety of craft and popular beer brands",
+    "is": ""
+  },
+  "home.features.beerTitle": {
+    "en": "Beer",
+    "is": ""
+  },
+  "home.features.deliveryDescription": {
+    "en": "Quick and reliable delivery to your doorstep",
+    "is": ""
+  },
+  "home.features.deliveryTitle": {
+    "en": "Fast Delivery",
+    "is": ""
+  },
+  "home.features.wineDescription": {
+    "en": "Premium selection of wines from the world's best vineyards",
+    "is": ""
+  },
+  "home.features.wineTitle": {
+    "en": "Wine",
+    "is": ""
+  },
+  "home.hero.startShopping": {
+    "en": "Start Shopping",
+    "is": ""
+  },
+  "home.hero.subtitle": {
+    "en": "Premium selection of wines and beers with fast delivery",
+    "is": ""
+  },
+  "home.olfongLogoAlt": {
+    "en": "Ölföng logo",
+    "is": ""
+  },
+  "home.testimonials.review1": {
+    "en": "Excellent service and fast delivery. Highly recommended!",
+    "is": ""
+  },
+  "home.testimonials.review1Author": {
+    "en": "Jón Jónsson",
+    "is": ""
+  },
+  "home.testimonials.review1Location": {
+    "en": "Reykjavík",
+    "is": ""
+  },
+  "home.testimonials.review2": {
+    "en": "Great selection and fair prices. Always coming back.",
+    "is": ""
+  },
+  "home.testimonials.review2Author": {
+    "en": "Anna Sigurðardóttir",
+    "is": ""
+  },
+  "home.testimonials.review2Location": {
+    "en": "Akureyri",
+    "is": ""
+  },
+  "home.testimonials.review3": {
+    "en": "Best app for ordering wine and beer. Very convenient!",
+    "is": ""
+  },
+  "home.testimonials.review3Author": {
+    "en": "Pétur Gunnarsson",
+    "is": ""
+  },
+  "home.testimonials.review3Location": {
+    "en": "Hafnarfjörður",
+    "is": ""
+  },
+  "home.testimonials.subtitle": {
+    "en": "See what others say about our service",
+    "is": ""
+  },
+  "home.testimonials.title": {
+    "en": "Customer Reviews",
+    "is": ""
+  },
+  "home.why.subtitle": {
+    "en": "We offer premium products, excellent service, and fast delivery",
+    "is": ""
+  },
+  "home.why.title": {
+    "en": "Why Choose Us?",
+    "is": ""
+  },
+  "id_token": {
+    "en": "Id_token",
+    "is": ""
+  },
+  "imageSearchModal.allColors": {
+    "en": "All Colors",
+    "is": ""
+  },
+  "imageSearchModal.allOrientations": {
+    "en": "All Orientations",
+    "is": ""
+  },
+  "imageSearchModal.black": {
+    "en": "Black",
+    "is": ""
+  },
+  "imageSearchModal.blue": {
+    "en": "Blue",
+    "is": ""
+  },
+  "imageSearchModal.green": {
+    "en": "Green",
+    "is": ""
+  },
+  "imageSearchModal.landscape": {
+    "en": "Landscape",
+    "is": ""
+  },
+  "imageSearchModal.magenta": {
+    "en": "Magenta",
+    "is": ""
+  },
+  "imageSearchModal.orange": {
+    "en": "Orange",
+    "is": ""
+  },
+  "imageSearchModal.portrait": {
+    "en": "Portrait",
+    "is": ""
+  },
+  "imageSearchModal.purple": {
+    "en": "Purple",
+    "is": ""
+  },
+  "imageSearchModal.recentSearches": {
+    "en": "Recent Searches",
+    "is": ""
+  },
+  "imageSearchModal.red": {
+    "en": "Red",
+    "is": ""
+  },
+  "imageSearchModal.square": {
+    "en": "Square",
+    "is": ""
+  },
+  "imageSearchModal.suggestions": {
+    "en": "Suggestions",
+    "is": ""
+  },
+  "imageSearchModal.teal": {
+    "en": "Teal",
+    "is": ""
+  },
+  "imageSearchModal.white": {
+    "en": "White",
+    "is": ""
+  },
+  "imageSearchModal.yellow": {
+    "en": "Yellow",
+    "is": ""
+  },
+  "is-IS": {
+    "en": "Icelandic",
+    "is": ""
+  },
+  "join-admin-room": {
+    "en": "Join-Admin-Room",
+    "is": ""
+  },
+  "join-conversation": {
+    "en": "Join Conversation",
+    "is": ""
+  },
+  "json": {
+    "en": "Json",
+    "is": ""
+  },
+  "language.is": {
+    "en": "IS",
+    "is": ""
+  },
+  "link-dropdown-container": {
+    "en": "Link-Dropdown-Container",
+    "is": ""
+  },
+  "login.adminLogin": {
+    "en": "Admin login",
+    "is": ""
+  },
+  "login.automatedTestLogin": {
+    "en": "Automated Test Login",
+    "is": ""
+  },
+  "login.dummyElectronicId": {
+    "en": "Dummy Electronic ID (Testing)",
+    "is": ""
+  },
+  "login.email": {
+    "en": "Email",
+    "is": ""
+  },
+  "login.emailPasswordTests": {
+    "en": "Email/Password (For Tests)",
+    "is": ""
+  },
+  "login.enterEmailAddress": {
+    "en": "Enter email address",
+    "is": ""
+  },
+  "login.enterPassword": {
+    "en": "Enter password",
+    "is": ""
+  },
+  "login.enterPhoneNumber": {
+    "en": "Enter phone number",
+    "is": ""
+  },
+  "login.forgotPassword": {
+    "en": "Forgot password?",
+    "is": ""
+  },
+  "login.insertPhoneNumber": {
+    "en": "Insert your phone number",
+    "is": ""
+  },
+  "login.loggingIn": {
+    "en": "Logging in...",
+    "is": ""
+  },
+  "login.loginButton": {
+    "en": "Login",
+    "is": ""
+  },
+  "login.loginWithEmail": {
+    "en": "Login with Email",
+    "is": ""
+  },
+  "login.loginWithPhone": {
+    "en": "Login with Phone",
+    "is": ""
+  },
+  "login.noAccount": {
+    "en": "Don't have an account?",
+    "is": ""
+  },
+  "login.or": {
+    "en": "or",
+    "is": ""
+  },
+  "login.password": {
+    "en": "Password",
+    "is": ""
+  },
+  "login.rememberMe": {
+    "en": "Remember me",
+    "is": ""
+  },
+  "login.signUp": {
+    "en": "Sign up",
+    "is": ""
+  },
+  "login.testLogin": {
+    "en": "Test Login",
+    "is": ""
+  },
+  "login.title": {
+    "en": "Login",
+    "is": ""
+  },
+  "login.welcome": {
+    "en": "Welcome",
+    "is": ""
+  },
+  "\\n": {
+    "en": "\\N",
+    "is": ""
+  },
+  "nav.admin": {
+    "en": "Admin",
+    "is": ""
+  },
+  "nav.cart": {
+    "en": "Cart",
+    "is": ""
+  },
+  "nav.home": {
+    "en": "Home",
+    "is": ""
+  },
+  "navigation.admin": {
+    "en": "Admin",
+    "is": ""
+  },
+  "navigation.allProducts": {
+    "en": "All Products",
+    "is": ""
+  },
+  "navigation.beer": {
+    "en": "Beer",
+    "is": ""
+  },
+  "navigation.cart": {
+    "en": "Cart",
+    "is": ""
+  },
+  "navigation.categories": {
+    "en": "Categories",
+    "is": ""
+  },
+  "navigation.contact": {
+    "en": "Contact",
+    "is": ""
+  },
+  "navigation.contactUs": {
+    "en": "Contact us",
+    "is": ""
+  },
+  "navigation.customers": {
+    "en": "Customers",
+    "is": ""
+  },
+  "navigation.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "navigation.discoverCategories": {
+    "en": "Discover all our product categories",
+    "is": ""
+  },
+  "navigation.home": {
+    "en": "Home",
+    "is": ""
+  },
+  "navigation.language": {
+    "en": "Language",
+    "is": ""
+  },
+  "navigation.legal": {
+    "en": "Legal",
+    "is": ""
+  },
+  "navigation.login": {
+    "en": "Login",
+    "is": ""
+  },
+  "navigation.logout": {
+    "en": "Logout",
+    "is": ""
+  },
+  "navigation.menu": {
+    "en": "Menu",
+    "is": ""
+  },
+  "navigation.needHelp": {
+    "en": "Need help?",
+    "is": ""
+  },
+  "navigation.non_alcoholic": {
+    "en": "Non-alcoholic",
+    "is": ""
+  },
+  "navigation.nonAlcoholic": {
+    "en": "Non-Alcoholic",
+    "is": ""
+  },
+  "navigation.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "navigation.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "navigation.profile": {
+    "en": "Profile",
+    "is": ""
+  },
+  "navigation.service": {
+    "en": "Service",
+    "is": ""
+  },
+  "navigation.settings": {
+    "en": "Settings",
+    "is": ""
+  },
+  "navigation.shop": {
+    "en": "Shop",
+    "is": ""
+  },
+  "navigation.spirits": {
+    "en": "Spirits",
+    "is": ""
+  },
+  "navigation.viewAllProducts": {
+    "en": "View all products",
+    "is": ""
+  },
+  "navigation.wine": {
+    "en": "Wine",
+    "is": ""
+  },
+  "nav.login": {
+    "en": "Login",
+    "is": ""
+  },
+  "nav.logout": {
+    "en": "Logout",
+    "is": ""
+  },
+  "nav.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "nav.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "nav.profile": {
+    "en": "Profile",
+    "is": ""
+  },
+  "nav.search": {
+    "en": "Search",
+    "is": ""
+  },
+  "notifications.deliveryMethods": {
+    "en": "Delivery Methods",
+    "is": ""
+  },
+  "notifications.emailNotifications": {
+    "en": "Email Notifications",
+    "is": ""
+  },
+  "notifications.marketing": {
+    "en": "Marketing",
+    "is": ""
+  },
+  "notifications.noNotifications": {
+    "en": "No notifications found",
+    "is": ""
+  },
+  "notifications.orderUpdates": {
+    "en": "Order Updates",
+    "is": ""
+  },
+  "notifications.pushNotifications": {
+    "en": "Push Notifications",
+    "is": ""
+  },
+  "notifications.securityAlerts": {
+    "en": "Security Alerts",
+    "is": ""
+  },
+  "notifications.settings": {
+    "en": "Notification Settings",
+    "is": ""
+  },
+  "notifications.smsNotifications": {
+    "en": "SMS Notifications",
+    "is": ""
+  },
+  "notifications.systemAlerts": {
+    "en": "System Alerts",
+    "is": ""
+  },
+  "notifications.title": {
+    "en": "Notifications",
+    "is": ""
+  },
+  "notifications.types": {
+    "en": "Notification Types",
+    "is": ""
+  },
+  "orderDetailPage.backToOrders": {
+    "en": "Back to Orders",
+    "is": ""
+  },
+  "orderDetailPage.created": {
+    "en": "Created",
+    "is": ""
+  },
+  "orderDetailPage.deliveredAt": {
+    "en": "Delivered At",
+    "is": ""
+  },
+  "orderDetailPage.deliveryAddress": {
+    "en": "Delivery Address",
+    "is": ""
+  },
+  "orderDetailPage.deliveryInfo": {
+    "en": "Delivery Info",
+    "is": ""
+  },
+  "orderDetailPage.deliveryMethod": {
+    "en": "Delivery Method",
+    "is": ""
+  },
+  "orderDetailPage.deliveryPerson": {
+    "en": "Delivery Person",
+    "is": ""
+  },
+  "orderDetailPage.deliveryTracking": {
+    "en": "Delivery Tracking",
+    "is": ""
+  },
+  "orderDetailPage.each": {
+    "en": "Each",
+    "is": ""
+  },
+  "orderDetailPage.estimatedDelivery": {
+    "en": "Estimated Delivery",
+    "is": ""
+  },
+  "orderDetailPage.homeDelivery": {
+    "en": "Home Delivery",
+    "is": ""
+  },
+  "orderDetailPage.lastUpdated": {
+    "en": "Last Updated",
+    "is": ""
+  },
+  "orderDetailPage.notes": {
+    "en": "Notes",
+    "is": ""
+  },
+  "orderDetailPage.notStarted": {
+    "en": "Not Started",
+    "is": ""
+  },
+  "orderDetailPage.onTheWay": {
+    "en": "On The Way",
+    "is": ""
+  },
+  "orderDetailPage.order": {
+    "en": "Order",
+    "is": ""
+  },
+  "orderDetailPage.orderItems": {
+    "en": "Order Items",
+    "is": ""
+  },
+  "orderDetailPage.orderNotFound": {
+    "en": "OrderDetailPage OrderNotFound",
+    "is": ""
+  },
+  "orderDetailPage.orderNotFoundDesc": {
+    "en": "OrderDetailPage OrderNotFoundDesc",
+    "is": ""
+  },
+  "orderDetailPage.paymentInfo": {
+    "en": "Payment Info",
+    "is": ""
+  },
+  "orderDetailPage.paymentMethod": {
+    "en": "Payment Method",
+    "is": ""
+  },
+  "orderDetailPage.quantity": {
+    "en": "Quantity",
+    "is": ""
+  },
+  "orderDetailPage.status": {
+    "en": "Status",
+    "is": ""
+  },
+  "orderDetailPage.storePickup": {
+    "en": "OrderDetailPage StorePickup",
+    "is": ""
+  },
+  "order.orderNumber": {
+    "en": "Order OrderNumber",
+    "is": ""
+  },
+  "/orders/${id}": {
+    "en": "/Orders/${Id}",
+    "is": ""
+  },
+  "/orders?${queryParams.toString()}": {
+    "en": "/Orders?${QueryParams ToString()}",
+    "is": ""
+  },
+  "orders.date": {
+    "en": "Date",
+    "is": ""
+  },
+  "orders.deliveryPerson": {
+    "en": "Delivery Person",
+    "is": ""
+  },
+  "/orders?limit=10&status=COMPLETED,PROCESSING,SHIPPED": {
+    "en": "/Orders?Limit=10&Status=COMPLETED,PROCESSING,SHIPPED",
+    "is": ""
+  },
+  "/orders/my-orders?${queryParams.toString()}": {
+    "en": "/Orders/My-Orders?${QueryParams ToString()}",
+    "is": ""
+  },
+  "orders.orderNumber": {
+    "en": "Order Number",
+    "is": ""
+  },
+  "ordersPage.allOrders": {
+    "en": "All Orders",
+    "is": ""
+  },
+  "ordersPage.confirmed": {
+    "en": "Confirmed",
+    "is": ""
+  },
+  "ordersPage.date": {
+    "en": "Date",
+    "is": ""
+  },
+  "ordersPage.delivered": {
+    "en": "Delivered",
+    "is": ""
+  },
+  "ordersPage.delivery": {
+    "en": "Delivery",
+    "is": ""
+  },
+  "ordersPage.deliveryAddress": {
+    "en": "Delivery Address",
+    "is": ""
+  },
+  "ordersPage.filterByStatus": {
+    "en": "Filter by Status",
+    "is": ""
+  },
+  "ordersPage.homeDelivery": {
+    "en": "Home Delivery",
+    "is": ""
+  },
+  "ordersPage.items": {
+    "en": "Items",
+    "is": ""
+  },
+  "ordersPage.loginToView": {
+    "en": "Login to view",
+    "is": ""
+  },
+  "ordersPage.mustLogin": {
+    "en": "You must login",
+    "is": ""
+  },
+  "ordersPage.next": {
+    "en": "Next",
+    "is": ""
+  },
+  "ordersPage.noOrders": {
+    "en": "No orders",
+    "is": ""
+  },
+  "ordersPage.noOrdersDesc": {
+    "en": "No orders description",
+    "is": ""
+  },
+  "ordersPage.notes": {
+    "en": "Notes",
+    "is": ""
+  },
+  "ordersPage.of": {
+    "en": "of",
+    "is": ""
+  },
+  "ordersPage.outForDelivery": {
+    "en": "Out for Delivery",
+    "is": ""
+  },
+  "ordersPage.page": {
+    "en": "OrdersPage Page",
+    "is": ""
+  },
+  "ordersPage.pending": {
+    "en": "Pending",
+    "is": ""
+  },
+  "ordersPage.pickup": {
+    "en": "Pickup",
+    "is": ""
+  },
+  "ordersPage.previous": {
+    "en": "Previous",
+    "is": ""
+  },
+  "ordersPage.reorder": {
+    "en": "Reorder",
+    "is": ""
+  },
+  "ordersPage.startShopping": {
+    "en": "Start Shopping",
+    "is": ""
+  },
+  "ordersPage.time": {
+    "en": "Time",
+    "is": ""
+  },
+  "ordersPage.total": {
+    "en": "Total",
+    "is": ""
+  },
+  "ordersPage.view": {
+    "en": "View",
+    "is": ""
+  },
+  "orders.reorder": {
+    "en": "Reorder",
+    "is": ""
+  },
+  "orders.status": {
+    "en": "Status",
+    "is": ""
+  },
+  "orders.statuses": {
+    "en": "Status",
+    "is": ""
+  },
+  "orders.statuses.${status}": {
+    "en": "Orders Statuses ${Status}",
+    "is": ""
+  },
+  "orders.statuses.CANCELLED": {
+    "en": "Cancelled",
+    "is": ""
+  },
+  "orders.statuses.CONFIRMED": {
+    "en": "Confirmed",
+    "is": ""
+  },
+  "orders.statuses.DELIVERED": {
+    "en": "Delivered",
+    "is": ""
+  },
+  "orders.statuses.OUT_FOR_DELIVERY": {
+    "en": "Out for Delivery",
+    "is": ""
+  },
+  "orders.statuses.PENDING": {
+    "en": "Pending",
+    "is": ""
+  },
+  "orders.statuses.PREPARING": {
+    "en": "Preparing",
+    "is": ""
+  },
+  "orders.title": {
+    "en": "Orders",
+    "is": ""
+  },
+  "orders.total": {
+    "en": "Total",
+    "is": ""
+  },
+  "orders.viewDetails": {
+    "en": "View Details",
+    "is": ""
+  },
+  "pdf": {
+    "en": "PDF",
+    "is": ""
+  },
+  "pos.allCategories": {
+    "en": "Allir flokkar",
+    "is": ""
+  },
+  "pos.card": {
+    "en": "Kort",
+    "is": ""
+  },
+  "pos.cartItems": {
+    "en": "Pos CartItems",
+    "is": ""
+  },
+  "pos.cartTitle": {
+    "en": "Karfa ({count} vörur)",
+    "is": ""
+  },
+  "pos.cash": {
+    "en": "Reiðufé",
+    "is": ""
+  },
+  "pos.customer": {
+    "en": "Viðskiptavinur",
+    "is": ""
+  },
+  "pos.description": {
+    "en": "POS Lýsing",
+    "is": ""
+  },
+  "pos.guestEmail": {
+    "en": "Netfang gesta",
+    "is": ""
+  },
+  "pos.guestName": {
+    "en": "Nafn gesta",
+    "is": ""
+  },
+  "pos.guestPhone": {
+    "en": "Símanúmer gesta",
+    "is": ""
+  },
+  "pos.homeDelivery": {
+    "en": "Heimsending - {price} ISK",
+    "is": ""
+  },
+  "pos.notes": {
+    "en": "Athugasemdir",
+    "is": ""
+  },
+  "pos.or": {
+    "en": "eða",
+    "is": ""
+  },
+  "pos.orderNotes": {
+    "en": "Pöntunarathugasemdir",
+    "is": ""
+  },
+  "posOrders.title": {
+    "en": "POS Orders",
+    "is": ""
+  },
+  "pos.payLater": {
+    "en": "Borga síðar",
+    "is": ""
+  },
+  "pos.paymentMethod": {
+    "en": "Greiðslumáti",
+    "is": ""
+  },
+  "pos.processOrder": {
+    "en": "Afklára pöntun",
+    "is": ""
+  },
+  "pos.searchCustomers": {
+    "en": "Leita að viðskiptavinum",
+    "is": ""
+  },
+  "pos.searchProducts": {
+    "en": "Leita að vörum",
+    "is": ""
+  },
+  "pos.shipping": {
+    "en": "Sendingarkostnaður:",
+    "is": ""
+  },
+  "pos.shippingOption": {
+    "en": "Sendingarmöguleiki",
+    "is": ""
+  },
+  "pos.stock": {
+    "en": "Birgðir: {count}",
+    "is": ""
+  },
+  "pos.subtotal": {
+    "en": "Samtals:",
+    "is": ""
+  },
+  "pos.title": {
+    "en": "POS Titill",
+    "is": ""
+  },
+  "pos.total": {
+    "en": "Heildarverð:",
+    "is": ""
+  },
+  "product.abv": {
+    "en": "ABV",
+    "is": ""
+  },
+  "productDetailPage.addToCart": {
+    "en": "Add to Cart",
+    "is": ""
+  },
+  "productDetailPage.ageRestriction": {
+    "en": "ProductDetailPage AgeRestriction",
+    "is": ""
+  },
+  "productDetailPage.ageRestrictionDesc": {
+    "en": "ProductDetailPage AgeRestrictionDesc",
+    "is": ""
+  },
+  "productDetailPage.alcoholContent": {
+    "en": "Alcohol Content",
+    "is": ""
+  },
+  "productDetailPage.available": {
+    "en": "Available",
+    "is": ""
+  },
+  "productDetailPage.back": {
+    "en": "Back",
+    "is": ""
+  },
+  "productDetailPage.comingSoonDesc": {
+    "en": "ProductDetailPage ComingSoonDesc",
+    "is": ""
+  },
+  "productDetailPage.country": {
+    "en": "Country",
+    "is": ""
+  },
+  "productDetailPage.createSubscription": {
+    "en": "ProductDetailPage CreateSubscription",
+    "is": ""
+  },
+  "productDetailPage.deliveryFrequency": {
+    "en": "ProductDetailPage DeliveryFrequency",
+    "is": ""
+  },
+  "productDetailPage.description": {
+    "en": "Description",
+    "is": ""
+  },
+  "productDetailPage.discontinuedDesc": {
+    "en": "ProductDetailPage DiscontinuedDesc",
+    "is": ""
+  },
+  "productDetailPage.edit": {
+    "en": "Edit",
+    "is": ""
+  },
+  "productDetailPage.loginHere": {
+    "en": "ProductDetailPage LoginHere",
+    "is": ""
+  },
+  "productDetailPage.loginToAdd": {
+    "en": "ProductDetailPage LoginToAdd",
+    "is": ""
+  },
+  "productDetailPage.noDescription": {
+    "en": "ProductDetailPage NoDescription",
+    "is": ""
+  },
+  "productDetailPage.noImage": {
+    "en": "No image",
+    "is": ""
+  },
+  "productDetailPage.notesOptional": {
+    "en": "ProductDetailPage NotesOptional",
+    "is": ""
+  },
+  "productDetailPage.outOfStock": {
+    "en": "Out of Stock",
+    "is": ""
+  },
+  "productDetailPage.packaging": {
+    "en": "Packaging",
+    "is": ""
+  },
+  "productDetailPage.preferredDayOptional": {
+    "en": "ProductDetailPage PreferredDayOptional",
+    "is": ""
+  },
+  "productDetailPage.preferredTimeOptional": {
+    "en": "ProductDetailPage PreferredTimeOptional",
+    "is": ""
+  },
+  "productDetailPage.priceBeforeVat": {
+    "en": "Price before VAT",
+    "is": ""
+  },
+  "productDetailPage.producer": {
+    "en": "Producer",
+    "is": ""
+  },
+  "productDetailPage.quantity": {
+    "en": "Quantity",
+    "is": ""
+  },
+  "productDetailPage.specialOrderDesc": {
+    "en": "ProductDetailPage SpecialOrderDesc",
+    "is": ""
+  },
+  "productDetailPage.specifications": {
+    "en": "Specifications",
+    "is": ""
+  },
+  "productDetailPage.subscribe": {
+    "en": "Subscribe",
+    "is": ""
+  },
+  "productDetailPage.subscriptionCreated": {
+    "en": "ProductDetailPage SubscriptionCreated",
+    "is": ""
+  },
+  "productDetailPage.totalPrice": {
+    "en": "Total Price (incl. VAT)",
+    "is": ""
+  },
+  "productDetailPage.unitsAvailable": {
+    "en": "units available",
+    "is": ""
+  },
+  "productDetailPage.vatAmount": {
+    "en": "VAT Amount",
+    "is": ""
+  },
+  "productDetailPage.vatInformation": {
+    "en": "VAT Information",
+    "is": ""
+  },
+  "productDetailPage.vatProfile": {
+    "en": "VAT Profile",
+    "is": ""
+  },
+  "productDetailPage.vatRate": {
+    "en": "VAT Rate",
+    "is": ""
+  },
+  "productDetailPage.volume": {
+    "en": "Volume",
+    "is": ""
+  },
+  "productModal.discounts.discountPercentage": {
+    "en": "Discount Percentage (%) *",
+    "is": ""
+  },
+  "productModal.discounts.emptyStateMessage": {
+    "en": "Enable discount to configure discount settings for this product",
+    "is": ""
+  },
+  "productModal.discounts.enableDiscount": {
+    "en": "Enable Discount for this Product",
+    "is": ""
+  },
+  "productModal.discounts.endDate": {
+    "en": "Discount End Date",
+    "is": ""
+  },
+  "productModal.discounts.originalPrice": {
+    "en": "Original Price (kr) *",
+    "is": ""
+  },
+  "productModal.discounts.reasonEn": {
+    "en": "Discount Reason (EN)",
+    "is": ""
+  },
+  "productModal.discounts.reasonIs": {
+    "en": "Discount Reason (IS)",
+    "is": ""
+  },
+  "productModal.discounts.reasonIsPlaceholder": {
+    "en": "e.g., Seasonal Sale, Clearance",
+    "is": ""
+  },
+  "productModal.discounts.reasonPlaceholder": {
+    "en": "e.g., Seasonal Sale, Clearance",
+    "is": ""
+  },
+  "productModal.discounts.startDate": {
+    "en": "Discount Start Date",
+    "is": ""
+  },
+  "productModal.discounts.tabLabel": {
+    "en": "Discounts",
+    "is": ""
+  },
+  "product.origin": {
+    "en": "Origin",
+    "is": ""
+  },
+  "/products/${id}": {
+    "en": "/Products/${Id}",
+    "is": ""
+  },
+  "/products?${queryParams.toString()}": {
+    "en": "/Products?${QueryParams ToString()}",
+    "is": ""
+  },
+  "products.addToCart": {
+    "en": "Add to Cart",
+    "is": ""
+  },
+  "products.alcoholContent": {
+    "en": "Alcohol Content",
+    "is": ""
+  },
+  "products.availability": {
+    "en": "Products Availability",
+    "is": ""
+  },
+  "products.brand": {
+    "en": "Brand",
+    "is": ""
+  },
+  "products.carbonFootprint": {
+    "en": "Carbon Footprint",
+    "is": ""
+  },
+  "products.category": {
+    "en": "Category",
+    "is": ""
+  },
+  "/products?category=${category.name}&limit=${limit}": {
+    "en": "/Products?Category=${Category Name}&Limit=${Limit}",
+    "is": ""
+  },
+  "products.country": {
+    "en": "Country",
+    "is": ""
+  },
+  "products.description": {
+    "en": "Description",
+    "is": ""
+  },
+  "products.details": {
+    "en": "Product details",
+    "is": ""
+  },
+  "/products/discounted?${queryParams.toString()}": {
+    "en": "/Products/Discounted?${QueryParams ToString()}",
+    "is": ""
+  },
+  "products.distributor": {
+    "en": "Distributor",
+    "is": ""
+  },
+  "products.foodPairings": {
+    "en": "Food Pairings",
+    "is": ""
+  },
+  "products.grapeVariety": {
+    "en": "Grape Variety",
+    "is": ""
+  },
+  "products.inStock": {
+    "en": "In Stock",
+    "is": ""
+  },
+  "products.origin": {
+    "en": "Origin",
+    "is": ""
+  },
+  "products.outOfStock": {
+    "en": "Out of Stock",
+    "is": ""
+  },
+  "products.packaging": {
+    "en": "Packaging",
+    "is": ""
+  },
+  "products.packagingWeight": {
+    "en": "Packaging Weight",
+    "is": ""
+  },
+  "productsPage.addToCart": {
+    "en": "Add to cart",
+    "is": ""
+  },
+  "productsPage.adjustSearch": {
+    "en": "Adjust search",
+    "is": ""
+  },
+  "productsPage.alcoholContent": {
+    "en": "Alcohol content",
+    "is": ""
+  },
+  "productsPage.alcoholVolume": {
+    "en": "Alcohol Volume",
+    "is": ""
+  },
+  "productsPage.all": {
+    "en": "All Products",
+    "is": ""
+  },
+  "productsPage.category": {
+    "en": "Category",
+    "is": ""
+  },
+  "productsPage.clearFilters": {
+    "en": "Clear filters",
+    "is": ""
+  },
+  "productsPage.filters": {
+    "en": "Filters",
+    "is": ""
+  },
+  "productsPage.inStock": {
+    "en": "In stock",
+    "is": ""
+  },
+  "productsPage.loading": {
+    "en": "Loading products...",
+    "is": ""
+  },
+  "productsPage.loadMore": {
+    "en": "Load more",
+    "is": ""
+  },
+  "productsPage.noProducts": {
+    "en": "No products found",
+    "is": ""
+  },
+  "productsPage.noProductsFound": {
+    "en": "No products found",
+    "is": ""
+  },
+  "productsPage.outOfStock": {
+    "en": "Out of stock",
+    "is": ""
+  },
+  "productsPage.priceRange": {
+    "en": "Price range",
+    "is": ""
+  },
+  "productsPage.products": {
+    "en": "Products",
+    "is": ""
+  },
+  "productsPage.showingResults": {
+    "en": "Showing {count} of {total} products",
+    "is": ""
+  },
+  "productsPage.sortBy": {
+    "en": "Sort by",
+    "is": ""
+  },
+  "productsPage.sortByAlcoholAsc": {
+    "en": "Sort by alcohol ascending",
+    "is": ""
+  },
+  "productsPage.sortByAlcoholDesc": {
+    "en": "Sort by alcohol descending",
+    "is": ""
+  },
+  "productsPage.sortByNameAsc": {
+    "en": "Sort by name ascending",
+    "is": ""
+  },
+  "productsPage.sortByNameDesc": {
+    "en": "Sort by name descending",
+    "is": ""
+  },
+  "productsPage.sortByPriceAsc": {
+    "en": "Sort by price ascending",
+    "is": ""
+  },
+  "productsPage.sortByPriceDesc": {
+    "en": "Sort by price descending",
+    "is": ""
+  },
+  "productsPage.sortOptions.nameAZ": {
+    "en": "Name: A-Z",
+    "is": ""
+  },
+  "productsPage.sortOptions.nameZA": {
+    "en": "Name: Z-A",
+    "is": ""
+  },
+  "productsPage.sortOptions.newest": {
+    "en": "Newest",
+    "is": ""
+  },
+  "productsPage.sortOptions.priceHighToLow": {
+    "en": "Price: High to low",
+    "is": ""
+  },
+  "productsPage.sortOptions.priceLowToHigh": {
+    "en": "Price: Low to high",
+    "is": ""
+  },
+  "productsPage.subcategories": {
+    "en": "ProductsPage Subcategories",
+    "is": ""
+  },
+  "productsPage.subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "productsPage.title": {
+    "en": "Products",
+    "is": ""
+  },
+  "productsPage.tryAdjusting": {
+    "en": "Try adjusting your filters",
+    "is": ""
+  },
+  "productsPage.viewDetails": {
+    "en": "View details",
+    "is": ""
+  },
+  "products.price": {
+    "en": "Price",
+    "is": ""
+  },
+  "products.pricePerLiter": {
+    "en": "Price per Liter",
+    "is": ""
+  },
+  "products.producer": {
+    "en": "Producer",
+    "is": ""
+  },
+  "products.productDetails": {
+    "en": "Product Details",
+    "is": ""
+  },
+  "products.region": {
+    "en": "Region",
+    "is": ""
+  },
+  "/products?search=${encodeURIComponent(query)}&limit=5": {
+    "en": "/Products?Search=${EncodeURIComponent(Query)}&Limit=5",
+    "is": ""
+  },
+  "products.sku": {
+    "en": "SKU",
+    "is": ""
+  },
+  "products.specialAttributes": {
+    "en": "Special Attributes",
+    "is": ""
+  },
+  "products.stock": {
+    "en": "Stock",
+    "is": ""
+  },
+  "/products/subcategories?categoryId=${categoryId}": {
+    "en": "/Products/Subcategories?CategoryId=${CategoryId}",
+    "is": ""
+  },
+  "products.subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "products.title": {
+    "en": "Products",
+    "is": ""
+  },
+  "products.units": {
+    "en": "units",
+    "is": ""
+  },
+  "products.unitsAvailable": {
+    "en": "units available",
+    "is": ""
+  },
+  "products.vintage": {
+    "en": "Vintage",
+    "is": ""
+  },
+  "products.volume": {
+    "en": "Volume",
+    "is": ""
+  },
+  "products.wineStyle": {
+    "en": "Wine Style",
+    "is": ""
+  },
+  "product.type": {
+    "en": "Type",
+    "is": ""
+  },
+  "product.volume": {
+    "en": "Volume",
+    "is": ""
+  },
+  "product.year": {
+    "en": "Year",
+    "is": ""
+  },
+  "profilePage.addresses": {
+    "en": "Addresses",
+    "is": ""
+  },
+  "profilePage.addressMissingWarning": {
+    "en": "Please add an address to continue with your order",
+    "is": ""
+  },
+  "profilePage.cancel": {
+    "en": "Cancel",
+    "is": ""
+  },
+  "profilePage.city": {
+    "en": "City",
+    "is": ""
+  },
+  "profilePage.cityRequired": {
+    "en": "City is required",
+    "is": ""
+  },
+  "profilePage.country": {
+    "en": "Country",
+    "is": ""
+  },
+  "profilePage.createAddress": {
+    "en": "Create",
+    "is": ""
+  },
+  "profilePage.default": {
+    "en": "Default",
+    "is": ""
+  },
+  "profilePage.edit": {
+    "en": "Edit",
+    "is": ""
+  },
+  "profilePage.editAddress": {
+    "en": "Edit Address",
+    "is": ""
+  },
+  "profilePage.email": {
+    "en": "Email",
+    "is": ""
+  },
+  "profilePage.emailMissingWarning": {
+    "en": "Please add an email for better service",
+    "is": ""
+  },
+  "profilePage.fullName": {
+    "en": "Full Name",
+    "is": ""
+  },
+  "profilePage.logout": {
+    "en": "Logout",
+    "is": ""
+  },
+  "profilePage.manageInfo": {
+    "en": "Manage Info",
+    "is": ""
+  },
+  "profilePage.name": {
+    "en": "Name",
+    "is": ""
+  },
+  "profilePage.newAddress": {
+    "en": "New Address",
+    "is": ""
+  },
+  "profilePage.newAddressTitle": {
+    "en": "New Address",
+    "is": ""
+  },
+  "profilePage.noAddresses": {
+    "en": "No addresses",
+    "is": ""
+  },
+  "profilePage.noOrders": {
+    "en": "No orders",
+    "is": ""
+  },
+  "profilePage.notSpecified": {
+    "en": "Not specified",
+    "is": ""
+  },
+  "profilePage.orderDate": {
+    "en": "Date",
+    "is": ""
+  },
+  "profilePage.orderNumber": {
+    "en": "Order Number",
+    "is": ""
+  },
+  "profilePage.orders": {
+    "en": "Orders",
+    "is": ""
+  },
+  "profilePage.orderStatus": {
+    "en": "Status",
+    "is": ""
+  },
+  "profilePage.orderTotal": {
+    "en": "Total",
+    "is": ""
+  },
+  "profilePage.personalInfo": {
+    "en": "Personal Information",
+    "is": ""
+  },
+  "profilePage.personalInformation": {
+    "en": "Personal Information",
+    "is": ""
+  },
+  "profilePage.phone": {
+    "en": "Phone",
+    "is": ""
+  },
+  "profilePage.postalCode": {
+    "en": "Postal Code",
+    "is": ""
+  },
+  "profilePage.postalCodeRequired": {
+    "en": "Postal code is required",
+    "is": ""
+  },
+  "profilePage.role": {
+    "en": "Role",
+    "is": ""
+  },
+  "profilePage.save": {
+    "en": "Save",
+    "is": ""
+  },
+  "profilePage.setAsDefault": {
+    "en": "Set as default address",
+    "is": ""
+  },
+  "profilePage.setAsDefaultAddress": {
+    "en": "Set as default address",
+    "is": ""
+  },
+  "profilePage.street": {
+    "en": "Street",
+    "is": ""
+  },
+  "profilePage.streetRequired": {
+    "en": "Street is required",
+    "is": ""
+  },
+  "profilePage.subtitle": {
+    "en": "Manage information",
+    "is": ""
+  },
+  "profilePage.title": {
+    "en": "Profile",
+    "is": ""
+  },
+  "profilePage.updateAddress": {
+    "en": "Update",
+    "is": ""
+  },
+  "profile.title": {
+    "en": "Profile",
+    "is": ""
+  },
+  "profile.updateError": {
+    "en": "Update error",
+    "is": ""
+  },
+  "profile.updateSuccess": {
+    "en": "Profile updated",
+    "is": ""
+  },
+  "receipt.basePrice": {
+    "en": "Base Price",
+    "is": ""
+  },
+  "receipts.configureInSettings": {
+    "en": "Please configure receipt settings to display your receipt",
+    "is": ""
+  },
+  "receipts.downloadPdf": {
+    "en": "Receipts DownloadPdf",
+    "is": ""
+  },
+  "receipts.emailReceipt": {
+    "en": "Receipts EmailReceipt",
+    "is": ""
+  },
+  "receipts.emailSendError": {
+    "en": "Receipts EmailSendError",
+    "is": ""
+  },
+  "receipts.emailSent": {
+    "en": "Receipts EmailSent",
+    "is": ""
+  },
+  "receipts.emailSentSuccess": {
+    "en": "Receipts EmailSentSuccess",
+    "is": ""
+  },
+  "/receipt-settings": {
+    "en": "/Receipt-Settings",
+    "is": ""
+  },
+  "receipts.noEmailAddress": {
+    "en": "Receipts NoEmailAddress",
+    "is": ""
+  },
+  "receipts.pdfDownloadError": {
+    "en": "Receipts PdfDownloadError",
+    "is": ""
+  },
+  "receipts.print": {
+    "en": "Receipts Print",
+    "is": ""
+  },
+  "receipts.receipt": {
+    "en": "Receipts Receipt",
+    "is": ""
+  },
+  "receipts.receiptForOrder": {
+    "en": "Receipts ReceiptForOrder",
+    "is": ""
+  },
+  "receipts.settingsNotFound": {
+    "en": "Receipts SettingsNotFound",
+    "is": ""
+  },
+  "receipts.viewReceipt": {
+    "en": "Receipts ViewReceipt",
+    "is": ""
+  },
+  "receipt.totalBeforeVat": {
+    "en": "Subtotal",
+    "is": ""
+  },
+  "receipt.totalWithVat": {
+    "en": "Total",
+    "is": ""
+  },
+  "receipt.vatAmount": {
+    "en": "VAT Amount",
+    "is": ""
+  },
+  "relative": {
+    "en": ".relative",
+    "is": ""
+  },
+  "/reports/customers?${params}": {
+    "en": "/Reports/Customers?${Params}",
+    "is": ""
+  },
+  "/reports/inventory?${params}": {
+    "en": "/Reports/Inventory?${Params}",
+    "is": ""
+  },
+  "/reports/orders?${params}": {
+    "en": "/Reports/Orders?${Params}",
+    "is": ""
+  },
+  "/reports/products?${params}": {
+    "en": "/Reports/Products?${Params}",
+    "is": ""
+  },
+  "/reports/sales?${params}": {
+    "en": "/Reports/Sales?${Params}",
+    "is": ""
+  },
+  "reports.title": {
+    "en": "Reports",
+    "is": ""
+  },
+  "search.noResults": {
+    "en": "No results found for",
+    "is": ""
+  },
+  "search.placeholder": {
+    "en": "Search for products...",
+    "is": ""
+  },
+  "search.result": {
+    "en": "result",
+    "is": ""
+  },
+  "search.results": {
+    "en": "results",
+    "is": ""
+  },
+  "search.searching": {
+    "en": "Searching...",
+    "is": ""
+  },
+  "search.viewAllResults": {
+    "en": "View all results for",
+    "is": ""
+  },
+  "section.key": {
+    "en": "Section Key",
+    "is": ""
+  },
+  "settings.apiKeys.title": {
+    "en": "API Keys",
+    "is": ""
+  },
+  "settings.business.title": {
+    "en": "Business Settings",
+    "is": ""
+  },
+  "settings.general.preferences": {
+    "en": "Preferences",
+    "is": ""
+  },
+  "settings.general.storeAddressPlaceholder": {
+    "en": "Enter your store address",
+    "is": ""
+  },
+  "settings.general.storeDescriptionPlaceholder": {
+    "en": "Describe your store and what makes it special",
+    "is": ""
+  },
+  "settings.general.storeInformation": {
+    "en": "Store Information",
+    "is": ""
+  },
+  "settings.general.storeNamePlaceholder": {
+    "en": "Enter your store name",
+    "is": ""
+  },
+  "settings.general.title": {
+    "en": "General Settings",
+    "is": ""
+  },
+  "settingsOverview.title": {
+    "en": "Settings Overview",
+    "is": ""
+  },
+  "settings.receipt.currentLogo": {
+    "en": "Current logo",
+    "is": ""
+  },
+  "settings.receipt.description": {
+    "en": "Customize your receipt appearance and branding",
+    "is": ""
+  },
+  "settings.receipt.font.arial": {
+    "en": "Arial",
+    "is": ""
+  },
+  "settings.receipt.font.georgia": {
+    "en": "Georgia",
+    "is": ""
+  },
+  "settings.receipt.font.helvetica": {
+    "en": "Helvetica",
+    "is": ""
+  },
+  "settings.receipt.font.inter": {
+    "en": "Inter",
+    "is": ""
+  },
+  "settings.receipt.font.timesNewRoman": {
+    "en": "Times New Roman",
+    "is": ""
+  },
+  "settings.receipt.locationPlaceholder": {
+    "en": "Reykjavík, Iceland",
+    "is": ""
+  },
+  "settings.receipt.noLogo": {
+    "en": "No logo uploaded",
+    "is": ""
+  },
+  "settings.receipt.pageSize.letter": {
+    "en": "Letter",
+    "is": ""
+  },
+  "settings.receipt.thankYouPlaceholder": {
+    "en": "Thank you for your business!",
+    "is": ""
+  },
+  "settings.receipt.title": {
+    "en": "Receipt Settings",
+    "is": ""
+  },
+  "settings.receipt.uploadLogo": {
+    "en": "Upload a logo to appear on receipts",
+    "is": ""
+  },
+  "settings.shipping.title": {
+    "en": "Shipping Settings",
+    "is": ""
+  },
+  "settings.smtp.appPasswordPlaceholder": {
+    "en": "Your app password",
+    "is": ""
+  },
+  "settings.smtp.description": {
+    "en": "Configure SMTP settings for sending receipt emails",
+    "is": ""
+  },
+  "settings.smtp.title": {
+    "en": "Email Settings",
+    "is": ""
+  },
+  "settings.vat.title": {
+    "en": "VAT Settings",
+    "is": ""
+  },
+  "/shipping": {
+    "en": "/Shipping",
+    "is": ""
+  },
+  "/smtp-settings": {
+    "en": "/Smtp-Settings",
+    "is": ""
+  },
+  "state": {
+    "en": "State",
+    "is": ""
+  },
+  "status.active": {
+    "en": "Active",
+    "is": ""
+  },
+  "status.archived": {
+    "en": "Archived",
+    "is": ""
+  },
+  "status.cancelled": {
+    "en": "Cancelled",
+    "is": ""
+  },
+  "status.confirmed": {
+    "en": "Confirmed",
+    "is": ""
+  },
+  "status.delivered": {
+    "en": "Delivered",
+    "is": ""
+  },
+  "status.inactive": {
+    "en": "Inactive",
+    "is": ""
+  },
+  "status.outForDelivery": {
+    "en": "Out for Delivery",
+    "is": ""
+  },
+  "status.pending": {
+    "en": "Pending",
+    "is": ""
+  },
+  "status.preparing": {
+    "en": "Preparing",
+    "is": ""
+  },
+  "status.production": {
+    "en": "Production",
+    "is": ""
+  },
+  "status.ready": {
+    "en": "Ready",
+    "is": ""
+  },
+  "status.sandbox": {
+    "en": "Sandbox",
+    "is": ""
+  },
+  "subcategories.CHAMPAGNE": {
+    "en": "Champagne",
+    "is": ""
+  },
+  "subcategories.COGNAC": {
+    "en": "Cognac",
+    "is": ""
+  },
+  "subcategories.ENERGY_DRINKS": {
+    "en": "Energy Drinks",
+    "is": ""
+  },
+  "subcategories.GIN": {
+    "en": "Gin",
+    "is": ""
+  },
+  "subcategories.LIQUEURS_SHOTS": {
+    "en": "Liqueurs & Shots",
+    "is": ""
+  },
+  "subcategories.NICOTINE_PADS": {
+    "en": "Nicotine Pads",
+    "is": ""
+  },
+  "subcategories.RED_WINE": {
+    "en": "Red Wine",
+    "is": ""
+  },
+  "subcategories.ROSE_WINE": {
+    "en": "Rose Wine",
+    "is": ""
+  },
+  "subcategories.RUM": {
+    "en": "Rum",
+    "is": ""
+  },
+  "subcategories.SODA": {
+    "en": "Soda",
+    "is": ""
+  },
+  "subcategories.SOFT_DRINKS": {
+    "en": "Soft Drinks",
+    "is": ""
+  },
+  "subcategories.SPARKLING_WINE": {
+    "en": "Sparkling Wine",
+    "is": ""
+  },
+  "subcategories.TEQUILA": {
+    "en": "Tequila",
+    "is": ""
+  },
+  "subcategories.VAPE": {
+    "en": "Vape",
+    "is": ""
+  },
+  "subcategories.VODKA": {
+    "en": "Vodka",
+    "is": ""
+  },
+  "subcategories.WHISKEY": {
+    "en": "Whiskey",
+    "is": ""
+  },
+  "subcategories.WHITE_WINE": {
+    "en": "White Wine",
+    "is": ""
+  },
+  "subcategories.YELLOW_WINE": {
+    "en": "Yellow Wine",
+    "is": ""
+  },
+  "subcategory": {
+    "en": "Subcategory",
+    "is": ""
+  },
+  "subscription.biweekly": {
+    "en": "Subscription Biweekly",
+    "is": ""
+  },
+  "subscription.cancel": {
+    "en": "Subscription Cancel",
+    "is": ""
+  },
+  "subscription.createSubscription": {
+    "en": "Subscription CreateSubscription",
+    "is": ""
+  },
+  "subscription.creationFailed": {
+    "en": "Failed to create subscription",
+    "is": ""
+  },
+  "subscription.friday": {
+    "en": "Subscription Friday",
+    "is": ""
+  },
+  "subscription.monday": {
+    "en": "Subscription Monday",
+    "is": ""
+  },
+  "subscription.monthly": {
+    "en": "Subscription Monthly",
+    "is": ""
+  },
+  "subscription.mustBeLoggedIn": {
+    "en": "You must be logged in to create a subscription",
+    "is": ""
+  },
+  "subscription.noPaymentProviderSupport": {
+    "en": "No payment provider currently supports subscriptions",
+    "is": ""
+  },
+  "subscription.noSpecificDay": {
+    "en": "Subscription NoSpecificDay",
+    "is": ""
+  },
+  "/subscriptions/${id}": {
+    "en": "/Subscriptions/${Id}",
+    "is": ""
+  },
+  "/subscriptions?${queryParams.toString()}": {
+    "en": "/Subscriptions?${QueryParams ToString()}",
+    "is": ""
+  },
+  "subscription.saturday": {
+    "en": "Subscription Saturday",
+    "is": ""
+  },
+  "subscription.selectPreferredTimeHelp": {
+    "en": "Choose your preferred delivery time",
+    "is": ""
+  },
+  "/subscriptions/my-subscriptions?${queryParams.toString()}": {
+    "en": "/Subscriptions/My-Subscriptions?${QueryParams ToString()}",
+    "is": ""
+  },
+  "subscription.specialNotesPlaceholder": {
+    "en": "Subscription SpecialNotesPlaceholder",
+    "is": ""
+  },
+  "subscription.sunday": {
+    "en": "Subscription Sunday",
+    "is": ""
+  },
+  "subscription.thursday": {
+    "en": "Subscription Thursday",
+    "is": ""
+  },
+  "subscription.tuesday": {
+    "en": "Subscription Tuesday",
+    "is": ""
+  },
+  "subscription.wednesday": {
+    "en": "Subscription Wednesday",
+    "is": ""
+  },
+  "subscription.weekly": {
+    "en": "Subscription Weekly",
+    "is": ""
+  },
+  "T": {
+    "en": "T",
+    "is": ""
+  },
+  "test.checkout": {
+    "en": "Test Checkout",
+    "is": ""
+  },
+  "tooltips.archive": {
+    "en": "Archive",
+    "is": ""
+  },
+  "tooltips.delete": {
+    "en": "Delete",
+    "is": ""
+  },
+  "tooltips.markAsRead": {
+    "en": "Mark as read",
+    "is": ""
+  },
+  "tooltips.markAsUnread": {
+    "en": "Mark as unread",
+    "is": ""
+  },
+  "tooltips.unarchive": {
+    "en": "Unarchive",
+    "is": ""
+  },
+  "typing-start": {
+    "en": "Typing start",
+    "is": ""
+  },
+  "typing-stop": {
+    "en": "Typing stop",
+    "is": ""
+  },
+  "whyUs.title": {
+    "en": "Af hverju velja okkur",
+    "is": ""
+  }
+}

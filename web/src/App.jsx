@@ -9,6 +9,7 @@ import { updateOrderStatusRealtime } from './store/slices/orderSlice';
 import socketService from './services/socket';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import AdminSidebarWidget from './components/admin/AdminSidebarWidget';
+import { useReceiptCSS } from './hooks/useReceiptCSS';
 
 // Components
 import Navbar from './components/layout/Navbar';
@@ -53,6 +54,7 @@ import DemoData from './pages/admin/DemoData';
 import Translations from './pages/admin/Translations';
 import Media from './pages/admin/Media';
 import MediaUpload from './pages/admin/MediaUpload';
+import Discounts from './pages/admin/Discounts';
 import DeliveryDashboard from './pages/delivery/Dashboard';
 
 function App() {
@@ -60,7 +62,10 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const { isAuthenticated, user, isLoading } = useSelector((state) => state.auth);
-  
+
+  // Load receipt CSS globally
+  useReceiptCSS();
+
   // Check if we're on an admin route
   const isAdminRoute = location.pathname.startsWith('/admin') || location.pathname.startsWith('/delivery');
 
@@ -179,7 +184,7 @@ function App() {
         <div className="min-h-screen flex flex-col bg-gray-50">
           <Navbar />
 
-          <main className="flex-1 pt-16-safe pb-16-safe md:pb-0">
+          <main className="flex-1 pt-16-safe">
             <Routes>
             {/* Public routes */}
             <Route path="/" element={<Home />} />
@@ -201,6 +206,7 @@ function App() {
             <Route element={<ProtectedRoute requiredRole="ADMIN" />}>
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/products" element={<AdminProducts />} />
+              <Route path="/admin/discounts" element={<Discounts />} />
               <Route path="/admin/categories" element={<AdminCategories />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/pos" element={<POSOrders />} />

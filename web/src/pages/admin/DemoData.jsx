@@ -3,6 +3,7 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import { Play, Trash2, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 
 const DemoData = () => {
   const { t } = useLanguage();
@@ -115,16 +116,11 @@ const DemoData = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-               <div>
-                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('demoData.title')}</h1>
-                 <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">{t('demoData.description')}</p>
-               </div>
-             </div>
-           </div>
-         </div>
+        <PageHeader
+          icon={Play}
+          title={t('demoData.title')}
+          description={t('demoData.description')}
+        />
 
       {/* Demo Data Overview */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

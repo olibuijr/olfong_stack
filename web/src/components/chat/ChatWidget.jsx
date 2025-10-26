@@ -166,10 +166,11 @@ const ChatWidget = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-6 right-6 z-50 md:bottom-4 md:right-4">
         <button
           onClick={() => navigate('/login')}
-          className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+          className="bg-primary-600 dark:bg-primary-500 text-white p-4 rounded-full shadow-lg hover:bg-primary-700 dark:hover:bg-primary-600 active:scale-95 transition-all duration-200 hover:shadow-xl"
+          aria-label={t('chat.title')}
         >
           <MessageCircle size={24} />
         </button>
@@ -178,36 +179,44 @@ const ChatWidget = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-20 right-6 z-50 md:bottom-6 md:right-6">
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors relative"
+          className="bg-primary-600 dark:bg-primary-500 text-white p-4 rounded-full shadow-lg hover:bg-primary-700 dark:hover:bg-primary-600 active:scale-95 transition-all duration-200 hover:shadow-xl relative"
+          aria-label={t('chat.title')}
         >
           <MessageCircle size={24} />
           {unreadCount > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-semibold animate-pulse" aria-label={`${unreadCount} unread messages`}>
               {unreadCount}
             </span>
           )}
         </button>
       ) : (
-        <div className="bg-white rounded-lg shadow-xl w-80 h-96 flex flex-col">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-96 max-w-[calc(100vw-2rem)] h-[500px] flex flex-col border border-gray-200 dark:border-gray-700 overflow-hidden">
           {/* Header */}
-          <div className="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
-            <h3 className="font-semibold">{t('chat.title')}</h3>
-            <div className="flex items-center space-x-2">
+          <div className="bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 text-white p-4 flex items-center justify-between flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="p-1.5 bg-white/20 rounded-lg">
+                <MessageCircle size={18} />
+              </div>
+              <h3 className="font-semibold text-lg">{t('chat.title')}</h3>
+            </div>
+            <div className="flex items-center space-x-1">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="text-white hover:bg-blue-700 p-1 rounded"
+                className="text-white hover:bg-white/20 p-1.5 rounded-lg transition-colors"
+                aria-label={isMinimized ? 'Expand' : 'Minimize'}
               >
-                {isMinimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
+                {isMinimized ? <Maximize2 size={18} /> : <Minimize2 size={18} />}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-white hover:bg-blue-700 p-1 rounded"
+                className="text-white hover:bg-white/20 p-1.5 rounded-lg transition-colors"
+                aria-label="Close chat"
               >
-                <X size={16} />
+                <X size={18} />
               </button>
             </div>
           </div>
@@ -215,9 +224,18 @@ const ChatWidget = () => {
           {!isMinimized && (
             <>
               {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-3 space-y-2">
+              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-900/50">
                 {isLoading ? (
-                  <div className="text-center text-gray-500">{t('common.loading')}</div>
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary-600 border-t-transparent mx-auto mb-2"></div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</p>
+                    </div>
+                  </div>
+                ) : messages.length === 0 ? (
+                  <div className="flex items-center justify-center h-full">
+                    <p className="text-center text-sm text-gray-500 dark:text-gray-400">No messages yet. Start a conversation!</p>
+                  </div>
                 ) : (
                   messages.map((message) => (
                     <div
@@ -225,15 +243,17 @@ const ChatWidget = () => {
                       className={`flex ${message.senderId === user?.id ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-xs p-2 rounded-lg ${
+                        className={`max-w-xs px-4 py-2 rounded-xl text-sm transition-all duration-200 ${
                           message.senderId === user?.id
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-gray-200 text-gray-800'
+                            ? 'bg-primary-600 dark:bg-primary-700 text-white rounded-br-none shadow-sm'
+                            : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-bl-none shadow-sm border border-gray-200 dark:border-gray-600'
                         }`}
                       >
-                        <p className="text-sm">{message.content}</p>
-                        <p className="text-xs opacity-75 mt-1">
-                          {new Date(message.createdAt).toLocaleTimeString()}
+                        <p className="break-words">{message.content}</p>
+                        <p className={`text-xs mt-1 opacity-70 ${
+                          message.senderId === user?.id ? 'text-white' : 'text-gray-600 dark:text-gray-400'
+                        }`}>
+                          {new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       </div>
                     </div>
@@ -241,11 +261,11 @@ const ChatWidget = () => {
                 )}
                 {otherUserTyping && (
                   <div className="flex justify-start">
-                    <div className="bg-gray-200 text-gray-800 p-2 rounded-lg">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 rounded-xl rounded-bl-none shadow-sm border border-gray-200 dark:border-gray-600">
+                      <div className="flex space-x-1.5">
+                        <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                       </div>
                     </div>
                   </div>
@@ -254,7 +274,7 @@ const ChatWidget = () => {
               </div>
 
               {/* Input */}
-              <div className="p-3 border-t">
+              <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex-shrink-0">
                 <div className="flex space-x-2">
                   <input
                     ref={inputRef}
@@ -266,14 +286,15 @@ const ChatWidget = () => {
                     }}
                     onKeyPress={handleKeyPress}
                     placeholder={t('chat.typeMessage')}
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
                   />
                   <button
                     onClick={sendMessage}
                     disabled={!newMessage.trim()}
-                    className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-primary-600 dark:bg-primary-700 hover:bg-primary-700 dark:hover:bg-primary-800 disabled:opacity-50 disabled:cursor-not-allowed text-white p-2.5 rounded-lg transition-all duration-200 active:scale-95"
+                    aria-label="Send message"
                   >
-                    <Send size={16} />
+                    <Send size={18} />
                   </button>
                 </div>
               </div>

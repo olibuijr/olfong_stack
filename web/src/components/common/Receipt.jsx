@@ -12,10 +12,12 @@ const Receipt = ({
 }) => {
   
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('is-IS', {
-      style: 'currency',
-      currency: 'ISK'
+    const formatted = new Intl.NumberFormat('is-IS', {
+      style: 'decimal',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(amount);
+    return `${formatted} kr.`;
   };
 
   const formatDate = (date) => {
@@ -56,27 +58,66 @@ const Receipt = ({
     return {};
   };
 
+  const getLogoUrl = () => {
+    if (!settings.logoUrl) return null;
+
+    // If the URL is already absolute (starts with http), return it as is
+    if (settings.logoUrl.startsWith('http')) {
+      return settings.logoUrl;
+    }
+
+    // Otherwise, construct the full URL using the API base URL
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://192.168.8.62:5000/api';
+    const baseUrl = apiUrl.replace('/api', '');
+    return `${baseUrl}${settings.logoUrl}`;
+  };
+
+  const getHeaderStyle = () => {
+    const baseStyle = { color: 'white' };
+    if (settings.useGradient && settings.headerGradient) {
+      return {
+        ...baseStyle,
+        background: settings.headerGradient,
+        WebkitPrintColorAdjust: 'exact',
+        printColorAdjust: 'exact',
+      };
+    }
+    return {
+      ...baseStyle,
+      backgroundColor: settings.headerColor || '#1e40af',
+      WebkitPrintColorAdjust: 'exact',
+      printColorAdjust: 'exact',
+    };
+  };
+
+  // Convert paperSize to a valid CSS class name
+  const paperSizeClass = paperSize.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const templateClass = template || 'modern';
+
   return (
     <div
-      className={`receipt receipt-${template} receipt-${paperSize} ${className}`}
+      className={`receipt receipt-${templateClass} receipt-${paperSizeClass} ${className}`}
       style={{
         '--receipt-header-color': settings.headerColor || '#1e40af',
         '--receipt-accent-color': settings.accentColor || '#3b82f6',
+        fontFamily: settings.fontFamily || "'Courier New', monospace",
+        fontSize: settings.fontSize || '14px',
+        padding: 0,
       }}
     >
       {/* Header */}
-      <div className="header" style={{ backgroundColor: settings.headerColor, color: 'white' }}>
-        {settings.logoUrl && (
+      <div className="header" style={{...getHeaderStyle(), margin: 0}}>
+        {getLogoUrl() && (
           <div className="mb-2 flex justify-center">
             <img
-              src={settings.logoUrl}
+              src={getLogoUrl()}
               alt={getCompanyName()}
               className="h-12"
               style={{ maxHeight: '48px', ...getLogoStyle() }}
             />
           </div>
         )}
-        {!settings.logoUrl && (
+        {!getLogoUrl() && (
           <div className="company-name" style={{ color: 'white' }}>
             {getCompanyName()}
           </div>
@@ -147,13 +188,13 @@ const Receipt = ({
 
         {/* Items */}
         <div className="items">
-          {order.orderItems?.map((item, index) => (
+          {order.items?.map((item, index) => (
             <div key={index} className="item">
               <div className="flex-1">
                 <div className="item-name">{item.product?.name}</div>
                 {item.quantity > 1 && (
                   <div className="item-details">
-                    {item.quantity} x {formatCurrency(item.product?.price || 0)}
+                    {item.quantity} x {formatCurrency(item.price || 0)}
                   </div>
                 )}
                 {item.notes && (
@@ -163,7 +204,7 @@ const Receipt = ({
                 )}
               </div>
               <div className="item-price">
-                {formatCurrency(item.totalPrice || 0)}
+                {formatCurrency((item.price || 0) * (item.quantity || 1))}
               </div>
             </div>
           ))}
@@ -172,7 +213,7 @@ const Receipt = ({
         {/* Totals */}
         <div className="totals">
           <div className="total-line">
-            <span>{'Undanþeginn VSK'}:</span>
+            <span>{'Vörur'}:</span>
             <span>{formatCurrency(order.subtotal || 0)}</span>
           </div>
           {order.shippingCost > 0 && (

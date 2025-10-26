@@ -9,7 +9,8 @@ import {
   Users,
   Package,
   Download,
-  Loader2
+  Loader2,
+  BarChart3
 } from 'lucide-react';
 import {
   Chart as ChartJS,
@@ -25,6 +26,7 @@ import {
 } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import { fetchAnalytics, fetchRevenueTrend } from '../../store/slices/analyticsSlice';
 
 // Register Chart.js components
@@ -145,33 +147,30 @@ const Analytics = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminAnalytics.analyticsDashboard')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminAnalytics.businessInsights')}</p>
-              </div>
-              <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-                <select
-                  value={timeRange}
-                  onChange={(e) => handleTimeRangeChange(e.target.value)}
-                  className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-                >
-                  {timeRanges.map(range => (
-                    <option key={range.value} value={range.value}>
-                      {range.label}
-                    </option>
-                  ))}
-                </select>
-                <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                  <Download className="h-4 w-4 mr-2" />
-                  {t('adminAnalytics.export')}
-                </button>
-              </div>
+        <PageHeader
+          icon={BarChart3}
+          title={t('adminAnalytics.analyticsDashboard')}
+          description={t('adminAnalytics.businessInsights')}
+          actions={
+            <div className="flex items-center space-x-4">
+              <select
+                value={timeRange}
+                onChange={(e) => handleTimeRangeChange(e.target.value)}
+                className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+              >
+                {timeRanges.map(range => (
+                  <option key={range.value} value={range.value}>
+                    {range.label}
+                  </option>
+                ))}
+              </select>
+              <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                <Download className="h-4 w-4 mr-2" />
+                {t('adminAnalytics.export')}
+              </button>
             </div>
-          </div>
-        </div>
+          }
+        />
 
         {/* Main Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
@@ -220,6 +219,70 @@ const Analytics = () => {
             </>
           )}
         </div>
+
+        {/* VAT Reporting Section */}
+        {!isLoading && metrics.vat && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {/* Total VAT Card */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-blue-700 dark:text-blue-300">{t('adminAnalytics.totalVat') || 'Total VAT'}</p>
+                  <p className="text-2xl font-bold text-blue-900 dark:text-blue-100 mt-2">{formatCurrency(metrics.vat.total)}</p>
+                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">{((metrics.vat.total / metrics.revenue.current) * 100).toFixed(1)}% {t('adminAnalytics.ofRevenue') || 'of revenue'}</p>
+                </div>
+                <div className="bg-blue-200 dark:bg-blue-700 rounded-full p-3">
+                  <DollarSign className="h-6 w-6 text-blue-700 dark:text-blue-200" />
+                </div>
+              </div>
+            </div>
+
+            {/* Revenue Before VAT Card */}
+            <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/30 dark:to-indigo-800/20 rounded-xl border border-indigo-200 dark:border-indigo-700 shadow-sm p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-indigo-700 dark:text-indigo-300">{t('adminAnalytics.revenueBeforeVat') || 'Revenue (before VAT)'}</p>
+                  <p className="text-2xl font-bold text-indigo-900 dark:text-indigo-100 mt-2">{formatCurrency(metrics.vat.beforeVat)}</p>
+                  <p className="text-xs text-indigo-600 dark:text-indigo-400 mt-1">{t('adminAnalytics.netRevenue') || 'Net revenue'}</p>
+                </div>
+                <div className="bg-indigo-200 dark:bg-indigo-700 rounded-full p-3">
+                  <TrendingUp className="h-6 w-6 text-indigo-700 dark:text-indigo-200" />
+                </div>
+              </div>
+            </div>
+
+            {/* Per-Profile VAT Cards */}
+            {metrics.vat.profiles && metrics.vat.profiles.map((profile, index) => {
+              const profileColors = [
+                { bg: 'from-purple-50 to-purple-100', darkBg: 'dark:from-purple-900/30 dark:to-purple-800/20', border: 'border-purple-200 dark:border-purple-700', text: 'text-purple-700 dark:text-purple-300', darkText: 'text-purple-900 dark:text-purple-100', iconBg: 'bg-purple-200 dark:bg-purple-700', icon: 'text-purple-700 dark:text-purple-200' },
+                { bg: 'from-green-50 to-green-100', darkBg: 'dark:from-green-900/30 dark:to-green-800/20', border: 'border-green-200 dark:border-green-700', text: 'text-green-700 dark:text-green-300', darkText: 'text-green-900 dark:text-green-100', iconBg: 'bg-green-200 dark:bg-green-700', icon: 'text-green-700 dark:text-green-200' },
+                { bg: 'from-orange-50 to-orange-100', darkBg: 'dark:from-orange-900/30 dark:to-orange-800/20', border: 'border-orange-200 dark:border-orange-700', text: 'text-orange-700 dark:text-orange-300', darkText: 'text-orange-900 dark:text-orange-100', iconBg: 'bg-orange-200 dark:bg-orange-700', icon: 'text-orange-700 dark:text-orange-200' },
+                { bg: 'from-pink-50 to-pink-100', darkBg: 'dark:from-pink-900/30 dark:to-pink-800/20', border: 'border-pink-200 dark:border-pink-700', text: 'text-pink-700 dark:text-pink-300', darkText: 'text-pink-900 dark:text-pink-100', iconBg: 'bg-pink-200 dark:bg-pink-700', icon: 'text-pink-700 dark:text-pink-200' },
+                { bg: 'from-cyan-50 to-cyan-100', darkBg: 'dark:from-cyan-900/30 dark:to-cyan-800/20', border: 'border-cyan-200 dark:border-cyan-700', text: 'text-cyan-700 dark:text-cyan-300', darkText: 'text-cyan-900 dark:text-cyan-100', iconBg: 'bg-cyan-200 dark:bg-cyan-700', icon: 'text-cyan-700 dark:text-cyan-200' }
+              ];
+              const colors = profileColors[index % profileColors.length];
+
+              return (
+                <div key={profile.profile?.id || index} className={`bg-gradient-to-br ${colors.bg} ${colors.darkBg} rounded-xl border ${colors.border} shadow-sm p-6`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className={`text-sm font-medium ${colors.text}`}>
+                        {profile.profile?.nameIs || profile.profile?.name} ({profile.profile?.vatRate}%)
+                      </p>
+                      <p className={`text-2xl font-bold ${colors.darkText} mt-2`}>{formatCurrency(profile.total)}</p>
+                      <p className={`text-xs ${colors.text.replace('700', '600').replace('300', '400')} mt-1`}>
+                        {profile.percentage.toFixed(1)}% {t('adminAnalytics.ofVat') || 'of VAT'}
+                      </p>
+                    </div>
+                    <div className={`${colors.iconBg} rounded-full p-3`}>
+                      <BarChart3 className={`h-6 w-6 ${colors.icon}`} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Revenue Chart */}

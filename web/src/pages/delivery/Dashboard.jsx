@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-  Truck, 
-  Package, 
-  MapPin, 
-  Clock, 
+import {
+  Truck,
+  Package,
+  MapPin,
+  Clock,
   CheckCircle,
-  Phone, 
-  User, 
+  Phone,
+  User,
   AlertCircle,
   Play,
   Pause
@@ -16,6 +16,7 @@ import {
 import { fetchAllOrders, updateOrderStatus } from '../../store/slices/orderSlice';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import toast from 'react-hot-toast';
 
 const DeliveryDashboard = () => {
@@ -214,55 +215,48 @@ const DeliveryDashboard = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {user?.role === 'ADMIN' ? 'Yfirlit afhendinga' : 'Afhendingarborð'}
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  {user?.role === 'ADMIN'
-                    ? 'Fylgstu með öllum afhendingum í kerfinu.'
-                    : 'Velkomin, ' + (user?.fullName || user?.username) + '. Stjórnaðu afhendingum þínum.'
-                  }
-                </p>
-              </div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+          <PageHeader
+            icon={Truck}
+            title={user?.role === 'ADMIN' ? 'Yfirlit afhendinga' : 'Afhendingarborð'}
+            description={user?.role === 'ADMIN'
+              ? 'Fylgstu með öllum afhendingum í kerfinu.'
+              : 'Velkomin, ' + (user?.fullName || user?.username) + '. Stjórnaðu afhendingum þínum.'
+            }
+          />
 
-              {/* Location Tracking Toggle - Only for delivery personnel */}
-              {user?.role === 'DELIVERY' && (
-                <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-                  <div className="flex items-center space-x-2">
-                    <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {isTracking
-                        ? 'Staðsetning virk'
-                        : 'Staðsetning óvirk'
-                      }
-                    </span>
-                  </div>
-                  <button
-                    onClick={toggleTracking}
-                    className={`inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                      isTracking
-                        ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
-                        : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500'
-                    } focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200`}
-                  >
-                    {isTracking ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
-                    <span>
-                      {isTracking ? 'Stöðva' : 'Byrja'}
-                    </span>
-                  </button>
-                </div>
-              )}
+          {/* Location Tracking Toggle - Only for delivery personnel */}
+          {user?.role === 'DELIVERY' && (
+            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+              <div className="flex items-center space-x-2">
+                <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {isTracking
+                    ? 'Staðsetning virk'
+                    : 'Staðsetning óvirk'
+                  }
+                </span>
+              </div>
+              <button
+                onClick={toggleTracking}
+                className={`inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                  isTracking
+                    ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
+                    : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500'
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200`}
+              >
+                {isTracking ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
+                <span>
+                  {isTracking ? 'Stöðva' : 'Byrja'}
+                </span>
+              </button>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="card p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                 <Package className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -276,7 +270,7 @@ const DeliveryDashboard = () => {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
                 <Truck className="w-6 h-6 text-orange-600 dark:text-orange-400" />
@@ -292,7 +286,7 @@ const DeliveryDashboard = () => {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
                 <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
@@ -311,7 +305,7 @@ const DeliveryDashboard = () => {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
                 <Clock className="w-6 h-6 text-purple-600 dark:text-purple-400" />
@@ -335,7 +329,7 @@ const DeliveryDashboard = () => {
           </h2>
 
           {assignedOrders.length === 0 ? (
-            <div className="card p-8 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 text-center">
               <Truck className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 {user?.role === 'ADMIN' ? 'Engar afhendingarpantanir' : 'Engar pantanir úthlutaðar'}
@@ -350,7 +344,7 @@ const DeliveryDashboard = () => {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {assignedOrders.map((order) => (
-                <div key={order.id} className="card p-6">
+                <div key={order.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">
@@ -476,14 +470,14 @@ Breyta
         {/* Status Update Modal */}
         {showStatusModal && selectedOrder && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                 Uppfæra pöntun #{selectedOrder.orderNumber}
               </h2>
               
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-Ný staða
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Ný staða
                 </label>
                 <select
                   value={newStatus}

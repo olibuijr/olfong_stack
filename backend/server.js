@@ -27,10 +27,12 @@ const customerRoutes = require('./src/routes/customers');
 const analyticsRoutes = require('./src/routes/analytics');
 const reportsRoutes = require('./src/routes/reports');
 const chatRoutes = require('./src/routes/chat');
+const notificationRoutes = require('./src/routes/notifications');
 const integrationRoutes = require('./src/routes/integrations');
 const shippingRoutes = require('./src/routes/shipping');
 const demoDataRoutes = require('./src/routes/demo-data');
 const translationRoutes = require('./src/routes/translations');
+const vatProfileRoutes = require('./src/routes/vatProfiles');
 const ChatService = require('./src/services/chatService');
 
 const app = express();
@@ -92,10 +94,12 @@ app.use('/api/receipt-settings', require('./src/routes/receiptSettings'));
 app.use('/api/smtp-settings', require('./src/routes/smtpSettings'));
 app.use('/api/reports', reportsRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use('/api/integrations', integrationRoutes);
 app.use('/api/shipping', shippingRoutes);
 app.use('/api/admin/demo-data', demoDataRoutes);
 app.use('/api/translations', translationRoutes);
+app.use('/api/vat-profiles', vatProfileRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

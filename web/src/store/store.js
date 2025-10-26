@@ -13,6 +13,7 @@ import analyticsReducer from './slices/analyticsSlice';
 import reportsReducer from './slices/reportsSlice';
 import receiptSettingsReducer from './slices/receiptSettingsSlice';
 import smtpSettingsReducer from './slices/smtpSettingsSlice';
+import discountReducer from './slices/discountSlice';
 
 export const store = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ export const store = configureStore({
     reports: reportsReducer,
     receiptSettings: receiptSettingsReducer,
     smtpSettings: smtpSettingsReducer,
+    discounts: discountReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

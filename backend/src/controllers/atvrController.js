@@ -314,7 +314,7 @@ const parseProductFromSearchResult = async ($, productElement, language = 'is') 
       /(\d+(?:\.\d+)?)\s*ml\s*(\d+(?:\.\d+)?)\s*%/,
       /(\d+(?:\.\d+)?)\s*ml/
     ];
-    
+
     for (const pattern of volumePatterns) {
       const match = allText.match(pattern);
       if (match) {
@@ -323,6 +323,28 @@ const parseProductFromSearchResult = async ($, productElement, language = 'is') 
           product.alcoholContent = match[2].replace('%', '');
         }
         break;
+      }
+    }
+
+    // If alcohol content still not found, search for standalone percentage pattern
+    if (!product.alcoholContent) {
+      const alcoholPatterns = [
+        /(?:Alcohol|Styrkleiki|Alkóhólprósenta|vol\.?\s*(?:alcohol|alkóhólinnihald)?)\s*(?:Content)?[\s:]+(\d+(?:\.\d+)?)\s*%/i,
+        /(\d+(?:\.\d+)?)\s*%\s*(?:vol\.?|alcohol|alkóhólinnihald)/i,
+        /(\d+(?:\.\d+)?)\s*%\s*vol/i,
+        /(?:vol|alcohol|alkóhólinnihald)[\s:]+(\d+(?:\.\d+)?)\s*%/i
+      ];
+
+      for (const pattern of alcoholPatterns) {
+        const match = allText.match(pattern);
+        if (match && match[1]) {
+          const percentage = match[1];
+          // Only accept if it's a reasonable alcohol percentage (0-100)
+          if (parseFloat(percentage) >= 0 && parseFloat(percentage) <= 100) {
+            product.alcoholContent = percentage;
+            break;
+          }
+        }
       }
     }
 
@@ -455,7 +477,13 @@ const getProductDetails = async (productId, language = 'is') => {
 // Get product details for a specific language with comprehensive data extraction
 const getProductDetailsForLanguage = async (productId, lang) => {
   try {
-    const url = `${ATVR_BASE_URLS[lang]}/desktopdefault.aspx/tabid-54/?productID=${productId}`;
+    // Use the new /heim format for Icelandic and /english/home format for English
+    let url;
+    if (lang === 'is') {
+      url = `https://www.vinbudin.is/heim/vorur/stoek-vara.aspx/?productid=${productId}/`;
+    } else {
+      url = `https://www.vinbudin.is/english/home/products/stoek-vara.aspx/?productid=${productId}/`;
+    }
     
     // Try axios first, fallback to Playwright if needed
     let $;
@@ -513,14 +541,67 @@ const getProductDetailsForLanguage = async (productId, lang) => {
       }
     }
 
-    // Enhanced description extraction
-    const descriptionSelectors = ['p', '.description', '.product-description', '.product-info'];
-    for (const selector of descriptionSelectors) {
-      const descElement = $(selector).first();
-      if (descElement.length && descElement.text().trim().length > 10) {
-        product.description = descElement.text().trim();
-        break;
+    // Enhanced description extraction - look for product flavor/taste descriptions
+    // Try multiple strategies to find the product description
+    let foundDescription = null;
+
+    // Strategy 1: Look for text that contains flavor/tasting notes (contains common descriptors)
+    const flavorKeywords = ['color|taste|flavor|note|aroma|body|palate|finish|sweet|dry|crisp|fresh|smooth|fruity|citrus|berry|spice|wood|vanilla|oak|mineral'];
+    const allElements = $('p, span, div');
+    for (let i = 0; i < allElements.length; i++) {
+      const element = allElements.eq(i);
+      let text = element.text().trim();
+
+      // Skip empty or very short text
+      if (!text || text.length < 10) continue;
+
+      // Skip if it's contact info or navigation
+      if (text.match(/@|vinbudin|navigation|instagram|facebook|twitter|email|contact/i)) continue;
+
+      // Check if it contains flavor-related keywords
+      if (text.match(new RegExp(flavorKeywords, 'i')) && !text.match(/^(Standard|VAT|Price|Stock|In|Ekki|Out)/i)) {
+        // Clean up: remove "Sjá meira" or "See more"
+        text = text.replace(/\s*Sjá meira.*$/i, '').replace(/\s*See more.*$/i, '').trim();
+
+        // Additional cleaning: remove parenthetical references
+        text = text.replace(/\s*\([^)]*\)\s*$/g, '').trim();
+
+        if (text.length > 15 && text.length < 300) {
+          foundDescription = text;
+          break;
+        }
       }
+    }
+
+    // Strategy 2: If no flavor description found, look for any meaningful paragraph
+    if (!foundDescription) {
+      const descriptionSelectors = ['p', '.description', '.product-description', '.product-info'];
+      for (const selector of descriptionSelectors) {
+        const descElement = $(selector).first();
+        if (descElement.length) {
+          let descText = descElement.text().trim();
+
+          // Skip unwanted content
+          if (descText.match(/@|vinbudin|navigation|Sjá meira|See more|instagram|facebook|twitter|email|contact/i)) {
+            continue;
+          }
+
+          // Skip if too short or contains unwanted patterns
+          if (descText.length > 10 && !descText.match(/^(Standard|VAT|Price|Stock|In stock|Ekki til|Out of stock)/i)) {
+            // Clean up the description
+            descText = descText.replace(/\s*Sjá meira\s*$/i, '').replace(/\s*See more\s*$/i, '').trim();
+
+            if (descText.length > 10 && descText.length < 300) {
+              foundDescription = descText;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (foundDescription) {
+      product.description = foundDescription;
     }
 
     // Enhanced price extraction
@@ -564,7 +645,7 @@ const getProductDetailsForLanguage = async (productId, lang) => {
       /(\d+(?:\.\d+)?)\s*ml\s*(\d+(?:\.\d+)?)\s*%/,
       /(\d+(?:\.\d+)?)\s*ml/
     ];
-    
+
     for (const pattern of volumePatterns) {
       const match = allText.match(pattern);
       if (match) {
@@ -576,41 +657,240 @@ const getProductDetailsForLanguage = async (productId, lang) => {
       }
     }
 
-    // Enhanced producer/distributor extraction
-    const producerPatterns = [
-      /Framleiðandi[:\s]+(.+?)(?:\n|$)/i,
-      /Producer[:\s]+(.+?)(?:\n|$)/i,
-      /Framleitt af[:\s]+(.+?)(?:\n|$)/i
-    ];
-    
-    for (const pattern of producerPatterns) {
-      const match = allText.match(pattern);
-      if (match) {
-        if (lang === 'is') {
-          product.producerIs = match[1].trim();
-        } else {
-          product.producer = match[1].trim();
+    // If alcohol content still not found, search for standalone percentage pattern
+    if (!product.alcoholContent) {
+      const alcoholPatterns = [
+        /(?:Alcohol|Styrkleiki|Alkóhólprósenta|vol\.?\s*(?:alcohol|alkóhólinnihald)?)\s*(?:Content)?[\s:]+(\d+(?:\.\d+)?)\s*%/i,
+        /(\d+(?:\.\d+)?)\s*%\s*(?:vol\.?|alcohol|alkóhólinnihald)/i,
+        /(\d+(?:\.\d+)?)\s*%\s*vol/i,
+        /(?:vol|alcohol|alkóhólinnihald)[\s:]+(\d+(?:\.\d+)?)\s*%/i
+      ];
+
+      for (const pattern of alcoholPatterns) {
+        const match = allText.match(pattern);
+        if (match && match[1]) {
+          const percentage = match[1];
+          // Only accept if it's a reasonable alcohol percentage (0-100)
+          if (parseFloat(percentage) >= 0 && parseFloat(percentage) <= 100) {
+            product.alcoholContent = percentage;
+            break;
+          }
         }
-        break;
       }
     }
 
-    // Enhanced country extraction
-    const countryPatterns = [
-      /Land[:\s]+(.+?)(?:\n|$)/i,
-      /Country[:\s]+(.+?)(?:\n|$)/i,
-      /Upprunaland[:\s]+(.+?)(?:\n|$)/i
-    ];
-    
-    for (const pattern of countryPatterns) {
-      const match = allText.match(pattern);
-      if (match) {
-        if (lang === 'is') {
-          product.countryIs = match[1].trim();
-        } else {
-          product.country = match[1].trim();
+    // Helper function to extract label-value pairs from HTML structure
+    // Looks for elements containing label and extracts the next sibling's value
+    // Handles cases where labels and values are in adjacent or nested elements
+    const extractLabelValuePair = (labelText) => {
+      let value = null;
+
+      // Try to find the element containing the label
+      // Search in two passes: first for exact labels within product details area,
+      // then broader if needed
+      const allElements = $('*');
+      let bestMatch = null;
+      let bestIndex = -1;
+
+      for (let i = 0; i < allElements.length; i++) {
+        const el = allElements.eq(i);
+        const text = el.text().trim();
+
+        // Check if this element contains exactly the label (or label + whitespace)
+        if (text.match(new RegExp(`^${labelText}\\s*$`, 'i')) || text === labelText.trim()) {
+          // Skip menu items and header navigation - they typically appear before main content
+          // by checking if element is in expected product detail area or not in navigation
+          const elParents = el.parents('[class*="product"], [class*="detail"], [id*="product"], [class*="info"]');
+          const inNav = el.parents('[class*="nav"], [class*="menu"], [role="navigation"]').length > 0;
+
+          // Prefer elements that are in a product/detail container and not in navigation
+          if (elParents.length > 0 && !inNav) {
+            bestMatch = el;
+            bestIndex = i;
+            break; // Found it in the right context
+          } else if (bestMatch === null && !inNav) {
+            // Remember first occurrence that's not in nav
+            bestMatch = el;
+            bestIndex = i;
+          }
         }
-        break;
+      }
+
+      if (bestMatch) {
+        const el = bestMatch;
+        // Get the next sibling element
+        const nextEl = el.next();
+        if (nextEl.length) {
+          const nextText = nextEl.text().trim();
+          // Make sure it's not another label
+          if (!nextText.match(/^(Producer|Framleiðandi|Supplier|Heildsali|Country|Land|Packaging|Umbúðir|Weight|Þyngd|Carbon|Kolefnis|Region|Svæði|Origin|Uppruni|Alcohol|Styrkleiki|Unit|Eining|Vintage|Árétun)\s*$/i)) {
+            value = nextText;
+          }
+        }
+
+        // Also try parent's next sibling if direct sibling didn't work
+        if (!value) {
+          const parentNext = el.parent().next();
+          if (parentNext.length) {
+            const parentNextText = parentNext.text().trim();
+            if (parentNextText && !parentNextText.match(/^(Producer|Framleiðandi|Supplier|Heildsali|Country|Land|Packaging|Umbúðir|Weight|Þyngd|Carbon|Kolefnis|Region|Svæði|Origin|Uppruni|Alcohol|Styrkleiki|Unit|Eining|Vintage|Árétun)\s*$/i)) {
+              value = parentNextText;
+            }
+          }
+        }
+      }
+
+      return value;
+    };
+
+    // Extract structured product details using label-value pairs
+    // Producer/Framleiðandi
+    let producerValue = extractLabelValuePair('Producer') ||
+                        extractLabelValuePair('Framleiðandi') ||
+                        extractLabelValuePair('Framleitt af');
+    if (producerValue) {
+      if (lang === 'is') {
+        product.producerIs = producerValue.trim();
+      } else {
+        product.producer = producerValue.trim();
+      }
+    }
+
+    // Alcohol Content / Styrkleiki - Extract from label-value pairs first
+    let alcoholFromLabel = extractLabelValuePair('Alcohol') ||
+                          extractLabelValuePair('Styrkleiki') ||
+                          extractLabelValuePair('STYRKLEIKI') ||
+                          extractLabelValuePair('Alcohol Content') ||
+                          extractLabelValuePair('Alcohol Vol') ||
+                          extractLabelValuePair('Vol');
+    if (alcoholFromLabel) {
+      // Extract numeric value with % from the label result
+      // Match pattern like "6,5% vol" or "6.5% vol" or just "6,5%"
+      const alcoholMatch = alcoholFromLabel.match(/(\d+[.,]\d+|\d+)\s*%/);
+      if (alcoholMatch) {
+        // Replace comma with period for consistency
+        product.alcoholContent = alcoholMatch[1].replace(',', '.');
+      }
+    }
+
+    // Supplier/Heildsali/Distributor
+    let supplierValue = extractLabelValuePair('Supplier') ||
+                        extractLabelValuePair('Heildsali') ||
+                        extractLabelValuePair('Distributor') ||
+                        extractLabelValuePair('Dreifaraðili');
+    if (supplierValue) {
+      if (lang === 'is') {
+        product.distributorIs = supplierValue.trim();
+      } else {
+        product.distributor = supplierValue.trim();
+      }
+    }
+
+    // Country
+    let countryValue = extractLabelValuePair('Country') ||
+                       extractLabelValuePair('Land');
+    if (countryValue) {
+      if (lang === 'is') {
+        product.countryIs = countryValue.trim();
+      } else {
+        product.country = countryValue.trim();
+      }
+    }
+
+    // Packaging/Umbúðir
+    let packagingValue = extractLabelValuePair('Packaging') ||
+                         extractLabelValuePair('Umbúðir');
+    if (packagingValue) {
+      if (lang === 'is') {
+        product.packagingIs = packagingValue.trim();
+      } else {
+        product.packaging = packagingValue.trim();
+      }
+    }
+
+    // Weight of packaging / Þyngd umbúða
+    let weightValue = extractLabelValuePair('Weight of packaging') ||
+                      extractLabelValuePair('Þyngd umbúða');
+    if (weightValue) {
+      if (lang === 'is') {
+        product.packagingWeightIs = weightValue.trim();
+      } else {
+        product.packagingWeight = weightValue.trim();
+      }
+    }
+
+    // Carbon footprint / Kolefnisarfar
+    let carbonValue = extractLabelValuePair('Carbon footprint') ||
+                      extractLabelValuePair('Est carbon footpr') ||
+                      extractLabelValuePair('Kolefnisarfar');
+    if (carbonValue) {
+      if (lang === 'is') {
+        product.carbonFootprintIs = carbonValue.trim();
+      } else {
+        product.carbonFootprint = carbonValue.trim();
+      }
+    }
+
+    // Region/Area extraction - fallback to regex if DOM extraction fails
+    let regionValue = extractLabelValuePair('Region') ||
+                      extractLabelValuePair('Svæði');
+    if (regionValue) {
+      if (lang === 'is') {
+        product.regionIs = regionValue.trim();
+      } else {
+        product.region = regionValue.trim();
+      }
+    }
+
+    // Origin/Appellation extraction - fallback to regex if DOM extraction fails
+    let originValue = extractLabelValuePair('Origin') ||
+                      extractLabelValuePair('Uppruni') ||
+                      extractLabelValuePair('Appellation');
+    if (originValue) {
+      if (lang === 'is') {
+        product.originIs = originValue.trim();
+      } else {
+        product.origin = originValue.trim();
+      }
+    }
+
+    // Vintage extraction (for wines)
+    let vintageValue = extractLabelValuePair('Vintage') ||
+                       extractLabelValuePair('Árétun');
+    if (vintageValue && vintageValue.match(/\d{4}/)) {
+      product.vintage = vintageValue.match(/\d{4}/)[0];
+    }
+
+    // Grape variety extraction
+    let grapeValue = extractLabelValuePair('Grape variety') ||
+                     extractLabelValuePair('Þrúguafbrigði');
+    if (grapeValue) {
+      if (lang === 'is') {
+        product.grapeVarietyIs = grapeValue.trim();
+      } else {
+        product.grapeVariety = grapeValue.trim();
+      }
+    }
+
+    // Wine style extraction
+    let wineStyleValue = extractLabelValuePair('Wine style') ||
+                         extractLabelValuePair('Vínstíll');
+    if (wineStyleValue) {
+      if (lang === 'is') {
+        product.wineStyleIs = wineStyleValue.trim();
+      } else {
+        product.wineStyle = wineStyleValue.trim();
+      }
+    }
+
+    // Price per liter extraction
+    let pricePerLiterValue = extractLabelValuePair('Price per liter') ||
+                             extractLabelValuePair('Verð á lítri');
+    if (pricePerLiterValue) {
+      if (lang === 'is') {
+        product.pricePerLiterIs = pricePerLiterValue.trim();
+      } else {
+        product.pricePerLiter = pricePerLiterValue.trim();
       }
     }
 
@@ -719,6 +999,7 @@ const searchProducts = async (req, res) => {
           if (product.packagingIs && !existing.packagingIs) existing.packagingIs = product.packagingIs;
           if (product.packagingWeight && !existing.packagingWeight) existing.packagingWeight = product.packagingWeight;
           if (product.packagingWeightIs && !existing.packagingWeightIs) existing.packagingWeightIs = product.packagingWeightIs;
+          if (product.alcoholContent && !existing.alcoholContent) existing.alcoholContent = product.alcoholContent;
           if (product.carbonFootprint && !existing.carbonFootprint) existing.carbonFootprint = product.carbonFootprint;
           if (product.carbonFootprintIs && !existing.carbonFootprintIs) existing.carbonFootprintIs = product.carbonFootprintIs;
           if (product.vintage && !existing.vintage) existing.vintage = product.vintage;
@@ -898,13 +1179,24 @@ const searchATVRInLanguage = async (searchTerm, language) => {
     }
 
     // Remove duplicates based on product ID
-    const uniqueProducts = products.filter((product, index, self) => 
+    const uniqueProducts = products.filter((product, index, self) =>
       index === self.findIndex(p => p.id === product.id)
     );
 
-    console.log(`Found ${uniqueProducts.length} products for ${language}`);
+    // Filter to only include products where the search term appears in the product name
+    // This prevents irrelevant results from being returned
+    const searchTermLower = searchTerm.toLowerCase().trim();
+    const filteredProducts = uniqueProducts.filter(product => {
+      const productNameLower = (product.name || '').toLowerCase();
+      const productNameIsLower = (product.nameIs || '').toLowerCase();
 
-    return uniqueProducts;
+      // Check if search term is in product name (allows partial matches)
+      return productNameLower.includes(searchTermLower) || productNameIsLower.includes(searchTermLower);
+    });
+
+    console.log(`Found ${filteredProducts.length} products for ${language} (filtered from ${uniqueProducts.length})`);
+
+    return filteredProducts;
 
   } catch (error) {
     console.error(`Error searching ATVR products for ${language}:`, error);

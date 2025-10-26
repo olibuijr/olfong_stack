@@ -16,9 +16,11 @@ import {
   Package,
   Loader2,
   AlertCircle,
-  CheckCircle
+  CheckCircle,
+  Calculator
 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import { fetchProducts } from '../../store/slices/productSlice';
 import { fetchCategories } from '../../store/slices/categorySlice';
 import api from '../../services/api';
@@ -45,6 +47,27 @@ const POSOrders = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
   const [currentOrder, setCurrentOrder] = useState(null);
+  const [vatSettings, setVatSettings] = useState(null);
+
+  // Fetch VAT settings
+  const fetchVatSettings = async () => {
+    try {
+      const response = await api.get('/settings?category=VAT');
+      if (response.data) {
+        const settings = {};
+        response.data.forEach(setting => {
+          if (setting.key === 'vatRate') {
+            settings.rate = parseInt(setting.value);
+          } else {
+            settings[setting.key] = setting.value === 'true';
+          }
+        });
+        setVatSettings(settings);
+      }
+    } catch (error) {
+      console.error('Failed to fetch VAT settings:', error);
+    }
+  };
 
   // Load initial data
   useEffect(() => {
@@ -53,6 +76,7 @@ const POSOrders = () => {
       dispatch(fetchCategories());
       fetchShippingOptions();
       fetchPaymentGateways();
+      fetchVatSettings();
     }
   }, [dispatch, user]);
 
@@ -138,11 +162,15 @@ const POSOrders = () => {
     setCart(cart.filter(item => item.productId !== productId));
   };
 
-  // Calculate totals
+  // Calculate totals with VAT
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const selectedShipping = shippingOptions.find(option => option.id === parseInt(shippingOptionId));
   const shippingCost = selectedShipping ? selectedShipping.fee : 0;
-  const total = subtotal + shippingCost;
+
+  // Calculate VAT
+  const vatRate = vatSettings?.rate || 24; // Default to 24%
+  const vatAmount = Math.round(subtotal * (vatRate / 100));
+  const total = subtotal + vatAmount + shippingCost;
 
   // Search customers
   const searchCustomers = async (query) => {
@@ -267,12 +295,11 @@ const POSOrders = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('pos.title')}</h1>
-            <p className="text-gray-600 dark:text-gray-400">{t('pos.description')}</p>
-          </div>
-        </div>
+        <PageHeader
+          icon={Calculator}
+          title={t('pos.title')}
+          description={t('pos.description')}
+        />
 
         <div className="grid grid-cols-12 gap-6">
           {/* Left: Product Selection */}
@@ -453,11 +480,20 @@ const POSOrders = () => {
               {/* Totals */}
               <div className="space-y-2 mb-6">
                 <div className="flex justify-between text-sm">
-                                    <span>{t('pos.subtotal')}:</span>
+                  <span>{t('pos.subtotal')}:</span>
                   <span>{subtotal.toLocaleString()} ISK</span>
                 </div>
+
+                {/* VAT Line Item */}
+                {vatAmount > 0 && (
+                  <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                    <span>{t('checkout.vat')} ({vatRate}%):</span>
+                    <span>{vatAmount.toLocaleString()} ISK</span>
+                  </div>
+                )}
+
                 <div className="flex justify-between text-sm">
-                                    <span>{t('pos.shipping')}:</span>
+                  <span>{t('pos.shipping')}:</span>
                   <span>{shippingCost.toLocaleString()} ISK</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold border-t border-gray-200 dark:border-gray-700 pt-2">
@@ -602,7 +638,30 @@ const POSOrders = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-2">
+                  {/* Subtotal before VAT */}
+                  <div className="flex justify-between text-sm">
+                    <span>{t('checkoutPage.subtotal')}:</span>
+                    <span>{(currentOrder.subtotalBeforeVat || currentOrder.totalAmount - currentOrder.deliveryFee - (currentOrder.taxAmount || 0)).toLocaleString()} ISK</span>
+                  </div>
+
+                  {/* VAT Line */}
+                  {currentOrder.taxAmount > 0 && (
+                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                      <span>{t('checkout.vat')} ({currentOrder.vatRate || 24}%):</span>
+                      <span>{currentOrder.taxAmount.toLocaleString()} ISK</span>
+                    </div>
+                  )}
+
+                  {/* Shipping */}
+                  {currentOrder.deliveryFee > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span>{t('pos.shipping')}:</span>
+                      <span>{currentOrder.deliveryFee.toLocaleString()} ISK</span>
+                    </div>
+                  )}
+
+                  {/* Total */}
                   <div className="flex justify-between font-bold text-lg">
                     <span>{t('pos.total')}:</span>
                     <span>{currentOrder.totalAmount.toLocaleString()} ISK</span>

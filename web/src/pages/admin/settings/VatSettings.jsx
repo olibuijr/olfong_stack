@@ -4,7 +4,8 @@ import {
   Percent,
   Save,
   RefreshCw,
-  ArrowLeft
+  ArrowLeft,
+  Tag
 } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
@@ -29,8 +30,13 @@ const VatSettings = () => {
     showVatBreakdown: false
   });
 
+  // Category VAT Rates
+  const [categories, setCategories] = useState([]);
+  const [categoryVatRates, setCategoryVatRates] = useState({});
+
   useEffect(() => {
     loadSettings();
+    loadCategories();
   }, []);
 
   const loadSettings = async () => {
@@ -75,6 +81,30 @@ const VatSettings = () => {
     }
   };
 
+  const loadCategories = async () => {
+    try {
+      const response = await fetch('/api/categories?limit=100', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCategories(data.categories || []);
+
+        // Create rate map
+        const rates = {};
+        (data.categories || []).forEach(cat => {
+          rates[cat.id] = cat.vatRate || null;
+        });
+        setCategoryVatRates(rates);
+      }
+    } catch (error) {
+      console.error('Error loading categories:', error);
+    }
+  };
+
   const handleSaveSettings = async () => {
     setIsSaving(true);
     try {
@@ -98,6 +128,22 @@ const VatSettings = () => {
 
       if (!response.ok) {
         throw new Error('Failed to save settings');
+      }
+
+      // Save category VAT rates
+      for (const [categoryId, vatRate] of Object.entries(categoryVatRates)) {
+        try {
+          await fetch(`/api/categories/${categoryId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ vatRate: vatRate === null ? null : parseFloat(vatRate) })
+          });
+        } catch (error) {
+          console.error(`Error saving VAT rate for category ${categoryId}:`, error);
+        }
       }
 
       toast.success(t('adminSettings.settingsSaved'));
@@ -315,6 +361,52 @@ const VatSettings = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Category VAT Rates */}
+          <div className="mb-8">
+            <h4 className="text-md font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 flex items-center">
+              <Tag className="w-5 h-5 mr-2" />
+              Category VAT Rates (Optional)
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Set different VAT rates for specific product categories. Leave blank to use the default VAT rate above.
+            </p>
+
+            <div className="space-y-4">
+              {categories.map(category => (
+                <div key={category.id} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-700/30 rounded-md">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      {category.nameIs || category.name}
+                    </label>
+                  </div>
+                  <div className="w-32">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        value={categoryVatRates[category.id] === null ? '' : categoryVatRates[category.id] || ''}
+                        onChange={(e) => {
+                          const value = e.target.value === '' ? null : parseFloat(e.target.value);
+                          setCategoryVatRates(prev => ({
+                            ...prev,
+                            [category.id]: value
+                          }));
+                          setHasUnsavedChanges(true);
+                        }}
+                        disabled={!settings.enabled}
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        placeholder="Default"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white disabled:opacity-50"
+                      />
+                      <span className="text-sm text-gray-600 dark:text-gray-400">%</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           </div>

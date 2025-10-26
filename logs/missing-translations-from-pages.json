@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-10-25T22:16:26.407Z",
+  "totalMissing": 0,
+  "missingKeys": [],
+  "pagesVisited": 18,
+  "pages": [
+    "/admin",
+    "/admin/products",
+    "/admin/categories",
+    "/admin/orders",
+    "/admin/customers",
+    "/admin/chat",
+    "/admin/analytics",
+    "/admin/reports",
+    "/admin/notifications",
+    "/admin/media",
+    "/admin/banners",
+    "/admin/translations",
+    "/admin/settings/general",
+    "/admin/settings/business",
+    "/admin/settings/shipping",
+    "/admin/settings/vat",
+    "/admin/settings/api-keys",
+    "/admin/settings/payment-gateways"
+  ]
+}

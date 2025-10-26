@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-  Package, 
-  Clock, 
-  Truck, 
-  CheckCircle, 
-  XCircle, 
-  Search, 
+import {
+  Package,
+  Clock,
+  Truck,
+  CheckCircle,
+  XCircle,
+  Search,
   Filter,
-  User, 
+  User,
   MapPin,
   AlertCircle,
-  Receipt
+  Receipt,
+  ShoppingCart
 } from 'lucide-react';
 import { fetchAllOrders, updateOrderStatus, assignDeliveryPerson } from '../../store/slices/orderSlice';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import ReceiptModal from '../../components/common/ReceiptModal';
 import toast from 'react-hot-toast';
 
@@ -179,16 +181,11 @@ const AdminOrders = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminPage.orderManagement')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminPage.manageOrders')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PageHeader
+          icon={ShoppingCart}
+          title={t('adminPage.orderManagement')}
+          description={t('adminPage.manageOrders')}
+        />
 
         {/* Main Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

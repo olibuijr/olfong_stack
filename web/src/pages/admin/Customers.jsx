@@ -13,6 +13,7 @@ import {
   Loader2
 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import api from '../../services/api';
 
 const Customers = () => {
@@ -135,22 +136,17 @@ const Customers = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminCustomers.customerManagement')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminCustomers.manageCustomerInfo')}</p>
-              </div>
-              <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-                <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                  <Download className="h-4 w-4 mr-2" />
-                  {t('adminCustomers.export')}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PageHeader
+          icon={Users}
+          title={t('adminCustomers.customerManagement')}
+          description={t('adminCustomers.manageCustomerInfo')}
+          actions={
+            <button className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+              <Download className="h-4 w-4 mr-2" />
+              {t('adminCustomers.export')}
+            </button>
+          }
+        />
 
         {/* Main Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

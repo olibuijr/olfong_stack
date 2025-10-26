@@ -34,7 +34,28 @@ const Cart = () => {
   const [isLoadingGateways, setIsLoadingGateways] = useState(true);
   const [shippingOptions, setShippingOptions] = useState([]);
   const [isLoadingShipping, setIsLoadingShipping] = useState(true);
+  const [vatSettings, setVatSettings] = useState(null);
 
+
+  // Fetch VAT settings
+  const fetchVatSettings = async () => {
+    try {
+      const response = await api.get('/settings?category=VAT');
+      if (response.data) {
+        const settings = {};
+        response.data.forEach(setting => {
+          if (setting.key === 'vatRate') {
+            settings.rate = parseInt(setting.value);
+          } else {
+            settings[setting.key] = setting.value === 'true';
+          }
+        });
+        setVatSettings(settings);
+      }
+    } catch (error) {
+      console.error('Failed to fetch VAT settings:', error);
+    }
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -42,6 +63,7 @@ const Cart = () => {
       dispatch(fetchAddresses());
       fetchEnabledPaymentGateways();
       fetchShippingOptions();
+      fetchVatSettings();
     }
   }, [dispatch, isAuthenticated]);
 
@@ -293,7 +315,11 @@ const Cart = () => {
 
   const subtotal = cart.items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
   const shippingCost = getSelectedShippingOption()?.fee || 0;
-  const totalPrice = subtotal + shippingCost;
+
+  // Calculate VAT
+  const vatRate = vatSettings?.rate || 24; // Default to 24%
+  const vatAmount = Math.round(subtotal * (vatRate / 100));
+  const totalPrice = subtotal + vatAmount + shippingCost;
   const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -768,36 +794,40 @@ const Cart = () => {
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-300 dark:border-gray-500 mt-4 pt-4">
+                  <div className="border-t border-gray-300 dark:border-gray-500 mt-4 pt-4 space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600 dark:text-gray-400">{t('checkoutPage.subtotal')}</span>
                       <span className="font-medium text-gray-900 dark:text-white">
                         {subtotal.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
                       </span>
                     </div>
-                  </div>
-                </div>
 
-                {/* Shipping Summary */}
-                <div className="mb-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-                  <div className="flex justify-between items-center">
-                    <span className="text-blue-900 dark:text-blue-100 font-medium">
-                      {getSelectedShippingOption() ? (currentLanguage === 'is' ? (getSelectedShippingOption().nameIs || getSelectedShippingOption().name) : (getSelectedShippingOption().name || getSelectedShippingOption().nameEn)) : t('checkoutPage.shipping')}
-                    </span>
-                    <span className="font-semibold text-blue-900 dark:text-blue-100">
-                      {getSelectedShippingOption()?.fee === 0 ? (
-                        <span className="text-green-600">{t('common.free')}</span>
-                      ) : (
-                        `${getSelectedShippingOption()?.fee?.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) || 0} ${t('common.currency')}`
-                      )}
-                    </span>
+                    {/* VAT Line Item */}
+                    {vatAmount > 0 && (
+                      <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                        <span>{t('checkout.vat')} ({vatRate}%)</span>
+                        <span>
+                          {vatAmount.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Shipping */}
+                    {shippingCost > 0 && (
+                      <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                        <span>{t('checkout.shipping')}</span>
+                        <span>
+                          {shippingCost.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Total Summary */}
                 <div className="mb-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-lg p-4 border border-primary-200 dark:border-primary-700">
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('common.total')}</span>
+                    <span className="text-lg font-semibold text-gray-900 dark:text-white">{t('checkout.total')}</span>
                     <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                       {totalPrice.toLocaleString('is-IS', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} {t('common.currency')}
                     </span>

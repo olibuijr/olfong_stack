@@ -31,10 +31,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     let translation = translations[key];
 
     if (!translation) {
-      // Log missing translation in development
-      if (process.env.NODE_ENV === 'development') {
-        console.warn(`Translation not found for key: ${key} in language: ${currentLanguage}`);
-      }
       // Return the key itself as a fallback (better than showing nothing)
       return key;
     }
@@ -130,6 +126,33 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'receipts.settingsNotFound': 'Stillingar fundust ekki',
         'receipts.viewReceipt': 'Skoða kvittun',
         'receipts.configureInSettings': 'Vinsamlegast stilltu kvittanastillingar til að birta kvittunina þína',
+        'adminMenu.sales': 'Sölur',
+        'adminMenu.orders': 'Pantanir',
+        'adminMenu.pointOfSale': 'Sölustaður',
+        'adminMenu.deliveries': 'Afhendingar',
+        'adminMenu.catalog': 'Vörulisti',
+        'adminMenu.products': 'Vörur',
+        'adminMenu.categories': 'Flokkar',
+        'adminMenu.media': 'Myndefni',
+        'adminMenu.analytics': 'Greiningar',
+        'adminMenu.analyticsLink': 'Greiningar',
+        'adminMenu.customers': 'Viðskiptavinir',
+        'adminMenu.reports': 'Skýrslur',
+        'adminMenu.content': 'Innihald',
+        'adminMenu.banners': 'Borðar',
+        'adminMenu.messages': 'Skilaboð',
+        'adminMenu.notifications': 'Tilkynningar',
+        'adminMenu.settingsSection': 'Stillingar',
+        'adminMenu.general': 'Almennt',
+        'adminMenu.payment': 'Greiðslur',
+        'adminMenu.receipts': 'Kvittanir',
+        'adminMenu.system': 'Kerfi',
+        'adminMenu.translations': 'Þýðingar',
+        'adminMenu.demoData': 'Sýnisgögn',
+        'adminMenu.dashboard': 'Mælaborð',
+        'adminMenu.manageBusinessSettings': 'Hafðu umsjón með fyrirtækinu og stillingum',
+        'adminMenu.helpText': 'Vantar þig hjálp? Kíktu í',
+        'adminMenu.supportCenter': 'þjónustuverið',
       },
       en: {
         'nav.home': 'Home',
@@ -175,6 +198,33 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'receipts.settingsNotFound': 'Settings Not Found',
         'receipts.viewReceipt': 'View Receipt',
         'receipts.configureInSettings': 'Please configure receipt settings to display your receipt',
+        'adminMenu.sales': 'Sales',
+        'adminMenu.orders': 'Orders',
+        'adminMenu.pointOfSale': 'Point of Sale',
+        'adminMenu.deliveries': 'Deliveries',
+        'adminMenu.catalog': 'Catalog',
+        'adminMenu.products': 'Products',
+        'adminMenu.categories': 'Categories',
+        'adminMenu.media': 'Media',
+        'adminMenu.analytics': 'Analytics',
+        'adminMenu.analyticsLink': 'Analytics',
+        'adminMenu.customers': 'Customers',
+        'adminMenu.reports': 'Reports',
+        'adminMenu.content': 'Content',
+        'adminMenu.banners': 'Banners',
+        'adminMenu.messages': 'Messages',
+        'adminMenu.notifications': 'Notifications',
+        'adminMenu.settingsSection': 'Settings',
+        'adminMenu.general': 'General',
+        'adminMenu.payment': 'Payment',
+        'adminMenu.receipts': 'Receipts',
+        'adminMenu.system': 'System',
+        'adminMenu.translations': 'Translations',
+        'adminMenu.demoData': 'Demo Data',
+        'adminMenu.dashboard': 'Dashboard',
+        'adminMenu.manageBusinessSettings': 'Manage your business and settings',
+        'adminMenu.helpText': 'Need help? Check the',
+        'adminMenu.supportCenter': 'support center',
       }
     };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Settings as SettingsIcon, Save, RefreshCw, ArrowLeft, Store, Globe, Mail, Phone, MapPin, Clock, DollarSign, Calendar, Info, AlertCircle, CheckCircle, Key, Eye, EyeOff, Building, Copy, Sparkles, Server, Lock, User, TestTube, Loader2 } from 'lucide-react';
+import { Settings as SettingsIcon, Save, RefreshCw, ArrowLeft, Store, Globe, Mail, Phone, MapPin, Clock, DollarSign, Calendar, Info, AlertCircle, CheckCircle, Key, Eye, EyeOff, Building, Copy, Sparkles, Server, Lock, User, TestTube, Loader2, Percent } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import LoadingSpinner from '../../../components/common/LoadingSpinner';
 import { useLanguage } from "../../../contexts/LanguageContext";
@@ -68,6 +68,32 @@ const GeneralSettings = () => {
   // API Keys state
   const [apiKeys, setApiKeys] = useState({});
   const [showApiKeys, setShowApiKeys] = useState({});
+
+  // VAT state
+  const [vatSettings, setVatSettings] = useState({
+    enabled: true,
+    rate: 24,
+    country: 'IS',
+    displayInAdmin: true,
+    includeInCustomerPrice: true,
+    showVatBreakdown: false
+  });
+
+  // VAT Profiles state
+  const [vatProfiles, setVatProfiles] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [showProfileForm, setShowProfileForm] = useState(false);
+  const [editingProfile, setEditingProfile] = useState(null);
+  const [profileFormData, setProfileFormData] = useState({
+    name: '',
+    nameIs: '',
+    description: '',
+    descriptionIs: '',
+    vatRate: 24,
+    isDefault: false,
+    categoryIds: []
+  });
+  const [isLoadingProfiles, setIsLoadingProfiles] = useState(false);
 
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -152,6 +178,44 @@ const GeneralSettings = () => {
       // Load SMTP settings if on SMTP tab
       if (activeTab === 'smtp') {
         dispatch(fetchSMTPSettings());
+      }
+
+      // Load VAT settings if on VAT tab
+      if (activeTab === 'vat') {
+        const vatResponse = await fetch('/api/settings?category=VAT', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        if (vatResponse.ok) {
+          const data = await vatResponse.json();
+          const vatData = {};
+          data.data.settings.VAT?.forEach(setting => {
+            if (setting.key === 'vatEnabled') {
+              vatData.enabled = setting.value === 'true';
+            } else if (setting.key === 'vatRate') {
+              vatData.rate = parseFloat(setting.value) || 0;
+            } else if (setting.key === 'vatCountry') {
+              vatData.country = setting.value;
+            } else if (setting.key === 'vatDisplayInAdmin') {
+              vatData.displayInAdmin = setting.value === 'true';
+            } else if (setting.key === 'vatIncludeInCustomerPrice') {
+              vatData.includeInCustomerPrice = setting.value === 'true';
+            } else if (setting.key === 'vatShowBreakdown') {
+              vatData.showVatBreakdown = setting.value === 'true';
+            }
+          });
+
+          setVatSettings(prev => ({
+            ...prev,
+            ...vatData
+          }));
+        }
+
+        // Load VAT Profiles and Categories
+        await loadVatProfiles();
+        await loadCategories();
       }
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -379,6 +443,181 @@ const GeneralSettings = () => {
     return { hours: h, minutes: m, total: durationMinutes / 60 };
   };
 
+  // VAT Settings functions
+  // Load VAT Profiles
+  const loadVatProfiles = async () => {
+    try {
+      setIsLoadingProfiles(true);
+      const response = await fetch('/api/vat-profiles', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setVatProfiles(data.data?.profiles || []);
+      }
+    } catch (error) {
+      console.error('Error loading VAT profiles:', error);
+    } finally {
+      setIsLoadingProfiles(false);
+    }
+  };
+
+  // Load Categories
+  const loadCategories = async () => {
+    try {
+      const response = await fetch('/api/categories', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setCategories(data.data?.categories || []);
+      }
+    } catch (error) {
+      console.error('Error loading categories:', error);
+    }
+  };
+
+  // Save VAT Profile
+  const handleSaveVatProfile = async () => {
+    try {
+      if (!profileFormData.name || !profileFormData.nameIs) {
+        toast.error('Name and Icelandic name are required');
+        return;
+      }
+
+      setIsSaving(true);
+      const url = editingProfile
+        ? `/api/vat-profiles/${editingProfile.id}`
+        : '/api/vat-profiles';
+
+      const response = await fetch(url, {
+        method: editingProfile ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          name: profileFormData.name,
+          nameIs: profileFormData.nameIs,
+          description: profileFormData.description,
+          descriptionIs: profileFormData.descriptionIs,
+          vatRate: parseFloat(profileFormData.vatRate),
+          isDefault: profileFormData.isDefault,
+          categoryIds: profileFormData.categoryIds
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save VAT profile');
+      }
+
+      toast.success(editingProfile ? 'VAT profile updated' : 'VAT profile created');
+      await loadVatProfiles();
+      setShowProfileForm(false);
+      setEditingProfile(null);
+      setProfileFormData({
+        name: '',
+        nameIs: '',
+        description: '',
+        descriptionIs: '',
+        vatRate: 24,
+        isDefault: false,
+        categoryIds: []
+      });
+    } catch (error) {
+      console.error('Error saving VAT profile:', error);
+      toast.error('Failed to save VAT profile');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Delete VAT Profile
+  const handleDeleteVatProfile = async (profileId) => {
+    if (!window.confirm('Are you sure you want to delete this profile?')) return;
+
+    try {
+      setIsSaving(true);
+      const response = await fetch(`/api/vat-profiles/${profileId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete VAT profile');
+      }
+
+      toast.success('VAT profile deleted');
+      await loadVatProfiles();
+    } catch (error) {
+      console.error('Error deleting VAT profile:', error);
+      toast.error('Failed to delete VAT profile');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Edit VAT Profile
+  const handleEditVatProfile = (profile) => {
+    setEditingProfile(profile);
+    setProfileFormData({
+      name: profile.name,
+      nameIs: profile.nameIs,
+      description: profile.description || '',
+      descriptionIs: profile.descriptionIs || '',
+      vatRate: profile.vatRate,
+      isDefault: profile.isDefault,
+      categoryIds: profile.categories?.map(c => c.id) || []
+    });
+    setShowProfileForm(true);
+  };
+
+  const handleSaveVatSettings = async () => {
+    setIsSaving(true);
+    try {
+      const settingsToSave = [
+        { key: 'vatEnabled', value: vatSettings.enabled.toString(), category: 'VAT', description: 'VAT enabled', isPublic: true },
+        { key: 'vatRate', value: vatSettings.rate.toString(), category: 'VAT', description: 'VAT rate', isPublic: true },
+        { key: 'vatCountry', value: vatSettings.country, category: 'VAT', description: 'VAT country', isPublic: true },
+        { key: 'vatDisplayInAdmin', value: vatSettings.displayInAdmin.toString(), category: 'VAT', description: 'Show VAT in admin', isPublic: true },
+        { key: 'vatIncludeInCustomerPrice', value: vatSettings.includeInCustomerPrice.toString(), category: 'VAT', description: 'Include VAT in customer price', isPublic: true },
+        { key: 'vatShowBreakdown', value: vatSettings.showVatBreakdown.toString(), category: 'VAT', description: 'Show VAT breakdown', isPublic: true }
+      ];
+
+      const response = await fetch('/api/settings', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ settings: settingsToSave })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save VAT settings');
+      }
+
+      toast.success(t('adminSettings.settingsSaved'));
+      setHasUnsavedChanges(false);
+    } catch (error) {
+      console.error('Error saving VAT settings:', error);
+      toast.error('Failed to save VAT settings');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleVatInputChange = (field, value) => {
+    setVatSettings(prev => ({ ...prev, [field]: value }));
+    setHasUnsavedChanges(true);
+  };
+
   // SMTP Settings functions
   useEffect(() => {
     if (smtpSettings && activeTab === 'smtp') {
@@ -462,39 +701,52 @@ const GeneralSettings = () => {
       <div className="max-w-none">
          {/* Header */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-2 sm:px-4 lg:px-6 xl:px-8 2xl:px-10 py-6">
-           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-             <div className="flex items-center space-x-4">
+          <div className="px-3 sm:px-4 lg:px-6 xl:px-8 2xl:px-10 py-4 sm:py-6">
+           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
+             <div className="flex items-start gap-2 sm:gap-3 lg:gap-4 min-w-0 flex-1">
                <Link
                  to="/admin/settings"
-                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                 className="flex-shrink-0 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 mt-0.5"
                >
                  <ArrowLeft className="w-5 h-5" />
                </Link>
-               <div>
-                 <h1 className="text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 dark:text-white flex items-center">
-                   <SettingsIcon className="w-8 h-8 xl:w-10 xl:h-10 2xl:w-12 2xl:h-12 text-blue-600 dark:text-blue-400 mr-3" />
-                   {t('adminSettings.generalSettings')}
+               <div className="flex-1 min-w-0">
+                 <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 dark:text-white flex items-center gap-1.5 sm:gap-2 lg:gap-3 flex-wrap leading-tight">
+                   <SettingsIcon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 xl:w-10 xl:h-10 2xl:w-12 2xl:h-12 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                   <span>{t('adminSettings.generalSettings')}</span>
                  </h1>
-                 <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSettings.generalDescription')}</p>
+                 <p className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400 mt-1 sm:mt-2">{t('adminSettings.generalDescription')}</p>
                </div>
              </div>
-             <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+             <div className="flex flex-col xs:flex-row items-center justify-end gap-2 sm:gap-3 lg:gap-4 flex-shrink-0 w-full sm:w-auto">
                {hasUnsavedChanges ? (
-                 <div className="flex items-center text-amber-600 dark:text-amber-400">
-                   <AlertCircle className="w-5 h-5 mr-2" />
-                   <span className="text-sm font-medium">Unsaved Changes</span>
+                 <div className="flex items-center gap-1 text-amber-600 dark:text-amber-400 whitespace-nowrap">
+                   <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                   <span className="text-xs sm:text-sm font-medium hidden sm:inline">Unsaved Changes</span>
                  </div>
                ) : (
-                 <div className="flex items-center text-green-600 dark:text-green-400">
-                   <CheckCircle className="w-5 h-5 mr-2" />
-                   <span className="text-sm font-medium">All Saved</span>
+                 <div className="flex items-center gap-1 text-green-600 dark:text-green-400 whitespace-nowrap">
+                   <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                   <span className="text-xs sm:text-sm font-medium hidden sm:inline">All Saved</span>
                  </div>
                )}
                <button
-                 onClick={handleSaveSettings}
+                 onClick={() => {
+                   if (activeTab === 'business' || activeTab === 'ageRestrictions') {
+                     handleSaveBusinessSettings();
+                   } else if (activeTab === 'apiKeys') {
+                     // API Keys are saved individually
+                     toast.info('API keys are saved individually');
+                   } else if (activeTab === 'smtp') {
+                     handleSaveSmtp();
+                   } else if (activeTab === 'vat') {
+                     handleSaveVatSettings();
+                   } else {
+                     handleSaveSettings();
+                   }
+                 }}
                  disabled={isSaving || !hasUnsavedChanges}
-                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                 className="inline-flex items-center px-3 sm:px-4 py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 whitespace-nowrap"
                >
                  {isSaving ? (
                    <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
@@ -509,72 +761,85 @@ const GeneralSettings = () => {
        </div>
 
         {/* Tabs Navigation */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-          <div className="border-b border-gray-200 dark:border-gray-700">
-            <nav className="flex space-x-8 px-6" aria-label="Tabs">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
+            <nav className="flex gap-1 sm:gap-2 lg:gap-4 px-2 sm:px-4 lg:px-6 min-w-max sm:min-w-full" aria-label="Tabs">
               <button
                 onClick={() => setActiveTab('general')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
                   activeTab === 'general'
                     ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                <div className="flex items-center">
-                  <SettingsIcon className="w-5 h-5 mr-2" />
-                  {t('adminSettings.general')}
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <SettingsIcon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.general')}</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveTab('apiKeys')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
                   activeTab === 'apiKeys'
                     ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                <div className="flex items-center">
-                  <Key className="w-5 h-5 mr-2" />
-                  {t('adminSettings.apiKeys')}
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Key className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.apiKeys')}</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveTab('business')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
                   activeTab === 'business'
                     ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                <div className="flex items-center">
-                  <Clock className="w-5 h-5 mr-2" />
-                  {t('adminSettings.openingHours') || 'Opnunartímar'}
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.openingHours') || 'Opnunartímar'}</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveTab('ageRestrictions')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
                   activeTab === 'ageRestrictions'
                     ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                <div className="flex items-center">
-                  <AlertCircle className="w-5 h-5 mr-2" />
-                  {t('adminSettings.ageRestrictions') || 'Aldurstakmörk'}
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.ageRestrictions') || 'Aldurstakmörk'}</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveTab('smtp')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
                   activeTab === 'smtp'
                     ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
-                <div className="flex items-center">
-                  <Mail className="w-5 h-5 mr-2" />
-                  {t('adminSettings.smtp')}
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.smtp')}</span>
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveTab('vat')}
+                className={`py-3 sm:py-4 px-2 sm:px-3 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
+                  activeTab === 'vat'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
+              >
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <Percent className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="hidden sm:inline">{t('adminSettings.vat')}</span>
                 </div>
               </button>
             </nav>
@@ -1760,6 +2025,423 @@ const GeneralSettings = () => {
                     </div>
                     <p className="text-xs text-blue-600 dark:text-blue-400 mt-3">
                       {t('adminSettings.smtp.gmailTip')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : activeTab === 'vat' ? (
+            // VAT Settings Content
+            <>
+              {/* VAT Configuration */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center">
+                    <Percent className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-3" />
+                    <div>
+                      <h3 className="text-lg xl:text-xl 2xl:text-2xl font-semibold text-gray-900 dark:text-white">
+                        {t('adminSettings.vatConfiguration')}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                        {t('adminSettings.vatInformationDescription')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-6">
+                  {/* VAT Enable Toggle */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('adminSettings.vatEnabled')}
+                      </label>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {t('adminSettings.enableVatForStore')}
+                      </p>
+                    </div>
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={vatSettings.enabled}
+                        onChange={(e) => handleVatInputChange('enabled', e.target.checked)}
+                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                    </label>
+                  </div>
+
+                  {vatSettings.enabled && (
+                    <>
+                      {/* VAT Rate */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {t('adminSettings.vatRate')} (%) <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="number"
+                          value={vatSettings.rate}
+                          onChange={(e) => handleVatInputChange('rate', parseFloat(e.target.value) || 0)}
+                          min="0"
+                          max="100"
+                          step="0.01"
+                          placeholder="24.00"
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        />
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                          {t('adminSettings.vatRateDescription')}
+                        </p>
+                      </div>
+
+                      {/* VAT Country */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {t('adminSettings.country')}
+                        </label>
+                        <select
+                          value={vatSettings.country}
+                          onChange={(e) => handleVatInputChange('country', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        >
+                          <option value="IS">{t('adminSettings.iceland')}</option>
+                          <option value="EU">{t('adminSettings.euCountries')}</option>
+                          <option value="OTHER">{t('adminSettings.otherCountries')}</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* VAT Display Settings */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    {t('adminSettings.vatDisplaySettings')}
+                  </h3>
+                </div>
+
+                <div className="p-6 space-y-4">
+                  {/* Show VAT in Admin */}
+                  <div className="flex items-start">
+                    <input
+                      type="checkbox"
+                      id="displayInAdmin"
+                      checked={vatSettings.displayInAdmin}
+                      onChange={(e) => handleVatInputChange('displayInAdmin', e.target.checked)}
+                      disabled={!vatSettings.enabled}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 mt-1 disabled:opacity-50"
+                    />
+                    <div className="ml-3">
+                      <label htmlFor="displayInAdmin" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('adminSettings.showVatInAdmin')}
+                      </label>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {t('adminSettings.showVatInAdminDescription')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Include VAT in Customer Price */}
+                  <div className="flex items-start">
+                    <input
+                      type="checkbox"
+                      id="includeInCustomerPrice"
+                      checked={vatSettings.includeInCustomerPrice}
+                      onChange={(e) => handleVatInputChange('includeInCustomerPrice', e.target.checked)}
+                      disabled={!vatSettings.enabled}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 mt-1 disabled:opacity-50"
+                    />
+                    <div className="ml-3">
+                      <label htmlFor="includeInCustomerPrice" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('adminSettings.includeVatInCustomerPrice')}
+                      </label>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {t('adminSettings.includeVatInCustomerPriceDescription')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Show VAT Breakdown */}
+                  <div className="flex items-start">
+                    <input
+                      type="checkbox"
+                      id="showVatBreakdown"
+                      checked={vatSettings.showVatBreakdown}
+                      onChange={(e) => handleVatInputChange('showVatBreakdown', e.target.checked)}
+                      disabled={!vatSettings.enabled}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 mt-1 disabled:opacity-50"
+                    />
+                    <div className="ml-3">
+                      <label htmlFor="showVatBreakdown" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('adminSettings.showVatBreakdown')}
+                      </label>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {t('adminSettings.showVatBreakdownDescription')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* VAT Profiles */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {t('adminSettings.vatProfiles')}
+                    </h3>
+                    <button
+                      onClick={() => {
+                        setShowProfileForm(!showProfileForm);
+                        setEditingProfile(null);
+                        setProfileFormData({
+                          name: '',
+                          nameIs: '',
+                          description: '',
+                          descriptionIs: '',
+                          vatRate: 24,
+                          isDefault: false,
+                          categoryIds: []
+                        });
+                      }}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium transition-colors"
+                    >
+                      {showProfileForm ? t('adminSettings.cancel') : t('adminSettings.addProfile')}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  {showProfileForm && (
+                    <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+                        {editingProfile ? t('adminSettings.editVatProfile') : t('adminSettings.createNewVatProfile')}
+                      </h4>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {t('adminSettings.nameEnglish')} <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={profileFormData.name}
+                            onChange={(e) => setProfileFormData({ ...profileFormData, name: e.target.value })}
+                            placeholder="e.g., Standard Rate"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {t('adminSettings.nameIcelandic')} <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={profileFormData.nameIs}
+                            onChange={(e) => setProfileFormData({ ...profileFormData, nameIs: e.target.value })}
+                            placeholder="e.g., Venjuleg hlutföll"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {t('adminSettings.vatRatePercent')} <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="number"
+                            value={profileFormData.vatRate}
+                            onChange={(e) => setProfileFormData({ ...profileFormData, vatRate: parseFloat(e.target.value) || 0 })}
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="flex items-center mt-6">
+                            <input
+                              type="checkbox"
+                              checked={profileFormData.isDefault}
+                              onChange={(e) => setProfileFormData({ ...profileFormData, isDefault: e.target.checked })}
+                              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                            <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                              {t('adminSettings.setAsDefault')}
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {t('adminSettings.descriptionEnglish')}
+                        </label>
+                        <textarea
+                          value={profileFormData.description}
+                          onChange={(e) => setProfileFormData({ ...profileFormData, description: e.target.value })}
+                          placeholder="e.g., Standard VAT rate for most products"
+                          rows={2}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        />
+                      </div>
+
+                      <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {t('adminSettings.descriptionIcelandic')}
+                        </label>
+                        <textarea
+                          value={profileFormData.descriptionIs}
+                          onChange={(e) => setProfileFormData({ ...profileFormData, descriptionIs: e.target.value })}
+                          placeholder="e.g., Venjuleg VSK hlutfall fyrir flestar vörur"
+                          rows={2}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                        />
+                      </div>
+
+                      <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                          {t('adminSettings.assignCategories')}
+                        </label>
+                        <div className="max-h-64 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-md p-3 bg-white dark:bg-gray-800">
+                          {categories.length === 0 ? (
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{t('adminSettings.noCategoriesAvailable')}</p>
+                          ) : (
+                            <div className="space-y-2">
+                              {categories.map(category => (
+                                <label key={category.id} className="flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    checked={profileFormData.categoryIds.includes(category.id)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setProfileFormData({
+                                          ...profileFormData,
+                                          categoryIds: [...profileFormData.categoryIds, category.id]
+                                        });
+                                      } else {
+                                        setProfileFormData({
+                                          ...profileFormData,
+                                          categoryIds: profileFormData.categoryIds.filter(id => id !== category.id)
+                                        });
+                                      }
+                                    }}
+                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600"
+                                  />
+                                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                    {category.name} {category.nameIs ? `(${category.nameIs})` : ''}
+                                  </span>
+                                </label>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex gap-3">
+                        <button
+                          onClick={handleSaveVatProfile}
+                          disabled={isSaving}
+                          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 text-sm font-medium transition-colors"
+                        >
+                          {isSaving ? t('adminSettings.saving') : t('adminSettings.saveProfile')}
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowProfileForm(false);
+                            setEditingProfile(null);
+                          }}
+                          className="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 text-sm font-medium transition-colors"
+                        >
+                          {t('adminSettings.cancel')}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {isLoadingProfiles ? (
+                    <div className="text-center py-8">
+                      <p className="text-gray-600 dark:text-gray-400">{t('common.loading')}</p>
+                    </div>
+                  ) : vatProfiles.length === 0 ? (
+                    <div className="text-center py-8">
+                      <p className="text-gray-600 dark:text-gray-400">{t('adminSettings.noVatProfilesCreated')}</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {vatProfiles.map(profile => (
+                        <div key={profile.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-700">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <h4 className="font-medium text-gray-900 dark:text-white">
+                                  {profile.name}
+                                </h4>
+                                {profile.isDefault && (
+                                  <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full font-semibold">
+                                    Default
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                {profile.nameIs}
+                              </p>
+                              <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
+                                <span className="font-medium">{t('adminSettings.vatRateLabel')}</span> {profile.vatRate}%
+                              </p>
+                              {profile.categories.length > 0 && (
+                                <div className="mt-2">
+                                  <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
+                                    {t('adminSettings.categories')}
+                                  </p>
+                                  <div className="flex flex-wrap gap-1">
+                                    {profile.categories.map(cat => (
+                                      <span
+                                        key={cat.id}
+                                        className="px-2 py-1 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded-md border border-gray-200 dark:border-gray-600"
+                                      >
+                                        {cat.name}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex gap-2 ml-4">
+                              <button
+                                onClick={() => handleEditVatProfile(profile)}
+                                className="px-3 py-1 bg-blue-500 text-white rounded text-xs font-medium hover:bg-blue-600 transition-colors"
+                              >
+                                {t('adminSettings.edit')}
+                              </button>
+                              <button
+                                onClick={() => handleDeleteVatProfile(profile.id)}
+                                className="px-3 py-1 bg-red-500 text-white rounded text-xs font-medium hover:bg-red-600 transition-colors disabled:opacity-50"
+                                disabled={isSaving}
+                              >
+                                {t('adminSettings.delete')}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* VAT Information Box */}
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-6">
+                <div className="flex items-start">
+                  <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">
+                      {t('adminSettings.vatInformation')}
+                    </h4>
+                    <p className="text-sm text-blue-700 dark:text-blue-300">
+                      {t('adminSettings.vatInformationDescription')}
                     </p>
                   </div>
                 </div>

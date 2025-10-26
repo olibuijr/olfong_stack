@@ -917,7 +917,7 @@ const ProductModal = ({
                     className="rounded border-gray-300 dark:border-gray-600"
                   />
                   <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Enable Discount for this Product
+                    {t('productModal.discounts.enableDiscount')}
                   </label>
                 </div>
 
@@ -926,7 +926,7 @@ const ProductModal = ({
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Original Price (kr) *
+                          {t('productModal.discounts.originalPrice')}
                         </label>
                         <input
                           type="number"
@@ -939,7 +939,7 @@ const ProductModal = ({
 
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Discount Percentage (%) *
+                          {t('productModal.discounts.discountPercentage')}
                         </label>
                         <input
                           type="number"
@@ -955,7 +955,7 @@ const ProductModal = ({
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Discount Start Date
+                          {t('productModal.discounts.startDate')}
                         </label>
                         <input
                           type="date"
@@ -966,7 +966,7 @@ const ProductModal = ({
 
                       <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Discount End Date
+                          {t('productModal.discounts.endDate')}
                         </label>
                         <input
                           type="date"
@@ -978,23 +978,23 @@ const ProductModal = ({
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Discount Reason (EN)
+                        {t('productModal.discounts.reasonEn')}
                       </label>
                       <input
                         {...register('discountReason')}
                         className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                        placeholder="e.g., Seasonal Sale, Clearance"
+                        placeholder={t('productModal.discounts.reasonPlaceholder')}
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Discount Reason (IS)
+                        {t('productModal.discounts.reasonIs')}
                       </label>
                       <input
                         {...register('discountReasonIs')}
                         className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                        placeholder="t.d., Árstíðabundin útsala"
+                        placeholder={t('productModal.discounts.reasonIsPlaceholder')}
                       />
                     </div>
                   </>
@@ -1003,7 +1003,7 @@ const ProductModal = ({
                 {!watch('hasDiscount') && (
                   <div className="bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg p-8 text-center">
                     <p className="text-gray-600 dark:text-gray-400">
-                      Enable discount to configure discount settings for this product
+                      {t('productModal.discounts.emptyStateMessage')}
                     </p>
                   </div>
                 )}

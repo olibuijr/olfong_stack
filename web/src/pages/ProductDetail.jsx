@@ -438,6 +438,79 @@ const ProductDetail = () => {
                 </p>
               </div>
 
+              {/* VAT Information */}
+              {currentProduct.category?.vatProfile && (() => {
+                const vatRate = currentProduct.category.vatProfile.vatRate;
+                const totalPrice = currentProduct.price;
+                // VAT amount = (Total Price / (1 + VAT Rate)) * VAT Rate
+                const priceBeforeVat = totalPrice / (1 + (vatRate / 100));
+                const vatAmount = totalPrice - priceBeforeVat;
+
+                return (
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                      {t('productDetailPage.vatInformation') || 'VAT Information'}
+                    </h3>
+                    <dl className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <dt className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {t('productDetailPage.vatProfile') || 'VAT Profile'}:
+                        </dt>
+                        <dd className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                          {currentLanguage === 'is' && currentProduct.category.vatProfile.nameIs
+                            ? currentProduct.category.vatProfile.nameIs
+                            : currentProduct.category.vatProfile.name}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <dt className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {t('productDetailPage.vatRate') || 'VAT Rate'}:
+                        </dt>
+                        <dd className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                          {vatRate}%
+                        </dd>
+                      </div>
+                      <div className="border-t border-blue-200 dark:border-blue-800 pt-3 mt-3">
+                        <div className="flex justify-between items-center mb-2">
+                          <dt className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {t('productDetailPage.priceBeforeVat') || 'Price before VAT'}:
+                          </dt>
+                          <dd className="text-sm text-gray-900 dark:text-white">
+                            {priceBeforeVat.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {t('common.currency')}
+                          </dd>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                          <dt className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {t('productDetailPage.vatAmount') || 'VAT Amount'}:
+                          </dt>
+                          <dd className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                            {vatAmount.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {t('common.currency')}
+                          </dd>
+                        </div>
+                        <div className="flex justify-between items-center pt-2 border-t border-blue-100 dark:border-blue-900">
+                          <dt className="text-sm font-semibold text-gray-900 dark:text-white">
+                            {t('productDetailPage.totalPrice') || 'Total Price (incl. VAT)'}:
+                          </dt>
+                          <dd className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                            {totalPrice.toLocaleString('is-IS', { maximumFractionDigits: 2, minimumFractionDigits: 2 })} {t('common.currency')}
+                          </dd>
+                        </div>
+                      </div>
+                      {currentProduct.category.vatProfile.description || currentProduct.category.vatProfile.descriptionIs && (
+                        <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-800">
+                          <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                            {currentLanguage === 'is' && currentProduct.category.vatProfile.descriptionIs
+                              ? currentProduct.category.vatProfile.descriptionIs
+                              : currentProduct.category.vatProfile.description}
+                          </p>
+                        </div>
+                      )}
+                    </dl>
+                  </div>
+                );
+              })()}
+
+
               {/* Product Specifications */}
               {(currentProduct.volume || currentProduct.alcoholContent || currentProduct.producer || currentProduct.country || currentProduct.packaging) && (
                 <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">

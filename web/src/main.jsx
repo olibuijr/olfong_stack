@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <App />
         </LanguageProvider>
         <Toaster
-          position="top-right"
+          position="bottom-center"
           toastOptions={{
             duration: 4000,
             success: {
@@ -41,6 +41,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 borderRadius: '8px',
                 fontSize: '14px',
                 fontWeight: '500',
+                marginBottom: window.innerWidth < 768 ? '70px' : '0px',
               },
               iconTheme: {
                 primary: '#fff',
@@ -55,6 +56,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 borderRadius: '8px',
                 fontSize: '14px',
                 fontWeight: '500',
+                marginBottom: window.innerWidth < 768 ? '70px' : '0px',
               },
               iconTheme: {
                 primary: '#fff',

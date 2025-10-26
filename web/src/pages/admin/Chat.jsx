@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLanguage } from "../../contexts/LanguageContext";
 import { toast } from 'react-hot-toast';
+import { MessageCircle } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import {
   fetchConversations,
     sendMessage,
@@ -192,16 +194,11 @@ const Chat = () => {
     <AdminLayout>
       <div className="h-[calc(100vh-2rem)] flex flex-col mt-0">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 rounded-t-lg">
-          <div className="px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('adminChat.title')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{t('adminChat.subtitle')}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PageHeader
+          icon={MessageCircle}
+          title={t('adminChat.title')}
+          description={t('adminChat.subtitle')}
+        />
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col h-[calc(100vh-2rem)] bg-white dark:bg-gray-800 border-l border-r border-b border-gray-200 dark:border-gray-700 rounded-b-lg">

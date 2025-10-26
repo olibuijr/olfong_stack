@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
+import {
+  Plus,
+  Edit,
+  Trash2,
   Search,
   Package,
   AlertCircle,
@@ -22,6 +22,7 @@ import {
 } from '../../store/slices/productSlice';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import ATVRImport from '../../components/admin/ATVRImport';
 import ImageSearchModal from '../../components/admin/ImageSearchModal';
 import MediaPicker from '../../components/admin/MediaPicker';
@@ -371,35 +372,32 @@ const AdminProducts = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminProductsPage.productManagement')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminProductsPage.manageProducts')}</p>
-              </div>
-              <div className="flex space-x-3 mt-4 sm:mt-0">
-                <button
-                  onClick={() => {
-                    setEditingProduct(null);
-                    setShowModal(true);
-                  }}
-                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  {t('adminProductsPage.newProduct')}
-                </button>
-                <button
-                  onClick={() => setShowATVRImport(true)}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-                >
-                  <Package className="w-4 h-4 mr-2" />
-                  {t('adminProducts.importFromATVR')}
-                </button>
-              </div>
+        <PageHeader
+          icon={Package}
+          title={t('adminProductsPage.productManagement')}
+          description={t('adminProductsPage.manageProducts')}
+          actions={
+            <div className="flex flex-col xs:flex-row gap-2 w-full sm:w-auto">
+              <button
+                onClick={() => {
+                  setEditingProduct(null);
+                  setShowModal(true);
+                }}
+                className="inline-flex items-center px-3 sm:px-4 py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                {t('adminProductsPage.newProduct')}
+              </button>
+              <button
+                onClick={() => setShowATVRImport(true)}
+                className="inline-flex items-center px-3 sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+              >
+                <Package className="w-4 h-4 mr-2" />
+                {t('adminProducts.importFromATVR')}
+              </button>
             </div>
-          </div>
-        </div>
+          }
+        />
 
         {/* Main Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

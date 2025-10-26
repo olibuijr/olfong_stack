@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import MediaPicker from '../../components/admin/MediaPicker';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import {
   fetchBanners,
   createBanner,
@@ -245,23 +246,20 @@ const Banners = () => {
     <AdminLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('admin.banners.title')}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
-              {t('admin.banners.subtitle')}
-            </p>
-          </div>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="btn btn-primary flex items-center gap-2"
-          >
-            <Plus className="w-4 h-4" />
-            {t('admin.banners.addBanner')}
-          </button>
-        </div>
+        <PageHeader
+          icon={ImageIcon}
+          title={t('admin.banners.title')}
+          description={t('admin.banners.subtitle')}
+          actions={
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="btn btn-primary flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" />
+              {t('admin.banners.addBanner')}
+            </button>
+          }
+        />
 
         {/* Error Message */}
         {error && (

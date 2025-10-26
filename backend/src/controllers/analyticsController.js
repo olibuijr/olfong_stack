@@ -1,5 +1,6 @@
 const { successResponse, errorResponse } = require('../utils/response');
 const prisma = require('../config/database');
+const { calculateOrderItemsVat } = require('../utils/vatUtils');
 
 /**
  * Get analytics data (Admin only)
@@ -222,6 +223,92 @@ const getAnalytics = async (req, res) => {
       percentage: totalOrdersForStatus > 0 ? (item._count.status / totalOrdersForStatus) * 100 : 0
     }));
 
+    // Calculate VAT data for current period
+    const currentOrdersWithItems = await prisma.order.findMany({
+      where: {
+        status: { not: 'CANCELLED' },
+        createdAt: { gte: startDate }
+      },
+      include: {
+        items: {
+          include: {
+            product: {
+              include: {
+                category: {
+                  include: { vatProfile: true }
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Calculate total VAT for current period and group by profile
+    let totalCurrentVat = 0;
+    let totalCurrentBeforeVat = 0;
+    const vatProfileTotals = {}; // Map of profileId to {profileData, total, beforeVat}
+
+    currentOrdersWithItems.forEach(order => {
+      const vatBreakdown = calculateOrderItemsVat(order.items);
+      totalCurrentVat += vatBreakdown.totalVat;
+      totalCurrentBeforeVat += vatBreakdown.totalBeforeVat;
+
+      // Group VAT amounts by profile
+      if (vatBreakdown.itemBreakdowns) {
+        vatBreakdown.itemBreakdowns.forEach(itemBreakdown => {
+          const profileId = itemBreakdown.profileId;
+          if (!vatProfileTotals[profileId]) {
+            vatProfileTotals[profileId] = {
+              profile: itemBreakdown.profile,
+              total: 0,
+              beforeVat: 0
+            };
+          }
+          vatProfileTotals[profileId].total += itemBreakdown.vat;
+          vatProfileTotals[profileId].beforeVat += itemBreakdown.priceBeforeVat;
+        });
+      }
+    });
+
+    // Convert to array and calculate percentages, filter out null profiles
+    const vatProfiles = Object.values(vatProfileTotals)
+      .filter(profile => profile.profile !== null) // Only include profiles with data
+      .map(profile => ({
+        ...profile,
+        total: Math.round(profile.total * 100) / 100,
+        beforeVat: Math.round(profile.beforeVat * 100) / 100,
+        percentage: totalCurrentVat > 0 ? (profile.total / totalCurrentVat) * 100 : 0
+      }))
+      .sort((a, b) => b.total - a.total);
+
+    // Calculate VAT data for previous period
+    const previousOrdersWithItems = await prisma.order.findMany({
+      where: {
+        status: { not: 'CANCELLED' },
+        createdAt: { gte: previousStartDate, lte: previousEndDate }
+      },
+      include: {
+        items: {
+          include: {
+            product: {
+              include: {
+                category: {
+                  include: { vatProfile: true }
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+
+    let totalPreviousVat = 0;
+    previousOrdersWithItems.forEach(order => {
+      const vatBreakdown = calculateOrderItemsVat(order.items);
+      totalPreviousVat += vatBreakdown.totalVat;
+    });
+
     const analytics = {
       metrics: {
         revenue: {
@@ -243,6 +330,13 @@ const getAnalytics = async (req, res) => {
           current: products,
           previous: previousProductsValue,
           growth: calculateGrowth(products, previousProductsValue)
+        },
+        vat: {
+          total: Math.round(totalCurrentVat * 100) / 100,
+          previousTotal: Math.round(totalPreviousVat * 100) / 100,
+          beforeVat: Math.round(totalCurrentBeforeVat * 100) / 100,
+          profiles: vatProfiles,
+          growth: calculateGrowth(totalCurrentVat, totalPreviousVat)
         }
       },
       orderStatusDistribution,

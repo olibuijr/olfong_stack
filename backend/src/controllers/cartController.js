@@ -112,42 +112,60 @@ const addToCart = async (req, res) => {
     if (existingItem) {
       // Update quantity
       const newQuantity = existingItem.quantity + parseInt(quantity);
-      
+
       if (product.stock < newQuantity) {
         return errorResponse(res, 'Insufficient stock', 400);
       }
 
-      const updatedItem = await prisma.cartItem.update({
+      await prisma.cartItem.update({
         where: { id: existingItem.id },
         data: { quantity: newQuantity },
+      });
+
+      // Return the full updated cart
+      const updatedCart = await prisma.cart.findUnique({
+        where: { id: cart.id },
         include: {
-          product: {
+          items: {
             include: {
-              category: true,
+              product: {
+                include: {
+                  category: true,
+                },
+              },
             },
           },
         },
       });
 
-      return successResponse(res, updatedItem, 'Cart item updated successfully');
+      return successResponse(res, updatedCart, 'Cart item updated successfully');
     } else {
       // Add new item
-      const newItem = await prisma.cartItem.create({
+      await prisma.cartItem.create({
         data: {
           cartId: cart.id,
           productId: parseInt(productId),
           quantity: parseInt(quantity),
         },
+      });
+
+      // Return the full updated cart
+      const updatedCart = await prisma.cart.findUnique({
+        where: { id: cart.id },
         include: {
-          product: {
+          items: {
             include: {
-              category: true,
+              product: {
+                include: {
+                  category: true,
+                },
+              },
             },
           },
         },
       });
 
-      return successResponse(res, newItem, 'Item added to cart successfully', 201);
+      return successResponse(res, updatedCart, 'Item added to cart successfully', 201);
     }
   } catch (error) {
     console.error('Add to cart error:', error);

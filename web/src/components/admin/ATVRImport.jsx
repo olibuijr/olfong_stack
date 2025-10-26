@@ -112,21 +112,55 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
       volumeIs: atvrProduct.volumeIs,
       country: atvrProduct.country,
       countryIs: atvrProduct.countryIs,
+      region: atvrProduct.region,
+      regionIs: atvrProduct.regionIs,
+      origin: atvrProduct.origin,
+      originIs: atvrProduct.originIs,
       producer: atvrProduct.producer,
       producerIs: atvrProduct.producerIs,
       distributor: atvrProduct.distributor,
       distributorIs: atvrProduct.distributorIs,
       packaging: atvrProduct.packaging,
       packagingIs: atvrProduct.packagingIs,
+      packagingWeight: atvrProduct.packagingWeight,
+      packagingWeightIs: atvrProduct.packagingWeightIs,
+      carbonFootprint: atvrProduct.carbonFootprint,
+      carbonFootprintIs: atvrProduct.carbonFootprintIs,
+      vintage: atvrProduct.vintage,
+      grapeVariety: atvrProduct.grapeVariety,
+      grapeVarietyIs: atvrProduct.grapeVarietyIs,
+      wineStyle: atvrProduct.wineStyle,
+      wineStyleIs: atvrProduct.wineStyleIs,
+      pricePerLiter: atvrProduct.pricePerLiter,
+      pricePerLiterIs: atvrProduct.pricePerLiterIs,
       foodPairings: foodPairings,
       foodPairingsIs: foodPairingsIs,
       specialAttributes: atvrProduct.specialAttributes || [],
       specialAttributesIs: atvrProduct.specialAttributesIs || [],
+      certifications: atvrProduct.certifications || [],
+      certificationsIs: atvrProduct.certificationsIs || [],
       availability: atvrProduct.availability || 'available',
       availabilityIs: atvrProduct.availabilityIs,
       atvrProductId: atvrProduct.id,
-      atvrUrl: atvrProduct.url
+      atvrUrl: atvrProduct.url,
+      atvrImageUrl: atvrProduct.atvrImageUrl || atvrProduct.image
     };
+  };
+
+  // Fetch detailed product information from ATVR
+  const fetchProductDetails = async (productId) => {
+    try {
+      const response = await fetch(`http://192.168.8.62:5000/api/atvr/product/${productId}`);
+      if (!response.ok) {
+        console.warn(`Failed to fetch details for product ${productId}`);
+        return null;
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      console.error(`Error fetching product details for ${productId}:`, error);
+      return null;
+    }
   };
 
   // Import selected products
@@ -137,8 +171,26 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
     }
 
     try {
-      const parsedProducts = selectedProducts.map(parseATVRProduct);
-      
+      // Fetch detailed information for each product to capture all fields
+      const enrichedProducts = await Promise.all(
+        selectedProducts.map(async (searchResult) => {
+          // First try to fetch full details from product page
+          const detailedProduct = await fetchProductDetails(searchResult.id);
+
+          // Merge search result with detailed product info (detailed product takes precedence)
+          const mergedProduct = {
+            ...searchResult,
+            ...detailedProduct,
+            // Preserve search result data if detail fetch failed
+            id: searchResult.id
+          };
+
+          return mergedProduct;
+        })
+      );
+
+      const parsedProducts = enrichedProducts.map(parseATVRProduct);
+
       for (const product of parsedProducts) {
         await onImportProduct(product);
       }
@@ -147,6 +199,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
       setSelectedProducts([]);
       setSearchResults([]);
       setSearchTerm('');
+      onClose();
     } catch (error) {
       console.error('Error importing products:', error);
       toast.error(t('atvrImport.failedToImport'));
@@ -162,7 +215,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
     <>
       {/* Preview Modal */}
       {showPreview && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-60 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" style={{ zIndex: 60 }}>
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -182,66 +235,194 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                   const parsedProduct = parseATVRProduct(product);
                   return (
                     <div key={index} className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-700">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                            {parsedProduct.name}
-                          </h4>
-                          {parsedProduct.nameIs && parsedProduct.nameIs !== parsedProduct.name && (
-                            <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                              <strong>{t('atvrImport.icelandicLabel')}</strong> {parsedProduct.nameIs}
-                            </p>
-                          )}
-                          <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                            {parsedProduct.description}
-                          </p>
-                          {parsedProduct.descriptionIs && parsedProduct.descriptionIs !== parsedProduct.description && (
-                            <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                              <strong>{t('atvrImport.icelandicLabel')}</strong> {parsedProduct.descriptionIs}
-                            </p>
-                          )}
-                          <p className="text-lg font-bold text-primary-600">
-                            {parsedProduct.price} kr
-                          </p>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          {parsedProduct.volume && (
-                            <p className="text-sm">
-                              <strong>{t('atvrImport.volume')}</strong> {parsedProduct.volume}
-                              {parsedProduct.volumeIs && parsedProduct.volumeIs !== parsedProduct.volume && (
-                                <span className="text-gray-600"> / {parsedProduct.volumeIs}</span>
-                              )}
-                            </p>
-                          )}
-                          {parsedProduct.country && (
-                            <p className="text-sm">
-                              <strong>{t('atvrImport.country')}</strong> {parsedProduct.country}
-                              {parsedProduct.countryIs && parsedProduct.countryIs !== parsedProduct.country && (
-                                <span className="text-gray-600"> / {parsedProduct.countryIs}</span>
-                              )}
-                            </p>
-                          )}
-                          {parsedProduct.producer && (
-                            <p className="text-sm">
-                              <strong>{t('atvrImport.producer')}</strong> {parsedProduct.producer}
-                              {parsedProduct.producerIs && parsedProduct.producerIs !== parsedProduct.producer && (
-                                <span className="text-gray-600"> / {parsedProduct.producerIs}</span>
-                              )}
-                            </p>
-                          )}
-                          {parsedProduct.foodPairings && parsedProduct.foodPairings.length > 0 && (
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {/* Product Image */}
+                        {parsedProduct.image && (
+                          <div className="md:col-span-1">
+                            <img
+                              src={parsedProduct.image}
+                              alt={parsedProduct.name}
+                              className="w-full h-auto rounded border border-gray-200 dark:border-gray-600"
+                            />
+                          </div>
+                        )}
+
+                        {/* Main Information */}
+                        <div className={parsedProduct.image ? "md:col-span-2" : "md:col-span-3"}>
+                          <div className="space-y-3">
                             <div>
-                              <strong className="text-sm">{t('atvrImport.foodPairings')}</strong>
-                              <div className="flex flex-wrap gap-1 mt-1">
-                                {parsedProduct.foodPairings.map((pairing, idx) => (
-                                  <span key={idx} className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
-                                    {pairing.name}
-                                  </span>
-                                ))}
-                              </div>
+                              <h4 className="font-semibold text-gray-900 dark:text-white text-lg">
+                                {parsedProduct.name}
+                              </h4>
+                              {parsedProduct.nameIs && parsedProduct.nameIs !== parsedProduct.name && (
+                                <p className="text-sm text-gray-600 dark:text-gray-300">
+                                  <strong>{t('atvrImport.icelandicLabel')}:</strong> {parsedProduct.nameIs}
+                                </p>
+                              )}
                             </div>
-                          )}
+
+                            {/* Category and Price */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-2 py-1 rounded">
+                                {parsedProduct.category}
+                              </span>
+                              <p className="text-lg font-bold text-primary-600">
+                                {parsedProduct.price} kr
+                              </p>
+                            </div>
+
+                            {/* Description */}
+                            {parsedProduct.description && (
+                              <div>
+                                <p className="text-sm text-gray-700 dark:text-gray-300">
+                                  {parsedProduct.description}
+                                </p>
+                                {parsedProduct.descriptionIs && parsedProduct.descriptionIs !== parsedProduct.description && (
+                                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                    <strong>{t('atvrImport.icelandicLabel')}:</strong> {parsedProduct.descriptionIs}
+                                  </p>
+                                )}
+                              </div>
+                            )}
+
+                            {/* Product Details Grid */}
+                            <div className="grid grid-cols-2 gap-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+                              {parsedProduct.volume && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.volume')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.volume}
+                                    {parsedProduct.volumeIs && parsedProduct.volumeIs !== parsedProduct.volume && (
+                                      <span className="text-gray-600 dark:text-gray-400"> / {parsedProduct.volumeIs}</span>
+                                    )}
+                                  </p>
+                                </div>
+                              )}
+                              {parsedProduct.alcoholContent && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.alcoholContent')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.alcoholContent}%
+                                  </p>
+                                </div>
+                              )}
+                              {parsedProduct.country && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.country')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.country}
+                                    {parsedProduct.countryIs && parsedProduct.countryIs !== parsedProduct.country && (
+                                      <span className="text-gray-600 dark:text-gray-400"> / {parsedProduct.countryIs}</span>
+                                    )}
+                                  </p>
+                                </div>
+                              )}
+                              {parsedProduct.producer && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.producer')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.producer}
+                                    {parsedProduct.producerIs && parsedProduct.producerIs !== parsedProduct.producer && (
+                                      <span className="text-gray-600 dark:text-gray-400"> / {parsedProduct.producerIs}</span>
+                                    )}
+                                  </p>
+                                </div>
+                              )}
+                              {parsedProduct.distributor && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.distributor')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.distributor}
+                                    {parsedProduct.distributorIs && parsedProduct.distributorIs !== parsedProduct.distributor && (
+                                      <span className="text-gray-600 dark:text-gray-400"> / {parsedProduct.distributorIs}</span>
+                                    )}
+                                  </p>
+                                </div>
+                              )}
+                              {parsedProduct.packaging && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.packaging')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.packaging}
+                                    {parsedProduct.packagingIs && parsedProduct.packagingIs !== parsedProduct.packaging && (
+                                      <span className="text-gray-600 dark:text-gray-400"> / {parsedProduct.packagingIs}</span>
+                                    )}
+                                  </p>
+                                </div>
+                              )}
+                              {parsedProduct.availability && (
+                                <div>
+                                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                    {t('atvrImport.availability')}
+                                  </p>
+                                  <p className="text-sm text-gray-900 dark:text-white">
+                                    {parsedProduct.availability}
+                                    {parsedProduct.availabilityIs && parsedProduct.availabilityIs !== parsedProduct.availability && (
+                                      <span className="text-gray-600 dark:text-gray-400"> / {parsedProduct.availabilityIs}</span>
+                                    )}
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Food Pairings */}
+                            {parsedProduct.foodPairings && parsedProduct.foodPairings.length > 0 && (
+                              <div className="pt-3 border-t border-gray-200 dark:border-gray-600">
+                                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-2">
+                                  {t('atvrImport.foodPairings')}
+                                </p>
+                                <div className="flex flex-wrap gap-1">
+                                  {parsedProduct.foodPairings.map((pairing, idx) => (
+                                    <span key={idx} className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                                      {typeof pairing === 'string' ? pairing : pairing.name}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Special Attributes */}
+                            {parsedProduct.specialAttributes && parsedProduct.specialAttributes.length > 0 && (
+                              <div className="pt-3 border-t border-gray-200 dark:border-gray-600">
+                                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-2">
+                                  {t('atvrImport.specialAttributes')}
+                                </p>
+                                <div className="flex flex-wrap gap-1">
+                                  {parsedProduct.specialAttributes.map((attr, idx) => (
+                                    <span key={idx} className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">
+                                      {typeof attr === 'string' ? attr : attr.name}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* ATVR URL */}
+                            {parsedProduct.atvrUrl && (
+                              <div className="pt-3 border-t border-gray-200 dark:border-gray-600">
+                                <a
+                                  href={parsedProduct.atvrUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-xs text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 underline"
+                                >
+                                  {t('atvrImport.viewOnATVR')} →
+                                </a>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -272,8 +453,8 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
       )}
 
       {/* Main Import Modal */}
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 pointer-events-none" style={{ zIndex: 50 }}>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col pointer-events-auto">
           {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <div>
@@ -322,9 +503,9 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
           </div>
 
           {/* Results */}
-          <div className="flex-1 overflow-hidden flex">
+          <div className="flex-1 overflow-hidden flex min-h-0">
             {/* Search Results */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6 min-h-0 min-w-0">
               {searchResults.length > 0 ? (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -361,7 +542,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
                               <img
                                 src={product.image}
                                 alt={product.name}
-                                className="w-16 h-16 object-cover rounded"
+                                className="w-16 h-16 object-contain rounded"
                               />
                             ) : (
                         <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
@@ -443,7 +624,7 @@ const ATVRImport = ({ onImportProduct, onClose }) => {
 
             {/* Selected Products Sidebar */}
             {selectedProducts.length > 0 && (
-              <div className="w-80 border-l border-gray-200 dark:border-gray-700 p-6 overflow-y-auto">
+              <div className="w-80 border-l border-gray-200 dark:border-gray-700 p-6 overflow-y-auto min-h-0">
                 <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t('atvrImport.selected')} ({selectedProducts.length})

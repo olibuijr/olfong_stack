@@ -31,6 +31,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { useLanguage } from "../../contexts/LanguageContext";
 import {
@@ -562,32 +563,29 @@ const Reports = () => {
     <AdminLayout>
       <div className="max-w-none">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-          <div className="px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminSidebar.reportsAnalytics')}</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminSidebar.comprehensiveInsights')}</p>
-            </div>
-            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+        <PageHeader
+          icon={FileText}
+          title={t('adminSidebar.reportsAnalytics')}
+          description={t('adminSidebar.comprehensiveInsights')}
+          actions={
+            <div className="flex items-center space-x-4">
               <button
                 onClick={() => exportReport('pdf')}
                 className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <FileText className="h-4 w-4 mr-2" />
-{t('adminReports.exportPDF')}
+                {t('adminReports.exportPDF')}
               </button>
               <button
                 onClick={() => exportReport('csv')}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <Download className="h-4 w-4 mr-2" />
-{t('adminReports.exportCSV')}
+                {t('adminReports.exportCSV')}
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+          }
+        />
 
       {/* Main Content */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

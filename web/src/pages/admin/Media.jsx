@@ -4,9 +4,11 @@ import {
   Image as ImageIcon,
   Upload,
   Plus,
-  AlertTriangle
+  AlertTriangle,
+  FileImage
 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import MediaGrid from '../../components/admin/MediaGrid';
 import MediaList from '../../components/admin/MediaList';
@@ -209,16 +211,11 @@ const Media = () => {
     <AdminLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('adminNavigation.media')}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
-              {t('adminMedia.manageMediaDescription')}
-            </p>
-          </div>
-          <div className="flex gap-2">
+        <PageHeader
+          icon={FileImage}
+          title={t('adminNavigation.media')}
+          description={t('adminMedia.manageMediaDescription')}
+          actions={
             <button
               onClick={() => window.open('/admin/media/upload', '_blank')}
               className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
@@ -226,8 +223,8 @@ const Media = () => {
               <Upload className="h-4 w-4 mr-2" />
               {t('adminMedia.uploadMedia')}
             </button>
-          </div>
-        </div>
+          }
+        />
 
         {/* Filters */}
         <MediaFilters

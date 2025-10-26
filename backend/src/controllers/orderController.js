@@ -1,6 +1,7 @@
 const { body } = require('express-validator');
 const { successResponse, errorResponse } = require('../utils/response');
 const prisma = require('../config/database');
+const vatService = require('../services/vatService');
 
 /**
  * Generate unique order number
@@ -152,7 +153,11 @@ const getOrder = async (req, res) => {
       include: {
         items: {
           include: {
-            product: true,
+            product: {
+              include: {
+                category: true
+              }
+            },
           },
         },
       },
@@ -203,8 +208,11 @@ const getOrder = async (req, res) => {
       }
     }
 
+    // Get VAT settings
+    const vatSettings = await vatService.getVATSettings();
+
     // Calculate total and check stock
-    let totalAmount = 0;
+    let itemsSubtotal = 0;
     const orderItems = [];
 
   for (const item of cart.items) {
@@ -220,19 +228,31 @@ const getOrder = async (req, res) => {
       return errorResponse(res, 'You must be 18+ to purchase nicotine products', 403);
     }
 
-      const itemTotal = item.product.price * item.quantity;
-      totalAmount += itemTotal;
+      itemsSubtotal += item.product.price * item.quantity;
+
+      // Get category VAT rate if available
+      const categoryVatRate = item.product.category?.vatRate;
 
       orderItems.push({
         productId: item.productId,
         quantity: item.quantity,
         price: item.product.price,
+        categoryVatRate
       });
     }
 
-    // Add shipping cost
+    // Get shipping cost
     const shippingCost = shippingOption.fee;
-    totalAmount += shippingCost;
+
+    // Calculate VAT and totals
+    const {
+      taxAmount,
+      totalAmount
+    } = vatService.calculateOrderTotals(
+      orderItems,
+      shippingCost,
+      vatSettings.rate
+    );
 
     // Create order
     const order = await prisma.$transaction(async (tx) => {
@@ -245,6 +265,9 @@ const getOrder = async (req, res) => {
           shippingOptionId: shippingOption.id,
           pickupTime: shippingOption.type === 'pickup' ? pickupTime : null,
           status: 'PENDING',
+          subtotalBeforeVat: itemsSubtotal,
+          taxAmount,
+          vatRate: vatSettings.rate,
           totalAmount,
           deliveryFee: shippingCost,
           notes,
@@ -676,13 +699,17 @@ const createPOSOrder = async (req, res) => {
       return errorResponse(res, 'Either customerId or guestInfo with email is required', 400);
     }
 
+    // Get VAT settings
+    const vatSettings = await vatService.getVATSettings();
+
     // Validate and calculate totals
-    let totalAmount = 0;
+    let itemsSubtotal = 0;
     const orderItems = [];
 
     for (const item of items) {
       const product = await prisma.product.findUnique({
-        where: { id: item.productId }
+        where: { id: item.productId },
+        include: { category: true }
       });
 
       if (!product) {
@@ -693,19 +720,31 @@ const createPOSOrder = async (req, res) => {
         return errorResponse(res, `Insufficient stock for ${product.name}`, 400);
       }
 
-      const itemTotal = item.price * item.quantity;
-      totalAmount += itemTotal;
+      itemsSubtotal += item.price * item.quantity;
+
+      // Get category VAT rate if available
+      const categoryVatRate = product.category?.vatRate;
 
       orderItems.push({
         productId: item.productId,
         quantity: item.quantity,
         price: item.price,
+        categoryVatRate
       });
     }
 
-    // Add shipping cost
+    // Get shipping cost
     const shippingCost = shippingOption.fee;
-    totalAmount += shippingCost;
+
+    // Calculate VAT and totals
+    const {
+      taxAmount,
+      totalAmount
+    } = vatService.calculateOrderTotals(
+      orderItems,
+      shippingCost,
+      vatSettings.rate
+    );
 
     // Determine order status based on payment
     let orderStatus = 'PENDING';
@@ -724,6 +763,9 @@ const createPOSOrder = async (req, res) => {
           shippingOptionId: shippingOption.id,
           pickupTime: shippingOption.type === 'pickup' ? pickupTime : null,
           status: orderStatus,
+          subtotalBeforeVat: itemsSubtotal,
+          taxAmount,
+          vatRate: vatSettings.rate,
           totalAmount,
           deliveryFee: shippingCost,
           notes,

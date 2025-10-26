@@ -2,7 +2,7 @@
 
 ## Process Management
 
-Always use the process management script for all process operations. Never use `npm start`, `npm run dev`, or manual process commands.
+Always use the process management script for all process operations. Never use `npm start`, `npm run dev`, or manual process commands. The process manager handles both frontend and backend services automatically.
 
 ### Basic Operations
 
@@ -26,7 +26,16 @@ Always use the process management script for all process operations. Never use `
 ./process-manager.sh logs
 ```
 
-The process manager handles both frontend and backend services automatically.
+## Testing and Verification
+
+**Do NOT run any tests, linting, or builds unless explicitly asked by the user.** Only perform testing operations when the user specifically requests them.
+
+When testing IS requested, use only the following commands:
+- `npm run lint` - For linting (code quality checks)
+- `npm test` - For running tests
+- `npm run build` - For building the project
+
+**Never use the dev server** (`npm run dev` or `npm run dev:android`, etc.) for verification or testing. The dev server is for development convenience only and should not be used for CI/CD-like processes. Use the process management script instead for any service operations.
 
 ## Browser Automation
 

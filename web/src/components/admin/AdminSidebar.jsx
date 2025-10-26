@@ -22,7 +22,9 @@ import {
   Receipt,
   Calculator,
   Image,
-  FileImage
+  FileImage,
+  ChevronDown,
+  Tag
 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
@@ -36,6 +38,11 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
   const [isCollapsed, setIsCollapsed] = useState(() => {
     // Initialize from localStorage, default to false (expanded)
     const saved = localStorage.getItem('adminSidebarCollapsed');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [isSettingsExpanded, setIsSettingsExpanded] = useState(() => {
+    // Initialize from localStorage, default to false (collapsed)
+    const saved = localStorage.getItem('adminSettingsExpanded');
     return saved ? JSON.parse(saved) : false;
   });
   const location = useLocation();
@@ -62,6 +69,14 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
     });
   };
 
+  const toggleSettingsMenu = () => {
+    setIsSettingsExpanded(prev => {
+      const newValue = !prev;
+      localStorage.setItem('adminSettingsExpanded', JSON.stringify(newValue));
+      return newValue;
+    });
+  };
+
   const navigationSections = [
     {
       title: t('adminSidebar.overview'),
@@ -81,6 +96,7 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
       title: t('adminSidebar.catalog'),
       items: [
         { name: t('adminNavigation.products'), href: '/admin/products', icon: Package },
+        { name: t('adminNavigation.discounts'), href: '/admin/discounts', icon: Tag },
         { name: t('adminNavigation.categories'), href: '/admin/categories', icon: FolderOpen }
       ]
     },
@@ -162,7 +178,10 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
 
       {/* Navigation */}
       <nav className="flex-1 px-2 py-2 space-y-2">
-        {navigationSections.map((section, sectionIndex) => (
+        {navigationSections.map((section, sectionIndex) => {
+          const isSettingsSection = section.title === t('adminSidebar.settings');
+
+          return (
            <div key={section.title} className="space-y-0.5">
              {/* Section Header */}
              <div className={`px-2 py-1 transition-all duration-300 ease-in-out ${
@@ -175,52 +194,125 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
 
              {/* Section Items */}
              <div className="space-y-0">
-              {section.items.map((item) => {
-                const Icon = item.icon;
-                const active = isActive(item.href);
+              {isSettingsSection ? (
+                // Settings section with expandable menu
+                <button
+                  onClick={toggleSettingsMenu}
+                  className="relative flex items-center w-full px-2 py-1.5 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-300 ease-in-out group"
+                  title={isCollapsed && !isMobile ? t('adminSidebar.settings') : undefined}
+                >
+                  <Settings className={`h-4 w-4 transition-transform duration-200 group-hover:scale-110 ${
+                    isCollapsed && !isMobile ? 'absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2' : 'flex-shrink-0'
+                  }`} />
+                  <div className={`flex items-center justify-between flex-1 transition-all duration-300 ease-in-out ${
+                    isCollapsed && !isMobile ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto ml-2.5'
+                  }`}>
+                    <span className="text-sm whitespace-nowrap transition-all duration-200">{t('adminSidebar.settings')}</span>
+                    {!isCollapsed && (
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isSettingsExpanded ? 'rotate-180' : ''}`} />
+                    )}
+                  </div>
+                </button>
+              ) : null}
 
-                return (
-                   <Link
-                     key={item.name}
-                     to={item.href}
-                     onClick={() => {
-                       // Close sidebar on mobile when a link is clicked
-                       if (isMobile) {
-                         setSidebarOpen(false);
-                       }
-                     }}
+              {/* Regular items or settings submenu */}
+              {isSettingsSection && isSettingsExpanded ? (
+                // Settings submenu items
+                <div className="pl-2 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 ml-2">
+                  {section.items.map((item) => {
+                    const Icon = item.icon;
+                    const active = isActive(item.href);
+
+                    return (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        onClick={() => {
+                          if (isMobile) {
+                            setSidebarOpen(false);
+                          }
+                        }}
+                        className={`relative flex items-center px-2 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ease-in-out group ${
+                          active
+                            ? 'bg-blue-600 text-white'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                        }`}
+                        title={isCollapsed ? item.name : undefined}
+                      >
+                        <Icon className={`h-4 w-4 transition-transform duration-200 group-hover:scale-110 ${
+                          isCollapsed && !isMobile ? 'absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2' : 'flex-shrink-0'
+                        }`} />
+                        <div className={`flex items-center justify-between flex-1 transition-all duration-300 ease-in-out ${
+                          isCollapsed && !isMobile ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto ml-2.5'
+                        }`}>
+                          <span className="text-sm whitespace-nowrap transition-all duration-200">{item.name}</span>
+                          {item.unreadCount > 0 && (
+                            <span className={`ml-2 px-2 py-0.5 text-xs rounded-full transition-all duration-200 ${
+                              active
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-red-500 text-white'
+                            }`}>
+                              {item.unreadCount}
+                            </span>
+                          )}
+                        </div>
+                        {isCollapsed && !isMobile && item.unreadCount > 0 && (
+                          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center transition-all duration-200 animate-pulse">
+                            {item.unreadCount}
+                          </span>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : !isSettingsSection ? (
+                // Regular section items
+                section.items.map((item) => {
+                  const Icon = item.icon;
+                  const active = isActive(item.href);
+
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      onClick={() => {
+                        if (isMobile) {
+                          setSidebarOpen(false);
+                        }
+                      }}
                       className={`relative flex items-center px-2 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ease-in-out group ${
                         active
                           ? 'bg-blue-600 text-white'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
                       }`}
-                     title={isCollapsed ? item.name : undefined}
-                   >
+                      title={isCollapsed ? item.name : undefined}
+                    >
                       <Icon className={`h-4 w-4 transition-transform duration-200 group-hover:scale-110 ${
                         isCollapsed && !isMobile ? 'absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2' : 'flex-shrink-0'
                       }`} />
-                     <div className={`flex items-center justify-between flex-1 transition-all duration-300 ease-in-out ${
-                       isCollapsed && !isMobile ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto ml-2.5'
-                     }`}>
-                       <span className="text-sm whitespace-nowrap transition-all duration-200">{item.name}</span>
-                       {item.unreadCount > 0 && (
-                         <span className={`ml-2 px-2 py-0.5 text-xs rounded-full transition-all duration-200 ${
-                           active
-                             ? 'bg-blue-500 text-white'
-                             : 'bg-red-500 text-white'
-                         }`}>
-                           {item.unreadCount}
-                         </span>
-                       )}
-                     </div>
-                     {isCollapsed && !isMobile && item.unreadCount > 0 && (
-                       <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center transition-all duration-200 animate-pulse">
-                         {item.unreadCount}
-                       </span>
-                     )}
-                  </Link>
-                );
-              })}
+                      <div className={`flex items-center justify-between flex-1 transition-all duration-300 ease-in-out ${
+                        isCollapsed && !isMobile ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto ml-2.5'
+                      }`}>
+                        <span className="text-sm whitespace-nowrap transition-all duration-200">{item.name}</span>
+                        {item.unreadCount > 0 && (
+                          <span className={`ml-2 px-2 py-0.5 text-xs rounded-full transition-all duration-200 ${
+                            active
+                              ? 'bg-blue-500 text-white'
+                              : 'bg-red-500 text-white'
+                          }`}>
+                            {item.unreadCount}
+                          </span>
+                        )}
+                      </div>
+                      {isCollapsed && !isMobile && item.unreadCount > 0 && (
+                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center transition-all duration-200 animate-pulse">
+                          {item.unreadCount}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })
+              ) : null}
             </div>
 
             {/* Section Separator (except for last section) */}
@@ -230,7 +322,8 @@ const AdminSidebar = ({ isMobile = false, onCollapseChange }) => {
               </div>
             )}
           </div>
-        ))}
+          );
+        })}
       </nav>
 
         {/* User Info & Logout - Bottom */}

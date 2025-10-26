@@ -17,13 +17,15 @@ import {
   Clock,
   Truck,
   CheckCircle,
-  XCircle, 
+  XCircle,
+  Receipt
 
 } from 'lucide-react';
 import { updateProfile, logout } from '../store/slices/authSlice';
 import { fetchAddresses, createAddress, updateAddress, deleteAddress } from '../store/slices/addressSlice';
 import { fetchUserOrders, setFilters } from '../store/slices/orderSlice';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import ReceiptModal from '../components/common/ReceiptModal';
 import toast from 'react-hot-toast';
 
 const Profile = () => {
@@ -36,6 +38,8 @@ const Profile = () => {
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [editingAddress, setEditingAddress] = useState(null);
   const [showProfileForm, setShowProfileForm] = useState(false);
+  const [showReceiptModal, setShowReceiptModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const { register: registerProfile, handleSubmit: handleProfileSubmit, formState: { errors: profileErrors }, reset: resetProfile } = useForm({
     defaultValues: {
@@ -495,9 +499,9 @@ const Profile = () => {
                 <div className="space-y-4">
                   {orders.map((order) => (
                     <div key={order.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-3 mb-2">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center space-x-2 mb-2 flex-wrap">
                             <h3 className="text-md font-semibold text-gray-900 dark:text-white">
                               {t('orderDetailPage.order')} #{order.orderNumber}
                             </h3>
@@ -507,7 +511,7 @@ const Profile = () => {
                             </span>
                           </div>
 
-                          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 text-sm text-gray-600 dark:text-gray-400">
                             <div className="min-w-0">
                               <span className="font-medium block">{t('ordersPage.date')}</span>
                               <span className="truncate block">{new Date(order.createdAt).toLocaleDateString()}</span>
@@ -522,6 +526,16 @@ const Profile = () => {
                             </div>
                           </div>
                         </div>
+                        <button
+                          onClick={() => {
+                            setSelectedOrder(order);
+                            setShowReceiptModal(true);
+                          }}
+                          className="flex-shrink-0 p-2 bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600 text-white rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
+                          title={t('receipts.viewReceipt')}
+                        >
+                          <Receipt className="w-5 h-5" />
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -674,6 +688,16 @@ const Profile = () => {
             </div>
           </div>
         )}
+
+        {/* Receipt Modal */}
+        <ReceiptModal
+          isOpen={showReceiptModal}
+          onClose={() => setShowReceiptModal(false)}
+          order={selectedOrder}
+          onEmailSent={() => {
+            toast.success(t('receipts.emailSentSuccess'));
+          }}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
-import { Plus, AlertCircle } from 'lucide-react';
+import { Plus, AlertCircle, FolderOpen } from 'lucide-react';
 import {
   fetchCategories,
   createCategory,
@@ -10,6 +10,7 @@ import {
 } from '../../store/slices/categorySlice';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import AdminLayout from '../../components/admin/AdminLayout';
+import PageHeader from '../../components/admin/PageHeader';
 import toast from 'react-hot-toast';
 import CategoryModal from './categories/CategoryModal';
 import CategoryList from './categories/CategoryList';
@@ -114,26 +115,23 @@ const AdminCategories = () => {
   return (
     <AdminLayout>
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-        <div className="px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('adminCategories.title')}</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-2">{t('adminCategories.manageCategories')}</p>
-            </div>
-            <button
-              onClick={() => {
-                setEditingCategory(null);
-                setShowModal(true);
-              }}
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 mt-4 sm:mt-0"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              {t('adminCategories.newCategory')}
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        icon={FolderOpen}
+        title={t('adminCategories.title')}
+        description={t('adminCategories.manageCategories')}
+        actions={
+          <button
+            onClick={() => {
+              setEditingCategory(null);
+              setShowModal(true);
+            }}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            {t('adminCategories.newCategory')}
+          </button>
+        }
+      />
 
       {/* Search Bar */}
       <div className="px-4 sm:px-6 lg:px-8 py-4 mb-6">

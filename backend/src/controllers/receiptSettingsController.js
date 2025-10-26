@@ -4,6 +4,76 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+/**
+ * Generate CSS from receipt settings
+ */
+const generateReceiptCSS = (settings) => {
+  const headerStyle = settings.useGradient && settings.headerGradient
+    ? settings.headerGradient
+    : settings.headerColor || '#1e40af';
+
+  const css = `
+:root {
+  --receipt-header-color: ${settings.headerColor || '#1e40af'};
+  --receipt-accent-color: ${settings.accentColor || '#3b82f6'};
+}
+
+.receipt {
+  font-family: ${settings.fontFamily || 'Inter, system-ui, sans-serif'};
+  font-size: ${settings.fontSize || '14px'};
+}
+
+.receipt-modern .header {
+  background: ${headerStyle};
+}
+
+.receipt-classic .header {
+  background: ${settings.headerColor || '#1e40af'};
+  border-bottom: 3px solid ${settings.accentColor || '#3b82f6'};
+}
+
+.receipt-minimal .header {
+  color: ${settings.headerColor || '#1e40af'};
+  border-bottom: 1px solid ${settings.headerColor || '#1e40af'};
+}
+
+.receipt-minimal .company-name {
+  color: ${settings.headerColor || '#1e40af'};
+}
+
+.receipt .total-line.final {
+  color: ${settings.headerColor || '#1e40af'};
+  border-top: 1px solid #ccc;
+}
+
+@media print {
+  .receipt-modern .header {
+    background: ${headerStyle};
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .receipt-classic .header {
+    background: ${settings.headerColor || '#1e40af'};
+    border-bottom: 3px solid ${settings.accentColor || '#3b82f6'};
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .receipt-minimal .header {
+    color: ${settings.headerColor || '#1e40af'};
+    border-bottom: 1px solid ${settings.headerColor || '#1e40af'};
+  }
+
+  .receipt-minimal .company-name {
+    color: ${settings.headerColor || '#1e40af'};
+  }
+}
+  `.trim();
+
+  return css;
+};
+
 // Configure multer for logo uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -98,7 +168,9 @@ const updateReceiptSettings = async (req, res) => {
       showBarcode,
       showQrCode,
       template,
-      paperSize
+      paperSize,
+      useGradient,
+      headerGradient
     } = req.body;
 
     // Validate required fields
@@ -106,53 +178,40 @@ const updateReceiptSettings = async (req, res) => {
       return errorResponse(res, 'Company name is required in both languages', 400);
     }
 
+    // Prepare settings data
+    const settingsData = {
+      logoUrl,
+      logoInversion: logoInversion || 'none',
+      companyName,
+      companyNameIs,
+      companyAddress,
+      companyAddressIs,
+      companyPhone,
+      companyEmail,
+      companyWebsite,
+      taxId,
+      headerColor: headerColor || '#1e40af',
+      accentColor: accentColor || '#3b82f6',
+      fontFamily: fontFamily || 'Inter, system-ui, sans-serif',
+      fontSize: fontSize || '14px',
+      footerText,
+      footerTextIs,
+      showBarcode: showBarcode !== undefined ? showBarcode : true,
+      showQrCode: showQrCode !== undefined ? showQrCode : true,
+      template: template || 'modern',
+      paperSize: paperSize || '80mm',
+      useGradient: useGradient !== undefined ? useGradient : false,
+      headerGradient: headerGradient || null
+    };
+
+    // Generate CSS
+    settingsData.customCss = generateReceiptCSS(settingsData);
+
     // Update or create settings
     const settings = await prisma.receiptSettings.upsert({
       where: { id: 1 },
-      update: {
-        logoUrl,
-        logoInversion: logoInversion || 'none',
-        companyName,
-        companyNameIs,
-        companyAddress,
-        companyAddressIs,
-        companyPhone,
-        companyEmail,
-        companyWebsite,
-        taxId,
-        headerColor: headerColor || '#1e40af',
-        accentColor: accentColor || '#3b82f6',
-        fontFamily: fontFamily || 'Inter, system-ui, sans-serif',
-        fontSize: fontSize || '14px',
-        footerText,
-        footerTextIs,
-        showBarcode: showBarcode !== undefined ? showBarcode : true,
-        showQrCode: showQrCode !== undefined ? showQrCode : true,
-        template: template || 'modern',
-        paperSize: paperSize || '80mm'
-      },
-      create: {
-        companyName,
-        companyNameIs,
-        companyAddress,
-        companyAddressIs,
-        companyPhone,
-        companyEmail,
-        companyWebsite,
-        taxId,
-        headerColor: headerColor || '#1e40af',
-        accentColor: accentColor || '#3b82f6',
-        fontFamily: fontFamily || 'Inter, system-ui, sans-serif',
-        fontSize: fontSize || '14px',
-        footerText,
-        footerTextIs,
-        showBarcode: showBarcode !== undefined ? showBarcode : true,
-        showQrCode: showQrCode !== undefined ? showQrCode : true,
-        template: template || 'modern',
-        paperSize: paperSize || '80mm',
-        logoUrl,
-        logoInversion: logoInversion || 'none'
-      }
+      update: settingsData,
+      create: settingsData
     });
 
     return successResponse(res, { settings }, 'Receipt settings updated successfully');

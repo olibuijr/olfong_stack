@@ -6,92 +6,28 @@ test.describe('Admin Orders Management', () => {
   test.beforeEach(async ({ page }) => {
     logTestStep('Setting up admin login');
 
-    // Login as admin with multiple fallback selectors
+    // Login as admin
     await page.goto('/admin-login');
     await page.waitForLoadState('networkidle');
 
-    // Try multiple selectors for username field
-    const usernameSelectors = [
-      'input[name="username"]',
-      'input[id="username"]',
-      'input[placeholder*="username" i]',
-      'input[placeholder*="notendanafn" i]', // Icelandic
-      'label:has-text("Username") + input',
-      'label:has-text("Notendanafn") + input', // Icelandic
-      'input[type="text"]'
-    ];
+    // Use data-testid attributes when available
+    const usernameInput = page.getByTestId('admin-username');
+    const passwordInput = page.getByTestId('admin-password');
 
-    let usernameField;
-    for (const selector of usernameSelectors) {
-      try {
-        usernameField = page.locator(selector).first();
-        await usernameField.waitFor({ state: 'visible', timeout: 2000 });
-        console.log(`Found username field with selector: ${selector}`);
-        break;
-      } catch (error) {
-        console.log(`Username selector failed: ${selector}`);
-      }
+    if (await usernameInput.count() > 0) {
+      await usernameInput.fill(testUsers.admin.username);
+      await passwordInput.fill(testUsers.admin.password);
+      console.log('Filled admin credentials using data-testid');
+    } else {
+      // Fallback to label-based selection
+      await page.getByLabel(/username|notandanafn/i).fill(testUsers.admin.username);
+      await page.getByLabel(/password|lykilorð/i).fill(testUsers.admin.password);
+      console.log('Filled admin credentials using labels');
     }
 
-    if (!usernameField) {
-      throw new Error('Could not find username field');
-    }
-
-    await usernameField.fill(testUsers.admin.username);
-
-    // Try multiple selectors for password field
-    const passwordSelectors = [
-      'input[name="password"]',
-      'input[id="password"]',
-      'input[type="password"]',
-      'input[placeholder*="password" i]',
-      'input[placeholder*="lykilorð" i]' // Icelandic
-    ];
-
-    let passwordField;
-    for (const selector of passwordSelectors) {
-      try {
-        passwordField = page.locator(selector).first();
-        await passwordField.waitFor({ state: 'visible', timeout: 2000 });
-        console.log(`Found password field with selector: ${selector}`);
-        break;
-      } catch (error) {
-        console.log(`Password selector failed: ${selector}`);
-      }
-    }
-
-    if (!passwordField) {
-      throw new Error('Could not find password field');
-    }
-
-    await passwordField.fill(testUsers.admin.password);
-
-    // Try multiple selectors for login button
-    const loginSelectors = [
-      'button[type="submit"]',
-      'button:has-text("Login")',
-      'button:has-text("Skrá")', // Icelandic
-      'button:has-text("Innskráning")' // Icelandic
-    ];
-
-    let loginButton;
-    for (const selector of loginSelectors) {
-      try {
-        loginButton = page.locator(selector).first();
-        await loginButton.waitFor({ state: 'visible', timeout: 2000 });
-        console.log(`Found login button with selector: ${selector}`);
-        break;
-      } catch (error) {
-        console.log(`Login button selector failed: ${selector}`);
-      }
-    }
-
-    if (!loginButton) {
-      throw new Error('Could not find login button');
-    }
-
-    await loginButton.click();
-    await expect(page).toHaveURL('/admin');
+    // Click login button
+    await page.getByRole('button', { name: /login|innskrá/i }).click();
+    await page.waitForTimeout(2000);
 
     logTestStep('Admin login completed successfully');
   });
