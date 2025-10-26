@@ -42,6 +42,10 @@ const Translations = () => {
   const [editFormData, setEditFormData] = useState({ key: '', is: '', en: '' });
   const [showAddModal, setShowAddModal] = useState(false);
   const [showStatsPanel, setShowStatsPanel] = useState(true);
+  const [showGenerateModal, setShowGenerateModal] = useState(false);
+  const [generateLoading, setGenerateLoading] = useState(false);
+  const [generateConfig, setGenerateConfig] = useState({ sourceLocale: 'is', targetLocale: 'en' });
+  const [translatingKey, setTranslatingKey] = useState(null);
 
   const itemsPerPage = 20;
 
@@ -281,6 +285,85 @@ const Translations = () => {
     }
   };
 
+  // Generate translations using Gemini
+  const handleGenerate = async () => {
+    if (!generateConfig.sourceLocale || !generateConfig.targetLocale) {
+      toast.error('Please select both source and target languages');
+      return;
+    }
+
+    setGenerateLoading(true);
+    try {
+      const response = await fetch('/api/translations/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          sourceLocale: generateConfig.sourceLocale,
+          targetLocale: generateConfig.targetLocale
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.details || 'Generation failed');
+      }
+
+      const result = await response.json();
+      toast.success(`Generated ${result.data.generated} translations`);
+      setShowGenerateModal(false);
+      fetchTranslations();
+      fetchStats();
+    } catch (err) {
+      console.error('Error generating translations:', err);
+      toast.error(err.message || 'Failed to generate translations');
+    } finally {
+      setGenerateLoading(false);
+    }
+  };
+
+  // Translate a single item
+  const handleTranslateItem = async (translation, sourceLocale, targetLocale) => {
+    if (!translation[sourceLocale === 'is' ? 'is' : 'en']) {
+      toast.error('Source translation not found');
+      return;
+    }
+
+    setTranslatingKey(translation.key);
+    try {
+      const response = await fetch('/api/translations/translate-item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          key: translation.key,
+          sourceLocale,
+          targetLocale,
+          value: translation[sourceLocale === 'is' ? 'is' : 'en']
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.details || 'Translation failed');
+      }
+
+      const result = await response.json();
+      toast.success(`Translated to ${targetLocale === 'is' ? 'Icelandic' : 'English'}`);
+      fetchTranslations();
+      fetchStats();
+    } catch (err) {
+      console.error('Error translating item:', err);
+      toast.error(err.message || 'Failed to translate item');
+    } finally {
+      setTranslatingKey(null);
+    }
+  };
+
   if (loading) {
     return (
       <AdminLayout>
@@ -341,6 +424,13 @@ const Translations = () => {
                   className="hidden"
                 />
               </label>
+              <button
+                onClick={() => setShowGenerateModal(true)}
+                className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+              >
+                <FileJson className="w-4 h-4 mr-2" />
+                <span>Generate with Gemini</span>
+              </button>
               <button
                 onClick={() => {
                   setShowAddModal(true);
@@ -530,6 +620,38 @@ const Translations = () => {
                             </td>
                             <td className="px-4 py-3 text-right">
                               <div className="flex justify-end gap-2">
+                                {/* Translate to Icelandic button */}
+                                {!translation.is && translation.en && (
+                                  <button
+                                    onClick={() => handleTranslateItem(translation, 'en', 'is')}
+                                    disabled={translatingKey === translation.key}
+                                    className="text-cyan-600 hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-300 disabled:opacity-50"
+                                    title="Translate to Icelandic"
+                                  >
+                                    {translatingKey === translation.key ? (
+                                      <Loader2 className="w-4 h-4 animate-spin" />
+                                    ) : (
+                                      <Globe className="w-4 h-4" />
+                                    )}
+                                  </button>
+                                )}
+
+                                {/* Translate to English button */}
+                                {!translation.en && translation.is && (
+                                  <button
+                                    onClick={() => handleTranslateItem(translation, 'is', 'en')}
+                                    disabled={translatingKey === translation.key}
+                                    className="text-cyan-600 hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-300 disabled:opacity-50"
+                                    title="Translate to English"
+                                  >
+                                    {translatingKey === translation.key ? (
+                                      <Loader2 className="w-4 h-4 animate-spin" />
+                                    ) : (
+                                      <Globe className="w-4 h-4" />
+                                    )}
+                                  </button>
+                                )}
+
                                 <button
                                   onClick={() => handleEdit(translation)}
                                   className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
@@ -666,6 +788,90 @@ const Translations = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Generate Translations Modal */}
+        {showGenerateModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full">
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Generate Translations with Gemini
+                </h2>
+                <button
+                  onClick={() => setShowGenerateModal(false)}
+                  disabled={generateLoading}
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-50"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-6">
+                <p className="text-gray-600 dark:text-gray-400">
+                  Generate missing translations using Gemini Flash 2.5 model. This will translate from the source language to the target language for any keys that don't already have translations.
+                </p>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Source Language
+                    </label>
+                    <select
+                      value={generateConfig.sourceLocale}
+                      onChange={(e) => setGenerateConfig({ ...generateConfig, sourceLocale: e.target.value })}
+                      disabled={generateLoading}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:opacity-50"
+                    >
+                      <option value="is">Icelandic</option>
+                      <option value="en">English</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Target Language
+                    </label>
+                    <select
+                      value={generateConfig.targetLocale}
+                      onChange={(e) => setGenerateConfig({ ...generateConfig, targetLocale: e.target.value })}
+                      disabled={generateLoading}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:text-white disabled:opacity-50"
+                    >
+                      <option value="en">English</option>
+                      <option value="is">Icelandic</option>
+                    </select>
+                  </div>
+
+                  {generateConfig.sourceLocale === generateConfig.targetLocale && (
+                    <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                      <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                        Source and target languages are the same. Please select different languages.
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => setShowGenerateModal(false)}
+                    disabled={generateLoading}
+                    className="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleGenerate}
+                    disabled={generateLoading || generateConfig.sourceLocale === generateConfig.targetLocale}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                  >
+                    {generateLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+                    <span>{generateLoading ? 'Generating...' : 'Generate'}</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
