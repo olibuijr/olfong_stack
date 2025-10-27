@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from "../contexts/LanguageContext";
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { ArrowLeft, ShoppingCart, Minus, Plus, AlertTriangle, Calendar, Clock, Edit, X } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Minus, Plus, AlertTriangle, Calendar, Clock, Edit } from 'lucide-react';
 import { FaFish, FaDrumstickBite, FaCheese, FaCarrot, FaBirthdayCake, FaUtensils, FaPizzaSlice, FaLeaf, FaHamburger } from 'react-icons/fa';
 import { GiCow } from 'react-icons/gi';
 import { fetchProduct, clearCurrentProduct, updateProduct } from '../store/slices/productSlice';
 import { addToCart } from '../store/slices/cartSlice';
 import useCurrency from '../hooks/useCurrency';
 import LoadingSpinner from '../components/common/LoadingSpinner';
+import ProductModal from '../components/admin/ProductModal';
 import toast from 'react-hot-toast';
-import { 
-  getProductName, 
-  getProductDescription, 
-  getProductFoodPairings, 
+import {
+  getProductName,
+  getProductDescription,
+  getProductFoodPairings,
   getProductSpecialAttributes
 } from '../utils/languageUtils';
 
@@ -40,6 +40,43 @@ const getFoodIcon = (food) => {
   return <FaUtensils className="w-6 h-6 text-gray-600 dark:text-gray-400" />; // Default food icon
 };
 
+// Category and subcategory definitions
+const getCategories = (t) => [
+  { value: 'WINE', label: t('categories.WINE') },
+  { value: 'BEER', label: t('categories.BEER') },
+  { value: 'BEERS', label: t('categories.BEERS') },
+  { value: 'CIDER_RTD', label: t('categories.CIDER_RTD') },
+  { value: 'SPIRITS', label: t('categories.SPIRITS') },
+  { value: 'NICOTINE', label: t('categories.NICOTINE') },
+  { value: 'NON_ALCOHOLIC', label: t('categories.NON_ALCOHOLIC') },
+  { value: 'OFFERS', label: t('categories.OFFERS') }
+];
+
+const getSubcategories = (t) => [
+  // Wine subcategories
+  { value: 'WHITE_WINE', label: t('subcategories.WHITE_WINE'), category: 'WINE' },
+  { value: 'RED_WINE', label: t('subcategories.RED_WINE'), category: 'WINE' },
+  { value: 'SPARKLING_WINE', label: t('subcategories.SPARKLING_WINE'), category: 'WINE' },
+  { value: 'CHAMPAGNE', label: t('subcategories.CHAMPAGNE'), category: 'WINE' },
+  { value: 'YELLOW_WINE', label: t('subcategories.YELLOW_WINE'), category: 'WINE' },
+  { value: 'ROSE_WINE', label: t('subcategories.ROSE_WINE'), category: 'WINE' },
+  // Spirits subcategories
+  { value: 'GIN', label: t('subcategories.GIN'), category: 'SPIRITS' },
+  { value: 'COGNAC', label: t('subcategories.COGNAC'), category: 'SPIRITS' },
+  { value: 'RUM', label: t('subcategories.RUM'), category: 'SPIRITS' },
+  { value: 'LIQUEURS_SHOTS', label: t('subcategories.LIQUEURS_SHOTS'), category: 'SPIRITS' },
+  { value: 'TEQUILA', label: t('subcategories.TEQUILA'), category: 'SPIRITS' },
+  { value: 'VODKA', label: t('subcategories.VODKA'), category: 'SPIRITS' },
+  { value: 'WHISKEY', label: t('subcategories.WHISKEY'), category: 'SPIRITS' },
+  // Nicotine subcategories
+  { value: 'VAPE', label: t('subcategories.VAPE'), category: 'NICOTINE' },
+  { value: 'NICOTINE_PADS', label: t('subcategories.NICOTINE_PADS'), category: 'NICOTINE' },
+  // Non-alcoholic subcategories
+  { value: 'SODA', label: t('subcategories.SODA'), category: 'NON_ALCOHOLIC' },
+  { value: 'SOFT_DRINKS', label: t('subcategories.SOFT_DRINKS'), category: 'NON_ALCOHOLIC' },
+  { value: 'ENERGY_DRINKS', label: t('subcategories.ENERGY_DRINKS'), category: 'NON_ALCOHOLIC' }
+];
+
 const ProductDetail = () => {
   const { t, currentLanguage } = useLanguage();
   const { currencySymbol } = useCurrency();
@@ -56,8 +93,8 @@ const ProductDetail = () => {
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([]);
-  const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [showImageLightbox, setShowImageLightbox] = useState(false);
 
   const [subscriptionData, setSubscriptionData] = useState({
     intervalType: 'WEEKLY',
@@ -94,65 +131,6 @@ const ProductDetail = () => {
     }
   };
 
-  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
-    defaultValues: {
-      name: '',
-      nameIs: '',
-      description: '',
-      descriptionIs: '',
-      price: 0,
-      stock: 0,
-      category: 'WINE',
-      subcategory: '',
-      isAgeRestricted: false,
-      imageUrl: '',
-      hasDiscount: false,
-      originalPrice: 0,
-      discountPercentage: 0,
-      discountStartDate: '',
-      discountEndDate: '',
-      discountReason: '',
-      discountReasonIs: '',
-      // ATVR/Enhanced fields
-      volume: '',
-      volumeIs: '',
-      alcoholContent: '',
-      country: '',
-      countryIs: '',
-      region: '',
-      regionIs: '',
-      origin: '',
-      originIs: '',
-      producer: '',
-      producerIs: '',
-      distributor: '',
-      distributorIs: '',
-      packaging: '',
-      packagingIs: '',
-      packagingWeight: '',
-      packagingWeightIs: '',
-      carbonFootprint: '',
-      carbonFootprintIs: '',
-      vintage: '',
-      grapeVariety: '',
-      grapeVarietyIs: '',
-      wineStyle: '',
-      wineStyleIs: '',
-      pricePerLiter: '',
-      pricePerLiterIs: '',
-      foodPairings: [],
-      foodPairingsIs: [],
-      specialAttributes: [],
-      specialAttributesIs: [],
-      certifications: [],
-      certificationsIs: [],
-      availability: 'available',
-      availabilityIs: 'Til ráðstöfunar',
-      atvrProductId: '',
-      atvrUrl: '',
-      atvrImageUrl: ''
-    }
-  });
 
   useEffect(() => {
     if (id) {
@@ -176,126 +154,38 @@ const ProductDetail = () => {
     }
   }, [currentProduct, user]);
 
+  // Reset uploaded image when edit modal closes
   useEffect(() => {
-    if (currentProduct && showEditModal) {
-      setValue('name', currentProduct.name);
-      setValue('nameIs', currentProduct.nameIs || '');
-      setValue('description', currentProduct.description || '');
-      setValue('descriptionIs', currentProduct.descriptionIs || '');
-      setValue('price', currentProduct.price);
-      setValue('stock', currentProduct.stock);
-      setValue('category', currentProduct.category.name);
-      setValue('subcategory', currentProduct.subcategory || '');
-      setValue('isAgeRestricted', currentProduct.ageRestriction > 18);
-      setValue('imageUrl', currentProduct.imageUrl || '');
-      setValue('hasDiscount', currentProduct.hasDiscount || false);
-      setValue('originalPrice', currentProduct.originalPrice || 0);
-      setValue('discountPercentage', currentProduct.discountPercentage || 0);
-      setValue('discountStartDate', currentProduct.discountStartDate ? currentProduct.discountStartDate.split('T')[0] : '');
-      setValue('discountEndDate', currentProduct.discountEndDate ? currentProduct.discountEndDate.split('T')[0] : '');
-      setValue('discountReason', currentProduct.discountReason || '');
-      setValue('discountReasonIs', currentProduct.discountReasonIs || '');
-      
-      // ATVR/Enhanced fields
-      setValue('volume', currentProduct.volume || '');
-      setValue('volumeIs', currentProduct.volumeIs || '');
-      setValue('alcoholContent', currentProduct.alcoholContent || '');
-      setValue('country', currentProduct.country || '');
-      setValue('countryIs', currentProduct.countryIs || '');
-      setValue('region', currentProduct.region || '');
-      setValue('regionIs', currentProduct.regionIs || '');
-      setValue('origin', currentProduct.origin || '');
-      setValue('originIs', currentProduct.originIs || '');
-      setValue('producer', currentProduct.producer || '');
-      setValue('producerIs', currentProduct.producerIs || '');
-      setValue('distributor', currentProduct.distributor || '');
-      setValue('distributorIs', currentProduct.distributorIs || '');
-      setValue('packaging', currentProduct.packaging || '');
-      setValue('packagingIs', currentProduct.packagingIs || '');
-      setValue('packagingWeight', currentProduct.packagingWeight || '');
-      setValue('packagingWeightIs', currentProduct.packagingWeightIs || '');
-      setValue('carbonFootprint', currentProduct.carbonFootprint || '');
-      setValue('carbonFootprintIs', currentProduct.carbonFootprintIs || '');
-      setValue('vintage', currentProduct.vintage || '');
-      setValue('grapeVariety', currentProduct.grapeVariety || '');
-      setValue('grapeVarietyIs', currentProduct.grapeVarietyIs || '');
-      setValue('wineStyle', currentProduct.wineStyle || '');
-      setValue('wineStyleIs', currentProduct.wineStyleIs || '');
-      setValue('pricePerLiter', currentProduct.pricePerLiter || '');
-      setValue('pricePerLiterIs', currentProduct.pricePerLiterIs || '');
-      setValue('foodPairings', currentProduct.foodPairings || []);
-      setValue('foodPairingsIs', currentProduct.foodPairingsIs || []);
-      setValue('specialAttributes', currentProduct.specialAttributes || []);
-      setValue('specialAttributesIs', currentProduct.specialAttributesIs || []);
-      setValue('certifications', currentProduct.certifications || []);
-      setValue('certificationsIs', currentProduct.certificationsIs || []);
-      setValue('availability', currentProduct.availability || 'available');
-      setValue('availabilityIs', currentProduct.availabilityIs || 'Til ráðstöfunar');
-      setValue('atvrProductId', currentProduct.atvrProductId || '');
-      setValue('atvrUrl', currentProduct.atvrUrl || '');
-      setValue('atvrImageUrl', currentProduct.atvrImageUrl || '');
-      
-      // Reset image uploads
-      setUploadedImages([]);
-      setImagePreviewUrls([]);
+    if (!showEditModal) {
+      setUploadedImage(null);
     }
-  }, [currentProduct, showEditModal, setValue]);
+  }, [showEditModal]);
 
-  // Image upload handlers
+  // Image upload handler
   const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
-    const newImages = [...uploadedImages, ...files];
-    setUploadedImages(newImages);
-    
-    // Create preview URLs
-    const newPreviewUrls = files.map(file => URL.createObjectURL(file));
-    setImagePreviewUrls(prev => [...prev, ...newPreviewUrls]);
+    const file = event.target.files?.[0];
+    if (file) {
+      setUploadedImage(file);
+    }
   };
 
-  const removeImage = (index) => {
-    const newImages = uploadedImages.filter((_, i) => i !== index);
-    const newPreviewUrls = imagePreviewUrls.filter((_, i) => i !== index);
-    setUploadedImages(newImages);
-    setImagePreviewUrls(newPreviewUrls);
-  };
-
+  // Handle product edit submission
   const handleEditSubmit = async (data) => {
     try {
-      // Remove the category field since we're using categoryId for the relation
-      // eslint-disable-next-line no-unused-vars
-      const { category, ...formData } = data;
-      
-      // Create FormData for file uploads
-      const productData = new FormData();
-      
-      // Add all form fields
-      Object.keys(formData).forEach(key => {
-        if (key === 'foodPairings' || key === 'foodPairingsIs' || 
-            key === 'specialAttributes' || key === 'specialAttributesIs' ||
-            key === 'certifications' || key === 'certificationsIs' ||
-            key === 'subcategories') {
-          // Handle arrays
-          productData.append(key, JSON.stringify(formData[key] || []));
-        } else {
-          productData.append(key, formData[key] || '');
-        }
-      });
-      
-      // Add categoryId and ageRestriction
-      productData.append('categoryId', currentProduct.categoryId);
-      productData.append('ageRestriction', data.isAgeRestricted ? 20 : 18);
-      
-      // Add uploaded images
-      uploadedImages.forEach((file) => {
-        productData.append('images', file);
-      });
+      // Build form data for submission
+      const productData = {
+        ...data,
+        price: parseFloat(data.price),
+        stock: parseInt(data.stock),
+        categoryId: currentProduct.categoryId,
+        ageRestriction: data.isAgeRestricted ? 20 : 18,
+        imageUrl: uploadedImage || data.imageUrl
+      };
 
-      await dispatch(updateProduct({ id: currentProduct.id, productData })).unwrap();
+      await dispatch(updateProduct({ id: currentProduct.id, ...productData })).unwrap();
       toast.success(t('common.success'));
       setShowEditModal(false);
-      reset();
-      setUploadedImages([]);
-      setImagePreviewUrls([]);
+      setUploadedImage(null);
     } catch (error) {
       console.error('Error updating product:', error);
       toast.error(error.message || t('common.error'));
@@ -385,7 +275,10 @@ const ProductDetail = () => {
             {/* Product Image */}
             <div className="space-y-4">
               {currentProduct.responsiveData ? (
-                <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
+                <div
+                  onClick={() => setShowImageLightbox(true)}
+                  className="bg-white dark:bg-white rounded-lg p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-200"
+                >
                   <picture>
                     {currentProduct.responsiveData.picture?.webp?.srcset && (
                       <source
@@ -412,7 +305,10 @@ const ProductDetail = () => {
                   </picture>
                 </div>
               ) : currentProduct.imageUrl ? (
-                <div className="bg-white dark:bg-white rounded-lg p-4 shadow-lg">
+                <div
+                  onClick={() => setShowImageLightbox(true)}
+                  className="bg-white dark:bg-white rounded-lg p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-200"
+                >
                   <img
                     src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${currentProduct.imageUrl}`}
                     alt={getProductName(currentLanguage, currentProduct)}
@@ -462,9 +358,15 @@ const ProductDetail = () => {
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('productDetailPage.description')}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {getProductDescription(currentLanguage, currentProduct) || t('productDetailPage.noDescription')}
-                </p>
+                <div className="text-gray-600 dark:text-gray-300 leading-relaxed space-y-3">
+                  {(getProductDescription(currentLanguage, currentProduct) || t('productDetailPage.noDescription'))
+                    .split('\n\n')
+                    .filter(para => para.trim())
+                    .map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))
+                  }
+                </div>
               </div>
 
               {/* VAT Information */}
@@ -905,200 +807,68 @@ const ProductDetail = () => {
         </div>
       )}
 
-      {/* Edit Product Modal */}
-      {showEditModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-xl">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                {t('adminProductsPage.editProduct')}
-              </h2>
-              <button
-                onClick={() => {
-                  setShowEditModal(false);
-                  reset();
-                }}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+      {/* Product Edit Modal */}
+      <ProductModal
+        isOpen={showEditModal}
+        onClose={() => {
+          setShowEditModal(false);
+          setUploadedImage(null);
+        }}
+        onSubmit={handleEditSubmit}
+        editingProduct={currentProduct}
+        categories={getCategories(t)}
+        subcategories={getSubcategories(t)}
+        uploadedImage={uploadedImage}
+        setUploadedImage={setUploadedImage}
+        handleImageUpload={handleImageUpload}
+        setShowImageSearch={() => {}} // Not needed for product detail
+        setShowMediaPicker={() => {}} // Not needed for product detail
+      />
 
-            <form onSubmit={handleSubmit(handleEditSubmit)} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Name (English) */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminProductsPage.nameEn')} *
-                  </label>
-                  <input
-                    {...register('name', { required: true })}
-                    className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder={t('products.title')}
+      {/* Image Lightbox Modal */}
+      {showImageLightbox && (currentProduct.responsiveData || currentProduct.imageUrl) && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowImageLightbox(false)}
+        >
+          <button
+            onClick={() => setShowImageLightbox(false)}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200 z-10"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <div className="max-w-6xl max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
+            {currentProduct.responsiveData ? (
+              <picture>
+                {currentProduct.responsiveData.picture?.webp?.srcset && (
+                  <source
+                    srcSet={currentProduct.responsiveData.picture.webp.srcset}
+                    type="image/webp"
+                    sizes="90vw"
                   />
-                  {errors.name && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                      {t('adminProductsPage.nameRequired')}
-                    </p>
-                  )}
-                </div>
-
-                {/* Name (Icelandic) */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('adminProductsPage.nameIs')}
-                  </label>
-                  <input
-                    {...register('nameIs')}
-                    className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder={t('adminProductsPage.nameIs')}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Price */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('common.price')} * ({currencySymbol})
-                  </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    {...register('price', { required: true, min: 0 })}
-                    className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  />
-                  {errors.price && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                      {t('adminProductsPage.priceRequired')}
-                    </p>
-                  )}
-                </div>
-
-                {/* Stock */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t('products.stock')} *
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    {...register('stock', { required: true, min: 0 })}
-                    className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  />
-                  {errors.stock && (
-                    <p className="text-red-600 dark:text-red-400 text-sm mt-1">
-                      {t('adminProductsPage.stockRequired')}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Description */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('products.description')}
-                </label>
-                <textarea
-                  {...register('description')}
-                  rows={3}
-                  className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder={t('products.description')}
-                />
-              </div>
-
-              {/* Description (Icelandic) */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminProductsPage.descriptionIs')}
-                </label>
-                <textarea
-                  {...register('descriptionIs')}
-                  rows={3}
-                  className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder={t('adminProductsPage.descriptionIs')}
-                />
-              </div>
-
-              {/* Image Upload */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminProductsPage.productImages')}
-                </label>
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                />
-                {imagePreviewUrls.length > 0 && (
-                  <div className="mt-2 grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {imagePreviewUrls.map((url, index) => (
-                      <div key={index} className="relative">
-                        <img
-                          src={url}
-                          alt={`Preview ${index + 1}`}
-                          className="w-full h-20 object-cover rounded border"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeImage(index)}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
-                  </div>
                 )}
-              </div>
-
-              {/* Image URL (fallback) */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t('adminProductsPage.imageUrl')}
-                </label>
-                <input
-                  {...register('imageUrl')}
-                  className="input w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder="https://example.com/image.jpg"
+                {currentProduct.responsiveData.picture?.jpeg?.srcset && (
+                  <source
+                    srcSet={currentProduct.responsiveData.picture.jpeg.srcset}
+                    type="image/jpeg"
+                    sizes="90vw"
+                  />
+                )}
+                <img
+                  src={currentProduct.responsiveData.picture?.img?.src || currentProduct.responsiveData.src}
+                  alt={currentProduct.responsiveData.picture?.img?.alt || currentProduct.responsiveData.alt}
+                  className="w-full h-auto object-contain"
+                  sizes="90vw"
+                  srcSet={currentProduct.responsiveData.picture?.jpeg?.srcset || currentProduct.responsiveData.srcset}
                 />
-              </div>
-
-              {/* Age Restriction */}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  {...register('isAgeRestricted')}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                  {t('adminProductsPage.ageRestricted')}
-                </label>
-              </div>
-
-              {/* Form Actions */}
-              <div className="flex justify-end space-x-3 pt-6 border-t">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowEditModal(false);
-                    reset();
-                  }}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-                >
-                  {t('common.cancel')}
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-                >
-                  {t('common.save')}
-                </button>
-              </div>
-            </form>
+              </picture>
+            ) : (
+              <img
+                src={currentProduct.imageUrl.startsWith('http') ? currentProduct.imageUrl : `${import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com'}${currentProduct.imageUrl}`}
+                alt={getProductName(currentLanguage, currentProduct)}
+                className="w-full h-auto object-contain"
+              />
+            )}
           </div>
         </div>
       )}
