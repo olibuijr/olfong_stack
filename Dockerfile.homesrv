@@ -3,7 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --ignore-scripts
 COPY . .
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 RUN sh -c 'npm run build || echo "No build script"'
 EXPOSE 3000
-ENTRYPOINT []
-CMD ["/bin/sh", "-c", "npm start 2>&1 || npm run dev 2>&1 || node server.js 2>&1 || tail -f /dev/null"]
+ENTRYPOINT ["/app/entrypoint.sh"]
