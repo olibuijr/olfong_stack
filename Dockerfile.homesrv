@@ -6,4 +6,4 @@ COPY . .
 RUN sh -c 'npm run build || echo "No build script"'
 EXPOSE 3000
 ENTRYPOINT []
-CMD ["sh", "-c", "npm start 2>/dev/null || npm run dev 2>/dev/null || node server.js 2>/dev/null || (echo 'Container ready' && tail -f /dev/null)"]
+CMD ["/bin/sh", "-c", "npm start 2>&1 || npm run dev 2>&1 || node server.js 2>&1 || tail -f /dev/null"]
