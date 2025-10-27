@@ -87,11 +87,24 @@ async function callFluxKontextAPI(imageUrl, promptData) {
   if (!response.ok) {
     const error = await response.text();
     console.error('DEBUG: FLUX API error response:', error);
-    throw new Error(`FLUX Kontext API error: ${error}`);
+    throw new Error(`FLUX Kontext API error (status ${response.status}): ${error}`);
   }
 
   const result = await response.json();
   console.log('DEBUG: FLUX API response:', JSON.stringify(result, null, 2));
+
+  // Validate response has required fields
+  if (!result.id) {
+    console.error('DEBUG: RunPod response missing job ID:', result);
+    throw new Error('RunPod response missing job ID - API key may be invalid or insufficient credits');
+  }
+
+  if (result.status === 'FAILED') {
+    const errorMsg = result.error || 'Unknown error';
+    console.error('DEBUG: RunPod returned FAILED status:', errorMsg);
+    throw new Error(`RunPod generation failed: ${errorMsg}`);
+  }
+
   return result;
 }
 
@@ -102,13 +115,20 @@ async function pollRunPodStatus(jobId) {
   const settings = await getSettings();
   const apiKey = settings.runpodApiKey;
 
+  if (!apiKey) {
+    throw new Error('RunPod API key not configured in settings');
+  }
+
   const endpoint = `https://api.runpod.ai/v2/black-forest-labs-flux-1-kontext-dev/status/${jobId}`;
 
   console.log('DEBUG: Polling RunPod FLUX Kontext Dev status for job:', jobId);
+  console.log('DEBUG: Status endpoint:', endpoint);
+  console.log('DEBUG: Has API key:', !!apiKey);
 
   const response = await fetch(endpoint, {
     headers: {
-      'Authorization': `Bearer ${apiKey}`
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
     }
   });
 
@@ -116,8 +136,15 @@ async function pollRunPodStatus(jobId) {
 
   if (!response.ok) {
     const error = await response.text();
-    console.error('DEBUG: RunPod status error:', error);
-    throw new Error('Failed to get job status: ' + error);
+    console.error('DEBUG: RunPod status error (status ' + response.status + '):', error);
+
+    // 404 usually means job_id is wrong, API key invalid, or job doesn't exist yet
+    if (response.status === 404) {
+      console.error('DEBUG: Job not found. Possible causes: invalid job_id, API key without access, or job expired');
+      console.error('DEBUG: Job ID used:', jobId);
+    }
+
+    throw new Error(`Failed to get job status (${response.status}): ${error}`);
   }
 
   const result = await response.json();
