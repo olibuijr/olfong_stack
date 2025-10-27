@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: [['html'], ['json', { outputFile: 'test-results.json' }]],
 
   use: {
-    baseURL: 'http://localhost:3001',
+    baseURL: process.env.TEST_FRONTEND_URL || process.env.PLAYWRIGHT_TEST_BASE_URL || 'https://olfong.olibuijr.com',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

@@ -1,5 +1,91 @@
 # Project Rules
 
+## URL Configuration - CRITICAL OVERRIDE
+
+**ALL frontend and backend services MUST use `https://olfong.olibuijr.com` as the base URL:**
+- Frontend (React): Available at `https://olfong.olibuijr.com`
+- Backend API: Available at `https://olfong.olibuijr.com/api`
+- Media/Uploads: Served through `https://olfong.olibuijr.com`
+
+**NEVER use localhost, 127.0.0.1, or any other hostname.** This rule overrides any other configuration that references different hostnames or ports.
+
+When encountering code with localhost or other hostnames, update to use `https://olfong.olibuijr.com` instead.
+
+## MCP Servers - NEVER USE
+
+**Do NOT use MCP servers (e.g., Playwright MCP browser automation) under any circumstances.**
+
+- Only use E2E tests with Playwright via `npx playwright test`
+- Never use browser automation through MCP tools like `mcp__playwright__*`
+- All testing and automation must be done through standard E2E test files
+- Configuration files: `/web-tests/playwright.config.ts`
+- Test files location: `/web-tests/e2e/**/*.spec.ts`
+
+This keeps testing consistent, reproducible, and follows standard CI/CD practices.
+
+## Development Workflow - Incremental & Self-Healing
+
+**CRITICAL: Follow this workflow for maximum efficiency and reliability:**
+
+### 1. Incremental Development
+- Build features in small, testable increments
+- Don't try to build everything at once - work step by step
+- Each increment should be functional and testable on its own
+- Commit working increments frequently
+
+### 2. Test As You Go
+- Write code → Write tests → Run tests → Fix issues immediately
+- **Never wait until the end to test** - test each piece as it's built
+- Run tests after each increment to catch issues early
+- Use test failures as immediate feedback to guide fixes
+
+### 3. Self-Healing Approach
+- When tests fail, **automatically analyze and fix the errors**
+- Read error messages carefully and fix the root cause
+- Re-run tests after fixes to verify the solution works
+- Iterate quickly: fix → test → fix → test until all tests pass
+- Don't ask for permission to fix test failures - just fix them
+
+### 4. Fast Iteration Cycle
+The ideal workflow is:
+1. Look up documentation (use Context7)
+2. Write a small increment of code
+3. Write tests for that increment
+4. Run tests
+5. If tests fail: analyze errors → fix code → re-run tests
+6. If tests pass: move to next increment
+7. Repeat until feature is complete
+
+### 5. Efficiency Through Testing
+- Tests save time by catching issues immediately
+- Self-healing through automated test-fix cycles is faster than manual debugging
+- Each passing test is proof the code works correctly
+- Build confidence incrementally rather than hoping everything works at the end
+
+**Goal: Make functionality work as fast as possible through rapid iteration and automatic error correction.**
+
+## Context7 - Always Look Up Documentation First
+
+**CRITICAL: Before writing any code for a requested framework or feature, ALWAYS use Context7 to look up the latest documentation and best practices.**
+
+- Use Context7 to fetch up-to-date API references, examples, and documentation
+- Include "use context7" in your internal process when researching frameworks, libraries, or features
+- Verify current syntax, methods, and patterns before implementing
+- Check for deprecated features or breaking changes in newer versions
+- This ensures code is using the latest, correct approaches rather than outdated patterns
+
+**How to use Context7:**
+- Simply mention "use context7" when you need to look up documentation
+- Context7 provides version-specific API references from official sources
+- Always prioritize Context7 documentation over knowledge cutoff information
+
+**Fallback Strategy:**
+- **If Context7 lookup fails**, immediately fall back to WebSearch
+- Search for official documentation, API references, and best practices
+- Prioritize official docs (e.g., "React official docs 2025", "Playwright API reference 2025")
+- Use web search results to get the same up-to-date information Context7 would provide
+- Never skip the documentation lookup step - always try Context7 first, then WebSearch if needed
+
 ## Process Management
 
 Always use the process management script for all process operations. Never use `npm start`, `npm run dev`, or manual process commands. The process manager handles both frontend and backend services automatically.
@@ -37,9 +123,57 @@ When testing IS requested, use only the following commands:
 
 **Never use the dev server** (`npm run dev` or `npm run dev:android`, etc.) for verification or testing. The dev server is for development convenience only and should not be used for CI/CD-like processes. Use the process management script instead for any service operations.
 
-## Browser Automation
+## E2E Testing
 
-Always attempt to use Playwright for browser automation tasks, but **never run it in non-headless mode**. Always use headless mode (`headless: true`) and 2K resolution (2560x1440). If Playwright encounters an error, report it clearly and suggest alternatives if applicable.
+When asked to fix or implement a feature, **ALWAYS provide both the code implementation and Playwright e2e tests** unless explicitly told otherwise.
+
+- Write comprehensive e2e tests that verify the feature works correctly
+- Run the tests to ensure they pass: `npx playwright test`
+- Include tests as part of the feature delivery, not as an afterthought
+- Tests should cover the main user flows and edge cases for the feature
+- Never use Playwright MCP browser automation - only use standard E2E tests
+
+### Debugging E2E Test Failures
+
+When E2E tests fail, **ALWAYS check the process manager logs** for backend or frontend errors:
+
+```bash
+./process-manager.sh logs backend | tail -100
+./process-manager.sh logs frontend | tail -100
+```
+
+This helps identify:
+- Backend API errors that caused the failure
+- Frontend rendering or state issues
+- Missing translations or configuration
+- Database connection problems
+- Service communication issues
+
+Always correlate test failures with process logs to identify root causes before fixing tests.
+
+### Test Files Location
+
+- **Playwright Config**: `/web-tests/playwright.config.ts`
+- **E2E Tests Root**: `/web-tests/e2e/`
+- **Admin Tests**: `/web-tests/e2e/admin/` (includes ATVR import, products, media management)
+- **Product Tests**: `/web-tests/e2e/products/`
+- **Auth Tests**: `/web-tests/e2e/auth/`
+- **Checkout Tests**: `/web-tests/e2e/checkout/`
+- **User Tests**: `/web-tests/e2e/user/`
+- **Integration Tests**: `/web-tests/e2e/integration/`
+- **FLUX Image Generation Tests**: `/web-tests/e2e/admin/flux-image-generation.spec.ts`
+
+### Test Execution & Reporting Rules
+
+**CRITICAL: NEVER open browser reports. Always analyze test results programmatically.**
+
+- After running tests with `npx playwright test`, analyze `/web-tests/test-results.json`
+- Extract test failures and errors from the JSON report automatically
+- Use the error messages and logs to identify and fix issues
+- Self-heal: Fix code → Re-run tests → Verify → Repeat
+- Never manually inspect HTML reports in browser
+- Document final results in code comments or commit messages, not in browser
+- Only mention test results in commit messages or code when necessary
 
 ## Translation Management
 
@@ -182,13 +316,46 @@ When requested to generate Icelandic text or translations, always use the `icela
 
 ## Database Operations
 
-Always use the PostgreSQL MCP server for database operations on this project. Use the `mcp__postgres__query` tool to run SQL queries instead of using Bash commands or manual database connections. This provides:
+Always use `psql` commands for all database operations on this project. The database connection details are stored in `backend/.env`:
 
-- Direct database access through the MCP interface
-- Read-only query execution for safety
-- Better integration with Claude Code workflows
+- **Database**: `olfong_db`
+- **User**: `olfong_user`
+- **Password**: `olfong_password`
+- **Host**: `localhost`
+- **Port**: `5432`
 
-When you need to query the database, use the MCP tool rather than `psql` or other CLI tools.
+### Running SQL Queries
+
+Use the `PGPASSWORD` environment variable to avoid password prompts:
+
+```bash
+PGPASSWORD="olfong_password" psql -U olfong_user -d olfong_db -h localhost -c "SELECT * FROM \"Setting\" LIMIT 5;"
+```
+
+For multi-line queries or complex operations, use heredoc syntax:
+
+```bash
+PGPASSWORD="olfong_password" psql -U olfong_user -d olfong_db -h localhost <<EOF
+SELECT key, value, category
+FROM "Setting"
+WHERE category = 'API_KEYS';
+EOF
+```
+
+### Common Database Tasks
+
+- **Query data**: Use `-c "SQL QUERY"` for single-line queries
+- **List tables**: `\dt` in interactive mode or `-c "\dt"`
+- **Describe table**: `\d "TableName"` or `-c "\d \"TableName\""`
+- **Export data**: Use `-c "COPY (...) TO STDOUT"` with output redirection
+- **Import data**: Use `COPY` commands or pipe SQL files
+
+### Safety Notes
+
+- Always use double quotes for table and column names (e.g., `"Setting"`, `"User"`)
+- Use parameterized queries when possible to prevent SQL injection
+- Prefer SELECT queries for data inspection
+- Be cautious with UPDATE/DELETE operations - always include WHERE clauses
 
 ### CRITICAL: NEVER RESET THE DATABASE
 
@@ -270,3 +437,109 @@ Use `node scripts/restore-db-from-backup.js backup-name.json` to restore from a 
 
 ### Other
 - `web/src/pages/AdminLogin.jsx` - Admin login page
+
+## API Integrations
+
+### OpenRouter Integration
+
+OpenRouter is integrated into the system to provide unified access to multiple AI models (GPT-4, Claude, Gemini, Llama, etc.) through a single API endpoint.
+
+#### Configuration Location
+
+The OpenRouter API key and model selection can be configured at:
+- **Admin UI**: `https://olfong.olibuijr.com/admin/settings/api-keys`
+- **Frontend Component**: `web/src/pages/admin/settings/ApiKeysSettings.jsx`
+
+#### Database Settings
+
+Two settings are stored in the `Setting` table under the `API_KEYS` category:
+
+1. **`openrouter`** (API Key)
+   - Category: `API_KEYS`
+   - Encrypted: `true`
+   - Public: `false`
+   - Description: "OpenRouter API key for accessing multiple AI models"
+
+2. **`openrouterModel`** (Selected Model)
+   - Category: `API_KEYS`
+   - Encrypted: `false`
+   - Public: `false`
+   - Description: "Selected OpenRouter model for AI operations"
+
+#### Retrieving Settings in Code
+
+To use OpenRouter in your backend code:
+
+```javascript
+// Get OpenRouter settings
+const settings = await prisma.setting.findMany({
+  where: {
+    key: { in: ['openrouter', 'openrouterModel'] }
+  }
+});
+
+const apiKey = settings.find(s => s.key === 'openrouter')?.value;
+const model = settings.find(s => s.key === 'openrouterModel')?.value;
+```
+
+Or via the settings API endpoint:
+
+```javascript
+const response = await fetch('/api/settings?category=API_KEYS', {
+  headers: { 'Authorization': `Bearer ${token}` }
+});
+const data = await response.json();
+const openrouterKey = data.data.settings.API_KEYS.find(s => s.key === 'openrouter')?.value;
+const openrouterModel = data.data.settings.API_KEYS.find(s => s.key === 'openrouterModel')?.value;
+```
+
+#### Making OpenRouter API Calls
+
+OpenRouter uses the OpenAI SDK-compatible format. Example usage:
+
+```javascript
+const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+    'HTTP-Referer': 'https://olfong.olibuijr.com', // Optional: for rankings
+    'X-Title': 'Ölföng' // Optional: app name
+  },
+  body: JSON.stringify({
+    model: model, // e.g., 'openai/gpt-4o', 'anthropic/claude-3.5-sonnet'
+    messages: [
+      { role: 'user', content: 'Your prompt here' }
+    ]
+  })
+});
+
+const data = await response.json();
+```
+
+#### Available Models
+
+The UI includes a refresh button that fetches available models from OpenRouter's API. Popular models include:
+- `openai/gpt-4o` - GPT-4o
+- `openai/gpt-4-turbo` - GPT-4 Turbo
+- `openai/gpt-3.5-turbo` - GPT-3.5 Turbo
+- `anthropic/claude-3.5-sonnet` - Claude 3.5 Sonnet
+- `anthropic/claude-3-opus` - Claude 3 Opus
+- `google/gemini-pro` - Gemini Pro
+- `meta-llama/llama-3-70b-instruct` - Llama 3 70B
+
+#### UI Features
+
+The ApiKeysSettings component includes:
+- Password-masked API key input with show/hide toggle
+- Model selection dropdown
+- Refresh button to fetch latest models from OpenRouter
+- Active/Inactive status indicator
+- Links to OpenRouter documentation
+- Individual save buttons for API key and model
+
+#### Documentation
+
+- OpenRouter Docs: https://openrouter.ai/docs
+- Get API Key: https://openrouter.ai/keys
+- Available Models: https://openrouter.ai/models
