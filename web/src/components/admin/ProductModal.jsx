@@ -60,8 +60,16 @@ const ProductModal = ({
       setValue('nameIs', editingProduct.nameIs || '');
       setValue('price', editingProduct.price || 0);
       setValue('stock', editingProduct.stock || 0);
-      setValue('category', editingProduct.category || '');
-      setValue('subcategory', editingProduct.subcategory || '');
+      // Handle category - it comes as an object from the database relation, extract the name
+      const categoryValue = typeof editingProduct.category === 'object'
+        ? editingProduct.category?.name
+        : editingProduct.category;
+      setValue('category', categoryValue || '');
+      // Handle subcategory - it comes as an object from the database relation, extract the name
+      const subcategoryValue = typeof editingProduct.subcategory === 'object'
+        ? editingProduct.subcategory?.name
+        : editingProduct.subcategory;
+      setValue('subcategory', subcategoryValue || '');
       setValue('isAgeRestricted', editingProduct.isAgeRestricted || false);
       setValue('ageRestriction', editingProduct.ageRestriction || 18);
 
