@@ -28,8 +28,72 @@ const ProductModal = ({
     formState: { errors, isDirty },
     watch,
     setValue,
-    reset
-  } = useForm();
+    reset,
+    trigger
+  } = useForm({
+    mode: 'onSubmit',
+    defaultValues: {
+      name: '',
+      nameIs: '',
+      description: '',
+      descriptionIs: '',
+      price: 0,
+      stock: 0,
+      ageRestriction: 0,
+      category: '',
+      subcategory: '',
+      isAgeRestricted: false,
+      descriptionEn: '',
+      descriptionIsGenerated: false,
+      // Details tab
+      volumeEn: '',
+      volumeIs: '',
+      alcoholContent: '',
+      vintage: '',
+      packagingEn: '',
+      packagingIs: '',
+      grapeVarietyEn: '',
+      grapeVarietyIs: '',
+      wineStyleEn: '',
+      wineStyleIs: '',
+      pricePerLiterEn: '',
+      pricePerLiterIs: '',
+      // Origin tab
+      producerEn: '',
+      producerIs: '',
+      countryEn: '',
+      countryIs: '',
+      regionEn: '',
+      regionIs: '',
+      originEn: '',
+      originIs: '',
+      distributorEn: '',
+      distributorIs: '',
+      atvrInformation: '',
+      atvrProductId: '',
+      atvrUrl: '',
+      atvrImageUrl: '',
+      // Pairings tab
+      foodPairings: '',
+      foodPairingsIs: '',
+      specialAttributes: '',
+      specialAttributesIs: '',
+      certifications: '',
+      certificationsIs: '',
+      availability: 'available',
+      availabilityIs: '',
+      // Image tab
+      imageUrl: '',
+      // Discount tab
+      hasDiscount: false,
+      originalPrice: 0,
+      discountPercentage: 0,
+      discountStartDate: '',
+      discountEndDate: '',
+      discountReason: '',
+      discountReasonIs: ''
+    }
+  });
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -52,109 +116,132 @@ const ProductModal = ({
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, isDirty, t]);
 
-  // Reset form when editing product changes
+  // Fetch full product details when editing
   useEffect(() => {
-    if (editingProduct) {
-      // Basic fields
-      setValue('name', editingProduct.name || '');
-      setValue('nameIs', editingProduct.nameIs || '');
-      setValue('price', editingProduct.price || 0);
-      setValue('stock', editingProduct.stock || 0);
-      // Handle category - it comes as an object from the database relation, extract the name
-      const categoryValue = typeof editingProduct.category === 'object'
-        ? editingProduct.category?.name
-        : editingProduct.category;
-      setValue('category', categoryValue || '');
-      // Handle subcategory - it comes as an object from the database relation, extract the name
-      const subcategoryValue = typeof editingProduct.subcategory === 'object'
-        ? editingProduct.subcategory?.name
-        : editingProduct.subcategory;
-      setValue('subcategory', subcategoryValue || '');
-      setValue('isAgeRestricted', editingProduct.isAgeRestricted || false);
-      setValue('ageRestriction', editingProduct.ageRestriction || 18);
-
-      // Descriptions
-      setValue('description', editingProduct.description || '');
-      setValue('descriptionIs', editingProduct.descriptionIs || '');
-
-      // Product details
-      setValue('volume', editingProduct.volume || '');
-      setValue('volumeIs', editingProduct.volumeIs || '');
-      setValue('alcoholContent', editingProduct.alcoholContent || '');
-      setValue('packaging', editingProduct.packaging || '');
-      setValue('packagingIs', editingProduct.packagingIs || '');
-
-      // Origin information
-      setValue('producer', editingProduct.producer || '');
-      setValue('producerIs', editingProduct.producerIs || '');
-      setValue('country', editingProduct.country || '');
-      setValue('countryIs', editingProduct.countryIs || '');
-      setValue('region', editingProduct.region || '');
-      setValue('regionIs', editingProduct.regionIs || '');
-      setValue('origin', editingProduct.origin || '');
-      setValue('originIs', editingProduct.originIs || '');
-      setValue('distributor', editingProduct.distributor || '');
-      setValue('distributorIs', editingProduct.distributorIs || '');
-
-      // Wine specific
-      setValue('vintage', editingProduct.vintage || '');
-      setValue('grapeVariety', editingProduct.grapeVariety || '');
-      setValue('grapeVarietyIs', editingProduct.grapeVarietyIs || '');
-      setValue('wineStyle', editingProduct.wineStyle || '');
-      setValue('wineStyleIs', editingProduct.wineStyleIs || '');
-
-      // Pricing
-      setValue('pricePerLiter', editingProduct.pricePerLiter || '');
-      setValue('pricePerLiterIs', editingProduct.pricePerLiterIs || '');
-
-      // Arrays (parse if they're JSON strings)
-      const parseFoodPairings = (data) => {
-        if (!data) return '';
-        if (Array.isArray(data)) return data.join(', ');
-        if (typeof data === 'string') {
-          try {
-            const parsed = JSON.parse(data);
-            return Array.isArray(parsed) ? parsed.join(', ') : data;
-          } catch {
-            return data;
+    if (editingProduct?.id) {
+      const fetchFullProduct = async () => {
+        try {
+          const response = await fetch(`/api/products/${editingProduct.id}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.data) {
+              // Use the full product data from the API which includes all relationships
+              populateForm(data.data);
+              return;
+            }
           }
+        } catch (error) {
+          console.error('Error fetching product details:', error);
         }
-        return '';
+        // Fall back to using editingProduct if fetch fails
+        populateForm(editingProduct);
       };
 
-      setValue('foodPairings', parseFoodPairings(editingProduct.foodPairings));
-      setValue('foodPairingsIs', parseFoodPairings(editingProduct.foodPairingsIs));
-      setValue('specialAttributes', parseFoodPairings(editingProduct.specialAttributes));
-      setValue('specialAttributesIs', parseFoodPairings(editingProduct.specialAttributesIs));
-      setValue('certifications', parseFoodPairings(editingProduct.certifications));
-      setValue('certificationsIs', parseFoodPairings(editingProduct.certificationsIs));
-
-      // ATVR fields
-      setValue('atvrProductId', editingProduct.atvrProductId || '');
-      setValue('atvrUrl', editingProduct.atvrUrl || '');
-      setValue('atvrImageUrl', editingProduct.atvrImageUrl || '');
-      setValue('availability', editingProduct.availability || 'available');
-      setValue('availabilityIs', editingProduct.availabilityIs || '');
-
-      // Image
-      setValue('imageUrl', editingProduct.imageUrl || '');
-      if (editingProduct.imageUrl) {
-        setUploadedImage(editingProduct.imageUrl);
-      }
-
-      // Discount fields
-      setValue('hasDiscount', editingProduct.hasDiscount || false);
-      setValue('originalPrice', editingProduct.originalPrice || 0);
-      setValue('discountPercentage', editingProduct.discountPercentage || 0);
-      setValue('discountStartDate', editingProduct.discountStartDate ? editingProduct.discountStartDate.split('T')[0] : '');
-      setValue('discountEndDate', editingProduct.discountEndDate ? editingProduct.discountEndDate.split('T')[0] : '');
-      setValue('discountReason', editingProduct.discountReason || '');
-      setValue('discountReasonIs', editingProduct.discountReasonIs || '');
-    } else {
+      fetchFullProduct();
+    } else if (!editingProduct) {
       reset();
       setUploadedImage(null);
     }
-  }, [editingProduct, setValue, reset, setUploadedImage]);
+  }, [editingProduct?.id]);
+
+  // Populate form with product data
+  const populateForm = (product) => {
+    // Basic fields
+    setValue('name', product.name || '');
+    setValue('nameIs', product.nameIs || '');
+    setValue('price', product.price || 0);
+    setValue('stock', product.stock || 0);
+    // Handle category - it comes as an object from the database relation, extract the name
+    const categoryValue = typeof product.category === 'object'
+      ? product.category?.name
+      : product.category;
+    setValue('category', categoryValue || '');
+    // Handle subcategory - it comes as an object from the database relation, extract the name
+    const subcategoryValue = typeof product.subcategory === 'object'
+      ? product.subcategory?.name
+      : product.subcategory;
+    setValue('subcategory', subcategoryValue || '');
+    setValue('isAgeRestricted', product.isAgeRestricted || false);
+    setValue('ageRestriction', product.ageRestriction || 18);
+
+    // Descriptions
+    setValue('description', product.description || '');
+    setValue('descriptionIs', product.descriptionIs || '');
+
+    // Product details
+    setValue('volume', product.volume || '');
+    setValue('volumeIs', product.volumeIs || '');
+    setValue('alcoholContent', product.alcoholContent || '');
+    setValue('packaging', product.packaging || '');
+    setValue('packagingIs', product.packagingIs || '');
+
+    // Origin information
+    setValue('producer', product.producer || '');
+    setValue('producerIs', product.producerIs || '');
+    setValue('country', product.country || '');
+    setValue('countryIs', product.countryIs || '');
+    setValue('region', product.region || '');
+    setValue('regionIs', product.regionIs || '');
+    setValue('origin', product.origin || '');
+    setValue('originIs', product.originIs || '');
+    setValue('distributor', product.distributor || '');
+    setValue('distributorIs', product.distributorIs || '');
+
+    // Wine specific
+    setValue('vintage', product.vintage || '');
+    setValue('grapeVariety', product.grapeVariety || '');
+    setValue('grapeVarietyIs', product.grapeVarietyIs || '');
+    setValue('wineStyle', product.wineStyle || '');
+    setValue('wineStyleIs', product.wineStyleIs || '');
+
+    // Pricing
+    setValue('pricePerLiter', product.pricePerLiter || '');
+    setValue('pricePerLiterIs', product.pricePerLiterIs || '');
+
+    // Arrays (parse if they're JSON strings)
+    const parseFoodPairings = (data) => {
+      if (!data) return '';
+      if (Array.isArray(data)) return data.join(', ');
+      if (typeof data === 'string') {
+        try {
+          const parsed = JSON.parse(data);
+          return Array.isArray(parsed) ? parsed.join(', ') : data;
+        } catch {
+          return data;
+        }
+      }
+      return '';
+    };
+
+    setValue('foodPairings', parseFoodPairings(product.foodPairings));
+    setValue('foodPairingsIs', parseFoodPairings(product.foodPairingsIs));
+    setValue('specialAttributes', parseFoodPairings(product.specialAttributes));
+    setValue('specialAttributesIs', parseFoodPairings(product.specialAttributesIs));
+    setValue('certifications', parseFoodPairings(product.certifications));
+    setValue('certificationsIs', parseFoodPairings(product.certificationsIs));
+
+    // ATVR fields
+    setValue('atvrProductId', product.atvrProductId || '');
+    setValue('atvrUrl', product.atvrUrl || '');
+    setValue('atvrImageUrl', product.atvrImageUrl || '');
+    setValue('availability', product.availability || 'available');
+    setValue('availabilityIs', product.availabilityIs || '');
+
+    // Image
+    setValue('imageUrl', product.imageUrl || '');
+    if (product.imageUrl) {
+      setUploadedImage(product.imageUrl);
+    }
+
+    // Discount fields
+    setValue('hasDiscount', product.hasDiscount || false);
+    setValue('originalPrice', product.originalPrice || 0);
+    setValue('discountPercentage', product.discountPercentage || 0);
+    setValue('discountStartDate', product.discountStartDate ? product.discountStartDate.split('T')[0] : '');
+    setValue('discountEndDate', product.discountEndDate ? product.discountEndDate.split('T')[0] : '');
+    setValue('discountReason', product.discountReason || '');
+    setValue('discountReasonIs', product.discountReasonIs || '');
+  };
 
   const handleClose = () => {
     if (isDirty) {
@@ -172,6 +259,8 @@ const ProductModal = ({
   };
 
   const handleFormSubmit = (data) => {
+    console.log('ProductModal.handleFormSubmit called with data:', data);
+
     // Convert comma-separated strings back to arrays
     const parseToArray = (str) => {
       if (!str) return [];
@@ -188,6 +277,7 @@ const ProductModal = ({
       certificationsIs: JSON.stringify(parseToArray(data.certificationsIs)),
     };
 
+    console.log('ProductModal.handleFormSubmit calling onSubmit with:', formattedData);
     onSubmit(formattedData);
   };
 
@@ -401,7 +491,7 @@ const ProductModal = ({
                     >
                       <option value="">{t('productModal.fields.selectSubcategory')}</option>
                       {subcategories
-                        ?.filter(sub => sub.category === watch('category'))
+                        ?.filter(sub => !watch('category') || sub.category === watch('category'))
                         .map(subcategory => (
                           <option key={subcategory.value} value={subcategory.value}>
                             {subcategory.label}

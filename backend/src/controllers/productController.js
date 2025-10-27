@@ -222,6 +222,10 @@ const getProduct = async (req, res) => {
  */
 const createProduct = async (req, res) => {
   try {
+    console.log('=== CREATE PRODUCT REQUEST ===');
+    console.log('Received subcategory:', req.body.subcategory);
+    console.log('Received category:', req.body.category);
+    console.log('Request body keys:', Object.keys(req.body));
     console.log('Creating product with body:', JSON.stringify(req.body, null, 2));
     const productData = {
       ...req.body,
@@ -358,12 +362,16 @@ const createProduct = async (req, res) => {
         ? req.body.subcategory.toUpperCase()
         : req.body.subcategory;
 
+      console.log(`Looking for subcategory: ${subcategoryName} in category: ${productData.categoryId}`);
+
       let subcategory = await prisma.subcategory.findFirst({
         where: {
           name: subcategoryName,
           categoryId: productData.categoryId
         }
       });
+
+      console.log(`Subcategory lookup result:`, subcategory);
 
       // If subcategory doesn't exist and this is an ATVR import, create it
       if (!subcategory && req.body.atvrProductId) {
@@ -429,9 +437,9 @@ const createProduct = async (req, res) => {
       }
     }
 
-    // Remove the category field since we're using categoryId for the relation
-    const { category: _, ...productDataForCreate } = productData;
-    
+    // Remove the category field and subcategory/subcategoryIs fields since we're using categoryId/subcategoryId for relations
+    const { category: _, subcategory: __, subcategoryIs: ___, ...productDataForCreate } = productData;
+
     // Remove undefined values and fix array fields to avoid database issues
     Object.keys(productDataForCreate).forEach(key => {
       if (productDataForCreate[key] === undefined) {
@@ -466,14 +474,66 @@ const updateProduct = async (req, res) => {
     const { id } = req.params;
     const updateData = { ...req.body };
 
+    console.log('Update product request for ID:', id);
+    console.log('Update data received:', JSON.stringify(updateData, null, 2));
+
+    // First, fetch the existing product to get current categoryId if needed
+    const existingProduct = await prisma.product.findUnique({
+      where: { id: parseInt(id) },
+      include: { category: true }
+    });
+
+    if (!existingProduct) {
+      console.error('Product not found with ID:', id);
+      return errorResponse(res, 'Product not found', 404);
+    }
+
+    console.log('Existing product categoryId:', existingProduct.categoryId);
+
     // Convert numeric fields
     if (updateData.price) updateData.price = parseFloat(updateData.price);
     if (updateData.stock) updateData.stock = parseInt(updateData.stock);
     if (updateData.ageRestriction) updateData.ageRestriction = parseInt(updateData.ageRestriction);
     if (updateData.categoryId) updateData.categoryId = parseInt(updateData.categoryId);
 
-    // Remove the category field since we're using categoryId for the relation
-    delete updateData.category;
+    // Determine which categoryId to use for subcategory lookup
+    let targetCategoryId = existingProduct.categoryId;
+
+    // Handle category name to categoryId conversion
+    if (updateData.category && typeof updateData.category === 'string') {
+      const category = await prisma.category.findFirst({
+        where: { name: updateData.category.toUpperCase() }
+      });
+      if (category) {
+        updateData.categoryId = category.id;
+        targetCategoryId = category.id;
+      }
+      delete updateData.category;
+    } else {
+      delete updateData.category;
+    }
+
+    // Handle subcategory name to subcategoryId conversion
+    if (updateData.subcategory && typeof updateData.subcategory === 'string') {
+      console.log('Looking for subcategory:', updateData.subcategory, 'in categoryId:', targetCategoryId);
+      const subcategory = await prisma.subcategory.findFirst({
+        where: {
+          name: updateData.subcategory.toUpperCase(),
+          categoryId: targetCategoryId
+        }
+      });
+      if (subcategory) {
+        console.log('Found subcategory:', subcategory.name, 'with ID:', subcategory.id);
+        updateData.subcategoryId = subcategory.id;
+      } else {
+        console.warn('Subcategory not found for name:', updateData.subcategory, 'in categoryId:', targetCategoryId);
+      }
+      delete updateData.subcategory;
+    } else {
+      delete updateData.subcategory;
+    }
+
+    console.log('Final updateData before database update:', JSON.stringify(updateData, null, 2));
 
     // Convert boolean fields
     if (updateData.isAgeRestricted !== undefined) {
@@ -516,6 +576,7 @@ const updateProduct = async (req, res) => {
       data: updateData,
       include: {
         category: true,
+        subcategory: true,
       }
     });
 

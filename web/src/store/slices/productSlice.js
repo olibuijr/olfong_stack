@@ -109,21 +109,29 @@ export const updateProduct = createAsyncThunk(
   'products/updateProduct',
   async ({ id, productData }, { rejectWithValue }) => {
     try {
+      console.log('updateProduct thunk - id:', id, 'productData:', productData);
+
       const formData = new FormData();
-      
+
       Object.keys(productData).forEach(key => {
         if (productData[key] !== null && productData[key] !== undefined) {
           formData.append(key, productData[key]);
         }
       });
-      
+
+      console.log('updateProduct thunk - FormData entries:', Array.from(formData.entries()));
+
       const response = await api.put(`/products/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log('updateProduct thunk - response:', response.data);
       return response.data;
     } catch (error) {
+      console.error('updateProduct thunk - error:', error);
+      console.error('updateProduct thunk - error.response:', error.response);
+      console.error('updateProduct thunk - error message:', error.response?.data?.message);
       return rejectWithValue(error.response?.data?.message || 'Failed to update product');
     }
   }

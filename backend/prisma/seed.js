@@ -76,24 +76,43 @@ async function main() {
 
       // Clear existing data (order matters due to foreign keys)
       console.log('\n🗑️  Clearing existing data...');
+      // eslint-disable-next-line no-empty
       try { await prisma.cartItem.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.cart.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.orderItem.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.order.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.address.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.shippingRate.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.shippingOption.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.productImage.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.product.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.subcategory.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.category.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.lang.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.user.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.banner.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.setting.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.paymentGateway.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.notification.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.chatMessage.deleteMany({}); } catch (e) {}
+      // eslint-disable-next-line no-empty
       try { await prisma.conversation.deleteMany({}); } catch (e) {}
       console.log('✅ Cleared existing data');
 

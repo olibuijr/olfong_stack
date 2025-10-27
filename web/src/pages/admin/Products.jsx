@@ -43,11 +43,13 @@ const AdminProducts = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
+  const [filterSubcategory, setFilterSubcategory] = useState('');
   const [showAgeRestricted, setShowAgeRestricted] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const [currencySymbol, setCurrencySymbol] = useState('kr'); // Default to kr
-  const [generatingMediaIds, setGeneratingMediaIds] = useState([]); // Track which products are generating AI images
+  const [generatingMediaIds, setGeneratingMediaIds] = useState({}); // Track which products are generating AI images with progress {mediaId: progress%}
+  const [jobMappings, setJobMappings] = useState({}); // Track mediaId -> jobId mappings for RunPod status polling
 
   const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm({
     defaultValues: {
@@ -77,6 +79,36 @@ const AdminProducts = () => {
     }
   }, [dispatch, user]);
 
+  // Fetch and resume polling for any ongoing AI image generation jobs
+  useEffect(() => {
+    const fetchOngoingJobs = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+        const response = await fetch(`${apiBase}/api/ai-image/ongoing-jobs`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.jobMappings && Object.keys(data.jobMappings).length > 0) {
+            console.log('Resuming AI image generation polling for ongoing jobs:', data.jobMappings);
+            const mediaIds = Object.keys(data.jobMappings);
+            handleGeneratingProducts(mediaIds, data.jobMappings);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching ongoing jobs:', error);
+      }
+    };
+
+    if (user?.role === 'ADMIN') {
+      fetchOngoingJobs();
+    }
+  }, [user]);
+
   useEffect(() => {
     if (editingProduct) {
       setValue('name', editingProduct.name);
@@ -85,8 +117,8 @@ const AdminProducts = () => {
       setValue('descriptionIs', editingProduct.descriptionIs || '');
       setValue('price', editingProduct.price);
       setValue('stock', editingProduct.stock);
-      setValue('category', editingProduct.category);
-      setValue('subcategory', editingProduct.subcategory || '');
+      setValue('category', editingProduct.category?.name || editingProduct.category || '');
+      setValue('subcategory', editingProduct.subcategory?.name || '');
       setValue('isAgeRestricted', editingProduct.isAgeRestricted);
       setValue('imageUrl', editingProduct.imageUrl || '');
       setValue('hasDiscount', editingProduct.hasDiscount || false);
@@ -138,10 +170,14 @@ const AdminProducts = () => {
         imageUrl: uploadedImage || data.imageUrl
       };
 
+      console.log('Form submitted with data:', productData);
+
       if (editingProduct) {
-        await dispatch(updateProduct({ id: editingProduct.id, ...productData })).unwrap();
+        console.log('Dispatching updateProduct with id:', editingProduct.id, 'productData:', productData);
+        await dispatch(updateProduct({ id: editingProduct.id, productData })).unwrap();
         toast.success(t('common.success'));
       } else {
+        console.log('Dispatching createProduct');
         await dispatch(createProduct(productData)).unwrap();
         toast.success(t('common.success'));
       }
@@ -151,6 +187,12 @@ const AdminProducts = () => {
       reset();
       setUploadedImage(null);
     } catch (error) {
+      console.error('onSubmit error:', error);
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      console.error('Error payload:', error.payload);
+      console.error('Full error object:', JSON.stringify(error, null, 2));
       toast.error(error.message || t('common.error'));
     }
   };
@@ -171,37 +213,51 @@ const AdminProducts = () => {
 
         if (!response.ok) {
           console.error(`Failed to check status for job ${jobId}`);
+          // Update progress based on time passed
+          const progress = Math.min(10 + (attempts * 0.75), 95);
+          setGeneratingMediaIds(prev => ({...prev, [mediaId]: Math.round(progress)}));
           return false;
         }
 
         const data = await response.json();
         console.log(`Job ${jobId} status:`, data.status);
 
-        if (data.status === 'COMPLETED' && data.media) {
-          // Update the product with the new image
-          const updatedProducts = products.map(p =>
-            p.mediaId === mediaId
-              ? { ...p, imageUrl: data.media.url }
-              : p
-          );
+        if (data.status === 'COMPLETED') {
+          // Set progress to 100%
+          setGeneratingMediaIds(prev => ({...prev, [mediaId]: 100}));
 
-          // Update Redux store with the new product list
-          // For now, we'll just update local state - in production, dispatch to Redux
-          console.log(`AI image generation completed for mediaId ${mediaId}`);
-
-          // Remove from generating list
-          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          // Refresh products to get the new image
+          dispatch(fetchProducts()).then(() => {
+            console.log(`AI image generation completed for mediaId ${mediaId}`);
+            // Remove from generating list
+            setGeneratingMediaIds(prev => {
+              const newState = { ...prev };
+              delete newState[mediaId];
+              return newState;
+            });
+          });
           return true;
         } else if (data.status === 'FAILED') {
           console.error(`Generation failed for job ${jobId}: ${data.error}`);
-          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          toast.error(`Generation failed for job ${jobId}: ${data.error}`);
+          setGeneratingMediaIds(prev => {
+            const newState = { ...prev };
+            delete newState[mediaId];
+            return newState;
+          });
           return true; // Stop polling on failure
         }
 
-        // Still processing, continue polling
+        // Still processing - update progress based on attempts
+        // Progress moves from 10% to 95% as time passes
+        const progress = Math.min(10 + (attempts * 0.75), 95);
+        setGeneratingMediaIds(prev => ({...prev, [mediaId]: Math.round(progress)}));
         return false;
       } catch (error) {
         console.error(`Error polling status for job ${jobId}:`, error);
+        // Still update progress on error
+        const progress = Math.min(10 + (attempts * 0.75), 95);
+        setGeneratingMediaIds(prev => ({...prev, [mediaId]: Math.round(progress)}));
         return false;
       }
     };
@@ -215,7 +271,11 @@ const AdminProducts = () => {
         clearInterval(pollInterval);
         if (attempts >= maxAttempts) {
           console.warn(`Polling timeout for job ${jobId}`);
-          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          setGeneratingMediaIds(prev => {
+            const newState = { ...prev };
+            delete newState[mediaId];
+            return newState;
+          });
         }
       }
     }, 5000); // Poll every 5 seconds
@@ -223,17 +283,72 @@ const AdminProducts = () => {
     return pollInterval;
   };
 
-  const handleGeneratingProducts = async (mediaIds) => {
-    // Track which products are generating AI images
-    setGeneratingMediaIds(mediaIds);
+  const handleGeneratingProducts = async (mediaIds, newJobMappings = {}) => {
+    // Store the job mappings for status polling
+    setJobMappings(newJobMappings);
 
-    // For each mediaId, we need to find the corresponding jobId
-    // Since we don't have it here, we'll need to get it from the backend
-    // For now, we'll start polling immediately and the backend will handle it
+    // Track which products are generating AI images with initial progress
+    const initialProgress = {};
+    mediaIds.forEach(id => {
+      initialProgress[id] = 5; // Start at 5%
+    });
+    setGeneratingMediaIds(initialProgress);
+
+    // Immediately check status for each job to get accurate progress
     for (const mediaId of mediaIds) {
-      // In a real implementation, we'd store the jobId with the mediaId
-      // For now, we'll poll the media endpoint to check if the image has been updated
-      pollMediaStatus(mediaId);
+      const jobId = newJobMappings[mediaId];
+      if (jobId) {
+        console.log(`Starting to poll RunPod status for mediaId ${mediaId} with jobId ${jobId}`);
+
+        // Get immediate status update before starting polling
+        try {
+          const token = localStorage.getItem('token');
+          const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
+          const response = await fetch(`${apiBase}/api/ai-image/status/${jobId}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log(`Initial status for job ${jobId}:`, data.status);
+
+            if (data.status === 'COMPLETED') {
+              setGeneratingMediaIds(prev => ({...prev, [mediaId]: 100}));
+              // Refresh products to get the new image
+              dispatch(fetchProducts()).then(() => {
+                setGeneratingMediaIds(prev => {
+                  const newState = { ...prev };
+                  delete newState[mediaId];
+                  return newState;
+                });
+              });
+              continue; // Skip polling for completed jobs
+            } else if (data.status === 'FAILED') {
+              console.error(`Job ${jobId} already failed`);
+              toast.error(`Generation failed for job ${jobId}: ${data.error || 'Unknown error'}`);
+              setGeneratingMediaIds(prev => {
+                const newState = { ...prev };
+                delete newState[mediaId];
+                return newState;
+              });
+              continue; // Skip polling for failed jobs
+            } else if (data.status === 'IN_PROGRESS' || data.status === 'IN_QUEUE') {
+              // Update to a more accurate initial progress for in-progress jobs
+              setGeneratingMediaIds(prev => ({...prev, [mediaId]: 30}));
+            }
+          }
+        } catch (error) {
+          console.error(`Error checking initial status for job ${jobId}:`, error);
+        }
+
+        pollGenerationStatus(mediaId, jobId);
+      } else {
+        // Fallback to media status polling if no jobId
+        console.warn(`No jobId found for mediaId ${mediaId}, using media status polling as fallback`);
+        pollMediaStatus(mediaId);
+      }
     }
   };
 
@@ -276,7 +391,11 @@ const AdminProducts = () => {
           console.log(`AI image generation completed for mediaId ${mediaId}`);
 
           // Remove from generating list
-          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          setGeneratingMediaIds(prev => {
+            const newState = { ...prev };
+            delete newState[mediaId];
+            return newState;
+          });
           return true;
         }
 
@@ -290,13 +409,39 @@ const AdminProducts = () => {
     // Poll for status
     const pollInterval = setInterval(async () => {
       attempts++;
+
+      // Increment progress: 10-95% over time (5-120 attempts = 10% to 95%)
+      const progress = Math.min(10 + (attempts * 0.75), 95);
+      setGeneratingMediaIds(prev => ({
+        ...prev,
+        [mediaId]: Math.round(progress)
+      }));
+
       const isDone = await poll();
 
       if (isDone || attempts >= maxAttempts) {
         clearInterval(pollInterval);
-        if (attempts >= maxAttempts) {
+        if (isDone) {
+          // Set to 100% before removing
+          setGeneratingMediaIds(prev => ({
+            ...prev,
+            [mediaId]: 100
+          }));
+          // Remove after a short delay to show completion
+          setTimeout(() => {
+            setGeneratingMediaIds(prev => {
+              const newState = { ...prev };
+              delete newState[mediaId];
+              return newState;
+            });
+          }, 500);
+        } else if (attempts >= maxAttempts) {
           console.warn(`Polling timeout for mediaId ${mediaId}`);
-          setGeneratingMediaIds(prev => prev.filter(id => id !== mediaId));
+          setGeneratingMediaIds(prev => {
+            const newState = { ...prev };
+            delete newState[mediaId];
+            return newState;
+          });
         }
       }
     }, 5000); // Poll every 5 seconds
@@ -380,7 +525,8 @@ const AdminProducts = () => {
         wineStyleIs: productData.wineStyleIs,
         pricePerLiter: productData.pricePerLiter,
         pricePerLiterIs: productData.pricePerLiterIs,
-        subcategories: productData.subcategories || [],
+        subcategory: productData.subcategory,
+        subcategoryIs: productData.subcategoryIs,
         foodPairings: JSON.stringify(productData.foodPairings || []),
         foodPairingsIs: JSON.stringify(productData.foodPairingsIs || []),
         specialAttributes: JSON.stringify(productData.specialAttributes || []),
@@ -448,10 +594,11 @@ const AdminProducts = () => {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          (product.nameIs && product.nameIs.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = !filterCategory || product.category === filterCategory;
+    const matchesCategory = !filterCategory || product.category?.name === filterCategory;
+    const matchesSubcategory = !filterSubcategory || product.subcategory?.name === filterSubcategory;
     const matchesAgeFilter = !showAgeRestricted || product.isAgeRestricted;
-    
-    return matchesSearch && matchesCategory && matchesAgeFilter;
+
+    return matchesSearch && matchesCategory && matchesSubcategory && matchesAgeFilter;
   });
 
   const categories = [
@@ -613,7 +760,7 @@ const AdminProducts = () => {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -629,7 +776,10 @@ const AdminProducts = () => {
             {/* Category Filter */}
             <select
               value={filterCategory}
-              onChange={(e) => setFilterCategory(e.target.value)}
+              onChange={(e) => {
+                setFilterCategory(e.target.value);
+                setFilterSubcategory(''); // Clear subcategory when category changes
+              }}
               className="input w-full"
             >
               <option value="">{t('adminProductsPage.allCategories')}</option>
@@ -638,6 +788,22 @@ const AdminProducts = () => {
                   {category.label}
                 </option>
               ))}
+            </select>
+
+            {/* Subcategory Filter */}
+            <select
+              value={filterSubcategory}
+              onChange={(e) => setFilterSubcategory(e.target.value)}
+              className="input w-full"
+            >
+              <option value="">{t('adminProductsPage.allSubcategories') || 'All Subcategories'}</option>
+              {subcategories
+                .filter(sub => !filterCategory || sub.category === filterCategory)
+                .map(subcategory => (
+                  <option key={subcategory.value} value={subcategory.value}>
+                    {subcategory.label}
+                  </option>
+                ))}
             </select>
 
             {/* Age Restricted Filter */}
@@ -666,12 +832,25 @@ const AdminProducts = () => {
                     onClick={() => handleEdit(product)}
                     className="aspect-square bg-white dark:bg-white rounded-lg mb-4 overflow-hidden p-2 cursor-pointer hover:shadow-md transition-shadow duration-200 relative"
                   >
-                    {generatingMediaIds.includes(product.mediaId) ? (
+                    {generatingMediaIds[product.mediaId] !== undefined ? (
                       <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded">
-                        <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-2 animate-spin" />
-                        <p className="text-sm font-medium text-blue-700 dark:text-blue-300 text-center px-2">
+                        <Sparkles className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-3 animate-spin" />
+                        <p className="text-sm font-medium text-blue-700 dark:text-blue-300 text-center px-2 mb-3">
                           {t('adminProductsPage.generatingAIImage') || 'Generating AI Image'}
                         </p>
+                        <div className="w-3/4">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-xs text-blue-600 dark:text-blue-300 font-medium">
+                              {generatingMediaIds[product.mediaId]}%
+                            </span>
+                          </div>
+                          <div className="w-full bg-blue-200 dark:bg-blue-700 rounded-full h-2 overflow-hidden">
+                            <div
+                              className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 h-full rounded-full transition-all duration-300"
+                              style={{ width: `${generatingMediaIds[product.mediaId]}%` }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     ) : product.responsiveData ? (
                       <picture>
@@ -769,12 +948,12 @@ const AdminProducts = () => {
                     onClick={() => handleEdit(product)}
                     className="w-24 h-24 bg-white dark:bg-white rounded-lg overflow-hidden flex-shrink-0 p-2 cursor-pointer hover:shadow-md transition-shadow duration-200 relative"
                   >
-                    {generatingMediaIds.includes(product.mediaId) ? (
+                    {generatingMediaIds[product.mediaId] !== undefined ? (
                       <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded">
-                        <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400 animate-spin" />
-                        <p className="text-xs font-medium text-blue-700 dark:text-blue-300 text-center mt-1">
-                          {t('adminProductsPage.generatingAIImage') || 'Gen'}
-                        </p>
+                        <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400 animate-spin mb-1" />
+                        <span className="text-xs font-bold text-blue-700 dark:text-blue-300">
+                          {generatingMediaIds[product.mediaId]}%
+                        </span>
                       </div>
                     ) : product.responsiveData ? (
                       <picture>
