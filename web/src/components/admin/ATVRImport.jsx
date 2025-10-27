@@ -129,6 +129,40 @@ const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
     const foodPairings = atvrProduct.foodPairings || [];
     const foodPairingsIs = atvrProduct.foodPairingsIs || [];
 
+    // Map ATVR subcategories to internal names
+    const subcategoryMapping = {
+      // Wines
+      'Red wine': 'RED_WINE',
+      'Rauðvín': 'RED_WINE',
+      'White wine': 'WHITE_WINE',
+      'Hvítvín': 'WHITE_WINE',
+      'Rosé wine': 'ROSE_WINE',
+      'Rose wine': 'ROSE_WINE',
+      'Rósavín': 'ROSE_WINE',
+      'Sparkling wine': 'SPARKLING_WINE',
+      'Freyðivín': 'SPARKLING_WINE',
+      'Champagne': 'CHAMPAGNE',
+      'Dessert wine': 'DESSERT_WINE',
+      'Yellow wine': 'YELLOW_WINE',
+      // Spirits
+      'Gin': 'GIN',
+      'Vodka': 'VODKA',
+      'Rum': 'RUM',
+      'Whiskey': 'WHISKEY',
+      'Whisky': 'WHISKEY',
+      'Cognac': 'COGNAC',
+      'Liqueur': 'LIQUEURS_SHOTS',
+      'Tequila': 'TEQUILA',
+      // Beer
+      'Beer': 'BEER',
+      'Bjór': 'BEER',
+      // Cider
+      'Cider': 'CIDER_RTD',
+      'Síder': 'CIDER_RTD'
+    };
+
+    const parsedSubcategory = subcategoryMapping[atvrProduct.subcategory] || atvrProduct.subcategory;
+
     return {
       name: atvrProduct.name,
       nameIs: atvrProduct.nameIs || atvrProduct.name,
@@ -136,6 +170,8 @@ const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
       descriptionIs: atvrProduct.descriptionIs || atvrProduct.description || '',
       price: typeof atvrProduct.price === 'number' ? atvrProduct.price : parseFloat(atvrProduct.price.replace(/[^\d.,]/g, '').replace(',', '.')),
       category: productCategories[atvrProduct.category]?.en || atvrProduct.category,
+      subcategory: parsedSubcategory,
+      subcategoryIs: atvrProduct.subcategoryIs || parsedSubcategory,
       image: atvrProduct.image,
       alcoholContent: atvrProduct.alcoholContent,
       volume: atvrProduct.volume,
@@ -235,17 +271,15 @@ const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
 
       // Generate AI images if auto-generate is enabled
       if (autoGenerateAI && importedMediaIds.length > 0) {
-        // Notify parent component about generating products
-        if (onGeneratingProducts) {
-          onGeneratingProducts(importedMediaIds);
-        }
+        // Collect job mappings: mediaId -> jobId
+        const jobMappings = {};
 
         toast.loading(`Generating AI images for ${importedMediaIds.length} product(s)...`);
 
         for (const mediaId of importedMediaIds) {
           try {
             const apiBase = import.meta.env.VITE_API_BASE_URL || 'https://olfong.olibuijr.com';
-            await fetch(`${apiBase}/api/ai-image/generate/${mediaId}`, {
+            const response = await fetch(`${apiBase}/api/ai-image/generate/${mediaId}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -256,9 +290,22 @@ const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
                 backgroundColor: '#FFFFFF'
               })
             });
+
+            if (response.ok) {
+              const data = await response.json();
+              if (data.jobId) {
+                jobMappings[mediaId] = data.jobId;
+                console.log(`Generation started for media ${mediaId} with jobId ${data.jobId}`);
+              }
+            }
           } catch (error) {
             console.error(`Error generating AI image for media ${mediaId}:`, error);
           }
+        }
+
+        // Notify parent component about generating products with job mappings
+        if (onGeneratingProducts) {
+          onGeneratingProducts(importedMediaIds, jobMappings);
         }
 
         toast.dismiss();
@@ -733,7 +780,7 @@ const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
                   ))}
                 </div>
 
-                {/* Auto-generate AI images option */}
+                {/* Auto-generate AI images with FLUX Kontext option */}
                 {hasRunPodKey && (
                   <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-lg">
                     <label className="flex items-center space-x-3 cursor-pointer">
@@ -746,10 +793,10 @@ const ATVRImport = ({ onImportProduct, onClose, onGeneratingProducts }) => {
                       <div className="flex-1">
                         <span className="text-sm font-medium text-gray-900 dark:text-white flex items-center space-x-1">
                           <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                          <span>{t('atvrImport.generateAIImages') || 'Generate AI Images'}</span>
+                          <span>{t('atvrImport.generateAIImages') || 'Generate Images with FLUX Kontext Dev'}</span>
                         </span>
                         <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                          {t('atvrImport.generateAIImagesDescription') || 'Automatically generate product images after import'}
+                          {t('atvrImport.generateAIImagesDescription') || 'Automatically generate 1024x1024 product images with Icelandic backgrounds using FLUX Kontext Dev'}
                         </p>
                       </div>
                     </label>

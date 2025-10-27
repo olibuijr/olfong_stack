@@ -310,17 +310,85 @@ const createProduct = async (req, res) => {
 
       const mappedCategoryName = categoryMapping[req.body.category] || req.body.category.toUpperCase();
 
-      const category = await prisma.category.findFirst({
+      let category = await prisma.category.findFirst({
         where: { name: mappedCategoryName }
       });
+
+      // If category doesn't exist and this is an ATVR import, create it
+      if (!category && req.body.atvrProductId) {
+        try {
+          // Create new category with the ATVR category name
+          category = await prisma.category.create({
+            data: {
+              name: mappedCategoryName,
+              nameIs: req.body.category || mappedCategoryName, // Use original ATVR name for Icelandic
+              slug: mappedCategoryName.toLowerCase().replace(/\s+/g, '-'),
+              description: `Imported from ATVR: ${req.body.category}`,
+              descriptionIs: `Flutt inn frá ATVR: ${req.body.category}`,
+              icon: null,
+              isActive: true,
+              sortOrder: 99 // Place new categories at the end
+            }
+          });
+          console.log(`Created new category: ${mappedCategoryName}`, category);
+        } catch (error) {
+          console.error(`Failed to create category ${mappedCategoryName}:`, error);
+          // Fall back to LIGHT_WINE if category creation fails
+          const defaultCategory = await prisma.category.findFirst({
+            where: { name: 'LIGHT_WINE' }
+          });
+          category = defaultCategory;
+        }
+      }
+
       if (category) {
         productData.categoryId = category.id;
       } else {
-        // Default to LIGHT_WINE category if not found
+        // Default to LIGHT_WINE category if not found and can't create
         const defaultCategory = await prisma.category.findFirst({
           where: { name: 'LIGHT_WINE' }
         });
         productData.categoryId = defaultCategory?.id || 2;
+      }
+    }
+
+    // Handle subcategory mapping and creation
+    if (req.body.subcategory && productData.categoryId) {
+      const subcategoryName = typeof req.body.subcategory === 'string'
+        ? req.body.subcategory.toUpperCase()
+        : req.body.subcategory;
+
+      let subcategory = await prisma.subcategory.findFirst({
+        where: {
+          name: subcategoryName,
+          categoryId: productData.categoryId
+        }
+      });
+
+      // If subcategory doesn't exist and this is an ATVR import, create it
+      if (!subcategory && req.body.atvrProductId) {
+        try {
+          subcategory = await prisma.subcategory.create({
+            data: {
+              name: subcategoryName,
+              nameIs: req.body.subcategoryIs || req.body.subcategory || subcategoryName,
+              slug: subcategoryName.toLowerCase().replace(/\s+/g, '-'),
+              description: `Imported from ATVR`,
+              descriptionIs: `Flutt inn frá ATVR`,
+              categoryId: productData.categoryId,
+              isActive: true,
+              sortOrder: 99
+            }
+          });
+          console.log(`Created new subcategory: ${subcategoryName} for category ${productData.categoryId}`, subcategory);
+        } catch (error) {
+          console.error(`Failed to create subcategory ${subcategoryName}:`, error);
+          // Continue without subcategory if creation fails
+        }
+      }
+
+      if (subcategory) {
+        productData.subcategoryId = subcategory.id;
       }
     }
 
